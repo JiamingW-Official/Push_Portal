@@ -9,22 +9,29 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #ffffff;
-    --bg2: #f8f9fa;
-    --card: #ffffff;
     --accent: #4f46e5;
     --accent-light: #818cf8;
-    --accent-bg: rgba(79, 70, 229, 0.06);
+    --accent-dark: #3730a3;
+    --accent-bg: rgba(79,70,229,0.06);
+    --primary: #0f0f1a;
     --green: #059669;
-    --green-bg: rgba(5, 150, 105, 0.08);
+    --green-bg: rgba(5,150,105,0.08);
     --orange: #d97706;
-    --orange-bg: rgba(217, 119, 6, 0.08);
+    --orange-bg: rgba(217,119,6,0.08);
     --red: #dc2626;
-    --red-bg: rgba(220, 38, 38, 0.08);
+    --red-bg: rgba(220,38,38,0.08);
     --text: #111827;
+    --text2: #4b5563;
+    --text3: #9ca3af;
     --text-dim: #6b7280;
     --border: #e5e7eb;
     --border-hover: #d1d5db;
+    --bg: #ffffff;
+    --bg2: #f8f9fa;
+    --card: #ffffff;
+    --radius: 14px;
+    --shadow: 0 4px 20px rgba(0,0,0,0.08);
+    --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -39,25 +46,42 @@
     color: var(--text);
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Microsoft YaHei', sans-serif;
     overflow-x: hidden;
+    line-height: 1.75;
   }
 
-  /* Navigation */
-  .nav-back {
-    position: fixed;
-    top: 20px;
-    left: 24px;
-    z-index: 100;
-    color: var(--text-dim);
-    text-decoration: none;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    transition: color 0.2s;
+  /* NAV */
+  .topnav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center;
+    padding: 0 24px; height: 60px; gap: 8px;
   }
-  .nav-back:hover { color: var(--accent); }
-  .nav-back svg { width: 16px; height: 16px; }
+  .logo {
+    font-weight: 900; font-size: 22px; color: var(--accent);
+    letter-spacing: 2px; text-decoration: none; flex-shrink: 0;
+    margin-right: 16px; margin-bottom: 0;
+  }
+  .navlinks {
+    display: flex; gap: 2px; flex-wrap: wrap; flex: 1;
+  }
+  .navlinks a {
+    padding: 5px 12px; border-radius: 8px; font-size: 12px; font-weight: 500;
+    color: var(--text2); transition: all 0.2s; text-decoration: none;
+    white-space: nowrap;
+  }
+  .navlinks a:hover { color: var(--text); background: var(--bg2); text-decoration: none; }
+  .navlinks a.active { color: var(--accent); background: var(--accent-bg); font-weight: 700; }
+  #lang-btn {
+    background: var(--accent); color: #fff; border: none;
+    padding: 7px 16px; border-radius: 8px; font-size: 12px; font-weight: 700;
+    cursor: pointer; white-space: nowrap; flex-shrink: 0;
+    transition: background 0.2s; font-family: inherit;
+  }
+  #lang-btn:hover { background: var(--accent-dark); }
 
+  /* Slide navigation dots */
   .slide-nav {
     position: fixed;
     right: 24px;
@@ -79,6 +103,7 @@
   }
   .slide-nav a.active {
     background: var(--accent);
+    transform: scale(1.4);
   }
   .slide-nav a:hover { background: var(--accent-light); }
   .slide-nav a .tooltip {
@@ -117,7 +142,7 @@
     right: 60px;
     font-size: 64px;
     font-weight: 800;
-    color: rgba(79, 70, 229, 0.06);
+    color: rgba(79, 70, 229, 0.14);
     letter-spacing: -2px;
     user-select: none;
   }
@@ -170,22 +195,23 @@
     color: var(--text);
   }
   h2 {
-    font-size: 36px;
-    font-weight: 700;
+    font-size: 40px;
+    font-weight: 800;
     line-height: 1.2;
     margin-bottom: 12px;
-    color: var(--text);
+    color: var(--primary);
+    letter-spacing: -1px;
   }
   h3 {
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 18px;
+    font-weight: 700;
     margin-bottom: 8px;
     color: var(--text);
   }
   .subtitle {
     font-size: 18px;
     color: var(--text-dim);
-    line-height: 1.6;
+    line-height: 1.75;
     margin-bottom: 24px;
   }
   .accent { color: var(--accent); }
@@ -201,9 +227,7 @@
     padding: 24px;
     margin-bottom: 16px;
   }
-  .card-accent {
-    border-left: 3px solid var(--accent);
-  }
+  .card-accent { border-left: 3px solid var(--accent); }
   .card-green { border-left: 3px solid var(--green); }
   .card-orange { border-left: 3px solid var(--orange); }
   .card-red { border-left: 3px solid var(--red); }
@@ -286,7 +310,7 @@
   }
   .flow-text {
     font-size: 15px;
-    line-height: 1.4;
+    line-height: 1.5;
     color: var(--text);
   }
 
@@ -365,7 +389,7 @@
     padding-left: 20px;
     position: relative;
     font-size: 15px;
-    line-height: 1.5;
+    line-height: 1.75;
     color: var(--text);
   }
   .bullet-list li::before {
@@ -396,6 +420,24 @@
   .tag-green { background: var(--green-bg); color: var(--green); }
   .tag-orange { background: var(--orange-bg); color: var(--orange); }
 
+  /* Slide section label */
+  .slide-label {
+    position: absolute;
+    top: 28px;
+    left: 80px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+  }
+  @media (max-width: 1024px) {
+    .slide-label { left: 30px; }
+  }
+  @media (max-width: 640px) {
+    .slide-label { left: 16px; }
+  }
+
   /* Title slide special */
   .slide-title {
     background: #fff;
@@ -406,8 +448,8 @@
   }
   .slide-title .subtitle { font-size: 22px; }
 
-  /* Logo */
-  .logo {
+  /* Logo (within slides, not nav) */
+  .slide-logo {
     font-size: 18px;
     font-weight: 800;
     letter-spacing: 6px;
@@ -451,7 +493,7 @@
   .adv-item p {
     font-size: 13px;
     color: var(--text-dim);
-    line-height: 1.4;
+    line-height: 1.5;
   }
 
   /* Responsive */
@@ -461,7 +503,7 @@
     .divider-line { display: none; }
     h1 { font-size: 36px; }
     .slide-title h1 { font-size: 44px; }
-    h2 { font-size: 28px; }
+    h2 { font-size: 30px; }
     .stat-number { font-size: 32px; }
     .slide-number { font-size: 48px; }
   }
@@ -480,10 +522,6 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* ENHANCED NAV DOTS */
-  .slide-nav a { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-  .slide-nav a.active { transform: scale(1.4); }
-
   /* LANG VISIBILITY */
   body.lang-en .col-zh { display: none; }
   body.lang-zh .col-en { display: none; }
@@ -493,61 +531,15 @@
   body.lang-zh .slide-inner { grid-template-columns: 1fr; }
   body.lang-en .lang-label { display: none; }
   body.lang-zh .lang-label { display: none; }
-
-  /* LANG TOGGLE */
-  .lang-toggle {
-    position: fixed;
-    top: 20px;
-    right: 60px;
-    z-index: 101;
-    display: flex;
-    align-items: center;
-    gap: 0;
-    background: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  }
-  .lang-toggle button {
-    padding: 5px 12px;
-    background: transparent;
-    border: none;
-    color: #9ca3af;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .lang-toggle button.active {
-    background: var(--accent);
-    color: var(--text);
-  }
-
-  /* NAV BAR */
-  .topnav-bar {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: #fff;
-    border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; padding: 0 24px; height: 60px; gap: 8px;
-  }
-  .topnav-bar .logo { font-weight: 800; font-size: 22px; color: #1a1a2e; letter-spacing: 2px; margin-right: 32px; margin-bottom: 0; }
-  .topnav-bar .navlinks { display: flex; gap: 4px; flex-wrap: wrap; }
-  .topnav-bar .navlinks a {
-    padding: 6px 14px; border-radius: 8px; font-size: 13px; font-weight: 500;
-    color: #6b7280; transition: color 0.2s; text-decoration: none;
-  }
-  .topnav-bar .navlinks a:hover { color: #111827; }
-  .topnav-bar .navlinks a.active { color: var(--accent); font-weight: 600; }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav class="topnav-bar">
+<nav class="topnav">
   <div class="logo">PUSH</div>
   <div class="navlinks">
-    <a href="index.html" data-en="Dashboard" data-zh="仪表盘">Dashboard</a>
+    <a href="index.html" data-en="Overview" data-zh="概览">Overview</a>
     <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
     <a href="pitch-deck.html" class="active" data-en="Pitch Deck" data-zh="路演方案">Pitch Deck</a>
     <a href="prospects.html" data-en="Prospects" data-zh="未来愿景">Prospects</a>
@@ -557,10 +549,7 @@
     <a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
     <a href="push-strategy-core.html" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
   </div>
-  <div class="lang-toggle" style="position:static;margin-left:auto;box-shadow:none;">
-    <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
-    <button id="btn-zh" onclick="setLang('zh')">中</button>
-  </div>
+  <button id="lang-btn">中 / EN</button>
 </nav>
 
 <!-- Slide navigation dots -->
@@ -573,16 +562,17 @@
   <a href="#slide-6"><span class="tooltip">Market</span></a>
   <a href="#slide-7"><span class="tooltip">Traction</span></a>
   <a href="#slide-8"><span class="tooltip">Advantage</span></a>
-  <a href="#slide-9"><span class="tooltip">Team & Ask</span></a>
+  <a href="#slide-9"><span class="tooltip">Team &amp; Ask</span></a>
 </nav>
 
 <!-- ==================== SLIDE 1: TITLE ==================== -->
 <section class="slide slide-title" id="slide-1">
+  <span class="slide-label">PUSH — Pitch Deck</span>
   <span class="slide-number">01</span>
   <div class="slide-inner" style="align-items: center;">
     <div class="col-zh">
       <div class="lang-label">中文</div>
-      <div class="logo">P U S H</div>
+      <div class="slide-logo">P U S H</div>
       <h1>本地达人<br>履约基础设施</h1>
       <p class="subtitle">标准化、验证、排名、路由<br>达人驱动的本地商家需求</p>
       <div style="margin-top: 32px;">
@@ -594,7 +584,7 @@
     <div class="divider-line"></div>
     <div class="col-en">
       <div class="lang-label">English</div>
-      <div class="logo">P U S H</div>
+      <div class="slide-logo">P U S H</div>
       <h1>Local Creator<br>Performance Infrastructure</h1>
       <p class="subtitle">Standardize, verify, rank, and route<br>creator-driven demand for local merchants</p>
       <div style="margin-top: 32px;">
@@ -608,6 +598,7 @@
 
 <!-- ==================== SLIDE 2: PROBLEM ==================== -->
 <section class="slide" id="slide-2">
+  <span class="slide-label">02 — PROBLEM</span>
   <span class="slide-number">02</span>
   <div class="slide-inner">
     <div class="col-zh">
@@ -617,15 +608,15 @@
 
       <div class="card card-red">
         <h3 class="red">商家之痛</h3>
-        <p style="font-size:14px;color:var(--text-dim);line-height:1.6;">无法衡量达人ROI。投放预算盲目，无法追踪从内容到到店的转化路径。钱花了，不知道效果。</p>
+        <p style="font-size:15px;color:var(--text2);line-height:1.75;">无法衡量达人ROI。投放预算盲目，无法追踪从内容到到店的转化路径。钱花了，不知道效果。</p>
       </div>
       <div class="card card-orange">
         <h3 class="orange">达人之痛</h3>
-        <p style="font-size:14px;color:var(--text-dim);line-height:1.6;">缺乏定价权。没有标准化的能力证明，报价全靠感觉，优质达人被劣质达人挤压。</p>
+        <p style="font-size:15px;color:var(--text2);line-height:1.75;">缺乏定价权。没有标准化的能力证明，报价全靠感觉，优质达人被劣质达人挤压。</p>
       </div>
       <div class="card card-accent">
         <h3 class="accent">市场之痛</h3>
-        <p style="font-size:14px;color:var(--text-dim);line-height:1.6;">供给充沛但无结构化渠道。大量达人和商家需求存在，但缺乏匹配、验证和履约的基础设施。</p>
+        <p style="font-size:15px;color:var(--text2);line-height:1.75;">供给充沛但无结构化渠道。大量达人和商家需求存在，但缺乏匹配、验证和履约的基础设施。</p>
       </div>
     </div>
     <div class="divider-line"></div>
@@ -636,15 +627,15 @@
 
       <div class="card card-red">
         <h3 class="red">Merchant Pain</h3>
-        <p style="font-size:14px;color:var(--text-dim);line-height:1.6;">Cannot measure creator ROI. Ad spend is blind with no way to track conversion from content to foot traffic. Money spent, results unknown.</p>
+        <p style="font-size:15px;color:var(--text2);line-height:1.75;">Cannot measure creator ROI. Ad spend is blind with no way to track conversion from content to foot traffic. Money spent, results unknown.</p>
       </div>
       <div class="card card-orange">
         <h3 class="orange">Creator Pain</h3>
-        <p style="font-size:14px;color:var(--text-dim);line-height:1.6;">Lack pricing power. No standardized proof of ability means pricing is guesswork. Quality creators get undercut by low-quality ones.</p>
+        <p style="font-size:15px;color:var(--text2);line-height:1.75;">Lack pricing power. No standardized proof of ability means pricing is guesswork. Quality creators get undercut by low-quality ones.</p>
       </div>
       <div class="card card-accent">
         <h3 class="accent">Market Pain</h3>
-        <p style="font-size:14px;color:var(--text-dim);line-height:1.6;">Abundant supply, no structured channel. Massive creator and merchant demand exists but lacks infrastructure for matching, verification, and fulfillment.</p>
+        <p style="font-size:15px;color:var(--text2);line-height:1.75;">Abundant supply, no structured channel. Massive creator and merchant demand exists but lacks infrastructure for matching, verification, and fulfillment.</p>
       </div>
     </div>
   </div>
@@ -652,6 +643,7 @@
 
 <!-- ==================== SLIDE 3: SOLUTION ==================== -->
 <section class="slide" id="slide-3">
+  <span class="slide-label">03 — SOLUTION</span>
   <span class="slide-number">03</span>
   <div class="slide-inner">
     <div class="col-zh">
@@ -706,6 +698,7 @@
 
 <!-- ==================== SLIDE 4: HOW IT WORKS ==================== -->
 <section class="slide" id="slide-4">
+  <span class="slide-label">04 — HOW IT WORKS</span>
   <span class="slide-number">04</span>
   <div class="slide-inner">
     <div class="col-zh">
@@ -788,6 +781,7 @@
 
 <!-- ==================== SLIDE 5: BUSINESS MODEL ==================== -->
 <section class="slide" id="slide-5">
+  <span class="slide-label">05 — BUSINESS MODEL</span>
   <span class="slide-number">05</span>
   <div class="slide-inner">
     <div class="col-zh">
@@ -876,6 +870,7 @@
 
 <!-- ==================== SLIDE 6: MARKET ==================== -->
 <section class="slide" id="slide-6">
+  <span class="slide-label">06 — MARKET</span>
   <span class="slide-number">06</span>
   <div class="slide-inner">
     <div class="col-zh">
@@ -956,6 +951,7 @@
 
 <!-- ==================== SLIDE 7: TRACTION ==================== -->
 <section class="slide" id="slide-7">
+  <span class="slide-label">07 — TRACTION</span>
   <span class="slide-number">07</span>
   <div class="slide-inner">
     <div class="col-zh">
@@ -1072,6 +1068,7 @@
 
 <!-- ==================== SLIDE 8: COMPETITIVE ADVANTAGE ==================== -->
 <section class="slide" id="slide-8">
+  <span class="slide-label">08 — ADVANTAGE</span>
   <span class="slide-number">08</span>
   <div class="slide-inner">
     <div class="col-zh">
@@ -1144,6 +1141,7 @@
 
 <!-- ==================== SLIDE 9: TEAM & ASK ==================== -->
 <section class="slide" id="slide-9">
+  <span class="slide-label">09 — TEAM &amp; ASK</span>
   <span class="slide-number">09</span>
   <div class="slide-inner">
     <div class="col-zh">
@@ -1153,7 +1151,7 @@
 
       <div class="card card-accent" style="margin-bottom:20px;">
         <h3>核心团队</h3>
-        <p style="font-size:14px;color:var(--text-dim);line-height:1.8;margin-top:8px;">
+        <p style="font-size:15px;color:var(--text2);line-height:1.75;margin-top:8px;">
           [团队成员信息占位]<br>
           [创始人背景 - 本地商业 + 技术]<br>
           [联合创始人背景 - 达人生态 + 运营]<br>
@@ -1164,7 +1162,7 @@
       <div class="ask-card">
         <div style="font-size:14px;color:var(--text-dim);margin-bottom:12px;">我们的目标</div>
         <div style="font-size:36px;font-weight:800;color:var(--accent);margin-bottom:8px;">[融资金额占位]</div>
-        <div style="font-size:14px;color:var(--text-dim);line-height:1.6;">
+        <div style="font-size:14px;color:var(--text-dim);line-height:1.75;">
           用于：产品研发 / 冷启动补贴 / 团队扩张<br>
           目标：12周内验证核心假设
         </div>
@@ -1183,7 +1181,7 @@
 
       <div class="card card-accent" style="margin-bottom:20px;">
         <h3>Core Team</h3>
-        <p style="font-size:14px;color:var(--text-dim);line-height:1.8;margin-top:8px;">
+        <p style="font-size:15px;color:var(--text2);line-height:1.75;margin-top:8px;">
           [Team member details placeholder]<br>
           [Founder - Local commerce + Engineering]<br>
           [Co-founder - Creator ecosystem + Ops]<br>
@@ -1194,7 +1192,7 @@
       <div class="ask-card">
         <div style="font-size:14px;color:var(--text-dim);margin-bottom:12px;">Our Goal</div>
         <div style="font-size:36px;font-weight:800;color:var(--accent);margin-bottom:8px;">[Funding Amount Placeholder]</div>
-        <div style="font-size:14px;color:var(--text-dim);line-height:1.6;">
+        <div style="font-size:14px;color:var(--text-dim);line-height:1.75;">
           Use of funds: Product dev / Cold start subsidies / Team growth<br>
           Target: Validate core hypotheses within 12 weeks
         </div>
@@ -1243,25 +1241,36 @@
       slides[prev].scrollIntoView({ behavior: 'smooth' });
     }
   });
+</script>
 
-  // Language toggle
-  function setLang(lang) {
-    localStorage.setItem('push-lang', lang);
+<script>
+(function() {
+  let lang = localStorage.getItem('push-lang') || 'en';
+  function applyLang(l) {
+    lang = l;
+    localStorage.setItem('push-lang', l);
+    document.body.classList.toggle('lang-en', l === 'en');
+    document.body.classList.toggle('lang-zh', l === 'zh');
     document.querySelectorAll('[data-en]').forEach(el => {
-      el.textContent = lang === 'en' ? el.dataset.en : el.dataset.zh;
+      const val = el.getAttribute('data-' + l);
+      if (val !== null) el.innerHTML = val;
     });
-    document.querySelectorAll('[data-en-html]').forEach(el => {
-      el.innerHTML = lang === 'en' ? el.dataset.enHtml : el.dataset.zhHtml;
-    });
-    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-    document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
-    document.body.classList.toggle('lang-en', lang === 'en');
-    document.body.classList.toggle('lang-zh', lang === 'zh');
+    const btn = document.getElementById('lang-btn');
+    if (btn) btn.textContent = l === 'en' ? '中 / EN' : 'EN / 中';
   }
-  (function() {
-    const lang = localStorage.getItem('push-lang') || 'en';
-    setLang(lang);
-  })();
+  const btn = document.getElementById('lang-btn');
+  if (btn) {
+    btn.addEventListener('click', () => {
+      document.body.style.opacity = '0.8';
+      document.body.style.transition = 'opacity 0.15s';
+      setTimeout(() => {
+        applyLang(lang === 'en' ? 'zh' : 'en');
+        document.body.style.opacity = '1';
+      }, 150);
+    });
+  }
+  applyLang(lang);
+})();
 </script>
 </body>
 </html>

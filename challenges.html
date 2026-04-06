@@ -9,61 +9,73 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #ffffff;
-  --bg2: #f8f9fa;
-  --bg3: #f1f3f5;
-  --bg4: #e9ecef;
-  --primary: #1a1a2e;
   --accent: #4f46e5;
-  --accent2: #4f46e5;
   --accent-light: #818cf8;
-  --accent-bg: rgba(79, 70, 229, 0.06);
+  --accent-dark: #3730a3;
+  --accent-bg: rgba(79,70,229,0.06);
+  --primary: #0f0f1a;
   --green: #059669;
-  --green-bg: rgba(5, 150, 105, 0.08);
+  --green-bg: rgba(5,150,105,0.08);
   --orange: #d97706;
-  --orange-bg: rgba(217, 119, 6, 0.08);
+  --orange-bg: rgba(217,119,6,0.08);
   --red: #dc2626;
-  --red-bg: rgba(220, 38, 38, 0.08);
-  --pink: #be185d;
-  --blue: #2563eb;
+  --red-bg: rgba(220,38,38,0.08);
   --text: #111827;
   --text2: #4b5563;
   --text3: #9ca3af;
   --border: #e5e7eb;
-  --border-hover: #d1d5db;
-  --radius: 12px;
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-  --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+  --bg: #ffffff;
+  --bg2: #f8f9fa;
+  --bg3: #f1f3f5;
+  --bg4: #e9ecef;
+  --radius: 14px;
+  --shadow: 0 4px 20px rgba(0,0,0,0.08);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg2); color: var(--text); line-height: 1.6; }
+body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg2); color: var(--text); line-height: 1.75; font-size: 15px; }
 a { color: var(--accent); text-decoration: none; }
 a:hover { color: var(--accent-light); text-decoration: none; }
 
 /* NAV */
-.topnav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: #fff;
+.topnav, nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border);
-  display: flex; align-items: center; padding: 0 24px; height: 60px; gap: 8px;
+  display: flex; align-items: center;
+  padding: 0 24px; height: 60px; gap: 8px;
 }
-.topnav .logo { font-weight: 800; font-size: 22px; color: var(--primary); letter-spacing: 2px; margin-right: 32px; }
-.topnav .navlinks { display: flex; gap: 4px; flex-wrap: wrap; }
-.topnav .navlinks a {
-  padding: 6px 14px; border-radius: 8px; font-size: 13px; font-weight: 500;
-  color: var(--text2); transition: color 0.2s;
+.logo, .nav-logo {
+  font-weight: 900; font-size: 22px; color: var(--accent);
+  letter-spacing: 2px; text-decoration: none; flex-shrink: 0;
+  margin-right: 16px;
 }
-.topnav .navlinks a:hover { color: var(--text); text-decoration: none; }
-.topnav .navlinks a.active { color: var(--accent); font-weight: 600; text-decoration: none; }
+.navlinks, .nav-links {
+  display: flex; gap: 2px; flex-wrap: wrap; flex: 1;
+}
+.navlinks a, .nav-links a {
+  padding: 5px 12px; border-radius: 8px; font-size: 12px; font-weight: 500;
+  color: var(--text2); transition: all 0.2s; text-decoration: none;
+  white-space: nowrap;
+}
+.navlinks a:hover, .nav-links a:hover { color: var(--text); background: var(--bg2); }
+.navlinks a.active, .nav-links a.active { color: var(--accent); background: var(--accent-bg); font-weight: 700; }
+#lang-btn {
+  background: var(--accent); color: #fff; border: none;
+  padding: 7px 16px; border-radius: 8px; font-size: 12px; font-weight: 700;
+  cursor: pointer; white-space: nowrap; flex-shrink: 0;
+  transition: background 0.2s; font-family: inherit;
+}
+#lang-btn:hover { background: var(--accent-dark); }
 
 /* HERO */
 .hero {
   padding: 100px 24px 40px;
-  max-width: 1400px; margin: 0 auto;
+  max-width: 1200px; margin: 0 auto;
   text-align: center;
-  background: #fff;
+  background: transparent;
 }
 .hero h1 {
   font-size: 42px; font-weight: 900;
@@ -89,11 +101,11 @@ a:hover { color: var(--accent-light); text-decoration: none; }
 
 /* SECTION */
 .section {
-  padding: 40px 24px; max-width: 1400px; margin: 0 auto;
+  padding: 80px 24px; max-width: 1200px; margin: 0 auto;
 }
 .section-label {
   display: inline-flex; align-items: center; gap: 10px;
-  font-size: 26px; font-weight: 800; margin-bottom: 24px;
+  font-size: 36px; font-weight: 800; margin-bottom: 24px;
   padding-bottom: 8px; border-bottom: 3px solid;
 }
 .section-label.critical { border-color: var(--red); color: var(--red); }
@@ -113,11 +125,12 @@ a:hover { color: var(--accent-light); text-decoration: none; }
   border-radius: var(--radius);
   padding: 0;
   overflow: hidden;
-  transition: all 0.2s;
+  transition: all 0.25s;
 }
 .challenge-card:hover {
-  border-color: var(--border-hover);
-  box-shadow: var(--shadow);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: transparent;
 }
 
 /* Card header with number badge */
@@ -128,15 +141,18 @@ a:hover { color: var(--accent-light); text-decoration: none; }
 .card-num {
   width: 36px; height: 36px; border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
-  font-weight: 800; font-size: 15px; color: var(--text); flex-shrink: 0;
+  font-weight: 800; font-size: 15px; color: #fff; flex-shrink: 0;
 }
 .card-num.critical { background: var(--red); }
 .card-num.high { background: var(--orange); }
 .card-num.medium { background: var(--accent); }
 
 .card-title {
-  font-size: 15px; font-weight: 700; color: var(--text);
+  font-size: 20px; font-weight: 700; color: var(--text);
 }
+.card-title.critical { color: var(--red); }
+.card-title.high { color: var(--orange); }
+.card-title.medium { color: var(--accent); }
 
 /* Severity meter */
 .severity-bar-wrap {
@@ -177,7 +193,7 @@ a:hover { color: var(--accent-light); text-decoration: none; }
   color: var(--text3);
 }
 .desc-text {
-  font-size: 13px; color: var(--text2); line-height: 1.7; margin-bottom: 10px;
+  font-size: 13px; color: var(--text2); line-height: 1.75; margin-bottom: 10px;
 }
 .defense-label {
   font-size: 11px; font-weight: 700; text-transform: uppercase;
@@ -238,42 +254,15 @@ body.lang-en .bilingual { grid-template-columns: 1fr; }
 body.lang-zh .bilingual { grid-template-columns: 1fr; }
 body.lang-en .col-en { padding-left: 0; border-left: none; }
 body.lang-zh .col-zh { padding-right: 0; border-right: none; }
-
-/* LANG TOGGLE */
-.lang-toggle {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  gap: 0;
-  background: var(--bg3);
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  flex-shrink: 0;
-}
-.lang-toggle button {
-  padding: 5px 12px;
-  background: transparent;
-  border: none;
-  color: var(--text3);
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.lang-toggle button.active {
-  background: var(--accent);
-  color: var(--text);
-}
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav class="topnav">
-  <div class="logo">PUSH</div>
+  <a href="index.html" class="logo">PUSH</a>
   <div class="navlinks">
-    <a href="index.html" data-en="Dashboard" data-zh="仪表盘">Dashboard</a>
+    <a href="index.html" data-en="Overview" data-zh="概览">Overview</a>
     <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
     <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演方案">Pitch Deck</a>
     <a href="prospects.html" data-en="Prospects" data-zh="未来愿景">Prospects</a>
@@ -283,10 +272,7 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
     <a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
     <a href="push-strategy-core.html" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
   </div>
-  <div class="lang-toggle">
-    <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
-    <button id="btn-zh" onclick="setLang('zh')">中</button>
-  </div>
+  <button id="lang-btn">中 / EN</button>
 </nav>
 
 <!-- HERO -->
@@ -321,7 +307,7 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
     <div class="challenge-card">
       <div class="card-header">
         <div class="card-num critical">1</div>
-        <div class="card-title" data-en="Cold Start Problem" data-zh="冷启动问题">Cold Start Problem</div>
+        <div class="card-title critical" data-en="Cold Start Problem" data-zh="冷启动问题">Cold Start Problem</div>
       </div>
       <div class="severity-bar-wrap">
         <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>95%</span></div>
@@ -347,7 +333,7 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
     <div class="challenge-card">
       <div class="card-header">
         <div class="card-num critical">2</div>
-        <div class="card-title" data-en="Disintermediation Risk" data-zh="脱媒风险">Disintermediation Risk</div>
+        <div class="card-title critical" data-en="Disintermediation Risk" data-zh="脱媒风险">Disintermediation Risk</div>
       </div>
       <div class="severity-bar-wrap">
         <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>90%</span></div>
@@ -373,7 +359,7 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
     <div class="challenge-card">
       <div class="card-header">
         <div class="card-num critical">3</div>
-        <div class="card-title" data-en="Merchant Retention" data-zh="商家留存">Merchant Retention</div>
+        <div class="card-title critical" data-en="Merchant Retention" data-zh="商家留存">Merchant Retention</div>
       </div>
       <div class="severity-bar-wrap">
         <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>85%</span></div>
@@ -399,7 +385,7 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
     <div class="challenge-card">
       <div class="card-header">
         <div class="card-num critical">4</div>
-        <div class="card-title" data-en="Creator Quality Retention" data-zh="创作者质量留存">Creator Quality Retention</div>
+        <div class="card-title critical" data-en="Creator Quality Retention" data-zh="创作者质量留存">Creator Quality Retention</div>
       </div>
       <div class="severity-bar-wrap">
         <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>80%</span></div>
@@ -425,7 +411,7 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
     <div class="challenge-card">
       <div class="card-header">
         <div class="card-num critical">5</div>
-        <div class="card-title" data-en="Weak Attribution" data-zh="归因能力薄弱">Weak Attribution</div>
+        <div class="card-title critical" data-en="Weak Attribution" data-zh="归因能力薄弱">Weak Attribution</div>
       </div>
       <div class="severity-bar-wrap">
         <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>82%</span></div>
@@ -460,7 +446,7 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
     <div class="challenge-card">
       <div class="card-header">
         <div class="card-num high">6</div>
-        <div class="card-title" data-en="Fraud" data-zh="欺诈风险">Fraud</div>
+        <div class="card-title high" data-en="Fraud" data-zh="欺诈风险">Fraud</div>
       </div>
       <div class="severity-bar-wrap">
         <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>75%</span></div>
@@ -486,7 +472,7 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
     <div class="challenge-card">
       <div class="card-header">
         <div class="card-num high">7</div>
-        <div class="card-title" data-en="Commoditization" data-zh="同质化竞争">Commoditization</div>
+        <div class="card-title high" data-en="Commoditization" data-zh="同质化竞争">Commoditization</div>
       </div>
       <div class="severity-bar-wrap">
         <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>65%</span></div>
@@ -512,7 +498,7 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
     <div class="challenge-card">
       <div class="card-header">
         <div class="card-num high">8</div>
-        <div class="card-title" data-en="Weak Wedge Selection" data-zh="切入点选择不当">Weak Wedge Selection</div>
+        <div class="card-title high" data-en="Weak Wedge Selection" data-zh="切入点选择不当">Weak Wedge Selection</div>
       </div>
       <div class="severity-bar-wrap">
         <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>70%</span></div>
@@ -538,7 +524,7 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
     <div class="challenge-card">
       <div class="card-header">
         <div class="card-num high">9</div>
-        <div class="card-title" data-en="Supply Opportunism" data-zh="供给端投机">Supply Opportunism</div>
+        <div class="card-title high" data-en="Supply Opportunism" data-zh="供给端投机">Supply Opportunism</div>
       </div>
       <div class="severity-bar-wrap">
         <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>60%</span></div>
@@ -573,7 +559,7 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
     <div class="challenge-card">
       <div class="card-header">
         <div class="card-num medium">10</div>
-        <div class="card-title" data-en="Approval Bottlenecks" data-zh="审批与结算瓶颈">Approval Bottlenecks</div>
+        <div class="card-title medium" data-en="Approval Bottlenecks" data-zh="审批与结算瓶颈">Approval Bottlenecks</div>
       </div>
       <div class="severity-bar-wrap">
         <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>55%</span></div>
@@ -599,7 +585,7 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
     <div class="challenge-card">
       <div class="card-header">
         <div class="card-num medium">11</div>
-        <div class="card-title" data-en="Scaling Manual Operations" data-zh="手动运营扩展">Scaling Manual Operations</div>
+        <div class="card-title medium" data-en="Scaling Manual Operations" data-zh="手动运营扩展">Scaling Manual Operations</div>
       </div>
       <div class="severity-bar-wrap">
         <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>50%</span></div>
@@ -625,7 +611,7 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
     <div class="challenge-card">
       <div class="card-header">
         <div class="card-num medium">12</div>
-        <div class="card-title" data-en="Quality vs Growth" data-zh="质量与增长的平衡">Quality vs Growth</div>
+        <div class="card-title medium" data-en="Quality vs Growth" data-zh="质量与增长的平衡">Quality vs Growth</div>
       </div>
       <div class="severity-bar-wrap">
         <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>50%</span></div>
@@ -663,23 +649,35 @@ document.querySelectorAll('.section, .challenge-card').forEach(el => {
   el.classList.add('fade-in');
   fadeObserver.observe(el);
 });
+</script>
 
-function setLang(lang) {
-  localStorage.setItem('push-lang', lang);
-  document.querySelectorAll('[data-en]').forEach(el => {
-    el.textContent = lang === 'en' ? el.dataset.en : el.dataset.zh;
-  });
-  document.querySelectorAll('[data-en-html]').forEach(el => {
-    el.innerHTML = lang === 'en' ? el.dataset.enHtml : el.dataset.zhHtml;
-  });
-  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-  document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
-  document.body.classList.toggle('lang-en', lang === 'en');
-  document.body.classList.toggle('lang-zh', lang === 'zh');
-}
+<script>
 (function() {
-  const lang = localStorage.getItem('push-lang') || 'en';
-  setLang(lang);
+  let lang = localStorage.getItem('push-lang') || 'en';
+  function applyLang(l) {
+    lang = l;
+    localStorage.setItem('push-lang', l);
+    document.querySelectorAll('[data-en]').forEach(el => {
+      const val = el.getAttribute('data-' + l);
+      if (val !== null) el.innerHTML = val;
+    });
+    document.body.classList.toggle('lang-en', l === 'en');
+    document.body.classList.toggle('lang-zh', l === 'zh');
+    const btn = document.getElementById('lang-btn');
+    if (btn) btn.textContent = l === 'en' ? '中 / EN' : 'EN / 中';
+  }
+  const btn = document.getElementById('lang-btn');
+  if (btn) {
+    btn.addEventListener('click', () => {
+      document.body.style.opacity = '0.8';
+      document.body.style.transition = 'opacity 0.15s';
+      setTimeout(() => {
+        applyLang(lang === 'en' ? 'zh' : 'en');
+        document.body.style.opacity = '1';
+      }, 150);
+    });
+  }
+  applyLang(lang);
 })();
 </script>
 </body>
