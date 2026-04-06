@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Push 技术文档 — 本地创作者效果基础设施">
+<meta property="og:title" content="PUSH — Technical Documents">
+<meta property="og:type" content="website">
 <title>PUSH — GTM Experiments & Launch Loops</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,8 +37,9 @@ html{scroll-behavior:smooth;}
 body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--text);line-height:1.6;overflow-x:hidden;background:#fff;}
 
 /* ── FADE IN ── */
-.fade-in{opacity:0;transition:opacity 0.5s ease;}
-.fade-in.visible{opacity:1;}
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.5s ease,transform 0.5s ease;animation:fadeInFallback 0s 4s forwards;}
+.fade-in.visible{opacity:1;transform:translateY(0);animation:none;}
+@keyframes fadeInFallback{to{opacity:1;transform:translateY(0);}}
 
 /* ── NAV ── */
 nav{
@@ -67,6 +71,24 @@ nav{
 .lang-btn:hover{background:var(--accent-dark);}
 @media(max-width:768px){
   .nav-links{display:none;}
+}
+/* ── MOBILE HAMBURGER ── */
+.nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;flex-shrink:0;margin-left:4px;}
+.nav-burger span{display:block;width:22px;height:2px;background:var(--text,#111827);border-radius:2px;transition:transform 0.2s,opacity 0.2s;}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-burger.open span:nth-child(2){opacity:0;}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.nav-mobile-panel{display:none;position:fixed;top:60px;left:0;right:0;background:rgba(255,255,255,0.98);border-bottom:1px solid var(--border,#e5e7eb);padding:12px 16px 20px;flex-direction:column;gap:2px;z-index:999;box-shadow:0 8px 32px rgba(0,0,0,0.12);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);}
+.nav-mobile-panel.open{display:flex;}
+.nav-mobile-panel a{padding:12px 16px;border-radius:8px;font-size:15px;font-weight:500;color:var(--text,#111827);text-decoration:none;transition:background 0.15s,color 0.15s;}
+.nav-mobile-panel a:hover{background:var(--bg2,#f8f9fa);}
+.nav-mobile-panel a.active{color:var(--accent,#4f46e5);background:var(--accent-bg,rgba(79,70,229,0.06));font-weight:700;}
+.nav-mobile-panel .mobile-lang-row{display:flex;align-items:center;padding:12px 16px 4px;gap:12px;border-top:1px solid var(--border,#e5e7eb);margin-top:8px;}
+.nav-mobile-panel .mobile-lang-label{font-size:12px;color:var(--text3,#9ca3af);font-weight:500;}
+@media(max-width:768px){
+  .nav-links,.navlinks{display:none !important;}
+  .nav-burger{display:flex !important;}
+  #lang-btn{font-size:12px;padding:6px 12px;}
 }
 
 /* ── HERO ── */
@@ -318,19 +340,38 @@ blockquote.principle-white{
 <nav>
   <a href="index.html" class="nav-logo">PUSH</a>
   <div class="nav-links">
-    <a href="index.html" data-en="Overview" data-zh="总览">Overview</a>
+    <a href="index.html" data-en="Overview" data-zh="概览">Overview</a>
     <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
-    <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演文件">Pitch Deck</a>
-    <a href="prospects.html" data-en="Prospects" data-zh="市场前景">Prospects</a>
+    <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
+    <a href="prospects.html" data-en="Prospects" data-zh="未来愿景">Prospects</a>
     <a href="challenges.html" data-en="Challenges" data-zh="挑战">Challenges</a>
     <a href="risk-defense.html" data-en="Risk &amp; Defense" data-zh="风险防御">Risk &amp; Defense</a>
-    <a href="retention-defense.html" data-en="Retention" data-zh="留存">Retention</a>
+    <a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a>
     <a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
     <a href="push-strategy-core.html" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
     <a href="gtm-launch.html" class="active" data-en="GTM &amp; Launch" data-zh="GTM与启动">GTM &amp; Launch</a>
   </div>
   <button class="lang-btn" id="lang-btn">中 / EN</button>
+  <button class="nav-burger" id="nav-burger" aria-label="打开菜单" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="nav-mobile-panel" id="nav-mobile-panel">
+  <a href="index.html" data-en="Overview" data-zh="总览">Overview</a>
+  <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
+  <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演文件">Pitch Deck</a>
+  <a href="prospects.html" data-en="Prospects" data-zh="市场前景">Prospects</a>
+  <a href="challenges.html" data-en="Challenges" data-zh="挑战">Challenges</a>
+  <a href="risk-defense.html" data-en="Risk &amp; Defense" data-zh="风险防御">Risk &amp; Defense</a>
+  <a href="retention-defense.html" data-en="Retention" data-zh="留存">Retention</a>
+  <a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
+  <a href="push-strategy-core.html" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
+  <a href="gtm-launch.html" class="active" data-en="GTM &amp; Launch" data-zh="GTM与启动">GTM &amp; Launch</a>
+  <div class="mobile-lang-row">
+    <span class="mobile-lang-label" data-en="Language" data-zh="语言">Language</span>
+    <button id="lang-btn-mobile" style="background:var(--accent,#4f46e5);color:#fff;border:none;padding:6px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">中 / EN</button>
+  </div>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -724,13 +765,13 @@ blockquote.principle-white{
         <div style="font-size:13px;color:rgba(255,255,255,0.35);max-width:280px;line-height:1.6;" data-en="Creator-to-merchant performance platform. Local density drives platform value." data-zh="创作者与商户绩效平台。本地密度驱动平台价值。">Creator-to-merchant performance platform. Local density drives platform value.</div>
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:8px 16px;max-width:620px;">
-        <a href="index.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Overview" data-zh="总览">Overview</a>
+        <a href="index.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Overview" data-zh="概览">Overview</a>
         <a href="project-intro.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
-        <a href="pitch-deck.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Pitch Deck" data-zh="路演文件">Pitch Deck</a>
-        <a href="prospects.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Prospects" data-zh="市场前景">Prospects</a>
+        <a href="pitch-deck.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
+        <a href="prospects.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Prospects" data-zh="未来愿景">Prospects</a>
         <a href="challenges.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Challenges" data-zh="挑战">Challenges</a>
         <a href="risk-defense.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Risk &amp; Defense" data-zh="风险防御">Risk &amp; Defense</a>
-        <a href="retention-defense.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Retention" data-zh="留存">Retention</a>
+        <a href="retention-defense.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Retention" data-zh="留存机制">Retention</a>
         <a href="platform-value.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
         <a href="push-strategy-core.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
         <a href="fraud-integrity.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Fraud &amp; Integrity" data-zh="诚信运营">Fraud &amp; Integrity</a>
@@ -753,6 +794,8 @@ blockquote.principle-white{
     });
     const btn = document.getElementById('lang-btn');
     if (btn) btn.textContent = l === 'en' ? '中 / EN' : 'EN / 中';
+    const mobileBtn = document.getElementById('lang-btn-mobile');
+    if (mobileBtn) mobileBtn.textContent = l === 'en' ? '中 / EN' : 'EN / 中';
   }
   document.getElementById('lang-btn').addEventListener('click', () => {
     document.body.style.opacity = '0.8';
@@ -763,8 +806,45 @@ blockquote.principle-white{
 
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.05 });
+  }, { threshold: 0.01, rootMargin: '0px 0px 60px 0px' });
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+})();
+
+// Mobile navigation
+(function() {
+  const burger = document.getElementById('nav-burger');
+  const panel = document.getElementById('nav-mobile-panel');
+  if (!burger || !panel) return;
+  burger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const open = panel.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open);
+  });
+  panel.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      panel.classList.remove('open');
+      burger.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+    });
+  });
+  document.addEventListener('click', (e) => {
+    if (!burger.contains(e.target) && !panel.contains(e.target)) {
+      panel.classList.remove('open');
+      burger.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+    }
+  });
+  const mobileLangBtn = document.getElementById('lang-btn-mobile');
+  if (mobileLangBtn) {
+    mobileLangBtn.addEventListener('click', () => {
+      const mainLangBtn = document.getElementById('lang-btn');
+      if (mainLangBtn) mainLangBtn.click();
+      setTimeout(() => { if (mainLangBtn) mobileLangBtn.textContent = mainLangBtn.textContent; }, 200);
+    });
+    const mainLangBtn = document.getElementById('lang-btn');
+    if (mainLangBtn) mobileLangBtn.textContent = mainLangBtn.textContent;
+  }
 })();
 </script>
 </body>

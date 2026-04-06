@@ -3,6 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Push — 本地创作者效果基础设施">
+<meta property="og:title" content="PUSH">
+<meta property="og:description" content="Push 让每次创作者合作都可以量化、追踪、复购。">
+<meta property="og:type" content="website">
 <title>PUSH — Risk & Defense</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -326,8 +330,9 @@ nav{
 /* ═══════════════════════════════════════════
    SCROLL FADE
 ═══════════════════════════════════════════ */
-.fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease;}
-.fade-in.visible{opacity:1;transform:translateY(0);}
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease;animation:fadeInFallback 0s 4s forwards;}
+.fade-in.visible{opacity:1;transform:translateY(0);animation:none;}
+@keyframes fadeInFallback{to{opacity:1;transform:translateY(0);}}
 
 /* ═══════════════════════════════════════════
    FOOTER
@@ -376,6 +381,23 @@ footer{
 @media(max-width:640px){
   .risk-grid-3{grid-template-columns:1fr;}
 }
+/* ── MOBILE HAMBURGER ── */
+.nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;flex-shrink:0;margin-left:4px;}
+.nav-burger span{display:block;width:22px;height:2px;background:var(--text,#111827);border-radius:2px;transition:transform 0.2s,opacity 0.2s;}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-burger.open span:nth-child(2){opacity:0;}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.nav-mobile-panel{display:none;position:fixed;top:60px;left:0;right:0;background:rgba(255,255,255,0.98);border-bottom:1px solid var(--border,#e5e7eb);padding:12px 16px 20px;flex-direction:column;gap:2px;z-index:999;box-shadow:0 8px 32px rgba(0,0,0,0.12);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);}
+.nav-mobile-panel.open{display:flex;}
+.nav-mobile-panel a{padding:12px 16px;border-radius:8px;font-size:15px;font-weight:500;color:var(--text,#111827);text-decoration:none;transition:background 0.15s,color 0.15s;}
+.nav-mobile-panel a:hover{background:var(--bg2,#f8f9fa);}
+.nav-mobile-panel a.active{color:var(--accent,#4f46e5);background:var(--accent-bg,rgba(79,70,229,0.06));font-weight:700;}
+.nav-mobile-panel .mobile-lang-row{display:flex;align-items:center;padding:12px 16px 4px;gap:12px;border-top:1px solid var(--border,#e5e7eb);margin-top:8px;}
+.nav-mobile-panel .mobile-lang-label{font-size:12px;color:var(--text3,#9ca3af);font-weight:500;}
+@media(max-width:768px){
+  .nav-links,.navlinks{display:none !important;}
+  .nav-burger{display:flex !important;}
+}
 </style>
 </head>
 <body>
@@ -384,9 +406,9 @@ footer{
 <nav>
   <a href="index.html" class="nav-logo">PUSH</a>
   <div class="nav-links">
-    <a href="index.html" data-en="Dashboard" data-zh="仪表盘">Dashboard</a>
+    <a href="index.html" data-en="Overview" data-zh="概览">Overview</a>
     <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
-    <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演方案">Pitch Deck</a>
+    <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
     <a href="prospects.html" data-en="Prospects" data-zh="未来愿景">Prospects</a>
     <a href="challenges.html" data-en="Challenges" data-zh="挑战">Challenges</a>
     <a href="risk-defense.html" class="active" data-en="Risk &amp; Defense" data-zh="风险防御">Risk &amp; Defense</a>
@@ -398,7 +420,25 @@ footer{
   <div class="nav-mobile-right">
     <button class="lang-btn" onclick="toggleLang()">中 / EN</button>
   </div>
+  <button class="nav-burger" id="nav-burger" aria-label="打开菜单" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="nav-mobile-panel" id="nav-mobile-panel">
+  <a href="index.html" data-en="Overview" data-zh="概览">Dashboard</a>
+  <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
+  <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
+  <a href="prospects.html" data-en="Prospects" data-zh="未来愿景">Prospects</a>
+  <a href="challenges.html" data-en="Challenges" data-zh="挑战">Challenges</a>
+  <a href="risk-defense.html" class="active" data-en="Risk &amp; Defense" data-zh="风险防御">Risk &amp; Defense</a>
+  <a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a>
+  <a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
+  <a href="push-strategy-core.html" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
+  <div class="mobile-lang-row">
+    <span class="mobile-lang-label" data-en="Language" data-zh="语言">Language</span>
+    <button id="lang-btn-mobile" onclick="toggleLang()" style="background:var(--accent,#4f46e5);color:#fff;border:none;padding:6px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">中 / EN</button>
+  </div>
+</div>
 
 <!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
 <section class="hero">
@@ -1075,9 +1115,9 @@ footer{
         <div class="footer-tagline" data-en="Local Creator Performance Infrastructure" data-zh="本地 Creator 效果基础设施">Local Creator Performance Infrastructure</div>
       </div>
       <div class="footer-links">
-        <a href="index.html" class="footer-pill" data-en="Dashboard" data-zh="仪表盘">Dashboard</a>
+        <a href="index.html" class="footer-pill" data-en="Overview" data-zh="概览">Dashboard</a>
         <a href="project-intro.html" class="footer-pill" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
-        <a href="pitch-deck.html" class="footer-pill" data-en="Pitch Deck" data-zh="路演方案">Pitch Deck</a>
+        <a href="pitch-deck.html" class="footer-pill" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
         <a href="prospects.html" class="footer-pill" data-en="Prospects" data-zh="未来愿景">Prospects</a>
         <a href="challenges.html" class="footer-pill" data-en="Challenges" data-zh="挑战">Challenges</a>
         <a href="risk-defense.html" class="footer-pill current" data-en="Risk &amp; Defense" data-zh="风险防御">Risk &amp; Defense</a>
@@ -1087,7 +1127,7 @@ footer{
       </div>
     </div>
     <div class="footer-bottom">
-      <span data-en="© 2025 PUSH Platform. All rights reserved." data-zh="© 2025 PUSH 平台。保留所有权利。">© 2025 PUSH Platform. All rights reserved.</span>
+      <span data-en="© 2026 Push" data-zh="© 2026 Push">© 2026 Push</span>
     </div>
   </div>
 </footer>
@@ -1107,6 +1147,8 @@ function applyLang(lang) {
     document.querySelectorAll('.nav-mobile-right .lang-btn').forEach(b => {
       b.textContent = lang === 'zh' ? 'EN / 中' : '中 / EN';
     });
+    const mobileBtn = document.getElementById('lang-btn-mobile');
+    if (mobileBtn) mobileBtn.textContent = lang === 'zh' ? 'EN / 中' : '中 / EN';
     currentLang = lang;
     localStorage.setItem('push-lang', lang);
     document.body.style.opacity = '1';
@@ -1130,7 +1172,7 @@ const observer = new IntersectionObserver((entries) => {
       observer.unobserve(entry.target);
     }
   });
-}, { threshold: 0.08 });
+}, { threshold: 0.01, rootMargin: '0px 0px 60px 0px' });
 
 fadeEls.forEach(el => observer.observe(el));
 
@@ -1151,6 +1193,33 @@ const sectionObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.25, rootMargin: '-60px 0px -40% 0px' });
 
 sections.forEach(s => sectionObserver.observe(s));
+
+// Mobile navigation
+(function() {
+  const burger = document.getElementById('nav-burger');
+  const panel = document.getElementById('nav-mobile-panel');
+  if (!burger || !panel) return;
+  burger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const open = panel.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open);
+  });
+  panel.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      panel.classList.remove('open');
+      burger.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+    });
+  });
+  document.addEventListener('click', (e) => {
+    if (!burger.contains(e.target) && !panel.contains(e.target)) {
+      panel.classList.remove('open');
+      burger.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+    }
+  });
+})();
 </script>
 </body>
 </html>
