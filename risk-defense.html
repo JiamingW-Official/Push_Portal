@@ -73,8 +73,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
   padding:8px 20px;border-radius:100px;margin-bottom:24px;position:relative;z-index:1;
 }
 .hero-title{
-  font-size:36px;font-weight:900;
-  letter-spacing:-1px;line-height:1.1;color:#fff;
+  font-size:clamp(24px,5vw,36px);font-weight:900;
+  letter-spacing:-1px;line-height:1.3;color:#fff;
   max-width:900px;margin:0 auto 16px;position:relative;z-index:1;
 }
 .hero-title span{color:var(--accent-light);}
@@ -131,7 +131,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 .cat-icon{font-size:16px;}
 .section-title{
   font-size:36px;font-weight:900;letter-spacing:-1px;
-  color:var(--primary);line-height:1.1;margin-bottom:8px;
+  color:var(--primary);line-height:1.4;margin-bottom:8px;
 }
 .section-title-white{color:var(--primary);}
 .section-sub{
@@ -351,6 +351,7 @@ p,.rc-desc,.hero-subtitle,.section-sub,.rc-defense-title,.sys-text,.layer-desc,.
 h2,.section-title,.hero-title{margin-bottom:16px;}
 li{margin-bottom:6px;line-height:1.7;}
 strong{font-weight:600;color:var(--text);}
+.hero strong{color:inherit;}
 .system-section strong{color:rgba(255,255,255,.95);}
 .section-sub,.hero-subtitle{max-width:640px;}
 @media(max-width:640px){
@@ -403,7 +404,7 @@ strong{font-weight:600;color:var(--text);}
 <section class="hero">
   <div class="hero-badge" data-en="Risk Register" data-zh="风险清单">Risk Register</div>
   <h1 class="hero-title" data-en="Risk Defense Playbook" data-zh="风险防御手册">Risk Defense Playbook</h1>
-  <p class="hero-subtitle" data-en="For every risk we've identified, here's our specific defense strategy — not theory, but concrete mechanisms built into the platform." data-zh="">For every risk we've identified, here's our specific defense strategy — not theory, but concrete mechanisms built into the platform.</p>
+  <p class="hero-subtitle" data-en="For every risk we've identified, here's our specific defense strategy — not theory, but concrete mechanisms built into the platform." data-zh="每个已识别的风险，都有具体的防御设计——写进产品里，不是停在纸上。">For every risk we've identified, here's our specific defense strategy — not theory, but concrete mechanisms built into the platform.</p>
 </section>
 
 <!-- CROSS-LINK -->
@@ -609,7 +610,7 @@ strong{font-weight:600;color:var(--text);}
         <div class="rc-bottom">
           <div class="rc-defense-title" data-en="&ldquo;Every map node must answer: can I book now, slots remaining, distance, expiry, eligibility, worth immediate action?&rdquo;" data-zh="&ldquo;每个地图节点都要回答：现在能接吗、还剩几个名额、离我多远、截止时间、我够资格吗、值不值得立刻行动？&rdquo;">&ldquo;Every map node must answer: can I book now, slots remaining, distance, expiry, eligibility, worth immediate action?&rdquo;</div>
           <ul class="rc-defense-bullets">
-            <li data-en="Map drives: application, standby, urgency, fill rate — NOT content browsing" data-zh="地图应该驱动：申请、候补、紧迫感、填充率——不是内容浏览">Map drives: application, standby, urgency, fill rate — NOT content browsing</li>
+            <li data-en="Map drives: application, standby, urgency, fill rate — NOT content browsing" data-zh="地图应该带来：申请、候补、紧迫感、填充率——不是内容浏览">Map drives: application, standby, urgency, fill rate — NOT content browsing</li>
             <li data-en="Every visible campaign is actionable, not just informational" data-zh="每个可见的活动都是可操作的，而不仅仅是展示性的">Every visible campaign is actionable, not just informational</li>
           </ul>
           <div class="rc-insight" data-en="&ldquo;If users open the map and just look, the map has failed. It should make them tap.&rdquo;" data-zh="&ldquo;如果用户打开地图只是看看，地图就失败了。它应该让他们点击行动。&rdquo;">&ldquo;If users open the map and just look, the map has failed. It should make them tap.&rdquo;</div>

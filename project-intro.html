@@ -41,8 +41,9 @@
 }
 html{scroll-behavior:smooth}
 body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.75;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;word-break:break-word;}
-body[lang="zh"], body.zh-active{line-height:2.0;letter-spacing:0.01em;}
+html[lang="zh"] body, body.zh-active{line-height:2.0;letter-spacing:0.01em;}
 strong{font-weight:600;color:var(--text);}
+.hero strong{color:inherit;}
 p{max-width:680px;}
 ul,ol{padding-left:20px;}
 li{margin-bottom:6px;line-height:1.7;}
@@ -90,7 +91,7 @@ nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
   margin-bottom:28px;
 }
 .hero-title{
-  font-size:clamp(3.2rem,6vw,5.5rem);
+  font-size:clamp(2.2rem,6vw,5.5rem);
   font-weight:900;color:#fff;
   letter-spacing:-2.5px;line-height:1.04;
   max-width:860px;margin-bottom:0;
@@ -120,7 +121,7 @@ section.bg-dark{border-top-color:rgba(255,255,255,0.08);}
 .section-title{
   font-size:36px;
   font-weight:900;letter-spacing:-1px;
-  color:var(--text);margin-bottom:16px;line-height:1.13;
+  color:var(--text);margin-bottom:16px;line-height:1.4;
 }
 .section-sub{
   font-size:16px;color:var(--text2);

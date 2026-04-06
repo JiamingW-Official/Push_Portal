@@ -43,8 +43,11 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.75;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;word-break:break-word;}
-body[lang="zh"], body.zh-active{line-height:2.0;letter-spacing:0.01em;}
+html[lang="zh"] body{line-height:2.0;letter-spacing:0.01em;}
+html[lang="zh"] .hero h1{line-height:1.25;}
+html[lang="zh"] .section-title{line-height:1.5;}
 strong{font-weight:600;color:var(--text);}
+.hero strong{color:inherit;}
 p{max-width:680px;}
 ul,ol{padding-left:20px;}
 li{margin-bottom:6px;line-height:1.7;}
@@ -95,6 +98,13 @@ nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
   padding:160px 64px 100px;
   min-height:100vh;
   display:flex;align-items:center;
+  position:relative;
+}
+.hero::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;
+  height:80px;
+  background:linear-gradient(to bottom, transparent, #0f0f1a 60%, #ffffff);
+  pointer-events:none;
 }
 .hero-inner{max-width:1000px;width:100%;margin:0 auto;}
 .hero h1,.hero-sub,.hero-ctas,.hero-label{max-width:640px;}
@@ -107,7 +117,7 @@ nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
   color:#fff;line-height:1.1;margin-bottom:0;max-width:900px;
 }
 .hero h1 .accent-line{
-  color:var(--accent-light);display:block;margin-top:8px;
+  color:var(--accent-light);display:block;margin-top:16px;
 }
 .hero-sub{
   font-size:16px;color:rgba(255,255,255,0.55);
@@ -145,7 +155,7 @@ nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
 .section-label-dark::before{background:var(--accent-light);}
 .section-title{
   font-size:clamp(26px,3.5vw,36px);font-weight:800;letter-spacing:-1px;
-  color:var(--primary);margin-bottom:16px;line-height:1.2;
+  color:var(--primary);margin-bottom:16px;line-height:1.35;
 }
 .section-title-white{color:#fff;}
 .section-sub{font-size:16px;color:var(--text2);line-height:1.65;max-width:640px;}
@@ -393,16 +403,20 @@ footer{background:#0f0f1a;padding:40px 64px;border-top:1px solid var(--border);f
 /* — Responsive — */
 @media(max-width:768px){
   body{font-size:15px;}
-  .section-title{font-size:28px;}
+  .section-title{font-size:28px;max-width:90vw;}
   .nav-links{display:none !important;}
   .nav-burger{display:flex !important;}
-  .hero{padding:120px 20px 80px;}
-  .hero h1{font-size:clamp(2.4rem,8vw,3.5rem);letter-spacing:-1.5px;}
+  .hero{padding:120px 20px 80px;min-height:auto;}
+  .hero h1{font-size:clamp(2rem,7vw,3rem);letter-spacing:-1.5px;line-height:1.2;}
+  .hero h1 .accent-line{margin-top:12px;}
+  html[lang="zh"] .hero h1{line-height:1.35;}
   .problem-grid,.nav-cards-grid,.footer-inner,.is-grid,.diff-grid{grid-template-columns:1fr;}
   .audience-grid{grid-template-columns:1fr;}
-  .flow5{flex-direction:column;align-items:flex-start;}
-  .flow5-step{flex-direction:row;gap:16px;align-items:center;text-align:left;}
-  .flow5-arrow{transform:rotate(90deg);margin:4px 0 4px 44px;}
+  .audience-card{padding:22px;}
+  .diff-card,.nav-card{padding:24px;}
+  .flow5{flex-direction:column;align-items:flex-start;gap:0;overflow-x:visible;}
+  .flow5-step{flex-direction:row;gap:14px;align-items:center;text-align:left;padding:6px 0;}
+  .flow5-arrow{transform:rotate(90deg);margin:0 0 0 17px;font-size:14px;}
   .reading-paths{grid-template-columns:1fr 1fr;}
   .footer-inner{text-align:center;}
   .footer-links{justify-content:center;}
@@ -411,6 +425,7 @@ footer{background:#0f0f1a;padding:40px 64px;border-top:1px solid var(--border);f
   .dochub-inner{padding:80px 20px;}
   .doc-cards-grid{grid-template-columns:repeat(2,1fr);}
   .doc-linked-row{grid-template-columns:repeat(2,1fr);}
+  #back-top{bottom:20px;right:16px;width:40px;height:40px;font-size:16px;}
 }
 @media(max-width:480px){
   .hero-ctas{flex-direction:column;align-items:flex-start;}
@@ -489,7 +504,7 @@ footer{background:#0f0f1a;padding:40px 64px;border-top:1px solid var(--border);f
 <div class="sw-white">
   <div class="section">
     <div class="section-label fade-in" data-en="WHAT IS PUSH" data-zh="一句话说清楚">WHAT IS PUSH</div>
-    <h2 class="section-title fade-in" data-en="Merchants say what they want. Push <strong>handles the rest</strong> — finding creators, scheduling, tracking, verifying, and paying." data-zh="商家提需求，Push <strong>自动匹配人</strong>、排���动、盯进度、验结果、走付款。">Merchants say what they want. Push <strong>handles the rest</strong> — finding creators, scheduling, tracking, verifying, and paying.</h2>
+    <h2 class="section-title fade-in" data-en="Merchants say what they want. Push <strong>handles the rest</strong> — finding creators, scheduling, tracking, verifying, and paying." data-zh="商家提需求，Push <strong>自动匹配人</strong>、排活动、盯进度、验结果、走付款。">Merchants say what they want. Push <strong>handles the rest</strong> — finding creators, scheduling, tracking, verifying, and paying.</h2>
 
     <!-- 5-Step Flow -->
     <div class="flow5 fade-in">
@@ -532,7 +547,7 @@ footer{background:#0f0f1a;padding:40px 64px;border-top:1px solid var(--border);f
       <a href="pitch-deck.html" class="audience-card">
         <div class="audience-label" data-en="INVESTOR" data-zh="我是投资者">INVESTOR</div>
         <div class="audience-title" data-en="我是投资者" data-zh="我是投资者">我是投资者</div>
-        <div class="audience-body" data-en="Market, model, and moat in 3 minutes." data-zh="3分钟看完市场逻辑、商业模式和竞争壁垒。">Market, model, and moat in 3 minutes.</div>
+        <div class="audience-body" data-en="Market, model, and moat in 3 minutes." data-zh="3分钟看完市场逻辑、商业模式和别人抄不走的东西。">Market, model, and moat in 3 minutes.</div>
         <div class="audience-link" data-en="View Pitch Deck →" data-zh="查看路演材料 →">View Pitch Deck →</div>
       </a>
       <a href="#dochub" class="audience-card">
@@ -795,7 +810,7 @@ footer{background:#0f0f1a;padding:40px 64px;border-top:1px solid var(--border);f
       <a href="pitch-deck.html" class="nav-card fade-in" data-delay="0.05s">
         <div class="nav-card-icon">📊</div>
         <div class="nav-card-title" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</div>
-        <div class="nav-card-desc" data-en="Investor-ready overview of market, product, model, and moat." data-zh="面向投资者：市场、产品、模式、竞争壁垒。">Investor-ready overview of market, product, model, and moat.</div>
+        <div class="nav-card-desc" data-en="Investor-ready overview of market, product, model, and moat." data-zh="面向投资者：市场、产品、模式、别人追不上的点。">Investor-ready overview of market, product, model, and moat.</div>
         <span class="nav-card-tag tag-accent" data-en="Investors" data-zh="投资者">Investors</span>
       </a>
       <a href="prospects.html" class="nav-card fade-in" data-delay="0.1s">

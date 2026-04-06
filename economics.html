@@ -94,8 +94,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
   margin-bottom:16px;display:block;
 }
 .hero-title{
-  font-size:36px;font-weight:800;
-  letter-spacing:-1px;line-height:1.1;color:var(--text);
+  font-size:clamp(24px,5vw,36px);font-weight:800;
+  letter-spacing:-1px;line-height:1.3;color:var(--text);
   max-width:700px;margin-bottom:8px;
 }
 .hero-sub{
@@ -115,7 +115,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 }
 .section-title{
   font-size:36px;font-weight:800;letter-spacing:-1px;
-  color:var(--primary);line-height:1.1;margin-bottom:8px;
+  color:var(--primary);line-height:1.4;margin-bottom:8px;
 }
 .section-title-white{color:#fff;}
 .section-sub{
@@ -383,6 +383,7 @@ html[lang="zh"] body { line-height: 2.0; letter-spacing: 0.01em; }
 .section-title { margin-bottom: 16px; }
 li { margin-bottom: 6px; line-height: 1.7; }
 strong { font-weight: 600; color: var(--text); }
+.section-dark strong { color: rgba(255,255,255,.95); }
 .section-sub { max-width: 640px; }
 @media (max-width: 768px) {
   body { font-size: 15px; }
@@ -406,7 +407,7 @@ strong { font-weight: 600; color: var(--text); }
     <a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a>
     <a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
     <a href="push-strategy-core.html" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
-    <a href="economics.html" class="active" data-en="Economics" data-zh="收费与收入">Economics</a>
+    <a href="economics.html" class="active" data-en="Economics" data-zh="经济模型">Economics</a>
   </div>
   <div class="nav-right">
     <a href="index.html" class="nav-hub">DOC HUB ↗</a>
@@ -426,7 +427,7 @@ strong { font-weight: 600; color: var(--text); }
   <a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a>
   <a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
   <a href="push-strategy-core.html" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
-  <a href="economics.html" class="active" data-en="Economics" data-zh="收费与收入">Economics</a>
+  <a href="economics.html" class="active" data-en="Economics" data-zh="经济模型">Economics</a>
   <div class="mobile-lang-row">
     <span class="mobile-lang-label" data-en="Language" data-zh="语言">Language</span>
     <button id="lang-btn-mobile" style="background:var(--accent,#4f46e5);color:#fff;border:none;padding:6px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">中 / EN</button>
@@ -810,8 +811,8 @@ strong { font-weight: 600; color: var(--text); }
       <li><a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a></li>
       <li><a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a></li>
       <li><a href="push-strategy-core.html" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a></li>
-      <li><a href="economics.html" data-en="Economics" data-zh="收费与收入">Economics</a></li>
-      <li><a href="attribution.html" data-en="Attribution" data-zh="归因系统">Attribution</a></li>
+      <li><a href="economics.html" data-en="Economics" data-zh="经济模型">Economics</a></li>
+      <li><a href="attribution.html" data-en="Attribution" data-zh="归因体系">Attribution</a></li>
     </ul>
     <div class="footer-copy">© 2026 PUSH. Internal strategy documentation.</div>
     <div style="margin-top:16px; font-size:13px;">

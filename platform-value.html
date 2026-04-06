@@ -87,8 +87,8 @@ nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
   margin-bottom:24px;
 }
 .hero h1{
-  font-size:36px;
-  font-weight:900;letter-spacing:-1px;line-height:1.1;
+  font-size:clamp(24px,5vw,36px);
+  font-weight:900;letter-spacing:-1px;line-height:1.3;
   color:var(--text);margin-bottom:8px;
 }
 .hero h1 span{color:var(--accent)}
@@ -99,7 +99,7 @@ nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
 }
 
 /* SECTIONS */
-section{padding:120px 64px;background:#fff;border-top:1px solid var(--border);contain:layout style paint;}
+section{padding:80px 64px;background:#fff;border-top:1px solid var(--border);contain:layout style paint;}
 .container{max-width:1000px;margin:0 auto}
 
 .section-tag{
@@ -114,7 +114,7 @@ section{padding:120px 64px;background:#fff;border-top:1px solid var(--border);co
 .section-title{
   position:relative;z-index:1;
   font-size:36px;
-  font-weight:900;letter-spacing:-1px;line-height:1.1;
+  font-weight:900;letter-spacing:-1px;line-height:1.4;
   color:var(--text);margin-bottom:8px;
 }
 .section-title.white{color:#fff}
@@ -501,6 +501,7 @@ html[lang*="zh"] body{line-height:2.0;letter-spacing:0.01em;}
 li{margin-bottom:6px;line-height:1.7;}
 /* Strong styling */
 strong{font-weight:600;color:var(--text);}
+.s3 strong,.s6 strong{color:rgba(255,255,255,.95);}
 /* Section subtitle */
 .section-sub,.hero-sub{max-width:640px;}
 /* Mobile text */
@@ -559,7 +560,7 @@ strong{font-weight:600;color:var(--text);}
     <div class="hero-badge" data-en="Second Existential Risk" data-zh="第二大生死存亡级风险">Second Existential Risk</div>
     <h1>
       <span data-en="Anti-Disintermediation" data-zh="为什么商家不会跳过平台">Anti-Disintermediation</span><br>
-      <span style="color:var(--text);" data-en="Defense" data-zh="">Defense</span>
+      <span style="color:var(--text);" data-en="Defense" data-zh="防御方案">Defense</span>
     </h1>
     <p class="hero-sub" data-en="Why both sides stay on-platform — not because they're forced, but because it's more profitable, safer, and easier." data-zh="双方留在平台不是因为被迫，而是因为走平台更划算、更安全、更省事。">Why both sides stay on-platform — not because they're forced, but because it's more profitable, safer, and easier.</p>
   </div>
@@ -600,7 +601,7 @@ strong{font-weight:600;color:var(--text);}
     <div class="section-header fade-in">
       <div class="section-tag red" data-en="The Pull Factors" data-zh="创作者为什么想跑">The Pull Factors</div>
       <h2 class="section-title" data-en="Why Merchants Bypass" data-zh="商家为什么会绕平台">Why Merchants Bypass</h2>
-      <p class="section-sub" data-en="Understanding why is the first step to making the platform irreplaceable." data-zh="">Understanding why is the first step to making the platform irreplaceable.</p>
+      <p class="section-sub" data-en="Understanding why is the first step to making the platform irreplaceable." data-zh="搞清楚为什么有人想绕过平台，是让平台变得不可替代的第一步。">Understanding why is the first step to making the platform irreplaceable.</p>
     </div>
 
     <div class="bypass-grid">
@@ -652,7 +653,7 @@ strong{font-weight:600;color:var(--text);}
     <div class="section-header fade-in">
       <div class="section-tag white" data-en="Irreplaceable Advantages" data-zh="私下合作给不了的东西">Irreplaceable Advantages</div>
       <h2 class="section-title white" data-en="Five Things Private Deals Can Never Provide" data-zh="私下合作做不到的五件事">Five Things Private Deals Can Never Provide</h2>
-      <p class="section-sub white" data-en="These aren't features — they're structural advantages that compound over time." data-zh="">These aren't features — they're structural advantages that compound over time.</p>
+      <p class="section-sub white" data-en="These aren't features — they're structural advantages that compound over time." data-zh="这不是功能——是越用越强的结构优势。">These aren't features — they're structural advantages that compound over time.</p>
     </div>
 
     <div class="values-grid">
@@ -795,7 +796,7 @@ strong{font-weight:600;color:var(--text);}
     <div class="section-header fade-in">
       <div class="section-tag" data-en="Compounding System" data-zh="正向循环">Compounding System</div>
       <h2 class="section-title" data-en="The Retention & Anti-Bypass Flywheel" data-zh="用得越多越离不开">The Retention &amp; Anti-Bypass Flywheel</h2>
-      <p class="section-sub" data-en="Every transaction strengthens the loop — making escape more costly each time." data-zh="">Every transaction strengthens the loop — making escape more costly each time.</p>
+      <p class="section-sub" data-en="Every transaction strengthens the loop — making escape more costly each time." data-zh="每笔交易都在强化这个循环——每走一圈，离开的代价越高。">Every transaction strengthens the loop — making escape more costly each time.</p>
     </div>
 
     <div class="flywheel-grid fade-in">
