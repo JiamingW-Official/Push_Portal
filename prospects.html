@@ -4,45 +4,71 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PUSH - Future Prospects / 未来愿景</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0a0a0f;
-  --bg2: #12121a;
-  --bg3: #1a1a2e;
-  --bg4: #242440;
-  --accent: #6c5ce7;
-  --accent2: #a29bfe;
-  --green: #00cec9;
-  --orange: #fdcb6e;
-  --red: #e17055;
-  --pink: #fd79a8;
-  --blue: #74b9ff;
-  --text: #dfe6e9;
-  --text2: #b2bec3;
-  --text3: #636e72;
-  --radius: 16px;
-  --shadow: 0 4px 24px rgba(0,0,0,0.3);
+  /* Backgrounds */
+  --bg: #ffffff;
+  --bg2: #f8f9fa;
+  --bg3: #f1f3f5;
+  --bg4: #e9ecef;
+
+  /* Primary */
+  --primary: #1a1a2e;
+  --primary-light: #2d2d5e;
+
+  /* Accent */
+  --accent: #4f46e5;
+  --accent-light: #818cf8;
+  --accent-bg: rgba(79, 70, 229, 0.06);
+  --accent2: #4f46e5;
+
+  /* Semantic */
+  --green: #059669;
+  --green-bg: rgba(5, 150, 105, 0.08);
+  --orange: #d97706;
+  --orange-bg: rgba(217, 119, 6, 0.08);
+  --red: #dc2626;
+  --red-bg: rgba(220, 38, 38, 0.08);
+  --pink: #db2777;
+  --blue: #2563eb;
+
+  /* Text */
+  --text: #111827;
+  --text2: #4b5563;
+  --text3: #9ca3af;
+
+  /* Borders */
+  --border: #e5e7eb;
+  --border-hover: #d1d5db;
+
+  --radius: 12px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
-a { color: var(--accent2); text-decoration: none; }
+body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
 /* NAV */
 .topnav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(10,10,15,0.92); backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(108,92,231,0.2);
+  background: #fff;
+  border-bottom: 1px solid var(--border);
   display: flex; align-items: center; padding: 0 24px; height: 60px; gap: 8px;
 }
-.topnav .logo { font-weight: 800; font-size: 22px; color: var(--accent2); letter-spacing: 2px; margin-right: 32px; }
+.topnav .logo { font-weight: 800; font-size: 22px; color: var(--primary); letter-spacing: 2px; margin-right: 32px; }
 .topnav .navlinks { display: flex; gap: 4px; flex-wrap: wrap; }
 .topnav .navlinks a {
   padding: 6px 14px; border-radius: 8px; font-size: 13px; font-weight: 500;
   color: var(--text2); transition: all 0.2s;
 }
-.topnav .navlinks a:hover, .topnav .navlinks a.active { background: var(--bg3); color: #fff; text-decoration: none; }
+.topnav .navlinks a:hover, .topnav .navlinks a.active { background: var(--bg3); color: var(--text); text-decoration: none; }
 
 /* HERO */
 .hero {
@@ -50,17 +76,12 @@ a:hover { text-decoration: underline; }
   text-align: center;
   position: relative;
   overflow: hidden;
-}
-.hero::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-  background: radial-gradient(ellipse at 50% 0%, rgba(108,92,231,0.15) 0%, transparent 60%);
-  pointer-events: none;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
 }
 .hero h1 {
   font-size: 48px; font-weight: 900; margin-bottom: 12px;
-  background: linear-gradient(135deg, var(--accent2), var(--green));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  color: var(--text);
 }
 .hero p { color: var(--text2); font-size: 18px; max-width: 700px; margin: 0 auto; }
 
@@ -77,10 +98,10 @@ a:hover { text-decoration: underline; }
   position: absolute;
   left: 50%;
   top: 0; bottom: 0;
-  width: 3px;
-  background: linear-gradient(to bottom, var(--accent), var(--green), var(--orange));
+  width: 2px;
+  background: var(--border);
   transform: translateX(-50%);
-  border-radius: 3px;
+  border-radius: 2px;
 }
 .timeline-node {
   position: absolute;
@@ -90,7 +111,6 @@ a:hover { text-decoration: underline; }
   transform: translateX(-50%);
   border: 3px solid var(--bg);
   z-index: 2;
-  box-shadow: 0 0 20px rgba(108,92,231,0.4);
 }
 
 /* PHASE BLOCK */
@@ -110,7 +130,6 @@ a:hover { text-decoration: underline; }
   display: flex; align-items: center; justify-content: center;
   margin: 0 auto 16px;
   font-size: 32px;
-  box-shadow: 0 0 30px rgba(0,0,0,0.4);
 }
 .phase-label {
   display: inline-block;
@@ -134,19 +153,20 @@ a:hover { text-decoration: underline; }
   z-index: 2;
 }
 .lang-card {
-  background: var(--bg2);
+  background: #fff;
   border-radius: var(--radius);
   padding: 32px;
-  border: 1px solid rgba(108,92,231,0.12);
+  border: 1px solid var(--border);
   transition: transform 0.3s, box-shadow 0.3s;
 }
 .lang-card:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-lg);
 }
 .lang-label {
   font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
   margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+  color: var(--text3);
 }
 .lang-label .dot {
   width: 8px; height: 8px; border-radius: 50%; display: inline-block;
@@ -154,7 +174,7 @@ a:hover { text-decoration: underline; }
 .item-list { list-style: none; }
 .item-list li {
   padding: 12px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
+  border-bottom: 1px solid var(--border);
   display: flex; align-items: flex-start; gap: 12px;
   font-size: 15px; color: var(--text2);
 }
@@ -174,11 +194,11 @@ a:hover { text-decoration: underline; }
   margin-top: 24px;
 }
 .metric-badge {
-  background: var(--bg3);
+  background: #fff;
   border-radius: 12px;
   padding: 16px;
   text-align: center;
-  border: 1px solid rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
 }
 .metric-badge .num {
   font-size: 24px; font-weight: 800;
@@ -192,12 +212,8 @@ a:hover { text-decoration: underline; }
   text-align: center;
   padding: 80px 24px;
   position: relative;
-}
-.end-state::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-  background: radial-gradient(ellipse at 50% 50%, rgba(0,206,201,0.08) 0%, transparent 60%);
-  pointer-events: none;
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
 }
 .end-state-inner {
   max-width: 900px;
@@ -207,8 +223,7 @@ a:hover { text-decoration: underline; }
 }
 .end-state h2 {
   font-size: 36px; font-weight: 900; margin-bottom: 24px;
-  background: linear-gradient(135deg, var(--green), var(--accent2));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  color: var(--text);
 }
 .end-state-grid {
   display: grid;
@@ -217,14 +232,14 @@ a:hover { text-decoration: underline; }
   margin-top: 32px;
 }
 .end-card {
-  background: var(--bg2);
+  background: #fff;
   border-radius: var(--radius);
   padding: 32px;
-  border: 1px solid rgba(0,206,201,0.15);
+  border: 1px solid var(--border);
   text-align: left;
 }
 .end-card h3 {
-  font-size: 16px; font-weight: 700; margin-bottom: 12px; color: var(--green);
+  font-size: 16px; font-weight: 700; margin-bottom: 12px; color: var(--accent);
 }
 .end-card p {
   font-size: 15px; color: var(--text2); line-height: 1.7;
@@ -232,9 +247,9 @@ a:hover { text-decoration: underline; }
 .analogy {
   margin-top: 40px;
   padding: 32px;
-  background: linear-gradient(135deg, rgba(108,92,231,0.1), rgba(0,206,201,0.1));
+  background: var(--accent-bg);
   border-radius: var(--radius);
-  border: 1px solid rgba(108,92,231,0.2);
+  border: 1px solid var(--border);
   display: inline-block;
   max-width: 600px;
 }
@@ -242,30 +257,30 @@ a:hover { text-decoration: underline; }
 .analogy .en { font-size: 16px; color: var(--text2); }
 
 /* SHORT-TERM COLOR */
-.phase-short .phase-icon { background: linear-gradient(135deg, var(--accent), var(--accent2)); }
-.phase-short .phase-label { background: rgba(108,92,231,0.15); color: var(--accent2); }
-.phase-short .phase-title { color: var(--accent2); }
-.phase-short .item-icon { background: rgba(108,92,231,0.15); color: var(--accent2); }
-.phase-short .lang-label .dot { background: var(--accent2); }
+.phase-short .phase-icon { background: var(--accent-bg); border: 2px solid var(--accent); }
+.phase-short .phase-label { background: var(--accent-bg); color: var(--accent); }
+.phase-short .phase-title { color: var(--accent); }
+.phase-short .item-icon { background: var(--accent-bg); color: var(--accent); }
+.phase-short .lang-label .dot { background: var(--accent); }
 
 /* MEDIUM-TERM COLOR */
-.phase-medium .phase-icon { background: linear-gradient(135deg, var(--green), #55efc4); }
-.phase-medium .phase-label { background: rgba(0,206,201,0.15); color: var(--green); }
+.phase-medium .phase-icon { background: var(--green-bg); border: 2px solid var(--green); }
+.phase-medium .phase-label { background: var(--green-bg); color: var(--green); }
 .phase-medium .phase-title { color: var(--green); }
-.phase-medium .item-icon { background: rgba(0,206,201,0.15); color: var(--green); }
+.phase-medium .item-icon { background: var(--green-bg); color: var(--green); }
 .phase-medium .lang-label .dot { background: var(--green); }
 
 /* LONG-TERM COLOR */
-.phase-long .phase-icon { background: linear-gradient(135deg, var(--orange), #ffeaa7); }
-.phase-long .phase-label { background: rgba(253,203,110,0.15); color: var(--orange); }
+.phase-long .phase-icon { background: var(--orange-bg); border: 2px solid var(--orange); }
+.phase-long .phase-label { background: var(--orange-bg); color: var(--orange); }
 .phase-long .phase-title { color: var(--orange); }
-.phase-long .item-icon { background: rgba(253,203,110,0.15); color: var(--orange); }
+.phase-long .item-icon { background: var(--orange-bg); color: var(--orange); }
 .phase-long .lang-label .dot { background: var(--orange); }
 
 /* FOOTER */
 .footer {
   text-align: center; padding: 40px 24px; color: var(--text3); font-size: 13px;
-  border-top: 1px solid rgba(255,255,255,0.05);
+  border-top: 1px solid var(--border);
 }
 
 /* RESPONSIVE */
@@ -279,12 +294,55 @@ a:hover { text-decoration: underline; }
 
 /* ANIMATIONS */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
+  from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
-.phase { animation: fadeUp 0.6s ease-out both; }
+.phase { animation: fadeUp 0.5s ease-out both; }
 .phase:nth-child(2) { animation-delay: 0.15s; }
 .phase:nth-child(3) { animation-delay: 0.3s; }
+
+/* SCROLL ANIMATIONS */
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* LANG VISIBILITY */
+body.lang-en .lang-card:nth-child(odd) { display: none; }
+body.lang-zh .lang-card:nth-child(even) { display: none; }
+body.lang-en .bilingual-row { grid-template-columns: 1fr; }
+body.lang-zh .bilingual-row { grid-template-columns: 1fr; }
+body.lang-en .end-state-grid .end-card:nth-child(odd) { display: none; }
+body.lang-zh .end-state-grid .end-card:nth-child(even) { display: none; }
+body.lang-en .end-state-grid { grid-template-columns: 1fr; }
+body.lang-zh .end-state-grid { grid-template-columns: 1fr; }
+body.lang-en .analogy .zh { display: none; }
+body.lang-zh .analogy .en { display: none; }
+
+/* LANG TOGGLE */
+.lang-toggle {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: var(--bg3);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.lang-toggle button {
+  padding: 5px 12px;
+  background: transparent;
+  border: none;
+  color: var(--text3);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.lang-toggle button.active {
+  background: var(--accent);
+  color: #fff;
+}
 </style>
 </head>
 <body>
@@ -293,15 +351,24 @@ a:hover { text-decoration: underline; }
 <nav class="topnav">
   <div class="logo">PUSH</div>
   <div class="navlinks">
-    <a href="index.html">Dashboard</a>
-    <a href="prospects.html" class="active">Prospects</a>
+    <a href="index.html" data-en="Dashboard" data-zh="仪表盘">Dashboard</a>
+    <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
+    <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演方案">Pitch Deck</a>
+    <a href="prospects.html" class="active" data-en="Prospects" data-zh="未来愿景">Prospects</a>
+    <a href="challenges.html" data-en="Challenges" data-zh="挑战">Challenges</a>
+    <a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a>
+    <a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
+  </div>
+  <div class="lang-toggle">
+    <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+    <button id="btn-zh" onclick="setLang('zh')">中</button>
   </div>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
-  <h1>Future Prospects & Vision<br>未来愿景与规划</h1>
-  <p>From one neighborhood to the infrastructure layer for local creator-driven demand across America.<br>从一个社区出发，构建覆盖全美的本地创作者驱动需求的基础设施层。</p>
+  <h1 data-en="Future Prospects &amp; Vision" data-zh="未来愿景与规划">Future Prospects &amp; Vision</h1>
+  <p data-en="From one neighborhood to the infrastructure layer for local creator-driven demand across America." data-zh="从一个社区出发，构建覆盖全美的本地创作者驱动需求的基础设施层。">From one neighborhood to the infrastructure layer for local creator-driven demand across America.</p>
 </div>
 
 <!-- ====== SHORT-TERM ====== -->
@@ -309,8 +376,8 @@ a:hover { text-decoration: underline; }
 <div class="phase phase-short">
   <div class="phase-header">
     <div class="phase-icon">&#x1F680;</div>
-    <div class="phase-label">Phase 1 / 第一阶段</div>
-    <div class="phase-title">Short-term Vision / 短期愿景 (6 Months / 6个月)</div>
+    <div class="phase-label" data-en="Phase 1" data-zh="第一阶段">Phase 1</div>
+    <div class="phase-title" data-en="Short-term Vision (6 Months)" data-zh="短期愿景 (6个月)">Short-term Vision (6 Months)</div>
   </div>
 
   <div class="bilingual-row">
@@ -324,7 +391,7 @@ a:hover { text-decoration: underline; }
         </li>
         <li>
           <div class="item-icon">&#x1F4B0;</div>
-          <div><strong>15+付费商户，25+活跃创作者</strong><br>建立首批商户和创作者网络，形成双边市场雏形</div>
+          <div><strong>15+活跃商户（5+付费），25+活跃创作者</strong><br>建立首批商户和创作者网络，形成双边市场雏形</div>
         </li>
         <li>
           <div class="item-icon">&#x1F504;</div>
@@ -351,7 +418,7 @@ a:hover { text-decoration: underline; }
         </li>
         <li>
           <div class="item-icon">&#x1F4B0;</div>
-          <div><strong>15+ Paying Merchants, 25+ Active Creators</strong><br>Establish initial two-sided marketplace with real participants</div>
+          <div><strong>15+ Active Merchants (5+ Paying), 25+ Active Creators</strong><br>Establish initial two-sided marketplace with real participants</div>
         </li>
         <li>
           <div class="item-icon">&#x1F504;</div>
@@ -370,10 +437,10 @@ a:hover { text-decoration: underline; }
   </div>
 
   <div class="metrics-row">
-    <div class="metric-badge"><div class="num" style="color:var(--accent2)">15+</div><div class="label">Paying Merchants / 付费商户</div></div>
-    <div class="metric-badge"><div class="num" style="color:var(--accent2)">25+</div><div class="label">Active Creators / 活跃创作者</div></div>
-    <div class="metric-badge"><div class="num" style="color:var(--accent2)">40%+</div><div class="label">Repeat Rate / 复购率</div></div>
-    <div class="metric-badge"><div class="num" style="color:var(--accent2)">$99</div><div class="label">Monthly / 月订阅</div></div>
+    <div class="metric-badge"><div class="num" style="color:var(--accent)">15+</div><div class="label" data-en="Active Merchants" data-zh="活跃商户">Active Merchants</div></div>
+    <div class="metric-badge"><div class="num" style="color:var(--accent)">25+</div><div class="label" data-en="Active Creators" data-zh="活跃创作者">Active Creators</div></div>
+    <div class="metric-badge"><div class="num" style="color:var(--accent)">40%+</div><div class="label" data-en="Repeat Rate" data-zh="复购率">Repeat Rate</div></div>
+    <div class="metric-badge"><div class="num" style="color:var(--accent)">$99</div><div class="label" data-en="Monthly" data-zh="月订阅">Monthly</div></div>
   </div>
 </div>
 
@@ -381,8 +448,8 @@ a:hover { text-decoration: underline; }
 <div class="phase phase-medium">
   <div class="phase-header">
     <div class="phase-icon">&#x1F4C8;</div>
-    <div class="phase-label">Phase 2 / 第二阶段</div>
-    <div class="phase-title">Medium-term Vision / 中期愿景 (1-2 Years / 1-2年)</div>
+    <div class="phase-label" data-en="Phase 2" data-zh="第二阶段">Phase 2</div>
+    <div class="phase-title" data-en="Medium-term Vision (1-2 Years)" data-zh="中期愿景 (1-2年)">Medium-term Vision (1-2 Years)</div>
   </div>
 
   <div class="bilingual-row">
@@ -442,10 +509,10 @@ a:hover { text-decoration: underline; }
   </div>
 
   <div class="metrics-row">
-    <div class="metric-badge"><div class="num" style="color:var(--green)">3-5</div><div class="label">Cities / 城市</div></div>
-    <div class="metric-badge"><div class="num" style="color:var(--green)">500+</div><div class="label">Merchants / 商户</div></div>
-    <div class="metric-badge"><div class="num" style="color:var(--green)">2,000+</div><div class="label">Creators / 创作者</div></div>
-    <div class="metric-badge"><div class="num" style="color:var(--green)">$50K+</div><div class="label">MRR / 月经常性收入</div></div>
+    <div class="metric-badge"><div class="num" style="color:var(--green)">3-5</div><div class="label" data-en="Cities" data-zh="城市">Cities</div></div>
+    <div class="metric-badge"><div class="num" style="color:var(--green)">500+</div><div class="label" data-en="Merchants" data-zh="商户">Merchants</div></div>
+    <div class="metric-badge"><div class="num" style="color:var(--green)">2,000+</div><div class="label" data-en="Creators" data-zh="创作者">Creators</div></div>
+    <div class="metric-badge"><div class="num" style="color:var(--green)">$50K+</div><div class="label" data-en="MRR" data-zh="月经常性收入">MRR</div></div>
   </div>
 </div>
 
@@ -453,8 +520,8 @@ a:hover { text-decoration: underline; }
 <div class="phase phase-long">
   <div class="phase-header">
     <div class="phase-icon">&#x1F451;</div>
-    <div class="phase-label">Phase 3 / 第三阶段</div>
-    <div class="phase-title">Long-term Vision / 长期愿景 (3-5 Years / 3-5年)</div>
+    <div class="phase-label" data-en="Phase 3" data-zh="第三阶段">Phase 3</div>
+    <div class="phase-title" data-en="Long-term Vision (3-5 Years)" data-zh="长期愿景 (3-5年)">Long-term Vision (3-5 Years)</div>
   </div>
 
   <div class="bilingual-row">
@@ -526,7 +593,7 @@ a:hover { text-decoration: underline; }
 <!-- ====== THE END STATE ====== -->
 <div class="end-state">
   <div class="end-state-inner">
-    <h2>The End State / 终极愿景</h2>
+    <h2 data-en="The End State" data-zh="终极愿景">The End State</h2>
 
     <div class="end-state-grid">
       <div class="end-card">
@@ -564,8 +631,37 @@ a:hover { text-decoration: underline; }
 
 <!-- FOOTER -->
 <div class="footer">
-  PUSH Platform &copy; 2026 &mdash; Future Prospects / 未来愿景
+  <span data-en="PUSH Platform" data-zh="PUSH 平台">PUSH Platform</span> &copy; 2026 &mdash; <span data-en="Future Prospects" data-zh="未来愿景">Future Prospects</span>
 </div>
 
+<script>
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.section, .phase, .metric-card').forEach(el => {
+  el.classList.add('fade-in');
+  fadeObserver.observe(el);
+});
+</script>
+
+<script>
+function setLang(lang) {
+  localStorage.setItem('push-lang', lang);
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.textContent = lang === 'en' ? el.dataset.en : el.dataset.zh;
+  });
+  document.querySelectorAll('[data-en-html]').forEach(el => {
+    el.innerHTML = lang === 'en' ? el.dataset.enHtml : el.dataset.zhHtml;
+  });
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+  document.body.classList.toggle('lang-en', lang === 'en');
+  document.body.classList.toggle('lang-zh', lang === 'zh');
+}
+(function() {
+  const lang = localStorage.getItem('push-lang') || 'en';
+  setLang(lang);
+})();
+</script>
 </body>
 </html>

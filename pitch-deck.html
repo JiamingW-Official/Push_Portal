@@ -4,18 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PUSH - Pitch Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0a0f;
-    --card: #12121a;
-    --accent: #6c5ce7;
-    --accent-light: #a29bfe;
-    --green: #00cec9;
-    --orange: #fdcb6e;
-    --red: #e17055;
-    --text: #e0e0e0;
-    --text-dim: #888;
-    --border: #1e1e2e;
+    --bg: #ffffff;
+    --bg2: #f8f9fa;
+    --card: #ffffff;
+    --accent: #4f46e5;
+    --accent-light: #818cf8;
+    --accent-bg: rgba(79, 70, 229, 0.06);
+    --green: #059669;
+    --green-bg: rgba(5, 150, 105, 0.08);
+    --orange: #d97706;
+    --orange-bg: rgba(217, 119, 6, 0.08);
+    --red: #dc2626;
+    --red-bg: rgba(220, 38, 38, 0.08);
+    --text: #111827;
+    --text-dim: #6b7280;
+    --border: #e5e7eb;
+    --border-hover: #d1d5db;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,9 +35,9 @@
   }
 
   body {
-    background: var(--bg);
+    background: var(--bg2);
     color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', 'Microsoft YaHei', sans-serif;
     overflow-x: hidden;
   }
 
@@ -46,7 +55,7 @@
     gap: 6px;
     transition: color 0.2s;
   }
-  .nav-back:hover { color: var(--accent-light); }
+  .nav-back:hover { color: var(--accent); }
   .nav-back svg { width: 16px; height: 16px; }
 
   .slide-nav {
@@ -70,7 +79,6 @@
   }
   .slide-nav a.active {
     background: var(--accent);
-    box-shadow: 0 0 8px var(--accent);
   }
   .slide-nav a:hover { background: var(--accent-light); }
   .slide-nav a .tooltip {
@@ -78,7 +86,7 @@
     right: 20px;
     top: 50%;
     transform: translateY(-50%);
-    background: var(--card);
+    background: #fff;
     border: 1px solid var(--border);
     color: var(--text);
     padding: 4px 10px;
@@ -88,6 +96,7 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
   }
   .slide-nav a:hover .tooltip { opacity: 1; }
 
@@ -98,7 +107,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 60px 80px;
+    padding: 80px 80px 60px;
     position: relative;
   }
 
@@ -108,7 +117,7 @@
     right: 60px;
     font-size: 64px;
     font-weight: 800;
-    color: rgba(108, 92, 231, 0.08);
+    color: rgba(79, 70, 229, 0.06);
     letter-spacing: -2px;
     user-select: none;
   }
@@ -158,17 +167,20 @@
     font-weight: 800;
     line-height: 1.1;
     margin-bottom: 16px;
+    color: var(--text);
   }
   h2 {
     font-size: 36px;
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 12px;
+    color: var(--text);
   }
   h3 {
     font-size: 20px;
     font-weight: 600;
     margin-bottom: 8px;
+    color: var(--text);
   }
   .subtitle {
     font-size: 18px;
@@ -176,7 +188,7 @@
     line-height: 1.6;
     margin-bottom: 24px;
   }
-  .accent { color: var(--accent-light); }
+  .accent { color: var(--accent); }
   .green { color: var(--green); }
   .orange { color: var(--orange); }
   .red { color: var(--red); }
@@ -215,6 +227,7 @@
     font-weight: 800;
     line-height: 1;
     margin-bottom: 6px;
+    color: var(--text);
   }
   .stat-label {
     font-size: 13px;
@@ -260,7 +273,7 @@
     font-weight: 700;
     flex-shrink: 0;
     border: 2px solid var(--accent);
-    color: var(--accent-light);
+    color: var(--accent);
   }
   .flow-arrow {
     width: 36px;
@@ -274,6 +287,7 @@
   .flow-text {
     font-size: 15px;
     line-height: 1.4;
+    color: var(--text);
   }
 
   /* Timeline */
@@ -289,7 +303,7 @@
   .timeline-weeks {
     font-size: 13px;
     font-weight: 700;
-    color: var(--accent-light);
+    color: var(--accent);
     width: 80px;
     flex-shrink: 0;
     text-align: right;
@@ -303,6 +317,7 @@
     padding: 0 16px;
     font-size: 14px;
     font-weight: 500;
+    color: var(--text);
   }
 
   /* Pricing */
@@ -323,15 +338,17 @@
   }
   .pricing-card.featured {
     border-color: var(--accent);
-    box-shadow: 0 0 20px rgba(108, 92, 231, 0.15);
+    box-shadow: 0 1px 3px rgba(79, 70, 229, 0.1);
   }
   .pricing-name {
     font-size: 16px;
     font-weight: 600;
+    color: var(--text);
   }
   .pricing-price {
     font-size: 28px;
     font-weight: 800;
+    color: var(--text);
   }
   .pricing-note {
     font-size: 12px;
@@ -375,21 +392,17 @@
     margin-right: 6px;
     margin-bottom: 6px;
   }
-  .tag-accent { background: rgba(108,92,231,0.15); color: var(--accent-light); }
-  .tag-green { background: rgba(0,206,201,0.15); color: var(--green); }
-  .tag-orange { background: rgba(253,203,110,0.15); color: var(--orange); }
+  .tag-accent { background: var(--accent-bg); color: var(--accent); }
+  .tag-green { background: var(--green-bg); color: var(--green); }
+  .tag-orange { background: var(--orange-bg); color: var(--orange); }
 
   /* Title slide special */
   .slide-title {
-    background: radial-gradient(ellipse at 30% 50%, rgba(108,92,231,0.08) 0%, transparent 60%),
-                radial-gradient(ellipse at 70% 50%, rgba(0,206,201,0.05) 0%, transparent 60%);
+    background: #fff;
   }
   .slide-title h1 {
     font-size: 64px;
-    background: linear-gradient(135deg, var(--accent-light), var(--green));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--text);
   }
   .slide-title .subtitle { font-size: 22px; }
 
@@ -398,14 +411,14 @@
     font-size: 18px;
     font-weight: 800;
     letter-spacing: 6px;
-    color: var(--accent-light);
+    color: var(--accent);
     margin-bottom: 32px;
   }
 
   /* Ask card */
   .ask-card {
-    background: linear-gradient(135deg, rgba(108,92,231,0.1), rgba(0,206,201,0.05));
-    border: 1px solid var(--accent);
+    background: var(--accent-bg);
+    border: 1px solid var(--border);
     border-radius: 16px;
     padding: 32px;
     margin-top: 20px;
@@ -433,6 +446,7 @@
     font-size: 14px;
     font-weight: 700;
     margin-bottom: 4px;
+    color: var(--text);
   }
   .adv-item p {
     font-size: 13px;
@@ -458,15 +472,94 @@
     .slide-nav { right: 10px; gap: 8px; }
     .adv-grid { grid-template-columns: 1fr; }
   }
+
+  /* SLIDE ENTRANCE */
+  .slide-inner { animation: slideUp 0.6s ease-out; }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ENHANCED NAV DOTS */
+  .slide-nav a { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+  .slide-nav a.active { transform: scale(1.4); }
+
+  /* LANG VISIBILITY */
+  body.lang-en .col-zh { display: none; }
+  body.lang-zh .col-en { display: none; }
+  body.lang-en .divider-line { display: none; }
+  body.lang-zh .divider-line { display: none; }
+  body.lang-en .slide-inner { grid-template-columns: 1fr; }
+  body.lang-zh .slide-inner { grid-template-columns: 1fr; }
+  body.lang-en .lang-label { display: none; }
+  body.lang-zh .lang-label { display: none; }
+
+  /* LANG TOGGLE */
+  .lang-toggle {
+    position: fixed;
+    top: 20px;
+    right: 60px;
+    z-index: 101;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+  .lang-toggle button {
+    padding: 5px 12px;
+    background: transparent;
+    border: none;
+    color: #9ca3af;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .lang-toggle button.active {
+    background: var(--accent);
+    color: var(--text);
+  }
+
+  /* NAV BAR */
+  .topnav-bar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; padding: 0 24px; height: 60px; gap: 8px;
+  }
+  .topnav-bar .logo { font-weight: 800; font-size: 22px; color: #1a1a2e; letter-spacing: 2px; margin-right: 32px; margin-bottom: 0; }
+  .topnav-bar .navlinks { display: flex; gap: 4px; flex-wrap: wrap; }
+  .topnav-bar .navlinks a {
+    padding: 6px 14px; border-radius: 8px; font-size: 13px; font-weight: 500;
+    color: #6b7280; transition: color 0.2s; text-decoration: none;
+  }
+  .topnav-bar .navlinks a:hover { color: #111827; }
+  .topnav-bar .navlinks a.active { color: var(--accent); font-weight: 600; }
 </style>
 </head>
 <body>
 
-<!-- Back link -->
-<a href="index.html" class="nav-back">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-  Dashboard
-</a>
+<!-- NAV -->
+<nav class="topnav-bar">
+  <div class="logo">PUSH</div>
+  <div class="navlinks">
+    <a href="index.html" data-en="Dashboard" data-zh="仪表盘">Dashboard</a>
+    <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
+    <a href="pitch-deck.html" class="active" data-en="Pitch Deck" data-zh="路演方案">Pitch Deck</a>
+    <a href="prospects.html" data-en="Prospects" data-zh="未来愿景">Prospects</a>
+    <a href="challenges.html" data-en="Challenges" data-zh="挑战">Challenges</a>
+    <a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a>
+    <a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
+  </div>
+  <div class="lang-toggle" style="position:static;margin-left:auto;box-shadow:none;">
+    <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+    <button id="btn-zh" onclick="setLang('zh')">中</button>
+  </div>
+</nav>
 
 <!-- Slide navigation dots -->
 <nav class="slide-nav" id="slideNav">
@@ -713,14 +806,14 @@
             <div class="pricing-name">Phase 2 - 基础版</div>
             <div class="pricing-note">核心功能 + 基础分析</div>
           </div>
-          <div class="pricing-price" style="color:var(--accent-light);">$99<span style="font-size:14px;color:var(--text-dim);">/月</span></div>
+          <div class="pricing-price" style="color:var(--accent);">$99<span style="font-size:14px;color:var(--text-dim);">/月</span></div>
         </div>
         <div class="pricing-card featured">
           <div>
             <div class="pricing-name">Phase 2 - 专业版</div>
             <div class="pricing-note">全功能 + 高级路由 + 优先匹配</div>
           </div>
-          <div class="pricing-price" style="color:var(--accent-light);">$199<span style="font-size:14px;color:var(--text-dim);">/月</span></div>
+          <div class="pricing-price" style="color:var(--accent);">$199<span style="font-size:14px;color:var(--text-dim);">/月</span></div>
         </div>
       </div>
 
@@ -754,14 +847,14 @@
             <div class="pricing-name">Phase 2 - Basic</div>
             <div class="pricing-note">Core features + basic analytics</div>
           </div>
-          <div class="pricing-price" style="color:var(--accent-light);">$99<span style="font-size:14px;color:var(--text-dim);">/mo</span></div>
+          <div class="pricing-price" style="color:var(--accent);">$99<span style="font-size:14px;color:var(--text-dim);">/mo</span></div>
         </div>
         <div class="pricing-card featured">
           <div>
             <div class="pricing-name">Phase 2 - Pro</div>
             <div class="pricing-note">Full features + advanced routing + priority matching</div>
           </div>
-          <div class="pricing-price" style="color:var(--accent-light);">$199<span style="font-size:14px;color:var(--text-dim);">/mo</span></div>
+          <div class="pricing-price" style="color:var(--accent);">$199<span style="font-size:14px;color:var(--text-dim);">/mo</span></div>
         </div>
       </div>
 
@@ -791,7 +884,7 @@
       <div class="card" style="text-align:center;padding:32px;">
         <div style="display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;">
           <div>
-            <div style="font-size:48px;font-weight:800;color:var(--accent-light);">本地商业</div>
+            <div style="font-size:48px;font-weight:800;color:var(--accent);">本地商业</div>
             <div style="font-size:13px;color:var(--text-dim);margin-top:4px;">万亿级市场</div>
           </div>
           <div style="font-size:36px;color:var(--green);font-weight:300;">+</div>
@@ -828,7 +921,7 @@
       <div class="card" style="text-align:center;padding:32px;">
         <div style="display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;">
           <div>
-            <div style="font-size:48px;font-weight:800;color:var(--accent-light);">Local Commerce</div>
+            <div style="font-size:48px;font-weight:800;color:var(--accent);">Local Commerce</div>
             <div style="font-size:13px;color:var(--text-dim);margin-top:4px;">Trillion-dollar market</div>
           </div>
           <div style="font-size:36px;color:var(--green);font-weight:300;">+</div>
@@ -871,19 +964,19 @@
       <div class="timeline">
         <div class="timeline-row">
           <div class="timeline-weeks">第 1-4 周</div>
-          <div class="timeline-bar" style="background:rgba(108,92,231,0.2);border:1px solid var(--accent);">
+          <div class="timeline-bar" style="background:var(--accent-bg);border:1px solid var(--accent);">
             基础搭建
           </div>
         </div>
         <div class="timeline-row">
           <div class="timeline-weeks">第 5-8 周</div>
-          <div class="timeline-bar" style="background:rgba(0,206,201,0.15);border:1px solid var(--green);">
+          <div class="timeline-bar" style="background:var(--green-bg);border:1px solid var(--green);">
             首批活动
           </div>
         </div>
         <div class="timeline-row">
           <div class="timeline-weeks">第 9-12 周</div>
-          <div class="timeline-bar" style="background:rgba(253,203,110,0.15);border:1px solid var(--orange);">
+          <div class="timeline-bar" style="background:var(--orange-bg);border:1px solid var(--orange);">
             验证复购
           </div>
         </div>
@@ -926,19 +1019,19 @@
       <div class="timeline">
         <div class="timeline-row">
           <div class="timeline-weeks">Week 1-4</div>
-          <div class="timeline-bar" style="background:rgba(108,92,231,0.2);border:1px solid var(--accent);">
+          <div class="timeline-bar" style="background:var(--accent-bg);border:1px solid var(--accent);">
             Foundation
           </div>
         </div>
         <div class="timeline-row">
           <div class="timeline-weeks">Week 5-8</div>
-          <div class="timeline-bar" style="background:rgba(0,206,201,0.15);border:1px solid var(--green);">
+          <div class="timeline-bar" style="background:var(--green-bg);border:1px solid var(--green);">
             First Campaigns
           </div>
         </div>
         <div class="timeline-row">
           <div class="timeline-weeks">Week 9-12</div>
-          <div class="timeline-bar" style="background:rgba(253,203,110,0.15);border:1px solid var(--orange);">
+          <div class="timeline-bar" style="background:var(--orange-bg);border:1px solid var(--orange);">
             Validate Repeat
           </div>
         </div>
@@ -986,7 +1079,7 @@
 
       <div class="adv-grid">
         <div class="adv-item">
-          <div class="adv-icon" style="color:var(--accent-light);">&#9733;</div>
+          <div class="adv-icon" style="color:var(--accent);">&#9733;</div>
           <h4 class="accent">专有达人评分</h4>
           <p>基于多维度历史数据构建的达人能力模型，持续迭代，越用越精准。</p>
         </div>
@@ -1019,7 +1112,7 @@
 
       <div class="adv-grid">
         <div class="adv-item">
-          <div class="adv-icon" style="color:var(--accent-light);">&#9733;</div>
+          <div class="adv-icon" style="color:var(--accent);">&#9733;</div>
           <h4 class="accent">Proprietary Creator Scoring</h4>
           <p>Multi-dimensional performance model built from historical data. Improves with every campaign.</p>
         </div>
@@ -1068,7 +1161,7 @@
 
       <div class="ask-card">
         <div style="font-size:14px;color:var(--text-dim);margin-bottom:12px;">我们的目标</div>
-        <div style="font-size:36px;font-weight:800;color:var(--accent-light);margin-bottom:8px;">[融资金额占位]</div>
+        <div style="font-size:36px;font-weight:800;color:var(--accent);margin-bottom:8px;">[融资金额占位]</div>
         <div style="font-size:14px;color:var(--text-dim);line-height:1.6;">
           用于：产品研发 / 冷启动补贴 / 团队扩张<br>
           目标：12周内验证核心假设
@@ -1076,7 +1169,7 @@
       </div>
 
       <div style="margin-top:24px;text-align:center;">
-        <p style="font-size:16px;font-weight:600;color:var(--accent-light);">PUSH</p>
+        <p style="font-size:16px;font-weight:600;color:var(--accent);">PUSH</p>
         <p style="font-size:13px;color:var(--text-dim);margin-top:4px;">[联系方式占位]</p>
       </div>
     </div>
@@ -1098,7 +1191,7 @@
 
       <div class="ask-card">
         <div style="font-size:14px;color:var(--text-dim);margin-bottom:12px;">Our Goal</div>
-        <div style="font-size:36px;font-weight:800;color:var(--accent-light);margin-bottom:8px;">[Funding Amount Placeholder]</div>
+        <div style="font-size:36px;font-weight:800;color:var(--accent);margin-bottom:8px;">[Funding Amount Placeholder]</div>
         <div style="font-size:14px;color:var(--text-dim);line-height:1.6;">
           Use of funds: Product dev / Cold start subsidies / Team growth<br>
           Target: Validate core hypotheses within 12 weeks
@@ -1106,7 +1199,7 @@
       </div>
 
       <div style="margin-top:24px;text-align:center;">
-        <p style="font-size:16px;font-weight:600;color:var(--accent-light);">PUSH</p>
+        <p style="font-size:16px;font-weight:600;color:var(--accent);">PUSH</p>
         <p style="font-size:13px;color:var(--text-dim);margin-top:4px;">[Contact info placeholder]</p>
       </div>
     </div>
@@ -1148,6 +1241,25 @@
       slides[prev].scrollIntoView({ behavior: 'smooth' });
     }
   });
+
+  // Language toggle
+  function setLang(lang) {
+    localStorage.setItem('push-lang', lang);
+    document.querySelectorAll('[data-en]').forEach(el => {
+      el.textContent = lang === 'en' ? el.dataset.en : el.dataset.zh;
+    });
+    document.querySelectorAll('[data-en-html]').forEach(el => {
+      el.innerHTML = lang === 'en' ? el.dataset.enHtml : el.dataset.zhHtml;
+    });
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+    document.body.classList.toggle('lang-en', lang === 'en');
+    document.body.classList.toggle('lang-zh', lang === 'zh');
+  }
+  (function() {
+    const lang = localStorage.getItem('push-lang') || 'en';
+    setLang(lang);
+  })();
 </script>
 </body>
 </html>

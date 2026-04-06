@@ -4,74 +4,90 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PUSH - Project Introduction</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0a0a0f;
-  --bg2: #12121a;
-  --bg3: #1a1a2e;
-  --bg4: #242440;
-  --accent: #6c5ce7;
-  --accent2: #a29bfe;
-  --green: #00cec9;
-  --orange: #fdcb6e;
-  --red: #e17055;
-  --pink: #fd79a8;
-  --blue: #74b9ff;
-  --text: #dfe6e9;
-  --text2: #b2bec3;
-  --text3: #636e72;
-  --radius: 16px;
-  --shadow: 0 4px 24px rgba(0,0,0,0.3);
+  --bg: #ffffff;
+  --bg2: #f8f9fa;
+  --bg3: #f1f3f5;
+  --bg4: #e9ecef;
+  --primary: #1a1a2e;
+  --primary-light: #2d2d5e;
+  --accent: #4f46e5;
+  --accent2: #4f46e5;
+  --accent-light: #818cf8;
+  --accent-bg: rgba(79, 70, 229, 0.06);
+  --green: #059669;
+  --green-bg: rgba(5, 150, 105, 0.08);
+  --orange: #d97706;
+  --orange-bg: rgba(217, 119, 6, 0.08);
+  --red: #dc2626;
+  --red-bg: rgba(220, 38, 38, 0.08);
+  --pink: #be185d;
+  --blue: #2563eb;
+  --text: #111827;
+  --text2: #4b5563;
+  --text3: #9ca3af;
+  --border: #e5e7eb;
+  --border-hover: #d1d5db;
+  --radius: 12px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
-  background: var(--bg); color: var(--text); line-height: 1.7;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: var(--bg2); color: var(--text); line-height: 1.7;
 }
-a { color: var(--accent2); text-decoration: none; }
-a:hover { text-decoration: underline; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-light); text-decoration: none; }
 
 /* NAV */
 .topnav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(10,10,15,0.92); backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(108,92,231,0.2);
+  background: #fff;
+  border-bottom: 1px solid var(--border);
   display: flex; align-items: center; padding: 0 24px; height: 60px; gap: 12px;
 }
-.topnav .logo { font-weight: 800; font-size: 22px; color: var(--accent2); letter-spacing: 2px; }
+.topnav .logo { font-weight: 800; font-size: 22px; color: var(--primary); letter-spacing: 2px; }
 .topnav .back-link {
   display: flex; align-items: center; gap: 6px;
   padding: 6px 16px; border-radius: 8px; font-size: 13px; font-weight: 500;
-  color: var(--text2); transition: all 0.2s; margin-left: 24px;
+  color: var(--text2); transition: color 0.2s; margin-left: 24px;
 }
-.topnav .back-link:hover { background: var(--bg3); color: #fff; text-decoration: none; }
+.topnav .back-link:hover { color: var(--text); text-decoration: none; }
 .topnav .nav-title {
   margin-left: auto; font-size: 13px; color: var(--text3); font-weight: 500;
   letter-spacing: 1px; text-transform: uppercase;
 }
+.topnav .navlinks { display: flex; gap: 4px; flex-wrap: wrap; }
+.topnav .navlinks a {
+  padding: 6px 14px; border-radius: 8px; font-size: 13px; font-weight: 500;
+  color: var(--text2); transition: color 0.2s; text-decoration: none;
+}
+.topnav .navlinks a:hover { color: var(--text); text-decoration: none; }
+.topnav .navlinks a.active { color: var(--accent); font-weight: 600; text-decoration: none; }
 
 /* HERO */
 .hero {
   padding: 120px 24px 60px;
   text-align: center;
-  background: radial-gradient(ellipse at 50% 0%, rgba(108,92,231,0.15) 0%, transparent 60%);
+  background: #fff;
   position: relative;
-}
-.hero::after {
-  content: '';
-  position: absolute; bottom: 0; left: 10%; right: 10%; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  border-bottom: 1px solid var(--border);
 }
 .hero-badge {
   display: inline-block; padding: 6px 20px; border-radius: 20px; font-size: 12px;
   font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px;
-  background: rgba(108,92,231,0.15); border: 1px solid rgba(108,92,231,0.3); color: var(--accent2);
+  background: var(--accent-bg); border: 1px solid var(--border); color: var(--accent);
 }
 .hero h1 {
   font-size: 56px; font-weight: 900; line-height: 1.15; margin-bottom: 12px;
-  background: linear-gradient(135deg, #fff 0%, var(--accent2) 50%, var(--green) 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  color: var(--text);
 }
 .hero-sub {
   font-size: 20px; color: var(--text2); max-width: 700px; margin: 0 auto 8px;
@@ -93,26 +109,24 @@ a:hover { text-decoration: underline; }
 }
 .section-title-group { flex: 1; }
 .section-title {
-  font-size: 28px; font-weight: 800;
-  background: linear-gradient(135deg, var(--accent2), var(--green));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  font-size: 28px; font-weight: 700;
+  color: var(--text);
 }
 .section-title-cn {
   font-size: 16px; color: var(--text3); font-weight: 500; margin-top: 2px;
 }
 .section-divider {
   height: 1px; margin-bottom: 32px;
-  background: linear-gradient(90deg, var(--accent), transparent 70%);
-  opacity: 0.3;
+  background: var(--border);
 }
 
 /* BILINGUAL CARD */
 .bi-card {
-  background: var(--bg2); border: 1px solid rgba(108,92,231,0.15);
-  border-radius: var(--radius); overflow: hidden; transition: all 0.3s;
+  background: #fff; border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; transition: all 0.2s;
   margin-bottom: 20px;
 }
-.bi-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow); }
+.bi-card:hover { border-color: var(--border-hover); box-shadow: var(--shadow); }
 .bi-card-inner {
   display: grid; grid-template-columns: 1fr 1fr; min-height: 100%;
 }
@@ -120,18 +134,18 @@ a:hover { text-decoration: underline; }
   padding: 28px 32px;
 }
 .bi-col-cn {
-  border-right: 1px solid rgba(108,92,231,0.1);
-  background: rgba(108,92,231,0.03);
+  border-right: 1px solid var(--border);
+  background: var(--bg2);
 }
 .bi-col-en {
-  background: rgba(0,206,201,0.03);
+  background: #fff;
 }
 .bi-col h3 {
   font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
   margin-bottom: 16px; padding-bottom: 8px;
   border-bottom: 2px solid;
 }
-.bi-col-cn h3 { color: var(--accent2); border-color: var(--accent); }
+.bi-col-cn h3 { color: var(--accent); border-color: var(--accent); }
 .bi-col-en h3 { color: var(--green); border-color: var(--green); }
 .bi-col p, .bi-col li {
   font-size: 15px; color: var(--text2); line-height: 1.8;
@@ -147,7 +161,7 @@ a:hover { text-decoration: underline; }
 .bi-col-en ul li::before { background: var(--green); }
 
 /* HIGHLIGHT TEXT */
-.hl-accent { color: var(--accent2); font-weight: 600; }
+.hl-accent { color: var(--accent); font-weight: 600; }
 .hl-green { color: var(--green); font-weight: 600; }
 .hl-orange { color: var(--orange); font-weight: 600; }
 .hl-pink { color: var(--pink); font-weight: 600; }
@@ -173,56 +187,50 @@ a:hover { text-decoration: underline; }
   padding: 4px 0; font-size: 14px; color: var(--text2);
   padding-left: 18px; position: relative;
 }
-.not-is-card.is-card ul li::before { content: '\2713'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
-.not-is-card.not-card ul li::before { content: '\2717'; position: absolute; left: 0; color: var(--red); font-weight: 700; }
+.not-is-card.is-card ul li::before { content: '¹3'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+.not-is-card.not-card ul li::before { content: '¹7'; position: absolute; left: 0; color: var(--red); font-weight: 700; }
 
 /* PILLARS */
 .pillars-grid {
   display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-top: 20px;
 }
 .pillar-card {
-  background: var(--bg2); border: 1px solid rgba(108,92,231,0.15);
+  background: #fff; border: 1px solid var(--border);
   border-radius: var(--radius); padding: 24px 16px; text-align: center;
-  transition: all 0.3s; position: relative; overflow: hidden;
+  transition: all 0.2s; position: relative; overflow: hidden;
 }
 .pillar-card::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
 }
-.pillar-card:nth-child(1)::before { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
-.pillar-card:nth-child(2)::before { background: linear-gradient(90deg, var(--green), #55efc4); }
-.pillar-card:nth-child(3)::before { background: linear-gradient(90deg, var(--orange), #ffeaa7); }
-.pillar-card:nth-child(4)::before { background: linear-gradient(90deg, var(--pink), #fab1a0); }
-.pillar-card:nth-child(5)::before { background: linear-gradient(90deg, var(--blue), #a29bfe); }
-.pillar-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--accent); }
+.pillar-card:nth-child(1)::before { background: var(--accent); }
+.pillar-card:nth-child(2)::before { background: var(--green); }
+.pillar-card:nth-child(3)::before { background: var(--orange); }
+.pillar-card:nth-child(4)::before { background: var(--pink); }
+.pillar-card:nth-child(5)::before { background: var(--blue); }
+.pillar-card:hover { box-shadow: var(--shadow); border-color: var(--border-hover); }
 .pillar-icon { font-size: 32px; margin-bottom: 12px; }
 .pillar-num {
   font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
   color: var(--text3); margin-bottom: 8px;
 }
-.pillar-name-en { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 4px; }
-.pillar-name-cn { font-size: 14px; color: var(--accent2); margin-bottom: 12px; }
+.pillar-name-en { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.pillar-name-cn { font-size: 14px; color: var(--accent); margin-bottom: 12px; }
 .pillar-desc { font-size: 13px; color: var(--text3); line-height: 1.6; }
 
 /* THESIS */
 .thesis-box {
-  background: linear-gradient(135deg, rgba(108,92,231,0.12), rgba(0,206,201,0.08));
-  border: 1px solid rgba(108,92,231,0.25);
+  background: var(--accent-bg);
+  border: 1px solid var(--border);
   border-radius: var(--radius); padding: 40px; position: relative; overflow: hidden;
 }
-.thesis-box::before {
-  content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-  background: radial-gradient(circle, rgba(108,92,231,0.05) 0%, transparent 50%);
-  animation: pulse 6s ease-in-out infinite;
-}
-@keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.1); } }
 .thesis-content { position: relative; z-index: 1; }
 .thesis-content .bi-card-inner { background: transparent; }
 .thesis-quote {
-  font-size: 22px; font-weight: 700; line-height: 1.6; color: #fff;
+  font-size: 22px; font-weight: 700; line-height: 1.6; color: var(--text);
   margin-bottom: 16px;
 }
 .thesis-quote-cn {
-  font-size: 20px; font-weight: 600; line-height: 1.7; color: var(--accent2);
+  font-size: 20px; font-weight: 600; line-height: 1.7; color: var(--accent);
 }
 .thesis-body {
   font-size: 15px; color: var(--text2); line-height: 1.8; margin-top: 16px;
@@ -231,13 +239,13 @@ a:hover { text-decoration: underline; }
 /* FOOTER */
 .page-footer {
   text-align: center; padding: 60px 24px 40px; color: var(--text3); font-size: 13px;
-  border-top: 1px solid rgba(108,92,231,0.1); margin-top: 40px;
+  border-top: 1px solid var(--border); margin-top: 40px; background: #fff;
 }
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
   .bi-card-inner { grid-template-columns: 1fr; }
-  .bi-col-cn { border-right: none; border-bottom: 1px solid rgba(108,92,231,0.1); }
+  .bi-col-cn { border-right: none; border-bottom: 1px solid var(--border); }
   .pillars-grid { grid-template-columns: repeat(2, 1fr); }
   .not-is-grid { grid-template-columns: 1fr; }
   .hero h1 { font-size: 36px; }
@@ -247,6 +255,51 @@ a:hover { text-decoration: underline; }
   .hero h1 { font-size: 28px; }
   .bi-col { padding: 20px; }
 }
+
+/* SCROLL ANIMATIONS */
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* SECTION DIVIDER */
+.section + .section { border-top: 1px solid var(--border); }
+
+/* LANG VISIBILITY */
+body.lang-en .bi-col-cn { display: none; }
+body.lang-zh .bi-col-en { display: none; }
+body.lang-en .bi-card-inner { grid-template-columns: 1fr; }
+body.lang-zh .bi-card-inner { grid-template-columns: 1fr; }
+body.lang-en .thesis-box .bi-card-inner { grid-template-columns: 1fr; }
+body.lang-zh .thesis-box .bi-card-inner { grid-template-columns: 1fr; }
+/* Hide the thesis zh/en column based on lang */
+body.lang-en .thesis-content > .bi-card-inner > div:first-child { display: none; }
+body.lang-zh .thesis-content > .bi-card-inner > div:last-child { display: none; }
+
+/* LANG TOGGLE */
+.lang-toggle {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: var(--bg3);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.lang-toggle button {
+  padding: 5px 12px;
+  background: transparent;
+  border: none;
+  color: var(--text3);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.lang-toggle button.active {
+  background: var(--accent);
+  color: var(--text);
+}
 </style>
 </head>
 <body>
@@ -254,25 +307,34 @@ a:hover { text-decoration: underline; }
 <!-- NAV -->
 <nav class="topnav">
   <div class="logo">PUSH</div>
-  <a href="index.html" class="back-link">&larr; Dashboard</a>
-  <span class="nav-title">Project Introduction / &#39033;&#30446;&#20171;&#32461;</span>
+  <div class="navlinks" style="display:flex;gap:4px;flex-wrap:wrap;">
+    <a href="index.html" style="padding:6px 14px;border-radius:8px;font-size:13px;font-weight:500;color:var(--text2);transition:color 0.2s;" data-en="Dashboard" data-zh="仪表盘">Dashboard</a>
+    <a href="project-intro.html" class="active" style="padding:6px 14px;border-radius:8px;font-size:13px;font-weight:500;color:var(--accent);font-weight:600;transition:color 0.2s;" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
+    <a href="pitch-deck.html" style="padding:6px 14px;border-radius:8px;font-size:13px;font-weight:500;color:var(--text2);transition:color 0.2s;" data-en="Pitch Deck" data-zh="路演方案">Pitch Deck</a>
+    <a href="prospects.html" style="padding:6px 14px;border-radius:8px;font-size:13px;font-weight:500;color:var(--text2);transition:color 0.2s;" data-en="Prospects" data-zh="未来愿景">Prospects</a>
+    <a href="challenges.html" style="padding:6px 14px;border-radius:8px;font-size:13px;font-weight:500;color:var(--text2);transition:color 0.2s;" data-en="Challenges" data-zh="挑战">Challenges</a>
+    <a href="retention-defense.html" style="padding:6px 14px;border-radius:8px;font-size:13px;font-weight:500;color:var(--text2);transition:color 0.2s;" data-en="Retention" data-zh="留存机制">Retention</a>
+    <a href="platform-value.html" style="padding:6px 14px;border-radius:8px;font-size:13px;font-weight:500;color:var(--text2);transition:color 0.2s;" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
+  </div>
+  <div class="lang-toggle">
+    <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+    <button id="btn-zh" onclick="setLang('zh')">中</button>
+  </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-badge">Local Creator Performance Infrastructure</div>
+  <div class="hero-badge" data-en="Local Creator Performance Infrastructure" data-zh="本地创作者绩效基础设施">Local Creator Performance Infrastructure</div>
   <h1>PUSH</h1>
-  <p class="hero-sub">The system that standardizes local creator-driven customer acquisition.</p>
-  <p class="hero-sub-cn">&#26412;&#22320;&#21019;&#20316;&#32773;&#39537;&#21160;&#23458;&#25143;&#33719;&#21462;&#30340;&#26631;&#20934;&#21270;&#22522;&#30784;&#35774;&#26045;&#12290;</p>
+  <p class="hero-sub" data-en="The system that standardizes local creator-driven customer acquisition." data-zh="本地创作者驱动客户获取的标准化基础设施。">The system that standardizes local creator-driven customer acquisition.</p>
 </section>
 
 <!-- VISION -->
 <section class="section" id="vision">
   <div class="section-header">
-    <div class="section-icon" style="background: linear-gradient(135deg, var(--accent), var(--accent2));">&#127758;</div>
+    <div class="section-icon" style="background: var(--accent-bg);">&#127758;</div>
     <div class="section-title-group">
-      <div class="section-title">Vision</div>
-      <div class="section-title-cn">&#24895;&#26223;</div>
+      <div class="section-title" data-en="Vision" data-zh="愿景">Vision</div>
     </div>
   </div>
   <div class="section-divider"></div>
@@ -295,9 +357,11 @@ a:hover { text-decoration: underline; }
           <div class="not-is-card not-card">
             <div class="label">PUSH &#19981;&#26159;</div>
             <ul>
-              <li>&#32593;&#32418;&#24066;&#22330;&#24179;&#21488;</li>
-              <li>&#21019;&#20316;&#32773;&#21457;&#29616;&#24212;&#29992;</li>
-              <li>&#24544;&#35802;&#24230;&#31995;&#32479;</li>
+              <li>通用网红市场平台</li>
+              <li>本地发现应用</li>
+              <li>内容社区</li>
+              <li>奖励应用</li>
+              <li>轻量忠诚度系统</li>
             </ul>
           </div>
         </div>
@@ -319,9 +383,11 @@ a:hover { text-decoration: underline; }
           <div class="not-is-card not-card">
             <div class="label">PUSH IS NOT</div>
             <ul>
-              <li>Influencer marketplace</li>
-              <li>Discovery app</li>
-              <li>Loyalty system</li>
+              <li>Generic influencer marketplace</li>
+              <li>Local discovery app</li>
+              <li>Content community</li>
+              <li>Reward app</li>
+              <li>Lightweight loyalty system</li>
             </ul>
           </div>
         </div>
@@ -333,10 +399,9 @@ a:hover { text-decoration: underline; }
 <!-- PROBLEM -->
 <section class="section" id="problem">
   <div class="section-header">
-    <div class="section-icon" style="background: linear-gradient(135deg, var(--red), var(--orange));">&#9888;&#65039;</div>
+    <div class="section-icon" style="background: var(--red-bg);">&#9888;&#65039;</div>
     <div class="section-title-group">
-      <div class="section-title">Core Problem</div>
-      <div class="section-title-cn">&#26680;&#24515;&#38382;&#39064;</div>
+      <div class="section-title" data-en="Core Problem" data-zh="核心问题">Core Problem</div>
     </div>
   </div>
   <div class="section-divider"></div>
@@ -346,17 +411,19 @@ a:hover { text-decoration: underline; }
         <h3>&#20013;&#25991;</h3>
         <p style="font-weight:700; color:var(--orange); margin-bottom:12px;">&#21830;&#23478;&#31471;&#30171;&#28857;</p>
         <ul>
-          <li>&#26080;&#27861;&#21028;&#26029;&#21019;&#20316;&#32773;&#36136;&#37327;</li>
-          <li>ROI &#19981;&#28165;&#26224;&#65292;&#25928;&#26524;&#38590;&#20197;&#34913;&#37327;</li>
-          <li>&#36816;&#33829;&#25705;&#25830;&#22823;&#65292;&#27969;&#31243;&#22797;&#26434;</li>
+          <li>无法判断创作者质量</li>
+          <li>ROI 不清晰，效果难以衡量</li>
+          <li>运营摩擦大，流程复杂</li>
+          <li>担心被爽约或低质量内容伤害</li>
         </ul>
         <p style="font-weight:700; color:var(--pink); margin-top:20px; margin-bottom:12px;">&#21019;&#20316;&#32773;&#31471;&#30171;&#28857;</p>
         <ul>
-          <li>&#32570;&#20047;&#23450;&#20215;&#26435;</li>
-          <li>&#25910;&#20837;&#19981;&#31283;&#23450;</li>
-          <li>&#32463;&#24120;&#36935;&#21040;&#21387;&#20215;&#21644;&#21093;&#21066;&#24615;&#25253;&#20215;</li>
+          <li>缺乏定价权</li>
+          <li>收入不稳定</li>
+          <li>经常遇到压价和剥削性报价</li>
+          <li>与商家之间的信任不对称</li>
         </ul>
-        <p style="font-weight:700; color:var(--accent2); margin-top:20px; margin-bottom:12px;">&#24066;&#22330;&#38382;&#39064;</p>
+        <p style="font-weight:700; color:var(--accent); margin-top:20px; margin-bottom:12px;">&#24066;&#22330;&#38382;&#39064;</p>
         <p>&#21019;&#20316;&#32773;&#20379;&#32473;&#26410;&#34987;&#32467;&#26500;&#21270;&#22320;&#24212;&#29992;&#20110;&#26412;&#22320;&#21830;&#19994;&#12290;</p>
       </div>
       <div class="bi-col bi-col-en">
@@ -366,14 +433,16 @@ a:hover { text-decoration: underline; }
           <li>Cannot judge creator quality</li>
           <li>Unclear ROI, hard to measure outcomes</li>
           <li>High operational friction, complex workflows</li>
+          <li>Fear of being burned by no-shows or low quality</li>
         </ul>
         <p style="font-weight:700; color:var(--pink); margin-top:20px; margin-bottom:12px;">Creator Pain Points</p>
         <ul>
           <li>Lack pricing power</li>
           <li>Income instability</li>
           <li>Exploitative and lowball offers</li>
+          <li>Trust asymmetry with merchants</li>
         </ul>
-        <p style="font-weight:700; color:var(--accent2); margin-top:20px; margin-bottom:12px;">Market Problem</p>
+        <p style="font-weight:700; color:var(--accent); margin-top:20px; margin-bottom:12px;">Market Problem</p>
         <p>Creator supply is not structured for local commerce.</p>
       </div>
     </div>
@@ -383,16 +452,15 @@ a:hover { text-decoration: underline; }
 <!-- CORE INSIGHT -->
 <section class="section" id="insight">
   <div class="section-header">
-    <div class="section-icon" style="background: linear-gradient(135deg, var(--orange), var(--pink));">&#128161;</div>
+    <div class="section-icon" style="background: var(--orange-bg);">&#128161;</div>
     <div class="section-title-group">
-      <div class="section-title">Core Insight</div>
-      <div class="section-title-cn">&#26680;&#24515;&#27934;&#23519;</div>
+      <div class="section-title" data-en="Core Insight" data-zh="核心洞察">Core Insight</div>
     </div>
   </div>
   <div class="section-divider"></div>
-  <div class="bi-card" style="border-color: rgba(253,203,110,0.3);">
+  <div class="bi-card" style="border-color: var(--border);">
     <div class="bi-card-inner">
-      <div class="bi-col bi-col-cn" style="background: rgba(253,203,110,0.05);">
+      <div class="bi-col bi-col-cn" style="background: var(--bg2);">
         <h3>&#20013;&#25991;</h3>
         <p style="font-size:20px; font-weight:700; color:var(--orange); line-height:1.7; margin-bottom:16px;">
           &#21019;&#20316;&#32773;&#26159;&#38750;&#32467;&#26500;&#21270;&#30340;&#23458;&#25143;&#33719;&#21462;&#28192;&#36947;&#12290;
@@ -405,7 +473,7 @@ a:hover { text-decoration: underline; }
           <li><span class="hl-pink">&#36335;&#30001;</span> &#8212; &#26234;&#33021;&#21305;&#37197;&#20379;&#38656;</li>
         </ul>
       </div>
-      <div class="bi-col bi-col-en" style="background: rgba(253,203,110,0.03);">
+      <div class="bi-col bi-col-en" style="background: #fff;">
         <h3>English</h3>
         <p style="font-size:20px; font-weight:700; color:var(--orange); line-height:1.7; margin-bottom:16px;">
           Creators are unstructured customer acquisition channels.
@@ -427,8 +495,7 @@ a:hover { text-decoration: underline; }
   <div class="section-header">
     <div class="section-icon" style="background: linear-gradient(135deg, var(--green), var(--blue));">&#127919;</div>
     <div class="section-title-group">
-      <div class="section-title">5 Strategic Pillars</div>
-      <div class="section-title-cn">&#20116;&#22823;&#25112;&#30053;&#25903;&#26609;</div>
+      <div class="section-title" data-en="5 Strategic Pillars" data-zh="五大战略支柱">5 Strategic Pillars</div>
     </div>
   </div>
   <div class="section-divider"></div>
@@ -436,37 +503,37 @@ a:hover { text-decoration: underline; }
     <div class="pillar-card">
       <div class="pillar-icon">&#128220;</div>
       <div class="pillar-num">Pillar 01</div>
-      <div class="pillar-name-en">Offer OS</div>
+      <div class="pillar-name-en" data-en="Offer OS" data-zh="报价操作系统">Offer OS</div>
       <div class="pillar-name-cn">&#25253;&#20215;&#25805;&#20316;&#31995;&#32479;</div>
-      <div class="pillar-desc">Structured offer creation, pricing, and deal flow management for merchant-creator transactions.</div>
+      <div class="pillar-desc" data-en="Convert merchant growth goals into structured campaigns — not vague collaboration posts." data-zh="将商家增长目标转化为结构化活动，而非模糊的合作帖子。">Convert merchant growth goals into structured campaigns — not vague collaboration posts.</div>
     </div>
     <div class="pillar-card">
       <div class="pillar-icon">&#11088;</div>
       <div class="pillar-num">Pillar 02</div>
-      <div class="pillar-name-en">Creator Credit</div>
+      <div class="pillar-name-en" data-en="Creator Credit" data-zh="创作者信用">Creator Credit</div>
       <div class="pillar-name-cn">&#21019;&#20316;&#32773;&#20449;&#29992;</div>
-      <div class="pillar-desc">Performance-based reputation and scoring system that builds trust and unlocks better opportunities.</div>
+      <div class="pillar-desc" data-en="Performance-based reputation and scoring system that builds trust and unlocks better opportunities." data-zh="基于绩效的声誉和评分系统，建立信任并解锁更好的机会。">Performance-based reputation and scoring system that builds trust and unlocks better opportunities.</div>
     </div>
     <div class="pillar-card">
       <div class="pillar-icon">&#128200;</div>
       <div class="pillar-num">Pillar 03</div>
-      <div class="pillar-name-en">Attribution</div>
+      <div class="pillar-name-en" data-en="Attribution" data-zh="归因分析">Attribution</div>
       <div class="pillar-name-cn">&#24402;&#22240;&#20998;&#26512;</div>
-      <div class="pillar-desc">Measurable, transparent tracking that connects creator actions to real merchant outcomes.</div>
+      <div class="pillar-desc" data-en="Measurable, transparent tracking that connects creator actions to real merchant outcomes." data-zh="可衡量、透明的追踪，将创作者行为与真实商家成果关联。">Measurable, transparent tracking that connects creator actions to real merchant outcomes.</div>
     </div>
     <div class="pillar-card">
       <div class="pillar-icon">&#127760;</div>
       <div class="pillar-num">Pillar 04</div>
-      <div class="pillar-name-en">Demand Surface</div>
+      <div class="pillar-name-en" data-en="Demand Surface" data-zh="需求界面">Demand Surface</div>
       <div class="pillar-name-cn">&#38656;&#27714;&#30028;&#38754;</div>
-      <div class="pillar-desc">The interface where local demand is surfaced, organized, and made actionable for creators.</div>
+      <div class="pillar-desc" data-en="The interface where local demand is surfaced, organized, and made actionable for creators." data-zh="本地需求呈现、组织和可执行化的界面。">The interface where local demand is surfaced, organized, and made actionable for creators.</div>
     </div>
     <div class="pillar-card">
       <div class="pillar-icon">&#128256;</div>
       <div class="pillar-num">Pillar 05</div>
-      <div class="pillar-name-en">Liquidity Layer</div>
+      <div class="pillar-name-en" data-en="Liquidity Layer" data-zh="流动性层">Liquidity Layer</div>
       <div class="pillar-name-cn">&#27969;&#21160;&#24615;&#23618;</div>
-      <div class="pillar-desc">Ensures consistent matching between merchant demand and creator supply at scale.</div>
+      <div class="pillar-desc" data-en="Standby mechanism that increases slot fill rate, urgency, creator engagement, and merchant confidence." data-zh="候补机制提升空位填充率、紧迫性、创作者参与度和商家信心。">Standby mechanism that increases slot fill rate, urgency, creator engagement, and merchant confidence.</div>
     </div>
   </div>
 
@@ -477,22 +544,22 @@ a:hover { text-decoration: underline; }
         <h3>&#20013;&#25991;</h3>
         <p>&#36825;&#20116;&#22823;&#25903;&#26609;&#20849;&#21516;&#26500;&#25104;&#20102; PUSH &#30340;&#26680;&#24515;&#26550;&#26500;&#65306;</p>
         <ul>
-          <li><span class="hl-accent">&#25253;&#20215;OS</span> &#8212; &#32467;&#26500;&#21270;&#25253;&#20215;&#12289;&#23450;&#20215;&#21644;&#20132;&#26131;&#27969;&#31649;&#29702;</li>
+          <li><span class="hl-accent">&#25253;&#20215;OS</span> &#8212; 将商家增长目标转化为结构化活动</li>
           <li><span class="hl-green">&#21019;&#20316;&#32773;&#20449;&#29992;</span> &#8212; &#22522;&#20110;&#32489;&#25928;&#30340;&#22768;&#35465;&#21644;&#35780;&#20998;&#31995;&#32479;</li>
           <li><span class="hl-orange">&#24402;&#22240;&#20998;&#26512;</span> &#8212; &#23558;&#21019;&#20316;&#32773;&#34892;&#20026;&#19982;&#21830;&#23478;&#25104;&#26524;&#36879;&#26126;&#20851;&#32852;</li>
           <li><span class="hl-pink">&#38656;&#27714;&#30028;&#38754;</span> &#8212; &#26412;&#22320;&#38656;&#27714;&#30340;&#21576;&#29616;&#12289;&#32452;&#32455;&#21644;&#21487;&#25191;&#34892;&#30028;&#38754;</li>
-          <li><span class="hl-accent2">&#27969;&#21160;&#24615;&#23618;</span> &#8212; &#30830;&#20445;&#21830;&#23478;&#38656;&#27714;&#19982;&#21019;&#20316;&#32773;&#20379;&#32473;&#30340;&#25345;&#32493;&#21305;&#37197;</li>
+          <li><span class="hl-accent2">&#27969;&#21160;&#24615;&#23618;</span> &#8212; 候补机制提升填充率、紧迫性与商家信心</li>
         </ul>
       </div>
       <div class="bi-col bi-col-en">
         <h3>English</h3>
         <p>These five pillars form the core architecture of PUSH:</p>
         <ul>
-          <li><span class="hl-accent">Offer OS</span> &#8212; structured offer creation, pricing, and deal flow</li>
+          <li><span class="hl-accent">Offer OS</span> &#8212; convert merchant growth goals into structured campaigns</li>
           <li><span class="hl-green">Creator Credit</span> &#8212; performance-based reputation and scoring</li>
           <li><span class="hl-orange">Attribution</span> &#8212; transparent tracking of creator-to-merchant outcomes</li>
           <li><span class="hl-pink">Demand Surface</span> &#8212; where local demand is organized and made actionable</li>
-          <li><span class="hl-accent2">Liquidity Layer</span> &#8212; consistent matching of supply and demand at scale</li>
+          <li><span class="hl-accent2">Liquidity Layer</span> &#8212; standby mechanism for fill rate, urgency, and merchant confidence</li>
         </ul>
       </div>
     </div>
@@ -504,8 +571,7 @@ a:hover { text-decoration: underline; }
   <div class="section-header">
     <div class="section-icon" style="background: linear-gradient(135deg, var(--accent), var(--green));">&#128640;</div>
     <div class="section-title-group">
-      <div class="section-title">Company Thesis</div>
-      <div class="section-title-cn">&#20844;&#21496;&#35770;&#28857;</div>
+      <div class="section-title" data-en="Company Thesis" data-zh="公司论点">Company Thesis</div>
     </div>
   </div>
   <div class="section-divider"></div>
@@ -513,30 +579,30 @@ a:hover { text-decoration: underline; }
     <div class="thesis-content">
       <div class="bi-card-inner" style="display:grid; grid-template-columns:1fr 1fr; gap:40px;">
         <div>
-          <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:2px; color:var(--accent2); margin-bottom:16px; padding-bottom:8px; border-bottom:2px solid var(--accent);">&#20013;&#25991;</div>
+          <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:2px; color:var(--accent); margin-bottom:16px; padding-bottom:8px; border-bottom:2px solid var(--accent);">&#20013;&#25991;</div>
           <p class="thesis-quote-cn">
             &#22914;&#26524;&#25104;&#21151;&#65292;PUSH &#23558;&#25104;&#20026;&#8212;&#8212;
           </p>
           <ul style="list-style:none; padding:0; margin-top:16px;">
             <li style="padding:8px 0; padding-left:24px; position:relative; color:var(--text2); font-size:15px; line-height:1.8;">
-              <span style="position:absolute; left:0; color:var(--accent2);">&#9654;</span>
+              <span style="position:absolute; left:0; color:var(--accent);">&#9654;</span>
               <span class="hl-accent">&#26631;&#20934;&#21270;</span>&#26412;&#22320;&#21019;&#20316;&#32773;&#33719;&#23458;&#30340;&#31995;&#32479;
             </li>
             <li style="padding:8px 0; padding-left:24px; position:relative; color:var(--text2); font-size:15px; line-height:1.8;">
               <span style="position:absolute; left:0; color:var(--green);">&#9654;</span>
-              &#25353;<span class="hl-green">&#32489;&#25928;</span>&#25490;&#21517;&#21019;&#20316;&#32773;
+              按<span class="hl-green">商业绩效</span>排名创作者
             </li>
             <li style="padding:8px 0; padding-left:24px; position:relative; color:var(--text2); font-size:15px; line-height:1.8;">
               <span style="position:absolute; left:0; color:var(--orange);">&#9654;</span>
-              &#21521;&#26356;&#22909;&#30340;&#32467;&#26524;<span class="hl-orange">&#36335;&#30001;</span>
+              将商家<span class="hl-orange">路由</span>至更优的结果
             </li>
             <li style="padding:8px 0; padding-left:24px; position:relative; color:var(--text2); font-size:15px; line-height:1.8;">
               <span style="position:absolute; left:0; color:var(--pink);">&#9654;</span>
-              &#31215;&#32047;<span class="hl-pink">&#19987;&#26377;&#25968;&#25454;</span>
+              积累<span class="hl-pink">专有创作者绩效数据</span>
             </li>
             <li style="padding:8px 0; padding-left:24px; position:relative; color:var(--text2); font-size:15px; line-height:1.8;">
               <span style="position:absolute; left:0; color:var(--blue);">&#9654;</span>
-              &#24418;&#25104;&#24378;&#22823;&#30340;<span class="hl-accent">&#38145;&#23450;&#25928;&#24212;</span>
+              通过准入、信任和工作流形成<span class="hl-accent">锁定效应</span>
             </li>
           </ul>
         </div>
@@ -547,24 +613,24 @@ a:hover { text-decoration: underline; }
           </p>
           <ul style="list-style:none; padding:0; margin-top:16px;">
             <li style="padding:8px 0; padding-left:24px; position:relative; color:var(--text2); font-size:15px; line-height:1.8;">
-              <span style="position:absolute; left:0; color:var(--accent2);">&#9654;</span>
+              <span style="position:absolute; left:0; color:var(--accent);">&#9654;</span>
               <span class="hl-accent">Standardizes</span> local creator acquisition
             </li>
             <li style="padding:8px 0; padding-left:24px; position:relative; color:var(--text2); font-size:15px; line-height:1.8;">
               <span style="position:absolute; left:0; color:var(--green);">&#9654;</span>
-              <span class="hl-green">Ranks</span> by performance
+              <span class="hl-green">Ranks</span> creators by commercial performance
             </li>
             <li style="padding:8px 0; padding-left:24px; position:relative; color:var(--text2); font-size:15px; line-height:1.8;">
               <span style="position:absolute; left:0; color:var(--orange);">&#9654;</span>
-              <span class="hl-orange">Routes</span> toward better outcomes
+              <span class="hl-orange">Routes</span> merchants toward better outcomes
             </li>
             <li style="padding:8px 0; padding-left:24px; position:relative; color:var(--text2); font-size:15px; line-height:1.8;">
               <span style="position:absolute; left:0; color:var(--pink);">&#9654;</span>
-              Compounds <span class="hl-pink">proprietary data</span>
+              Compounds <span class="hl-pink">proprietary creator performance data</span>
             </li>
             <li style="padding:8px 0; padding-left:24px; position:relative; color:var(--text2); font-size:15px; line-height:1.8;">
               <span style="position:absolute; left:0; color:var(--blue);">&#9654;</span>
-              Creates <span class="hl-accent">lock-in</span>
+              Creates <span class="hl-accent">lock-in</span> through access, trust, and workflow
             </li>
           </ul>
         </div>
@@ -575,9 +641,38 @@ a:hover { text-decoration: underline; }
 
 <!-- FOOTER -->
 <footer class="page-footer">
-  <p>PUSH &mdash; Local Creator Performance Infrastructure &nbsp;|&nbsp; &#26412;&#22320;&#21019;&#20316;&#32773;&#32489;&#25928;&#22522;&#30784;&#35774;&#26045;</p>
-  <p style="margin-top:8px;"><a href="index.html">&larr; Back to Dashboard</a></p>
+  <p data-en="PUSH — Local Creator Performance Infrastructure" data-zh="PUSH — 本地创作者绩效基础设施">PUSH — Local Creator Performance Infrastructure</p>
+  <p style="margin-top:8px;"><a href="index.html" data-en="← Back to Dashboard" data-zh="← 返回仪表盘">← Back to Dashboard</a></p>
 </footer>
 
+<script>
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.section, .card, .bi-card').forEach(el => {
+  el.classList.add('fade-in');
+  fadeObserver.observe(el);
+});
+</script>
+
+<script>
+function setLang(lang) {
+  localStorage.setItem('push-lang', lang);
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.textContent = lang === 'en' ? el.dataset.en : el.dataset.zh;
+  });
+  document.querySelectorAll('[data-en-html]').forEach(el => {
+    el.innerHTML = lang === 'en' ? el.dataset.enHtml : el.dataset.zhHtml;
+  });
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+  document.body.classList.toggle('lang-en', lang === 'en');
+  document.body.classList.toggle('lang-zh', lang === 'zh');
+}
+(function() {
+  const lang = localStorage.getItem('push-lang') || 'en';
+  setLang(lang);
+})();
+</script>
 </body>
 </html>

@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PUSH - Anti-Disintermediation Defense</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Backgrounds */
+  --bg: #ffffff;
+  --bg2: #f8f9fa;
+  --bg3: #f1f3f5;
+  --bg4: #e9ecef;
+
+  /* Primary */
+  --primary: #1a1a2e;
+  --primary-light: #2d2d5e;
+
+  /* Accent */
+  --accent: #4f46e5;
+  --accent-light: #818cf8;
+  --accent-bg: rgba(79, 70, 229, 0.06);
+  --accent2: #4f46e5;
+
+  /* Semantic */
+  --green: #059669;
+  --green-bg: rgba(5, 150, 105, 0.08);
+  --orange: #d97706;
+  --orange-bg: rgba(217, 119, 6, 0.08);
+  --red: #dc2626;
+  --red-bg: rgba(220, 38, 38, 0.08);
+  --pink: #db2777;
+  --blue: #2563eb;
+
+  /* Text */
+  --text: #111827;
+  --text2: #4b5563;
+  --text3: #9ca3af;
+
+  /* Borders */
+  --border: #e5e7eb;
+  --border-hover: #d1d5db;
+
+  --radius: 12px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* NAV */
+.topnav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; padding: 0 24px; height: 60px; gap: 8px;
+}
+.topnav .logo { font-weight: 800; font-size: 22px; color: var(--primary); letter-spacing: 2px; margin-right: 32px; }
+.topnav .navlinks { display: flex; gap: 4px; flex-wrap: wrap; flex: 1; }
+.topnav .navlinks a {
+  padding: 6px 14px; border-radius: 8px; font-size: 13px; font-weight: 500;
+  color: var(--text2); transition: all 0.2s;
+}
+.topnav .navlinks a:hover, .topnav .navlinks a.active { background: var(--bg3); color: var(--text); text-decoration: none; }
+#lang-toggle {
+  padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 700;
+  background: var(--bg3); color: var(--accent); border: 1px solid var(--border);
+  cursor: pointer; transition: all 0.2s; white-space: nowrap; flex-shrink: 0;
+}
+#lang-toggle:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* HERO */
+.hero {
+  padding: 120px 24px 60px;
+  max-width: 1400px; margin: 0 auto;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.hero h1 {
+  font-size: 44px; font-weight: 900;
+  color: var(--text);
+  margin-bottom: 12px; position: relative;
+}
+.hero p { color: var(--text2); font-size: 18px; max-width: 700px; margin: 0 auto; position: relative; }
+
+/* SECTIONS */
+.section { padding: 60px 24px 40px; max-width: 1200px; margin: 0 auto; }
+.section + .section { border-top: 1px solid var(--border); }
+.section-title {
+  font-size: 28px; font-weight: 800; margin-bottom: 8px;
+  color: var(--text);
+}
+.section-sub { color: var(--text2); font-size: 14px; margin-bottom: 32px; }
+
+/* CARDS */
+.grid { display: grid; gap: 20px; }
+.grid-2 { grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); }
+.grid-3 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+.grid-4 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.grid-5 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.card {
+  background: #fff; border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 24px; transition: all 0.3s;
+  position: relative; overflow: hidden;
+}
+.card:hover { border-color: var(--border-hover); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.card-icon {
+  width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+  font-size: 20px; flex-shrink: 0;
+}
+.card-title { font-size: 16px; font-weight: 700; color: var(--text); }
+.card-desc { color: var(--text2); font-size: 14px; line-height: 1.7; }
+
+/* TAGS */
+.tag {
+  display: inline-block; padding: 3px 10px; border-radius: 6px; font-size: 11px; font-weight: 600;
+  margin: 2px 4px 2px 0;
+}
+.tag-purple { background: var(--accent-bg); color: var(--accent); }
+.tag-green { background: var(--green-bg); color: var(--green); }
+.tag-orange { background: var(--orange-bg); color: var(--orange); }
+.tag-red { background: var(--red-bg); color: var(--red); }
+.tag-blue { background: rgba(37, 99, 235, 0.08); color: var(--blue); }
+.tag-pink { background: rgba(219, 39, 119, 0.08); color: var(--pink); }
+
+/* INSIGHT BOX */
+.insight-box {
+  background: var(--green-bg); border-left: 4px solid var(--green);
+  border-radius: 0 12px 12px 0; padding: 16px 20px; margin-top: 16px;
+  font-size: 13px; color: var(--green); line-height: 1.7; font-weight: 500;
+}
+
+/* BYPASS REASON CARDS */
+.bypass-card {
+  background: #fff; border: 1px solid rgba(220, 38, 38, 0.15);
+  border-radius: var(--radius); padding: 20px; text-align: center;
+  transition: all 0.3s;
+}
+.bypass-card:hover { border-color: var(--red); transform: translateY(-2px); box-shadow: var(--shadow); }
+.bypass-icon { font-size: 28px; margin-bottom: 8px; }
+.bypass-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.bypass-desc { font-size: 12px; color: var(--text2); }
+
+/* MAJOR VALUE CARD */
+.value-card {
+  background: #fff; border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 28px; transition: all 0.3s;
+}
+.value-card:hover { border-color: var(--border-hover); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.value-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: 10px; font-weight: 800; font-size: 16px;
+  color: #fff; margin-bottom: 12px;
+}
+.value-num.v1 { background: var(--accent); }
+.value-num.v2 { background: var(--green); }
+.value-num.v3 { background: var(--blue); }
+.value-num.v4 { background: var(--orange); }
+.value-num.v5 { background: var(--pink); }
+.value-title { font-size: 18px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
+.value-items { list-style: none; padding: 0; margin: 0 0 16px; }
+.value-items li {
+  position: relative; padding: 6px 0 6px 20px; font-size: 13px; color: var(--text2); line-height: 1.6;
+}
+.value-items li::before {
+  content: ''; position: absolute; left: 4px; top: 13px;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+}
+.value-key {
+  background: var(--accent-bg); border-left: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0; padding: 12px 16px;
+  font-size: 13px; color: var(--accent); font-weight: 600; line-height: 1.6;
+}
+
+/* MECHANISM CARDS */
+.mech-card {
+  background: #fff; border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 24px; transition: all 0.3s;
+  display: flex; gap: 16px;
+}
+.mech-card:hover { border-color: var(--green); transform: translateY(-2px); box-shadow: var(--shadow); }
+.mech-num {
+  width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 16px; color: #fff;
+  background: var(--green);
+}
+.mech-content { flex: 1; }
+.mech-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.mech-desc { font-size: 13px; color: var(--text2); line-height: 1.7; }
+.mech-detail {
+  margin-top: 10px; padding: 10px 14px; background: var(--green-bg);
+  border-radius: 8px; font-size: 12px; color: var(--green); line-height: 1.6;
+}
+
+/* FLYWHEEL */
+.flywheel-container {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 24px;
+}
+.flywheel-lane {
+  background: #fff; border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 24px; text-align: center;
+}
+.flywheel-lane h3 { font-size: 16px; font-weight: 800; margin-bottom: 16px; }
+.flywheel-lane.creator h3 { color: var(--accent); }
+.flywheel-lane.merchant h3 { color: var(--green); }
+.flywheel-lane.platform h3 { color: var(--orange); }
+.flywheel-step {
+  padding: 8px 12px; margin: 0 auto 4px; font-size: 12px; font-weight: 600;
+  border-radius: 8px; max-width: 240px;
+}
+.flywheel-lane.creator .flywheel-step { background: var(--accent-bg); color: var(--accent); }
+.flywheel-lane.merchant .flywheel-step { background: var(--green-bg); color: var(--green); }
+.flywheel-lane.platform .flywheel-step { background: var(--orange-bg); color: var(--orange); }
+.flywheel-arrow { color: var(--text3); font-size: 16px; margin: 2px 0; }
+
+/* CALLOUT */
+.callout {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 32px; text-align: center;
+  margin: 24px 0;
+}
+.callout h3 {
+  font-size: 20px; font-weight: 800; color: var(--text); margin-bottom: 16px;
+}
+.callout p {
+  font-size: 15px; color: var(--text); line-height: 1.8; max-width: 800px; margin: 0 auto 12px;
+}
+.callout .sub {
+  font-size: 13px; color: var(--text2); line-height: 1.7; max-width: 700px; margin: 16px auto 0;
+}
+
+/* NEXT STEP CARD */
+.next-card {
+  background: #fff; border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 28px;
+}
+.next-card h3 {
+  font-size: 18px; font-weight: 800; color: var(--orange); margin-bottom: 16px;
+}
+.next-list {
+  list-style: none; padding: 0; counter-reset: next-counter;
+}
+.next-list li {
+  counter-increment: next-counter; position: relative;
+  padding: 12px 0 12px 48px; font-size: 14px; color: var(--text2); line-height: 1.7;
+  border-bottom: 1px solid var(--border);
+}
+.next-list li:last-child { border-bottom: none; }
+.next-list li::before {
+  content: counter(next-counter);
+  position: absolute; left: 0; top: 12px;
+  width: 32px; height: 32px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 14px; color: #fff;
+  background: var(--orange);
+}
+
+/* FOOTER */
+.footer {
+  text-align: center; padding: 40px 24px; color: var(--text3); font-size: 13px;
+  border-top: 1px solid var(--border); margin-top: 40px;
+  max-width: 1200px; margin-left: auto; margin-right: auto;
+}
+.footer a { color: var(--accent); }
+
+/* SCROLL ANIMATIONS */
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .topnav { padding: 0 12px; }
+  .topnav .navlinks a { padding: 4px 8px; font-size: 11px; }
+  .hero h1 { font-size: 28px; }
+  .section { padding: 40px 16px 32px; }
+  .grid-2, .grid-3, .grid-4, .grid-5 { grid-template-columns: 1fr; }
+  .flywheel-container { grid-template-columns: 1fr; }
+  .section-title { font-size: 22px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="topnav">
+  <div class="logo">PUSH</div>
+  <div class="navlinks">
+    <a href="index.html" data-en="Dashboard" data-zh="仪表盘" class="bilingual-text">Dashboard</a>
+    <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍" class="bilingual-text">Project Intro</a>
+    <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演方案" class="bilingual-text">Pitch Deck</a>
+    <a href="prospects.html" data-en="Prospects" data-zh="未来愿景" class="bilingual-text">Prospects</a>
+    <a href="challenges.html" data-en="Challenges" data-zh="挑战" class="bilingual-text">Challenges</a>
+    <a href="retention-defense.html" data-en="Retention" data-zh="留存机制" class="bilingual-text">Retention</a>
+    <a href="platform-value.html" class="active bilingual-text" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
+  </div>
+  <button id="lang-toggle" onclick="toggleLang()">ZH / CN</button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>
+    <span data-en="Anti-Disintermediation Defense" data-zh="反绕平台机制与平台不可替代性" class="bilingual-text">Anti-Disintermediation Defense</span>
+  </h1>
+  <p>
+    <span data-en="Why both sides stay on-platform -- not because they must, but because it's better" data-zh="双方留在平台不是因为被迫，而是因为更划算" class="bilingual-text">Why both sides stay on-platform -- not because they must, but because it's better</span>
+  </p>
+</div>
+
+<!-- SECTION 1: WHY MERCHANTS BYPASS -->
+<div class="section fade-in">
+  <div class="section-title">
+    <span data-en="Why Merchants Bypass the Platform" data-zh="商家为什么绕平台" class="bilingual-text">Why Merchants Bypass the Platform</span>
+  </div>
+  <div class="section-sub">
+    <span data-en="Understanding the natural logic behind disintermediation" data-zh="理解脱媒背后的自然逻辑" class="bilingual-text">Understanding the natural logic behind disintermediation</span>
+  </div>
+
+  <div class="grid grid-5" style="margin-bottom: 24px;">
+    <div class="bypass-card fade-in">
+      <div class="bypass-icon">&#x1F91D;</div>
+      <div class="bypass-title"><span data-en="Already Know Creator" data-zh="已经认识 Creator" class="bilingual-text">Already Know Creator</span></div>
+      <div class="bypass-desc"><span data-en="Why use a platform for someone I already met?" data-zh="已经认识了为什么还走平台？" class="bilingual-text">Why use a platform for someone I already met?</span></div>
+    </div>
+    <div class="bypass-card fade-in">
+      <div class="bypass-icon">&#x1F4AC;</div>
+      <div class="bypass-title"><span data-en="DM is Easier" data-zh="直接 DM 更简单" class="bilingual-text">DM is Easier</span></div>
+      <div class="bypass-desc"><span data-en="One message, done. No forms, no rules." data-zh="一条消息搞定，不用填表不用走流程" class="bilingual-text">One message, done. No forms, no rules.</span></div>
+    </div>
+    <div class="bypass-card fade-in">
+      <div class="bypass-icon">&#x1F4B0;</div>
+      <div class="bypass-title"><span data-en="Save Platform Fees" data-zh="省掉平台费" class="bilingual-text">Save Platform Fees</span></div>
+      <div class="bypass-desc"><span data-en="Keep 100% by going direct" data-zh="直接合作可以省掉中间费用" class="bilingual-text">Keep 100% by going direct</span></div>
+    </div>
+    <div class="bypass-card fade-in">
+      <div class="bypass-icon">&#x1F6AB;</div>
+      <div class="bypass-title"><span data-en="Skip the Rules" data-zh="省掉规则" class="bilingual-text">Skip the Rules</span></div>
+      <div class="bypass-desc"><span data-en="No proof uploads, no deadlines, no ratings" data-zh="不用上传证明、不受时间限制、没有评分" class="bilingual-text">No proof uploads, no deadlines, no ratings</span></div>
+    </div>
+    <div class="bypass-card fade-in">
+      <div class="bypass-icon">&#x1F504;</div>
+      <div class="bypass-title"><span data-en="Long-term Private Deals" data-zh="长期私下合作" class="bilingual-text">Long-term Private Deals</span></div>
+      <div class="bypass-desc"><span data-en="Build a recurring deal off-platform" data-zh="建立长期固定的私下合作关系" class="bilingual-text">Build a recurring deal off-platform</span></div>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <span data-en="Key Insight: Don't try to ban private contact -- that's naive. Make the platform more valuable." data-zh="核心洞察：不要试图禁止私联——那很幼稚。让平台本身更有价值。" class="bilingual-text">Key Insight: Don't try to ban private contact -- that's naive. Make the platform more valuable.</span>
+  </div>
+</div>
+
+<!-- SECTION 2: FIVE IRREPLACEABLE VALUES -->
+<div class="section fade-in">
+  <div class="section-title">
+    <span data-en="Five Irreplaceable Platform Values" data-zh="平台五大不可替代价值" class="bilingual-text">Five Irreplaceable Platform Values</span>
+  </div>
+  <div class="section-sub">
+    <span data-en="What the platform provides that private deals never can" data-zh="平台提供的私下合作永远无法替代的价值" class="bilingual-text">What the platform provides that private deals never can</span>
+  </div>
+
+  <div class="grid" style="gap: 24px;">
+
+    <!-- Value 1 -->
+    <div class="value-card fade-in">
+      <div class="value-num v1">1</div>
+      <div class="value-title">
+        <span data-en="Screening & Matching Efficiency" data-zh="筛选与匹配效率" class="bilingual-text">Screening & Matching Efficiency</span>
+      </div>
+      <ul class="value-items">
+        <li><span data-en="Smart recommendations based on category, location, and history" data-zh="基于品类、位置和历史数据的智能推荐" class="bilingual-text">Smart recommendations based on category, location, and history</span></li>
+        <li><span data-en="Auto-fill and standby fill when creators cancel" data-zh="Creator 取消时自动补位和备选填充" class="bilingual-text">Auto-fill and standby fill when creators cancel</span></li>
+        <li><span data-en="Target-based filtering by engagement, tier, and niche" data-zh="基于互动量、等级和垂直领域的目标筛选" class="bilingual-text">Target-based filtering by engagement, tier, and niche</span></li>
+        <li><span data-en="Multi-campaign management from a single dashboard" data-zh="单一后台管理多个推广活动" class="bilingual-text">Multi-campaign management from a single dashboard</span></li>
+      </ul>
+      <div class="value-key">
+        <span data-en="Platform manages a creator acquisition program, not just introductions" data-zh="平台管理的是整套 creator 获客方案，不只是介绍" class="bilingual-text">Platform manages a creator acquisition program, not just introductions</span>
+      </div>
+    </div>
+
+    <!-- Value 2 -->
+    <div class="value-card fade-in">
+      <div class="value-num v2">2</div>
+      <div class="value-title">
+        <span data-en="Attribution & Data" data-zh="可归因与数据沉淀" class="bilingual-text">Attribution & Data</span>
+      </div>
+      <ul class="value-items">
+        <li><span data-en="Creator performance comparison across campaigns" data-zh="跨活动的 Creator 表现对比" class="bilingual-text">Creator performance comparison across campaigns</span></li>
+        <li><span data-en="Category analytics and trend insights" data-zh="品类分析和趋势洞察" class="bilingual-text">Category analytics and trend insights</span></li>
+        <li><span data-en="Campaign ROI tracking with cost per redemption" data-zh="活动 ROI 追踪和每次核销成本" class="bilingual-text">Campaign ROI tracking with cost per redemption</span></li>
+        <li><span data-en="Fill rate, completion rate, and no-show analytics" data-zh="填充率、完成率和缺席率分析" class="bilingual-text">Fill rate, completion rate, and no-show analytics</span></li>
+      </ul>
+      <div class="value-key">
+        <span data-en="Platform is a performance dashboard, not just a middleman" data-zh="平台是效果操作后台，不只是中介" class="bilingual-text">Platform is a performance dashboard, not just a middleman</span>
+      </div>
+    </div>
+
+    <!-- Value 3 -->
+    <div class="value-card fade-in">
+      <div class="value-num v3">3</div>
+      <div class="value-title">
+        <span data-en="Payment, Dispute & Fulfillment Protection" data-zh="支付、争议与履约保障" class="bilingual-text">Payment, Dispute & Fulfillment Protection</span>
+      </div>
+      <ul class="value-items">
+        <li><span data-en="Payout protection with escrow-style settlement" data-zh="托管式结算的支付保障" class="bilingual-text">Payout protection with escrow-style settlement</span></li>
+        <li><span data-en="Proof flow: upload, review, confirm, settle" data-zh="证明流程：上传、审核、确认、结算" class="bilingual-text">Proof flow: upload, review, confirm, settle</span></li>
+        <li><span data-en="Dispute resolution with platform mediation" data-zh="平台调解的争议解决机制" class="bilingual-text">Dispute resolution with platform mediation</span></li>
+        <li><span data-en="Cancellation rules, no-show penalties, and creator ratings" data-zh="取消规则、缺席惩罚和 Creator 评分" class="bilingual-text">Cancellation rules, no-show penalties, and creator ratings</span></li>
+      </ul>
+      <div class="value-key">
+        <span data-en="Walking the platform is safer for both sides" data-zh="走平台对双方更安全" class="bilingual-text">Walking the platform is safer for both sides</span>
+      </div>
+    </div>
+
+    <!-- Value 4 -->
+    <div class="value-card fade-in">
+      <div class="value-num v4">4</div>
+      <div class="value-title">
+        <span data-en="Continuous Supply & Rotation" data-zh="持续供给与轮换" class="bilingual-text">Continuous Supply & Rotation</span>
+      </div>
+      <ul class="value-items">
+        <li><span data-en="Private deals only solve one collaboration at a time" data-zh="私下合作每次只能解决一次合作" class="bilingual-text">Private deals only solve one collaboration at a time</span></li>
+        <li><span data-en="Platform provides ongoing creator discovery and rotation" data-zh="平台提供持续的 Creator 发现与轮换" class="bilingual-text">Platform provides ongoing creator discovery and rotation</span></li>
+        <li><span data-en="Fresh faces keep content authentic and prevent fatigue" data-zh="新面孔保持内容真实性并防止审美疲劳" class="bilingual-text">Fresh faces keep content authentic and prevent fatigue</span></li>
+        <li><span data-en="Seasonal and category-specific supply matching" data-zh="季节性和品类特定的供给匹配" class="bilingual-text">Seasonal and category-specific supply matching</span></li>
+      </ul>
+      <div class="value-key">
+        <span data-en="Merchants bypass for one deal; platform delivers an ongoing channel" data-zh="商家绕开只解决一次，平台解决持续获客" class="bilingual-text">Merchants bypass for one deal; platform delivers an ongoing channel</span>
+      </div>
+    </div>
+
+    <!-- Value 5 -->
+    <div class="value-card fade-in">
+      <div class="value-num v5">5</div>
+      <div class="value-title">
+        <span data-en="Merchant Reputation System" data-zh="商家信用体系" class="bilingual-text">Merchant Reputation System</span>
+      </div>
+      <ul class="value-items">
+        <li><span data-en="Payment speed and reliability scoring" data-zh="付款速度与可靠性评分" class="bilingual-text">Payment speed and reliability scoring</span></li>
+        <li><span data-en="Communication quality and responsiveness" data-zh="沟通质量和响应速度" class="bilingual-text">Communication quality and responsiveness</span></li>
+        <li><span data-en="Promise fulfillment rate and creator satisfaction" data-zh="承诺兑现率和 Creator 满意度" class="bilingual-text">Promise fulfillment rate and creator satisfaction</span></li>
+        <li><span data-en="Repeat booking rate signals merchant quality" data-zh="复购率体现商家品质" class="bilingual-text">Repeat booking rate signals merchant quality</span></li>
+      </ul>
+      <div class="value-key">
+        <span data-en="Good merchants attract better creators; bad merchants get filtered out" data-zh="好商家吸引更好的 Creator；差商家被逐步淘汰" class="bilingual-text">Good merchants attract better creators; bad merchants get filtered out</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION 3: FIVE ANTI-BYPASS MECHANISMS -->
+<div class="section fade-in">
+  <div class="section-title">
+    <span data-en="Five Anti-Bypass Mechanisms" data-zh="五大反绕过机制" class="bilingual-text">Five Anti-Bypass Mechanisms</span>
+  </div>
+  <div class="section-sub">
+    <span data-en="Structural incentives that make staying on-platform the rational choice" data-zh="让留在平台成为理性选择的结构性激励" class="bilingual-text">Structural incentives that make staying on-platform the rational choice</span>
+  </div>
+
+  <div class="grid" style="gap: 16px;">
+
+    <div class="mech-card fade-in">
+      <div class="mech-num">1</div>
+      <div class="mech-content">
+        <div class="mech-title"><span data-en="Future opportunities only exist on-platform" data-zh="未来机会只在平台上" class="bilingual-text">Future opportunities only exist on-platform</span></div>
+        <div class="mech-desc"><span data-en="The next campaign, the next high-paying merchant, the next tier-up -- all only accessible through the platform. Bypassing today means missing tomorrow." data-zh="下一个活动、下一个高付费商家、下一次升级——全都只能通过平台获取。今天绕开意味着明天错过。" class="bilingual-text">The next campaign, the next high-paying merchant, the next tier-up -- all only accessible through the platform. Bypassing today means missing tomorrow.</span></div>
+      </div>
+    </div>
+
+    <div class="mech-card fade-in">
+      <div class="mech-num">2</div>
+      <div class="mech-content">
+        <div class="mech-title"><span data-en="Private deals don't inherit platform credit" data-zh="私下合作不继承平台信用" class="bilingual-text">Private deals don't inherit platform credit</span></div>
+        <div class="mech-desc"><span data-en="Creator Passport scores, merchant reliability ratings, and accumulated trust only exist on-platform. Off-platform deals start from zero every time." data-zh="Creator Passport 分数、商家可靠性评级和积累的信任只存在于平台上。平台外的合作每次都从零开始。" class="bilingual-text">Creator Passport scores, merchant reliability ratings, and accumulated trust only exist on-platform. Off-platform deals start from zero every time.</span></div>
+      </div>
+    </div>
+
+    <div class="mech-card fade-in">
+      <div class="mech-num">3</div>
+      <div class="mech-content">
+        <div class="mech-title"><span data-en="On-platform re-booking is easier than DMs" data-zh="平台内复购比私下更省事" class="bilingual-text">On-platform re-booking is easier than DMs</span></div>
+        <div class="mech-desc"><span data-en="Why negotiate via DM when you can click one button?" data-zh="为什么要通过 DM 谈判，一个按钮就能搞定？" class="bilingual-text">Why negotiate via DM when you can click one button?</span></div>
+        <div class="mech-detail">
+          <span data-en="One-click: duplicate campaign, invite same creator, auto-set payout, auto-collect proof" data-zh="一键操作：复制活动、邀请同一 Creator、自动设置报酬、自动收集证明" class="bilingual-text">One-click: duplicate campaign, invite same creator, auto-set payout, auto-collect proof</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mech-card fade-in">
+      <div class="mech-num">4</div>
+      <div class="mech-content">
+        <div class="mech-title"><span data-en="High-tier benefits only settle on-platform" data-zh="高 Tier 福利只能平台内结算" class="bilingual-text">High-tier benefits only settle on-platform</span></div>
+        <div class="mech-desc"><span data-en="Premium payouts, priority matching, exclusive campaigns, and bonus multipliers are tied to platform transactions. Private deals can't unlock these rewards." data-zh="高额报酬、优先匹配、独家活动和奖金倍率都绑定在平台交易上。私下合作无法解锁这些奖励。" class="bilingual-text">Premium payouts, priority matching, exclusive campaigns, and bonus multipliers are tied to platform transactions. Private deals can't unlock these rewards.</span></div>
+      </div>
+    </div>
+
+    <div class="mech-card fade-in">
+      <div class="mech-num">5</div>
+      <div class="mech-content">
+        <div class="mech-title"><span data-en="Light rules, not heavy bans" data-zh="轻度规则，不重度封杀" class="bilingual-text">Light rules, not heavy bans</span></div>
+        <div class="mech-desc"><span data-en="Don't punish contact -- incentivize transactions. The platform doesn't block DMs or ban users for talking privately. Instead, it makes the on-platform path so smooth that going off-platform feels like extra work." data-zh="不惩罚联系——激励交易。平台不封锁 DM 也不因私下沟通封号。相反，它让平台内路径如此顺畅，以至于走平台外反而更麻烦。" class="bilingual-text">Don't punish contact -- incentivize transactions. The platform doesn't block DMs or ban users for talking privately. Instead, it makes the on-platform path so smooth that going off-platform feels like extra work.</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SECTION 4: THREE-SIDED FLYWHEEL -->
+<div class="section fade-in">
+  <div class="section-title">
+    <span data-en="The Three-Sided Flywheel" data-zh="三边飞轮" class="bilingual-text">The Three-Sided Flywheel</span>
+  </div>
+  <div class="section-sub">
+    <span data-en="How creator, merchant, and platform incentives compound into an unstoppable network effect" data-zh="Creator、商家和平台的激励如何复利叠加成不可阻挡的网络效应" class="bilingual-text">How creator, merchant, and platform incentives compound into an unstoppable network effect</span>
+  </div>
+
+  <div class="flywheel-container">
+    <!-- Creator Lane -->
+    <div class="flywheel-lane creator fade-in">
+      <h3><span data-en="Creator Side" data-zh="Creator 端" class="bilingual-text">Creator Side</span></h3>
+      <div class="flywheel-step"><span data-en="Complete Campaign" data-zh="完成活动" class="bilingual-text">Complete Campaign</span></div>
+      <div class="flywheel-arrow">&#x2193;</div>
+      <div class="flywheel-step"><span data-en="Passport Updated" data-zh="Passport 更新" class="bilingual-text">Passport Updated</span></div>
+      <div class="flywheel-arrow">&#x2193;</div>
+      <div class="flywheel-step"><span data-en="Tier Up" data-zh="等级提升" class="bilingual-text">Tier Up</span></div>
+      <div class="flywheel-arrow">&#x2193;</div>
+      <div class="flywheel-step"><span data-en="Better Campaigns" data-zh="更好的活动" class="bilingual-text">Better Campaigns</span></div>
+      <div class="flywheel-arrow">&#x2193;</div>
+      <div class="flywheel-step"><span data-en="Earn More" data-zh="赚得更多" class="bilingual-text">Earn More</span></div>
+      <div class="flywheel-arrow">&#x2193;</div>
+      <div class="flywheel-step" style="font-weight:800;"><span data-en="Stay on Platform" data-zh="留在平台" class="bilingual-text">Stay on Platform</span></div>
+    </div>
+
+    <!-- Merchant Lane -->
+    <div class="flywheel-lane merchant fade-in">
+      <h3><span data-en="Merchant Side" data-zh="商家端" class="bilingual-text">Merchant Side</span></h3>
+      <div class="flywheel-step"><span data-en="Post Campaign" data-zh="发布活动" class="bilingual-text">Post Campaign</span></div>
+      <div class="flywheel-arrow">&#x2193;</div>
+      <div class="flywheel-step"><span data-en="Find Reliable Creators" data-zh="找到可靠 Creator" class="bilingual-text">Find Reliable Creators</span></div>
+      <div class="flywheel-arrow">&#x2193;</div>
+      <div class="flywheel-step"><span data-en="Data Review" data-zh="数据复盘" class="bilingual-text">Data Review</span></div>
+      <div class="flywheel-arrow">&#x2193;</div>
+      <div class="flywheel-step"><span data-en="Easy Re-book" data-zh="一键复购" class="bilingual-text">Easy Re-book</span></div>
+      <div class="flywheel-arrow">&#x2193;</div>
+      <div class="flywheel-step"><span data-en="Stable ROI" data-zh="稳定 ROI" class="bilingual-text">Stable ROI</span></div>
+      <div class="flywheel-arrow">&#x2193;</div>
+      <div class="flywheel-step" style="font-weight:800;"><span data-en="Stay on Platform" data-zh="留在平台" class="bilingual-text">Stay on Platform</span></div>
+    </div>
+
+    <!-- Platform Lane -->
+    <div class="flywheel-lane platform fade-in">
+      <h3><span data-en="Platform Side" data-zh="平台端" class="bilingual-text">Platform Side</span></h3>
+      <div class="flywheel-step"><span data-en="More Transactions" data-zh="更多交易" class="bilingual-text">More Transactions</span></div>
+      <div class="flywheel-arrow">&#x2193;</div>
+      <div class="flywheel-step"><span data-en="Stronger Dataset" data-zh="更强数据集" class="bilingual-text">Stronger Dataset</span></div>
+      <div class="flywheel-arrow">&#x2193;</div>
+      <div class="flywheel-step"><span data-en="Better Matching" data-zh="更好匹配" class="bilingual-text">Better Matching</span></div>
+      <div class="flywheel-arrow">&#x2193;</div>
+      <div class="flywheel-step"><span data-en="Stronger Passport" data-zh="更强 Passport" class="bilingual-text">Stronger Passport</span></div>
+      <div class="flywheel-arrow">&#x2193;</div>
+      <div class="flywheel-step"><span data-en="Higher Retention" data-zh="更高留存" class="bilingual-text">Higher Retention</span></div>
+      <div class="flywheel-arrow">&#x2193;</div>
+      <div class="flywheel-step" style="font-weight:800;"><span data-en="Network Effects" data-zh="网络效应" class="bilingual-text">Network Effects</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 5: THE ULTIMATE QUESTION -->
+<div class="section fade-in">
+  <div class="section-title">
+    <span data-en="The Ultimate Question" data-zh="终极问题" class="bilingual-text">The Ultimate Question</span>
+  </div>
+
+  <div class="callout">
+    <h3><span data-en="From Transaction Entry Point to Value Settlement Layer" data-zh="从交易入口到价值结算层" class="bilingual-text">From Transaction Entry Point to Value Settlement Layer</span></h3>
+    <p>
+      <span data-en="Push isn't asking 'how to prevent freeloading' or 'how to prevent bypass'. The real question is: How does the platform evolve from 'transaction entry point' to 'value settlement layer'?" data-zh="Push 真正问的不是怎么防薅羊毛或怎么防私下绕过。真正的问题是：平台怎样从'交易入口'进化成'价值结算层'？" class="bilingual-text">Push isn't asking 'how to prevent freeloading' or 'how to prevent bypass'. The real question is: How does the platform evolve from 'transaction entry point' to 'value settlement layer'?</span>
+    </p>
+    <div class="sub">
+      <span data-en="Only when Push becomes this settlement layer: Creators leaving lose credit and future earnings. Merchants leaving lose efficiency, data, and continuous supply." data-zh="只有当 Push 成为这个结算层：Creator 离开会失去信用和未来收益。商家离开会失去效率、数据和持续供给。" class="bilingual-text">Only when Push becomes this settlement layer: Creators leaving lose credit and future earnings. Merchants leaving lose efficiency, data, and continuous supply.</span>
+    </div>
+  </div>
+
+  <div class="grid grid-2" style="margin-top: 24px;">
+    <div class="card fade-in">
+      <div class="card-header">
+        <div class="card-icon" style="background: var(--accent-bg); color: var(--accent);">&#x1F3AD;</div>
+        <div class="card-title"><span data-en="Creator Loss if Leaving" data-zh="Creator 离开的损失" class="bilingual-text">Creator Loss if Leaving</span></div>
+      </div>
+      <div class="card-desc">
+        <span data-en="Accumulated Passport score, tier status, priority matching, historical performance data, earnings multipliers, and access to premium campaigns -- all non-transferable." data-zh="积累的 Passport 分数、等级状态、优先匹配、历史表现数据、收益倍率和独家活动机会——全部不可转移。" class="bilingual-text">Accumulated Passport score, tier status, priority matching, historical performance data, earnings multipliers, and access to premium campaigns -- all non-transferable.</span>
+      </div>
+    </div>
+    <div class="card fade-in">
+      <div class="card-header">
+        <div class="card-icon" style="background: var(--green-bg); color: var(--green);">&#x1F3EA;</div>
+        <div class="card-title"><span data-en="Merchant Loss if Leaving" data-zh="商家离开的损失" class="bilingual-text">Merchant Loss if Leaving</span></div>
+      </div>
+      <div class="card-desc">
+        <span data-en="Campaign analytics history, creator performance benchmarks, automated re-booking workflows, dispute protection, continuous supply pipeline, and reputation score -- all platform-locked." data-zh="活动分析历史、Creator 表现基准、自动复购工作流、争议保护、持续供给管道和信誉评分——全部锁定在平台内。" class="bilingual-text">Campaign analytics history, creator performance benchmarks, automated re-booking workflows, dispute protection, continuous supply pipeline, and reputation score -- all platform-locked.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 6: NEXT STEP -->
+<div class="section fade-in">
+  <div class="section-title">
+    <span data-en="Next Step: Business Plan Chapter" data-zh="下一步：商业计划书新章节" class="bilingual-text">Next Step: Business Plan Chapter</span>
+  </div>
+  <div class="section-sub">
+    <span data-en="What the 'Retention & Disintermediation Defense' chapter must contain" data-zh="'留存与反脱媒'章节必须包含的内容" class="bilingual-text">What the 'Retention & Disintermediation Defense' chapter must contain</span>
+  </div>
+
+  <div class="next-card fade-in">
+    <h3><span data-en="Retention & Disintermediation Defense" data-zh="留存与反脱媒防御" class="bilingual-text">Retention & Disintermediation Defense</span></h3>
+    <ol class="next-list">
+      <li>
+        <span data-en="What non-transferable assets creators accumulate on-platform -- Passport scores, tier benefits, earnings history, and reputation that cannot be recreated elsewhere" data-zh="Creator 在平台上积累了哪些不可转移资产——Passport 分数、等级福利、收益历史和无法在其他地方重建的声誉" class="bilingual-text">What non-transferable assets creators accumulate on-platform -- Passport scores, tier benefits, earnings history, and reputation that cannot be recreated elsewhere</span>
+      </li>
+      <li>
+        <span data-en="What continuous value merchants get that private deals can't provide -- ongoing supply, data intelligence, automated workflows, and dispute protection" data-zh="商家从平台获得了哪些私下合作无法提供的持续价值——持续供给、数据智能、自动化工作流和争议保护" class="bilingual-text">What continuous value merchants get that private deals can't provide -- ongoing supply, data intelligence, automated workflows, and dispute protection</span>
+      </li>
+      <li>
+        <span data-en="Why on-platform re-booking is easier, safer, and more profitable -- one-click duplication, auto-settlement, proof collection, and compounding credit benefits" data-zh="为什么平台内复购更简单、更安全、更赚钱——一键复制、自动结算、证明收集和复利信用权益" class="bilingual-text">Why on-platform re-booking is easier, safer, and more profitable -- one-click duplication, auto-settlement, proof collection, and compounding credit benefits</span>
+      </li>
+    </ol>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span data-en="PUSH Platform -- Anti-Disintermediation & Platform Indispensability" data-zh="PUSH 平台——反绕平台机制与平台不可替代性" class="bilingual-text">PUSH Platform -- Anti-Disintermediation & Platform Indispensability</span>
+  <br><br>
+  <a href="index.html"><span data-en="Back to Dashboard" data-zh="返回仪表盘" class="bilingual-text">Back to Dashboard</span></a>
+  &nbsp;&middot;&nbsp;
+  <a href="challenges.html"><span data-en="Challenges & Risks" data-zh="挑战与风险" class="bilingual-text">Challenges & Risks</span></a>
+  &nbsp;&middot;&nbsp;
+  <a href="retention-defense.html"><span data-en="Creator Retention Defense" data-zh="Creator 留存防御" class="bilingual-text">Creator Retention Defense</span></a>
+</div>
+
+<script>
+// Language toggle
+let currentLang = localStorage.getItem('push-lang') || 'en';
+
+function applyLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('push-lang', lang);
+  document.querySelectorAll('.bilingual-text').forEach(el => {
+    const text = el.getAttribute('data-' + lang);
+    if (text) el.textContent = text;
+  });
+  document.getElementById('lang-toggle').textContent = lang === 'en' ? 'ZH / CN' : 'EN';
+  document.documentElement.lang = lang === 'en' ? 'en' : 'zh';
+}
+
+function toggleLang() {
+  applyLang(currentLang === 'en' ? 'zh' : 'en');
+}
+
+// Apply saved language on load
+applyLang(currentLang);
+
+// Scroll fade-in animations
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.fade-in').forEach(el => {
+  fadeObserver.observe(el);
+});
+</script>
+</body>
+</html>

@@ -4,57 +4,71 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PUSH - Challenges & Risks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0a0a0f;
-  --bg2: #12121a;
-  --bg3: #1a1a2e;
-  --bg4: #242440;
-  --accent: #6c5ce7;
-  --accent2: #a29bfe;
-  --green: #00cec9;
-  --orange: #fdcb6e;
-  --red: #e17055;
-  --pink: #fd79a8;
-  --blue: #74b9ff;
-  --text: #dfe6e9;
-  --text2: #b2bec3;
-  --text3: #636e72;
-  --radius: 16px;
-  --shadow: 0 4px 24px rgba(0,0,0,0.3);
+  --bg: #ffffff;
+  --bg2: #f8f9fa;
+  --bg3: #f1f3f5;
+  --bg4: #e9ecef;
+  --primary: #1a1a2e;
+  --accent: #4f46e5;
+  --accent2: #4f46e5;
+  --accent-light: #818cf8;
+  --accent-bg: rgba(79, 70, 229, 0.06);
+  --green: #059669;
+  --green-bg: rgba(5, 150, 105, 0.08);
+  --orange: #d97706;
+  --orange-bg: rgba(217, 119, 6, 0.08);
+  --red: #dc2626;
+  --red-bg: rgba(220, 38, 38, 0.08);
+  --pink: #be185d;
+  --blue: #2563eb;
+  --text: #111827;
+  --text2: #4b5563;
+  --text3: #9ca3af;
+  --border: #e5e7eb;
+  --border-hover: #d1d5db;
+  --radius: 12px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
-a { color: var(--accent2); text-decoration: none; }
-a:hover { text-decoration: underline; }
+body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg2); color: var(--text); line-height: 1.6; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-light); text-decoration: none; }
 
 /* NAV */
 .topnav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(10,10,15,0.92); backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(108,92,231,0.2);
+  background: #fff;
+  border-bottom: 1px solid var(--border);
   display: flex; align-items: center; padding: 0 24px; height: 60px; gap: 8px;
 }
-.topnav .logo { font-weight: 800; font-size: 22px; color: var(--accent2); letter-spacing: 2px; margin-right: 32px; }
+.topnav .logo { font-weight: 800; font-size: 22px; color: var(--primary); letter-spacing: 2px; margin-right: 32px; }
 .topnav .navlinks { display: flex; gap: 4px; flex-wrap: wrap; }
 .topnav .navlinks a {
   padding: 6px 14px; border-radius: 8px; font-size: 13px; font-weight: 500;
-  color: var(--text2); transition: all 0.2s;
+  color: var(--text2); transition: color 0.2s;
 }
-.topnav .navlinks a:hover, .topnav .navlinks a.active { background: var(--bg3); color: #fff; text-decoration: none; }
+.topnav .navlinks a:hover { color: var(--text); text-decoration: none; }
+.topnav .navlinks a.active { color: var(--accent); font-weight: 600; text-decoration: none; }
 
 /* HERO */
 .hero {
   padding: 100px 24px 40px;
   max-width: 1400px; margin: 0 auto;
   text-align: center;
+  background: #fff;
 }
 .hero h1 {
   font-size: 42px; font-weight: 900;
-  background: linear-gradient(135deg, var(--red), var(--orange), var(--accent2));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text; margin-bottom: 8px;
+  color: var(--text);
+  margin-bottom: 8px;
 }
 .hero p { color: var(--text2); font-size: 18px; max-width: 700px; margin: 0 auto; }
 
@@ -69,9 +83,9 @@ a:hover { text-decoration: underline; }
 .legend-dot {
   width: 12px; height: 12px; border-radius: 50%;
 }
-.legend-dot.critical { background: var(--red); box-shadow: 0 0 8px var(--red); }
-.legend-dot.high { background: var(--orange); box-shadow: 0 0 8px var(--orange); }
-.legend-dot.medium { background: var(--accent2); box-shadow: 0 0 8px var(--accent2); }
+.legend-dot.critical { background: var(--red); }
+.legend-dot.high { background: var(--orange); }
+.legend-dot.medium { background: var(--accent); }
 
 /* SECTION */
 .section {
@@ -84,7 +98,7 @@ a:hover { text-decoration: underline; }
 }
 .section-label.critical { border-color: var(--red); color: var(--red); }
 .section-label.high { border-color: var(--orange); color: var(--orange); }
-.section-label.medium { border-color: var(--accent2); color: var(--accent2); }
+.section-label.medium { border-color: var(--accent); color: var(--accent); }
 
 /* CARD GRID */
 .card-grid {
@@ -94,15 +108,15 @@ a:hover { text-decoration: underline; }
 
 /* CHALLENGE CARD */
 .challenge-card {
-  background: var(--bg2);
-  border: 1px solid rgba(108,92,231,0.15);
+  background: #fff;
+  border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 0;
   overflow: hidden;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: all 0.2s;
 }
 .challenge-card:hover {
-  transform: translateY(-3px);
+  border-color: var(--border-hover);
   box-shadow: var(--shadow);
 }
 
@@ -114,14 +128,14 @@ a:hover { text-decoration: underline; }
 .card-num {
   width: 36px; height: 36px; border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
-  font-weight: 800; font-size: 15px; color: #fff; flex-shrink: 0;
+  font-weight: 800; font-size: 15px; color: var(--text); flex-shrink: 0;
 }
-.card-num.critical { background: linear-gradient(135deg, var(--red), #c0392b); }
-.card-num.high { background: linear-gradient(135deg, var(--orange), #e67e22); }
-.card-num.medium { background: linear-gradient(135deg, var(--accent2), var(--accent)); }
+.card-num.critical { background: var(--red); }
+.card-num.high { background: var(--orange); }
+.card-num.medium { background: var(--accent); }
 
 .card-title {
-  font-size: 15px; font-weight: 700; color: #fff;
+  font-size: 15px; font-weight: 700; color: var(--text);
 }
 
 /* Severity meter */
@@ -133,14 +147,14 @@ a:hover { text-decoration: underline; }
   font-size: 11px; color: var(--text3); margin-bottom: 4px;
 }
 .severity-track {
-  width: 100%; height: 6px; background: var(--bg3); border-radius: 3px; overflow: hidden;
+  width: 100%; height: 6px; background: var(--bg4); border-radius: 3px; overflow: hidden;
 }
 .severity-fill {
   height: 100%; border-radius: 3px; transition: width 1s ease;
 }
-.severity-fill.critical { background: linear-gradient(90deg, var(--red), #ff6b6b); }
-.severity-fill.high { background: linear-gradient(90deg, var(--orange), #ffeaa7); }
-.severity-fill.medium { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+.severity-fill.critical { background: var(--red); }
+.severity-fill.high { background: var(--orange); }
+.severity-fill.medium { background: var(--accent); }
 
 /* Bilingual content */
 .bilingual {
@@ -152,7 +166,7 @@ a:hover { text-decoration: underline; }
 }
 .col-zh {
   padding-right: 16px;
-  border-right: 1px solid rgba(108,92,231,0.1);
+  border-right: 1px solid var(--border);
 }
 .col-en {
   padding-left: 16px;
@@ -175,7 +189,7 @@ a:hover { text-decoration: underline; }
 .defense-text {
   font-size: 12px; color: var(--green); line-height: 1.6;
   padding: 8px 10px;
-  background: rgba(0,206,201,0.06);
+  background: var(--green-bg);
   border-radius: 8px;
   border-left: 3px solid var(--green);
 }
@@ -186,21 +200,21 @@ a:hover { text-decoration: underline; }
   gap: 16px; margin-bottom: 40px;
 }
 .stat-card {
-  background: var(--bg2); border-radius: var(--radius);
+  background: #fff; border-radius: var(--radius);
   padding: 20px 24px; text-align: center;
-  border: 1px solid rgba(108,92,231,0.12);
+  border: 1px solid var(--border);
 }
 .stat-num { font-size: 36px; font-weight: 900; }
 .stat-num.critical { color: var(--red); }
 .stat-num.high { color: var(--orange); }
-.stat-num.medium { color: var(--accent2); }
-.stat-num.total { background: linear-gradient(135deg, var(--red), var(--orange), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.stat-num.medium { color: var(--accent); }
+.stat-num.total { color: var(--text); }
 .stat-label { font-size: 12px; color: var(--text3); margin-top: 4px; }
 
 /* FOOTER */
 .footer {
   text-align: center; padding: 40px 24px; color: var(--text3); font-size: 13px;
-  border-top: 1px solid rgba(108,92,231,0.1); margin-top: 40px;
+  border-top: 1px solid var(--border); margin-top: 40px; background: #fff;
 }
 
 @media (max-width: 900px) {
@@ -208,9 +222,48 @@ a:hover { text-decoration: underline; }
 }
 @media (max-width: 600px) {
   .bilingual { grid-template-columns: 1fr; }
-  .col-zh { border-right: none; padding-right: 0; padding-bottom: 12px; border-bottom: 1px solid rgba(108,92,231,0.1); margin-bottom: 12px; }
+  .col-zh { border-right: none; padding-right: 0; padding-bottom: 12px; border-bottom: 1px solid var(--border); margin-bottom: 12px; }
   .col-en { padding-left: 0; }
   .hero h1 { font-size: 28px; }
+}
+
+/* SCROLL ANIMATIONS */
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* LANG VISIBILITY */
+body.lang-en .col-zh, body.lang-en .lang-tag { display: none; }
+body.lang-zh .col-en, body.lang-zh .lang-tag { display: none; }
+body.lang-en .bilingual { grid-template-columns: 1fr; }
+body.lang-zh .bilingual { grid-template-columns: 1fr; }
+body.lang-en .col-en { padding-left: 0; border-left: none; }
+body.lang-zh .col-zh { padding-right: 0; border-right: none; }
+
+/* LANG TOGGLE */
+.lang-toggle {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: var(--bg3);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.lang-toggle button {
+  padding: 5px 12px;
+  background: transparent;
+  border: none;
+  color: var(--text3);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.lang-toggle button.active {
+  background: var(--accent);
+  color: var(--text);
 }
 </style>
 </head>
@@ -220,36 +273,45 @@ a:hover { text-decoration: underline; }
 <nav class="topnav">
   <div class="logo">PUSH</div>
   <div class="navlinks">
-    <a href="index.html">Dashboard</a>
-    <a href="challenges.html" class="active">Challenges</a>
+    <a href="index.html" data-en="Dashboard" data-zh="仪表盘">Dashboard</a>
+    <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
+    <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演方案">Pitch Deck</a>
+    <a href="prospects.html" data-en="Prospects" data-zh="未来愿景">Prospects</a>
+    <a href="challenges.html" class="active" data-en="Challenges" data-zh="挑战">Challenges</a>
+    <a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a>
+    <a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
+  </div>
+  <div class="lang-toggle">
+    <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+    <button id="btn-zh" onclick="setLang('zh')">中</button>
   </div>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
-  <h1>Challenges & Risks / 挑战与风险</h1>
-  <p>PUSH 平台面临的核心挑战、风险评估及应对策略<br>Core challenges, risk assessment, and defense strategies for the PUSH platform</p>
+  <h1 data-en="Challenges &amp; Risks" data-zh="挑战与风险">Challenges &amp; Risks</h1>
+  <p data-en="Core challenges, risk assessment, and defense strategies for the PUSH platform" data-zh="PUSH 平台面临的核心挑战、风险评估及应对策略">Core challenges, risk assessment, and defense strategies for the PUSH platform</p>
 
   <div class="legend">
-    <div class="legend-item"><div class="legend-dot critical"></div>Existential / 生死攸关</div>
-    <div class="legend-item"><div class="legend-dot high"></div>Major / 重大风险</div>
-    <div class="legend-item"><div class="legend-dot medium"></div>Operational / 运营挑战</div>
+    <div class="legend-item"><div class="legend-dot critical"></div><span data-en="Existential" data-zh="生死攸关">Existential</span></div>
+    <div class="legend-item"><div class="legend-dot high"></div><span data-en="Major" data-zh="重大风险">Major</span></div>
+    <div class="legend-item"><div class="legend-dot medium"></div><span data-en="Operational" data-zh="运营挑战">Operational</span></div>
   </div>
 </div>
 
 <!-- STATS -->
 <div class="section">
   <div class="stats-row">
-    <div class="stat-card"><div class="stat-num total">12</div><div class="stat-label">Total Challenges / 挑战总数</div></div>
-    <div class="stat-card"><div class="stat-num critical">5</div><div class="stat-label">Existential / 生存级</div></div>
-    <div class="stat-card"><div class="stat-num high">4</div><div class="stat-label">Major / 重大级</div></div>
-    <div class="stat-card"><div class="stat-num medium">3</div><div class="stat-label">Operational / 运营级</div></div>
+    <div class="stat-card"><div class="stat-num total">12</div><div class="stat-label" data-en="Total Challenges" data-zh="挑战总数">Total Challenges</div></div>
+    <div class="stat-card"><div class="stat-num critical">5</div><div class="stat-label" data-en="Existential" data-zh="生存级">Existential</div></div>
+    <div class="stat-card"><div class="stat-num high">4</div><div class="stat-label" data-en="Major" data-zh="重大级">Major</div></div>
+    <div class="stat-card"><div class="stat-num medium">3</div><div class="stat-label" data-en="Operational" data-zh="运营级">Operational</div></div>
   </div>
 </div>
 
 <!-- EXISTENTIAL -->
 <div class="section">
-  <div class="section-label critical">Existential Challenges / 生存级挑战</div>
+  <div class="section-label critical" data-en="Existential Challenges" data-zh="生存级挑战">Existential Challenges</div>
 
   <div class="card-grid">
 
@@ -257,10 +319,10 @@ a:hover { text-decoration: underline; }
     <div class="challenge-card">
       <div class="card-header">
         <div class="card-num critical">1</div>
-        <div class="card-title">Cold Start Problem / 冷启动问题</div>
+        <div class="card-title" data-en="Cold Start Problem" data-zh="冷启动问题">Cold Start Problem</div>
       </div>
       <div class="severity-bar-wrap">
-        <div class="severity-label"><span>Risk Severity / 风险等级</span><span>95%</span></div>
+        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>95%</span></div>
         <div class="severity-track"><div class="severity-fill critical" style="width:95%"></div></div>
       </div>
       <div class="bilingual">
@@ -283,10 +345,10 @@ a:hover { text-decoration: underline; }
     <div class="challenge-card">
       <div class="card-header">
         <div class="card-num critical">2</div>
-        <div class="card-title">Disintermediation Risk / 脱媒风险</div>
+        <div class="card-title" data-en="Disintermediation Risk" data-zh="脱媒风险">Disintermediation Risk</div>
       </div>
       <div class="severity-bar-wrap">
-        <div class="severity-label"><span>Risk Severity / 风险等级</span><span>90%</span></div>
+        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>90%</span></div>
         <div class="severity-track"><div class="severity-fill critical" style="width:90%"></div></div>
       </div>
       <div class="bilingual">
@@ -294,13 +356,13 @@ a:hover { text-decoration: underline; }
           <div class="lang-tag">中文</div>
           <div class="desc-text">商家和创作者在首次联系后绕过平台直接合作。这是所有撮合平台的核心威胁——一旦双方建立联系，平台就可能被架空。</div>
           <div class="defense-label critical">应对策略</div>
-          <div class="defense-text">让平台内价值持续复利增长：信用体系、自动化工具、支付结算、备选资源池，形成离不开的生态。</div>
+          <div class="defense-text">信用积累、重复合作自动化、新机会可见性、快速结算、候补机制、商户活动历史和可信的争议解决——让平台内价值持续复利增长。</div>
         </div>
         <div class="col-en">
           <div class="lang-tag">English</div>
           <div class="desc-text">Merchants and creators bypass the platform after first contact. This is the core threat to all matching platforms -- once both sides connect, the platform risks becoming irrelevant.</div>
           <div class="defense-label critical">Defense Strategy</div>
-          <div class="defense-text">Make on-platform value compounding: credit system, automation tools, payouts, standby pool -- create an ecosystem too valuable to leave.</div>
+          <div class="defense-text">Credit accumulation, repeat workflow automation, visibility into new opportunities, faster payouts, standby access, merchant campaign history, and trusted dispute resolution.</div>
         </div>
       </div>
     </div>
@@ -309,10 +371,10 @@ a:hover { text-decoration: underline; }
     <div class="challenge-card">
       <div class="card-header">
         <div class="card-num critical">3</div>
-        <div class="card-title">Merchant Retention / 商家留存</div>
+        <div class="card-title" data-en="Merchant Retention" data-zh="商家留存">Merchant Retention</div>
       </div>
       <div class="severity-bar-wrap">
-        <div class="severity-label"><span>Risk Severity / 风险等级</span><span>85%</span></div>
+        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>85%</span></div>
         <div class="severity-track"><div class="severity-fill critical" style="width:85%"></div></div>
       </div>
       <div class="bilingual">
@@ -320,13 +382,13 @@ a:hover { text-decoration: underline; }
           <div class="lang-tag">中文</div>
           <div class="desc-text">商家尝试一次后不再回来。首次体验不佳、ROI不清晰、流程复杂都会导致商家流失，而获客成本高昂。</div>
           <div class="defense-label critical">应对策略</div>
-          <div class="defense-text">优化模板体系、增强报告功能、改进创作者排序、提升填充速度、让ROI一目了然。</div>
+          <div class="defense-text">优化模板体系、增强报告功能、下次活动智能推荐、改进创作者排序、提升填充速度、让ROI一目了然。</div>
         </div>
         <div class="col-en">
           <div class="lang-tag">English</div>
           <div class="desc-text">Merchants try once and don't return. Poor first experience, unclear ROI, and complex workflows all cause merchant churn, while acquisition costs remain high.</div>
           <div class="defense-label critical">Defense Strategy</div>
-          <div class="defense-text">Better templates, enhanced reporting, improved creator sorting, faster fill speed, ROI legibility.</div>
+          <div class="defense-text">Better templates, post-campaign reporting, next-campaign recommendations, creator quality sorting, fill speed, ROI legibility.</div>
         </div>
       </div>
     </div>
@@ -335,10 +397,10 @@ a:hover { text-decoration: underline; }
     <div class="challenge-card">
       <div class="card-header">
         <div class="card-num critical">4</div>
-        <div class="card-title">Creator Quality Retention / 创作者质量留存</div>
+        <div class="card-title" data-en="Creator Quality Retention" data-zh="创作者质量留存">Creator Quality Retention</div>
       </div>
       <div class="severity-bar-wrap">
-        <div class="severity-label"><span>Risk Severity / 风险等级</span><span>80%</span></div>
+        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>80%</span></div>
         <div class="severity-track"><div class="severity-fill critical" style="width:80%"></div></div>
       </div>
       <div class="bilingual">
@@ -346,13 +408,13 @@ a:hover { text-decoration: underline; }
           <div class="lang-tag">中文</div>
           <div class="desc-text">创作者冲着免费福利而来，拿完即走。如果平台沦为"薅羊毛"工具，创作者质量将持续下降，形成恶性循环。</div>
           <div class="defense-label critical">应对策略</div>
-          <div class="defense-text">建立成长体系、清晰的收益阶梯、减少对免费福利的依赖，让优质创作者看到长期价值。</div>
+          <div class="defense-text">建立成长体系、清晰的收益阶梯、减少对免费福利的依赖、候补机制、高价值解锁和平台专属声誉资本。</div>
         </div>
         <div class="col-en">
           <div class="lang-tag">English</div>
           <div class="desc-text">Creators join for freebies, then disappear. If the platform becomes a freebie-harvesting tool, creator quality spirals downward in a vicious cycle.</div>
           <div class="defense-label critical">Defense Strategy</div>
-          <div class="defense-text">Progression system, clear earnings ladder, limited freebie dependency -- show quality creators long-term value.</div>
+          <div class="defense-text">Progression system, clear earnings ladder, limited freebie dependency, standby utility, high-value unlocks, and platform-native reputation capital.</div>
         </div>
       </div>
     </div>
@@ -361,10 +423,10 @@ a:hover { text-decoration: underline; }
     <div class="challenge-card">
       <div class="card-header">
         <div class="card-num critical">5</div>
-        <div class="card-title">Weak Attribution / 归因能力薄弱</div>
+        <div class="card-title" data-en="Weak Attribution" data-zh="归因能力薄弱">Weak Attribution</div>
       </div>
       <div class="severity-bar-wrap">
-        <div class="severity-label"><span>Risk Severity / 风险等级</span><span>82%</span></div>
+        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>82%</span></div>
         <div class="severity-track"><div class="severity-fill critical" style="width:82%"></div></div>
       </div>
       <div class="bilingual">
@@ -388,7 +450,7 @@ a:hover { text-decoration: underline; }
 
 <!-- MAJOR -->
 <div class="section">
-  <div class="section-label high">Major Challenges / 重大挑战</div>
+  <div class="section-label high" data-en="Major Challenges" data-zh="重大挑战">Major Challenges</div>
 
   <div class="card-grid">
 
@@ -396,10 +458,10 @@ a:hover { text-decoration: underline; }
     <div class="challenge-card">
       <div class="card-header">
         <div class="card-num high">6</div>
-        <div class="card-title">Fraud / 欺诈风险</div>
+        <div class="card-title" data-en="Fraud" data-zh="欺诈风险">Fraud</div>
       </div>
       <div class="severity-bar-wrap">
-        <div class="severity-label"><span>Risk Severity / 风险等级</span><span>75%</span></div>
+        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>75%</span></div>
         <div class="severity-track"><div class="severity-fill high" style="width:75%"></div></div>
       </div>
       <div class="bilingual">
@@ -407,13 +469,13 @@ a:hover { text-decoration: underline; }
           <div class="lang-tag">中文</div>
           <div class="desc-text">虚假证明、自我核销、互动数据造假。作弊行为会侵蚀平台信任基础，降低商家对效果数据的信心。</div>
           <div class="defense-label high">应对策略</div>
-          <div class="defense-text">带时间戳的上传验证、地理位置校验、异常行为检测，多维度反欺诈体系。</div>
+          <div class="defense-text">带时间戳的上传验证、地理位置校验、商家二次确认、异常模式分析、弱化虚荣指标在评分中的权重。</div>
         </div>
         <div class="col-en">
           <div class="lang-tag">English</div>
           <div class="desc-text">Fake proof, self-redemption, engagement inflation. Cheating erodes platform trust and undermines merchant confidence in performance data.</div>
           <div class="defense-label high">Defense Strategy</div>
-          <div class="defense-text">Timestamped uploads, geo checks, anomaly detection -- multi-dimensional anti-fraud system.</div>
+          <div class="defense-text">Timestamped uploads, geo checks, merchant verification, pattern analysis, anomaly review. De-emphasize vanity metrics in scoring.</div>
         </div>
       </div>
     </div>
@@ -422,10 +484,10 @@ a:hover { text-decoration: underline; }
     <div class="challenge-card">
       <div class="card-header">
         <div class="card-num high">7</div>
-        <div class="card-title">Commoditization / 同质化竞争</div>
+        <div class="card-title" data-en="Commoditization" data-zh="同质化竞争">Commoditization</div>
       </div>
       <div class="severity-bar-wrap">
-        <div class="severity-label"><span>Risk Severity / 风险等级</span><span>65%</span></div>
+        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>65%</span></div>
         <div class="severity-track"><div class="severity-fill high" style="width:65%"></div></div>
       </div>
       <div class="bilingual">
@@ -444,28 +506,28 @@ a:hover { text-decoration: underline; }
       </div>
     </div>
 
-    <!-- 8. Large Platform Threat -->
+    <!-- 8. Weak Wedge Selection -->
     <div class="challenge-card">
       <div class="card-header">
         <div class="card-num high">8</div>
-        <div class="card-title">Large Platform Threat / 大平台威胁</div>
+        <div class="card-title" data-en="Weak Wedge Selection" data-zh="切入点选择不当">Weak Wedge Selection</div>
       </div>
       <div class="severity-bar-wrap">
-        <div class="severity-label"><span>Risk Severity / 风险等级</span><span>70%</span></div>
+        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>70%</span></div>
         <div class="severity-track"><div class="severity-fill high" style="width:70%"></div></div>
       </div>
       <div class="bilingual">
         <div class="col-zh">
           <div class="lang-tag">中文</div>
-          <div class="desc-text">TikTok、Yelp 等大平台可能进入本地推广领域。它们拥有海量用户和雄厚资金，一旦切入可能快速蚕食市场。</div>
+          <div class="desc-text">试图跨太多品类或社区同时启动。密度不足导致用户体验差、转化率低，无法形成有效的供需匹配。</div>
           <div class="defense-label high">应对策略</div>
-          <div class="defense-text">深耕垂直领域、聚焦本地化运营，做大平台不愿做的脏活累活。</div>
+          <div class="defense-text">聚焦单个密集区域、一到两个强势垂直品类，创始人亲自管理供需两端。</div>
         </div>
         <div class="col-en">
           <div class="lang-tag">English</div>
-          <div class="desc-text">Competitive threat from large platforms like TikTok and Yelp entering local promotion. They have massive user bases and deep pockets to quickly capture market share.</div>
+          <div class="desc-text">Trying to launch across too many categories or neighborhoods. Low density leads to bad user experience and weak conversion.</div>
           <div class="defense-label high">Defense Strategy</div>
-          <div class="defense-text">Vertical depth, local focus -- do the hard, unglamorous work that big platforms won't bother with.</div>
+          <div class="defense-text">Start with one dense area, one or two strong verticals, founder-managed supply and demand.</div>
         </div>
       </div>
     </div>
@@ -474,10 +536,10 @@ a:hover { text-decoration: underline; }
     <div class="challenge-card">
       <div class="card-header">
         <div class="card-num high">9</div>
-        <div class="card-title">Supply Opportunism / 供给端投机</div>
+        <div class="card-title" data-en="Supply Opportunism" data-zh="供给端投机">Supply Opportunism</div>
       </div>
       <div class="severity-bar-wrap">
-        <div class="severity-label"><span>Risk Severity / 风险等级</span><span>60%</span></div>
+        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>60%</span></div>
         <div class="severity-track"><div class="severity-fill high" style="width:60%"></div></div>
       </div>
       <div class="bilingual">
@@ -485,13 +547,13 @@ a:hover { text-decoration: underline; }
           <div class="lang-tag">中文</div>
           <div class="desc-text">低质量创作者抢占优质机会，劣币驱逐良币。如果好机会总被不靠谱的人抢走，优质创作者将离开平台。</div>
           <div class="defense-label high">应对策略</div>
-          <div class="defense-text">根据历史表现设置准入门槛，优质机会优先匹配高分创作者。</div>
+          <div class="defense-text">根据履约质量、平台历史、可靠性和表现进阶设置准入门槛，优质机会优先匹配高分创作者。</div>
         </div>
         <div class="col-en">
           <div class="lang-tag">English</div>
           <div class="desc-text">Low-quality creators grab premium opportunities, driving out good ones. If unreliable creators always snag the best gigs, quality creators will leave.</div>
           <div class="defense-label high">Defense Strategy</div>
-          <div class="defense-text">Gate opportunities behind performance -- prioritize high-scoring creators for premium gigs.</div>
+          <div class="defense-text">Gate better opportunities behind fulfillment quality, platform history, reliability, and performance progression.</div>
         </div>
       </div>
     </div>
@@ -501,7 +563,7 @@ a:hover { text-decoration: underline; }
 
 <!-- OPERATIONAL -->
 <div class="section">
-  <div class="section-label medium">Operational Challenges / 运营挑战</div>
+  <div class="section-label medium" data-en="Operational Challenges" data-zh="运营挑战">Operational Challenges</div>
 
   <div class="card-grid">
 
@@ -509,10 +571,10 @@ a:hover { text-decoration: underline; }
     <div class="challenge-card">
       <div class="card-header">
         <div class="card-num medium">10</div>
-        <div class="card-title">Approval Bottlenecks / 审批与结算瓶颈</div>
+        <div class="card-title" data-en="Approval Bottlenecks" data-zh="审批与结算瓶颈">Approval Bottlenecks</div>
       </div>
       <div class="severity-bar-wrap">
-        <div class="severity-label"><span>Risk Severity / 风险等级</span><span>55%</span></div>
+        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>55%</span></div>
         <div class="severity-track"><div class="severity-fill medium" style="width:55%"></div></div>
       </div>
       <div class="bilingual">
@@ -535,10 +597,10 @@ a:hover { text-decoration: underline; }
     <div class="challenge-card">
       <div class="card-header">
         <div class="card-num medium">11</div>
-        <div class="card-title">Scaling Manual Operations / 手动运营扩展</div>
+        <div class="card-title" data-en="Scaling Manual Operations" data-zh="手动运营扩展">Scaling Manual Operations</div>
       </div>
       <div class="severity-bar-wrap">
-        <div class="severity-label"><span>Risk Severity / 风险等级</span><span>50%</span></div>
+        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>50%</span></div>
         <div class="severity-track"><div class="severity-fill medium" style="width:50%"></div></div>
       </div>
       <div class="bilingual">
@@ -561,10 +623,10 @@ a:hover { text-decoration: underline; }
     <div class="challenge-card">
       <div class="card-header">
         <div class="card-num medium">12</div>
-        <div class="card-title">Quality vs Growth / 质量与增长的平衡</div>
+        <div class="card-title" data-en="Quality vs Growth" data-zh="质量与增长的平衡">Quality vs Growth</div>
       </div>
       <div class="severity-bar-wrap">
-        <div class="severity-label"><span>Risk Severity / 风险等级</span><span>50%</span></div>
+        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>50%</span></div>
         <div class="severity-track"><div class="severity-fill medium" style="width:50%"></div></div>
       </div>
       <div class="bilingual">
@@ -588,8 +650,35 @@ a:hover { text-decoration: underline; }
 
 <!-- FOOTER -->
 <div class="footer">
-  PUSH Platform -- Challenges & Risks Analysis / PUSH 平台挑战与风险分析
+  <span data-en="PUSH Platform -- Challenges &amp; Risks Analysis" data-zh="PUSH 平台挑战与风险分析">PUSH Platform -- Challenges &amp; Risks Analysis</span>
 </div>
 
+<script>
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.section, .challenge-card').forEach(el => {
+  el.classList.add('fade-in');
+  fadeObserver.observe(el);
+});
+
+function setLang(lang) {
+  localStorage.setItem('push-lang', lang);
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.textContent = lang === 'en' ? el.dataset.en : el.dataset.zh;
+  });
+  document.querySelectorAll('[data-en-html]').forEach(el => {
+    el.innerHTML = lang === 'en' ? el.dataset.enHtml : el.dataset.zhHtml;
+  });
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+  document.body.classList.toggle('lang-en', lang === 'en');
+  document.body.classList.toggle('lang-zh', lang === 'zh');
+}
+(function() {
+  const lang = localStorage.getItem('push-lang') || 'en';
+  setLang(lang);
+})();
+</script>
 </body>
 </html>

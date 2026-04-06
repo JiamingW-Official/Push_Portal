@@ -4,52 +4,66 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PUSH Team Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0a0a0f;
-  --bg2: #12121a;
-  --bg3: #1a1a2e;
-  --bg4: #242440;
-  --accent: #6c5ce7;
-  --accent2: #a29bfe;
-  --green: #00cec9;
-  --orange: #fdcb6e;
-  --red: #e17055;
-  --pink: #fd79a8;
-  --blue: #74b9ff;
-  --text: #dfe6e9;
-  --text2: #b2bec3;
-  --text3: #636e72;
-  --radius: 16px;
-  --shadow: 0 4px 24px rgba(0,0,0,0.3);
+  --bg: #ffffff;
+  --bg2: #f8f9fa;
+  --bg3: #f1f3f5;
+  --bg4: #e9ecef;
+  --primary: #1a1a2e;
+  --primary-light: #2d2d5e;
+  --accent: #4f46e5;
+  --accent2: #4f46e5;
+  --accent-light: #818cf8;
+  --accent-bg: rgba(79, 70, 229, 0.06);
+  --green: #059669;
+  --green-bg: rgba(5, 150, 105, 0.08);
+  --orange: #d97706;
+  --orange-bg: rgba(217, 119, 6, 0.08);
+  --red: #dc2626;
+  --red-bg: rgba(220, 38, 38, 0.08);
+  --pink: #be185d;
+  --blue: #2563eb;
+  --text: #111827;
+  --text2: #4b5563;
+  --text3: #9ca3af;
+  --border: #e5e7eb;
+  --border-hover: #d1d5db;
+  --radius: 12px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
-a { color: var(--accent2); text-decoration: none; }
-a:hover { text-decoration: underline; }
+body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg2); color: var(--text); line-height: 1.6; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-light); text-decoration: none; }
 
 /* NAV */
 .topnav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(10,10,15,0.92); backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(108,92,231,0.2);
+  background: #fff;
+  border-bottom: 1px solid var(--border);
   display: flex; align-items: center; padding: 0 24px; height: 60px; gap: 8px;
 }
-.topnav .logo { font-weight: 800; font-size: 22px; color: var(--accent2); letter-spacing: 2px; margin-right: 32px; }
+.topnav .logo { font-weight: 800; font-size: 22px; color: var(--primary); letter-spacing: 2px; margin-right: 32px; }
 .topnav .navlinks { display: flex; gap: 4px; flex-wrap: wrap; }
 .topnav .navlinks a {
   padding: 6px 14px; border-radius: 8px; font-size: 13px; font-weight: 500;
-  color: var(--text2); transition: all 0.2s;
+  color: var(--text2); transition: color 0.2s;
 }
-.topnav .navlinks a:hover, .topnav .navlinks a.active { background: var(--bg3); color: #fff; text-decoration: none; }
+.topnav .navlinks a:hover { color: var(--text); text-decoration: none; }
+.topnav .navlinks a.active { color: var(--accent); font-weight: 600; text-decoration: none; }
 
 /* SECTIONS */
 .section { padding: 80px 24px 40px; max-width: 1400px; margin: 0 auto; }
 .section-title {
-  font-size: 32px; font-weight: 800; margin-bottom: 8px;
-  background: linear-gradient(135deg, var(--accent2), var(--green));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  font-size: 28px; font-weight: 700; margin-bottom: 8px;
+  color: var(--text);
 }
 .section-sub { color: var(--text2); font-size: 15px; margin-bottom: 32px; }
 
@@ -60,75 +74,75 @@ a:hover { text-decoration: underline; }
 .grid-4 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
 .grid-5 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
 .card {
-  background: var(--bg2); border: 1px solid rgba(108,92,231,0.15);
-  border-radius: var(--radius); padding: 24px; transition: all 0.3s;
+  background: #fff; border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 24px; transition: all 0.2s;
 }
-.card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow); }
+.card:hover { border-color: var(--border-hover); box-shadow: var(--shadow); }
 .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
 .card-icon {
-  width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
   font-size: 20px; flex-shrink: 0;
 }
-.card-title { font-size: 16px; font-weight: 700; }
+.card-title { font-size: 16px; font-weight: 700; color: var(--text); }
 .card-desc { color: var(--text2); font-size: 14px; line-height: 1.7; }
 
 /* STAT CARDS */
 .stat-card { text-align: center; padding: 28px 20px; }
-.stat-number { font-size: 40px; font-weight: 800; }
-.stat-label { color: var(--text2); font-size: 13px; margin-top: 4px; }
+.stat-number { font-size: 40px; font-weight: 800; color: var(--text); }
+.stat-label { color: var(--text3); font-size: 13px; margin-top: 4px; }
 
 /* TAGS */
 .tag {
   display: inline-block; padding: 3px 10px; border-radius: 6px; font-size: 11px; font-weight: 600;
   margin: 2px 4px 2px 0;
 }
-.tag-purple { background: rgba(108,92,231,0.2); color: var(--accent2); }
-.tag-green { background: rgba(0,206,201,0.2); color: var(--green); }
-.tag-orange { background: rgba(253,203,110,0.2); color: var(--orange); }
-.tag-red { background: rgba(225,112,85,0.2); color: var(--red); }
-.tag-blue { background: rgba(116,185,255,0.2); color: var(--blue); }
-.tag-pink { background: rgba(253,121,168,0.2); color: var(--pink); }
+.tag-purple { background: var(--accent-bg); color: var(--accent); }
+.tag-green { background: var(--green-bg); color: var(--green); }
+.tag-orange { background: var(--orange-bg); color: var(--orange); }
+.tag-red { background: var(--red-bg); color: var(--red); }
+.tag-blue { background: rgba(37, 99, 235, 0.08); color: var(--blue); }
+.tag-pink { background: rgba(190, 24, 93, 0.08); color: var(--pink); }
 
 /* TABLES */
-.table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid rgba(108,92,231,0.15); }
+.table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); }
 table { width: 100%; border-collapse: collapse; font-size: 14px; }
-th { background: var(--bg3); color: var(--accent2); font-weight: 600; text-align: left; padding: 12px 16px; white-space: nowrap; }
-td { padding: 10px 16px; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text2); }
-tr:hover td { background: rgba(108,92,231,0.05); }
+th { background: var(--bg3); color: var(--text); font-weight: 600; text-align: left; padding: 12px 16px; white-space: nowrap; }
+td { padding: 10px 16px; border-top: 1px solid var(--border); color: var(--text2); }
+tr:hover td { background: var(--bg3); }
 
 /* PROGRESS BARS */
-.progress-bar { height: 8px; background: var(--bg3); border-radius: 4px; overflow: hidden; margin-top: 8px; }
+.progress-bar { height: 8px; background: var(--bg4); border-radius: 4px; overflow: hidden; margin-top: 8px; }
 .progress-fill { height: 100%; border-radius: 4px; transition: width 1s ease; }
 
 /* TIMELINE */
 .timeline { position: relative; padding-left: 32px; }
-.timeline::before { content: ''; position: absolute; left: 12px; top: 0; bottom: 0; width: 2px; background: var(--bg4); }
+.timeline::before { content: ''; position: absolute; left: 12px; top: 0; bottom: 0; width: 2px; background: var(--border); }
 .timeline-item { position: relative; margin-bottom: 28px; }
 .timeline-dot {
   position: absolute; left: -27px; top: 4px; width: 14px; height: 14px;
-  border-radius: 50%; border: 3px solid var(--accent); background: var(--bg);
+  border-radius: 50%; border: 3px solid var(--accent); background: #fff;
 }
-.timeline-item.active .timeline-dot { background: var(--accent); box-shadow: 0 0 12px var(--accent); }
-.timeline-title { font-weight: 700; font-size: 15px; margin-bottom: 4px; }
+.timeline-item.active .timeline-dot { background: var(--accent); }
+.timeline-title { font-weight: 700; font-size: 15px; margin-bottom: 4px; color: var(--text); }
 .timeline-desc { color: var(--text2); font-size: 13px; }
 
 /* FLOW DIAGRAM */
 .flow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 16px 0; }
 .flow-step {
-  background: var(--bg3); border: 1px solid rgba(108,92,231,0.2); border-radius: 10px;
-  padding: 10px 16px; font-size: 13px; font-weight: 600; white-space: nowrap;
+  background: var(--bg3); border: 1px solid var(--border); border-radius: 10px;
+  padding: 10px 16px; font-size: 13px; font-weight: 600; white-space: nowrap; color: var(--text);
 }
 .flow-arrow { color: var(--accent); font-size: 18px; }
 
 /* TABS */
 .tabs { display: flex; gap: 4px; margin-bottom: 24px; flex-wrap: wrap; }
 .tab-btn {
-  padding: 8px 18px; border-radius: 8px; border: 1px solid rgba(108,92,231,0.2);
+  padding: 8px 18px; border-radius: 8px; border: 1px solid var(--border);
   background: transparent; color: var(--text2); font-size: 13px; font-weight: 600;
   cursor: pointer; transition: all 0.2s;
 }
-.tab-btn:hover { border-color: var(--accent); color: #fff; }
-.tab-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.tab-btn:hover { border-color: var(--border-hover); color: var(--text); }
+.tab-btn.active { background: var(--accent); color: var(--text); border-color: var(--accent); }
 .tab-content { display: none; }
 .tab-content.active { display: block; }
 
@@ -138,7 +152,7 @@ tr:hover td { background: rgba(108,92,231,0.05); }
 .donut svg { transform: rotate(-90deg); }
 .donut-label {
   position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-  font-size: 24px; font-weight: 800;
+  font-size: 24px; font-weight: 800; color: var(--text);
 }
 .donut-legend { display: flex; flex-direction: column; gap: 6px; }
 .legend-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text2); }
@@ -148,32 +162,32 @@ tr:hover td { background: rgba(108,92,231,0.05); }
 .hero {
   min-height: 400px; display: flex; flex-direction: column; justify-content: center;
   align-items: center; text-align: center; padding: 120px 24px 60px;
-  background: radial-gradient(ellipse at 50% 0%, rgba(108,92,231,0.15) 0%, transparent 60%);
+  background: #fff; border-bottom: 1px solid var(--border);
 }
-.hero h1 { font-size: 56px; font-weight: 900; letter-spacing: -1px; margin-bottom: 16px; }
-.hero h1 span { background: linear-gradient(135deg, var(--accent2), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero h1 { font-size: 56px; font-weight: 900; letter-spacing: -1px; margin-bottom: 16px; color: var(--text); }
+.hero h1 span { color: inherit; }
 .hero p { color: var(--text2); font-size: 18px; max-width: 600px; }
 
 /* DOC HUB */
 .doc-sidebar {
-  position: sticky; top: 80px; background: var(--bg2); border-radius: var(--radius);
-  border: 1px solid rgba(108,92,231,0.15); padding: 16px; max-height: calc(100vh - 100px);
+  position: sticky; top: 80px; background: #fff; border-radius: var(--radius);
+  border: 1px solid var(--border); padding: 16px; max-height: calc(100vh - 100px);
   overflow-y: auto;
 }
 .doc-sidebar a {
   display: block; padding: 8px 12px; border-radius: 8px; font-size: 13px;
   color: var(--text2); transition: all 0.2s; margin-bottom: 2px;
 }
-.doc-sidebar a:hover, .doc-sidebar a.active { background: var(--bg3); color: #fff; text-decoration: none; }
-.doc-content { background: var(--bg2); border-radius: var(--radius); border: 1px solid rgba(108,92,231,0.15); padding: 32px; }
-.doc-content h2 { font-size: 24px; font-weight: 800; margin-bottom: 16px; color: var(--accent2); }
-.doc-content h3 { font-size: 18px; font-weight: 700; margin: 24px 0 12px; color: #fff; }
+.doc-sidebar a:hover, .doc-sidebar a.active { background: var(--bg3); color: var(--text); text-decoration: none; }
+.doc-content { background: #fff; border-radius: var(--radius); border: 1px solid var(--border); padding: 32px; }
+.doc-content h2 { font-size: 24px; font-weight: 800; margin-bottom: 16px; color: var(--text); }
+.doc-content h3 { font-size: 18px; font-weight: 700; margin: 24px 0 12px; color: var(--text); }
 .doc-content h4 { font-size: 15px; font-weight: 600; margin: 16px 0 8px; color: var(--green); }
 .doc-content p, .doc-content li { color: var(--text2); font-size: 14px; line-height: 1.8; }
 .doc-content ul, .doc-content ol { padding-left: 20px; margin: 8px 0; }
 .doc-content blockquote {
   border-left: 3px solid var(--accent); padding: 12px 16px; margin: 16px 0;
-  background: rgba(108,92,231,0.08); border-radius: 0 8px 8px 0; font-style: italic;
+  background: var(--accent-bg); border-radius: 0 8px 8px 0; font-style: italic;
 }
 .doc-content .doc-table { margin: 16px 0; }
 .doc-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; margin-bottom: 16px; }
@@ -181,12 +195,12 @@ tr:hover td { background: rgba(108,92,231,0.05); }
 /* PILL NAV */
 .pill-nav { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
 .pill {
-  padding: 6px 16px; border-radius: 20px; border: 1px solid rgba(108,92,231,0.3);
+  padding: 6px 16px; border-radius: 20px; border: 1px solid var(--border);
   background: transparent; color: var(--text2); font-size: 12px; font-weight: 600;
   cursor: pointer; transition: all 0.2s;
 }
-.pill:hover { border-color: var(--accent); color: #fff; }
-.pill.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.pill:hover { border-color: var(--border-hover); color: var(--text); }
+.pill.active { background: var(--accent); color: var(--text); border-color: var(--accent); }
 
 /* SCORE GAUGE */
 .gauge { text-align: center; }
@@ -206,7 +220,7 @@ tr:hover td { background: rgba(108,92,231,0.05); }
 .accordion-header {
   cursor: pointer; padding: 16px; background: var(--bg3); border-radius: 10px;
   display: flex; justify-content: space-between; align-items: center;
-  font-weight: 600; font-size: 15px; margin-bottom: 4px; transition: all 0.2s;
+  font-weight: 600; font-size: 15px; margin-bottom: 4px; transition: all 0.2s; color: var(--text);
 }
 .accordion-header:hover { background: var(--bg4); }
 .accordion-header .arrow { transition: transform 0.3s; }
@@ -218,8 +232,45 @@ tr:hover td { background: rgba(108,92,231,0.05); }
 .bar-chart { display: flex; flex-direction: column; gap: 12px; }
 .bar-row { display: flex; align-items: center; gap: 12px; }
 .bar-label { width: 140px; font-size: 13px; color: var(--text2); flex-shrink: 0; text-align: right; }
-.bar-track { flex: 1; height: 24px; background: var(--bg3); border-radius: 6px; overflow: hidden; position: relative; }
-.bar-fill { height: 100%; border-radius: 6px; transition: width 1.5s ease; display: flex; align-items: center; padding-left: 8px; font-size: 11px; font-weight: 700; color: #fff; }
+.bar-track { flex: 1; height: 24px; background: var(--bg4); border-radius: 6px; overflow: hidden; position: relative; }
+.bar-fill { height: 100%; border-radius: 6px; transition: width 1.5s ease; display: flex; align-items: center; padding-left: 8px; font-size: 11px; font-weight: 700; color: var(--text); }
+
+/* SCROLL ANIMATIONS */
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* SECTION DIVIDER */
+.section + .section { border-top: 1px solid var(--border); }
+
+/* FOOTER */
+footer { background: #fff; border-top: 1px solid var(--border); }
+
+/* LANG TOGGLE */
+.lang-toggle {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: var(--bg3);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.lang-toggle button {
+  padding: 5px 12px;
+  background: transparent;
+  border: none;
+  color: var(--text3);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.lang-toggle button.active {
+  background: var(--accent);
+  color: var(--text);
+}
 </style>
 </head>
 <body>
@@ -228,97 +279,103 @@ tr:hover td { background: rgba(108,92,231,0.05); }
 <nav class="topnav">
   <div class="logo">PUSH</div>
   <div class="navlinks">
-    <a href="#overview" class="active">Overview</a>
-    <a href="#strategy">Strategy</a>
-    <a href="#workflow">Workflow</a>
-    <a href="#painpoints">Pain Points</a>
-    <a href="#risks">Risks</a>
-    <a href="#execution">Execution</a>
-    <a href="#coldstart">Cold Start</a>
-    <a href="#pricing">Pricing</a>
-    <a href="#scoring">Scoring</a>
-    <a href="#dochub">Doc Hub</a>
-    <a href="project-intro.html">Project Intro</a>
-    <a href="pitch-deck.html">Pitch Deck</a>
-    <a href="prospects.html">Prospects</a>
-    <a href="challenges.html">Challenges</a>
+    <a href="#overview" class="active" data-en="Overview" data-zh="概览">Overview</a>
+    <a href="#strategy" data-en="Strategy" data-zh="战略">Strategy</a>
+    <a href="#workflow" data-en="Workflow" data-zh="工作流">Workflow</a>
+    <a href="#painpoints" data-en="Pain Points" data-zh="痛点">Pain Points</a>
+    <a href="#risks" data-en="Risks" data-zh="风险">Risks</a>
+    <a href="#execution" data-en="Execution" data-zh="执行">Execution</a>
+    <a href="#coldstart" data-en="Cold Start" data-zh="冷启动">Cold Start</a>
+    <a href="#pricing" data-en="Pricing" data-zh="定价">Pricing</a>
+    <a href="#scoring" data-en="Scoring" data-zh="评分">Scoring</a>
+    <a href="#dochub" data-en="Doc Hub" data-zh="文档中心">Doc Hub</a>
+    <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
+    <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演方案">Pitch Deck</a>
+    <a href="prospects.html" data-en="Prospects" data-zh="未来愿景">Prospects</a>
+    <a href="challenges.html" data-en="Challenges" data-zh="挑战">Challenges</a>
+    <a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a>
+    <a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
+  </div>
+  <div class="lang-toggle">
+    <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+    <button id="btn-zh" onclick="setLang('zh')">���</button>
   </div>
 </nav>
 
 <!-- HERO -->
 <div class="hero" id="overview">
-  <h1><span>PUSH</span> Team Dashboard</h1>
-  <p>Local creator performance infrastructure — a unified view of strategy, operations, and execution across all 8 core documents.</p>
+  <h1><span>PUSH</span> <span data-en="Team Dashboard" data-zh="团队仪表盘">Team Dashboard</span></h1>
+  <p data-en="Local creator performance infrastructure — a unified view of strategy, operations, and execution across all 8 core documents." data-zh="本地创作者绩效基础设施 — 涵盖所有8份核心文档的战略、运营和执行统一视图。">Local creator performance infrastructure — a unified view of strategy, operations, and execution across all 8 core documents.</p>
 </div>
 
 <!-- OVERVIEW STATS -->
 <div class="section">
-  <div class="section-title">Platform Overview</div>
-  <div class="section-sub">Key metrics and strategic alignment at a glance</div>
+  <div class="section-title" data-en="Platform Overview" data-zh="平台概览">Platform Overview</div>
+  <div class="section-sub" data-en="Key metrics and strategic alignment at a glance" data-zh="关键指标和战略对齐一览">Key metrics and strategic alignment at a glance</div>
 
   <div class="grid grid-5" style="margin-bottom:32px">
     <div class="card stat-card">
-      <div class="stat-number" style="color:var(--accent2)">8</div>
-      <div class="stat-label">Core Documents</div>
+      <div class="stat-number" style="color:var(--accent)">8</div>
+      <div class="stat-label" data-en="Core Documents" data-zh="核心文档">Core Documents</div>
     </div>
     <div class="card stat-card">
       <div class="stat-number" style="color:var(--green)">5</div>
-      <div class="stat-label">Strategic Pillars</div>
+      <div class="stat-label" data-en="Strategic Pillars" data-zh="战略支柱">Strategic Pillars</div>
     </div>
     <div class="card stat-card">
       <div class="stat-number" style="color:var(--orange)">4</div>
-      <div class="stat-label">Creator Tiers</div>
+      <div class="stat-label" data-en="Creator Tiers" data-zh="创作者等级">Creator Tiers</div>
     </div>
     <div class="card stat-card">
       <div class="stat-number" style="color:var(--pink)">16</div>
-      <div class="stat-label">Identified Risks</div>
+      <div class="stat-label" data-en="Identified Risks" data-zh="已识别风险">Identified Risks</div>
     </div>
     <div class="card stat-card">
       <div class="stat-number" style="color:var(--blue)">12</div>
-      <div class="stat-label">Week Execution Plan</div>
+      <div class="stat-label" data-en="Week Execution Plan" data-zh="周执行计划">Week Execution Plan</div>
     </div>
   </div>
 
   <!-- Document Map -->
   <div class="grid grid-3">
     <div class="card" style="border-left: 3px solid var(--accent)">
-      <div class="card-header"><div class="card-icon" style="background:rgba(108,92,231,0.2)">01</div><div class="card-title">Master Strategy</div></div>
-      <div class="card-desc">Strategic definition, pillars, company thesis, red flags</div>
+      <div class="card-header"><div class="card-icon" style="background:var(--accent-bg)">01</div><div class="card-title" data-en="Master Strategy" data-zh="总体战略">Master Strategy</div></div>
+      <div class="card-desc" data-en="Strategic definition, pillars, company thesis, red flags" data-zh="战略定义、支柱、公司论点、红旗">Strategic definition, pillars, company thesis, red flags</div>
       <div style="margin-top:12px"><span class="tag tag-purple">Strategy</span><span class="tag tag-purple">Vision</span></div>
     </div>
     <div class="card" style="border-left: 3px solid var(--green)">
-      <div class="card-header"><div class="card-icon" style="background:rgba(0,206,201,0.2)">02</div><div class="card-title">Workflow Architecture</div></div>
-      <div class="card-desc">20x workflow, milestone states, SLAs, ops processes</div>
+      <div class="card-header"><div class="card-icon" style="background:var(--green-bg)">02</div><div class="card-title" data-en="Workflow Architecture" data-zh="工作流架构">Workflow Architecture</div></div>
+      <div class="card-desc" data-en="20x workflow, milestone states, SLAs, ops processes" data-zh="20倍工作流、里程碑状态、SLA、运营流程">20x workflow, milestone states, SLAs, ops processes</div>
       <div style="margin-top:12px"><span class="tag tag-green">Workflow</span><span class="tag tag-green">SLAs</span></div>
     </div>
     <div class="card" style="border-left: 3px solid var(--orange)">
-      <div class="card-header"><div class="card-icon" style="background:rgba(253,203,110,0.2)">03</div><div class="card-title">Pain Points Map</div></div>
-      <div class="card-desc">Root cause analysis, merchant/creator/platform pain diagnosis</div>
+      <div class="card-header"><div class="card-icon" style="background:var(--orange-bg)">03</div><div class="card-title" data-en="Pain Points Map" data-zh="痛点地图">Pain Points Map</div></div>
+      <div class="card-desc" data-en="Root cause analysis, merchant/creator/platform pain diagnosis" data-zh="根因分析、商家/创作者/平台痛点诊断">Root cause analysis, merchant/creator/platform pain diagnosis</div>
       <div style="margin-top:12px"><span class="tag tag-orange">Diagnosis</span><span class="tag tag-orange">Root Cause</span></div>
     </div>
     <div class="card" style="border-left: 3px solid var(--red)">
-      <div class="card-header"><div class="card-icon" style="background:rgba(225,112,85,0.2)">04</div><div class="card-title">Risk Register</div></div>
-      <div class="card-desc">16 risks across strategic, marketplace, behavioral, fraud, operational</div>
+      <div class="card-header"><div class="card-icon" style="background:var(--red-bg)">04</div><div class="card-title" data-en="Risk Register" data-zh="风险登记">Risk Register</div></div>
+      <div class="card-desc" data-en="16 risks across strategic, marketplace, behavioral, fraud, operational" data-zh="跨战略、市场、行为、欺诈、运营的16项风险">16 risks across strategic, marketplace, behavioral, fraud, operational</div>
       <div style="margin-top:12px"><span class="tag tag-red">Risk</span><span class="tag tag-red">Defense</span></div>
     </div>
     <div class="card" style="border-left: 3px solid var(--blue)">
-      <div class="card-header"><div class="card-icon" style="background:rgba(116,185,255,0.2)">05</div><div class="card-title">Execution Playbook</div></div>
-      <div class="card-desc">10 execution skills, founder ops standards, what good looks like</div>
+      <div class="card-header"><div class="card-icon" style="background:rgba(37,99,235,0.08)">05</div><div class="card-title" data-en="Execution Playbook" data-zh="执行手册">Execution Playbook</div></div>
+      <div class="card-desc" data-en="9 execution skills, founder ops standards, what good looks like" data-zh="9项执行技能、创始人运营标准、优秀标准">9 execution skills, founder ops standards, what good looks like</div>
       <div style="margin-top:12px"><span class="tag tag-blue">Execution</span><span class="tag tag-blue">Skills</span></div>
     </div>
     <div class="card" style="border-left: 3px solid var(--pink)">
-      <div class="card-header"><div class="card-icon" style="background:rgba(253,121,168,0.2)">11</div><div class="card-title">Cold Start Plan</div></div>
-      <div class="card-desc">12-week step-by-step launch from zero, 3 phases</div>
+      <div class="card-header"><div class="card-icon" style="background:rgba(190,24,93,0.08)">11</div><div class="card-title" data-en="Cold Start Plan" data-zh="冷启动计划">Cold Start Plan</div></div>
+      <div class="card-desc" data-en="12-week step-by-step launch from zero, 3 phases" data-zh="从零开始的12周逐步启动，3个阶段">12-week step-by-step launch from zero, 3 phases</div>
       <div style="margin-top:12px"><span class="tag tag-pink">Launch</span><span class="tag tag-pink">12 Weeks</span></div>
     </div>
     <div class="card" style="border-left: 3px solid var(--green)">
-      <div class="card-header"><div class="card-icon" style="background:rgba(0,206,201,0.2)">12</div><div class="card-title">V0.1 Pricing Model</div></div>
-      <div class="card-desc">Fee structures, payment flows, financial projections</div>
+      <div class="card-header"><div class="card-icon" style="background:var(--green-bg)">12</div><div class="card-title" data-en="V0.1 Pricing Model" data-zh="V0.1 定价模型">V0.1 Pricing Model</div></div>
+      <div class="card-desc" data-en="Fee structures, payment flows, financial projections" data-zh="费用结构、支付流程、财务预测">Fee structures, payment flows, financial projections</div>
       <div style="margin-top:12px"><span class="tag tag-green">Pricing</span><span class="tag tag-green">Revenue</span></div>
     </div>
     <div class="card" style="border-left: 3px solid var(--accent)">
-      <div class="card-header"><div class="card-icon" style="background:rgba(108,92,231,0.2)">13</div><div class="card-title">Creator Scoring</div></div>
-      <div class="card-desc">Composite scoring formula, tier system, anti-gaming</div>
+      <div class="card-header"><div class="card-icon" style="background:var(--accent-bg)">13</div><div class="card-title" data-en="Creator Scoring" data-zh="创作者评分">Creator Scoring</div></div>
+      <div class="card-desc" data-en="Composite scoring formula, tier system, anti-gaming" data-zh="综合评分公式、等级体系、反作弊">Composite scoring formula, tier system, anti-gaming</div>
       <div style="margin-top:12px"><span class="tag tag-purple">Scoring</span><span class="tag tag-purple">Tiers</span></div>
     </div>
   </div>
@@ -326,109 +383,109 @@ tr:hover td { background: rgba(108,92,231,0.05); }
 
 <!-- STRATEGY SECTION -->
 <div class="section" id="strategy">
-  <div class="section-title">01 — Master Strategy</div>
-  <div class="section-sub">Strategic definition, pillars, and company-building thesis</div>
+  <div class="section-title" data-en="01 — Master Strategy" data-zh="01 — 总体战略">01 — Master Strategy</div>
+  <div class="section-sub" data-en="Strategic definition, pillars, and company-building thesis" data-zh="战略定义、支柱和公司建设论点">Strategic definition, pillars, and company-building thesis</div>
 
   <!-- What Push IS / IS NOT -->
   <div class="grid grid-2" style="margin-bottom:32px">
-    <div class="card" style="border: 1px solid rgba(0,206,201,0.3)">
-      <h3 style="color:var(--green);font-size:18px;margin-bottom:16px">Push IS</h3>
+    <div class="card" style="border: 1px solid var(--border)">
+      <h3 style="color:var(--green);font-size:18px;margin-bottom:16px" data-en="Push IS" data-zh="Push 是">Push IS</h3>
       <div style="display:flex;flex-direction:column;gap:8px">
-        <div style="display:flex;align-items:center;gap:10px"><span style="color:var(--green);font-size:18px">&#10003;</span><span>A transaction system</span></div>
-        <div style="display:flex;align-items:center;gap:10px"><span style="color:var(--green);font-size:18px">&#10003;</span><span>A trust system</span></div>
-        <div style="display:flex;align-items:center;gap:10px"><span style="color:var(--green);font-size:18px">&#10003;</span><span>A creator credit system</span></div>
-        <div style="display:flex;align-items:center;gap:10px"><span style="color:var(--green);font-size:18px">&#10003;</span><span>A local demand orchestration system</span></div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="color:var(--green);font-size:18px">&#10003;</span><span data-en="A transaction system" data-zh="交易系统">A transaction system</span></div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="color:var(--green);font-size:18px">&#10003;</span><span data-en="A trust system" data-zh="信任系统">A trust system</span></div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="color:var(--green);font-size:18px">&#10003;</span><span data-en="A creator credit system" data-zh="创作者信用系统">A creator credit system</span></div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="color:var(--green);font-size:18px">&#10003;</span><span data-en="A local demand orchestration system" data-zh="本地需求编排系统">A local demand orchestration system</span></div>
       </div>
     </div>
-    <div class="card" style="border: 1px solid rgba(225,112,85,0.3)">
-      <h3 style="color:var(--red);font-size:18px;margin-bottom:16px">Push is NOT</h3>
+    <div class="card" style="border: 1px solid var(--border)">
+      <h3 style="color:var(--red);font-size:18px;margin-bottom:16px" data-en="Push is NOT" data-zh="Push 不是">Push is NOT</h3>
       <div style="display:flex;flex-direction:column;gap:8px">
-        <div style="display:flex;align-items:center;gap:10px"><span style="color:var(--red);font-size:18px">&#10007;</span><span>A generic influencer marketplace</span></div>
-        <div style="display:flex;align-items:center;gap:10px"><span style="color:var(--red);font-size:18px">&#10007;</span><span>A local discovery app</span></div>
-        <div style="display:flex;align-items:center;gap:10px"><span style="color:var(--red);font-size:18px">&#10007;</span><span>A content community or reward app</span></div>
-        <div style="display:flex;align-items:center;gap:10px"><span style="color:var(--red);font-size:18px">&#10007;</span><span>A lightweight loyalty system</span></div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="color:var(--red);font-size:18px">&#10007;</span><span data-en="A generic influencer marketplace" data-zh="通用网红市场">A generic influencer marketplace</span></div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="color:var(--red);font-size:18px">&#10007;</span><span data-en="A local discovery app" data-zh="本地发现应用">A local discovery app</span></div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="color:var(--red);font-size:18px">&#10007;</span><span data-en="A content community or reward app" data-zh="内容社区或奖励应用">A content community or reward app</span></div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="color:var(--red);font-size:18px">&#10007;</span><span data-en="A lightweight loyalty system" data-zh="轻量忠诚度系统">A lightweight loyalty system</span></div>
       </div>
     </div>
   </div>
 
   <!-- Core Insight -->
-  <div class="card" style="margin-bottom:32px; border-left:4px solid var(--accent); background: linear-gradient(135deg, rgba(108,92,231,0.08), transparent)">
-    <div style="font-size:13px;color:var(--accent2);font-weight:700;margin-bottom:8px">CORE INSIGHT</div>
-    <div style="font-size:18px;font-weight:600;color:#fff;margin-bottom:8px">Creators are not just media inventory. They are unstructured customer acquisition channels.</div>
-    <div class="card-desc">The real opportunity is to standardize, verify, rank, and route creator-driven demand. This is the difference between a marketplace and infrastructure.</div>
+  <div class="card" style="margin-bottom:32px; border-left:4px solid var(--accent); background: var(--accent-bg)">
+    <div style="font-size:13px;color:var(--accent);font-weight:700;margin-bottom:8px" data-en="CORE INSIGHT" data-zh="核心洞察">CORE INSIGHT</div>
+    <div style="font-size:18px;font-weight:600;color:var(--text);margin-bottom:8px" data-en="Creators are not just media inventory. They are unstructured customer acquisition channels." data-zh="创作者不仅仅是媒体资源。他们是非结构化的客户获取渠道。">Creators are not just media inventory. They are unstructured customer acquisition channels.</div>
+    <div class="card-desc" data-en="The real opportunity is to standardize, verify, rank, and route creator-driven demand. This is the difference between a marketplace and infrastructure." data-zh="真正的机会在于将创作者驱动的需求进行标准化、验证、排名和路由。这就是市场平台与基础设施的区别。">The real opportunity is to standardize, verify, rank, and route creator-driven demand. This is the difference between a marketplace and infrastructure.</div>
   </div>
 
   <!-- 5 Strategic Pillars -->
-  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:#fff">5 Strategic Pillars</h3>
+  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:var(--text)" data-en="5 Strategic Pillars" data-zh="5大战略支柱">5 Strategic Pillars</h3>
   <div class="grid grid-5" style="margin-bottom:32px">
     <div class="card" style="text-align:center;padding:20px">
       <div style="font-size:32px;margin-bottom:8px">&#127919;</div>
-      <div style="font-weight:700;margin-bottom:6px;color:var(--accent2)">Offer OS</div>
-      <div style="font-size:12px;color:var(--text2)">Convert merchant intent into structured campaigns</div>
+      <div style="font-weight:700;margin-bottom:6px;color:var(--accent)" data-en="Offer OS" data-zh="报价OS">Offer OS</div>
+      <div style="font-size:12px;color:var(--text2)" data-en="Convert merchant intent into structured campaigns" data-zh="将商家意图转化为结构化活动">Convert merchant intent into structured campaigns</div>
     </div>
     <div class="card" style="text-align:center;padding:20px">
       <div style="font-size:32px;margin-bottom:8px">&#11088;</div>
-      <div style="font-weight:700;margin-bottom:6px;color:var(--green)">Creator Credit</div>
-      <div style="font-size:12px;color:var(--text2)">Value creators by performance, not followers</div>
+      <div style="font-weight:700;margin-bottom:6px;color:var(--green)" data-en="Creator Credit" data-zh="创作者信用">Creator Credit</div>
+      <div style="font-size:12px;color:var(--text2)" data-en="Value creators by performance, not followers" data-zh="按绩效而非粉丝数评估创作者">Value creators by performance, not followers</div>
     </div>
     <div class="card" style="text-align:center;padding:20px">
       <div style="font-size:32px;margin-bottom:8px">&#128269;</div>
-      <div style="font-weight:700;margin-bottom:6px;color:var(--orange)">Attribution</div>
-      <div style="font-size:12px;color:var(--text2)">Verify whether campaigns produced real value</div>
+      <div style="font-weight:700;margin-bottom:6px;color:var(--orange)" data-en="Attribution" data-zh="归因分析">Attribution</div>
+      <div style="font-size:12px;color:var(--text2)" data-en="Verify whether campaigns produced real value" data-zh="验证活动是否产生了真实价值">Verify whether campaigns produced real value</div>
     </div>
     <div class="card" style="text-align:center;padding:20px">
       <div style="font-size:32px;margin-bottom:8px">&#127759;</div>
-      <div style="font-weight:700;margin-bottom:6px;color:var(--pink)">Demand Surface</div>
-      <div style="font-size:12px;color:var(--text2)">Real-time demand interface with live opportunities</div>
+      <div style="font-weight:700;margin-bottom:6px;color:var(--pink)" data-en="Demand Surface" data-zh="需求界面">Demand Surface</div>
+      <div style="font-size:12px;color:var(--text2)" data-en="Real-time demand interface with live opportunities" data-zh="实时需求界面与即时机会">Real-time demand interface with live opportunities</div>
     </div>
     <div class="card" style="text-align:center;padding:20px">
       <div style="font-size:32px;margin-bottom:8px">&#9889;</div>
-      <div style="font-weight:700;margin-bottom:6px;color:var(--blue)">Liquidity Layer</div>
-      <div style="font-size:12px;color:var(--text2)">Standby mechanism for urgency and fill rate</div>
+      <div style="font-weight:700;margin-bottom:6px;color:var(--blue)" data-en="Liquidity Layer" data-zh="流动性层">Liquidity Layer</div>
+      <div style="font-size:12px;color:var(--text2)" data-en="Standby mechanism for urgency and fill rate" data-zh="候补机制提升紧迫性与填充率">Standby mechanism for urgency and fill rate</div>
     </div>
   </div>
 
   <!-- Priority Matrix -->
-  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:#fff">Priority Matrix</h3>
+  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:var(--text)" data-en="Priority Matrix" data-zh="优先级矩阵">Priority Matrix</h3>
   <div class="grid grid-3">
     <div class="card" style="border-top:3px solid var(--green)">
-      <div style="font-weight:700;color:var(--green);margin-bottom:12px">Highest Priority</div>
+      <div style="font-weight:700;color:var(--green);margin-bottom:12px" data-en="Highest Priority" data-zh="最高优先级">Highest Priority</div>
       <ul style="list-style:none;display:flex;flex-direction:column;gap:6px">
-        <li style="font-size:13px;color:var(--text2)">&#9679; Verifiable campaign outcomes</li>
-        <li style="font-size:13px;color:var(--text2)">&#9679; Creator scoring architecture</li>
-        <li style="font-size:13px;color:var(--text2)">&#9679; Repeat merchant workflow</li>
-        <li style="font-size:13px;color:var(--text2)">&#9679; Creator retention via earning progression</li>
-        <li style="font-size:13px;color:var(--text2)">&#9679; Anti-disintermediation design</li>
-        <li style="font-size:13px;color:var(--text2)">&#9679; Standby and time-sensitive mechanics</li>
+        <li style="font-size:13px;color:var(--text2)" data-en="&#9679; Verifiable campaign outcomes" data-zh="&#9679; 可验证的活动成果">&#9679; Verifiable campaign outcomes</li>
+        <li style="font-size:13px;color:var(--text2)" data-en="&#9679; Creator scoring architecture" data-zh="&#9679; 创作者评分架构">&#9679; Creator scoring architecture</li>
+        <li style="font-size:13px;color:var(--text2)" data-en="&#9679; Repeat merchant workflow" data-zh="&#9679; 商家复购工作流">&#9679; Repeat merchant workflow</li>
+        <li style="font-size:13px;color:var(--text2)" data-en="&#9679; Creator retention via earning progression" data-zh="&#9679; 通过收入增长实现创作者留存">&#9679; Creator retention via earning progression</li>
+        <li style="font-size:13px;color:var(--text2)" data-en="&#9679; Anti-disintermediation design" data-zh="&#9679; 防脱媒设计">&#9679; Anti-disintermediation design</li>
+        <li style="font-size:13px;color:var(--text2)" data-en="&#9679; Standby and time-sensitive mechanics" data-zh="&#9679; 候补与时效性机制">&#9679; Standby and time-sensitive mechanics</li>
       </ul>
     </div>
     <div class="card" style="border-top:3px solid var(--orange)">
-      <div style="font-weight:700;color:var(--orange);margin-bottom:12px">Medium Priority</div>
+      <div style="font-weight:700;color:var(--orange);margin-bottom:12px" data-en="Medium Priority" data-zh="中等优先级">Medium Priority</div>
       <ul style="list-style:none;display:flex;flex-direction:column;gap:6px">
-        <li style="font-size:13px;color:var(--text2)">&#9679; Premium membership logic</li>
-        <li style="font-size:13px;color:var(--text2)">&#9679; Advanced analytics</li>
-        <li style="font-size:13px;color:var(--text2)">&#9679; Vertical-specific templates</li>
-        <li style="font-size:13px;color:var(--text2)">&#9679; Quality-of-life automation</li>
+        <li style="font-size:13px;color:var(--text2)" data-en="&#9679; Premium membership logic" data-zh="&#9679; 高级会员逻辑">&#9679; Premium membership logic</li>
+        <li style="font-size:13px;color:var(--text2)" data-en="&#9679; Advanced analytics" data-zh="&#9679; 高级分析">&#9679; Advanced analytics</li>
+        <li style="font-size:13px;color:var(--text2)" data-en="&#9679; Vertical-specific templates" data-zh="&#9679; 垂直行业模板">&#9679; Vertical-specific templates</li>
+        <li style="font-size:13px;color:var(--text2)" data-en="&#9679; Quality-of-life automation" data-zh="&#9679; 体验优化自动化">&#9679; Quality-of-life automation</li>
       </ul>
     </div>
     <div class="card" style="border-top:3px solid var(--text3)">
-      <div style="font-weight:700;color:var(--text3);margin-bottom:12px">Low Priority</div>
+      <div style="font-weight:700;color:var(--text3);margin-bottom:12px" data-en="Low Priority" data-zh="低优先级">Low Priority</div>
       <ul style="list-style:none;display:flex;flex-direction:column;gap:6px">
-        <li style="font-size:13px;color:var(--text2)">&#9679; Social/community features</li>
-        <li style="font-size:13px;color:var(--text2)">&#9679; Broad creator expression tools</li>
-        <li style="font-size:13px;color:var(--text2)">&#9679; Ornamental loyalty features</li>
+        <li style="font-size:13px;color:var(--text2)" data-en="&#9679; Social/community features" data-zh="&#9679; 社交/社区功能">&#9679; Social/community features</li>
+        <li style="font-size:13px;color:var(--text2)" data-en="&#9679; Broad creator expression tools" data-zh="&#9679; 泛创作者表达工具">&#9679; Broad creator expression tools</li>
+        <li style="font-size:13px;color:var(--text2)" data-en="&#9679; Ornamental loyalty features" data-zh="&#9679; 装饰性忠诚度功能">&#9679; Ornamental loyalty features</li>
       </ul>
     </div>
   </div>
 
   <!-- Strategic Decision Test -->
   <div class="card" style="margin-top:32px;background:var(--bg3)">
-    <div style="font-size:13px;color:var(--orange);font-weight:700;margin-bottom:12px">STRATEGIC DECISION TEST</div>
-    <div style="font-size:14px;color:var(--text2);line-height:1.8">Every major decision should answer at least one positively:<br>
+    <div style="font-size:13px;color:var(--orange);font-weight:700;margin-bottom:12px" data-en="STRATEGIC DECISION TEST" data-zh="战略决策测试">STRATEGIC DECISION TEST</div>
+    <div style="font-size:14px;color:var(--text2);line-height:1.8" data-en-html="Every major decision should answer at least one positively:&lt;br&gt;1. Does this improve merchant ROI clarity?&lt;br&gt;2. Does this improve creator earning power or quality sorting?&lt;br&gt;3. Does this deepen platform defensibility?&lt;br&gt;4. Does this reduce fraud, operational friction, or repeat campaign cost?&lt;br&gt;5. Does this make future transactions more likely to stay on-platform?&lt;br&gt;&lt;strong style='color:var(--red)'&gt;If the answer is no, the idea is likely noise.&lt;/strong&gt;" data-zh-html="每个重大决策应至少能肯定回答以下一个问题：&lt;br&gt;1. 这是否提高了商家的ROI清晰度？&lt;br&gt;2. 这是否提高了创作者的收入能力或质量筛选？&lt;br&gt;3. 这是否加深了平台的防御性？&lt;br&gt;4. 这是否减少了欺诈、运营摩擦或复购活动成本？&lt;br&gt;5. 这是否使未来的交易更可能留在平台上？&lt;br&gt;&lt;strong style='color:var(--red)'&gt;如果答案是否定的，这个想法很可能只是噪音。&lt;/strong&gt;">Every major decision should answer at least one positively:<br>
     1. Does this improve merchant ROI clarity?<br>
     2. Does this improve creator earning power or quality sorting?<br>
     3. Does this deepen platform defensibility?<br>
-    4. Does this reduce fraud, friction, or repeat campaign cost?<br>
+    4. Does this reduce fraud, operational friction, or repeat campaign cost?<br>
     5. Does this make future transactions more likely to stay on-platform?<br>
     <strong style="color:var(--red)">If the answer is no, the idea is likely noise.</strong></div>
   </div>
@@ -436,13 +493,13 @@ tr:hover td { background: rgba(108,92,231,0.05); }
 
 <!-- WORKFLOW SECTION -->
 <div class="section" id="workflow">
-  <div class="section-title">02 — Workflow Architecture</div>
-  <div class="section-sub">20x workflow design: from merchant goal to repeat optimization</div>
+  <div class="section-title" data-en="02 — Workflow Architecture" data-zh="02 — 工作流架构">02 — Workflow Architecture</div>
+  <div class="section-sub" data-en="20x workflow design: from merchant goal to repeat optimization" data-zh="20倍工作流设计：从商家目标到复购优化">20x workflow design: from merchant goal to repeat optimization</div>
 
   <!-- Flow Comparison -->
   <div class="grid grid-2" style="margin-bottom:32px">
     <div class="card" style="border-top:3px solid var(--text3)">
-      <div style="font-weight:700;color:var(--text3);margin-bottom:12px">Traditional Basic Flow</div>
+      <div style="font-weight:700;color:var(--text3);margin-bottom:12px" data-en="Traditional Basic Flow" data-zh="传统基础流程">Traditional Basic Flow</div>
       <div class="flow">
         <span class="flow-step" style="opacity:0.6">Post</span><span class="flow-arrow">&rarr;</span>
         <span class="flow-step" style="opacity:0.6">Apply</span><span class="flow-arrow">&rarr;</span>
@@ -452,7 +509,7 @@ tr:hover td { background: rgba(108,92,231,0.05); }
       </div>
     </div>
     <div class="card" style="border-top:3px solid var(--green)">
-      <div style="font-weight:700;color:var(--green);margin-bottom:12px">20x Push Flow</div>
+      <div style="font-weight:700;color:var(--green);margin-bottom:12px" data-en="20x Push Flow" data-zh="20倍 Push 流程">20x Push Flow</div>
       <div class="flow">
         <span class="flow-step">Goal</span><span class="flow-arrow">&rarr;</span>
         <span class="flow-step">Structure</span><span class="flow-arrow">&rarr;</span>
@@ -465,7 +522,7 @@ tr:hover td { background: rgba(108,92,231,0.05); }
   </div>
 
   <!-- Milestone States -->
-  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:#fff">Campaign Milestone States</h3>
+  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:var(--text)" data-en="Campaign Milestone States" data-zh="活动里程碑状态">Campaign Milestone States</h3>
   <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:32px">
     <div style="background:var(--bg3);padding:12px 20px;border-radius:10px;text-align:center;min-width:100px">
       <div style="font-size:24px;margin-bottom:4px">1</div><div style="font-size:12px;color:var(--text2)">Accepted</div>
@@ -484,24 +541,24 @@ tr:hover td { background: rgba(108,92,231,0.05); }
     </div>
     <div style="color:var(--accent);display:flex;align-items:center;font-size:20px">&rarr;</div>
     <div style="background:var(--bg3);padding:12px 20px;border-radius:10px;text-align:center;min-width:100px">
-      <div style="font-size:24px;margin-bottom:4px">5</div><div style="font-size:12px;color:var(--text2)">Published</div>
+      <div style="font-size:24px;margin-bottom:4px">5</div><div style="font-size:12px;color:var(--text2)">Content Published</div>
     </div>
     <div style="color:var(--accent);display:flex;align-items:center;font-size:20px">&rarr;</div>
     <div style="background:var(--bg3);padding:12px 20px;border-radius:10px;text-align:center;min-width:100px">
       <div style="font-size:24px;margin-bottom:4px">6</div><div style="font-size:12px;color:var(--text2)">Verified</div>
     </div>
     <div style="color:var(--green);display:flex;align-items:center;font-size:20px">&rarr;</div>
-    <div style="background:rgba(0,206,201,0.15);padding:12px 20px;border-radius:10px;text-align:center;min-width:100px;border:1px solid rgba(0,206,201,0.3)">
+    <div style="background:var(--green-bg);padding:12px 20px;border-radius:10px;text-align:center;min-width:100px;border:1px solid var(--border)">
       <div style="font-size:24px;margin-bottom:4px;color:var(--green)">7</div><div style="font-size:12px;color:var(--green)">Settled</div>
     </div>
   </div>
 
   <!-- SLA Tables -->
-  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:#fff">SLA Framework</h3>
+  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:var(--text)" data-en="SLA Framework" data-zh="SLA 框架">SLA Framework</h3>
   <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab(event,'sla-merchant')">Merchant SLAs</button>
-    <button class="tab-btn" onclick="switchTab(event,'sla-creator')">Creator SLAs</button>
-    <button class="tab-btn" onclick="switchTab(event,'sla-ops')">Platform Ops SLAs</button>
+    <button class="tab-btn active" onclick="switchTab(event,'sla-merchant')" data-en="Merchant SLAs" data-zh="商家SLA">Merchant SLAs</button>
+    <button class="tab-btn" onclick="switchTab(event,'sla-creator')" data-en="Creator SLAs" data-zh="创作者SLA">Creator SLAs</button>
+    <button class="tab-btn" onclick="switchTab(event,'sla-ops')" data-en="Platform Ops SLAs" data-zh="平台运营SLA">Platform Ops SLAs</button>
   </div>
   <div class="tab-content active" id="sla-merchant">
     <div class="table-wrap"><table>
@@ -532,28 +589,28 @@ tr:hover td { background: rgba(108,92,231,0.05); }
   </div>
 
   <!-- Merchant Workflow Stages -->
-  <h3 style="font-size:20px;font-weight:700;margin:32px 0 20px;color:#fff">Merchant Workflow (6 Stages)</h3>
+  <h3 style="font-size:20px;font-weight:700;margin:32px 0 20px;color:var(--text)" data-en="Merchant Workflow (6 Stages)" data-zh="商家工作流（6个阶段）">Merchant Workflow (6 Stages)</h3>
   <div class="grid grid-3">
-    <div class="card"><div style="font-size:28px;color:var(--accent2);font-weight:800;margin-bottom:8px">1</div><div style="font-weight:700;margin-bottom:6px">Onboarding</div><div class="card-desc">Location, category, capacity, demand windows, preferred creators</div></div>
-    <div class="card"><div style="font-size:28px;color:var(--accent2);font-weight:800;margin-bottom:8px">2</div><div style="font-weight:700;margin-bottom:6px">Goal Selection</div><div class="card-desc">New visits, weekday traffic, launch item, event attendance, fill slots</div></div>
-    <div class="card"><div style="font-size:28px;color:var(--accent2);font-weight:800;margin-bottom:8px">3</div><div style="font-weight:700;margin-bottom:6px">Campaign Structure</div><div class="card-desc">Offer, payout, slots, dates, creator requirements, verification</div></div>
-    <div class="card"><div style="font-size:28px;color:var(--accent2);font-weight:800;margin-bottom:8px">4</div><div style="font-weight:700;margin-bottom:6px">Candidate Routing</div><div class="card-desc">Ranked candidates by history, fit, reliability, efficiency</div></div>
-    <div class="card"><div style="font-size:28px;color:var(--accent2);font-weight:800;margin-bottom:8px">5</div><div style="font-weight:700;margin-bottom:6px">Execution</div><div class="card-desc">Clear deliverables, locked schedule, milestone tracking</div></div>
-    <div class="card"><div style="font-size:28px;color:var(--accent2);font-weight:800;margin-bottom:8px">6</div><div style="font-weight:700;margin-bottom:6px">Review & Repeat</div><div class="card-desc">Result summary, repeat recommendation, next campaign seed</div></div>
+    <div class="card"><div style="font-size:28px;color:var(--accent);font-weight:800;margin-bottom:8px">1</div><div style="font-weight:700;margin-bottom:6px" data-en="Onboarding" data-zh="入驻">Onboarding</div><div class="card-desc" data-en="Location, category, capacity, demand windows, preferred creators" data-zh="位置、类别、容量、需求时段、首选创作者">Location, category, capacity, demand windows, preferred creators</div></div>
+    <div class="card"><div style="font-size:28px;color:var(--accent);font-weight:800;margin-bottom:8px">2</div><div style="font-weight:700;margin-bottom:6px" data-en="Goal Selection" data-zh="目标选择">Goal Selection</div><div class="card-desc" data-en="New visits, weekday traffic, launch item, event attendance, fill slots" data-zh="新客到店、工作日流量、新品发布、活动出席、填补空位">New visits, weekday traffic, launch item, event attendance, fill slots</div></div>
+    <div class="card"><div style="font-size:28px;color:var(--accent);font-weight:800;margin-bottom:8px">3</div><div style="font-weight:700;margin-bottom:6px" data-en="Campaign Structure" data-zh="活动结构">Campaign Structure</div><div class="card-desc" data-en="Offer, payout, slots, dates, creator requirements, verification" data-zh="报价、付款、名额、日期、创作者要求、验证方式">Offer, payout, slots, dates, creator requirements, verification</div></div>
+    <div class="card"><div style="font-size:28px;color:var(--accent);font-weight:800;margin-bottom:8px">4</div><div style="font-weight:700;margin-bottom:6px" data-en="Candidate Routing" data-zh="候选人路由">Candidate Routing</div><div class="card-desc" data-en="Ranked candidates by history, fit, reliability, efficiency" data-zh="按历史记录、匹配度、可靠性、效率排名候选人">Ranked candidates by history, fit, reliability, efficiency</div></div>
+    <div class="card"><div style="font-size:28px;color:var(--accent);font-weight:800;margin-bottom:8px">5</div><div style="font-weight:700;margin-bottom:6px" data-en="Execution" data-zh="执行">Execution</div><div class="card-desc" data-en="Clear deliverables, locked schedule, milestone tracking" data-zh="明确交付物、锁定排期、里程碑追踪">Clear deliverables, locked schedule, milestone tracking</div></div>
+    <div class="card"><div style="font-size:28px;color:var(--accent);font-weight:800;margin-bottom:8px">6</div><div style="font-weight:700;margin-bottom:6px" data-en="Review & Repeat" data-zh="回顾与复购">Review & Repeat</div><div class="card-desc" data-en="Result summary, repeat recommendation, next campaign seed" data-zh="结果汇总、复购建议、下次活动种子">Result summary, repeat recommendation, next campaign seed</div></div>
   </div>
 </div>
 
 <!-- PAIN POINTS SECTION -->
 <div class="section" id="painpoints">
-  <div class="section-title">03 — Pain Points & Root Cause Map</div>
-  <div class="section-sub">Diagnosing structural causes, not just visible symptoms</div>
+  <div class="section-title" data-en="03 — Pain Points & Root Cause Map" data-zh="03 — 痛点与根因分析">03 — Pain Points & Root Cause Map</div>
+  <div class="section-sub" data-en="Diagnosing structural causes, not just visible symptoms" data-zh="诊断结构性原因，而非表面症状">Diagnosing structural causes, not just visible symptoms</div>
 
   <div class="grid grid-3" style="margin-bottom:32px">
     <!-- Merchant Pain Points -->
     <div class="card">
-      <h3 style="color:var(--orange);font-size:16px;margin-bottom:16px">Merchant Pain Points</h3>
+      <h3 style="color:var(--orange);font-size:16px;margin-bottom:16px" data-en="Merchant Pain Points" data-zh="商家痛点">Merchant Pain Points</h3>
       <div style="display:flex;flex-direction:column;gap:12px">
-        <div><div style="font-weight:600;font-size:14px">A: Cannot Judge Creator Quality</div><div style="font-size:12px;color:var(--text3);margin-top:2px">Root: No normalized credit layer</div></div>
+        <div><div style="font-weight:600;font-size:14px">A: Cannot Judge Creator Quality</div><div style="font-size:12px;color:var(--text3);margin-top:2px">Root: No normalized merchant-readable credit layer</div></div>
         <div><div style="font-weight:600;font-size:14px">B: Unclear ROI</div><div style="font-size:12px;color:var(--text3);margin-top:2px">Root: No structured attribution</div></div>
         <div><div style="font-weight:600;font-size:14px">C: Operational Friction</div><div style="font-size:12px;color:var(--text3);margin-top:2px">Root: Ad hoc relationship work</div></div>
         <div><div style="font-weight:600;font-size:14px">D: Fear of Being Burned</div><div style="font-size:12px;color:var(--text3);margin-top:2px">Root: No consequence-backed trust</div></div>
@@ -561,17 +618,17 @@ tr:hover td { background: rgba(108,92,231,0.05); }
     </div>
     <!-- Creator Pain Points -->
     <div class="card">
-      <h3 style="color:var(--pink);font-size:16px;margin-bottom:16px">Creator Pain Points</h3>
+      <h3 style="color:var(--pink);font-size:16px;margin-bottom:16px" data-en="Creator Pain Points" data-zh="创作者痛点">Creator Pain Points</h3>
       <div style="display:flex;flex-direction:column;gap:12px">
-        <div><div style="font-weight:600;font-size:14px">A: No Pricing Power</div><div style="font-size:12px;color:var(--text3);margin-top:2px">Root: No standardized credit system</div></div>
+        <div><div style="font-weight:600;font-size:14px">A: No Pricing Power</div><div style="font-size:12px;color:var(--text3);margin-top:2px">Root: No standardized local commercial credit system</div></div>
         <div><div style="font-weight:600;font-size:14px">B: Income Instability</div><div style="font-size:12px;color:var(--text3);margin-top:2px">Root: No structured pipeline</div></div>
         <div><div style="font-weight:600;font-size:14px">C: Exploitative Low-End Offers</div><div style="font-size:12px;color:var(--text3);margin-top:2px">Root: No onboarding vs growth distinction</div></div>
-        <div><div style="font-weight:600;font-size:14px">D: Trust Asymmetry</div><div style="font-size:12px;color:var(--text3);margin-top:2px">Root: Weak merchant accountability</div></div>
+        <div><div style="font-weight:600;font-size:14px">D: Trust Asymmetry</div><div style="font-size:12px;color:var(--text3);margin-top:2px">Root: Weak merchant accountability and platform mediation</div></div>
       </div>
     </div>
     <!-- Platform Pain Points -->
     <div class="card">
-      <h3 style="color:var(--blue);font-size:16px;margin-bottom:16px">Platform Pain Points</h3>
+      <h3 style="color:var(--blue);font-size:16px;margin-bottom:16px" data-en="Platform Pain Points" data-zh="平台痛点">Platform Pain Points</h3>
       <div style="display:flex;flex-direction:column;gap:12px">
         <div><div style="font-weight:600;font-size:14px">A: Cold Start</div><div style="font-size:12px;color:var(--text3);margin-top:2px">Root: Two-sided market dependency</div></div>
         <div><div style="font-weight:600;font-size:14px">B: Fraud</div><div style="font-size:12px;color:var(--text3);margin-top:2px">Root: Weak verification / no anomaly detection</div></div>
@@ -582,37 +639,43 @@ tr:hover td { background: rgba(108,92,231,0.05); }
   </div>
 
   <!-- Root Cause Framework -->
-  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:#fff">5 Root Causes</h3>
+  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:var(--text)" data-en="5 Root Causes" data-zh="5大根本原因">5 Root Causes</h3>
   <div class="grid grid-5" style="margin-bottom:32px">
-    <div class="card stat-card" style="padding:20px"><div style="font-size:28px;margin-bottom:8px;color:var(--accent2)">1</div><div style="font-size:13px;color:var(--text2)">Lack of Structure</div></div>
-    <div class="card stat-card" style="padding:20px"><div style="font-size:28px;margin-bottom:8px;color:var(--green)">2</div><div style="font-size:13px;color:var(--text2)">Lack of Verification</div></div>
-    <div class="card stat-card" style="padding:20px"><div style="font-size:28px;margin-bottom:8px;color:var(--orange)">3</div><div style="font-size:13px;color:var(--text2)">Lack of Repeatability</div></div>
-    <div class="card stat-card" style="padding:20px"><div style="font-size:28px;margin-bottom:8px;color:var(--pink)">4</div><div style="font-size:13px;color:var(--text2)">Lack of Durable Incentives</div></div>
-    <div class="card stat-card" style="padding:20px"><div style="font-size:28px;margin-bottom:8px;color:var(--blue)">5</div><div style="font-size:13px;color:var(--text2)">Lack of Compounding Data</div></div>
+    <div class="card stat-card" style="padding:20px"><div style="font-size:28px;margin-bottom:8px;color:var(--accent)">1</div><div style="font-size:13px;color:var(--text2)" data-en="Lack of Structure" data-zh="缺乏结构">Lack of Structure</div></div>
+    <div class="card stat-card" style="padding:20px"><div style="font-size:28px;margin-bottom:8px;color:var(--green)">2</div><div style="font-size:13px;color:var(--text2)" data-en="Lack of Verification" data-zh="缺乏验证">Lack of Verification</div></div>
+    <div class="card stat-card" style="padding:20px"><div style="font-size:28px;margin-bottom:8px;color:var(--orange)">3</div><div style="font-size:13px;color:var(--text2)" data-en="Lack of Repeatability" data-zh="缺乏可重复性">Lack of Repeatability</div></div>
+    <div class="card stat-card" style="padding:20px"><div style="font-size:28px;margin-bottom:8px;color:var(--pink)">4</div><div style="font-size:13px;color:var(--text2)" data-en="Lack of Durable Economic Incentives" data-zh="缺乏持久经济激励">Lack of Durable Economic Incentives</div></div>
+    <div class="card stat-card" style="padding:20px"><div style="font-size:28px;margin-bottom:8px;color:var(--blue)">5</div><div style="font-size:13px;color:var(--text2)" data-en="Lack of Compounding Platform Data" data-zh="缺乏可复合的平台数据">Lack of Compounding Platform Data</div></div>
   </div>
 
   <!-- Priority Severity -->
-  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:#fff">Pain Severity Map</h3>
+  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:var(--text)" data-en="Pain Severity Map" data-zh="痛点严重程度">Pain Severity Map</h3>
   <div class="bar-chart">
     <div class="bar-row"><div class="bar-label">Weak ROI confidence</div><div class="bar-track"><div class="bar-fill" style="width:95%;background:var(--red)">Critical</div></div></div>
     <div class="bar-row"><div class="bar-label">Creator low retention</div><div class="bar-track"><div class="bar-fill" style="width:90%;background:var(--red)">Critical</div></div></div>
     <div class="bar-row"><div class="bar-label">Off-platform leakage</div><div class="bar-track"><div class="bar-fill" style="width:88%;background:var(--red)">Critical</div></div></div>
     <div class="bar-row"><div class="bar-label">Fraud & fake value</div><div class="bar-track"><div class="bar-fill" style="width:85%;background:var(--red)">Critical</div></div></div>
+    <div class="bar-row"><div class="bar-label">Shallow campaign repetition</div><div class="bar-track"><div class="bar-fill" style="width:82%;background:var(--red)">Critical</div></div></div>
     <div class="bar-row"><div class="bar-label">Poor campaign design</div><div class="bar-track"><div class="bar-fill" style="width:60%;background:var(--orange)">Medium</div></div></div>
     <div class="bar-row"><div class="bar-label">Weak supply matching</div><div class="bar-track"><div class="bar-fill" style="width:55%;background:var(--orange)">Medium</div></div></div>
+    <div class="bar-row"><div class="bar-label">Proof submission confusion</div><div class="bar-track"><div class="bar-fill" style="width:50%;background:var(--orange)">Medium</div></div></div>
+    <div class="bar-row"><div class="bar-label">Slow approvals</div><div class="bar-track"><div class="bar-fill" style="width:45%;background:var(--orange)">Medium</div></div></div>
+    <div class="bar-row"><div class="bar-label">Inconsistent creator quality</div><div class="bar-track"><div class="bar-fill" style="width:45%;background:var(--orange)">Medium</div></div></div>
     <div class="bar-row"><div class="bar-label">Social/community gaps</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:var(--text3)">Low</div></div></div>
+    <div class="bar-row"><div class="bar-label">Aesthetic customization</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:var(--text3)">Low</div></div></div>
+    <div class="bar-row"><div class="bar-label">Creative utilities not tied to economics</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:var(--text3)">Low</div></div></div>
   </div>
 </div>
 
 <!-- RISKS SECTION -->
 <div class="section" id="risks">
-  <div class="section-title">04 — Risk Register & Defense Playbook</div>
-  <div class="section-sub">16 identified risks across 6 categories with active defenses</div>
+  <div class="section-title" data-en="04 — Risk Register & Defense Playbook" data-zh="04 — 风险登记与防御手册">04 — Risk Register & Defense Playbook</div>
+  <div class="section-sub" data-en="16 identified risks across 6 categories with active defenses" data-zh="6大类别中识别的16项风险及应对策略">16 identified risks across 6 categories with active defenses</div>
 
   <!-- Risk Categories Chart -->
   <div class="grid grid-2" style="margin-bottom:32px">
     <div class="card">
-      <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;color:#fff">Risk by Category</h3>
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;color:var(--text)" data-en="Risk by Category" data-zh="按类别划分的风险">Risk by Category</h3>
       <div class="bar-chart">
         <div class="bar-row"><div class="bar-label">Strategic</div><div class="bar-track"><div class="bar-fill" style="width:50%;background:var(--accent)">3 risks</div></div></div>
         <div class="bar-row"><div class="bar-label">Marketplace</div><div class="bar-track"><div class="bar-fill" style="width:50%;background:var(--green)">3 risks</div></div></div>
@@ -623,9 +686,9 @@ tr:hover td { background: rgba(108,92,231,0.05); }
       </div>
     </div>
     <div class="card">
-      <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;color:#fff">Risk Prioritization</h3>
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;color:var(--text)" data-en="Risk Prioritization" data-zh="风险优先级">Risk Prioritization</h3>
       <div style="margin-bottom:16px">
-        <div style="font-weight:600;color:var(--red);margin-bottom:8px">Existential</div>
+        <div style="font-weight:600;color:var(--red);margin-bottom:8px" data-en="Existential" data-zh="生存级">Existential</div>
         <div style="display:flex;flex-wrap:wrap;gap:4px">
           <span class="tag tag-red">Poor merchant retention</span>
           <span class="tag tag-red">Low creator quality</span>
@@ -635,7 +698,7 @@ tr:hover td { background: rgba(108,92,231,0.05); }
         </div>
       </div>
       <div style="margin-bottom:16px">
-        <div style="font-weight:600;color:var(--orange);margin-bottom:8px">Major</div>
+        <div style="font-weight:600;color:var(--orange);margin-bottom:8px" data-en="Major" data-zh="重大级">Major</div>
         <div style="display:flex;flex-wrap:wrap;gap:4px">
           <span class="tag tag-orange">Fraud</span>
           <span class="tag tag-orange">Commoditization</span>
@@ -644,7 +707,7 @@ tr:hover td { background: rgba(108,92,231,0.05); }
         </div>
       </div>
       <div>
-        <div style="font-weight:600;color:var(--text3);margin-bottom:8px">Manageable</div>
+        <div style="font-weight:600;color:var(--text3);margin-bottom:8px" data-en="Manageable" data-zh="可管理">Manageable</div>
         <div style="display:flex;flex-wrap:wrap;gap:4px">
           <span class="tag" style="background:rgba(99,110,114,0.2);color:var(--text3)">UI complexity</span>
           <span class="tag" style="background:rgba(99,110,114,0.2);color:var(--text3)">Feature prioritization</span>
@@ -655,7 +718,7 @@ tr:hover td { background: rgba(108,92,231,0.05); }
   </div>
 
   <!-- Key Risks Accordion -->
-  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:#fff">Key Risks & Defenses</h3>
+  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:var(--text)" data-en="Key Risks & Defenses" data-zh="关键风险与防御">Key Risks & Defenses</h3>
   <div style="display:flex;flex-direction:column;gap:4px">
     <div><div class="accordion-header" onclick="toggleAccordion(this)"><span><span class="tag tag-red">Existential</span> R1: Derivative Positioning</span><span class="arrow">&#9660;</span></div><div class="accordion-body"><p style="color:var(--text2);font-size:14px"><strong style="color:var(--red)">Consequence:</strong> Weak investor conviction, easy dismissal.<br><strong style="color:var(--green)">Defense:</strong> Position as local creator performance infrastructure, not a marketplace.</p></div></div>
     <div><div class="accordion-header" onclick="toggleAccordion(this)"><span><span class="tag tag-red">Existential</span> R4: Cold Start Failure</span><span class="arrow">&#9660;</span></div><div class="accordion-body"><p style="color:var(--text2);font-size:14px"><strong style="color:var(--red)">Consequence:</strong> Low liquidity, poor experience, weak retention.<br><strong style="color:var(--green)">Defense:</strong> Create density manually: founder-led acquisition, curated onboarding, concentrated volume.</p></div></div>
@@ -667,78 +730,78 @@ tr:hover td { background: rgba(108,92,231,0.05); }
 
 <!-- EXECUTION SECTION -->
 <div class="section" id="execution">
-  <div class="section-title">05 — Execution Skills Playbook</div>
-  <div class="section-sub">The 10 core skills required to build Push into a defensible company</div>
+  <div class="section-title" data-en="05 — Execution Skills Playbook" data-zh="05 — 执行技能手册">05 — Execution Skills Playbook</div>
+  <div class="section-sub" data-en="The 9 core skills required to build Push into a defensible company" data-zh="将Push打造为可防御公司所需的9项核心技能">The 9 core skills required to build Push into a defensible company</div>
 
   <div class="grid grid-2" style="margin-bottom:32px">
     <div class="card">
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:36px;height:36px;border-radius:10px;background:rgba(108,92,231,0.2);display:flex;align-items:center;justify-content:center;font-size:16px">1</div><div style="font-weight:700">Merchant Acquisition</div></div>
-      <div class="card-desc">Acquire the right initial merchants: cafes, dessert shops, beauty studios, boutique fitness, pop-ups. Strong = motivated, responsive, willing to test repeatedly.</div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:36px;height:36px;border-radius:10px;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;font-size:16px">1</div><div style="font-weight:700" data-en="Merchant Acquisition" data-zh="商家获取">Merchant Acquisition</div></div>
+      <div class="card-desc" data-en="Acquire the right initial merchants: cafes, dessert shops, beauty studios, boutique fitness, pop-ups. Strong = motivated, responsive, willing to test repeatedly." data-zh="获取合适的初始商家：咖啡馆、甜品店、美容工作室、精品健身、快闪店。优质商家 = 有动力、响应快、愿意反复测试。">Acquire the right initial merchants: cafes, dessert shops, beauty studios, boutique fitness, pop-ups. Strong = motivated, responsive, willing to test repeatedly.</div>
     </div>
     <div class="card">
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:36px;height:36px;border-radius:10px;background:rgba(0,206,201,0.2);display:flex;align-items:center;justify-content:center;font-size:16px">2</div><div style="font-weight:700">Creator Quality Sourcing</div></div>
-      <div class="card-desc">Recruit creators who can become reliable commercial operators. Distinguish aesthetic quality from business reliability. Avoid freebie opportunists.</div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:36px;height:36px;border-radius:10px;background:var(--green-bg);display:flex;align-items:center;justify-content:center;font-size:16px">2</div><div style="font-weight:700" data-en="Creator Quality Sourcing" data-zh="创作者质量招募">Creator Quality Sourcing</div></div>
+      <div class="card-desc" data-en="Recruit creators who can become reliable commercial operators. Distinguish aesthetic quality from business reliability. Avoid freebie opportunists." data-zh="招募能成为可靠商业合作伙伴的创作者。区分审美质量与商业可靠性。避免薅羊毛的投机者。">Recruit creators who can become reliable commercial operators. Distinguish aesthetic quality from business reliability. Avoid freebie opportunists.</div>
     </div>
     <div class="card">
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:36px;height:36px;border-radius:10px;background:rgba(253,203,110,0.2);display:flex;align-items:center;justify-content:center;font-size:16px">3</div><div style="font-weight:700">Campaign Design</div></div>
-      <div class="card-desc">Attractive, measurable, operationally realistic campaigns. One clear goal, simple requirements, verifiable steps, believable payout, reason to repeat.</div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:36px;height:36px;border-radius:10px;background:var(--orange-bg);display:flex;align-items:center;justify-content:center;font-size:16px">3</div><div style="font-weight:700" data-en="Campaign Design" data-zh="活动设计">Campaign Design</div></div>
+      <div class="card-desc" data-en="Attractive, measurable, operationally realistic campaigns. One clear goal, simple requirements, verifiable steps, believable payout, reason to repeat." data-zh="有吸引力、可衡量、运营可行的活动。一个明确目标、简单要求、可验证步骤、合理付款、值得复购。">Attractive, measurable, operationally realistic campaigns. One clear goal, simple requirements, verifiable steps, believable payout, reason to repeat.</div>
     </div>
     <div class="card">
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:36px;height:36px;border-radius:10px;background:rgba(225,112,85,0.2);display:flex;align-items:center;justify-content:center;font-size:16px">4</div><div style="font-weight:700">Operational Discipline</div></div>
-      <div class="card-desc">Clear milestone states, standard response templates, quick exception identification. Ops feel predictable, fair, visible, low-drama, rule-based.</div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:36px;height:36px;border-radius:10px;background:var(--red-bg);display:flex;align-items:center;justify-content:center;font-size:16px">4</div><div style="font-weight:700" data-en="Operational Discipline" data-zh="运营纪律">Operational Discipline</div></div>
+      <div class="card-desc" data-en="Clear milestone states, standard response templates, quick exception identification. Ops feel predictable, fair, visible, low-drama, rule-based." data-zh="清晰的里程碑状态、标准回复模板、快速异常识别。运营体验：可预测、公平、透明、低冲突、规则驱动。">Clear milestone states, standard response templates, quick exception identification. Ops feel predictable, fair, visible, low-drama, rule-based.</div>
     </div>
     <div class="card">
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:36px;height:36px;border-radius:10px;background:rgba(116,185,255,0.2);display:flex;align-items:center;justify-content:center;font-size:16px">5</div><div style="font-weight:700">Data Interpretation</div></div>
-      <div class="card-desc">Use limited early data intelligently. Separate signal from noise. Measure retention correctly. Track 9 key metrics.</div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:36px;height:36px;border-radius:10px;background:rgba(37,99,235,0.08);display:flex;align-items:center;justify-content:center;font-size:16px">5</div><div style="font-weight:700" data-en="Data Interpretation" data-zh="数据解读">Data Interpretation</div></div>
+      <div class="card-desc" data-en="Use limited early data intelligently. Separate signal from noise. Measure retention correctly. Track 9 key metrics." data-zh="智能运用有限的早期数据。区分信号与噪音。正确衡量留存。追踪9个关键指标。">Use limited early data intelligently. Separate signal from noise. Measure retention correctly. Track 9 key metrics.</div>
     </div>
     <div class="card">
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:36px;height:36px;border-radius:10px;background:rgba(253,121,168,0.2);display:flex;align-items:center;justify-content:center;font-size:16px">6</div><div style="font-weight:700">Anti-Cliche Positioning</div></div>
-      <div class="card-desc">Avoid lazy platform analogies. Frame around outcomes and infrastructure. Explain the moat in operational and economic terms.</div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:36px;height:36px;border-radius:10px;background:rgba(190,24,93,0.08);display:flex;align-items:center;justify-content:center;font-size:16px">6</div><div style="font-weight:700" data-en="Anti-Clich&eacute; Positioning" data-zh="反陈词滥调定位">Anti-Clich&eacute; Positioning</div></div>
+      <div class="card-desc" data-en="Avoid lazy platform analogies. Frame around outcomes and infrastructure. Explain the moat in operational and economic terms." data-zh="避免懒惰的平台类比。围绕成果和基础设施定位。用运营和经济术语解释护城河。">Avoid lazy platform analogies. Frame around outcomes and infrastructure. Explain the moat in operational and economic terms.</div>
     </div>
     <div class="card">
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:36px;height:36px;border-radius:10px;background:rgba(108,92,231,0.2);display:flex;align-items:center;justify-content:center;font-size:16px">7</div><div style="font-weight:700">Retention Architecture</div></div>
-      <div class="card-desc">Make platform participation economically compounding. Creators see improved earnings; merchants get faster performance; off-platform feels irrational.</div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:36px;height:36px;border-radius:10px;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;font-size:16px">7</div><div style="font-weight:700" data-en="Retention Architecture" data-zh="留存架构">Retention Architecture</div></div>
+      <div class="card-desc" data-en="Make platform participation economically compounding. Creators see improved earnings; merchants get faster performance; off-platform feels irrational." data-zh="让平台参与产生经济复利效应。创作者收入持续增长；商家获得更快的活动表现；离开平台变得不划算。">Make platform participation economically compounding. Creators see improved earnings; merchants get faster performance; off-platform feels irrational.</div>
     </div>
     <div class="card">
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:36px;height:36px;border-radius:10px;background:rgba(0,206,201,0.2);display:flex;align-items:center;justify-content:center;font-size:16px">8</div><div style="font-weight:700">Risk Management</div></div>
-      <div class="card-desc">Recognize danger early. Identify fraud patterns, weak verticals, creator opportunism, merchant churn risk. Know when a campaign type is structurally bad.</div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:36px;height:36px;border-radius:10px;background:var(--green-bg);display:flex;align-items:center;justify-content:center;font-size:16px">8</div><div style="font-weight:700" data-en="Risk Management" data-zh="风险管理">Risk Management</div></div>
+      <div class="card-desc" data-en="Recognize danger early. Identify fraud patterns, weak verticals, creator opportunism, merchant churn risk. Know when a campaign type is structurally bad." data-zh="尽早识别风险。识别欺诈模式、弱势垂直领域、创作者投机行为、商家流失风险。判断活动类型何时存在结构性问题。">Recognize danger early. Identify fraud patterns, weak verticals, creator opportunism, merchant churn risk. Know when a campaign type is structurally bad.</div>
     </div>
     <div class="card" style="grid-column:span 2">
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:36px;height:36px;border-radius:10px;background:rgba(253,203,110,0.2);display:flex;align-items:center;justify-content:center;font-size:16px">9</div><div style="font-weight:700">Founder Operating Skill</div></div>
-      <div class="card-desc">Act as system integrator. Talk to merchants directly. Understand creator psychology. Resist ornamental feature temptation. <strong style="color:var(--red)">Mistakes to avoid:</strong> building for aesthetics before economics, expanding before density, adding social features too early, confusing signup growth with useful supply.</div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:36px;height:36px;border-radius:10px;background:var(--orange-bg);display:flex;align-items:center;justify-content:center;font-size:16px">9</div><div style="font-weight:700" data-en="Founder Operating Skill" data-zh="创始人运营技能">Founder Operating Skill</div></div>
+      <div class="card-desc" data-en-html="Act as system integrator. Talk to merchants directly. Understand creator psychology. Resist ornamental feature temptation. &lt;strong style='color:var(--red)'&gt;Mistakes to avoid:&lt;/strong&gt; building for aesthetics before economics, expanding before density, adding social features too early, confusing signup growth with useful supply." data-zh-html="作为系统整合者。直接与商家对话。理解创作者心理。抵制装饰性功能的诱惑。&lt;strong style='color:var(--red)'&gt;需避免的错误：&lt;/strong&gt;重美学轻经济、密度不足时扩张、过早添加社交功能、将注册增长与有效供给混淆。">Act as system integrator. Talk to merchants directly. Understand creator psychology. Resist ornamental feature temptation. <strong style="color:var(--red)">Mistakes to avoid:</strong> building for aesthetics before economics, expanding before density, adding social features too early, confusing signup growth with useful supply.</div>
     </div>
   </div>
 </div>
 
 <!-- COLD START SECTION -->
 <div class="section" id="coldstart">
-  <div class="section-title">11 — Cold Start Execution Plan</div>
-  <div class="section-sub">12-week step-by-step launch from zero in a single US neighborhood</div>
+  <div class="section-title" data-en="11 — Cold Start Execution Plan" data-zh="11 — 冷启动执行计划">11 — Cold Start Execution Plan</div>
+  <div class="section-sub" data-en="12-week step-by-step launch from zero in a single US neighborhood" data-zh="单个美国社区从零开始的12周逐步启动计划">12-week step-by-step launch from zero in a single US neighborhood</div>
 
   <!-- Phase Overview -->
   <div class="grid grid-3" style="margin-bottom:32px">
     <div class="card" style="border-top:3px solid var(--accent)">
-      <div style="font-size:12px;color:var(--accent2);font-weight:700;margin-bottom:4px">PHASE 1</div>
-      <div style="font-weight:700;font-size:18px;margin-bottom:8px">Foundation</div>
+      <div style="font-size:12px;color:var(--accent);font-weight:700;margin-bottom:4px">PHASE 1</div>
+      <div style="font-weight:700;font-size:18px;margin-bottom:8px" data-en="Foundation" data-zh="基础搭建">Foundation</div>
       <div style="color:var(--text2);font-size:13px">Week 1-4</div>
       <div style="margin-top:12px;font-size:13px;color:var(--text2)">Build supply on both sides manually. Zone selection, merchant scouting, creator outreach, website MVP, dry run.</div>
     </div>
     <div class="card" style="border-top:3px solid var(--green)">
       <div style="font-size:12px;color:var(--green);font-weight:700;margin-bottom:4px">PHASE 2</div>
-      <div style="font-weight:700;font-size:18px;margin-bottom:8px">First Campaigns</div>
+      <div style="font-weight:700;font-size:18px;margin-bottom:8px" data-en="First Campaigns" data-zh="首批活动">First Campaigns</div>
       <div style="color:var(--text2);font-size:13px">Week 5-8</div>
       <div style="margin-top:12px;font-size:13px;color:var(--text2)">Prove the workflow works. Execute 5 campaigns, daily ops, iterate, track repeat rates, second batch.</div>
     </div>
     <div class="card" style="border-top:3px solid var(--orange)">
       <div style="font-size:12px;color:var(--orange);font-weight:700;margin-bottom:4px">PHASE 3</div>
-      <div style="font-weight:700;font-size:18px;margin-bottom:8px">Validate Repeat</div>
+      <div style="font-weight:700;font-size:18px;margin-bottom:8px" data-en="Validate Repeat" data-zh="验证复购">Validate Repeat</div>
       <div style="color:var(--text2);font-size:13px">Week 9-12</div>
       <div style="margin-top:12px;font-size:13px;color:var(--text2)">Prove merchants come back. Scale to 15 merchants, introduce scoring, standby, transition to paid.</div>
     </div>
   </div>
 
   <!-- Timeline -->
-  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:#fff">Week-by-Week Timeline</h3>
+  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:var(--text)" data-en="Week-by-Week Timeline" data-zh="逐周时间线">Week-by-Week Timeline</h3>
   <div class="timeline">
     <div class="timeline-item active"><div class="timeline-dot"></div><div class="timeline-title">Week 1: Zone Selection & Scouting</div><div class="timeline-desc">Pick ONE neighborhood. Scout 30 merchant prospects. Research 50 creator prospects.</div></div>
     <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-title">Week 2: First Merchant Conversations</div><div class="timeline-desc">15 conversations &rarr; 8 soft commitments &rarr; 5-6 committed for first batch.</div></div>
@@ -751,16 +814,16 @@ tr:hover td { background: rgba(108,92,231,0.05); }
   </div>
 
   <!-- Targets -->
-  <h3 style="font-size:20px;font-weight:700;margin:32px 0 20px;color:#fff">Week 12 Success Targets</h3>
+  <h3 style="font-size:20px;font-weight:700;margin:32px 0 20px;color:var(--text)">Week 12 Success Targets</h3>
   <div class="grid grid-4">
-    <div class="card stat-card"><div class="stat-number" style="color:var(--green);font-size:32px">40%+</div><div class="stat-label">Merchant Repeat Rate</div></div>
-    <div class="card stat-card"><div class="stat-number" style="color:var(--accent2);font-size:32px">85%+</div><div class="stat-label">Completion Rate</div></div>
-    <div class="card stat-card"><div class="stat-number" style="color:var(--orange);font-size:32px">&lt;48h</div><div class="stat-label">Time-to-Fill</div></div>
-    <div class="card stat-card"><div class="stat-number" style="color:var(--pink);font-size:32px">25+</div><div class="stat-label">Total Campaigns</div></div>
+    <div class="card stat-card"><div class="stat-number" style="color:var(--green);font-size:32px">40%+</div><div class="stat-label" data-en="Merchant Repeat Rate" data-zh="商家复购率">Merchant Repeat Rate</div></div>
+    <div class="card stat-card"><div class="stat-number" style="color:var(--accent);font-size:32px">85%+</div><div class="stat-label" data-en="Completion Rate" data-zh="完成率">Completion Rate</div></div>
+    <div class="card stat-card"><div class="stat-number" style="color:var(--orange);font-size:32px">&lt;48h</div><div class="stat-label" data-en="Time-to-Fill" data-zh="填充时间">Time-to-Fill</div></div>
+    <div class="card stat-card"><div class="stat-number" style="color:var(--pink);font-size:32px">25+</div><div class="stat-label" data-en="Total Campaigns" data-zh="总活动数">Total Campaigns</div></div>
   </div>
 
   <!-- Budget -->
-  <h3 style="font-size:20px;font-weight:700;margin:32px 0 20px;color:#fff">12-Week Budget</h3>
+  <h3 style="font-size:20px;font-weight:700;margin:32px 0 20px;color:var(--text)">12-Week Budget</h3>
   <div class="card" style="max-width:600px">
     <div class="bar-chart">
       <div class="bar-row"><div class="bar-label">Creator payments</div><div class="bar-track"><div class="bar-fill" style="width:75%;background:var(--accent)">$1,050-1,750</div></div></div>
@@ -774,13 +837,13 @@ tr:hover td { background: rgba(108,92,231,0.05); }
 
 <!-- PRICING SECTION -->
 <div class="section" id="pricing">
-  <div class="section-title">12 — V0.1 Pricing Model</div>
-  <div class="section-sub">Price for learning, not for revenue. Remove friction, prove willingness to pay.</div>
+  <div class="section-title" data-en="12 — V0.1 Pricing Model" data-zh="12 — V0.1 定价模型">12 — V0.1 Pricing Model</div>
+  <div class="section-sub" data-en="Price for learning, not for revenue. Remove friction, prove willingness to pay." data-zh="为学习定价，而非为收入。消除摩擦，验证付费意愿。">Price for learning, not for revenue. Remove friction, prove willingness to pay.</div>
 
   <!-- Pricing Phases -->
   <div class="grid grid-2" style="margin-bottom:32px">
     <div class="card" style="border-top:3px solid var(--accent)">
-      <div style="font-size:12px;color:var(--accent2);font-weight:700;margin-bottom:8px">PHASE 1 (Week 1-8)</div>
+      <div style="font-size:12px;color:var(--accent);font-weight:700;margin-bottom:8px">PHASE 1 (Week 1-8)</div>
       <div style="font-size:36px;font-weight:900;color:var(--green);margin-bottom:8px">$0</div>
       <div style="font-size:14px;color:var(--text2);margin-bottom:16px">Everything free. Goal: data and repeat behavior.</div>
       <div class="table-wrap"><table>
@@ -803,17 +866,17 @@ tr:hover td { background: rgba(108,92,231,0.05); }
   </div>
 
   <!-- Competitive Comparison -->
-  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:#fff">Push vs Alternatives</h3>
+  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:var(--text)" data-en="Push vs Alternatives" data-zh="Push 与替代方案对比">Push vs Alternatives</h3>
   <div class="table-wrap" style="margin-bottom:32px"><table>
     <tr><th>Method</th><th>Cost</th><th>Measurability</th><th>Effort</th></tr>
     <tr><td>DM a creator directly</td><td>$50-200/post + product</td><td><span class="tag tag-red">None</span></td><td><span class="tag tag-red">High</span></td></tr>
     <tr><td>Local marketing agency</td><td>$500-2000/month</td><td><span class="tag tag-orange">Low-Med</span></td><td><span class="tag tag-green">Low</span></td></tr>
     <tr><td>Instagram/Facebook Ads</td><td>$200-1000/month</td><td><span class="tag tag-orange">Medium</span></td><td><span class="tag tag-orange">Medium</span></td></tr>
-    <tr style="background:rgba(0,206,201,0.08)"><td style="font-weight:700;color:var(--green)">Push Basic</td><td style="font-weight:700;color:var(--green)">$99/month</td><td><span class="tag tag-green">Med-High</span></td><td><span class="tag tag-green">Very Low</span></td></tr>
+    <tr style="background:var(--green-bg)"><td style="font-weight:700;color:var(--green)">Push Basic</td><td style="font-weight:700;color:var(--green)">$99/month</td><td><span class="tag tag-green">Med-High</span></td><td><span class="tag tag-green">Very Low</span></td></tr>
   </table></div>
 
   <!-- Revenue Projections -->
-  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:#fff">Revenue Projections (Conservative)</h3>
+  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:var(--text)" data-en="Revenue Projections (Conservative)" data-zh="收入预测（保守）">Revenue Projections (Conservative)</h3>
   <div class="card" style="max-width:500px">
     <div class="bar-chart">
       <div class="bar-row"><div class="bar-label">Week 9</div><div class="bar-track"><div class="bar-fill" style="width:14%;background:var(--accent)">$198</div></div></div>
@@ -821,14 +884,14 @@ tr:hover td { background: rgba(108,92,231,0.05); }
       <div class="bar-row"><div class="bar-label">Week 11</div><div class="bar-track"><div class="bar-fill" style="width:28%;background:var(--accent)">$396</div></div></div>
       <div class="bar-row"><div class="bar-label">Week 12</div><div class="bar-track"><div class="bar-fill" style="width:36%;background:var(--green)">$495</div></div></div>
     </div>
-    <div style="margin-top:16px;text-align:right;font-size:16px;font-weight:700;color:var(--accent2)">Total W9-12: ~$1,386</div>
+    <div style="margin-top:16px;text-align:right;font-size:16px;font-weight:700;color:var(--accent)">Total W9-12: ~$1,386</div>
   </div>
 
   <!-- Pricing Rules -->
-  <h3 style="font-size:20px;font-weight:700;margin:32px 0 20px;color:#fff">Pricing Guardrails</h3>
+  <h3 style="font-size:20px;font-weight:700;margin:32px 0 20px;color:var(--text)">Pricing Guardrails</h3>
   <div class="grid grid-2">
     <div class="card" style="border-left:3px solid var(--red)">
-      <div style="font-weight:700;color:var(--red);margin-bottom:8px">NEVER</div>
+      <div style="font-weight:700;color:var(--red);margin-bottom:8px" data-en="NEVER" data-zh="绝不">NEVER</div>
       <ul style="list-style:none;font-size:13px;color:var(--text2)">
         <li>&#10007; Charge before 1 free campaign completed</li>
         <li>&#10007; Pay creators below $15 minimum</li>
@@ -836,7 +899,7 @@ tr:hover td { background: rgba(108,92,231,0.05); }
       </ul>
     </div>
     <div class="card" style="border-left:3px solid var(--green)">
-      <div style="font-weight:700;color:var(--green);margin-bottom:8px">ALWAYS</div>
+      <div style="font-weight:700;color:var(--green);margin-bottom:8px" data-en="ALWAYS" data-zh="始终">ALWAYS</div>
       <ul style="list-style:none;font-size:13px;color:var(--text2)">
         <li>&#10003; Pay creators within 24 hours</li>
         <li>&#10003; Full refund if zero completions</li>
@@ -848,27 +911,27 @@ tr:hover td { background: rgba(108,92,231,0.05); }
 
 <!-- SCORING SECTION -->
 <div class="section" id="scoring">
-  <div class="section-title">13 — Creator Scoring Model</div>
-  <div class="section-sub">Composite formula, tier system, anti-gaming measures</div>
+  <div class="section-title" data-en="13 — Creator Scoring Model" data-zh="13 — 创作者评分模型">13 — Creator Scoring Model</div>
+  <div class="section-sub" data-en="Composite formula, tier system, anti-gaming measures" data-zh="综合评分公式、等级体系、反作弊措施">Composite formula, tier system, anti-gaming measures</div>
 
   <!-- Scoring Formula Visual -->
-  <div class="card" style="margin-bottom:32px; background: linear-gradient(135deg, rgba(108,92,231,0.1), transparent); border:1px solid rgba(108,92,231,0.3)">
-    <div style="font-size:13px;color:var(--accent2);font-weight:700;margin-bottom:12px">PUSH SCORE FORMULA</div>
-    <div style="font-size:16px;font-weight:600;color:#fff;font-family:monospace;margin-bottom:16px">
+  <div class="card" style="margin-bottom:32px; background: var(--accent-bg); border:1px solid var(--border)">
+    <div style="font-size:13px;color:var(--accent);font-weight:700;margin-bottom:12px">PUSH SCORE FORMULA</div>
+    <div style="font-size:16px;font-weight:600;color:var(--text);font-family:monospace;margin-bottom:16px">
       Push Score = (Completion x 0.30) + (Reliability x 0.20) + (Quality x 0.25) + (Satisfaction x 0.15) + (Engagement x 0.10)
     </div>
     <div style="font-size:13px;color:var(--text2)">Score range: 0-100 | Higher scores predict better campaign outcomes</div>
   </div>
 
   <!-- Score Dimensions -->
-  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:#fff">Score Dimensions</h3>
+  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:var(--text)" data-en="Score Dimensions" data-zh="评分维度">Score Dimensions</h3>
   <div class="grid grid-5" style="margin-bottom:32px">
     <div class="card" style="text-align:center">
       <div style="position:relative;width:80px;height:80px;margin:0 auto 12px">
         <svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="35" fill="none" stroke="var(--bg3)" stroke-width="6"/><circle cx="40" cy="40" r="35" fill="none" stroke="var(--accent)" stroke-width="6" stroke-dasharray="66 154" stroke-linecap="round" transform="rotate(-90 40 40)"/></svg>
         <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:var(--accent)">30%</div>
       </div>
-      <div style="font-weight:700;font-size:13px">Completion</div>
+      <div style="font-weight:700;font-size:13px" data-en="Completion" data-zh="完成率">Completion</div>
       <div style="font-size:11px;color:var(--text3);margin-top:4px">Campaigns completed / accepted</div>
     </div>
     <div class="card" style="text-align:center">
@@ -876,7 +939,7 @@ tr:hover td { background: rgba(108,92,231,0.05); }
         <svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="35" fill="none" stroke="var(--bg3)" stroke-width="6"/><circle cx="40" cy="40" r="35" fill="none" stroke="var(--green)" stroke-width="6" stroke-dasharray="55 165" stroke-linecap="round" transform="rotate(-90 40 40)"/></svg>
         <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:var(--green)">25%</div>
       </div>
-      <div style="font-weight:700;font-size:13px">Quality</div>
+      <div style="font-weight:700;font-size:13px" data-en="Quality" data-zh="质量">Quality</div>
       <div style="font-size:11px;color:var(--text3);margin-top:4px">Merchant content rating</div>
     </div>
     <div class="card" style="text-align:center">
@@ -884,7 +947,7 @@ tr:hover td { background: rgba(108,92,231,0.05); }
         <svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="35" fill="none" stroke="var(--bg3)" stroke-width="6"/><circle cx="40" cy="40" r="35" fill="none" stroke="var(--orange)" stroke-width="6" stroke-dasharray="44 176" stroke-linecap="round" transform="rotate(-90 40 40)"/></svg>
         <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:var(--orange)">20%</div>
       </div>
-      <div style="font-weight:700;font-size:13px">Reliability</div>
+      <div style="font-weight:700;font-size:13px" data-en="Reliability" data-zh="可靠性">Reliability</div>
       <div style="font-size:11px;color:var(--text3);margin-top:4px">On-time, no-shows</div>
     </div>
     <div class="card" style="text-align:center">
@@ -892,7 +955,7 @@ tr:hover td { background: rgba(108,92,231,0.05); }
         <svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="35" fill="none" stroke="var(--bg3)" stroke-width="6"/><circle cx="40" cy="40" r="35" fill="none" stroke="var(--pink)" stroke-width="6" stroke-dasharray="33 187" stroke-linecap="round" transform="rotate(-90 40 40)"/></svg>
         <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:var(--pink)">15%</div>
       </div>
-      <div style="font-weight:700;font-size:13px">Satisfaction</div>
+      <div style="font-weight:700;font-size:13px" data-en="Satisfaction" data-zh="满意度">Satisfaction</div>
       <div style="font-size:11px;color:var(--text3);margin-top:4px">Merchant rebook score</div>
     </div>
     <div class="card" style="text-align:center">
@@ -900,25 +963,25 @@ tr:hover td { background: rgba(108,92,231,0.05); }
         <svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="35" fill="none" stroke="var(--bg3)" stroke-width="6"/><circle cx="40" cy="40" r="35" fill="none" stroke="var(--blue)" stroke-width="6" stroke-dasharray="22 198" stroke-linecap="round" transform="rotate(-90 40 40)"/></svg>
         <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:var(--blue)">10%</div>
       </div>
-      <div style="font-weight:700;font-size:13px">Engagement</div>
+      <div style="font-weight:700;font-size:13px" data-en="Engagement" data-zh="互动">Engagement</div>
       <div style="font-size:11px;color:var(--text3);margin-top:4px">Post engagement rate</div>
     </div>
   </div>
 
   <!-- Tier System -->
-  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:#fff">Tier System</h3>
+  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:var(--text)" data-en="Tier System" data-zh="等级体系">Tier System</h3>
   <div class="table-wrap" style="margin-bottom:32px"><table>
     <tr><th>Tier</th><th>Push Score</th><th>Badge</th><th>Campaigns Req.</th><th>Unlocks</th></tr>
     <tr><td style="font-weight:600">New</td><td>N/A</td><td style="font-size:20px">&#127381;</td><td>0</td><td>Basic campaigns, max 2 active</td></tr>
     <tr><td style="font-weight:600;color:var(--orange)">Rising</td><td>50+</td><td style="font-size:20px">&#11088;</td><td>3+</td><td>All standard campaigns, standby eligible</td></tr>
-    <tr><td style="font-weight:600;color:var(--accent2)">Reliable</td><td>70+</td><td style="font-size:20px">&#11088;&#11088;</td><td>8+</td><td>Priority matching, premium campaigns, higher payout</td></tr>
+    <tr><td style="font-weight:600;color:var(--accent)">Reliable</td><td>70+</td><td style="font-size:20px">&#11088;&#11088;</td><td>8+</td><td>Priority matching, premium campaigns, higher payout</td></tr>
     <tr><td style="font-weight:600;color:var(--green)">Elite</td><td>85+</td><td style="font-size:20px">&#11088;&#11088;&#11088;</td><td>20+</td><td>Top-tier campaigns, highest payouts, featured profile</td></tr>
   </table></div>
 
   <!-- Score Decay & Disputes -->
   <div class="grid grid-2">
     <div class="card">
-      <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;color:#fff">Score Decay</h3>
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;color:var(--text)" data-en="Score Decay" data-zh="分数衰减">Score Decay</h3>
       <div style="font-size:13px;color:var(--text2);line-height:1.8">
         <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span>Active (1+ campaign/30d)</span><span style="color:var(--green)">No decay</span></div>
         <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span>Inactive 30-60 days</span><span style="color:var(--orange)">-2 pts/month</span></div>
@@ -927,7 +990,7 @@ tr:hover td { background: rgba(108,92,231,0.05); }
       </div>
     </div>
     <div class="card">
-      <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;color:#fff">Dispute Impact</h3>
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;color:var(--text)" data-en="Dispute Impact" data-zh="争议影响">Dispute Impact</h3>
       <div style="font-size:13px;color:var(--text2);line-height:1.8">
         <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span>Creator at fault</span><span style="color:var(--red)">-15 points</span></div>
         <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span>Partially at fault</span><span style="color:var(--orange)">-8 points</span></div>
@@ -938,7 +1001,7 @@ tr:hover td { background: rgba(108,92,231,0.05); }
   </div>
 
   <!-- Anti-Gaming -->
-  <h3 style="font-size:20px;font-weight:700;margin:32px 0 20px;color:#fff">Anti-Gaming Measures</h3>
+  <h3 style="font-size:20px;font-weight:700;margin:32px 0 20px;color:var(--text)">Anti-Gaming Measures</h3>
   <div class="table-wrap"><table>
     <tr><th>Gaming Attempt</th><th>Detection</th><th>Prevention</th></tr>
     <tr><td>Only accepting easy campaigns</td><td>Track difficulty distribution</td><td>Require mix for tier promotion</td></tr>
@@ -950,25 +1013,25 @@ tr:hover td { background: rgba(108,92,231,0.05); }
 
 <!-- DOCUMENT HUB -->
 <div class="section" id="dochub">
-  <div class="section-title">Document Hub</div>
-  <div class="section-sub">Browse full content of all 8 PUSH strategic documents</div>
+  <div class="section-title" data-en="Document Hub" data-zh="文档中心">Document Hub</div>
+  <div class="section-sub" data-en="Browse full content of all 8 PUSH strategic documents" data-zh="浏览所有8份PUSH战略文档的完整内容">Browse full content of all 8 PUSH strategic documents</div>
 
   <div class="tabs" id="doc-tabs">
-    <button class="tab-btn active" onclick="switchDocTab(event,'doc-00')">00 Index</button>
-    <button class="tab-btn" onclick="switchDocTab(event,'doc-01')">01 Strategy</button>
-    <button class="tab-btn" onclick="switchDocTab(event,'doc-02')">02 Workflow</button>
-    <button class="tab-btn" onclick="switchDocTab(event,'doc-03')">03 Pain Points</button>
-    <button class="tab-btn" onclick="switchDocTab(event,'doc-04')">04 Risks</button>
-    <button class="tab-btn" onclick="switchDocTab(event,'doc-05')">05 Execution</button>
-    <button class="tab-btn" onclick="switchDocTab(event,'doc-11')">11 Cold Start</button>
-    <button class="tab-btn" onclick="switchDocTab(event,'doc-12')">12 Pricing</button>
-    <button class="tab-btn" onclick="switchDocTab(event,'doc-13')">13 Scoring</button>
+    <button class="tab-btn active" onclick="switchDocTab(event,'doc-00')" data-en="00 Index" data-zh="00 索引">00 Index</button>
+    <button class="tab-btn" onclick="switchDocTab(event,'doc-01')" data-en="01 Strategy" data-zh="01 战略">01 Strategy</button>
+    <button class="tab-btn" onclick="switchDocTab(event,'doc-02')" data-en="02 Workflow" data-zh="02 工作流">02 Workflow</button>
+    <button class="tab-btn" onclick="switchDocTab(event,'doc-03')" data-en="03 Pain Points" data-zh="03 痛点">03 Pain Points</button>
+    <button class="tab-btn" onclick="switchDocTab(event,'doc-04')" data-en="04 Risks" data-zh="04 风险">04 Risks</button>
+    <button class="tab-btn" onclick="switchDocTab(event,'doc-05')" data-en="05 Execution" data-zh="05 执行">05 Execution</button>
+    <button class="tab-btn" onclick="switchDocTab(event,'doc-11')" data-en="11 Cold Start" data-zh="11 冷启动">11 Cold Start</button>
+    <button class="tab-btn" onclick="switchDocTab(event,'doc-12')" data-en="12 Pricing" data-zh="12 定价">12 Pricing</button>
+    <button class="tab-btn" onclick="switchDocTab(event,'doc-13')" data-en="13 Scoring" data-zh="13 评分">13 Scoring</button>
   </div>
 
   <!-- Doc 00 -->
   <div class="tab-content active" id="doc-00">
     <div class="doc-content">
-      <div class="doc-badge" style="background:rgba(108,92,231,0.2);color:var(--accent2)">DOC-00 | Document Index</div>
+      <div class="doc-badge" style="background:var(--accent-bg);color:var(--accent)">DOC-00 | Document Index</div>
       <h2>PUSH Document Index & Navigation Guide</h2>
       <h3>Document Map: All 13 Authoritative Documents</h3>
       <div class="table-wrap doc-table"><table>
@@ -984,7 +1047,7 @@ tr:hover td { background: rgba(108,92,231,0.05); }
       </table></div>
       <h3>Reading Paths by Role</h3>
       <div class="grid grid-3" style="margin-top:12px">
-        <div class="card"><div style="font-weight:700;margin-bottom:8px;color:var(--accent2)">New to Push</div><div class="card-desc">4-6 hours: Doc 01 &rarr; 04 &rarr; 03 &rarr; 02 &rarr; 08 &rarr; 09</div></div>
+        <div class="card"><div style="font-weight:700;margin-bottom:8px;color:var(--accent)">New to Push</div><div class="card-desc">4-6 hours: Doc 01 &rarr; 04 &rarr; 03 &rarr; 02 &rarr; 08 &rarr; 09</div></div>
         <div class="card"><div style="font-weight:700;margin-bottom:8px;color:var(--green)">Investor Prep</div><div class="card-desc">3-4 hours: Doc 01 &rarr; 07 &rarr; 08 &rarr; 09 &rarr; 03 &rarr; 04</div></div>
         <div class="card"><div style="font-weight:700;margin-bottom:8px;color:var(--orange)">Product Leadership</div><div class="card-desc">5-7 hours: Doc 01 &rarr; 04 &rarr; 03 &rarr; 05 &rarr; 06 &rarr; 02 &rarr; 09</div></div>
         <div class="card"><div style="font-weight:700;margin-bottom:8px;color:var(--red)">Operations & Fraud</div><div class="card-desc">4-5 hours: Doc 02 &rarr; 06 &rarr; 05 &rarr; 03 &rarr; 04</div></div>
@@ -1010,7 +1073,7 @@ tr:hover td { background: rgba(108,92,231,0.05); }
   <!-- Doc 01 -->
   <div class="tab-content" id="doc-01">
     <div class="doc-content">
-      <div class="doc-badge" style="background:rgba(108,92,231,0.2);color:var(--accent2)">DOC-01 | v1.1 | Active</div>
+      <div class="doc-badge" style="background:var(--accent-bg);color:var(--accent)">DOC-01 | v1.1 | Active</div>
       <h2>PUSH Master Strategy</h2>
       <blockquote>Push is a local creator performance infrastructure layer that helps merchants acquire customers through measurable creator-driven demand.</blockquote>
       <h3>Core Problem</h3>
@@ -1033,7 +1096,7 @@ tr:hover td { background: rgba(108,92,231,0.05); }
   <!-- Doc 02 -->
   <div class="tab-content" id="doc-02">
     <div class="doc-content">
-      <div class="doc-badge" style="background:rgba(0,206,201,0.2);color:var(--green)">DOC-02 | v1.1 | Active</div>
+      <div class="doc-badge" style="background:var(--green-bg);color:var(--green)">DOC-02 | v1.1 | Active</div>
       <h2>20x Workflow Architecture</h2>
       <blockquote>The workflow should feel like a controlled economic system, not a manual project-management pipeline.</blockquote>
       <h3>Design Principles</h3><p>Fast to understand, hard to misuse, easy to repeat, measurable at every stage, resilient against drop-off and fraud, produces better data over time.</p>
@@ -1057,7 +1120,7 @@ tr:hover td { background: rgba(108,92,231,0.05); }
   <!-- Doc 03 -->
   <div class="tab-content" id="doc-03">
     <div class="doc-content">
-      <div class="doc-badge" style="background:rgba(253,203,110,0.2);color:var(--orange)">DOC-03 | v1.1 | Active</div>
+      <div class="doc-badge" style="background:var(--orange-bg);color:var(--orange)">DOC-03 | v1.1 | Active</div>
       <h2>Pain Points & Root Cause Map</h2>
       <blockquote>The strongest businesses correctly identify which complaints are structural and build around resolving them.</blockquote>
       <h3>Merchant Pain Points</h3>
@@ -1079,7 +1142,7 @@ tr:hover td { background: rgba(108,92,231,0.05); }
   <!-- Doc 04 -->
   <div class="tab-content" id="doc-04">
     <div class="doc-content">
-      <div class="doc-badge" style="background:rgba(225,112,85,0.2);color:var(--red)">DOC-04 | v1.1 | Active</div>
+      <div class="doc-badge" style="background:var(--red-bg);color:var(--red)">DOC-04 | v1.1 | Active</div>
       <h2>Risk Register & Defense Playbook</h2>
       <blockquote>Push wins by making the platform more economically rational than off-platform behavior.</blockquote>
       <h3>Strategic Risks (R1-R3)</h3>
@@ -1103,7 +1166,7 @@ tr:hover td { background: rgba(108,92,231,0.05); }
   <!-- Doc 05 -->
   <div class="tab-content" id="doc-05">
     <div class="doc-content">
-      <div class="doc-badge" style="background:rgba(116,185,255,0.2);color:var(--blue)">DOC-05 | v1.1 | Active</div>
+      <div class="doc-badge" style="background:rgba(37,99,235,0.08);color:var(--blue)">DOC-05 | v1.1 | Active</div>
       <h2>Execution Skills Playbook</h2>
       <blockquote>Push will succeed only if the team can: acquire right merchants, recruit right creators, verify/route value, and convert repetition into data, trust, and lock-in.</blockquote>
       <h3>9 Core Skills</h3>
@@ -1112,7 +1175,7 @@ tr:hover td { background: rgba(108,92,231,0.05); }
       <p><strong>3. Campaign Design:</strong> One clear goal, simple requirements, verifiable steps, believable payout, reason to repeat.</p>
       <p><strong>4. Operational Discipline:</strong> Clear milestone states, standard templates, quick exception ID. Ops feel predictable and rule-based.</p>
       <p><strong>5. Data Interpretation:</strong> 9 key metrics: merchant repeat rate, creator repeat completion, fill rate, standby response, time-to-fill, payout speed, dispute rate, progression rate, on-platform repeat rate.</p>
-      <p><strong>6. Anti-Cliche Positioning:</strong> Frame around outcomes and infrastructure, not lazy platform analogies.</p>
+      <p><strong>6. Anti-Clich&eacute; Positioning:</strong> Frame around outcomes and infrastructure, not lazy platform analogies.</p>
       <p><strong>7. Retention Architecture:</strong> Make participation economically compounding. Off-platform must feel irrational.</p>
       <p><strong>8. Risk Management:</strong> Recognize danger early. Identify fraud patterns, weak verticals, churn risk.</p>
       <p><strong>9. Founder Operating:</strong> System integrator. Resist ornamental features. Avoid: aesthetics before economics, expanding before density, social features too early.</p>
@@ -1122,7 +1185,7 @@ tr:hover td { background: rgba(108,92,231,0.05); }
   <!-- Doc 11 -->
   <div class="tab-content" id="doc-11">
     <div class="doc-content">
-      <div class="doc-badge" style="background:rgba(253,121,168,0.2);color:var(--pink)">DOC-11 | v1.0 | Active</div>
+      <div class="doc-badge" style="background:rgba(190,24,93,0.08);color:var(--pink)">DOC-11 | v1.0 | Active</div>
       <h2>Cold Start Execution Plan</h2>
       <blockquote>Step-by-step execution for the first 12 weeks, starting from zero merchants and zero creators.</blockquote>
       <h3>Phase 1: Foundation (Week 1-4)</h3>
@@ -1144,7 +1207,7 @@ tr:hover td { background: rgba(108,92,231,0.05); }
   <!-- Doc 12 -->
   <div class="tab-content" id="doc-12">
     <div class="doc-content">
-      <div class="doc-badge" style="background:rgba(0,206,201,0.2);color:var(--green)">DOC-12 | v1.0 | Active</div>
+      <div class="doc-badge" style="background:var(--green-bg);color:var(--green)">DOC-12 | v1.0 | Active</div>
       <h2>V0.1 Pricing Model</h2>
       <blockquote>Price for learning, not for revenue.</blockquote>
       <h3>Phase 1: Free Launch (Week 1-8)</h3>
@@ -1163,11 +1226,11 @@ tr:hover td { background: rgba(108,92,231,0.05); }
   <!-- Doc 13 -->
   <div class="tab-content" id="doc-13">
     <div class="doc-content">
-      <div class="doc-badge" style="background:rgba(108,92,231,0.2);color:var(--accent2)">DOC-13 | v1.0 | Active</div>
+      <div class="doc-badge" style="background:var(--accent-bg);color:var(--accent)">DOC-13 | v1.0 | Active</div>
       <h2>V0.1 Creator Scoring Model</h2>
       <blockquote>Simple enough for spreadsheets, meaningful enough to predict outcomes, transparent enough for creators, resistant to gaming.</blockquote>
       <h3>Composite Formula</h3>
-      <p style="font-family:monospace;font-size:14px;color:var(--accent2);margin:12px 0">Push Score = (Completion x 0.30) + (Reliability x 0.20) + (Quality x 0.25) + (Satisfaction x 0.15) + (Engagement x 0.10)</p>
+      <p style="font-family:monospace;font-size:14px;color:var(--accent);margin:12px 0">Push Score = (Completion x 0.30) + (Reliability x 0.20) + (Quality x 0.25) + (Satisfaction x 0.15) + (Engagement x 0.10)</p>
       <h3>Dimensions</h3>
       <p><strong>Completion (30%):</strong> campaigns completed / accepted. Highest weight because non-completion is worthless to merchants.</p>
       <p><strong>Quality (25%):</strong> Merchant content rating 1-5.</p>
@@ -1184,21 +1247,23 @@ tr:hover td { background: rgba(108,92,231,0.05); }
 </div>
 
 <!-- FOOTER -->
-<div style="text-align:center;padding:60px 24px;color:var(--text3);font-size:13px;border-top:1px solid rgba(108,92,231,0.1)">
-  <div style="font-weight:700;color:var(--accent2);font-size:16px;margin-bottom:8px">PUSH</div>
-  <div>Local Creator Performance Infrastructure</div>
-  <div style="margin-top:8px">8 Core Documents | 5 Strategic Pillars | 12-Week Execution Plan</div>
+<div style="text-align:center;padding:60px 24px;color:var(--text3);font-size:13px;border-top:1px solid var(--border)">
+  <div style="font-weight:700;color:var(--accent);font-size:16px;margin-bottom:8px">PUSH</div>
+  <div data-en="Local Creator Performance Infrastructure" data-zh="本地创作者绩效基础设施">Local Creator Performance Infrastructure</div>
+  <div style="margin-top:8px" data-en="8 Core Documents | 5 Strategic Pillars | 12-Week Execution Plan" data-zh="8份核心文档 | 5大战略支柱 | 12周执行计划">8 Core Documents | 5 Strategic Pillars | 12-Week Execution Plan</div>
   <div style="margin-top:16px;color:var(--text3)">Last updated: April 2026</div>
 </div>
 
-<footer style="background:rgba(10,10,15,0.95);border-top:1px solid rgba(108,92,231,0.2);padding:40px 24px;text-align:center;color:var(--text2);font-size:14px;">
+<footer style="background:#fff;border-top:1px solid var(--border);padding:40px 24px;text-align:center;color:var(--text2);font-size:14px;">
   <div style="max-width:1400px;margin:0 auto;">
-    <p style="margin-bottom:12px;font-weight:600;color:var(--accent2);font-size:16px;">PUSH Team Dashboard</p>
+    <p style="margin-bottom:12px;font-weight:600;color:var(--accent);font-size:16px;" data-en="PUSH Team Dashboard" data-zh="PUSH 团队仪表盘">PUSH Team Dashboard</p>
     <p style="margin-bottom:16px;">Explore more:
       <a href="project-intro.html" style="color:var(--accent);margin:0 8px;">Project Intro</a> |
       <a href="pitch-deck.html" style="color:var(--accent);margin:0 8px;">Pitch Deck</a> |
       <a href="prospects.html" style="color:var(--accent);margin:0 8px;">Prospects</a> |
-      <a href="challenges.html" style="color:var(--accent);margin:0 8px;">Challenges</a>
+      <a href="challenges.html" style="color:var(--accent);margin:0 8px;">Challenges</a> |
+      <a href="retention-defense.html" style="color:var(--accent);margin:0 8px;">Retention</a> |
+      <a href="platform-value.html" style="color:var(--accent);margin:0 8px;">Platform Value</a>
     </p>
     <p style="opacity:0.5;">&copy; 2025 Push Team. All rights reserved.</p>
   </div>
@@ -1235,6 +1300,19 @@ function toggleAccordion(header) {
   body.classList.toggle('open');
 }
 
+// Scroll-triggered fade-in animations
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.section, .card, .stat-card, .table-wrap, .timeline').forEach(el => {
+  el.classList.add('fade-in');
+  fadeObserver.observe(el);
+});
+
 // Active nav highlighting
 window.addEventListener('scroll', () => {
   const sections = document.querySelectorAll('.section, .hero');
@@ -1248,6 +1326,25 @@ window.addEventListener('scroll', () => {
     if (a.getAttribute('href') === '#' + current) a.classList.add('active');
   });
 });
+
+// Language toggle
+function setLang(lang) {
+  localStorage.setItem('push-lang', lang);
+  document.querySelectorAll('[data-en]').forEach(el => {
+    el.textContent = lang === 'en' ? el.dataset.en : el.dataset.zh;
+  });
+  document.querySelectorAll('[data-en-html]').forEach(el => {
+    el.innerHTML = lang === 'en' ? el.dataset.enHtml : el.dataset.zhHtml;
+  });
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+  document.body.classList.toggle('lang-en', lang === 'en');
+  document.body.classList.toggle('lang-zh', lang === 'zh');
+}
+(function() {
+  const lang = localStorage.getItem('push-lang') || 'en';
+  setLang(lang);
+})();
 </script>
 </body>
 </html>
