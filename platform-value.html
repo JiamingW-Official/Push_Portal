@@ -995,13 +995,14 @@ BTN.addEventListener('click', () => {
   setTimeout(() => {
     lang = lang === 'en' ? 'zh' : 'en';
     localStorage.setItem('push-lang', lang);
-    /* lang-reveal */document.documentElement.style.opacity='1';
     applyLang();
     document.body.classList.remove('lang-fade');
   }, 150);
 });
 
 applyLang();
+/* lang-reveal */document.documentElement.style.opacity='1';
+document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh' : 'en');
 
 // SCROLL ANIMATIONS
 const observer = new IntersectionObserver((entries) => {

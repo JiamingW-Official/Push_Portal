@@ -762,8 +762,6 @@ document.querySelectorAll('.desc-text').forEach(function(el) {
   function applyLang(l) {
     lang = l;
     localStorage.setItem('push-lang', l);
-    /* lang-reveal */document.documentElement.style.opacity='1';
-    document.documentElement.setAttribute('lang', lang === 'zh' || l === 'zh' ? 'zh' : 'en');
     document.querySelectorAll('[data-en]').forEach(el => {
       const val = el.getAttribute('data-' + l);
       if (val !== null) el.innerHTML = val;
@@ -787,6 +785,8 @@ document.querySelectorAll('.desc-text').forEach(function(el) {
     });
   }
   applyLang(lang);
+  /* lang-reveal */document.documentElement.style.opacity='1';
+  document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh' : 'en');
 })();
 
 // Mobile navigation

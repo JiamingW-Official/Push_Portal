@@ -844,8 +844,6 @@ function applyLang(lang) {
 function toggleLang() {
   currentLang = currentLang === 'en' ? 'zh' : 'en';
   localStorage.setItem('push-lang', currentLang);
-    /* lang-reveal */document.documentElement.style.opacity='1';
-    document.documentElement.setAttribute('lang', lang === 'zh' || l === 'zh' ? 'zh' : 'en');
   applyLang(currentLang);
 }
 
@@ -867,6 +865,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Apply immediately too
 applyLang(currentLang);
+/* lang-reveal */document.documentElement.style.opacity='1';
+document.documentElement.setAttribute('lang', currentLang === 'zh' ? 'zh' : 'en');
 
 // Nav scroll shadow + scroll progress bar
 (function() {

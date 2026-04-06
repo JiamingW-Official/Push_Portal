@@ -1132,8 +1132,6 @@ function applyLang(lang) {
     if (mobileBtn) mobileBtn.textContent = lang === 'zh' ? 'EN / 中' : '中 / EN';
     currentLang = lang;
     localStorage.setItem('push-lang', lang);
-    /* lang-reveal */document.documentElement.style.opacity='1';
-    document.documentElement.setAttribute('lang', lang === 'zh' || l === 'zh' ? 'zh' : 'en');
     document.body.style.opacity = '1';
   }, 75);
 }
@@ -1144,6 +1142,8 @@ function toggleLang() {
 
 document.addEventListener('DOMContentLoaded', () => {
   applyLang(currentLang);
+  /* lang-reveal */document.documentElement.style.opacity='1';
+  document.documentElement.setAttribute('lang', currentLang === 'zh' ? 'zh' : 'en');
 });
 
 /* SCROLL FADE IN */

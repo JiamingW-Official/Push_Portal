@@ -1023,8 +1023,6 @@ strong{font-weight:600;color:var(--text);}
   function applyLang(l) {
     lang = l;
     localStorage.setItem('push-lang', l);
-    /* lang-reveal */document.documentElement.style.opacity='1';
-    document.documentElement.setAttribute('lang', lang === 'zh' || l === 'zh' ? 'zh' : 'en');
     document.querySelectorAll('[data-en]').forEach(function(el) {
       const val = el.getAttribute('data-' + l);
       if (val !== null) el.innerHTML = val;
@@ -1043,6 +1041,8 @@ strong{font-weight:600;color:var(--text);}
     }, 150);
   });
   applyLang(lang);
+  /* lang-reveal */document.documentElement.style.opacity='1';
+  document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh' : 'en');
 })();
 
 // -- Scroll fade --

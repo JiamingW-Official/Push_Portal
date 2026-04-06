@@ -999,8 +999,6 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
   function applyLang(l) {
     lang = l;
     localStorage.setItem('push-lang', l);
-    document.documentElement.setAttribute('lang', l);
-    /* lang-reveal */document.documentElement.style.opacity='1';
     document.querySelectorAll('[data-en]').forEach(el => {
       const val = el.getAttribute('data-' + l);
       if (val !== null) el.innerHTML = val;
@@ -1016,6 +1014,8 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
     setTimeout(() => { applyLang(lang === 'en' ? 'zh' : 'en'); document.body.style.opacity = '1'; }, 150);
   });
   applyLang(lang);
+  /* lang-reveal */document.documentElement.style.opacity='1';
+  document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh' : 'en');
 })();
 
 const observer = new IntersectionObserver((entries) => {

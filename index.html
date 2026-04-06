@@ -1455,8 +1455,6 @@ footer{background:#0f0f1a;padding:40px 64px;border-top:1px solid var(--border);f
   function applyLang(l) {
     lang = l;
     localStorage.setItem('push-lang', l);
-    /* lang-reveal */document.documentElement.style.opacity='1';
-    document.documentElement.setAttribute('lang', lang === 'zh' || l === 'zh' ? 'zh' : 'en');
     document.querySelectorAll('[data-en]').forEach(el => {
       const val = el.getAttribute('data-' + l);
       if (val !== null) el.innerHTML = val;
@@ -1472,6 +1470,8 @@ footer{background:#0f0f1a;padding:40px 64px;border-top:1px solid var(--border);f
     setTimeout(() => { applyLang(lang === 'en' ? 'zh' : 'en'); document.body.style.opacity = '1'; }, 150);
   });
   applyLang(lang);
+  /* lang-reveal */document.documentElement.style.opacity='1';
+  document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh' : 'en');
 })();
 
 /* — Doc hub tab switching — */
