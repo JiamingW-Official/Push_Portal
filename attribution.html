@@ -33,91 +33,119 @@
   --bg: #ffffff;
   --bg2: #f8f9fa;
   --radius: 8px;
+  --shadow: 0 4px 20px rgba(0,0,0,0.08);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
 }
+
+/* SCROLL PROGRESS BAR */
+.scroll-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-light));z-index:300;width:0;transition:none;pointer-events:none;box-shadow:0 0 8px rgba(79,70,229,0.4);}
 
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:var(--text);font-size:15px;line-height:1.75;overflow-x:hidden;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;word-break:break-word;}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.75;overflow-x:hidden;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;word-break:break-word;}
+html[lang="zh"] body{line-height:2.0;letter-spacing:0.01em;}
+html[lang="zh"] .hero-title{line-height:1.25;}
+html[lang="zh"] .section-title{line-height:1.5;}
+strong{font-weight:600;color:var(--text);}
+.hero strong{color:inherit;}
+p{max-width:680px;}
+ul,ol{padding-left:20px;}
+li{margin-bottom:6px;line-height:1.7;}
+a{color:var(--accent);text-decoration:none;transition:color 0.15s;}
+a:hover{color:var(--accent-light);}
+.nav-logo,.nav-logo:hover{color:var(--accent);}
 
-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;background:#ffffff;border-bottom:1px solid var(--border);transition:box-shadow 0.2s;contain:layout style paint;}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;padding:0 24px;gap:6px;background:#ffffff;border-bottom:1px solid var(--border);transition:box-shadow 0.2s;contain:layout style paint;}
+nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
 .nav-logo{font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;margin-right:8px;flex-shrink:0;text-decoration:none;}
-.nav-links{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
-.nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:color 0.15s,background 0.15s;white-space:nowrap;text-decoration:none;}
+.nav-links{display:flex;gap:6px;flex-wrap:wrap;flex:1;}
+.nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:color 0.15s,background-color 0.15s;white-space:nowrap;text-decoration:none;position:relative;}
 .nav-links a:hover{color:var(--accent);background:var(--accent-bg);}
 .nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);}
+.nav-links a.active::after{content:'';position:absolute;bottom:0;left:12px;right:12px;height:2px;background:var(--accent);border-radius:1px;}
 #lang-btn{
   flex-shrink:0;background:var(--accent);color:#fff;font-weight:700;font-size:13px;
   padding:7px 18px;border-radius:8px;border:none;cursor:pointer;transition:background 0.15s;
 }
 #lang-btn:hover{background:var(--accent-dark);}
-@media(max-width:768px){
-  .nav-links{display:none;}
-}
-/* ── MOBILE HAMBURGER ── */
-.nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;flex-shrink:0;margin-left:4px;}
-.nav-burger span{display:block;width:22px;height:2px;background:var(--text,#111827);border-radius:2px;transition:transform 0.2s,opacity 0.2s;}
-.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
-.nav-burger.open span:nth-child(2){opacity:0;}
-.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-.nav-mobile-panel{display:none;position:fixed;top:60px;left:0;right:0;background:#ffffff;border-bottom:1px solid var(--border,#e5e7eb);padding:12px 16px 20px;flex-direction:column;gap:2px;z-index:999;box-shadow:0 8px 32px rgba(0,0,0,0.12);}
-.nav-mobile-panel.open{display:flex;}
-.nav-mobile-panel a{padding:12px 16px;border-radius:8px;font-size:15px;font-weight:500;color:var(--text,#111827);text-decoration:none;transition:background 0.15s,color 0.15s;contain:layout style;}
-.nav-mobile-panel a:hover{background:var(--bg2,#f8f9fa);}
-.nav-mobile-panel a.active{color:var(--accent,#4f46e5);background:var(--accent-bg,rgba(79,70,229,0.06));font-weight:700;}
-.nav-mobile-panel .mobile-lang-row{display:flex;align-items:center;padding:12px 16px 4px;gap:12px;border-top:1px solid var(--border,#e5e7eb);margin-top:8px;}
-.nav-mobile-panel .mobile-lang-label{font-size:12px;color:var(--text3,#9ca3af);font-weight:500;}
-@media(max-width:768px){
-  .nav-links,.navlinks{display:none !important;}
-  .nav-burger{display:flex !important;}
-}
 
+/* FADE-IN */
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.45s ease,transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94);will-change:opacity,transform;animation:fadeInFallback 0s 4s forwards;}
+.fade-in.visible,.visible .fade-in{opacity:1;transform:none;animation:none;}
+@keyframes fadeInFallback{to{opacity:1;transform:translateY(0);}}
+
+/* HERO */
 .hero{
-  background:#ffffff;
-  padding:100px 40px 48px;
-  border-bottom:1px solid var(--border);
+  background:#0f0f1a;
+  padding:140px 64px 80px;
+  text-align:center;position:relative;overflow:hidden;
 }
-.hero-dots{display:none;}
-.hero-inner{max-width:1000px;margin:0 auto;}
+.hero-inner{max-width:1000px;width:100%;margin:0 auto;}
 .hero-badge{
-  font-size:13px;font-weight:600;color:var(--accent);
-  letter-spacing:0.5px;text-transform:none;
-  margin-bottom:16px;display:block;
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(217,119,6,0.18);border:1px solid rgba(217,119,6,0.45);
+  color:#fbbf24;font-size:13px;font-weight:600;letter-spacing:0.5px;
+  text-transform:none;
+  padding:8px 20px;border-radius:100px;margin-bottom:28px;position:relative;z-index:1;
 }
 .hero-title{
-  font-size:clamp(24px,5vw,36px);font-weight:800;
-  letter-spacing:-0.5px;line-height:1.3;color:var(--text);
-  max-width:700px;margin-bottom:8px;
+  font-size:clamp(3rem,5.5vw,4.5rem);font-weight:800;
+  letter-spacing:-2.5px;line-height:1.15;color:#fff;
+  max-width:800px;margin:0 auto 20px;position:relative;z-index:1;
 }
+.hero-title span{color:var(--accent-light);}
 .hero-sub{
-  font-size:16px;font-weight:400;
-  color:var(--text2);
-  max-width:560px;line-height:1.65;
+  color:rgba(255,255,255,0.55);font-size:16px;font-weight:400;line-height:1.65;
+  max-width:560px;position:relative;z-index:1;margin:0 auto;
 }
 
-.section{padding:64px 40px;background:#ffffff;border-top:1px solid var(--border);}
+/* CROSS-LINK BANNER */
+.cross-link{
+  max-width:1000px;margin:0 auto;padding:14px 24px;
+  background:var(--accent-bg);border:1px solid var(--border);border-radius:var(--radius);
+  font-size:14px;color:var(--text2);text-align:center;
+}
+.cross-link a{font-weight:600;}
 
-.section-inner{max-width:1000px;margin:0 auto;}
-.section-bg2{background:#ffffff;}
-.section-dark{background:var(--primary);border-top:none;}
+/* SECTION WRAPPERS — design system */
+.sw-white{background:var(--bg);}
+.sw-gray{background:var(--bg2);border-top:1px solid var(--border);}
+.sw-gray + .sw-white{border-top:1px solid var(--border);}
+.sw-white + .sw-white{border-top:1px solid var(--border);}
+.sw-dark{background:var(--primary);}
 
+.section{padding:80px 64px;max-width:1000px;margin:0 auto;contain:layout style paint;}
+.sw-gray .section{padding:64px 64px;}
+
+/* Section labels — design system with ::before accent bar */
 .section-label{
   font-size:13px;font-weight:600;letter-spacing:0.5px;text-transform:none;
-  color:var(--accent);margin-bottom:10px;
+  color:var(--accent);margin-bottom:16px;
+  display:flex;align-items:center;gap:10px;
 }
+.section-label::before{
+  content:'';display:block;
+  width:20px;height:2px;background:var(--accent);flex-shrink:0;
+}
+.section-label-dark{color:var(--accent-light);letter-spacing:0.5px;}
+.section-label-dark::before{background:var(--accent-light);}
+
 .section-title{
-  font-size:36px;font-weight:800;letter-spacing:-0.5px;
-  color:var(--primary);line-height:1.4;margin-bottom:8px;
+  font-size:clamp(26px,3.5vw,36px);font-weight:800;letter-spacing:-0.5px;
+  color:var(--primary);margin-bottom:16px;line-height:1.4;
 }
 .section-title-white{color:#fff;}
 .section-sub{
-  font-size:16px;color:var(--text2);max-width:640px;line-height:1.65;
-  margin-bottom:48px;
+  font-size:16px;font-weight:400;color:var(--text2);
+  max-width:640px;line-height:1.65;
 }
 .section-sub-white{color:rgba(255,255,255,0.5);}
+.section-header{margin-bottom:56px;}
 
 blockquote.principle{
   border:1px solid var(--border);
-  border-radius:8px;
+  border-radius:var(--radius);
   padding:20px 24px;
   font-size:17px;font-style:italic;color:var(--text);
   background:var(--bg2);line-height:1.7;margin:0;
@@ -136,13 +164,15 @@ blockquote.principle cite{
 
 .attr-questions{
   display:flex;flex-direction:column;gap:0;
-  border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-top:36px;
+  border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-top:36px;
 }
 .attr-q{
   display:grid;grid-template-columns:48px 1fr;
   border-bottom:1px solid var(--border);
+  transition:background 0.2s;
 }
 .attr-q:last-child{border-bottom:none;}
+.attr-q:hover{background:var(--bg2);}
 .attr-q-num{
   font-family:'IBM Plex Mono',monospace;
   font-size:12px;font-weight:500;color:var(--accent);
@@ -160,10 +190,16 @@ blockquote.principle cite{
 .item-row{
   display:grid;grid-template-columns:40px 1fr;gap:0;
   padding:24px 0;border-bottom:1px solid var(--border);
+  border-left:3px solid transparent;
+  transition:border-color 0.2s,box-shadow 0.2s,background 0.2s;
   contain:layout style;
 }
 .item-row:first-child{border-top:1px solid var(--border);}
-.item-row:hover{background:#fafafa;}
+.item-row:hover{
+  background:var(--bg2) !important;
+  border-left-color:var(--accent);
+  box-shadow:0 2px 8px rgba(79,70,229,0.06);
+}
 .item-num{
   font-family:'IBM Plex Mono',monospace;
   font-size:13px;font-weight:600;
@@ -177,7 +213,7 @@ blockquote.principle cite{
   font-size:13px;font-weight:600;letter-spacing:0.5px;text-transform:none;
   color:var(--accent);margin-bottom:10px;
 }
-.item-desc{font-size:14px;color:var(--text2);line-height:1.65;margin-bottom:10px;}
+.item-desc{font-size:14px;color:var(--text2);line-height:1.65;margin-bottom:10px;max-width:680px;}
 .item-list{
   list-style:none;display:flex;flex-wrap:wrap;gap:6px 16px;
   padding:0;margin:0;
@@ -192,16 +228,16 @@ blockquote.principle cite{
 
 .data-table{
   width:100%;border-collapse:collapse;
-  font-size:13px;margin-top:8px;border-radius:8px;
+  font-size:13px;margin-top:8px;border-radius:var(--radius);
 }
 .data-table th{
-  background:#f8f9fa;
+  background:var(--bg2);
   font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
   color:var(--text2);padding:12px 16px;
   border-bottom:2px solid var(--border);text-align:left;
 }
 .data-table td{
-  padding:12px 16px;border-bottom:1px solid #e5e7eb;
+  padding:12px 16px;border-bottom:1px solid var(--border);
   color:var(--text2);line-height:1.55;vertical-align:top;
 }
 .data-table tr:last-child td{border-bottom:none;}
@@ -216,14 +252,16 @@ blockquote.principle cite{
 
 .campaign-grid{
   display:grid;grid-template-columns:1fr 1fr;
-  gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;
+  gap:0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;
 }
 @media(max-width:640px){.campaign-grid{grid-template-columns:1fr;}}
 .campaign-cell{
   padding:24px 28px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);
+  transition:border-color 0.2s,box-shadow 0.2s,background 0.2s;
 }
 .campaign-cell:nth-child(2n){border-right:none;}
 .campaign-cell:nth-last-child(-n+2){border-bottom:none;}
+.campaign-cell:hover{background:var(--bg2);box-shadow:0 2px 8px rgba(0,0,0,0.04);}
 @media(max-width:640px){
   .campaign-cell{border-right:none;}
   .campaign-cell:last-child{border-bottom:none;}
@@ -238,7 +276,7 @@ blockquote.principle cite{
 }
 .campaign-list{
   list-style:none;padding:0;margin:0;
-  display:flex;flex-direction:column;gap:6px;
+  display:flex;flex-direction:column;gap:6px;max-width:680px;
 }
 .campaign-list li{
   font-size:13px;color:var(--text2);
@@ -250,15 +288,21 @@ blockquote.principle cite{
   font-size:16px;line-height:1;top:1px;
 }
 
-.failure-rows{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.failure-rows{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
 .failure-row{
   display:grid;grid-template-columns:90px 240px 1fr;
   align-items:stretch;
   background:#fff;
   border-bottom:1px solid var(--border);
+  border-left:3px solid transparent;
+  transition:border-color 0.2s,box-shadow 0.2s,background 0.2s;
 }
 .failure-row:last-child{border-bottom:none;}
-.failure-row:hover{background:#fafafa;}
+.failure-row:hover{
+  background:var(--bg2) !important;
+  border-left-color:var(--orange);
+  box-shadow:0 2px 8px rgba(217,119,6,0.06);
+}
 .failure-label{
   font-size:13px;font-weight:600;letter-spacing:0.5px;text-transform:none;
   color:var(--orange);padding:18px 16px;
@@ -273,7 +317,7 @@ blockquote.principle cite{
 .failure-desc{
   font-size:13px;color:var(--text2);
   padding:18px 20px;line-height:1.6;
-  display:flex;align-items:center;
+  display:flex;align-items:center;max-width:680px;
 }
 @media(max-width:700px){
   .failure-row{grid-template-columns:1fr;}
@@ -281,10 +325,10 @@ blockquote.principle cite{
   .failure-desc{padding:12px 16px;}
 }
 
-/* ── CHECKLIST ────────────────────────────────── */
+/* CHECKLIST */
 .checklist{
   list-style:none;padding:0;margin:0;
-  display:flex;flex-direction:column;gap:0;
+  display:flex;flex-direction:column;gap:0;max-width:680px;
 }
 .checklist li{
   font-size:14px;color:var(--text2);
@@ -300,10 +344,10 @@ blockquote.principle cite{
   font-family:'IBM Plex Mono',monospace;
 }
 
-/* ── REPORTING SPLIT ──────────────────────────── */
+/* REPORTING SPLIT */
 .report-split{
   display:grid;grid-template-columns:1fr 1fr;
-  gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;
+  gap:0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;
 }
 @media(max-width:640px){.report-split{grid-template-columns:1fr;}}
 .report-col{padding:28px;}
@@ -326,7 +370,7 @@ blockquote.principle cite{
   margin-bottom:14px;line-height:1.5;
 }
 .report-list{
-  list-style:none;padding:0;margin:0;
+  list-style:none;padding:0;margin:0;max-width:680px;
 }
 .report-list li{
   font-size:13px;color:var(--text2);
@@ -339,93 +383,7 @@ blockquote.principle cite{
   top:11px;
 }
 
-.fade-in{opacity:0;transition:opacity 0.4s ease;animation:fadeInFallback 0s 4s forwards;will-change:opacity;}
-.fade-in.visible{opacity:1;animation:none;will-change:auto;}
-.visible .fade-in{opacity:1;}
-@keyframes fadeInFallback{to{opacity:1;}}
-
-footer{
-  background:#0f0f1a;color:rgba(255,255,255,0.5);
-  padding:48px 64px 32px;
-}
-.footer-inner{max-width:1000px;margin:0 auto;}
-.footer-logo{
-  font-size:20px;font-weight:900;color:#fff;
-  letter-spacing:-0.5px;margin-bottom:6px;
-}
-.footer-tagline{
-  font-size:13px;color:rgba(255,255,255,0.35);
-  margin-bottom:24px;
-}
-.footer-links{
-  display:flex;flex-wrap:wrap;gap:6px 0;
-  list-style:none;padding:0;margin:0 0 24px;
-}
-.footer-links li{margin-right:24px;}
-.footer-links a{
-  font-size:13px;color:rgba(255,255,255,0.45);
-  text-decoration:none;transition:color 0.15s;
-}
-.footer-links a:hover{color:#fff;}
-.footer-copy{font-size:12px;color:rgba(255,255,255,0.2);}
-
-/* -- Design polish: dark section text -- */
-.section-dark p,.section-dark li{color:rgba(255,255,255,0.9);}
-.section-dark strong{color:rgba(255,255,255,0.95);}
-
-/* -- Design polish: card hover on campaign cells -- */
-.campaign-cell{transition:transform 0.15s,box-shadow 0.15s,background 0.2s;}
-.campaign-cell:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,0.08);}
-
-/* -- Design polish: body p max-width -- */
-p{max-width:640px;}
-
-/* ── SCROLL PROGRESS BAR ────────────────────── */
-#scroll-progress{
-  position:fixed;top:0;left:0;height:2px;width:0%;
-  background:var(--accent);z-index:300;
-  transition:width 0.05s linear;pointer-events:none;
-}
-
-/* ── NAV ACTIVE ::after ─────────────────────── */
-.nav-links a{position:relative;}
-.nav-links a.active::after{
-  content:'';position:absolute;bottom:-1px;left:8px;right:8px;
-  height:2px;background:var(--accent);border-radius:2px 2px 0 0;
-}
-
-/* ── LAYER / ITEM-ROW HOVER ─────────────────── */
-.item-row{
-  border-left:3px solid transparent;
-  transition:border-color 0.2s,box-shadow 0.2s,background 0.2s;
-}
-.item-row:hover{
-  background:var(--bg2) !important;
-  border-left-color:var(--accent);
-  box-shadow:0 2px 8px rgba(79,70,229,0.06);
-}
-
-/* ── CAMPAIGN CELL HOVER ────────────────────── */
-.campaign-cell{
-  transition:border-color 0.2s,box-shadow 0.2s,background 0.2s;
-}
-.campaign-cell:hover{
-  background:var(--bg2);
-  box-shadow:0 2px 8px rgba(0,0,0,0.04);
-}
-
-/* ── FAILURE ROW HOVER ──────────────────────── */
-.failure-row{
-  transition:border-color 0.2s,box-shadow 0.2s,background 0.2s;
-  border-left:3px solid transparent;
-}
-.failure-row:hover{
-  background:var(--bg2) !important;
-  border-left-color:var(--orange);
-  box-shadow:0 2px 8px rgba(217,119,6,0.06);
-}
-
-/* ── CONFIDENCE PILLS ───────────────────────── */
+/* CONFIDENCE PILLS */
 .conf-pill{
   display:inline-flex;align-items:center;gap:5px;
   font-weight:700;font-size:12px;letter-spacing:0.5px;
@@ -443,17 +401,17 @@ p{max-width:640px;}
 .conf-pill-high{color:var(--green);background:var(--green-bg);}
 .conf-pill-high::before{background:var(--green);}
 
-/* ── DATA EXAMPLE INLINE ────────────────────── */
+/* DATA EXAMPLE INLINE */
 code.data-ex{
   font-family:'IBM Plex Mono',monospace;font-size:13px;
   background:var(--bg2);padding:3px 8px;border-radius:4px;
 }
 code,pre{font-size:13px;}
 
-/* ── BOLD KEY TERMS ─────────────────────────── */
+/* BOLD KEY TERMS */
 .kterm{font-weight:700;}
 
-/* ── LAYER DEPTH INDICATORS ─────────────────── */
+/* LAYER DEPTH INDICATORS */
 .item-rows .item-row:nth-child(1){border-left-color:transparent;}
 .item-rows .item-row:nth-child(1):hover{border-left-color:var(--accent);}
 .item-rows .item-row:nth-child(2){margin-left:4px;}
@@ -464,46 +422,100 @@ code,pre{font-size:13px;}
   .item-rows .item-row:nth-child(n){margin-left:0;}
 }
 
-/* ── ATTR QUESTION HOVER ────────────────────── */
-.attr-q{transition:background 0.2s;}
-.attr-q:hover{background:var(--bg2);}
+/* DARK SECTION TEXT */
+.section-dark p,.section-dark li{color:rgba(255,255,255,0.9);}
+.section-dark strong{color:rgba(255,255,255,0.95);}
 
-/* ── TEXT LAYOUT OPTIMIZATIONS ────────────────── */
-html[lang="zh"] body { line-height: 2.0; letter-spacing: 0.01em; }
-.section-sub, .item-desc, .campaign-list, .report-list, .checklist, .failure-desc { max-width: 680px; }
-.campaign-cell, .report-col, .attr-q-text { padding: 20px 24px; }
-.campaign-cell { padding: 24px 28px; }
-.report-col { padding: 28px; }
-.section-title { margin-bottom: 16px; }
-li { margin-bottom: 6px; line-height: 1.7; }
-strong { font-weight: 600; color: var(--text); }
-.section-dark strong { color: rgba(255,255,255,.95); }
-.section-sub { max-width: 640px; }
-@media (max-width: 768px) {
-  body { font-size: 15px; }
-  .hero-title, .section-title { font-size: 28px; }
+/* NEXT READING */
+.next-reading{
+  max-width:1000px;margin:0 auto;padding:48px 64px;
+}
+.next-reading h3{font-size:16px;font-weight:700;margin-bottom:16px;color:var(--text);}
+.next-card{
+  display:block;padding:20px 24px;background:#fff;
+  border:1px solid var(--border);border-radius:var(--radius);
+  text-decoration:none;transition:all 0.2s;max-width:420px;
+}
+.next-card:hover{border-color:var(--accent);box-shadow:var(--shadow);transform:translateY(-2px);}
+.next-card-label{font-size:13px;color:var(--text3);}
+.next-card-title{font-size:15px;font-weight:600;color:var(--text);margin-top:4px;}
+.next-card-link{font-size:13px;color:var(--accent);margin-top:6px;font-weight:500;}
+
+/* FOOTER */
+footer{
+  background:#0f0f1a;padding:48px 64px 32px;
+  border-top:1px solid rgba(255,255,255,0.06);
+}
+.footer-inner{max-width:1000px;margin:0 auto;}
+.footer-top{display:flex;align-items:flex-start;justify-content:space-between;gap:32px;margin-bottom:28px;flex-wrap:wrap;}
+.footer-brand{}
+.footer-logo{font-size:24px;font-weight:900;color:var(--accent);letter-spacing:-0.5px;margin-bottom:8px;}
+.footer-tagline{font-size:14px;color:rgba(255,255,255,0.4);font-weight:500;}
+.footer-links{display:flex;flex-wrap:wrap;gap:8px;}
+.footer-pill{
+  display:inline-block;padding:6px 14px;border-radius:100px;
+  border:1px solid rgba(255,255,255,0.1);
+  font-size:12px;font-weight:600;color:rgba(255,255,255,0.5);
+  text-decoration:none;transition:all 0.2s;
+}
+.footer-pill:hover{border-color:var(--accent);color:var(--accent-light);}
+.footer-pill.current{border-color:var(--accent);color:var(--accent-light);background:rgba(79,70,229,0.12);}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,0.06);padding-top:24px;
+  font-size:12px;color:rgba(255,255,255,0.25);
+}
+.footer-also{
+  margin-top:16px;font-size:13px;color:rgba(255,255,255,0.35);
+}
+.footer-also a{color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.15s;}
+.footer-also a:hover{color:var(--accent-light);}
+
+/* MOBILE HAMBURGER */
+.nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;flex-shrink:0;margin-left:4px;}
+.nav-burger span{display:block;width:22px;height:2px;background:var(--text,#111827);border-radius:2px;transition:transform 0.2s,opacity 0.2s;}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-burger.open span:nth-child(2){opacity:0;}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.nav-mobile-panel{display:none;position:fixed;top:60px;left:0;right:0;background:#ffffff;border-bottom:1px solid var(--border,#e5e7eb);padding:12px 16px 20px;flex-direction:column;gap:2px;z-index:999;box-shadow:0 8px 32px rgba(0,0,0,0.12);}
+.nav-mobile-panel.open{display:flex;}
+.nav-mobile-panel a{padding:12px 16px;border-radius:8px;font-size:15px;font-weight:500;color:var(--text,#111827);text-decoration:none;transition:background 0.15s,color 0.15s;contain:layout style;}
+.nav-mobile-panel a:hover{background:var(--bg2,#f8f9fa);}
+.nav-mobile-panel a.active{color:var(--accent,#4f46e5);background:var(--accent-bg,rgba(79,70,229,0.06));font-weight:700;}
+.nav-mobile-panel .mobile-lang-row{display:flex;align-items:center;padding:12px 16px 4px;gap:12px;border-top:1px solid var(--border,#e5e7eb);margin-top:8px;}
+.nav-mobile-panel .mobile-lang-label{font-size:12px;color:var(--text3,#9ca3af);font-weight:500;}
+
+/* MOBILE */
+@media(max-width:768px){
+  .nav-links,.navlinks{display:none !important;}
+  .nav-burger{display:flex !important;}
+  body{font-size:15px;}
+  .hero{padding:120px 20px 56px;}
+  .hero-title{font-size:clamp(26px,7vw,32px);letter-spacing:-0.5px;}
   .section{padding:48px 20px;}
+  .section-title{font-size:clamp(24px,6vw,28px);}
   footer{padding:32px 20px;}
+  .footer-top{flex-direction:column;}
+  .next-reading{padding:32px 20px;}
+  .item-rows .item-row:nth-child(n){margin-left:0;}
 }
 </style>
 </head>
 <body>
-<div id="scroll-progress"></div>
+<div class="scroll-progress" id="scroll-progress"></div>
 
-<!-- ── NAV ─────────────────────────────────────── -->
+<!-- NAV -->
 <nav>
   <a href="index.html" class="nav-logo">PUSH</a>
   <div class="nav-links">
     <a href="index.html" data-en="Overview" data-zh="首页">Overview</a>
-    <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
+    <a href="project-intro.html" data-en="Product" data-zh="产品介绍">Product</a>
     <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
-    <a href="prospects.html" data-en="Prospects" data-zh="未来愿景">Prospects</a>
+    <a href="investor-qa.html" data-en="Investor Q&amp;A" data-zh="投资人问答">Investor Q&amp;A</a>
     <a href="challenges.html" data-en="Challenges" data-zh="挑战分析">Challenges</a>
-    <a href="risk-defense.html" data-en="Risk &amp; Defense" data-zh="风险防御">Risk &amp; Defense</a>
+    <a href="risk-defense.html" data-en="Defense" data-zh="风险防御">Defense</a>
     <a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a>
-    <a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
-    <a href="push-strategy-core.html" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
-    <a href="attribution.html" class="active" data-en="Attribution" data-zh="归因体系">Attribution</a>
+    <a href="push-strategy-core.html" data-en="Strategy" data-zh="战略核心">Strategy</a>
+    <a href="standby-mechanism.html" data-en="Standby" data-zh="补位机制">Standby</a>
   </div>
   <button id="lang-btn">中 / EN</button>
   <button class="nav-burger" id="nav-burger" aria-label="打开菜单" aria-expanded="false">
@@ -512,22 +524,21 @@ strong { font-weight: 600; color: var(--text); }
 </nav>
 <div class="nav-mobile-panel" id="nav-mobile-panel">
   <a href="index.html" data-en="Overview" data-zh="首页">Overview</a>
-  <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
+  <a href="project-intro.html" data-en="Product" data-zh="产品介绍">Product</a>
   <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
-  <a href="prospects.html" data-en="Prospects" data-zh="未来愿景">Prospects</a>
+  <a href="investor-qa.html" data-en="Investor Q&amp;A" data-zh="投资人问答">Investor Q&amp;A</a>
   <a href="challenges.html" data-en="Challenges" data-zh="挑战分析">Challenges</a>
-  <a href="risk-defense.html" data-en="Risk &amp; Defense" data-zh="风险防御">Risk &amp; Defense</a>
+  <a href="risk-defense.html" data-en="Defense" data-zh="风险防御">Defense</a>
   <a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a>
-  <a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
-  <a href="push-strategy-core.html" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
-  <a href="attribution.html" class="active" data-en="Attribution" data-zh="归因体系">Attribution</a>
+  <a href="push-strategy-core.html" data-en="Strategy" data-zh="战略核心">Strategy</a>
+  <a href="standby-mechanism.html" data-en="Standby" data-zh="补位机制">Standby</a>
   <div class="mobile-lang-row">
     <span class="mobile-lang-label" data-en="Language" data-zh="语言">Language</span>
     <button id="lang-btn-mobile" style="background:var(--accent,#4f46e5);color:#fff;border:none;padding:6px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">中 / EN</button>
   </div>
 </div>
 
-<!-- ── HERO ─────────────────────────────────────── -->
+<!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
     <span class="hero-badge" data-en="Doc 07 -- Internal Strategy" data-zh="文档 07 -- 内部战略">Doc 07 -- Internal Strategy</span>
@@ -536,18 +547,23 @@ strong { font-weight: 600; color: var(--text); }
   </div>
 </section>
 
-<!-- ── LAYER DESCRIPTION ── -->
-<div style="max-width:800px; margin:0 auto 24px; padding:10px 16px; background:var(--bg2, #f8f9fa); border-radius:8px; font-size:13px; color:var(--text3); text-align:center;">
-  <span data-en="Deep dive into Push's attribution framework. For the full product overview, see <a href='project-intro.html'>Project Introduction</a>." data-zh="这里专门讲归因怎么做。想看完整产品介绍，请看<a href='project-intro.html'>项目介绍</a>。" class="bilingual-text">Deep dive into Push's attribution framework. For the full product overview, see <a href="project-intro.html">Project Introduction</a>.</span>
+<!-- LAYER DESCRIPTION -->
+<div style="padding:32px 64px 0;">
+  <div class="cross-link">
+    <span data-en="Deep dive into Push's attribution framework. For the full product overview, see <a href='project-intro.html'>Project Introduction</a>." data-zh="这里专门讲归因怎么做。想看完整产品介绍，请看<a href='project-intro.html'>项目介绍</a>。" class="bilingual-text">Deep dive into Push's attribution framework. For the full product overview, see <a href="project-intro.html">Project Introduction</a>.</span>
+  </div>
 </div>
 
-<!-- ── SECTION 1: PHILOSOPHY ──────────────────── -->
+<!-- SECTION 1: PHILOSOPHY -->
+<div class="sw-white">
 <section class="section">
   <div class="section-inner">
     <div class="fade-in">
-      <div class="section-label" data-en="Core Philosophy" data-zh="核心理念">Core Philosophy</div>
-      <h2 class="section-title" data-en="Not Perfect. Credible." data-zh="不求完美，求可信">Not Perfect. Credible.</h2>
-      <p class="section-sub" data-en="Push does not need perfect attribution on day one. The objective is to make results more <b>structured</b>, <b>trustworthy</b>, and <b>decision-useful</b> than today's alternatives." data-zh="Push 不需要从第一天就做到完美归因。目标是：结果要<b>有依据</b>、<b>能说清楚</b>、能帮商家<b>决定下次要不要再做</b>。">Push does not need perfect attribution on day one. The objective is to make results more <b>structured</b>, <b>trustworthy</b>, and <b>decision-useful</b> than today's alternatives.</p>
+      <div class="section-header">
+        <div class="section-label" data-en="Core Philosophy" data-zh="核心理念">Core Philosophy</div>
+        <h2 class="section-title" data-en="Not Perfect. Credible." data-zh="不求完美，求可信">Not Perfect. Credible.</h2>
+        <p class="section-sub" data-en="Push does not need perfect attribution on day one. The objective is to make results more <b>structured</b>, <b>trustworthy</b>, and <b>decision-useful</b> than today's alternatives." data-zh="Push 不需要从第一天就做到完美归因。目标是：结果要<b>有依据</b>、<b>能说清楚</b>、能帮商家<b>决定下次要不要再做</b>。">Push does not need perfect attribution on day one. The objective is to make results more <b>structured</b>, <b>trustworthy</b>, and <b>decision-useful</b> than today's alternatives.</p>
+      </div>
       <blockquote class="principle">
         <span data-en="The bar is not scientific certainty. The bar is: more structured, more trustworthy, and more decision-useful than what merchants and creators have today." data-zh="不需要实验室级别的证据。要求是：比商家和创作者现在能拿到的东西更靠谱、更能帮做决定。">The bar is not scientific certainty. The bar is: more structured, more trustworthy, and more decision-useful than what merchants and creators have today.</span>
       </blockquote>
@@ -580,14 +596,18 @@ strong { font-weight: 600; color: var(--text); }
     </div>
   </div>
 </section>
+</div>
 
-<!-- ── SECTION 2: VERIFICATION LAYERS ─────────── -->
-<section class="section section-bg2">
+<!-- SECTION 2: VERIFICATION LAYERS -->
+<div class="sw-gray">
+<section class="section">
   <div class="section-inner">
     <div class="fade-in">
-      <div class="section-label" data-en="Verification Architecture" data-zh="核验方式">Verification Architecture</div>
-      <h2 class="section-title" data-en="5 Verification Layers" data-zh="5 个核验层级">5 Verification Layers</h2>
-      <p class="section-sub" data-en="Each layer builds on the previous. Deeper layers require more infrastructure but produce stronger confidence signals for repeat buying decisions." data-zh="越深的层级需要的配套越多，但给商家决定是否复购提供的依据也越扎实。">Each layer builds on the previous. Deeper layers require more infrastructure but produce stronger confidence signals for repeat buying decisions.</p>
+      <div class="section-header">
+        <div class="section-label" data-en="Verification Architecture" data-zh="核验方式">Verification Architecture</div>
+        <h2 class="section-title" data-en="5 Verification Layers" data-zh="5 个核验层级">5 Verification Layers</h2>
+        <p class="section-sub" data-en="Each layer builds on the previous. Deeper layers require more infrastructure but produce stronger confidence signals for repeat buying decisions." data-zh="越深的层级需要的配套越多，但给商家决定是否复购提供的依据也越扎实。">Each layer builds on the previous. Deeper layers require more infrastructure but produce stronger confidence signals for repeat buying decisions.</p>
+      </div>
     </div>
     <div class="item-rows">
       <div class="item-row fade-in">
@@ -670,14 +690,18 @@ strong { font-weight: 600; color: var(--text); }
     </div>
   </div>
 </section>
+</div>
 
-<!-- ── SECTION 3: CONFIDENCE SCORING ─────────── -->
+<!-- SECTION 3: CONFIDENCE SCORING -->
+<div class="sw-white">
 <section class="section">
   <div class="section-inner">
     <div class="fade-in">
-      <div class="section-label" data-en="Confidence System" data-zh="可信程度">Confidence System</div>
-      <h2 class="section-title" data-en="3 Confidence Levels" data-zh="3 个置信度级别">3 Confidence Levels</h2>
-      <p class="section-sub" data-en="Every campaign result is assigned a <b>confidence level</b> based on available verification signals. Confidence level determines what decisions the result can support." data-zh="每次活动结果都会根据已有的核验信号评定一个<b>置信度级别</b>。级别决定了这份结果能用来支撑哪些决策。">Every campaign result is assigned a <b>confidence level</b> based on available verification signals. Confidence level determines what decisions the result can support.</p>
+      <div class="section-header">
+        <div class="section-label" data-en="Confidence System" data-zh="可信程度">Confidence System</div>
+        <h2 class="section-title" data-en="3 Confidence Levels" data-zh="3 个置信度级别">3 Confidence Levels</h2>
+        <p class="section-sub" data-en="Every campaign result is assigned a <b>confidence level</b> based on available verification signals. Confidence level determines what decisions the result can support." data-zh="每次活动结果都会根据已有的核验信号评定一个<b>置信度级别</b>。级别决定了这份结果能用来支撑哪些决策。">Every campaign result is assigned a <b>confidence level</b> based on available verification signals. Confidence level determines what decisions the result can support.</p>
+      </div>
     </div>
     <table class="data-table fade-in">
       <thead>
@@ -711,14 +735,18 @@ strong { font-weight: 600; color: var(--text); }
     </table>
   </div>
 </section>
+</div>
 
-<!-- ── SECTION 4: ATTRIBUTION BY CAMPAIGN TYPE ── -->
-<section class="section section-bg2">
+<!-- SECTION 4: ATTRIBUTION BY CAMPAIGN TYPE -->
+<div class="sw-gray">
+<section class="section">
   <div class="section-inner">
     <div class="fade-in">
-      <div class="section-label" data-en="Campaign-Specific Logic" data-zh="按活动类型区分">Campaign-Specific Logic</div>
-      <h2 class="section-title" data-en="Attribution by Campaign Type" data-zh="不同类型活动的归因方式">Attribution by Campaign Type</h2>
-      <p class="section-sub" data-en="Different campaign goals require different proof logic. One-size-fits-all measurement is a failure mode, not a feature." data-zh="不同类型的活动目的不同，要核验的东西也不一样。用一套标准衡量所有活动，结果只会让人误解。">Different campaign goals require different proof logic. One-size-fits-all measurement is a failure mode, not a feature.</p>
+      <div class="section-header">
+        <div class="section-label" data-en="Campaign-Specific Logic" data-zh="按活动类型区分">Campaign-Specific Logic</div>
+        <h2 class="section-title" data-en="Attribution by Campaign Type" data-zh="不同类型活动的归因方式">Attribution by Campaign Type</h2>
+        <p class="section-sub" data-en="Different campaign goals require different proof logic. One-size-fits-all measurement is a failure mode, not a feature." data-zh="不同类型的活动目的不同，要核验的东西也不一样。用一套标准衡量所有活动，结果只会让人误解。">Different campaign goals require different proof logic. One-size-fits-all measurement is a failure mode, not a feature.</p>
+      </div>
     </div>
     <div class="campaign-grid fade-in">
       <div class="campaign-cell">
@@ -764,14 +792,18 @@ strong { font-weight: 600; color: var(--text); }
     </div>
   </div>
 </section>
+</div>
 
-<!-- ── SECTION 5: FAILURE MODES ───────────────── -->
+<!-- SECTION 5: FAILURE MODES -->
+<div class="sw-white">
 <section class="section">
   <div class="section-inner">
     <div class="fade-in">
-      <div class="section-label" data-en="Risk Patterns" data-zh="常见风险">Risk Patterns</div>
-      <h2 class="section-title" data-en="4 Attribution Failure Modes" data-zh="4 种归因做法的坑">4 Attribution Failure Modes</h2>
-      <p class="section-sub" data-en="Each failure mode appears to be an attribution choice but is actually a trust-destruction mechanism. Avoid at all cost stages." data-zh="这几种做法看起来像是在认真做归因，实际上是在慢慢破坏信任。不管在哪个阶段都要避开。">Each failure mode appears to be an attribution choice but is actually a trust-destruction mechanism. Avoid at all cost stages.</p>
+      <div class="section-header">
+        <div class="section-label" data-en="Risk Patterns" data-zh="常见风险">Risk Patterns</div>
+        <h2 class="section-title" data-en="4 Attribution Failure Modes" data-zh="4 种归因做法的坑">4 Attribution Failure Modes</h2>
+        <p class="section-sub" data-en="Each failure mode appears to be an attribution choice but is actually a trust-destruction mechanism. Avoid at all cost stages." data-zh="这几种做法看起来像是在认真做归因，实际上是在慢慢破坏信任。不管在哪个阶段都要避开。">Each failure mode appears to be an attribution choice but is actually a trust-destruction mechanism. Avoid at all cost stages.</p>
+      </div>
     </div>
     <div class="failure-rows fade-in">
       <div class="failure-row">
@@ -797,14 +829,18 @@ strong { font-weight: 600; color: var(--text); }
     </div>
   </div>
 </section>
+</div>
 
-<!-- ── SECTION 6: PLATFORM DESIGN IMPLICATIONS ── -->
-<section class="section section-bg2">
+<!-- SECTION 6: PLATFORM DESIGN IMPLICATIONS -->
+<div class="sw-gray">
+<section class="section">
   <div class="section-inner">
     <div class="fade-in">
-      <div class="section-label" data-en="Design Implications" data-zh="归因怎么影响产品">Design Implications</div>
-      <h2 class="section-title" data-en="How Attribution Shapes the Platform" data-zh="归因决定产品怎么做">How Attribution Shapes the Platform</h2>
-      <p class="section-sub" data-en="Attribution is not a post-campaign reporting feature. It is a <b>design constraint</b> that shapes how campaigns are created, how creators are briefed, and what the dashboard shows." data-zh="归因不是活动做完再加的报告功能。它是一个前置的<b>设计约束</b>，决定了活动怎么创建、创作者的任务怎么说清楚、仪表板显示什么内容。">Attribution is not a post-campaign reporting feature. It is a <b>design constraint</b> that shapes how campaigns are created, how creators are briefed, and what the dashboard shows.</p>
+      <div class="section-header">
+        <div class="section-label" data-en="Design Implications" data-zh="归因怎么影响产品">Design Implications</div>
+        <h2 class="section-title" data-en="How Attribution Shapes the Platform" data-zh="归因决定产品怎么做">How Attribution Shapes the Platform</h2>
+        <p class="section-sub" data-en="Attribution is not a post-campaign reporting feature. It is a <b>design constraint</b> that shapes how campaigns are created, how creators are briefed, and what the dashboard shows." data-zh="归因不是活动做完再加的报告功能。它是一个前置的<b>设计约束</b>，决定了活动怎么创建、创作者的任务怎么说清楚、仪表板显示什么内容。">Attribution is not a post-campaign reporting feature. It is a <b>design constraint</b> that shapes how campaigns are created, how creators are briefed, and what the dashboard shows.</p>
+      </div>
     </div>
     <ul class="checklist fade-in">
       <li data-en="Define verification method at campaign creation — not retrospectively" data-zh="建活动时就定好核验方式，而不是事后补救">Define verification method at campaign creation — not retrospectively</li>
@@ -816,14 +852,18 @@ strong { font-weight: 600; color: var(--text); }
     </ul>
   </div>
 </section>
+</div>
 
-<!-- ── SECTION 7: REPORTING LOGIC ─────────────── -->
+<!-- SECTION 7: REPORTING LOGIC -->
+<div class="sw-white">
 <section class="section">
   <div class="section-inner">
     <div class="fade-in">
-      <div class="section-label" data-en="Reporting Design" data-zh="给谁看什么">Reporting Design</div>
-      <h2 class="section-title" data-en="What Each Side Sees" data-zh="商家和创作者各看到什么">What Each Side Sees</h2>
-      <p class="section-sub" data-en="Good reporting is not neutral. It converts attribution signals into decision support — for merchants to repeat, and for creators to improve." data-zh="好的报告不只是把数据摆出来。它要把核验信号转化成可以指导行动的信息——帮商家决定要不要继续，帮创作者知道下次怎么做得更好。">Good reporting is not neutral. It converts attribution signals into decision support — for merchants to repeat, and for creators to improve.</p>
+      <div class="section-header">
+        <div class="section-label" data-en="Reporting Design" data-zh="给谁看什么">Reporting Design</div>
+        <h2 class="section-title" data-en="What Each Side Sees" data-zh="商家和创作者各看到什么">What Each Side Sees</h2>
+        <p class="section-sub" data-en="Good reporting is not neutral. It converts attribution signals into decision support — for merchants to repeat, and for creators to improve." data-zh="好的报告不只是把数据摆出来。它要把核验信号转化成可以指导行动的信息——帮商家决定要不要继续，帮创作者知道下次怎么做得更好。">Good reporting is not neutral. It converts attribution signals into decision support — for merchants to repeat, and for creators to improve.</p>
+      </div>
     </div>
     <div class="report-split fade-in">
       <div class="report-col">
@@ -852,12 +892,14 @@ strong { font-weight: 600; color: var(--text); }
     </div>
   </div>
 </section>
+</div>
 
-<!-- ── SECTION 8: FINAL STANDARD ─────────────── -->
-<section class="section section-dark">
+<!-- SECTION 8: FINAL STANDARD -->
+<div class="sw-dark">
+<section class="section" style="padding:80px 64px;">
   <div class="section-inner">
     <div class="fade-in">
-      <div class="section-label" data-en="Final Standard" data-zh="最终标准" style="color:var(--accent-light);">Final Standard</div>
+      <div class="section-label section-label-dark" data-en="Final Standard" data-zh="最终标准">Final Standard</div>
       <h2 class="section-title section-title-white" data-en="The Attribution Standard" data-zh="归因做得好不好，看这个">The Attribution Standard</h2>
       <p class="section-sub section-sub-white" data-en="Attribution quality is the foundation of trust. Trust enables repeat behavior. Repeat behavior generates sustainable economics." data-zh="归因做得好，商家才信得过。信得过，才愿意再来。愿意再来，才有可持续的收入。">Attribution quality is the foundation of trust. Trust enables repeat behavior. Repeat behavior generates sustainable economics.</p>
       <blockquote class="principle principle-dark" style="margin-top:32px;">
@@ -867,47 +909,52 @@ strong { font-weight: 600; color: var(--text); }
     </div>
   </div>
 </section>
+</div>
 
-<!-- ── NEXT READING ── -->
-<div style="max-width:800px; margin:40px auto; padding:24px; background:var(--bg2, #f8f9fa); border:1px solid var(--border, #e5e7eb); border-radius:12px;">
-  <h3 style="font-size:16px; font-weight:700; margin-bottom:12px;" data-en="Continue Reading" data-zh="继续阅读" class="bilingual-text">Continue Reading</h3>
-  <a href="project-intro.html" style="display:block; padding:16px; background:#fff; border:1px solid var(--border, #e5e7eb); border-radius:8px; text-decoration:none; transition:all 0.2s; max-width:400px;">
-    <div style="font-size:13px; color:var(--text3, #9ca3af);" data-en="Next →" data-zh="下一篇 →" class="bilingual-text">Next →</div>
-    <div style="font-size:15px; font-weight:600; color:var(--text, #111827);" data-en="See how attribution feeds into the scoring system" data-zh="看归因结果怎么接入评分系统" class="bilingual-text">See how attribution feeds into the scoring system</div>
-    <div style="font-size:13px; color:var(--accent, #4f46e5); margin-top:4px;" data-en="Project Introduction →" data-zh="项目介绍 →" class="bilingual-text">Project Introduction →</div>
+<!-- NEXT READING -->
+<div class="next-reading">
+  <h3 data-en="Continue Reading" data-zh="继续阅读" class="bilingual-text">Continue Reading</h3>
+  <a href="project-intro.html" class="next-card">
+    <div class="next-card-label" data-en="Next →" data-zh="下一篇 →" class="bilingual-text">Next →</div>
+    <div class="next-card-title" data-en="See how attribution feeds into the scoring system" data-zh="看归因结果怎么接入评分系统" class="bilingual-text">See how attribution feeds into the scoring system</div>
+    <div class="next-card-link" data-en="Project Introduction →" data-zh="项目介绍 →" class="bilingual-text">Project Introduction →</div>
   </a>
 </div>
 
-<!-- ── FOOTER ─────────────────────────────────── -->
+<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-logo">PUSH</div>
-    <div class="footer-tagline" data-en="Local creator performance infrastructure" data-zh="本地创作者效果平台">Local creator performance infrastructure</div>
-    <ul class="footer-links">
-      <li><a href="index.html" data-en="Overview" data-zh="首页">Overview</a></li>
-      <li><a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a></li>
-      <li><a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a></li>
-      <li><a href="prospects.html" data-en="Prospects" data-zh="未来愿景">Prospects</a></li>
-      <li><a href="challenges.html" data-en="Challenges" data-zh="挑战分析">Challenges</a></li>
-      <li><a href="risk-defense.html" data-en="Risk &amp; Defense" data-zh="风险防御">Risk &amp; Defense</a></li>
-      <li><a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a></li>
-      <li><a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a></li>
-      <li><a href="push-strategy-core.html" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a></li>
-      <li><a href="economics.html" data-en="Economics" data-zh="经济模型">Economics</a></li>
-      <li><a href="attribution.html" data-en="Attribution" data-zh="归因体系">Attribution</a></li>
-    </ul>
-    <div class="footer-copy">© 2026 PUSH. Internal strategy documentation.</div>
-    <div style="margin-top:16px; font-size:13px;">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">PUSH</div>
+        <div class="footer-tagline" data-en="Local creator performance infrastructure" data-zh="本地创作者效果平台">Local creator performance infrastructure</div>
+      </div>
+      <div class="footer-links">
+        <a href="index.html" class="footer-pill" data-en="Overview" data-zh="首页">Overview</a>
+        <a href="project-intro.html" class="footer-pill" data-en="Product" data-zh="产品介绍">Product</a>
+        <a href="pitch-deck.html" class="footer-pill" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
+        <a href="investor-qa.html" class="footer-pill" data-en="Investor Q&amp;A" data-zh="投资人问答">Investor Q&amp;A</a>
+        <a href="challenges.html" class="footer-pill" data-en="Challenges" data-zh="挑战分析">Challenges</a>
+        <a href="risk-defense.html" class="footer-pill" data-en="Defense" data-zh="风险防御">Defense</a>
+        <a href="retention-defense.html" class="footer-pill" data-en="Retention" data-zh="留存机制">Retention</a>
+        <a href="push-strategy-core.html" class="footer-pill" data-en="Strategy" data-zh="战略核心">Strategy</a>
+        <a href="standby-mechanism.html" class="footer-pill" data-en="Standby" data-zh="补位机制">Standby</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-en="© 2026 Push" data-zh="© 2026 Push">© 2026 Push</span>
+    </div>
+    <div class="footer-also">
       <span data-en="You might also want: " data-zh="相关阅读：" class="bilingual-text">You might also want: </span>
       <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍" class="bilingual-text">Project Intro</a> ·
       <a href="metrics-dashboard.html" data-en="Metrics Dashboard" data-zh="指标看板" class="bilingual-text">Metrics Dashboard</a> ·
-      <a href="index.html" data-en="🏠 Dashboard" data-zh="🏠 首页" class="bilingual-text">🏠 Dashboard</a>
+      <a href="index.html" data-en="Dashboard" data-zh="首页" class="bilingual-text">Dashboard</a>
     </div>
   </div>
 </footer>
 
 <script>
-// ── BILINGUAL SYSTEM ──────────────────────────
+// BILINGUAL SYSTEM
 (function() {
   let lang = localStorage.getItem('push-lang') || 'en';
   function applyLang(l) {
@@ -921,6 +968,7 @@ strong { font-weight: 600; color: var(--text); }
     if (btn) btn.textContent = l === 'en' ? '中 / EN' : 'EN / 中';
     const mobileBtn = document.getElementById('lang-btn-mobile');
     if (mobileBtn) mobileBtn.textContent = l === 'en' ? '中 / EN' : 'EN / 中';
+    document.documentElement.setAttribute('lang', l === 'zh' ? 'zh' : 'en');
   }
   document.getElementById('lang-btn').addEventListener('click', () => {
     document.body.style.opacity = '0.8';
@@ -929,12 +977,11 @@ strong { font-weight: 600; color: var(--text); }
   });
   applyLang(lang);
   /* lang-reveal */document.documentElement.style.opacity='1';
-  document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh' : 'en');
 })();
 
-// ── SCROLL FADE IN ────────────────────────────
+// SCROLL FADE IN
 (function() {
-  const sections = document.querySelectorAll('section');
+  const sections = document.querySelectorAll('.sw-white,.sw-gray,.sw-dark,section.hero');
   const obs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -944,7 +991,6 @@ strong { font-weight: 600; color: var(--text); }
     });
   }, { threshold: 0.01, rootMargin: '0px 0px 60px 0px' });
   sections.forEach(s => obs.observe(s));
-  window.addEventListener('scroll', function(){}, {passive:true});
 })();
 
 // Mobile navigation
@@ -984,14 +1030,17 @@ strong { font-weight: 600; color: var(--text); }
   }
 })();
 
-// ── SCROLL PROGRESS BAR + NAV SHADOW ────────
+// SCROLL PROGRESS BAR + NAV SHADOW
 (function() {
   const bar = document.getElementById('scroll-progress');
   const nav = document.querySelector('nav');
   function update() {
     const h = document.documentElement.scrollHeight - window.innerHeight;
     if (bar) bar.style.width = h > 0 ? (window.scrollY / h * 100) + '%' : '0%';
-    if (nav) nav.style.boxShadow = window.scrollY > 10 ? '0 1px 8px rgba(0,0,0,0.06)' : 'none';
+    if (nav) {
+      if (window.scrollY > 10) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    }
   }
   window.addEventListener('scroll', update, {passive:true});
   update();

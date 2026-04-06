@@ -33,100 +33,114 @@
   --bg: #ffffff;
   --bg2: #f8f9fa;
   --radius: 8px;
+  --shadow: 0 4px 20px rgba(0,0,0,0.08);
 }
 
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:var(--text);font-size:15px;line-height:1.75;overflow-x:hidden;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;word-break:break-word;}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.75;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;word-break:break-word;}
+html[lang="zh"] body{line-height:2.0;letter-spacing:0.01em;}
+html[lang="zh"] .hero-title{line-height:1.25;}
+html[lang="zh"] .section-title{line-height:1.5;}
+strong{font-weight:600;color:var(--text);}
+p{max-width:680px;}
+ul,ol{padding-left:20px;}
+li{margin-bottom:6px;line-height:1.7;}
+a{color:var(--accent);text-decoration:none;transition:color 0.15s;}
+a:hover{color:var(--accent-light);}
+.nav-logo,.nav-logo:hover{color:var(--accent);}
 
-/*FADE IN */
-.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.55s ease,transform 0.55s ease;animation:fadeInFallback 0s 4s forwards;will-change:opacity,transform;}
-.visible .fade-in,.fade-in.visible{opacity:1;transform:none;animation:none;}
+/* -- Scroll progress bar -- */
+.scroll-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-light));z-index:300;width:0;transition:none;pointer-events:none;box-shadow:0 0 8px rgba(79,70,229,0.4);}
+
+/* -- Nav -- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;
+  background:#ffffff;
+  border-bottom:1px solid var(--border);transition:box-shadow 0.2s;
+}
+nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.08);}
+.nav-logo{
+  font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;
+  margin-right:8px;flex-shrink:0;text-decoration:none;
+}
+.nav-links{display:flex;gap:6px;flex-wrap:wrap;flex:1;}
+.nav-links a{
+  font-size:12px;font-weight:500;color:var(--text2);
+  padding:6px 12px;border-radius:8px;transition:color 0.15s,background-color 0.15s;white-space:nowrap;text-decoration:none;
+}
+.nav-links a:hover{color:var(--accent);}
+.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);position:relative;}
+.nav-links a.active::after{content:'';position:absolute;bottom:0;left:12px;right:12px;height:2px;background:var(--accent);border-radius:1px;}
+#lang-btn{
+  flex-shrink:0;background:var(--accent);color:#fff;font-weight:700;font-size:13px;
+  padding:7px 18px;border-radius:8px;border:none;cursor:pointer;transition:background 0.15s;
+}
+#lang-btn:hover{background:var(--accent-dark);}
+
+/* -- Fade-in -- */
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.45s ease,transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94);will-change:opacity,transform;animation:fadeInFallback 0s 4s forwards;}
+.fade-in.visible,.visible .fade-in{opacity:1;transform:none;animation:none;}
 @keyframes fadeInFallback{to{opacity:1;transform:translateY(0);}}
 
-/*SCROLL PROGRESS */
-.scroll-progress{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:300;width:0;transition:width 0.1s linear;pointer-events:none;}
-
-/*NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;background:#ffffff;border-bottom:1px solid var(--border);transition:box-shadow 0.2s;}
-.nav-logo{font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;margin-right:8px;flex-shrink:0;text-decoration:none;}
-.nav-links{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
-.nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:color 0.15s,background 0.15s;white-space:nowrap;text-decoration:none;position:relative;}
-.nav-links a:hover{color:var(--accent);background:var(--accent-bg);}
-.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);}
-.nav-links a.active::after{content:'';position:absolute;bottom:0;left:12px;right:12px;height:2px;background:var(--accent);border-radius:2px;}
-#lang-btn{background:var(--accent);color:#fff;border:none;padding:7px 18px;border-radius:8px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:background 0.2s;white-space:nowrap;letter-spacing:0.3px;flex-shrink:0;}
-#lang-btn:hover{background:var(--accent-dark);}
-@media(max-width:768px){
-  .nav-links{display:none;}
-}
-/*MOBILE HAMBURGER */
-.nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;flex-shrink:0;margin-left:4px;}
-.nav-burger span{display:block;width:22px;height:2px;background:var(--text,#111827);border-radius:2px;transition:transform 0.2s,opacity 0.2s;}
-.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
-.nav-burger.open span:nth-child(2){opacity:0;}
-.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-.nav-mobile-panel{display:none;position:fixed;top:62px;left:0;right:0;background:#ffffff;border-bottom:1px solid var(--border,#e5e7eb);padding:12px 16px 20px;flex-direction:column;gap:2px;z-index:999;box-shadow:0 8px 32px rgba(0,0,0,0.12);}
-.nav-mobile-panel.open{display:flex;}
-.nav-mobile-panel a{padding:12px 16px;border-radius:8px;font-size:15px;font-weight:500;color:var(--text,#111827);text-decoration:none;transition:background 0.15s,color 0.15s;}
-.nav-mobile-panel a:hover{background:var(--bg2,#f8f9fa);}
-.nav-mobile-panel a.active{color:var(--accent,#4f46e5);background:var(--accent-bg,rgba(79,70,229,0.06));font-weight:700;}
-.nav-mobile-panel .mobile-lang-row{display:flex;align-items:center;padding:12px 16px 4px;gap:12px;border-top:1px solid var(--border,#e5e7eb);margin-top:8px;}
-.nav-mobile-panel .mobile-lang-label{font-size:12px;color:var(--text3,#9ca3af);font-weight:500;}
-@media(max-width:768px){
-  .nav-links,.navlinks{display:none !important;}
-  .nav-burger{display:flex !important;}
-  #lang-btn{font-size:12px;padding:6px 12px;}
-}
-
-/* HERO */
+/* -- Hero -- */
 .hero{
-  background:#ffffff;
-  padding:100px 40px 48px;
-  border-bottom:1px solid var(--border);
+  background:#0f0f1a;
+  padding:140px 64px 80px;
 }
-.hero-inner{max-width:1000px;margin:0 auto;}
+.hero-inner{max-width:1000px;width:100%;margin:0 auto;}
 .hero-doc-badge{
   font-size:13px;font-weight:600;letter-spacing:0.5px;
-  color:var(--accent);text-transform:none;
+  color:var(--accent-light);text-transform:none;
   margin-bottom:16px;display:block;
 }
 .hero-title{
-  font-size:36px;font-weight:800;color:var(--text);
-  letter-spacing:-0.5px;line-height:1.15;
+  font-size:clamp(3rem,5.5vw,4.5rem);font-weight:800;color:#fff;
+  letter-spacing:-2.5px;line-height:1.1;
   margin-bottom:8px;
 }
 .hero-subtitle{
-  font-size:16px;font-weight:400;color:var(--text2);
-  max-width:560px;line-height:1.65;margin-bottom:14px;
+  font-size:16px;font-weight:400;color:rgba(255,255,255,0.55);
+  max-width:560px;line-height:1.65;margin-bottom:14px;margin-top:24px;
 }
 .hero-principle{
-  font-size:14px;font-weight:600;color:var(--accent);
+  font-size:14px;font-weight:600;color:var(--accent-light);
   letter-spacing:0.2px;padding-top:14px;
-  border-top:1px solid var(--border);
+  border-top:1px solid rgba(255,255,255,0.1);
   max-width:640px;
 }
 
-/* SECTIONS */
-.section{padding:64px 40px;border-top:1px solid var(--border);}
-.section-inner{max-width:1000px;margin:0 auto;}
-.section-bg2{background:#fff;}
-.section-white{background:#fff;}
-.section-dark{background:var(--primary);border-top:none;}
+/* -- Section wrappers -- */
+.sw-white{background:var(--bg);}
+.sw-gray{background:var(--bg);border-top:1px solid var(--border);}
+.sw-gray + .sw-white{border-top:1px solid var(--border);}
+.sw-white + .sw-white{border-top:1px solid var(--border);}
+.sw-dark{background:var(--primary);}
+
+.section{padding:80px 64px;max-width:1000px;margin:0 auto;}
 
 .section-label{
   font-size:13px;font-weight:600;letter-spacing:0.5px;text-transform:none;
-  color:var(--accent);margin-bottom:8px;
+  color:var(--accent);margin-bottom:16px;
+  display:flex;align-items:center;gap:10px;
 }
+.section-label::before{
+  content:'';display:block;
+  width:20px;height:2px;background:var(--accent);flex-shrink:0;
+}
+.section-label-dark{color:var(--accent-light);letter-spacing:0.5px;}
+.section-label-dark::before{background:var(--accent-light);}
 .section-title{
-  font-size:36px;font-weight:800;color:var(--text);
-  letter-spacing:-0.5px;line-height:1.4;margin-bottom:8px;
+  font-size:clamp(26px,3.5vw,36px);font-weight:800;letter-spacing:-0.5px;
+  color:var(--primary);margin-bottom:16px;line-height:1.4;
 }
 .section-sub{
   font-size:16px;color:var(--text2);max-width:640px;line-height:1.65;margin-bottom:40px;
 }
 .section-title-white{color:#fff;}
-.section-sub-white{color:rgba(255,255,255,0.55);}
+.section-sub-dark{color:rgba(255,255,255,0.55);}
+.section-sub-dark{color:rgba(255,255,255,0.5);}
 
 /* BLOCKQUOTE PRINCIPLE */
 blockquote.principle{
@@ -146,8 +160,8 @@ blockquote.principle-white{
 .check-list{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border);}
 .check-item{
   display:flex;align-items:flex-start;gap:16px;
-  padding:16px 12px;border-bottom:1px solid var(--border);
-  margin:0 -12px;border-radius:6px;
+  padding:20px 24px;border-bottom:1px solid var(--border);
+  border-radius:var(--radius);
   transition:background 0.2s;
 }
 .check-item:hover{background:var(--bg2);}
@@ -161,14 +175,14 @@ blockquote.principle-white{
 .check-label{font-size:14px;color:var(--text);font-weight:600;margin-bottom:2px;}
 .check-desc{font-size:13px;color:var(--text2);line-height:1.6;}
 
-/*NUMBERED EDITORIAL ROWS — timeline feel */
+/*NUMBERED EDITORIAL ROWS -- timeline feel */
 .item-list{border-top:1px solid var(--border);position:relative;}
 .item-list::before{content:'';position:absolute;left:23px;top:0;bottom:0;width:2px;background:var(--border);z-index:0;}
 .item-row{
   display:grid;
   grid-template-columns:48px 1fr;
   gap:0 28px;
-  padding:28px 16px 28px 0;
+  padding:20px 24px;
   border-bottom:1px solid var(--border);
   border-left:3px solid transparent;
   transition:border-color 0.2s,background 0.2s,box-shadow 0.2s;
@@ -184,7 +198,7 @@ blockquote.principle-white{
 }
 .item-title{font-size:18px;font-weight:700;color:var(--text);margin-bottom:4px;}
 .item-sub{font-size:13px;font-weight:600;text-transform:none;letter-spacing:0.5px;color:var(--accent);margin-bottom:8px;}
-.item-desc{font-size:14px;color:var(--text2);line-height:1.7;}
+.item-desc{font-size:14px;color:var(--text2);line-height:1.7;max-width:640px;}
 .item-meta{
   display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;
 }
@@ -202,9 +216,9 @@ blockquote.principle-white{
   font-size:13px;font-weight:600;padding:8px 16px;
   border-radius:100px;border:1px solid var(--border);
   color:var(--text);background:#fff;
-  transition:border-color 0.2s,box-shadow 0.2s,background 0.2s;
+  transition:border-color 0.2s,box-shadow 0.2s,background 0.2s,transform 0.15s;
 }
-.wedge-pill:hover{border-color:var(--accent);box-shadow:0 2px 8px rgba(79,70,229,0.1);background:var(--accent-bg);}
+.wedge-pill:hover{border-color:var(--accent);box-shadow:0 2px 8px rgba(79,70,229,0.1);background:var(--accent-bg);transform:translateY(-2px);}
 
 /*HYPER-LOCAL STAT STRIP */
 .stat-strip{
@@ -217,7 +231,7 @@ blockquote.principle-white{
 .stat-strip-item{
   flex:1;padding:28px 24px;text-align:center;
   border-right:1px solid var(--border);
-  transition:background 0.2s,box-shadow 0.2s;
+  transition:background 0.2s,box-shadow 0.2s,transform 0.15s;
 }
 .stat-strip-item:hover{background:var(--bg2);box-shadow:inset 0 -3px 0 var(--accent);}
 .stat-strip-item:last-child{border-right:none;}
@@ -265,11 +279,11 @@ blockquote.principle-white{
 .warn-strip{
   display:flex;gap:16px;align-items:flex-start;
   padding:18px 20px;border-left:3px solid var(--red);
-  background:var(--red-bg);border-radius:8px;
+  background:var(--red-bg);border-radius:var(--radius);
   border:1px solid rgba(220,38,38,0.15);
-  transition:box-shadow 0.2s,border-color 0.2s;
+  transition:box-shadow 0.2s,border-color 0.2s,transform 0.15s;
 }
-.warn-strip:hover{box-shadow:0 2px 12px rgba(220,38,38,0.08);border-color:rgba(220,38,38,0.3);}
+.warn-strip:hover{box-shadow:0 2px 12px rgba(220,38,38,0.08);border-color:rgba(220,38,38,0.3);transform:translateY(-2px);}
 .warn-label{
   font-size:13px;font-weight:700;
   color:var(--red);letter-spacing:0.5px;white-space:nowrap;padding-top:2px;
@@ -286,10 +300,10 @@ blockquote.principle-white{
 }
 .metric-item{
   display:flex;align-items:flex-start;gap:14px;
-  padding:18px 20px;border-bottom:1px solid var(--border);
+  padding:20px 24px;border-bottom:1px solid var(--border);
   border-right:1px solid var(--border);
   background:#fff;
-  transition:background 0.2s,box-shadow 0.2s;
+  transition:background 0.2s,box-shadow 0.2s,transform 0.15s;
 }
 .metric-item:hover{background:var(--bg2);box-shadow:inset 3px 0 0 var(--accent);}
 .metric-item:nth-child(even){border-right:none;}
@@ -305,13 +319,13 @@ blockquote.principle-white{
 .metric-label{font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;}
 .metric-why{font-size:12px;color:var(--text3);}
 
-/*EXPANSION CHECKLIST — pass/fail gates */
+/*EXPANSION CHECKLIST -- pass/fail gates */
 .expand-list{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border);}
 .expand-item{
   display:flex;align-items:flex-start;gap:16px;
   padding:14px 12px;border-bottom:1px solid var(--border);
   margin:0 -12px;border-radius:6px;border-left:3px solid transparent;
-  transition:background 0.2s,border-color 0.2s;
+  transition:background 0.2s,border-color 0.2s,transform 0.15s;
 }
 .expand-item:hover{background:var(--bg2);border-left-color:var(--green);}
 .expand-gate{
@@ -338,23 +352,42 @@ blockquote.principle-white{
 .callout-warning-text{font-size:15px;font-weight:700;color:var(--red);font-style:italic;}
 
 /* TEXT LAYOUT OPTIMIZATIONS */
-p,.item-desc,.check-desc,.signal-text,.philosophy-body{max-width:640px;}
-.section-sub,.hero-subtitle,.hero-sub{max-width:640px;}
+p,.item-desc,.check-desc{max-width:640px;}
+.section-sub,.hero-subtitle{max-width:640px;}
 .section-title,h2{margin-bottom:16px;}
-li{margin-bottom:6px;line-height:1.7;}
 strong{font-weight:600;color:var(--text);}
 .section-dark strong{color:rgba(255,255,255,0.95);}
 .section-dark p,.section-dark li{color:rgba(255,255,255,0.9);}
-.item-row,.check-item,.signal-item,.dash-item,.card,.metric-item,.metrics-card{padding:20px 24px;}
 code,pre{font-size:13px;}
 
-/* -- Design polish: card hover -- */
-.wedge-pill,.stat-strip-item,.metric-item,.expand-item{transition:transform 0.15s,box-shadow 0.15s,background 0.2s,border-color 0.2s;}
+/* -- Footer -- */
+footer{background:#0f0f1a;padding:48px 64px 32px;border-top:1px solid rgba(255,255,255,0.06);font-size:13px;color:var(--text3);}
+.footer-inner{
+  max-width:1000px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 2fr 1fr;gap:32px;align-items:start;
+}
+.footer-brand .f-logo{font-size:24px;font-weight:900;color:var(--accent);letter-spacing:2px;margin-bottom:8px;}
+.footer-brand .f-tagline{font-size:13px;color:rgba(255,255,255,0.4);}
+.footer-links{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
+.footer-link{color:rgba(255,255,255,0.4);font-size:13px;text-decoration:none;transition:color 0.2s ease;}
+.footer-link:hover{color:#fff;}
+.footer-copy{text-align:right;font-size:12px;color:rgba(255,255,255,0.3);line-height:1.8;align-self:center;}
 
-/* Chinese mode */
-html[lang="zh"] body{line-height:2.0;letter-spacing:0.01em;}
-html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
+/* -- Mobile Hamburger -- */
+.nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;flex-shrink:0;margin-left:4px;}
+.nav-burger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:transform 0.2s,opacity 0.2s;}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-burger.open span:nth-child(2){opacity:0;}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.nav-mobile-panel{display:none;position:fixed;top:60px;left:0;right:0;background:#ffffff;border-bottom:1px solid var(--border);padding:12px 16px 20px;flex-direction:column;gap:2px;z-index:999;box-shadow:0 8px 32px rgba(0,0,0,0.12);}
+.nav-mobile-panel.open{display:flex;}
+.nav-mobile-panel a{padding:12px 16px;border-radius:8px;font-size:15px;font-weight:500;color:var(--text);text-decoration:none;transition:background 0.15s,color 0.15s;}
+.nav-mobile-panel a:hover{background:var(--bg2);}
+.nav-mobile-panel a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;}
+.nav-mobile-panel .mobile-lang-row{display:flex;align-items:center;padding:12px 16px 4px;gap:12px;border-top:1px solid var(--border);margin-top:8px;}
+.nav-mobile-panel .mobile-lang-label{font-size:12px;color:var(--text3);font-weight:500;}
 
+/* -- Responsive -- */
 @media(max-width:900px){
   .stat-strip{flex-direction:column;}
   .stat-strip-item{border-right:none;border-bottom:1px solid var(--border);}
@@ -362,15 +395,21 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
   .metric-item:nth-child(even){border-right:none;}
   .loop-flow{gap:6px;}
 }
-@media(max-width:600px){
-  body{font-size:15px;}
-  .hero{padding:80px 20px 36px;}
-  .hero-title,.section-title,h2{font-size:clamp(22px,6vw,28px);line-height:1.3;}
-  .section{padding:48px 20px;}
-  .item-row{grid-template-columns:36px 1fr;gap:0 16px;}
-}
 @media(max-width:768px){
+  body{font-size:15px;}
+  .section-title{font-size:28px;max-width:90vw;}
+  .nav-links{display:none !important;}
+  .nav-burger{display:flex !important;}
+  #lang-btn{font-size:12px;padding:6px 12px;}
+  .hero{padding:120px 20px 60px;}
+  .hero-title{font-size:clamp(2rem,7vw,3rem);letter-spacing:-1.5px;line-height:1.2;}
+  html[lang="zh"] .hero-title{line-height:1.35;}
+  .section{padding:48px 20px;}
+  .footer-inner{grid-template-columns:1fr;text-align:center;}
+  .footer-links{justify-content:center;}
+  .footer-copy{text-align:center;}
   footer{padding:32px 20px;}
+  .item-row{grid-template-columns:36px 1fr;gap:0 16px;}
 }
 </style>
 </head>
@@ -384,56 +423,52 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
   <a href="index.html" class="nav-logo">PUSH</a>
   <div class="nav-links">
     <a href="index.html" data-en="Overview" data-zh="首页">Overview</a>
-    <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
+    <a href="project-intro.html" data-en="Product" data-zh="产品介绍">Product</a>
     <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
-    <a href="prospects.html" data-en="Prospects" data-zh="未来愿景">Prospects</a>
+    <a href="investor-qa.html" data-en="Investor Q&amp;A" data-zh="投资人问答">Investor Q&amp;A</a>
     <a href="challenges.html" data-en="Challenges" data-zh="挑战分析">Challenges</a>
-    <a href="risk-defense.html" data-en="Risk &amp; Defense" data-zh="风险防御">Risk &amp; Defense</a>
+    <a href="risk-defense.html" data-en="Defense" data-zh="风险防御">Defense</a>
     <a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a>
-    <a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
-    <a href="push-strategy-core.html" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
-    <a href="gtm-launch.html" class="active" data-en="GTM &amp; Launch" data-zh="上线计划">GTM &amp; Launch</a>
+    <a href="push-strategy-core.html" data-en="Strategy" data-zh="战略核心">Strategy</a>
+    <a href="standby-mechanism.html" data-en="Standby" data-zh="补位机制">Standby</a>
   </div>
   <button id="lang-btn">中 / EN</button>
-  <button class="nav-burger" id="nav-burger" aria-label="打开菜单" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
+  <button class="nav-burger" id="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 <div class="nav-mobile-panel" id="nav-mobile-panel">
   <a href="index.html" data-en="Overview" data-zh="首页">Overview</a>
-  <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
+  <a href="project-intro.html" data-en="Product" data-zh="产品介绍">Product</a>
   <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
-  <a href="prospects.html" data-en="Prospects" data-zh="未来愿景">Prospects</a>
+  <a href="investor-qa.html" data-en="Investor Q&amp;A" data-zh="投资人问答">Investor Q&amp;A</a>
   <a href="challenges.html" data-en="Challenges" data-zh="挑战分析">Challenges</a>
-  <a href="risk-defense.html" data-en="Risk &amp; Defense" data-zh="风险防御">Risk &amp; Defense</a>
+  <a href="risk-defense.html" data-en="Defense" data-zh="风险防御">Defense</a>
   <a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a>
-  <a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
-  <a href="push-strategy-core.html" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
-  <a href="gtm-launch.html" class="active" data-en="GTM &amp; Launch" data-zh="上线计划">GTM &amp; Launch</a>
+  <a href="push-strategy-core.html" data-en="Strategy" data-zh="战略核心">Strategy</a>
+  <a href="standby-mechanism.html" data-en="Standby" data-zh="补位机制">Standby</a>
   <div class="mobile-lang-row">
-    <span class="mobile-lang-label" data-en="Language" data-zh="语言">Language</span>
-    <button id="lang-btn-mobile" style="background:var(--accent,#4f46e5);color:#fff;border:none;padding:6px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">中 / EN</button>
+    <span class="mobile-lang-label">Language</span>
+    <button id="lang-btn-mobile" style="background:var(--accent);color:#fff;border:none;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">中 / EN</button>
   </div>
 </div>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <span class="hero-doc-badge" data-en="DOC — 09 · GTM &amp; LAUNCH LOOPS" data-zh="文档 — 09 · GTM与启动循环">DOC — 09 · GTM &amp; LAUNCH LOOPS</span>
-    <h1 class="hero-title" data-en="GTM Experiments &amp; Launch Loops" data-zh="GTM 实验与启动循环">GTM Experiments &amp; Launch Loops</h1>
-    <p class="hero-subtitle" data-en="How Push launches as a concentrated market experiment, not a broad platform announcement." data-zh="Push 怎么上线——不是全面铺开，而是在一个小地方集中验证。">How Push launches as a concentrated market experiment, not a broad platform announcement.</p>
-    <p class="hero-principle" data-en="Density changes behavior for both creators and merchants. The first neighborhood becomes the blueprint for the next one." data-zh="一个区域铺得够密，商家才会形成习惯。第一个街区跑通了，就是下一个的模板。">Density changes behavior for both creators and merchants. The first neighborhood becomes the blueprint for the next one.</p>
+    <span class="hero-doc-badge fade-in" data-en="DOC — 09 · GTM &amp; LAUNCH LOOPS" data-zh="文档 — 09 · GTM与启动循环">DOC — 09 · GTM &amp; LAUNCH LOOPS</span>
+    <h1 class="hero-title fade-in" data-en="GTM Experiments &amp; Launch Loops" data-zh="GTM 实验与启动循环">GTM Experiments &amp; Launch Loops</h1>
+    <p class="hero-subtitle fade-in" data-en="How Push launches as a concentrated market experiment, not a broad platform announcement." data-zh="Push 怎么上线——不是全面铺开，而是在一个小地方集中验证。">How Push launches as a concentrated market experiment, not a broad platform announcement.</p>
+    <p class="hero-principle fade-in" data-en="Density changes behavior for both creators and merchants. The first neighborhood becomes the blueprint for the next one." data-zh="一个区域铺得够密，商家才会形成习惯。第一个街区跑通了，就是下一个的模板。">Density changes behavior for both creators and merchants. The first neighborhood becomes the blueprint for the next one.</p>
   </div>
 </section>
 
-<!-- ── LAYER DESCRIPTION ── -->
+<!-- -- LAYER DESCRIPTION -- -->
 <div style="max-width:800px; margin:0 auto 24px; padding:10px 16px; background:var(--bg2, #f8f9fa); border-radius:8px; font-size:13px; color:var(--text3); text-align:center;">
   <span data-en="Deep dive into Push's go-to-market launch plan. For the investor-facing summary, see <a href='pitch-deck.html'>Pitch Deck</a>." data-zh="看看 Push 怎么上线、怎么进市场。投资者版本看这里：<a href='pitch-deck.html'>路演材料</a>。" class="bilingual-text">Deep dive into Push's go-to-market launch plan. For the investor-facing summary, see <a href="pitch-deck.html">Pitch Deck</a>.</span>
 </div>
 
 <!-- S1: LAUNCH PHILOSOPHY -->
-<section class="section section-bg2">
-  <div class="section-inner fade-in">
+<div class="sw-gray">
+<div class="section fade-in">
     <div class="section-label" data-en="PHILOSOPHY" data-zh="核心理念">PHILOSOPHY</div>
     <h2 class="section-title" data-en="Launch as a Concentrated Experiment" data-zh="先集中跑一个点，跑通再说">Launch as a Concentrated Experiment</h2>
     <blockquote class="principle">
@@ -441,11 +476,11 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
       <p style="margin-top:16px;font-size:15px;font-style:normal;color:var(--text2);" data-en="Expansion without proof of these four things is likely fake progress. Every launch cohort should teach the platform something real — not just fill a user count." data-zh="这四件事没验证就急着扩张，大概率是假进展。每上线一批，都得搞清楚一个真问题——不只是把用户数字堆高。">Expansion without proof of these four things is likely fake progress. Every launch cohort should teach the platform something real — not just fill a user count.</p>
     </blockquote>
   </div>
-</section>
+</div>
 
 <!-- S2: WEDGE SELECTION -->
-<section class="section section-white">
-  <div class="section-inner fade-in">
+<div class="sw-white">
+<div class="section fade-in">
     <div class="section-label" data-en="MARKET ENTRY" data-zh="市场进入">MARKET ENTRY</div>
     <h2 class="section-title" data-en="Wedge Selection Criteria" data-zh="切入点选择标准">Wedge Selection Criteria</h2>
     <p class="section-sub" data-en="A strong first wedge reduces operational complexity and maximizes the chance of early proof. Bad wedge selection makes everything harder." data-zh="切入点选对了，运营压力小，容易验证想法。切入点选错了，什么都难做。">A strong first wedge reduces operational complexity and maximizes the chance of early proof. Bad wedge selection makes everything harder.</p>
@@ -497,11 +532,11 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
       </div>
     </div>
   </div>
-</section>
+</div>
 
 <!-- S3: HYPER-LOCAL MODEL -->
-<section class="section section-bg2">
-  <div class="section-inner fade-in">
+<div class="sw-gray">
+<div class="section fade-in">
     <div class="section-label" data-en="LAUNCH MODEL" data-zh="启动模型">LAUNCH MODEL</div>
     <h2 class="section-title" data-en="Hyper-Local Launch Structure" data-zh="一个街区先跑起来">Hyper-Local Launch Structure</h2>
     <p class="section-sub" data-en="Start with one small zone where merchant density, creator proximity, and standby value reinforce each other." data-zh="先从一个小区域开始，让商户密度、创作者距离近、备选机制这三件事互相加强。">Start with one small zone where merchant density, creator proximity, and standby value reinforce each other.</p>
@@ -532,11 +567,11 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
       <p style="font-size:14px;color:var(--text2);line-height:1.7;" data-en="Within this zone: merchants are dense enough that creators can visit multiple in one trip. Standby has real meaning — creators nearby can accept quickly. Map value becomes visible immediately. Each campaign feeds the next one's awareness." data-zh="在这个区域内：商户够密，创作者一次出门可以跑几家。备选有真实意义——附近的创作者能快速接单。地图价值一眼就能看到。每个活动都在给下一个活动铺知名度。">Within this zone: merchants are dense enough that creators can visit multiple in one trip. Standby has real meaning — creators nearby can accept quickly. Map value becomes visible immediately. Each campaign feeds the next one's awareness.</p>
     </div>
   </div>
-</section>
+</div>
 
 <!-- S4: 4 GTM EXPERIMENTS -->
-<section class="section section-white">
-  <div class="section-inner fade-in">
+<div class="sw-white">
+<div class="section fade-in">
     <div class="section-label" data-en="EXPERIMENTS" data-zh="实验">EXPERIMENTS</div>
     <h2 class="section-title" data-en="Four Early GTM Experiments" data-zh="四个早期GTM实验">Four Early GTM Experiments</h2>
     <p class="section-sub" data-en="Each experiment is designed to produce a specific insight — not just usage data. Run in parallel across the first launch cohort." data-zh="每个测试都要得出具体结论——不只是收集用户行为数据。在第一批上线时并行跑。">Each experiment is designed to produce a specific insight — not just usage data. Run in parallel across the first launch cohort.</p>
@@ -591,14 +626,14 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
       </div>
     </div>
   </div>
-</section>
+</div>
 
 <!-- S5: 3 LAUNCH LOOPS -->
-<section class="section section-dark">
-  <div class="section-inner fade-in">
-    <div class="section-label" style="color:var(--accent-light);" data-en="GROWTH MECHANICS" data-zh="增长循环">GROWTH MECHANICS</div>
+<div class="sw-dark">
+<div class="section fade-in">
+    <div class="section-label section-label-dark" data-en="GROWTH MECHANICS" data-zh="增长循环">GROWTH MECHANICS</div>
     <h2 class="section-title section-title-white" data-en="Three Launch Loops" data-zh="三个增长循环">Three Launch Loops</h2>
-    <p class="section-sub section-sub-white" data-en="Each loop is self-reinforcing. Growth emerges from repeated value, not novelty. The loops must be running before geographic expansion begins." data-zh="每个循环都能自我加强。这些循环得先跑起来，才能考虑扩张地区。">Each loop is self-reinforcing. Growth emerges from repeated value, not novelty. The loops must be running before geographic expansion begins.</p>
+    <p class="section-sub section-sub-dark" data-en="Each loop is self-reinforcing. Growth emerges from repeated value, not novelty. The loops must be running before geographic expansion begins." data-zh="每个循环都能自我加强。这些循环得先跑起来，才能考虑扩张地区。">Each loop is self-reinforcing. Growth emerges from repeated value, not novelty. The loops must be running before geographic expansion begins.</p>
     <div class="loop-section">
       <div class="loop-block">
         <div class="loop-num" data-en="LOOP 01 · MERCHANT OUTCOME" data-zh="循环 01 · 商户结果">LOOP 01 · MERCHANT OUTCOME</div>
@@ -650,11 +685,11 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
       </div>
     </div>
   </div>
-</section>
+</div>
 
 <!-- S6: 4 GTM MISTAKES -->
-<section class="section section-white">
-  <div class="section-inner fade-in">
+<div class="sw-white">
+<div class="section fade-in">
     <div class="section-label" data-en="FAILURE MODES" data-zh="失败模式">FAILURE MODES</div>
     <h2 class="section-title" data-en="Four GTM Mistakes to Avoid" data-zh="四个要避免的GTM错误">Four GTM Mistakes to Avoid</h2>
     <p class="section-sub" data-en="These mistakes are common in platform launches and each one derails a different part of the launch loop." data-zh="这几个坑在平台上线时很常见，每一个都会把增长循环的某个环节搞垮。">These mistakes are common in platform launches and each one derails a different part of the launch loop.</p>
@@ -689,11 +724,11 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
       </div>
     </div>
   </div>
-</section>
+</div>
 
 <!-- S7: WHAT TO MEASURE -->
-<section class="section section-bg2">
-  <div class="section-inner fade-in">
+<div class="sw-gray">
+<div class="section fade-in">
     <div class="section-label" data-en="METRICS" data-zh="指标">METRICS</div>
     <h2 class="section-title" data-en="What to Measure in GTM" data-zh="GTM中要衡量什么">What to Measure in GTM</h2>
     <p class="section-sub" data-en="These metrics measure the launch loop's health, not vanity growth. They tell you whether the platform is delivering value — not just accumulating users." data-zh="这些数字反映的是增长循环是否健康，不是表面流量。它们告诉你平台有没有真正在创造价值——而不只是在堆用户数。">These metrics measure the launch loop's health, not vanity growth. They tell you whether the platform is delivering value — not just accumulating users.</p>
@@ -756,11 +791,11 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
       </div>
     </div>
   </div>
-</section>
+</div>
 
 <!-- S8: EXPANSION LOGIC -->
-<section class="section section-white">
-  <div class="section-inner fade-in">
+<div class="sw-white">
+<div class="section fade-in">
     <div class="section-label" data-en="EXPANSION GATES" data-zh="什么时候才能扩">EXPANSION GATES</div>
     <h2 class="section-title" data-en="When to Expand" data-zh="满足这几条才能往外铺">When to Expand</h2>
     <p class="section-sub" data-en="Geographic or category expansion is only justified when the existing launch zone is demonstrably healthy. Expansion is not a goal — it's a consequence of working loops." data-zh="只有现有区域明确健康了，才有理由扩张地区或品类。扩张不是目的——它是增长循环跑通之后自然发生的事。">Geographic or category expansion is only justified when the existing launch zone is demonstrably healthy. Expansion is not a goal — it's a consequence of working loops.</p>
@@ -791,20 +826,20 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
       <div class="callout-warning-text" data-en="&ldquo;Expansion without these signals is likely fake progress.&rdquo;" data-zh="&ldquo;这几个信号不对劲就急着扩，大概率是在自欺欺人。&rdquo;">&ldquo;Expansion without these signals is likely fake progress.&rdquo;</div>
     </div>
   </div>
-</section>
+</div>
 
 <!-- S9: FINAL STANDARD -->
-<section class="section section-dark">
-  <div class="section-inner fade-in">
-    <div class="section-label" style="color:var(--accent-light);" data-en="FINAL STANDARD" data-zh="最终标准">FINAL STANDARD</div>
+<div class="sw-dark">
+<div class="section fade-in">
+    <div class="section-label section-label-dark" data-en="FINAL STANDARD" data-zh="最终标准">FINAL STANDARD</div>
     <blockquote class="principle-white">
       <p data-en="Each launch cohort teaches the platform something real. Growth emerges from repeated value, not novelty. Density changes behavior for both creators and merchants." data-zh="每一批上线都得教会平台一些实在的东西。增长靠的是持续产生价值，不是新鲜劲。密集部署才能改变创作者和商户的行为。">Each launch cohort teaches the platform something real. Growth emerges from repeated value, not novelty. Density changes behavior for both creators and merchants.</p>
       <p style="margin-top:20px;font-size:16px;font-weight:700;font-style:normal;color:var(--accent-light);" data-en="The first neighborhood becomes a blueprint for the next one. Replicate only what worked — not the entire setup." data-zh="第一个街区跑通了就是下一个的模板。只复制真正有效的那部分——不是把整套照搬过去。">The first neighborhood becomes a blueprint for the next one. Replicate only what worked — not the entire setup.</p>
     </blockquote>
   </div>
-</section>
+</div>
 
-<!-- ── NEXT READING ── -->
+<!-- -- NEXT READING -- -->
 <div style="max-width:800px; margin:40px auto; padding:24px; background:var(--bg2, #f8f9fa); border:1px solid var(--border, #e5e7eb); border-radius:12px;">
   <h3 style="font-size:16px; font-weight:700; margin-bottom:12px;" data-en="Continue Reading" data-zh="继续阅读" class="bilingual-text">Continue Reading</h3>
   <a href="pitch-deck.html" style="display:block; padding:16px; background:#fff; border:1px solid var(--border, #e5e7eb); border-radius:8px; text-decoration:none; transition:box-shadow 0.2s,border-color 0.2s; max-width:400px;">
@@ -815,17 +850,23 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
 </div>
 
 <!-- FOOTER -->
-<footer style="background:#0f0f1a;padding:48px 64px 32px;border-top:1px solid rgba(255,255,255,0.06);">
-  <div style="max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
-    <div style="display:flex;align-items:center;gap:16px;">
-      <span style="font-size:18px;font-weight:900;color:var(--accent);letter-spacing:1px;">PUSH</span>
-      <span style="font-size:11px;color:rgba(255,255,255,0.2);" data-en="Internal Strategy Documentation" data-zh="内部战略文档">Internal Strategy Documentation</span>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="f-logo">PUSH</div>
+      <div class="f-tagline" data-en="The Operating System for Local Creator Commerce" data-zh="本地博主商业化操作系统">The Operating System for Local Creator Commerce</div>
     </div>
-    <div style="display:flex;flex-wrap:wrap;gap:6px 16px;">
-      <a href="index.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Overview" data-zh="首页">Overview</a>
-      <a href="pitch-deck.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
-      <a href="prospects.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Prospects" data-zh="未来愿景">Prospects</a>
-      <a href="push-strategy-core.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
+    <div class="footer-links">
+      <a href="index.html" class="footer-link" data-en="Overview" data-zh="首页">Overview</a>
+      <a href="project-intro.html" class="footer-link" data-en="Product" data-zh="产品介绍">Product</a>
+      <a href="pitch-deck.html" class="footer-link" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
+      <a href="challenges.html" class="footer-link" data-en="Challenges" data-zh="挑战分析">Challenges</a>
+      <a href="risk-defense.html" class="footer-link" data-en="Defense" data-zh="风险防御">Defense</a>
+      <a href="retention-defense.html" class="footer-link" data-en="Retention" data-zh="留存机制">Retention</a>
+      <a href="push-strategy-core.html" class="footer-link" data-en="Strategy" data-zh="战略核心">Strategy</a>
+    </div>
+    <div class="footer-copy">
+      <div data-en="&copy; 2026 Push" data-zh="&copy; 2026 Push">&copy; 2026 Push</div>
     </div>
   </div>
 </footer>
@@ -857,12 +898,14 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.01, rootMargin: '0px 0px 60px 0px' });
-  document.querySelectorAll('section').forEach(el => observer.observe(el));
-  // Scroll progress bar
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  // Scroll progress bar + nav shadow
   const progressBar = document.getElementById('scroll-progress');
+  const navEl = document.querySelector('nav');
   window.addEventListener('scroll', () => {
     const docH = document.documentElement.scrollHeight - window.innerHeight;
     if (docH > 0) progressBar.style.width = (window.scrollY / docH * 100) + '%';
+    if (navEl) navEl.classList.toggle('scrolled', window.scrollY > 10);
   }, { passive: true });
 })();
 

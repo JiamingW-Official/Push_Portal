@@ -33,119 +33,170 @@
   --bg: #ffffff;
   --bg2: #f8f9fa;
   --radius: 8px;
+  --shadow: 0 4px 20px rgba(0,0,0,0.08);
 }
 
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:var(--text);font-size:15px;line-height:1.75;overflow-x:hidden;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;word-break:break-word;}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.75;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;word-break:break-word;}
+html[lang="zh"] body{line-height:2.0;letter-spacing:0.01em;}
+html[lang="zh"] .hero h1{line-height:1.25;}
+html[lang="zh"] .section-title{line-height:1.5;}
+strong{font-weight:600;color:var(--text);}
+p{max-width:680px;}
+ul,ol{padding-left:20px;}
+li{margin-bottom:6px;line-height:1.7;}
+a{color:var(--accent);text-decoration:none;transition:color 0.15s;}
+a:hover{color:var(--accent-light);}
+.nav-logo,.nav-logo:hover{color:var(--accent);}
 
-/* FADE IN */
-.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.55s ease,transform 0.55s ease;animation:fadeInFallback 0s 4s forwards;will-change:opacity,transform;}
-.visible .fade-in{opacity:1;transform:none;animation:none;}
-.fade-in.visible{opacity:1;transform:none;animation:none;}
-@keyframes fadeInFallback{to{opacity:1;transform:translateY(0);}}
+/* — Scroll progress bar — */
+.scroll-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-light));z-index:300;width:0;transition:none;pointer-events:none;box-shadow:0 0 8px rgba(79,70,229,0.4);}
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;background:#ffffff;border-bottom:1px solid var(--border);transition:box-shadow 0.2s;}
-.nav-logo{font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;margin-right:8px;flex-shrink:0;text-decoration:none;}
-.nav-links{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
-.nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:color 0.15s,background 0.15s;white-space:nowrap;text-decoration:none;}
-.nav-links a:hover{color:var(--accent);background:var(--accent-bg);}
-.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);}
-#lang-btn{background:var(--accent);color:#fff;border:none;padding:7px 18px;border-radius:8px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:background 0.2s;white-space:nowrap;letter-spacing:0.3px;flex-shrink:0;}
-#lang-btn:hover{background:var(--accent-dark);}
-@media(max-width:768px){
-  .nav-links{display:none;}
+/* — Nav — */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;
+  background:#ffffff;
+  border-bottom:1px solid var(--border);transition:box-shadow 0.2s;
 }
-/*MOBILE HAMBURGER */
+nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.08);}
+.nav-logo{
+  font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;
+  margin-right:8px;flex-shrink:0;text-decoration:none;
+}
+.nav-links{display:flex;gap:6px;flex-wrap:wrap;flex:1;}
+.nav-links a{
+  font-size:12px;font-weight:500;color:var(--text2);
+  padding:6px 12px;border-radius:8px;transition:color 0.15s,background-color 0.15s;white-space:nowrap;text-decoration:none;
+}
+.nav-links a:hover{color:var(--accent);}
+.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);position:relative;}
+.nav-links a.active::after{content:'';position:absolute;bottom:0;left:12px;right:12px;height:2px;background:var(--accent);border-radius:1px;}
+#lang-btn{
+  flex-shrink:0;background:var(--accent);color:#fff;font-weight:700;font-size:13px;
+  padding:7px 18px;border-radius:8px;border:none;cursor:pointer;transition:background 0.15s;
+}
+#lang-btn:hover{background:var(--accent-dark);}
+
+/* — Mobile hamburger — */
 .nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;flex-shrink:0;margin-left:4px;}
-.nav-burger span{display:block;width:22px;height:2px;background:var(--text,#111827);border-radius:2px;transition:transform 0.2s,opacity 0.2s;}
+.nav-burger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:transform 0.2s,opacity 0.2s;}
 .nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
 .nav-burger.open span:nth-child(2){opacity:0;}
 .nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-.nav-mobile-panel{display:none;position:fixed;top:60px;left:0;right:0;background:#ffffff;border-bottom:1px solid var(--border,#e5e7eb);padding:12px 16px 20px;flex-direction:column;gap:2px;z-index:999;box-shadow:0 8px 32px rgba(0,0,0,0.12);}
+.nav-mobile-panel{display:none;position:fixed;top:60px;left:0;right:0;background:#ffffff;border-bottom:1px solid var(--border);padding:12px 16px 20px;flex-direction:column;gap:2px;z-index:999;box-shadow:0 8px 32px rgba(0,0,0,0.12);}
 .nav-mobile-panel.open{display:flex;}
-.nav-mobile-panel a{padding:12px 16px;border-radius:8px;font-size:15px;font-weight:500;color:var(--text,#111827);text-decoration:none;transition:background 0.15s,color 0.15s;contain:layout style paint;}
-.nav-mobile-panel a:hover{background:var(--bg2,#f8f9fa);}
-.nav-mobile-panel a.active{color:var(--accent,#4f46e5);background:var(--accent-bg,rgba(79,70,229,0.06));font-weight:700;}
-.nav-mobile-panel .mobile-lang-row{display:flex;align-items:center;padding:12px 16px 4px;gap:12px;border-top:1px solid var(--border,#e5e7eb);margin-top:8px;}
-.nav-mobile-panel .mobile-lang-label{font-size:12px;color:var(--text3,#9ca3af);font-weight:500;}
+.nav-mobile-panel a{padding:12px 16px;border-radius:8px;font-size:15px;font-weight:500;color:var(--text);text-decoration:none;transition:background 0.15s,color 0.15s;contain:layout style paint;}
+.nav-mobile-panel a:hover{background:var(--bg2);}
+.nav-mobile-panel a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;}
+.nav-mobile-panel .mobile-lang-row{display:flex;align-items:center;padding:12px 16px 4px;gap:12px;border-top:1px solid var(--border);margin-top:8px;}
+.nav-mobile-panel .mobile-lang-label{font-size:12px;color:var(--text3);font-weight:500;}
 @media(max-width:768px){
-  .nav-links,.navlinks{display:none !important;}
+  .nav-links{display:none !important;}
   .nav-burger{display:flex !important;}
   #lang-btn{font-size:12px;padding:6px 12px;}
 }
 
-/* HERO */
+/* — Fade-in — */
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.45s ease,transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94);will-change:opacity,transform;animation:fadeInFallback 0s 4s forwards;}
+.fade-in.visible,.visible .fade-in{opacity:1;transform:none;animation:none;}
+@keyframes fadeInFallback{to{opacity:1;transform:translateY(0);}}
+
+/* — Hero — */
 .hero{
-  background:#ffffff;
-  padding:100px 40px 48px;
-  border-bottom:1px solid var(--border);
+  background:#0f0f1a;
+  padding:140px 64px 80px;
+  display:flex;align-items:center;
 }
-.hero-inner{max-width:1000px;margin:0 auto;}
+.hero-inner{max-width:1000px;width:100%;margin:0 auto;}
 .hero-doc-badge{
   font-size:13px;font-weight:600;letter-spacing:0.5px;
-  color:var(--accent);text-transform:none;
-  margin-bottom:16px;display:block;
+  color:var(--accent-light);text-transform:none;
+  margin-bottom:24px;display:block;
 }
-.hero-title{
-  font-size:36px;font-weight:800;color:var(--text);
-  letter-spacing:-0.5px;line-height:1.15;
-  margin-bottom:8px;
+.hero h1,.hero-title{
+  font-size:clamp(3rem,5.5vw,4.5rem);font-weight:800;
+  letter-spacing:-2.5px;color:#fff;
+  line-height:1.1;margin-bottom:0;max-width:800px;
 }
 .hero-subtitle{
-  font-size:16px;font-weight:400;color:var(--text2);
-  max-width:560px;line-height:1.65;margin-bottom:14px;
+  font-size:16px;font-weight:400;color:rgba(255,255,255,0.55);
+  max-width:560px;line-height:1.65;margin-top:24px;
 }
 .hero-principle{
-  font-size:14px;font-weight:600;color:var(--accent);
-  letter-spacing:0.2px;padding-top:14px;
-  border-top:1px solid var(--border);
+  font-size:14px;font-weight:600;color:var(--accent-light);
+  letter-spacing:0.2px;padding-top:20px;margin-top:20px;
+  border-top:1px solid rgba(255,255,255,0.1);
   max-width:640px;
 }
 
-/* SECTIONS */
-.section{padding:64px 40px;border-top:1px solid var(--border);}
-.section-inner{max-width:1000px;margin:0 auto;}
-.section-bg2{background:#fff;}
-.section-white{background:#fff;}
-.section-dark{background:var(--primary);border-top:none;}
+/* — Section wrappers — */
+.sw-white{background:var(--bg);}
+.sw-gray{background:var(--bg);border-top:1px solid var(--border);}
+.sw-gray + .sw-white{border-top:1px solid var(--border);}
+.sw-white + .sw-white{border-top:1px solid var(--border);}
+.sw-dark{background:var(--primary);}
+
+.section{padding:80px 64px;max-width:1000px;margin:0 auto;contain:layout style paint;}
 
 .section-label{
   font-size:13px;font-weight:600;letter-spacing:0.5px;text-transform:none;
-  color:var(--accent);margin-bottom:8px;
+  color:var(--accent);margin-bottom:16px;
+  display:flex;align-items:center;gap:10px;
 }
+.section-label::before{
+  content:'';display:block;
+  width:20px;height:2px;background:var(--accent);flex-shrink:0;
+}
+.section-label-dark{color:var(--accent-light);letter-spacing:0.5px;}
+.section-label-dark::before{background:var(--accent-light);}
 .section-title{
-  font-size:36px;font-weight:800;color:var(--text);
-  letter-spacing:-0.5px;line-height:1.4;margin-bottom:8px;
+  font-size:clamp(26px,3.5vw,36px);font-weight:800;letter-spacing:-0.5px;
+  color:var(--primary);margin-bottom:16px;line-height:1.4;
 }
+.section-title-white{color:#fff;}
 .section-sub{
   font-size:16px;color:var(--text2);max-width:640px;line-height:1.65;margin-bottom:40px;
 }
-.section-title-white{color:#fff;}
 .section-sub-white{color:rgba(255,255,255,0.55);}
 
-/* BLOCKQUOTE PRINCIPLE — overridden below with pull-quote style */
+/* BLOCKQUOTE PRINCIPLE */
+blockquote.principle{
+  border-left:3px solid var(--accent);
+  padding:24px 28px;margin:0;
+  font-size:18px;font-style:italic;color:var(--text);
+  background:var(--accent-bg);border-radius:0 var(--radius) var(--radius) 0;
+}
 blockquote.principle p+p{margin-top:12px;}
+blockquote.principle-white{
+  border-left:3px solid var(--accent-light);
+  padding:28px 32px;margin:0;
+  font-size:20px;font-style:italic;color:rgba(255,255,255,0.9);
+  background:rgba(79,70,229,0.08);border-radius:0 var(--radius) var(--radius) 0;
+}
 
-/*NUMBERED EDITORIAL ROWS */
+/* NUMBERED EDITORIAL ROWS */
 .item-list{border-top:1px solid var(--border);}
 .item-row{
   display:grid;
   grid-template-columns:48px 1fr;
   gap:0 28px;
-  padding:28px 0;
+  padding:20px 24px;
   border-bottom:1px solid var(--border);
+  transition:border-color 0.2s ease,background 0.2s ease,transform 0.25s ease,box-shadow 0.25s ease;
+  border-radius:var(--radius);
 }
+.item-row:hover{transform:translateY(-2px);box-shadow:0 4px 20px rgba(79,70,229,0.08);}
 .item-num{
   font-size:13px;font-weight:800;font-family:'JetBrains Mono',monospace;
   color:var(--accent);letter-spacing:1px;padding-top:4px;
 }
 .item-title{font-size:18px;font-weight:700;color:var(--text);margin-bottom:4px;}
 .item-sub{font-size:13px;font-weight:600;text-transform:none;letter-spacing:0.5px;color:var(--accent);margin-bottom:8px;}
-.item-desc{font-size:14px;color:var(--text2);line-height:1.7;}
+.item-desc{font-size:14px;color:var(--text2);line-height:1.7;max-width:640px;}
 
-/*SIGNAL GRID */
+/* SIGNAL GRID */
 .signal-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -156,25 +207,30 @@ blockquote.principle p+p{margin-top:12px;}
 }
 .signal-item{
   display:flex;align-items:flex-start;gap:12px;
-  padding:16px 20px;border-bottom:1px solid var(--border);
+  padding:20px 24px;border-bottom:1px solid var(--border);
   border-right:1px solid var(--border);
   background:#fff;
+  transition:background 0.2s ease,border-color 0.2s ease,transform 0.25s ease;
 }
 .signal-item:nth-child(even){border-right:none;}
 .signal-item:last-child{border-bottom:none;}
 .signal-item:nth-last-child(2){border-bottom:none;}
+.signal-item:hover{background:rgba(217,119,6,0.03);}
 .signal-dot{
   width:7px;height:7px;border-radius:50%;
   background:var(--orange);flex-shrink:0;margin-top:6px;
 }
-.signal-text{font-size:13px;color:var(--text2);line-height:1.5;}
+.signal-text{font-size:13px;color:var(--text2);line-height:1.5;max-width:640px;}
 
-/*CHECKLIST */
+/* CHECKLIST */
 .check-list{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border);}
 .check-item{
   display:flex;align-items:flex-start;gap:16px;
-  padding:16px 0;border-bottom:1px solid var(--border);
+  padding:20px 24px;border-bottom:1px solid var(--border);
+  transition:border-color 0.2s ease,background 0.2s ease,transform 0.25s ease,box-shadow 0.25s ease;
+  border-radius:var(--radius);
 }
+.check-item:hover{transform:translateY(-2px);box-shadow:0 4px 20px rgba(5,150,105,0.1);border-bottom-color:rgba(5,150,105,0.25);background:rgba(5,150,105,0.02);}
 .check-icon{
   width:20px;height:20px;border-radius:5px;
   background:var(--green-bg);border:1.5px solid var(--green);
@@ -183,9 +239,9 @@ blockquote.principle p+p{margin-top:12px;}
 }
 .check-icon svg{width:11px;height:11px;stroke:var(--green);stroke-width:2.5;fill:none;}
 .check-label{font-size:14px;color:var(--text);font-weight:600;margin-bottom:2px;}
-.check-desc{font-size:13px;color:var(--text2);line-height:1.6;}
+.check-desc{font-size:13px;color:var(--text2);line-height:1.6;max-width:640px;}
 
-/*DATA TABLE */
+/* DATA TABLE */
 .data-table{width:100%;border-collapse:collapse;font-size:13px;}
 .data-table th{
   background:#f8f9fa;font-weight:600;text-align:left;
@@ -219,7 +275,9 @@ blockquote.principle p+p{margin-top:12px;}
   padding:18px 20px;border-left:none;
   background:white;border-radius:8px;
   border:1px solid var(--border);
+  transition:border-color 0.2s ease,background 0.2s ease,transform 0.25s ease,box-shadow 0.25s ease;
 }
+.warn-strip:hover{border-color:rgba(220,38,38,0.25);transform:translateY(-2px);box-shadow:0 4px 20px rgba(220,38,38,0.08);}
 .warn-label{
   font-size:13px;font-weight:600;
   color:var(--orange);letter-spacing:0.5px;white-space:nowrap;padding-top:2px;
@@ -227,9 +285,10 @@ blockquote.principle p+p{margin-top:12px;}
 .warn-title{font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px;}
 .warn-desc{font-size:13px;color:var(--text2);line-height:1.6;}
 
-/*FRAUD VS MISTAKE SPLIT */
+/* FRAUD VS MISTAKE SPLIT */
 .split-cols{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-.split-col{border-radius:var(--radius);overflow:hidden;}
+.split-col{border-radius:var(--radius);overflow:hidden;transition:transform 0.25s ease,box-shadow 0.25s ease;}
+.split-col:hover{transform:translateY(-2px);box-shadow:var(--shadow);}
 .split-col-head{
   padding:14px 20px;font-size:13px;font-weight:600;letter-spacing:0.5px;text-transform:none;
   font-family:'JetBrains Mono',monospace;
@@ -247,14 +306,16 @@ blockquote.principle p+p{margin-top:12px;}
 .split-mistake .split-dot{background:var(--orange);}
 .split-fraud .split-dot{background:var(--red);}
 
-/*DASHBOARD ITEMS */
+/* DASHBOARD ITEMS */
 .dash-grid{
   display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
   background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;
 }
 .dash-item{
   background:#fff;padding:20px 22px;
+  transition:transform 0.25s ease,box-shadow 0.25s ease;
 }
+.dash-item:hover{transform:translateY(-2px);box-shadow:0 4px 20px rgba(79,70,229,0.08);}
 .dash-item-num{
   font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:800;
   color:var(--accent-light);letter-spacing:1px;margin-bottom:6px;
@@ -262,46 +323,8 @@ blockquote.principle p+p{margin-top:12px;}
 .dash-item-label{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px;}
 .dash-item-desc{font-size:12px;color:var(--text3);line-height:1.5;}
 
-@media(max-width:900px){
-  .signal-grid{grid-template-columns:1fr;}
-  .signal-item:nth-child(even){border-right:none;}
-  .split-cols{grid-template-columns:1fr;}
-  .dash-grid{grid-template-columns:1fr 1fr;}
-}
-@media(max-width:600px){
-  .hero{padding:80px 20px 36px;}
-  .hero-title{font-size:clamp(22px,6vw,28px);line-height:1.3;}
-  .section{padding:48px 20px;}
-  .section-title{font-size:clamp(20px,5.5vw,26px);line-height:1.3;}
-  .item-row{grid-template-columns:36px 1fr;gap:0 16px;}
-  .dash-grid{grid-template-columns:1fr;}
-}
-
-/* SCROLL PROGRESS BAR */
-.scroll-progress{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:300;width:0;transition:width 0.1s linear;}
-
-/* NAV ACTIVE ::after INDICATOR */
-.nav-links a.active{position:relative;box-shadow:none;}
-.nav-links a.active::after{
-  content:'';position:absolute;bottom:-1px;left:12px;right:12px;
-  height:2px;background:var(--accent);border-radius:1px;
-}
-
 /* FRAUD CARD HOVER (red-tinted danger) */
-.item-row{transition:border-color 0.2s ease,background 0.2s ease;border-radius:4px;}
 .fraud-type-list .item-row:hover{border-bottom-color:rgba(220,38,38,0.25);background:rgba(220,38,38,0.02);}
-
-/* DEFENSE / SOLUTION CARD HOVER (green-tinted) */
-.check-item{transition:border-color 0.2s ease,background 0.2s ease;border-radius:4px;}
-.check-item:hover{border-bottom-color:rgba(5,150,105,0.25);background:rgba(5,150,105,0.02);}
-
-/* SIGNAL ITEM HOVER */
-.signal-item{transition:background 0.2s ease,border-color 0.2s ease;}
-.signal-item:hover{background:rgba(217,119,6,0.03);}
-
-/* WARN STRIP HOVER */
-.warn-strip{transition:border-color 0.2s ease,background 0.2s ease;}
-.warn-strip:hover{border-color:rgba(220,38,38,0.25);}
 
 /* FRAUD TYPE NAME STYLING */
 .fraud-type-list .item-title{font-size:16px;font-weight:700;}
@@ -321,50 +344,47 @@ blockquote.principle p+p{margin-top:12px;}
 }
 .detection-method strong{color:var(--green);font-weight:600;}
 
-/* PULL-QUOTE EDITORIAL */
-blockquote.principle{
-  border-left:3px solid var(--accent);
-  padding:24px 28px;margin:0;
-  font-size:18px;font-style:italic;color:var(--text);
-  background:var(--accent-bg);border-radius:0 var(--radius) var(--radius) 0;
-}
-blockquote.principle-white{
-  border-left:3px solid var(--accent-light);
-  padding:28px 32px;margin:0;
-  font-size:20px;font-style:italic;color:rgba(255,255,255,0.9);
-  background:rgba(79,70,229,0.08);border-radius:0 var(--radius) var(--radius) 0;
-}
-
 /* MERCHANT ITEM HOVER (red, since these are problems) */
 .merchant-issues .item-row:hover{border-bottom-color:rgba(220,38,38,0.25);background:rgba(220,38,38,0.02);}
 
-/* TEXT LAYOUT OPTIMIZATIONS */
-p,.item-desc,.check-desc,.signal-text,.philosophy-body{max-width:640px;}
-.section-sub,.hero-subtitle,.hero-sub{max-width:640px;}
-.section-title,h2{margin-bottom:16px;}
-li{margin-bottom:6px;line-height:1.7;}
-strong{font-weight:600;color:var(--text);}
-.section-dark strong,.section-dark .item-title{color:rgba(255,255,255,0.95);}
-.section-dark p,.section-dark li{color:rgba(255,255,255,0.9);}
-.item-row,.check-item,.signal-item,.dash-item,.card,.metric-item,.metrics-card{padding:20px 24px;}
+/* DARK SECTION TEXT */
+.sw-dark strong,.sw-dark .item-title,.section-dark strong,.section-dark .item-title{color:rgba(255,255,255,0.95);}
+.sw-dark p,.sw-dark li,.section-dark p,.section-dark li{color:rgba(255,255,255,0.9);}
+.sw-dark .section-label{color:var(--accent-light);}
+.sw-dark .section-label::before{background:var(--accent-light);}
+
+/* FOOTER */
+footer{background:#0f0f1a;padding:48px 64px 32px;border-top:1px solid var(--border);font-size:13px;color:var(--text3);}
+.footer-inner{
+  max-width:1000px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 2fr 1fr;gap:32px;align-items:start;
+}
+.footer-brand .f-logo{font-size:24px;font-weight:900;color:var(--accent);letter-spacing:2px;margin-bottom:8px;}
+.footer-brand .f-tagline{font-size:13px;color:rgba(255,255,255,0.4);}
+.footer-links{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
+.footer-link{color:rgba(255,255,255,0.4);font-size:13px;text-decoration:none;transition:color 0.2s ease;}
+.footer-link:hover{color:#fff;}
+.footer-copy{text-align:right;font-size:12px;color:rgba(255,255,255,0.3);line-height:1.8;align-self:center;}
+
 code,pre{font-size:13px;}
 
-/* -- Design polish: card hover -- */
-.warn-strip,.split-col,.dash-item{transition:transform 0.15s,box-shadow 0.15s;}
-
-/* Chinese mode */
-html[lang="zh"] body{line-height:2.0;letter-spacing:0.01em;}
-html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
-
-/* Mobile text */
-@media(max-width:600px){
-  body{font-size:15px;}
-  .hero-title,.section-title,h2{font-size:clamp(22px,6vw,28px);line-height:1.3;}
-  .section{padding:48px 20px;}
-  .signal-grid{gap:0;}
-  .dash-grid{gap:12px;}
+/* — Responsive — */
+@media(max-width:900px){
+  .signal-grid{grid-template-columns:1fr;}
+  .signal-item:nth-child(even){border-right:none;}
+  .split-cols{grid-template-columns:1fr;}
+  .dash-grid{grid-template-columns:1fr 1fr;}
 }
 @media(max-width:768px){
+  .hero{padding:100px 24px 56px;}
+  .hero h1,.hero-title{font-size:clamp(2rem,7vw,3rem);letter-spacing:-1.5px;}
+  .section{padding:56px 24px;}
+  .section-title{font-size:clamp(22px,5.5vw,28px);line-height:1.3;}
+  .item-row{grid-template-columns:36px 1fr;gap:0 16px;}
+  .dash-grid{grid-template-columns:1fr;}
+  .footer-inner{grid-template-columns:1fr;text-align:center;}
+  .footer-links{justify-content:center;}
+  .footer-copy{text-align:center;}
   footer{padding:32px 20px;}
 }
 </style>
@@ -379,56 +399,53 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
   <a href="index.html" class="nav-logo">PUSH</a>
   <div class="nav-links">
     <a href="index.html" data-en="Overview" data-zh="首页">Overview</a>
-    <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
+    <a href="project-intro.html" data-en="Product" data-zh="产品介绍">Product</a>
     <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
-    <a href="prospects.html" data-en="Prospects" data-zh="未来愿景">Prospects</a>
+    <a href="investor-qa.html" data-en="Investor Q&amp;A" data-zh="投资人问答">Investor Q&amp;A</a>
     <a href="challenges.html" data-en="Challenges" data-zh="挑战分析">Challenges</a>
-    <a href="risk-defense.html" data-en="Risk &amp; Defense" data-zh="风险防御">Risk &amp; Defense</a>
+    <a href="risk-defense.html" data-en="Defense" data-zh="风险防御">Defense</a>
     <a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a>
-    <a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
-    <a href="push-strategy-core.html" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
-    <a href="fraud-integrity.html" class="active" data-en="Fraud &amp; Integrity" data-zh="反欺诈">Fraud &amp; Integrity</a>
+    <a href="push-strategy-core.html" data-en="Strategy" data-zh="战略核心">Strategy</a>
+    <a href="standby-mechanism.html" data-en="Standby" data-zh="补位机制">Standby</a>
   </div>
   <button id="lang-btn">中 / EN</button>
-  <button class="nav-burger" id="nav-burger" aria-label="打开菜单" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
+  <button class="nav-burger" id="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 <div class="nav-mobile-panel" id="nav-mobile-panel">
   <a href="index.html" data-en="Overview" data-zh="首页">Overview</a>
-  <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
+  <a href="project-intro.html" data-en="Product" data-zh="产品介绍">Product</a>
   <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
-  <a href="prospects.html" data-en="Prospects" data-zh="未来愿景">Prospects</a>
+  <a href="investor-qa.html" data-en="Investor Q&amp;A" data-zh="投资人问答">Investor Q&amp;A</a>
   <a href="challenges.html" data-en="Challenges" data-zh="挑战分析">Challenges</a>
-  <a href="risk-defense.html" data-en="Risk &amp; Defense" data-zh="风险防御">Risk &amp; Defense</a>
+  <a href="risk-defense.html" data-en="Defense" data-zh="风险防御">Defense</a>
   <a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a>
-  <a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
-  <a href="push-strategy-core.html" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
-  <a href="fraud-integrity.html" class="active" data-en="Fraud &amp; Integrity" data-zh="反欺诈">Fraud &amp; Integrity</a>
+  <a href="push-strategy-core.html" data-en="Strategy" data-zh="战略核心">Strategy</a>
+  <a href="standby-mechanism.html" data-en="Standby" data-zh="补位机制">Standby</a>
   <div class="mobile-lang-row">
-    <span class="mobile-lang-label" data-en="Language" data-zh="语言">Language</span>
-    <button id="lang-btn-mobile" style="background:var(--accent,#4f46e5);color:#fff;border:none;padding:6px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">中 / EN</button>
+    <span class="mobile-lang-label">Language</span>
+    <button id="lang-btn-mobile" class="lang-btn" style="background:var(--accent);color:#fff;border:none;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">中 / EN</button>
   </div>
 </div>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <span class="hero-doc-badge" data-en="DOC — 08 · FRAUD &amp; INTEGRITY" data-zh="文档 — 08 · 欺诈与诚信">DOC — 08 · FRAUD &amp; INTEGRITY</span>
-    <h1 class="hero-title" data-en="Fraud &amp; Integrity Operations" data-zh="欺诈与诚信运营">Fraud &amp; Integrity Operations</h1>
-    <p class="hero-subtitle" data-en="How Push preserves a trusted commercial environment while keeping friction minimal." data-zh="Push 如何在将摩擦降至最低的同时让平台上的交易靠谱。">How Push preserves a trusted commercial environment while keeping friction minimal.</p>
-    <p class="hero-principle" data-en="Integrity is not a policing function — it is part of the product itself." data-zh="诚信不是一种执法功能——它是产品本身的一部分。">Integrity is not a policing function — it is part of the product itself.</p>
+    <span class="hero-doc-badge fade-in" data-en="DOC — 08 · FRAUD &amp; INTEGRITY" data-zh="文档 — 08 · 欺诈与诚信">DOC — 08 · FRAUD &amp; INTEGRITY</span>
+    <h1 class="fade-in" data-en="Fraud &amp; Integrity Operations" data-zh="欺诈与诚信运营">Fraud &amp; Integrity Operations</h1>
+    <p class="hero-subtitle fade-in" data-en="How Push preserves a trusted commercial environment while keeping friction minimal." data-zh="Push 如何在将摩擦降至最低的同时让平台上的交易靠谱。">How Push preserves a trusted commercial environment while keeping friction minimal.</p>
+    <p class="hero-principle fade-in" data-en="Integrity is not a policing function — it is part of the product itself." data-zh="诚信不是一种执法功能——它是产品本身的一部分。">Integrity is not a policing function — it is part of the product itself.</p>
   </div>
 </section>
 
 <!-- ── LAYER DESCRIPTION ── -->
-<div style="max-width:1000px; margin:0 auto 24px; padding:10px 16px; background:var(--bg2, #f8f9fa); border-radius:8px; font-size:13px; color:var(--text3); text-align:center;">
+<div style="max-width:1000px; margin:0 auto; padding:10px 16px; background:var(--bg2); border-radius:8px; font-size:13px; color:var(--text3); text-align:center;">
   <span data-en="Deep dive into Push's fraud prevention and platform integrity. For the broader risk landscape, see <a href='risk-defense.html'>Risk Defense</a>." data-zh="看看 Push 怎么做欺诈防控和平台诚信。完整风险分析看这里：<a href='risk-defense.html'>风险防御</a>。" class="bilingual-text">Deep dive into Push's fraud prevention and platform integrity. For the broader risk landscape, see <a href="risk-defense.html">Risk Defense</a>.</span>
 </div>
 
 <!-- S1: PHILOSOPHY -->
-<section class="section section-bg2">
-  <div class="section-inner fade-in">
+<div class="sw-gray">
+<section class="section">
+  <div class="fade-in">
     <div class="section-label" data-en="PHILOSOPHY" data-zh="核心理念">PHILOSOPHY</div>
     <h2 class="section-title" data-en="Goal: Preserve Trust, Not Punish" data-zh="目标：维护信任，而非惩罚">Goal: Preserve Trust, Not Punish</h2>
     <blockquote class="principle">
@@ -437,10 +454,12 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
     </blockquote>
   </div>
 </section>
+</div>
 
 <!-- S2: 5 FRAUD TYPES -->
-<section class="section section-white">
-  <div class="section-inner fade-in">
+<div class="sw-white">
+<section class="section">
+  <div class="fade-in">
     <div class="section-label" data-en="THREAT MODEL" data-zh="威胁模型">THREAT MODEL</div>
     <h2 class="section-title" data-en="Five Types of Fraud" data-zh="五种欺诈类型">Five Types of Fraud</h2>
     <p class="section-sub" data-en="Distinct failure modes requiring distinct detection and enforcement approaches." data-zh="不同类型的欺诈，需要不同的发现和处理方式。">Distinct failure modes requiring distinct detection and enforcement approaches.</p>
@@ -493,10 +512,12 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
     </div>
   </div>
 </section>
+</div>
 
 <!-- S3: RISK SIGNALS -->
-<section class="section section-bg2">
-  <div class="section-inner fade-in">
+<div class="sw-gray">
+<section class="section">
+  <div class="fade-in">
     <div class="section-label" data-en="DETECTION" data-zh="检测">DETECTION</div>
     <h2 class="section-title" data-en="Integrity Risk Signals" data-zh="诚信风险信号">Integrity Risk Signals</h2>
     <p class="section-sub" data-en="Behavioral patterns and data anomalies the platform monitors continuously — not as triggers for automatic punishment, but as inputs for risk scoring." data-zh="平台持续监控的行为规律和数据异常——不是自动触发处罚，而是作为风险打分的参考依据。">Behavioral patterns and data anomalies the platform monitors continuously — not as triggers for automatic punishment, but as inputs for risk scoring.</p>
@@ -512,10 +533,12 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
     </div>
   </div>
 </section>
+</div>
 
 <!-- S4: PREVENTION BY DESIGN -->
-<section class="section section-white">
-  <div class="section-inner fade-in">
+<div class="sw-white">
+<section class="section">
+  <div class="fade-in">
     <div class="section-label" data-en="ARCHITECTURE" data-zh="系统架构">ARCHITECTURE</div>
     <h2 class="section-title" data-en="Fraud Prevention by Design" data-zh="从产品设计上防欺诈">Fraud Prevention by Design</h2>
     <p class="section-sub" data-en="Structural mechanisms that reduce fraud opportunity without creating friction for honest users. Prevention is built in — not bolted on." data-zh="从设计上减少欺诈机会，同时不给正常用户添麻烦。防控是内建的——不是事后贴上去的。">Structural mechanisms that reduce fraud opportunity without creating friction for honest users. Prevention is built in — not bolted on.</p>
@@ -572,10 +595,12 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
     </div>
   </div>
 </section>
+</div>
 
 <!-- S5: REVIEW TIERS -->
-<section class="section section-bg2">
-  <div class="section-inner fade-in">
+<div class="sw-gray">
+<section class="section">
+  <div class="fade-in">
     <div class="section-label" data-en="REVIEW SYSTEM" data-zh="审查系统">REVIEW SYSTEM</div>
     <h2 class="section-title" data-en="Three Review Tiers" data-zh="三级审查制度">Three Review Tiers</h2>
     <p class="section-sub" data-en="Not all campaigns require the same scrutiny. Review depth scales with risk signals, not with payout alone." data-zh="不是所有活动都要一样严查。审查深度看风险信号，不只是看金额大小。">Not all campaigns require the same scrutiny. Review depth scales with risk signals, not with payout alone.</p>
@@ -609,10 +634,12 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
     </div>
   </div>
 </section>
+</div>
 
 <!-- S6: ENFORCEMENT FRAMEWORK -->
-<section class="section section-white">
-  <div class="section-inner fade-in">
+<div class="sw-white">
+<section class="section">
+  <div class="fade-in">
     <div class="section-label" data-en="ENFORCEMENT" data-zh="执行">ENFORCEMENT</div>
     <h2 class="section-title" data-en="Consequence Framework" data-zh="处罚规则">Consequence Framework</h2>
     <p class="section-sub" data-en="Rule-based consequences that are explainable, consistent, and proportional. Every consequence must pass a proportionality test." data-zh="规则清晰、一致、力度和问题匹配。每一条处罚都要经得起"是否合理"的追问。">Rule-based consequences that are explainable, consistent, and proportional. Every consequence must pass a proportionality test.</p>
@@ -666,10 +693,12 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
     </div>
   </div>
 </section>
+</div>
 
 <!-- S7: MERCHANT INTEGRITY -->
-<section class="section section-bg2">
-  <div class="section-inner fade-in">
+<div class="sw-gray">
+<section class="section">
+  <div class="fade-in">
     <div class="section-label" data-en="MERCHANT CONTROLS" data-zh="商户管控">MERCHANT CONTROLS</div>
     <h2 class="section-title" data-en="Merchant Integrity Controls" data-zh="管住商户不耍赖">Merchant Integrity Controls</h2>
     <p class="section-sub" data-en="Merchants are participants in the integrity system, not just victims of fraud. Merchant behavior affects the entire creator supply and campaign market." data-zh="商户是诚信系统的一部分，不只是受害者。商户的行为方式直接影响整个创作者供给和活动生态。">Merchants are participants in the integrity system, not just victims of fraud. Merchant behavior affects the entire creator supply and campaign market.</p>
@@ -714,10 +743,12 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
     </div>
   </div>
 </section>
+</div>
 
 <!-- S8: FRAUD VS MISTAKE -->
-<section class="section section-white">
-  <div class="section-inner fade-in">
+<div class="sw-white">
+<section class="section">
+  <div class="fade-in">
     <div class="section-label" data-en="DISTINCTION" data-zh="区分">DISTINCTION</div>
     <h2 class="section-title" data-en="Fraud vs. Mistake" data-zh="欺诈与错误的区别">Fraud vs. Mistake</h2>
     <p class="section-sub" data-en="This distinction matters for both fairness and retention. Treating mistakes as fraud destroys trust. Treating fraud as mistakes enables gaming." data-zh="这个区分很关键，关乎公平和留存。把失误当欺诈处理，会毁掉信任。把欺诈当失误放过，会让人觉得有空子可钻。">This distinction matters for both fairness and retention. Treating mistakes as fraud destroys trust. Treating fraud as mistakes enables gaming.</p>
@@ -745,33 +776,54 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
     </div>
   </div>
 </section>
+</div>
 
 <!-- S9: FINAL STANDARD -->
-<section class="section section-dark">
-  <div class="section-inner fade-in">
-    <div class="section-label" style="color:var(--accent-light);" data-en="FINAL STANDARD" data-zh="最终标准">FINAL STANDARD</div>
+<div class="sw-dark">
+<section class="section">
+  <div class="fade-in">
+    <div class="section-label section-label-dark" data-en="FINAL STANDARD" data-zh="最终标准">FINAL STANDARD</div>
     <blockquote class="principle-white">
       <p data-en="Protect merchants without crushing creator trust. Discourage abuse without overburdening good users. Create consequences that matter economically. Make the platform safer than informal alternatives." data-zh="保护商户，同时不伤创作者的信任。阻止滥用，同时不给好用户添麻烦。处罚要有实际经济影响。平台要比私下合作更安全可靠。">Protect merchants without crushing creator trust. Discourage abuse without overburdening good users. Create consequences that matter economically. Make the platform safer than informal alternatives.</p>
       <p style="margin-top:20px;font-size:16px;font-weight:700;font-style:normal;color:var(--accent-light);" data-en="Integrity is not just protection — it is part of the product." data-zh="诚信不只是保护机制——它本身就是产品的一部分。">Integrity is not just protection — it is part of the product.</p>
     </blockquote>
   </div>
 </section>
+</div>
 
 <!-- ── NEXT READING ── -->
-<div style="max-width:1000px; margin:40px auto; padding:24px; background:var(--bg2, #f8f9fa); border:1px solid var(--border, #e5e7eb); border-radius:12px;">
+<div class="sw-white" style="border-top:1px solid var(--border);">
+<section class="section" style="padding-top:48px;padding-bottom:48px;">
   <h3 style="font-size:16px; font-weight:700; margin-bottom:12px;" data-en="Continue Reading" data-zh="继续阅读" class="bilingual-text">Continue Reading</h3>
-  <a href="risk-defense.html" style="display:block; padding:16px; background:#fff; border:1px solid var(--border, #e5e7eb); border-radius:8px; text-decoration:none; transition:box-shadow 0.2s,border-color 0.2s; max-width:400px;">
-    <div style="font-size:13px; color:var(--text3, #9ca3af);" data-en="Next →" data-zh="下一步 →" class="bilingual-text">Next →</div>
-    <div style="font-size:15px; font-weight:600; color:var(--text, #111827);" data-en="See all risks and defense strategies" data-zh="查看所有风险与防御策略" class="bilingual-text">See all risks and defense strategies</div>
-    <div style="font-size:13px; color:var(--accent, #4f46e5); margin-top:4px;" data-en="Risk Defense →" data-zh="风险防御 →" class="bilingual-text">Risk Defense →</div>
+  <a href="risk-defense.html" style="display:block; padding:16px; background:#fff; border:1px solid var(--border); border-radius:8px; text-decoration:none; transition:box-shadow 0.2s,border-color 0.2s,transform 0.25s; max-width:400px;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 4px 20px rgba(79,70,229,0.1)'" onmouseout="this.style.transform='none';this.style.boxShadow='none'">
+    <div style="font-size:13px; color:var(--text3);" data-en="Next →" data-zh="下一步 →" class="bilingual-text">Next →</div>
+    <div style="font-size:15px; font-weight:600; color:var(--text);" data-en="See all risks and defense strategies" data-zh="查看所有风险与防御策略" class="bilingual-text">See all risks and defense strategies</div>
+    <div style="font-size:13px; color:var(--accent); margin-top:4px;" data-en="Risk Defense →" data-zh="风险防御 →" class="bilingual-text">Risk Defense →</div>
   </a>
+</section>
 </div>
 
 <!-- FOOTER -->
-<footer style="background:#0f0f1a;padding:48px 64px 32px;border-top:1px solid rgba(255,255,255,0.06);">
-  <div style="max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
-    <div style="font-size:18px;font-weight:900;color:var(--accent);letter-spacing:1px;">PUSH</div>
-    <div style="font-size:11px;color:rgba(255,255,255,0.2);" data-en="PUSH Platform — Internal Strategy Documentation" data-zh="PUSH 平台 — 内部战略文档">PUSH Platform — Internal Strategy Documentation</div>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="f-logo">PUSH</div>
+      <div class="f-tagline" data-en="The Operating System for Local Creator Commerce" data-zh="本地博主商业化操作系统">The Operating System for Local Creator Commerce</div>
+    </div>
+    <div class="footer-links">
+      <a href="index.html" class="footer-link" data-en="Overview" data-zh="首页">Overview</a>
+      <a href="project-intro.html" class="footer-link" data-en="Product" data-zh="产品介绍">Product</a>
+      <a href="pitch-deck.html" class="footer-link" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
+      <a href="investor-qa.html" class="footer-link" data-en="Investor Q&amp;A" data-zh="投资人问答">Investor Q&amp;A</a>
+      <a href="challenges.html" class="footer-link" data-en="Challenges" data-zh="挑战分析">Challenges</a>
+      <a href="risk-defense.html" class="footer-link" data-en="Defense" data-zh="风险防御">Defense</a>
+      <a href="retention-defense.html" class="footer-link" data-en="Retention" data-zh="留存机制">Retention</a>
+      <a href="push-strategy-core.html" class="footer-link" data-en="Strategy" data-zh="战略核心">Strategy</a>
+      <a href="standby-mechanism.html" class="footer-link" data-en="Standby" data-zh="补位机制">Standby</a>
+    </div>
+    <div class="footer-copy">
+      <div data-en="© 2026 Push" data-zh="© 2026 Push">© 2026 Push</div>
+    </div>
   </div>
 </footer>
 
@@ -781,6 +833,7 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
   function applyLang(l) {
     lang = l;
     localStorage.setItem('push-lang', l);
+    document.documentElement.setAttribute('lang', l === 'zh' ? 'zh' : 'en');
     document.querySelectorAll('[data-en]').forEach(el => {
       const val = el.getAttribute('data-' + l);
       if (val !== null) el.innerHTML = val;
@@ -797,8 +850,8 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
   });
   applyLang(lang);
   /* lang-reveal */document.documentElement.style.opacity='1';
-  document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh' : 'en');
 
+  // Fade-in observer
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -807,14 +860,17 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
       }
     });
   }, { threshold: 0.01, rootMargin: '0px 0px 60px 0px' });
-  document.querySelectorAll('section').forEach(el => observer.observe(el));
-  // Scroll progress bar
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Scroll progress bar + nav shadow
   const progressBar = document.getElementById('scroll-progress');
+  const navEl = document.querySelector('nav');
   window.addEventListener('scroll', () => {
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
     const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
     if (progressBar) progressBar.style.width = progress + '%';
+    if (navEl) navEl.classList.toggle('scrolled', scrollTop > 20);
   }, { passive: true });
 })();
 
