@@ -720,7 +720,7 @@
       .hero { padding: 80px 20px 48px; margin-top: 0; }
       .section-wrap, .section-wrap-gray, .section-wrap-dark { padding: 48px 20px; }
       footer { padding: 32px 20px 24px; }
-      .danger-grid, .pillar-grid, .fatal-grid { grid-template-columns: 1fr; }
+      .danger-grid, .pillar-grid, .fatal-grid, .behavior-grid { grid-template-columns: 1fr; }
       .moat-timeline { grid-template-columns: 1fr; }
       .bp-q { padding: 24px 20px; flex-direction: column; gap: 12px; }
       .hero-title { font-size: clamp(22px,6vw,28px); letter-spacing: -0.5px; line-height: 1.3; }
@@ -728,6 +728,8 @@
       .hero-ctas { flex-direction: column; gap: 12px; }
       .hero-ctas a { font-size: 14px; padding: 12px 20px; }
       .platform-loop-steps { flex-direction: column; align-items: flex-start; }
+      [style*="grid-template-columns:1fr auto 1fr"] { grid-template-columns: 1fr !important; }
+      [style*="grid-template-columns:1fr auto 1fr"] > div:nth-child(2) { justify-content: center; }
     }
 
     /* Nav scroll shadow */
@@ -852,10 +854,10 @@
 
     <h1 class="hero-title">
       <span data-en="Push is not a matching tool." data-zh="Push 不是撮合工具，">Push is not a matching tool.</span><br>
-      <span class="line-accent" data-en="Push is a value settlement layer." data-zh="<span class='line-accent'>而是让商家和创作者在这里合作、攒信用的系统。</span>">Push is a value settlement layer.</span>
+      <span class="line-accent" data-en="It is where structured campaigns produce verified results." data-zh="<span class='line-accent'>它是结构化活动产出可验证结果的地方。</span>">It is where structured campaigns produce verified results.</span>
     </h1>
 
-    <p class="hero-sub" data-en="Matching tools have no moat. No long-term value. No high valuation. This page explains why Push is fundamentally different — and why it must be." data-zh="光撮合没用——谁都能做，留不住人。这一页解释 Push 为什么本质上不同——以及为什么必须如此。">Matching tools have no moat. No long-term value. No high valuation. This page explains why Push is fundamentally different — and why it must be.</p>
+    <p class="hero-sub" data-en="Matching tools have no moat — anyone can copy them, no one stays. Push delivers repeatable outcomes: structured campaigns, verified redemptions, creator comparison, and re-bookable performance history." data-zh="撮合工具没有壁垒——谁都能抄，留不住人。Push 交付可重复的结果：结构化活动、已核验的核销、博主对比、可复购的业绩记录。">Matching tools have no moat — anyone can copy them, no one stays. Push delivers repeatable outcomes: structured campaigns, verified redemptions, creator comparison, and re-bookable performance history.</p>
 
     <div class="hero-ctas">
       <a href="retention-defense.html" class="hero-cta hero-cta-primary" data-en="Creator Retention Architecture" data-zh="Creator 留存架构">Creator Retention Architecture</a>
@@ -875,6 +877,18 @@
     <a href="risk-defense.html" style="text-decoration:none; color:var(--text3); opacity:0.5; transition:opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.5'" data-en="The Defense" data-zh="防御" class="bilingual-text">The Defense</a>
     <span style="color:var(--text3); opacity:0.3;"> &gt; </span>
     <span style="font-weight:700; color:var(--accent); background:var(--accent-bg); padding:2px 10px; border-radius:100px; font-size:12px;" data-en="The Endgame" data-zh="终局" class="bilingual-text">The Endgame</span>
+  </div>
+</div>
+
+<!-- NORTH STAR METRIC -->
+<div class="section-wrap" style="padding-top:40px; padding-bottom:40px; border-bottom:1px solid var(--border);">
+  <div class="inner-md fade-in">
+    <div style="background:linear-gradient(135deg, rgba(79,70,229,0.06) 0%, rgba(129,140,248,0.06) 100%); border:2px solid rgba(79,70,229,0.18); border-radius:12px; padding:36px 40px; text-align:center; position:relative; overflow:hidden;">
+      <div style="position:absolute; top:12px; right:20px; font-size:48px; opacity:0.06; font-weight:900; pointer-events:none;">&#x2605;</div>
+      <div style="font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent); margin-bottom:10px;" data-en="North Star Metric" data-zh="北极星指标">North Star Metric</div>
+      <div style="font-size:26px; font-weight:900; color:var(--primary); line-height:1.3; letter-spacing:-0.5px; margin-bottom:10px;" data-en="Verified Repeat Campaign Value Per Merchant" data-zh="每个商家的已验证复购活动价值">Verified Repeat Campaign Value Per Merchant</div>
+      <div style="font-size:14px; color:var(--text2); max-width:560px; margin:0 auto; line-height:1.7;" data-en="This single metric captures retention, trust, and monetization in one number. If this grows, everything else follows. If it stalls, nothing else matters." data-zh="这一个指标同时反映了留存、信任和变现。这个数字涨，一切都对了。这个数字停，其他都没意义。">This single metric captures retention, trust, and monetization in one number. If this grows, everything else follows. If it stalls, nothing else matters.</div>
+    </div>
   </div>
 </div>
 
@@ -902,6 +916,63 @@
 
     <div class="fatal-verdict fade-in fd3">
       <span data-en="If you cannot answer both questions convincingly, Push is just a tool. Tools get replaced. Tools get commoditized. Tools die." data-zh="如果回答不了这两个问题，Push 就只是个工具——随时能被替代。">If you cannot answer both questions convincingly, Push is just a tool. Tools get replaced. Tools get commoditized. Tools die.</span>
+    </div>
+
+    <!-- WHY NOT JUST DM? -->
+    <div class="fade-in" style="margin-top:36px;">
+      <div style="background:var(--red-bg); border:1px solid rgba(220,38,38,0.2); border-radius:12px; padding:28px 32px; position:relative;">
+        <div style="font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--red); margin-bottom:10px;" data-en="Why Not Just DM?" data-zh="为什么不直接私信？">Why Not Just DM?</div>
+        <div style="font-size:15px; font-weight:600; color:var(--text); line-height:1.75;" data-en="DM is random. Push is a system. You lose performance history, reliable execution, structured campaigns, creator comparison, and repeatability." data-zh="私信是碰运气。Push 是一套系统。你会失去业绩记录、可靠执行、结构化活动、博主对比和可复购性。">DM is random. Push is a system. You lose performance history, reliable execution, structured campaigns, creator comparison, and repeatability.</div>
+      </div>
+    </div>
+
+    <!-- BEHAVIOR DESIGN -->
+    <div class="fade-in" style="margin-top:48px;">
+      <div class="section-label" data-en="BEHAVIOR DESIGN" data-zh="行为设计">BEHAVIOR DESIGN</div>
+      <div class="section-divider"></div>
+      <h2 class="section-title" data-en="Push is not just a system — it is a behavior engine." data-zh="Push 不只是一个系统——它是一个行为引擎。">Push is not just a system — it is a behavior engine.</h2>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:24px;" class="fade-in behavior-grid">
+      <div style="background:var(--bg2, #f9fafb); border-radius:12px; padding:28px 24px;">
+        <div style="font-size:13px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#4f46e5; margin-bottom:16px;" data-en="Creator Drivers" data-zh="创作者驱动力">Creator Drivers</div>
+        <div style="display:flex; flex-direction:column; gap:12px; font-size:14px; line-height:1.7; color:var(--text2, #6b7280);">
+          <div data-en="<strong style='color:var(--text, #111827); font-weight:600;'>Limited seats</strong> &rarr; FOMO: act now or miss out" data-zh="<strong style='color:var(--text, #111827); font-weight:600;'>限量名额</strong> &rarr; FOMO：现在不抢就没了"><strong style="color:var(--text, #111827); font-weight:600;">Limited seats</strong> &rarr; FOMO: act now or miss out</div>
+          <div data-en="<strong style='color:var(--text, #111827); font-weight:600;'>Standby queue</strong> &rarr; Gamification: always one slot away" data-zh="<strong style='color:var(--text, #111827); font-weight:600;'>候补队列</strong> &rarr; 游戏化：永远只差一个位置"><strong style="color:var(--text, #111827); font-weight:600;">Standby queue</strong> &rarr; Gamification: always one slot away</div>
+          <div data-en="<strong style='color:var(--text, #111827); font-weight:600;'>Tier progression</strong> &rarr; Growth narrative: I'm building something" data-zh="<strong style='color:var(--text, #111827); font-weight:600;'>等级晋升</strong> &rarr; 成长叙事：我在构建自己的事业"><strong style="color:var(--text, #111827); font-weight:600;">Tier progression</strong> &rarr; Growth narrative: I'm building something</div>
+          <div data-en="<strong style='color:var(--text, #111827); font-weight:600;'>Fast payouts</strong> &rarr; Instant reward: effort &rarr; money today" data-zh="<strong style='color:var(--text, #111827); font-weight:600;'>快速结款</strong> &rarr; 即时奖励：付出 &rarr; 今天就拿钱"><strong style="color:var(--text, #111827); font-weight:600;">Fast payouts</strong> &rarr; Instant reward: effort &rarr; money today</div>
+        </div>
+      </div>
+      <div style="background:var(--bg2, #f9fafb); border-radius:12px; padding:28px 24px;">
+        <div style="font-size:13px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#4f46e5; margin-bottom:16px;" data-en="Merchant Drivers" data-zh="商家驱动力">Merchant Drivers</div>
+        <div style="display:flex; flex-direction:column; gap:12px; font-size:14px; line-height:1.7; color:var(--text2, #6b7280);">
+          <div data-en="<strong style='color:var(--text, #111827); font-weight:600;'>Templates</strong> &rarr; Low cognitive cost: don't think, just launch" data-zh="<strong style='color:var(--text, #111827); font-weight:600;'>模板</strong> &rarr; 低认知成本：不用想，直接发"><strong style="color:var(--text, #111827); font-weight:600;">Templates</strong> &rarr; Low cognitive cost: don't think, just launch</div>
+          <div data-en="<strong style='color:var(--text, #111827); font-weight:600;'>Repeat button</strong> &rarr; Habit loop: worked once, do it again" data-zh="<strong style='color:var(--text, #111827); font-weight:600;'>一键复购</strong> &rarr; 习惯回路：上次有效，再来一次"><strong style="color:var(--text, #111827); font-weight:600;">Repeat button</strong> &rarr; Habit loop: worked once, do it again</div>
+          <div data-en="<strong style='color:var(--text, #111827); font-weight:600;'>Dashboard</strong> &rarr; Control: I can see what's happening" data-zh="<strong style='color:var(--text, #111827); font-weight:600;'>数据面板</strong> &rarr; 掌控感：我能看到发生了什么"><strong style="color:var(--text, #111827); font-weight:600;">Dashboard</strong> &rarr; Control: I can see what's happening</div>
+          <div data-en="<strong style='color:var(--text, #111827); font-weight:600;'>Creator ranking</strong> &rarr; Safety: picking a vetted creator, not guessing" data-zh="<strong style='color:var(--text, #111827); font-weight:600;'>创作者排名</strong> &rarr; 安全感：选的是审核过的人，不是碰运气"><strong style="color:var(--text, #111827); font-weight:600;">Creator ranking</strong> &rarr; Safety: picking a vetted creator, not guessing</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BRUTAL SIMPLIFICATION (Minimum Viable Push) -->
+    <div class="fade-in" style="margin-top:48px;">
+      <div style="background:#fff; border:2px solid var(--green); border-radius:12px; padding:36px 40px; position:relative; overflow:hidden;">
+        <div style="position:absolute; top:12px; right:20px; font-size:48px; opacity:0.05; font-weight:900; pointer-events:none;">MVP</div>
+        <div style="font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--green); margin-bottom:14px;" data-en="Execution" data-zh="执行">Execution</div>
+        <div style="font-size:22px; font-weight:800; color:var(--primary); margin-bottom:20px; line-height:1.3;" data-en="Brutal Simplification: Minimum Viable Push" data-zh="极致简化：最小可行 Push">Brutal Simplification: Minimum Viable Push</div>
+        <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:20px;">
+          <span style="background:rgba(5,150,105,0.08); color:var(--green); font-size:13px; font-weight:700; padding:8px 16px; border-radius:100px; white-space:nowrap;" data-en="1. Merchant posts" data-zh="1. 商家发布">1. Merchant posts</span>
+          <span style="color:var(--green); font-size:16px; font-weight:700;">&#x2192;</span>
+          <span style="background:rgba(5,150,105,0.08); color:var(--green); font-size:13px; font-weight:700; padding:8px 16px; border-radius:100px; white-space:nowrap;" data-en="2. Creator accepts" data-zh="2. 创作者接单">2. Creator accepts</span>
+          <span style="color:var(--green); font-size:16px; font-weight:700;">&#x2192;</span>
+          <span style="background:rgba(5,150,105,0.08); color:var(--green); font-size:13px; font-weight:700; padding:8px 16px; border-radius:100px; white-space:nowrap;" data-en="3. Proof submitted" data-zh="3. 提交证明">3. Proof submitted</span>
+          <span style="color:var(--green); font-size:16px; font-weight:700;">&#x2192;</span>
+          <span style="background:rgba(5,150,105,0.08); color:var(--green); font-size:13px; font-weight:700; padding:8px 16px; border-radius:100px; white-space:nowrap;" data-en="4. Merchant confirms" data-zh="4. 商家确认">4. Merchant confirms</span>
+          <span style="color:var(--green); font-size:16px; font-weight:700;">&#x2192;</span>
+          <span style="background:rgba(5,150,105,0.08); color:var(--green); font-size:13px; font-weight:700; padding:8px 16px; border-radius:100px; white-space:nowrap;" data-en="5. Result recorded" data-zh="5. 结果记录">5. Result recorded</span>
+        </div>
+        <div style="font-size:14px; color:var(--text2); line-height:1.75; max-width:640px;" data-en="No map. No fancy UI. Runs on a spreadsheet and DMs before the product even exists. If the loop does not work manually, no amount of engineering will save it." data-zh="不需要地图，不需要花哨的 UI。在产品还没做出来之前，用表格和私信就能跑通。如果手动都跑不通，再多的技术也救不了。">No map. No fancy UI. Runs on a spreadsheet and DMs before the product even exists. If the loop does not work manually, no amount of engineering will save it.</div>
+      </div>
     </div>
 
   </div>
@@ -983,6 +1054,45 @@
       </div>
 
     </div>
+
+    <!-- OPERATING SYSTEM CALLOUT -->
+    <div class="fade-in" style="margin-top:48px;">
+      <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(129,140,248,0.25); border-radius:12px; padding:40px 44px; position:relative; overflow:hidden;">
+        <div style="position:absolute; top:16px; right:24px; font-size:56px; opacity:0.05; font-weight:900; color:#fff; pointer-events:none;">OS</div>
+        <div style="font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent-light); margin-bottom:14px;" data-en="Positioning" data-zh="定位">Positioning</div>
+        <div style="font-size:22px; font-weight:800; color:#fff; margin-bottom:16px; line-height:1.35;" data-en="Operating System, Not Platform" data-zh="操作系统，不是平台">Operating System, Not Platform</div>
+        <div style="font-size:15px; color:rgba(255,255,255,0.75); line-height:1.8; max-width:640px;" data-en="A platform connects two sides. An operating system makes them perform. Platforms are replaceable. Systems are not &mdash; because the switching cost is the accumulated intelligence inside." data-zh="平台只是连接两端。操作系统让两端高效运转。平台可以被替换。系统不行——因为切换成本就是系统内部积累的所有智能。">A platform connects two sides. An operating system makes them perform. Platforms are replaceable. Systems are not &mdash; because the switching cost is the accumulated intelligence inside.</div>
+      </div>
+    </div>
+
+    <!-- QUALITY DEFENSE -->
+    <div class="fade-in" style="margin-top:36px;">
+      <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(220,38,38,0.3); border-radius:12px; padding:40px 44px; position:relative; overflow:hidden;">
+        <div style="position:absolute; top:16px; right:24px; font-size:56px; opacity:0.05; font-weight:900; color:#fff; pointer-events:none;">QC</div>
+        <div style="font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:#f87171; margin-bottom:14px;" data-en="Quality Defense" data-zh="质量防线">Quality Defense</div>
+        <div style="font-size:22px; font-weight:800; color:#fff; margin-bottom:20px; line-height:1.35;" data-en="Why Push Won't Race to the Bottom" data-zh="为什么 Push 不会陷入低价竞争">Why Push Won't Race to the Bottom</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px;">
+          <div style="background:rgba(255,255,255,0.06); border-radius:8px; padding:18px 20px;">
+            <div style="font-size:13px; font-weight:700; color:#fff; margin-bottom:6px;" data-en="Tier (Gates)" data-zh="等级（门槛）">Tier (Gates)</div>
+            <div style="font-size:13px; color:rgba(255,255,255,0.6); line-height:1.65;" data-en="Entry requirements filter out low-effort participants before they enter" data-zh="准入要求在进入前就过滤掉低质量参与者">Entry requirements filter out low-effort participants before they enter</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.06); border-radius:8px; padding:18px 20px;">
+            <div style="font-size:13px; font-weight:700; color:#fff; margin-bottom:6px;" data-en="Credit (History)" data-zh="信用（历史）">Credit (History)</div>
+            <div style="font-size:13px; color:rgba(255,255,255,0.6); line-height:1.65;" data-en="Every action is recorded — reputation is earned, not claimed" data-zh="每个行为都有记录——信誉靠攒，不靠说">Every action is recorded — reputation is earned, not claimed</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.06); border-radius:8px; padding:18px 20px;">
+            <div style="font-size:13px; font-weight:700; color:#fff; margin-bottom:6px;" data-en="Verification (Checked)" data-zh="核验（审核）">Verification (Checked)</div>
+            <div style="font-size:13px; color:rgba(255,255,255,0.6); line-height:1.65;" data-en="Proof of work is verified before any payout or credit is issued" data-zh="在任何结算或信用发放前，工作证明必须核验通过">Proof of work is verified before any payout or credit is issued</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.06); border-radius:8px; padding:18px 20px;">
+            <div style="font-size:13px; font-weight:700; color:#fff; margin-bottom:6px;" data-en="Access Control (Earned)" data-zh="准入控制（需赢得）">Access Control (Earned)</div>
+            <div style="font-size:13px; color:rgba(255,255,255,0.6); line-height:1.65;" data-en="Premium campaigns are only visible to creators who have earned the right" data-zh="高价值活动只对赢得资格的创作者可见">Premium campaigns are only visible to creators who have earned the right</div>
+          </div>
+        </div>
+        <div style="font-size:15px; font-weight:600; color:rgba(255,255,255,0.9); line-height:1.7; font-style:italic; border-top:1px solid rgba(255,255,255,0.1); padding-top:20px;" data-en="Push is not an open marketplace — it is a curated, performance-gated system." data-zh="Push 不是一个开放市场——它是一个经过筛选、以表现为门槛的系统。">Push is not an open marketplace — it is a curated, performance-gated system.</div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -1047,6 +1157,44 @@
 
     </div>
 
+    <!-- GROWTH FLYWHEEL ENGINE -->
+    <div class="fade-in" style="margin-top:40px;">
+      <div style="background:#fff; border:2px solid var(--accent); border-radius:12px; padding:36px 40px; position:relative; overflow:hidden;">
+        <div style="position:absolute; top:12px; right:20px; font-size:48px; opacity:0.05; font-weight:900; pointer-events:none;">&#x267B;</div>
+        <div style="font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent); margin-bottom:14px;" data-en="Growth Engine" data-zh="增长引擎">Growth Engine</div>
+        <div style="font-size:20px; font-weight:800; color:var(--primary); margin-bottom:20px; line-height:1.3;" data-en="The 6-Step Growth Flywheel" data-zh="6 步增长飞轮">The 6-Step Growth Flywheel</div>
+        <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+          <span style="background:var(--accent-bg); color:var(--accent); font-size:13px; font-weight:700; padding:8px 16px; border-radius:100px; white-space:nowrap;" data-en="More merchants" data-zh="更多商家">More merchants</span>
+          <span style="color:var(--accent); font-size:16px; font-weight:700;">&#x2192;</span>
+          <span style="background:var(--accent-bg); color:var(--accent); font-size:13px; font-weight:700; padding:8px 16px; border-radius:100px; white-space:nowrap;" data-en="More campaigns" data-zh="更多活动">More campaigns</span>
+          <span style="color:var(--accent); font-size:16px; font-weight:700;">&#x2192;</span>
+          <span style="background:var(--accent-bg); color:var(--accent); font-size:13px; font-weight:700; padding:8px 16px; border-radius:100px; white-space:nowrap;" data-en="More creator opportunities" data-zh="更多创作者机会">More creator opportunities</span>
+          <span style="color:var(--accent); font-size:16px; font-weight:700;">&#x2192;</span>
+          <span style="background:var(--accent-bg); color:var(--accent); font-size:13px; font-weight:700; padding:8px 16px; border-radius:100px; white-space:nowrap;" data-en="Better creators stay" data-zh="好创作者留下">Better creators stay</span>
+          <span style="color:var(--accent); font-size:16px; font-weight:700;">&#x2192;</span>
+          <span style="background:var(--accent-bg); color:var(--accent); font-size:13px; font-weight:700; padding:8px 16px; border-radius:100px; white-space:nowrap;" data-en="Better results" data-zh="效果更好">Better results</span>
+          <span style="color:var(--accent); font-size:16px; font-weight:700;">&#x2192;</span>
+          <span style="background:var(--accent-bg); color:var(--accent); font-size:13px; font-weight:700; padding:8px 16px; border-radius:100px; white-space:nowrap;" data-en="Merchant repeat" data-zh="商家复购">Merchant repeat</span>
+          <span style="color:var(--accent); font-size:16px; font-weight:700;">&#x21BA;</span>
+        </div>
+        <div style="font-size:13px; color:var(--text2); margin-top:16px; line-height:1.7; max-width:600px;" data-en="Each revolution of this loop strengthens the next. The flywheel is self-reinforcing: more supply attracts demand, better demand retains supply, and data from both sides sharpens the matching engine." data-zh="每转一圈都让下一圈更强。飞轮自我强化：更多供给吸引需求，更好的需求留住供给，双方的数据让匹配引擎越来越精准。">Each revolution of this loop strengthens the next. The flywheel is self-reinforcing: more supply attracts demand, better demand retains supply, and data from both sides sharpens the matching engine.</div>
+      </div>
+    </div>
+
+    <!-- PMF SIGNAL -->
+    <div class="fade-in" style="margin-top:40px;">
+      <div style="background:#fff; border:2px solid var(--orange); border-radius:12px; padding:36px 40px; position:relative; overflow:hidden;">
+        <div style="position:absolute; top:12px; right:20px; font-size:48px; opacity:0.05; font-weight:900; pointer-events:none;">PMF</div>
+        <div style="font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--orange); margin-bottom:14px;" data-en="Validation Signal" data-zh="验证信号">Validation Signal</div>
+        <div style="font-size:20px; font-weight:800; color:var(--primary); margin-bottom:16px; line-height:1.3;" data-en="The Only PMF Signal That Matters" data-zh="唯一重要的 PMF 信号">The Only PMF Signal That Matters</div>
+        <div style="font-size:15px; color:var(--text2); line-height:1.8; max-width:640px; margin-bottom:16px;" data-en="When merchants start running campaigns repeatedly without being pushed, we know we have PMF. Not user growth. Not downloads. The only signal: unprompted merchant repeat." data-zh="当商家开始主动反复发起活动、不需要我们推动时，就说明我们找到了 PMF。不是用户增长，不是下载量。唯一的信号：商家自发复购。">When merchants start running campaigns repeatedly without being pushed, we know we have PMF. Not user growth. Not downloads. The only signal: unprompted merchant repeat.</div>
+        <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(217,119,6,0.08); padding:10px 18px; border-radius:8px;">
+          <span style="font-size:18px;">&#x1F3AF;</span>
+          <span style="font-size:13px; font-weight:700; color:var(--orange);" data-en="Metric: Unprompted merchant repeat rate" data-zh="指标：商家自发复购率">Metric: Unprompted merchant repeat rate</span>
+        </div>
+      </div>
+    </div>
+
     <!-- Platform Loop Strip -->
     <div class="platform-loop-strip platform-loop-mt fade-in fd2">
       <div class="platform-loop-label" data-en="Platform Loop" data-zh="平台循环">Platform Loop</div>
@@ -1063,6 +1211,17 @@
         <span class="platform-step-arrow">→</span>
         <span class="platform-step" data-en="Network Effects" data-zh="用的人越多越好用">Network Effects</span>
         <span class="platform-step-arrow">↺</span>
+      </div>
+    </div>
+
+    <!-- CONTROL POINT -->
+    <div class="fade-in" style="margin-top:40px;">
+      <div style="background:#fff; border:2px solid var(--accent); border-radius:12px; padding:36px 40px; position:relative; overflow:hidden;">
+        <div style="position:absolute; top:12px; right:20px; font-size:48px; opacity:0.05; font-weight:900; pointer-events:none;">&#x2693;</div>
+        <div style="font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent); margin-bottom:14px;" data-en="Defensibility" data-zh="防御壁垒">Defensibility</div>
+        <div style="font-size:20px; font-weight:800; color:var(--primary); margin-bottom:16px; line-height:1.3;" data-en="The Control Point" data-zh="控制点">The Control Point</div>
+        <div style="font-size:15px; color:var(--text2); line-height:1.8; max-width:640px; margin-bottom:16px;" data-en="Push controls access to high-quality demand — which campaigns appear, who sees them, who accepts, who gets priority. This is not a feature. This is the structural advantage." data-zh="Push 控制着高质量需求的准入——哪些活动出现、谁能看到、谁能接单、谁有优先权。这不是一个功能，这是结构性优势。">Push controls access to high-quality demand — which campaigns appear, who sees them, who accepts, who gets priority. This is not a feature. This is the structural advantage.</div>
+        <div style="font-size:16px; font-weight:700; color:var(--accent); font-style:italic;" data-en="That is the power." data-zh="这就是核心权力。">That is the power.</div>
       </div>
     </div>
 
@@ -1128,6 +1287,45 @@
       </div>
 
     </div>
+
+    <!-- DATA MOAT -->
+    <div class="fade-in" style="margin-top:56px;">
+      <div style="font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent); margin-bottom:14px; display:flex; align-items:center; gap:10px;" data-en="Data Moat" data-zh="数据护城河"><span style="width:20px; height:2px; background:var(--accent); display:block; flex-shrink:0; opacity:0.7;"></span>Data Moat</div>
+      <h3 style="font-size:28px; font-weight:800; color:var(--primary); margin-bottom:24px; line-height:1.35;" data-en="Two Data Streams, One Irreplicable Engine" data-zh="两条数据流，一个不可复制的引擎">Two Data Streams, One Irreplicable Engine</h3>
+      <div style="display:grid; grid-template-columns:1fr auto 1fr; gap:20px; align-items:stretch;">
+        <!-- Creator-side data -->
+        <div style="background:rgba(124,58,237,0.04); border:1px solid rgba(124,58,237,0.15); border-radius:12px; padding:28px 24px;">
+          <div style="font-size:12px; font-weight:700; letter-spacing:0.5px; color:#7c3aed; margin-bottom:16px;" data-en="Creator-Side Data" data-zh="创作者端数据">Creator-Side Data</div>
+          <div style="display:flex; flex-direction:column; gap:10px; font-size:14px; color:var(--text2); line-height:1.65;">
+            <div data-en="Completion rates" data-zh="完成率">Completion rates</div>
+            <div data-en="Reliability scores" data-zh="可靠性评分">Reliability scores</div>
+            <div data-en="Quality ratings" data-zh="质量评级">Quality ratings</div>
+            <div data-en="Conversion lift per creator" data-zh="每位创作者的转化提升">Conversion lift per creator</div>
+          </div>
+        </div>
+        <!-- Plus sign -->
+        <div style="display:flex; align-items:center; justify-content:center;">
+          <div style="width:48px; height:48px; border-radius:50%; background:var(--accent); color:#fff; font-size:24px; font-weight:800; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 16px rgba(79,70,229,0.25);">+</div>
+        </div>
+        <!-- Merchant-side data -->
+        <div style="background:rgba(5,150,105,0.04); border:1px solid rgba(5,150,105,0.15); border-radius:12px; padding:28px 24px;">
+          <div style="font-size:12px; font-weight:700; letter-spacing:0.5px; color:var(--green); margin-bottom:16px;" data-en="Merchant-Side Data" data-zh="商家端数据">Merchant-Side Data</div>
+          <div style="display:flex; flex-direction:column; gap:10px; font-size:14px; color:var(--text2); line-height:1.65;">
+            <div data-en="Which campaigns work" data-zh="哪些活动有效">Which campaigns work</div>
+            <div data-en="Which creators convert" data-zh="哪些创作者能转化">Which creators convert</div>
+            <div data-en="Optimal timing patterns" data-zh="最佳时机规律">Optimal timing patterns</div>
+            <div data-en="Repeat strategies" data-zh="复购策略">Repeat strategies</div>
+          </div>
+        </div>
+      </div>
+      <!-- Result -->
+      <div style="margin-top:20px; background:linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%); border-radius:12px; padding:28px 32px; text-align:center;">
+        <div style="font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,0.6); margin-bottom:8px;" data-en="Result" data-zh="结果">Result</div>
+        <div style="font-size:20px; font-weight:800; color:#fff; line-height:1.4;" data-en="An irreplicable matching engine that gets smarter with every transaction" data-zh="一个不可复制的匹配引擎，每笔交易都让它更聪明">An irreplicable matching engine that gets smarter with every transaction</div>
+        <div style="font-size:13px; color:rgba(255,255,255,0.65); margin-top:10px; max-width:500px; margin-left:auto; margin-right:auto; line-height:1.7;" data-en="Competitors can copy the interface. They cannot copy the data. And without the data, matching is guesswork." data-zh="竞争对手可以抄界面，但抄不走数据。没有数据，匹配就是瞎猜。">Competitors can copy the interface. They cannot copy the data. And without the data, matching is guesswork.</div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -1177,6 +1375,87 @@
 
     <div class="bp-verdict fade-in fd4" data-en="If answered <em>weakly</em>, the project appears fragile. If answered <em>strongly</em>, the project becomes fundable." data-zh="回答得弱，项目看着不靠谱。回答得好，才拿得到钱。">If answered <em>weakly</em>, the project appears fragile. If answered <em>strongly</em>, the project becomes fundable.</div>
 
+    <!-- UNIT ECONOMICS PER CAMPAIGN -->
+    <div class="fade-in" style="margin-top:48px;">
+      <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(129,140,248,0.25); border-radius:12px; padding:40px 44px; position:relative; overflow:hidden;">
+        <div style="position:absolute; top:16px; right:24px; font-size:56px; opacity:0.05; font-weight:900; color:#fff; pointer-events:none;">$</div>
+        <div style="font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent-light); margin-bottom:14px;" data-en="Unit Economics" data-zh="单元经济">Unit Economics</div>
+        <div style="font-size:22px; font-weight:800; color:#fff; margin-bottom:24px; line-height:1.35;" data-en="Economics Per Campaign" data-zh="每次活动的经济模型">Economics Per Campaign</div>
+        <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:24px;">
+          <div style="background:rgba(255,255,255,0.08); border-radius:10px; padding:16px 20px; text-align:center; min-width:120px;">
+            <div style="font-size:11px; font-weight:600; color:rgba(255,255,255,0.5); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.5px;" data-en="Merchant Pays" data-zh="商家支付">Merchant Pays</div>
+            <div style="font-size:28px; font-weight:900; color:#fff;">$200</div>
+          </div>
+          <span style="color:rgba(255,255,255,0.3); font-size:20px; font-weight:700;">&#x2192;</span>
+          <div style="background:rgba(129,140,248,0.12); border-radius:10px; padding:16px 20px; text-align:center; min-width:120px;">
+            <div style="font-size:11px; font-weight:600; color:rgba(255,255,255,0.5); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.5px;" data-en="Creator Earns" data-zh="创作者获得">Creator Earns</div>
+            <div style="font-size:28px; font-weight:900; color:var(--accent-light);">$120</div>
+          </div>
+          <span style="color:rgba(255,255,255,0.3); font-size:20px; font-weight:700;">+</span>
+          <div style="background:rgba(255,255,255,0.06); border-radius:10px; padding:16px 20px; text-align:center; min-width:100px;">
+            <div style="font-size:11px; font-weight:600; color:rgba(255,255,255,0.5); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.5px;" data-en="Ops Cost" data-zh="运营成本">Ops Cost</div>
+            <div style="font-size:28px; font-weight:900; color:rgba(255,255,255,0.7);">$10</div>
+          </div>
+          <span style="color:rgba(255,255,255,0.3); font-size:20px; font-weight:700;">=</span>
+          <div style="background:rgba(5,150,105,0.15); border:1px solid rgba(5,150,105,0.3); border-radius:10px; padding:16px 20px; text-align:center; min-width:140px;">
+            <div style="font-size:11px; font-weight:600; color:rgba(255,255,255,0.5); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.5px;" data-en="Platform Net" data-zh="平台净收入">Platform Net</div>
+            <div style="font-size:28px; font-weight:900; color:#34d399;">$70</div>
+            <div style="font-size:12px; font-weight:700; color:rgba(52,211,153,0.8); margin-top:2px;" data-en="35% margin" data-zh="35% 利润率">35% margin</div>
+          </div>
+        </div>
+        <div style="font-size:15px; font-weight:600; color:rgba(255,255,255,0.85); line-height:1.7; font-style:italic; border-top:1px solid rgba(255,255,255,0.1); padding-top:20px;" data-en="Push gets more profitable with every campaign — not busier but poorer." data-zh="每多一次活动，Push 就更赚钱——不是越忙越穷。">Push gets more profitable with every campaign — not busier but poorer.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- EXAMPLE CAMPAIGN -->
+<div class="section-wrap" style="padding-top:40px; padding-bottom:40px; border-bottom:1px solid var(--border);">
+  <div class="inner-md fade-in">
+    <div style="background:linear-gradient(135deg, rgba(5,150,105,0.06) 0%, rgba(5,150,105,0.03) 100%); border:2px solid rgba(5,150,105,0.18); border-radius:12px; padding:36px 40px; position:relative; overflow:hidden;">
+      <div style="position:absolute; top:12px; right:20px; font-size:48px; opacity:0.06; font-weight:900; pointer-events:none;">&#x2615;</div>
+      <div style="font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--green); margin-bottom:10px;" data-en="Example Campaign" data-zh="活动案例">Example Campaign</div>
+      <div style="font-size:22px; font-weight:800; color:var(--primary); line-height:1.35; margin-bottom:16px;" data-en="SoHo Caf&eacute; — Real Numbers" data-zh="SoHo 咖啡馆——真实数据">SoHo Caf&eacute; — Real Numbers</div>
+      <div style="display:flex; gap:16px; flex-wrap:wrap; margin-bottom:20px;">
+        <div style="background:rgba(5,150,105,0.08); border-radius:10px; padding:14px 18px; text-align:center; min-width:100px;">
+          <div style="font-size:11px; font-weight:600; color:var(--text3); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px;" data-en="Creators" data-zh="博主">Creators</div>
+          <div style="font-size:26px; font-weight:900; color:var(--green);">6</div>
+        </div>
+        <div style="background:rgba(5,150,105,0.08); border-radius:10px; padding:14px 18px; text-align:center; min-width:100px;">
+          <div style="font-size:11px; font-weight:600; color:var(--text3); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px;" data-en="Duration" data-zh="时长">Duration</div>
+          <div style="font-size:26px; font-weight:900; color:var(--green);" data-en="2 days" data-zh="2 天">2 days</div>
+        </div>
+        <div style="background:rgba(5,150,105,0.08); border-radius:10px; padding:14px 18px; text-align:center; min-width:100px;">
+          <div style="font-size:11px; font-weight:600; color:var(--text3); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px;" data-en="Redemptions" data-zh="核销">Redemptions</div>
+          <div style="font-size:26px; font-weight:900; color:var(--green);">38</div>
+        </div>
+        <div style="background:rgba(5,150,105,0.08); border-radius:10px; padding:14px 18px; text-align:center; min-width:100px;">
+          <div style="font-size:11px; font-weight:600; color:var(--text3); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px;" data-en="Cost/Customer" data-zh="获客成本">Cost/Customer</div>
+          <div style="font-size:26px; font-weight:900; color:var(--green);">$5.26</div>
+        </div>
+      </div>
+      <div style="font-size:15px; font-weight:600; color:var(--text); line-height:1.7; font-style:italic; border-top:1px solid rgba(5,150,105,0.15); padding-top:16px;" data-en="Repeat campaign launched next week — without being asked." data-zh="下周自动复购——不用催。">Repeat campaign launched next week — without being asked.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOUNDER-MARKET FIT -->
+<div class="section-wrap" style="padding-top:48px; padding-bottom:48px;">
+  <div class="inner-md fade-in">
+    <div style="background:linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #0f3460 100%); border-radius:12px; padding:44px 48px; position:relative; overflow:hidden;">
+      <div style="position:absolute; top:0; right:0; width:200px; height:200px; background:radial-gradient(circle, rgba(79,70,229,0.15) 0%, transparent 70%); pointer-events:none;"></div>
+      <div style="font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--accent-light); margin-bottom:14px;" data-en="Founder-Market Fit" data-zh="创始人-市场匹配">Founder-Market Fit</div>
+      <div style="font-size:24px; font-weight:800; color:#fff; margin-bottom:16px; line-height:1.35; max-width:600px;" data-en="At the Intersection of Three Worlds" data-zh="三个领域的交汇处">At the Intersection of Three Worlds</div>
+      <div style="display:flex; gap:16px; flex-wrap:wrap; margin-bottom:20px;">
+        <span style="background:rgba(129,140,248,0.15); color:var(--accent-light); font-size:13px; font-weight:700; padding:8px 18px; border-radius:100px; border:1px solid rgba(129,140,248,0.25);" data-en="Creator Culture" data-zh="创作者文化">Creator Culture</span>
+        <span style="font-size:18px; color:rgba(255,255,255,0.3); display:flex; align-items:center;">&#x00D7;</span>
+        <span style="background:rgba(129,140,248,0.15); color:var(--accent-light); font-size:13px; font-weight:700; padding:8px 18px; border-radius:100px; border:1px solid rgba(129,140,248,0.25);" data-en="Design Systems" data-zh="设计系统">Design Systems</span>
+        <span style="font-size:18px; color:rgba(255,255,255,0.3); display:flex; align-items:center;">&#x00D7;</span>
+        <span style="background:rgba(129,140,248,0.15); color:var(--accent-light); font-size:13px; font-weight:700; padding:8px 18px; border-radius:100px; border:1px solid rgba(129,140,248,0.25);" data-en="Local Commerce" data-zh="本地商业">Local Commerce</span>
+      </div>
+      <div style="font-size:15px; color:rgba(255,255,255,0.65); line-height:1.8; max-width:560px;" data-en="Positioned at the intersection of creator culture, design systems, and local commerce. This is not a generalist building a marketplace. This is someone who lives in all three worlds building the system that connects them." data-zh="位于创作者文化、设计系统和本地商业的交汇点。这不是一个通才在做市场平台，而是一个同时生活在这三个世界的人，在构建连接它们的系统。">Positioned at the intersection of creator culture, design systems, and local commerce. This is not a generalist building a marketplace. This is someone who lives in all three worlds building the system that connects them.</div>
+    </div>
   </div>
 </div>
 
@@ -1200,7 +1479,7 @@
 <footer>
   <div class="footer-inner">
     <a href="index.html" class="footer-logo">PUSH</a>
-    <div class="footer-tagline" data-en="From Transaction Entry Point to <em>Value Settlement Layer</em>" data-zh="从撮合入口，到<em>双方积累资产的系统</em>">From Transaction Entry Point to <em>Value Settlement Layer</em></div>
+    <div class="footer-tagline" data-en="From one-off transactions to <em>verified, repeatable campaigns</em>" data-zh="从一次性交易，到<em>可验证、可复购的活动体系</em>">From one-off transactions to <em>verified, repeatable campaigns</em></div>
     <div class="footer-links">
       <a href="index.html" data-en="Overview" data-zh="首页">Dashboard</a>
       <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>

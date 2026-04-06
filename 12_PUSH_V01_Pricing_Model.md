@@ -58,12 +58,13 @@ Creator payment timing: Within 24 hours of verified completion via Venmo/Zelle.
 **Option B: Monthly Subscription (Recommended)**
 | Plan | Price | Campaigns/month | Extra Campaign |
 |---|---|---|---|
-| Basic | $99/month | Up to 3 campaigns | $39 each |
-| Pro | $199/month | Up to 8 campaigns | $29 each |
+| Starter | $79/month | Up to 3 campaigns | $39 each |
+| Growth | $249/month | Up to 8 campaigns | $29 each |
+| Scale | $699/month | Unlimited campaigns | — |
 
-**Recommended starting point:** Option B, Basic plan at $99/month. Why:
+**Recommended starting point:** Option B, Starter plan at $79/month. Why:
 - Subscription creates habit and recurring revenue signal
-- $99/month is less than 1 Instagram ad campaign
+- $79/month is less than 1 Instagram ad campaign
 - 3 campaigns/month is realistic for a small F&B shop
 - Monthly commitment increases merchant seriousness
 
@@ -91,7 +92,7 @@ Not implemented in Phase 2, but designed for Phase 3+:
 | DM a creator directly | $50-200 per post + product | None | High (find, negotiate, manage) |
 | Local marketing agency | $500-2000/month | Low-Medium | Low |
 | Instagram/Facebook Ads | $200-1000/month | Medium | Medium |
-| **Push Basic** | **$99/month** | **Medium-High** | **Very Low** |
+| **Push Starter** | **$79/month** | **Medium-High** | **Very Low** |
 
 This comparison is your sales weapon. Push is cheaper than all alternatives AND requires less merchant effort.
 
@@ -136,13 +137,13 @@ Platform fee → Auto-deducted
 | **Total** | **~$1,000-1,450** |
 
 ### Break-even trajectory
-At $99/month per merchant, you need ~15 paying merchants to cover ongoing creator costs when creators are paid from campaign fees instead of your pocket. This is achievable by Month 4-5.
+At $79/month per merchant, you need ~19 paying merchants to cover ongoing creator costs when creators are paid from campaign fees instead of your pocket. This is achievable by Month 4-5.
 
 ---
 
 ## Pricing Experiments to Run
 
-1. **$49 vs $99 per month**: Test with different merchant cohorts
+1. **$49 vs $79 per month**: Test with different merchant cohorts
 2. **Per-campaign vs subscription**: Which gets higher adoption?
 3. **Creator payout sensitivity**: Does $25 vs $35 affect completion rate?
 4. **Standby premium**: Would merchants pay $20 extra for guaranteed fill?
@@ -154,6 +155,6 @@ At $99/month per merchant, you need ~15 paying merchants to cover ongoing creato
 - NEVER charge a merchant before they've completed at least 1 free campaign
 - ALWAYS pay creators within 24 hours (this is a trust-building non-negotiable)
 - Creator minimum payout: $15 (below this feels exploitative)
-- Merchant maximum first-month price: $99 (no premium tiers until proven value)
+- Merchant maximum first-month price: $79 (no premium tiers until proven value)
 - No annual contracts in Phase 1-2 (monthly only, cancel anytime)
 - Refund policy: Full refund if campaign gets zero completions

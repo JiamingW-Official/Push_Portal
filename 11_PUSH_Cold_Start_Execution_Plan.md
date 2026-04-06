@@ -193,7 +193,7 @@ Display on creator profiles:
 - Campaigns completed: [number]
 - Completion rate: [%]
 - Average merchant rating: [X/5]
-- Reliability badge: "New" / "Rising" / "Reliable"
+- Tier badge: "Explorer" / "Operator" / "Proven" / "Closer" / "Partner"
 
 **Introduce standby:**
 When a creator drops out last-minute, notify nearby qualified creators:
@@ -208,10 +208,10 @@ After proving value through free campaigns, introduce merchant pricing:
 - First campaign: FREE (already done)
 - Second campaign: FREE (already done for repeaters)
 - Third campaign onwards: $49/campaign flat fee (introductory price)
-- Or: $99/month for up to 3 campaigns
+- Or: $79/month for up to 3 campaigns
 
 **Have the pricing conversation:**
-"You've run [X] campaigns with us and [results]. Going forward, campaigns are $49 each or $99/month for 3. That's way less than what agencies charge, and you've already seen it works."
+"You've run [X] campaigns with us and [results]. Going forward, campaigns are $49 each or $79/month for 3. That's way less than what agencies charge, and you've already seen it works."
 
 **Week 12 data review — the numbers that matter:**
 1. Merchant repeat rate (target: 40%+ of merchants run 2+ campaigns)

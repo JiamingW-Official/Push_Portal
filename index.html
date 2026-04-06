@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Push 是本地商家与创作者之间的效果交付系统。每次合作有目标、可核验、有数据，支持复购。">
-<meta property="og:title" content="PUSH — 本地创作者效果平台">
+<meta property="og:title" content="PUSH — 本地创作者商业操作系统">
 <meta property="og:description" content="Push 让每次创作者合作有数据、能验证、值得再做。">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="PUSH — Local Creator Performance Infrastructure">
+<meta name="twitter:title" content="PUSH — The Operating System for Local Creator Commerce">
 <meta name="twitter:description" content="Push makes every creator campaign verifiable, measurable, and repeatable.">
-<title>PUSH — Local Creator Performance Infrastructure</title>
+<title>PUSH — The Operating System for Local Creator Commerce</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" as="style">
@@ -388,6 +388,31 @@ footer{background:#0f0f1a;padding:48px 64px 32px;border-top:1px solid var(--bord
 .audience-link,.diff-link,.sla-link,.doc-mini-link{transition:color 0.15s;}
 .audience-link:hover,.diff-link:hover{color:var(--accent-light);}
 
+/* — Strategic callouts — */
+.strategic-bar{background:#0f0f1a;border-top:1px solid rgba(255,255,255,0.06);padding:48px 64px;}
+.strategic-bar-inner{max-width:1000px;margin:0 auto;}
+.north-star-callout{display:flex;align-items:center;gap:16px;padding:20px 28px;background:rgba(79,70,229,0.1);border:1px solid rgba(79,70,229,0.25);border-radius:8px;margin-bottom:32px;}
+.north-star-callout .ns-icon{font-size:20px;flex-shrink:0;}
+.north-star-callout .ns-label{font-size:11px;font-weight:700;letter-spacing:0.5px;color:var(--accent-light);text-transform:uppercase;}
+.north-star-callout .ns-value{font-size:16px;font-weight:700;color:#fff;margin-top:2px;}
+.north-star-callout .ns-sub{font-size:13px;color:rgba(255,255,255,0.45);margin-top:2px;}
+.strat-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:40px;}
+.strat-card{padding:24px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;}
+.strat-card-label{font-size:11px;font-weight:700;letter-spacing:0.5px;color:var(--accent-light);text-transform:uppercase;margin-bottom:8px;}
+.strat-card-title{font-size:16px;font-weight:700;color:#fff;margin-bottom:6px;}
+.strat-card-body{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7;}
+.oneframe-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.oneframe-cell{padding:20px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;}
+.oneframe-cell .of-label{font-size:10px;font-weight:800;letter-spacing:1px;color:var(--accent-light);text-transform:uppercase;margin-bottom:6px;}
+.oneframe-cell .of-value{font-size:14px;font-weight:600;color:#fff;line-height:1.5;}
+@media(max-width:768px){
+  .strategic-bar{padding:36px 20px;}
+  .strat-row{grid-template-columns:1fr;}
+  .oneframe-grid{grid-template-columns:1fr 1fr;}
+  .north-star-callout{flex-direction:column;align-items:flex-start;gap:8px;}
+}
+@media(max-width:480px){.oneframe-grid{grid-template-columns:1fr;}}
+
 /* — Reading rhythm — alternating section padding — */
 .sw-white + .sw-gray .section{padding:56px 64px;}
 .sw-gray + .sw-white .section{padding:64px 64px;}
@@ -479,301 +504,355 @@ footer{background:#0f0f1a;padding:48px 64px 32px;border-top:1px solid var(--bord
 <!-- — S0: Hero — -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-label fade-in" data-en="THE MISSING LAYER IN LOCAL CREATOR MARKETING" data-zh="本地创作者营销，一直没人把流程跑通">THE MISSING LAYER IN LOCAL CREATOR MARKETING</div>
+    <div class="hero-label fade-in" data-en="STOP GUESSING. START BUYING RESULTS." data-zh="别再靠猜了。直接购买结果。">STOP GUESSING. START BUYING RESULTS.</div>
     <h1 class="fade-in">
-      <span data-en="You paid <strong>$150</strong> for a creator post. Did it work? You'll never know." data-zh="花 <strong>$150</strong> 请博主发了条帖子，效果怎么样？没人说得清。">You paid <strong>$150</strong> for a creator post. Did it work? You'll never know.</span>
-      <span class="accent-line" data-en="Push makes every campaign <strong>verifiable, trackable, and repeatable</strong>." data-zh="Push 让每一笔合作<strong>算得清账</strong>、看得到效果、值得再来。">Push makes every campaign <strong>verifiable, trackable, and repeatable</strong>.</span>
+      <span data-en="Run a local creator campaign in <strong>24 hours</strong>. Pay only for <strong>verified results</strong>." data-zh="<strong>24小时</strong>内跑一次本地创作者活动。只为<strong>验证过的效果</strong>付费。">Run a local creator campaign in <strong>24 hours</strong>. Pay only for <strong>verified results</strong>.</span>
+      <span class="accent-line" data-en="Get <strong>5 local creators</strong> to bring new customers this week &mdash; tracked, verified, repeatable." data-zh="这周就让<strong>5个本地博主</strong>给你带新客——可追踪、可核验、可复制。">Get <strong>5 local creators</strong> to bring new customers this week — tracked, verified, repeatable.</span>
     </h1>
-    <p class="hero-sub fade-in" data-en="Push isn't about finding creators — it's about making every collaboration produce data, so the next one is faster, smarter, and more valuable." data-zh="Push 不帮你找博主。但每次合作找了谁、花了多少、效果好不好，全都有据可查，下次不用从头来。">Push isn't about finding creators — it's about making every collaboration produce data, so the next one is faster, smarter, and more valuable.</p>
+    <p class="hero-sub fade-in" data-en="Push is not a marketplace. It's a system for running creator campaigns like ads — you set the goal, we handle matching, execution, verification, and settlement. Only pay when creators complete the campaign." data-zh="Push 不是撮合平台，而是一套把创作者活动当广告来投的系统——你定目标，我们搞定匹配、执行、核验、结算。博主完成了才付钱。">Push is not a marketplace. It's a system for running creator campaigns like ads — you set the goal, we handle matching, execution, verification, and settlement. Only pay when creators complete the campaign.</p>
     <div class="hero-ctas fade-in">
-      <a href="#workflow" class="hero-cta" data-en="→ See how it works" data-zh="→ 看看怎么运作">→ See how it works</a>
-      <a href="project-intro.html" class="hero-cta" data-en="→ Project Intro" data-zh="→ 项目介绍">→ Project Intro</a>
+      <a href="#workflow" class="hero-cta" data-en="→ Start a Campaign" data-zh="→ 发起一次活动">→ Start a Campaign</a>
+      <a href="project-intro.html" class="hero-cta" style="background:transparent;border:1px solid rgba(255,255,255,0.3);" data-en="→ See How It Works" data-zh="→ 看看怎么运作">→ See How It Works</a>
     </div>
   </div>
 </section>
 
-<!-- — S1: 30-second understanding + audience routing — -->
-<div class="sw-white">
-  <div class="section">
-    <div class="section-label fade-in" data-en="WHAT IS PUSH" data-zh="一句话说清楚">WHAT IS PUSH</div>
-    <h2 class="section-title fade-in" data-en="Merchants say what they want. Push <strong>handles the rest</strong> — finding creators, scheduling, tracking, verifying, and paying." data-zh="商家提需求，Push <strong>自动匹配人</strong>、排活动、盯进度、验结果、走付款。">Merchants say what they want. Push <strong>handles the rest</strong> — finding creators, scheduling, tracking, verifying, and paying.</h2>
-
-    <!-- 5-Step Flow -->
-    <div class="flow5 fade-in">
-      <div class="flow5-step">
-        <div class="flow5-icon">🎯</div>
-        <div class="flow5-label-zh" data-en="Post Goal" data-zh="商家发需求">Post Goal</div>
-        <div class="flow5-label-en">Goal</div>
-      </div>
-      <span class="flow5-arrow">→</span>
-      <div class="flow5-step">
-        <div class="flow5-icon">🔗</div>
-        <div class="flow5-label-zh" data-en="System Matches" data-zh="系统匹配">System Matches</div>
-        <div class="flow5-label-en">Match</div>
-      </div>
-      <span class="flow5-arrow">→</span>
-      <div class="flow5-step">
-        <div class="flow5-icon">🎬</div>
-        <div class="flow5-label-zh" data-en="Creator Executes" data-zh="创作者执行">Creator Executes</div>
-        <div class="flow5-label-en">Execute</div>
-      </div>
-      <span class="flow5-arrow">→</span>
-      <div class="flow5-step">
-        <div class="flow5-icon">✅</div>
-        <div class="flow5-label-zh" data-en="Platform Verifies" data-zh="平台核验">Platform Verifies</div>
-        <div class="flow5-label-en">Verify</div>
-      </div>
-      <span class="flow5-arrow">→</span>
-      <div class="flow5-step">
-        <div class="flow5-icon">💰</div>
-        <div class="flow5-label-zh" data-en="Auto Settlement" data-zh="自动结算">Auto Settlement</div>
-        <div class="flow5-label-en">Settle</div>
-      </div>
-    </div>
-
-    <!-- Audience Routing -->
-    <div class="section-label fade-in" style="margin-top:64px;" data-en="WHERE DO YOU WANT TO GO" data-zh="你想了解什么">WHERE DO YOU WANT TO GO</div>
-    <h3 class="fade-in" style="font-size:clamp(20px,2.5vw,28px);font-weight:800;color:var(--primary);margin-bottom:4px;letter-spacing:-0.5px;" data-en="Choose your path." data-zh="选择你的方向。">Choose your path.</h3>
-
-    <div class="audience-grid fade-in">
-      <a href="pitch-deck.html" class="audience-card">
-        <div class="audience-label" data-en="INVESTOR" data-zh="我是投资者">INVESTOR</div>
-        <div class="audience-title" data-en="See Market & Model" data-zh="看市场和模式">See Market & Model</div>
-        <div class="audience-body" data-en="Market, model, and moat in 3 minutes." data-zh="3分钟看完市场逻辑、商业模式和别人抄不走的东西。">Market, model, and moat in 3 minutes.</div>
-        <div class="audience-link" data-en="View Pitch Deck →" data-zh="查看路演材料 →">View Pitch Deck →</div>
-      </a>
-      <a href="#dochub" class="audience-card">
-        <div class="audience-label" data-en="TEAM MEMBER" data-zh="我是团队成员">TEAM MEMBER</div>
-        <div class="audience-title" data-en="View Full Docs" data-zh="查看完整文档">View Full Docs</div>
-        <div class="audience-body" data-en="13 strategy and ops documents." data-zh="13份内部文档，覆盖从策略到执行的完整框架。">13 strategy and ops documents.</div>
-        <div class="audience-link" data-en="View Document Hub →" data-zh="进入文档中心 →">View Document Hub →</div>
-      </a>
-      <a href="project-intro.html" class="audience-card">
-        <div class="audience-label" data-en="LEARN MORE" data-zh="想多了解产品">LEARN MORE</div>
-        <div class="audience-title" data-en="Explore the Product" data-zh="深入了解产品">Explore the Product</div>
-        <div class="audience-body" data-en="Full problem, workflow, and credit system." data-zh="完整的痛点分析、工作流和创作者信用体系。">Full problem, workflow, and credit system.</div>
-        <div class="audience-link" data-en="Project Intro →" data-zh="查看项目介绍 →">Project Intro →</div>
-      </a>
-    </div>
-  </div>
+<!-- — Supporting line — -->
+<div style="text-align:center;padding:16px 24px;background:var(--bg2);border-bottom:1px solid var(--border);">
+  <span style="font-size:14px;font-weight:600;color:var(--text2);letter-spacing:0.5px;" data-en="No contracts. No guessing. No wasted spend." data-zh="无合同。不靠猜。不浪费钱。">No contracts. No guessing. No wasted spend.</span>
 </div>
 
-<!-- — S2: The problem — -->
+<!-- — S1: The Problem — -->
 <div class="sw-gray">
   <div class="section fade-in">
-    <div class="section-label" data-en="WHY THIS EXISTS" data-zh="问题出在哪里">WHY THIS EXISTS</div>
-    <h2 class="section-title" data-en="<span style='color:var(--accent)'>Neither side</span> has what they need." data-zh="商家和创作者，<span style='color:var(--accent)'>双方都在踩坑</span>。"><span style="color:var(--accent)">Neither side</span> has what they need.</h2>
+    <div class="section-label" data-en="THE PROBLEM" data-zh="核心问题">THE PROBLEM</div>
+    <h2 class="section-title" data-en="Local creator marketing is <span style='color:var(--accent)'>broken</span>." data-zh="本地创作者营销<span style='color:var(--accent)'>已经坏了</span>。">Local creator marketing is <span style="color:var(--accent)">broken</span>.</h2>
 
     <div class="problem-grid">
-
       <!-- Merchant Pain -->
       <div class="problem-panel fade-in">
-        <div class="panel-header panel-header-red" data-en="For Merchants" data-zh="商家的困境">For Merchants</div>
-        <div class="panel-sub" data-en="The current situation is broken." data-zh="现在就是这样运作的。">The current situation is broken.</div>
+        <div class="panel-header panel-header-red" data-en="For Merchants" data-zh="商家">For Merchants</div>
         <div class="pain-list">
           <div class="pain-item pain-item-red">
-            <div class="pain-item-title" data-en="Can't judge creator quality" data-zh="根本不知道找谁靠谱">Can't judge creator quality</div>
-            <div class="pain-item-body" data-en="You evaluate by follower count and &ldquo;vibes.&rdquo; Neither predicts whether someone will show up, post on time, or actually bring customers." data-zh="只能靠粉丝数和感觉判断，但这两样完全无法预测对方会不会到场、按时发布、或真正带来客人。">You evaluate by follower count and &ldquo;vibes.&rdquo; Neither predicts whether someone will show up, post on time, or actually bring customers.</div>
-          </div>
-          <div class="pain-item pain-item-red">
-            <div class="pain-item-title" data-en="No way to measure ROI" data-zh="钱花出去了，效果完全看不到">No way to measure ROI</div>
-            <div class="pain-item-body" data-en="Did this campaign drive visits? Did anyone claim the offer? Was it worth $150? You'll never know." data-zh="这次活动有没有带来新客？有没有人用了优惠？花的钱值吗？永远没有答案。">Did this campaign drive visits? Did anyone claim the offer? Was it worth $150? You'll never know.</div>
-          </div>
-          <div class="pain-item pain-item-red">
-            <div class="pain-item-title" data-en="Too much manual work" data-zh="每次合作都要从头搞一遍">Too much manual work</div>
-            <div class="pain-item-body" data-en="Outreach, negotiation, content approval, reminders, proof tracking, payments — all handled through DMs and spreadsheets." data-zh="找人、谈价格、审内容、追截止日期、收款——全靠私信和表格。">Outreach, negotiation, content approval, reminders, proof tracking, payments — all handled through DMs and spreadsheets.</div>
-          </div>
-          <div class="pain-item pain-item-red">
-            <div class="pain-item-title" data-en="Fear of getting burned" data-zh="怕给了产品什么都捞不回来">Fear of getting burned</div>
-            <div class="pain-item-body" data-en="Creators take free product and disappear. No-shows. Low-quality content. No recourse, no records, no accountability." data-zh="博主拿了免费产品后消失、放鸽子、或发了劣质内容。没有记录、没有追责机制、没有任何补救办法。">Creators take free product and disappear. No-shows. Low-quality content. No recourse, no records, no accountability.</div>
+            <div class="pain-item-title" data-en="You DM creators" data-zh="你私信博主">You DM creators</div>
+            <div class="pain-item-body" data-en="You give away free product. You don't know what worked. You try again — or stop completely." data-zh="你送出免费产品。你不知道效果如何。你再试一次——或者直接放弃。">You give away free product. You don't know what worked. You try again — or stop completely.</div>
           </div>
         </div>
-        <div class="panel-verdict" data-en="<span style='font-weight:600;color:var(--text)'>$150</span> gone. Zero data, zero repeat." data-zh="每次 <span style='font-weight:600;color:var(--text)'>$150</span> 花出去，连个数据都没留下。"><span style="font-weight:600;color:var(--text)">$150</span> gone. Zero data, zero repeat.</div>
+        <div class="panel-verdict" data-en="Merchants guess." data-zh="商家在猜。">Merchants guess.</div>
       </div>
 
       <!-- Creator Pain -->
       <div class="problem-panel fade-in">
-        <div class="panel-header panel-header-accent" data-en="For Creators" data-zh="创作者的困境">For Creators</div>
-        <div class="panel-sub" data-en="This is what most creators deal with every day." data-zh="这是大多数创作者的日常。">This is what most creators deal with every day.</div>
+        <div class="panel-header panel-header-accent" data-en="For Creators" data-zh="创作者">For Creators</div>
         <div class="pain-list">
           <div class="pain-item pain-item-accent">
-            <div class="pain-item-title" data-en="No pricing power" data-zh="没有任何谈价的底气">No pricing power</div>
-            <div class="pain-item-body" data-en="You can't prove what you're worth. Every merchant offers whatever they feel like. Without a track record, you negotiate from zero every time." data-zh="你拿不出任何商业价值的证明。没有历史记录，每次谈价都从零开始，只能被动接受对方开的价。">You can't prove what you're worth. Every merchant offers whatever they feel like. Without a track record, you negotiate from zero every time.</div>
-          </div>
-          <div class="pain-item pain-item-accent">
-            <div class="pain-item-title" data-en="Income is unpredictable" data-zh="这个月有合作，下个月不一定">Income is unpredictable</div>
-            <div class="pain-item-body" data-en="Random DMs, vague offers, inconsistent payments. There's no structured pipeline of quality work that you can rely on." data-zh="全靠私信碰运气，报价忽高忽低，付款时间不定。没有稳定的优质合作渠道可以依赖。">Random DMs, vague offers, inconsistent payments. There's no structured pipeline of quality work that you can rely on.</div>
-          </div>
-          <div class="pain-item pain-item-accent">
-            <div class="pain-item-title" data-en="Trapped in the freebie loop" data-zh="一直在用内容换免费东西">Trapped in the freebie loop</div>
-            <div class="pain-item-body" data-en="Most gigs are &ldquo;free product in exchange for a post.&rdquo; There's no clear path from freebie work to real paid campaigns." data-zh="绝大多数合作就是"你来拍我给你吃"的免费置换。从免费体验到正式付费合作，中间没有任何晋升路径。">Most gigs are &ldquo;free product in exchange for a post.&rdquo; There's no clear path from freebie work to real paid campaigns.</div>
-          </div>
-          <div class="pain-item pain-item-accent">
-            <div class="pain-item-title" data-en="You don't know if merchants will pay fairly" data-zh="做完了，商家可能耍赖">You don't know if merchants will pay fairly</div>
-            <div class="pain-item-body" data-en="Requirements change after you've done the work. Merchants disappear. There's no accountability on either side." data-zh="做完之后商家改需求、拖延结款、甚至直接消失。双方都没有问责机制，创作者毫无保障。">Requirements change after you've done the work. Merchants disappear. There's no accountability on either side.</div>
+            <div class="pain-item-title" data-en="No stable income" data-zh="收入不稳定">No stable income</div>
+            <div class="pain-item-body" data-en="No clear path to grow. No way to prove your value. No structured pipeline you can rely on." data-zh="没有成长路径。无法证明自己的价值。没有可靠的合作渠道。">No clear path to grow. No way to prove your value. No structured pipeline you can rely on.</div>
           </div>
         </div>
-        <div class="panel-verdict" data-en="Good content, no credit history, no career path." data-zh="内容不错，但没有信用记录，没有职业路径。">Good content, no credit history, no career path.</div>
+        <div class="panel-verdict" data-en="Creators struggle." data-zh="创作者在挣扎。">Creators struggle.</div>
       </div>
+    </div>
 
+    <div class="fade-in" style="margin-top:32px;text-align:center;padding:20px;background:var(--red-bg);border-radius:10px;">
+      <div style="font-size:16px;font-weight:800;color:var(--red);" data-en="Nothing scales. Nothing repeats. Nobody has data." data-zh="无法规模化。无法复购。没有数据。">Nothing scales. Nothing repeats. Nobody has data.</div>
     </div>
   </div>
 </div>
 
-<!-- — S3: How it works — -->
-<div class="sw-white" id="workflow">
-  <div class="section fade-in">
-    <div class="section-label" data-en="HOW IT WORKS" data-zh="运作方式">HOW IT WORKS</div>
-    <h2 class="section-title" data-en="Goal → Structure → Route → Verify → Settle → <strong>Repeat</strong>." data-zh="从下单到结案，<strong>每一步都有记录</strong>。">Goal → Structure → Route → Verify → Settle → <strong>Repeat</strong>.</h2>
-    <p class="section-sub" data-en="<strong>20x improvement</strong> over the basic marketplace flow." data-zh="一套比微信对接<strong>靠谱得多</strong>的工作流。"><strong>20x improvement</strong> over the basic marketplace flow.</p>
-
-    <div style="margin-top:36px;">
-      <div class="compare-strip strip-before fade-in">
-        <div class="compare-strip-label" data-en="❌ Before Push" data-zh="❌ 现在的方式">❌ Before Push</div>
-        <span data-en="Merchant posts a vague brief → Creator applies with no screening → Maybe they show up → Maybe they post → Maybe you get paid → No data, no records, no repeat." data-zh="商家发帖 → 博主申请 → 不一定来 → 不一定发 → 不一定收款 → 没有数据，没有下次">Merchant posts a vague brief → Creator applies with no screening → Maybe they show up → Maybe they post → Maybe you get paid → No data, no records, no repeat.</span>
-        <div class="strip-note" data-en="No structure, no records, no repeat." data-zh="对接完就断了，什么都没留下。">No structure, no records, no repeat.</div>
-      </div>
-      <div class="compare-strip strip-after fade-in">
-        <div class="compare-strip-label" data-en="✅ With Push" data-zh="✅ Push 的方式">✅ With Push</div>
-        <span data-en="Merchant selects goal → Campaign auto-structures → Ranked creators matched by credit score → 7-state milestone tracking → Verified proof → Automatic settlement within 24hrs → Data feeds next campaign." data-zh="选定目标 → 自动生成方案 → 按评分匹配博主 → 7步全程追踪 → 完成后核实 → 24小时结款 → 数据积累，下次更准">Merchant selects goal → Campaign auto-structures → Ranked creators matched by credit score → 7-state milestone tracking → Verified proof → Automatic settlement within 24hrs → Data feeds next campaign.</span>
-        <div class="strip-note" data-en="Every step generates data. Data makes the next campaign better." data-zh="每一步都留数据，下次自动更准。">Every step generates data. Data makes the next campaign better.</div>
-      </div>
-    </div>
-
-    <!-- 7 Milestone Pills -->
-    <div class="milestone-row fade-in">
-      <div class="milestone-pill">
-        <span class="m-num">①</span>
-        <span data-en="Accepted" data-zh="接受合作">Accepted</span>
-      </div>
-      <span class="milestone-arrow">→</span>
-      <div class="milestone-pill">
-        <span class="m-num">②</span>
-        <span data-en="Scheduled" data-zh="确认排期">Scheduled</span>
-      </div>
-      <span class="milestone-arrow">→</span>
-      <div class="milestone-pill">
-        <span class="m-num">③</span>
-        <span data-en="Visited" data-zh="到店履约">Visited</span>
-      </div>
-      <span class="milestone-arrow">→</span>
-      <div class="milestone-pill">
-        <span class="m-num">④</span>
-        <span data-en="Proof Submitted" data-zh="提交证明">Proof Submitted</span>
-      </div>
-      <span class="milestone-arrow">→</span>
-      <div class="milestone-pill">
-        <span class="m-num">⑤</span>
-        <span data-en="Content Published" data-zh="内容发布">Content Published</span>
-      </div>
-      <span class="milestone-arrow">→</span>
-      <div class="milestone-pill">
-        <span class="m-num">⑥</span>
-        <span data-en="Verified" data-zh="核实通过">Verified</span>
-      </div>
-      <span class="milestone-arrow">→</span>
-      <div class="milestone-pill">
-        <span class="m-num">⑦</span>
-        <span data-en="Settled" data-zh="完成结款">Settled</span>
-      </div>
-    </div>
-
-    <div class="milestone-sla fade-in">
-      <span class="sla-chip" data-en="12hrs to accept" data-zh="12小时内接受">12hrs to accept</span>
-      <span class="sla-chip" data-en="3–5 days to visit" data-zh="3–5天内到店">3–5 days to visit</span>
-      <span class="sla-chip" data-en="24hrs to submit proof" data-zh="24小时内提交证明">24hrs to submit proof</span>
-      <span class="sla-chip" data-en="24hrs to settle" data-zh="24小时内结款">24hrs to settle</span>
-    </div>
-
-    <a href="project-intro.html" class="sla-link fade-in" data-en="→ View full SLA rules (project-intro.html)" data-zh="→ 查看完整 SLA 规则 (project-intro.html)">→ View full SLA rules (project-intro.html)</a>
-  </div>
-</div>
-
-<!-- — S4: Is vs is not — -->
-<div class="sw-gray">
-  <div class="section fade-in">
-    <div class="section-label" data-en="WHAT PUSH IS" data-zh="战略定位">WHAT PUSH IS</div>
-    <h2 class="section-title" data-en="Not everything. Just the <span style='color:var(--accent)'>right thing</span>." data-zh="不是什么都做，只做<span style='color:var(--accent)'>最该做的事</span>。">Not everything. Just the <span style="color:var(--accent)">right thing</span>.</h2>
-
-    <div class="is-grid fade-in">
-      <div class="is-col not">
-        <div class="is-col-head" data-en="Push is NOT" data-zh="Push 不是">Push is NOT</div>
-        <div class="is-item">
-          <span class="is-icon">✗</span>
-          <span data-en="Generic influencer marketplace" data-zh="通用网红撮合平台">Generic influencer marketplace</span>
-        </div>
-        <div class="is-item">
-          <span class="is-icon">✗</span>
-          <span data-en="Local discovery or exploration app" data-zh="本地探索或发现 App">Local discovery or exploration app</span>
-        </div>
-        <div class="is-item">
-          <span class="is-icon">✗</span>
-          <span data-en="Content community or social network" data-zh="内容社区或社交网络">Content community or social network</span>
-        </div>
-        <div class="is-item">
-          <span class="is-icon">✗</span>
-          <span data-en="Loyalty or coupon app" data-zh="积分奖励或优惠券系统">Loyalty or coupon app</span>
-        </div>
-        <div class="is-item">
-          <span class="is-icon">✗</span>
-          <span data-en="Sample giveaway platform" data-zh="免费体验分发平台">Sample giveaway platform</span>
-        </div>
-      </div>
-      <div class="is-col yes">
-        <div class="is-col-head" data-en="Push IS" data-zh="Push 是">Push IS</div>
-        <div class="is-item">
-          <span class="is-icon">✓</span>
-          <span data-en="Transaction system" data-zh="商业交易系统">Transaction system</span>
-        </div>
-        <div class="is-item">
-          <span class="is-icon">✓</span>
-          <span data-en="Trust system" data-zh="信任机制">Trust system</span>
-        </div>
-        <div class="is-item">
-          <span class="is-icon">✓</span>
-          <span data-en="Creator credit system" data-zh="创作者信用体系">Creator credit system</span>
-        </div>
-        <div class="is-item">
-          <span class="is-icon">✓</span>
-          <span data-en="Local demand orchestration system" data-zh="本地需求派单系统">Local demand orchestration system</span>
-        </div>
-        <div class="is-item">
-          <span class="is-icon">✓</span>
-          <span data-en="Operating infrastructure between merchants and creators" data-zh="商家和创作者之间跑通合作的那层系统">Operating infrastructure between merchants and creators</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- — S5: Three core differentiators — -->
+<!-- — S2: The Solution — -->
 <div class="sw-white">
   <div class="section fade-in">
-    <div class="section-label" data-en="CORE ADVANTAGES" data-zh="核心优势">CORE ADVANTAGES</div>
-    <h2 class="section-title" data-en="Three things <strong>no competitor</strong> has built." data-zh="三件竞品<strong>没有做</strong>、也不愿做的事。">Three things <strong>no competitor</strong> has built.</h2>
+    <div class="section-label" data-en="THE SOLUTION" data-zh="解决方案">THE SOLUTION</div>
+    <h2 class="section-title" data-en="Push turns creator marketing into a <span style='color:var(--accent)'>system</span>." data-zh="Push 把创作者营销变成一套<span style='color:var(--accent)'>系统</span>。">Push turns creator marketing into a <span style="color:var(--accent)">system</span>.</h2>
+    <p class="section-sub" data-en="Instead of random collaborations, Push gives you:" data-zh="不再碰运气，Push 提供：">Instead of random collaborations, Push gives you:</p>
 
-    <div class="diff-grid fade-in">
+    <div class="diff-grid fade-in" style="margin-top:32px;">
       <div class="diff-card">
-        <div class="diff-icon">🎯</div>
-        <div class="diff-title" data-en="Creators ranked by performance, not followers" data-zh="创作者按表现评分，不看粉丝">Creators ranked by performance, not followers</div>
-        <div class="diff-body" data-en="Creators ranked by completion, quality, and merchant satisfaction — not follower count." data-zh="按完成率、内容质量、商家满意度排名——不是粉丝数。">Creators ranked by completion, quality, and merchant satisfaction — not follower count.</div>
-        <a href="project-intro.html#scoring" class="diff-link" data-en="→ Credit System" data-zh="→ 了解评分体系">→ Credit System</a>
+        <div class="diff-icon">📋</div>
+        <div class="diff-title" data-en="Structured campaigns" data-zh="结构化活动">Structured campaigns</div>
+        <div class="diff-body" data-en="Set your goal, reward, slots, and timeline. Push structures the rest." data-zh="设定目标、奖励、名额和时间。Push 搞定剩下的。">Set your goal, reward, slots, and timeline. Push structures the rest.</div>
       </div>
       <div class="diff-card">
-        <div class="diff-icon">🔍</div>
-        <div class="diff-title" data-en="5-layer verification, outcomes on record" data-zh="5层核验，效果有据可查">5-layer verification, outcomes on record</div>
-        <div class="diff-body" data-en="5-layer verification from visit proof to merchant-side redemption data. Outcomes are quantifiable." data-zh="从到访证明到商家侧核销数据，5层核实。效果可量化。">5-layer verification from visit proof to merchant-side redemption data. Outcomes are quantifiable.</div>
-        <a href="attribution.html" class="diff-link" data-en="→ Attribution Framework" data-zh="→ 了解归因框架">→ Attribution Framework</a>
+        <div class="diff-icon">✅</div>
+        <div class="diff-title" data-en="Verified execution" data-zh="核验执行">Verified execution</div>
+        <div class="diff-body" data-en="Visit proof, content proof, merchant confirmation. No guessing if it happened." data-zh="到店证明、内容证明、商家确认。不用猜有没有做。">Visit proof, content proof, merchant confirmation. No guessing if it happened.</div>
       </div>
       <div class="diff-card">
-        <div class="diff-icon">⚡</div>
-        <div class="diff-title" data-en="Repeat campaigns, not from scratch every time" data-zh="复购更容易，不是每次从头来">Repeat campaigns, not from scratch every time</div>
-        <div class="diff-body" data-en="Post-campaign: system recommends best creator to rebook, next campaign template, and optimal timing." data-zh="活动结束后：系统推荐最值得复购的博主、下次活动模板和最佳时机。">Post-campaign: system recommends best creator to rebook, next campaign template, and optimal timing.</div>
-        <a href="project-intro.html" class="diff-link" data-en="→ Merchant Workflow" data-zh="→ 了解商家工作流">→ Merchant Workflow</a>
+        <div class="diff-icon">⚖️</div>
+        <div class="diff-title" data-en="Comparable creators" data-zh="可对比的博主">Comparable creators</div>
+        <div class="diff-body" data-en="Ranked by completion, quality, and merchant satisfaction. Not follower count." data-zh="按完成率、质量和商家满意度排名。不看粉丝数。">Ranked by completion, quality, and merchant satisfaction. Not follower count.</div>
       </div>
+      <div class="diff-card">
+        <div class="diff-icon">🔁</div>
+        <div class="diff-title" data-en="Repeatable outcomes" data-zh="可复制的效果">Repeatable outcomes</div>
+        <div class="diff-body" data-en="Each campaign generates data. Data makes the next one faster and better." data-zh="每次活动产生数据。数据让下次更快更好。">Each campaign generates data. Data makes the next one faster and better.</div>
+      </div>
+    </div>
+
+    <div class="fade-in" style="margin-top:32px;text-align:center;">
+      <p style="font-size:15px;font-weight:700;color:var(--text);" data-en="You don't &ldquo;find creators.&rdquo; You <span style='color:var(--accent)'>run campaigns</span>." data-zh="你不是在"找博主"。你是在<span style='color:var(--accent)'>跑活动</span>。">You don't &ldquo;find creators.&rdquo; You <span style="color:var(--accent)">run campaigns</span>.</p>
     </div>
   </div>
 </div>
+
+<!-- — S3: How It Works — -->
+<div class="sw-gray" id="workflow">
+  <div class="section fade-in">
+    <div class="section-label" data-en="HOW IT WORKS" data-zh="运作方式">HOW IT WORKS</div>
+    <h2 class="section-title" data-en="From idea to results in <strong>3 steps</strong>." data-zh="从想法到结果，<strong>3步搞定</strong>。">From idea to results in <strong>3 steps</strong>.</h2>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px;">
+      <div class="fade-in" style="padding:28px 24px;background:#fff;border-radius:12px;border:1px solid var(--border);">
+        <div style="font-size:32px;font-weight:900;color:var(--accent);margin-bottom:8px;">1</div>
+        <div style="font-size:17px;font-weight:800;color:var(--text);margin-bottom:8px;" data-en="Create a campaign" data-zh="创建活动">Create a campaign</div>
+        <div style="font-size:14px;color:var(--text2);line-height:1.7;" data-en="Choose your goal: bring new customers, promote a product, fill slow hours. Set reward, slots, and timeline." data-zh="选择目标：拉新客、推产品、填补冷门时段。设定奖励、名额和时间线。">Choose your goal: bring new customers, promote a product, fill slow hours. Set reward, slots, and timeline.</div>
+      </div>
+      <div class="fade-in" style="padding:28px 24px;background:#fff;border-radius:12px;border:1px solid var(--border);">
+        <div style="font-size:32px;font-weight:900;color:var(--accent);margin-bottom:8px;">2</div>
+        <div style="font-size:17px;font-weight:800;color:var(--text);margin-bottom:8px;" data-en="Creators apply" data-zh="博主申请">Creators apply</div>
+        <div style="font-size:14px;color:var(--text2);line-height:1.7;" data-en="Qualified local creators apply, get ranked by performance score, and fill spots. Or join standby for instant fill." data-zh="合格的本地博主申请、按评分排名、填满名额。或加入候补池即时补位。">Qualified local creators apply, get ranked by performance score, and fill spots. Or join standby for instant fill.</div>
+      </div>
+      <div class="fade-in" style="padding:28px 24px;background:#fff;border-radius:12px;border:1px solid var(--border);">
+        <div style="font-size:32px;font-weight:900;color:var(--accent);margin-bottom:8px;">3</div>
+        <div style="font-size:17px;font-weight:800;color:var(--text);margin-bottom:8px;" data-en="Track &amp; repeat" data-zh="追踪并复购">Track &amp; repeat</div>
+        <div style="font-size:14px;color:var(--text2);line-height:1.7;" data-en="Verified completion. Content proof. Performance signals. Then run it again — better." data-zh="核实完成。内容证明。效果信号。然后再跑一次——更好。">Verified completion. Content proof. Performance signals. Then run it again — better.</div>
+      </div>
+    </div>
+
+    <div class="fade-in" style="margin-top:28px;text-align:center;">
+      <p style="font-size:14px;font-weight:600;color:var(--text2);" data-en="This is not a one-time collaboration. It's a <span style='color:var(--accent);font-weight:800'>repeatable system</span>." data-zh="这不是一次性合作。这是一套<span style='color:var(--accent);font-weight:800'>可重复的系统</span>。">This is not a one-time collaboration. It's a <span style="color:var(--accent);font-weight:800">repeatable system</span>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- — S4: Example Campaign — -->
+<div class="sw-white">
+  <div class="section fade-in">
+    <div class="section-label" data-en="PROOF IT WORKS" data-zh="效果证明">PROOF IT WORKS</div>
+    <h2 class="section-title" data-en="What a real campaign looks like." data-zh="一次真实活动长什么样。">What a real campaign looks like.</h2>
+
+    <div style="margin-top:32px;padding:28px 32px;border-radius:12px;background:var(--bg2);border:2px solid var(--accent);position:relative;">
+      <div style="position:absolute;top:-12px;left:24px;background:var(--accent);color:#fff;font-size:11px;font-weight:700;letter-spacing:0.8px;padding:4px 14px;border-radius:20px;" data-en="EXAMPLE CAMPAIGN" data-zh="活动示例">EXAMPLE CAMPAIGN</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:24px;margin-top:8px;">
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.5px;color:var(--text3);margin-bottom:6px;" data-en="MERCHANT" data-zh="商家">MERCHANT</div>
+          <div style="font-size:16px;font-weight:800;color:var(--text);" data-en="SoHo Caf&eacute;" data-zh="SoHo 咖啡馆">SoHo Caf&eacute;</div>
+          <div style="font-size:13px;color:var(--text2);" data-en="Weekday traffic" data-zh="工作日客流">Weekday traffic</div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.5px;color:var(--text3);margin-bottom:6px;" data-en="CREATORS" data-zh="博主">CREATORS</div>
+          <div style="font-size:16px;font-weight:800;color:var(--text);" data-en="6 creators" data-zh="6位博主">6 creators</div>
+          <div style="font-size:13px;color:var(--text2);" data-en="Matched in 12hrs" data-zh="12小时匹配">Matched in 12hrs</div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.5px;color:var(--text3);margin-bottom:6px;" data-en="TIMELINE" data-zh="时间">TIMELINE</div>
+          <div style="font-size:16px;font-weight:800;color:var(--text);" data-en="2 days" data-zh="2天">2 days</div>
+          <div style="font-size:13px;color:var(--text2);" data-en="Content delivered" data-zh="内容交付">Content delivered</div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.5px;color:var(--text3);margin-bottom:6px;" data-en="RESULT" data-zh="结果">RESULT</div>
+          <div style="font-size:16px;font-weight:800;color:var(--green);" data-en="38 redemptions" data-zh="38次核销">38 redemptions</div>
+          <div style="font-size:13px;color:var(--text2);" data-en="$5.26 per new customer" data-zh="每新客$5.26">$5.26 per new customer</div>
+        </div>
+      </div>
+      <div style="margin-top:16px;padding:12px 16px;border-radius:8px;background:rgba(5,150,105,0.06);font-size:14px;font-weight:700;color:var(--green);" data-en="Repeat campaign launched next week — without being asked." data-zh="下周商家主动发起复购——没人催。">Repeat campaign launched next week &mdash; without being asked.</div>
+    </div>
+  </div>
+</div>
+
+<!-- — S5: Creator Tiers (Trust Engine) — -->
+<div class="sw-gray">
+  <div class="section fade-in">
+    <div class="section-label" data-en="TRUST ENGINE" data-zh="信任引擎">TRUST ENGINE</div>
+    <h2 class="section-title" data-en="Not all creators are equal &mdash; and now you can <span style='color:var(--accent)'>see it</span>." data-zh="博主水平有高低——现在你<span style='color:var(--accent)'>能看到了</span>。">Not all creators are equal &mdash; and now you can <span style="color:var(--accent)">see it</span>.</h2>
+    <p class="section-sub" data-en="Creators are ranked by real performance, not follower count." data-zh="按真实表现排名，不看粉丝数。">Creators are ranked by real performance, not follower count.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:32px;">
+      <div class="fade-in" style="padding:20px 16px;border-radius:10px;background:#fff;border:2px solid #64748b;text-align:center;">
+        <div style="font-size:11px;font-weight:800;letter-spacing:1px;color:#64748b;margin-bottom:4px;">EXPLORER</div>
+        <div style="font-size:13px;color:var(--text2);" data-en="New. Proving reliability." data-zh="新人。证明可靠性。">New. Proving reliability.</div>
+      </div>
+      <div class="fade-in" style="padding:20px 16px;border-radius:10px;background:#fff;border:2px solid #0ea5e9;text-align:center;">
+        <div style="font-size:11px;font-weight:800;letter-spacing:1px;color:#0ea5e9;margin-bottom:4px;">OPERATOR</div>
+        <div style="font-size:13px;color:var(--text2);" data-en="Consistent. Reliable." data-zh="稳定。可靠。">Consistent. Reliable.</div>
+      </div>
+      <div class="fade-in" style="padding:20px 16px;border-radius:10px;background:#fff;border:2px solid #10b981;text-align:center;">
+        <div style="font-size:11px;font-weight:800;letter-spacing:1px;color:#10b981;margin-bottom:4px;">PROVEN</div>
+        <div style="font-size:13px;color:var(--text2);" data-en="Trusted. Higher quality." data-zh="信任。更高质量。">Trusted. Higher quality.</div>
+      </div>
+      <div class="fade-in" style="padding:20px 16px;border-radius:10px;background:#fff;border:2px solid #f59e0b;text-align:center;">
+        <div style="font-size:11px;font-weight:800;letter-spacing:1px;color:#f59e0b;margin-bottom:4px;">CLOSER</div>
+        <div style="font-size:13px;color:var(--text2);" data-en="Drives results." data-zh="带来效果。">Drives results.</div>
+      </div>
+      <div class="fade-in" style="padding:20px 16px;border-radius:10px;background:#fff;border:2px solid #7c3aed;text-align:center;">
+        <div style="font-size:11px;font-weight:800;letter-spacing:1px;color:#7c3aed;margin-bottom:4px;">PARTNER</div>
+        <div style="font-size:13px;color:var(--text2);" data-en="Elite. Co-invested." data-zh="精英。共同投入。">Elite. Co-invested.</div>
+      </div>
+    </div>
+
+    <div class="fade-in" style="margin-top:24px;text-align:center;">
+      <p style="font-size:15px;font-weight:700;color:var(--text);" data-en="You don't guess who to work with. You <span style='color:var(--accent)'>know</span>." data-zh="你不用猜该找谁合作。你<span style='color:var(--accent)'>知道</span>。">You don't guess who to work with. You <span style="color:var(--accent)">know</span>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- — S6: Why Not Just DM — -->
+<div class="sw-white">
+  <div class="section fade-in">
+    <div class="section-label" data-en="ANTI-DISINTERMEDIATION" data-zh="为什么不跳过平台">ANTI-DISINTERMEDIATION</div>
+    <h2 class="section-title" data-en="Why not just <span style='color:var(--accent)'>message creators yourself</span>?" data-zh="为什么不直接<span style='color:var(--accent)'>私信博主</span>？">Why not just <span style="color:var(--accent)">message creators yourself</span>?</h2>
+    <p class="section-sub" data-en="Because you lose:" data-zh="因为你会失去：">Because you lose:</p>
+
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:28px;">
+      <div class="fade-in" style="padding:16px;border-radius:10px;background:var(--bg2);text-align:center;">
+        <div style="font-size:22px;margin-bottom:6px;">📊</div>
+        <div style="font-size:13px;font-weight:700;color:var(--text);" data-en="Performance history" data-zh="业绩记录">Performance history</div>
+      </div>
+      <div class="fade-in" style="padding:16px;border-radius:10px;background:var(--bg2);text-align:center;">
+        <div style="font-size:22px;margin-bottom:6px;">🛡️</div>
+        <div style="font-size:13px;font-weight:700;color:var(--text);" data-en="Reliable execution" data-zh="可靠执行">Reliable execution</div>
+      </div>
+      <div class="fade-in" style="padding:16px;border-radius:10px;background:var(--bg2);text-align:center;">
+        <div style="font-size:22px;margin-bottom:6px;">📋</div>
+        <div style="font-size:13px;font-weight:700;color:var(--text);" data-en="Structured campaigns" data-zh="结构化活动">Structured campaigns</div>
+      </div>
+      <div class="fade-in" style="padding:16px;border-radius:10px;background:var(--bg2);text-align:center;">
+        <div style="font-size:22px;margin-bottom:6px;">⚖️</div>
+        <div style="font-size:13px;font-weight:700;color:var(--text);" data-en="Creator comparison" data-zh="博主对比">Creator comparison</div>
+      </div>
+      <div class="fade-in" style="padding:16px;border-radius:10px;background:var(--bg2);text-align:center;">
+        <div style="font-size:22px;margin-bottom:6px;">🔁</div>
+        <div style="font-size:13px;font-weight:700;color:var(--text);" data-en="Repeatability" data-zh="可复购性">Repeatability</div>
+      </div>
+    </div>
+
+    <div class="fade-in" style="margin-top:24px;text-align:center;">
+      <p style="font-size:15px;font-weight:700;color:var(--text);" data-en="DM is random. Push is a system." data-zh="私信是碰运气。Push 是一套系统。">DM is random. Push is a system.</p>
+      <p style="font-size:14px;font-weight:600;color:var(--accent);margin-top:4px;" data-en="Stop guessing. Start operating." data-zh="别猜了。开始运营。">Stop guessing. Start operating.</p>
+    </div>
+  </div>
+</div>
+
+<!-- — S7: Why Merchants Stay — -->
+<div class="sw-gray">
+  <div class="section fade-in">
+    <div class="section-label" data-en="RETENTION" data-zh="留存">RETENTION</div>
+    <h2 class="section-title" data-en="This isn't a <span style='color:var(--accent)'>one-time tool</span>." data-zh="这不是<span style='color:var(--accent)'>用一次就丢</span>的工具。">This isn't a <span style="color:var(--accent)">one-time tool</span>.</h2>
+
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:32px;">
+      <div class="fade-in" style="padding:24px;border-radius:10px;background:#fff;border:1px solid var(--border);">
+        <div style="font-size:16px;font-weight:800;color:var(--text);margin-bottom:6px;" data-en="Campaigns are repeatable" data-zh="活动可重复">Campaigns are repeatable</div>
+        <div style="font-size:14px;color:var(--text2);" data-en="One click to re-run with the same or better creators." data-zh="一键用同样或更好的博主重新跑活动。">One click to re-run with the same or better creators.</div>
+      </div>
+      <div class="fade-in" style="padding:24px;border-radius:10px;background:#fff;border:1px solid var(--border);">
+        <div style="font-size:16px;font-weight:800;color:var(--text);margin-bottom:6px;" data-en="Results improve over time" data-zh="效果越来越好">Results improve over time</div>
+        <div style="font-size:14px;color:var(--text2);" data-en="Each campaign adds data. Better data means better matching and higher ROI." data-zh="每次活动积累数据。更好的数据意味着更好的匹配和更高的回报。">Each campaign adds data. Better data means better matching and higher ROI.</div>
+      </div>
+      <div class="fade-in" style="padding:24px;border-radius:10px;background:#fff;border:1px solid var(--border);">
+        <div style="font-size:16px;font-weight:800;color:var(--text);margin-bottom:6px;" data-en="Creator quality compounds" data-zh="博主质量持续提升">Creator quality compounds</div>
+        <div style="font-size:14px;color:var(--text2);" data-en="Top creators earn better tiers. Your talent pool gets stronger automatically." data-zh="优秀博主升级。你的人才池自动变强。">Top creators earn better tiers. Your talent pool gets stronger automatically.</div>
+      </div>
+      <div class="fade-in" style="padding:24px;border-radius:10px;background:#fff;border:1px solid var(--border);">
+        <div style="font-size:16px;font-weight:800;color:var(--text);margin-bottom:6px;" data-en="Setup gets faster" data-zh="设置越来越快">Setup gets faster</div>
+        <div style="font-size:14px;color:var(--text2);" data-en="Second campaign takes minutes, not hours. Templates, saved creators, learned preferences." data-zh="第二次活动只要几分钟，不是几小时。模板、收藏的博主、已学习的偏好。">Second campaign takes minutes, not hours. Templates, saved creators, learned preferences.</div>
+      </div>
+    </div>
+
+    <div class="fade-in" style="margin-top:24px;text-align:center;">
+      <p style="font-size:15px;font-weight:700;color:var(--accent);" data-en="The more you use Push, the better it gets." data-zh="用得越多，Push 越好用。">The more you use Push, the better it gets.</p>
+    </div>
+  </div>
+</div>
+
+<!-- — S8: Pricing — -->
+<div class="sw-white">
+  <div class="section fade-in">
+    <div class="section-label" data-en="PRICING" data-zh="定价">PRICING</div>
+    <h2 class="section-title" data-en="Simple, <span style='color:var(--accent)'>aligned</span> pricing." data-zh="简单、<span style='color:var(--accent)'>利益一致</span>的定价。">Simple, <span style="color:var(--accent)">aligned</span> pricing.</h2>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px;">
+      <div class="fade-in" style="padding:24px;border-radius:10px;background:var(--bg2);text-align:center;">
+        <div style="font-size:28px;font-weight:900;color:var(--accent);margin-bottom:4px;" data-en="$79/mo" data-zh="$79/月">$79/mo</div>
+        <div style="font-size:14px;font-weight:600;color:var(--text);" data-en="Monthly access" data-zh="月度使用权">Monthly access</div>
+        <div style="font-size:13px;color:var(--text2);margin-top:4px;" data-en="Up to 3 campaigns included" data-zh="含3次活动">Up to 3 campaigns included</div>
+      </div>
+      <div class="fade-in" style="padding:24px;border-radius:10px;background:var(--bg2);text-align:center;">
+        <div style="font-size:28px;font-weight:900;color:var(--accent);margin-bottom:4px;" data-en="$29-39" data-zh="$29-39">$29-39</div>
+        <div style="font-size:14px;font-weight:600;color:var(--text);" data-en="Per extra campaign" data-zh="每次额外活动">Per extra campaign</div>
+        <div style="font-size:13px;color:var(--text2);margin-top:4px;" data-en="Scale as you grow" data-zh="按需扩展">Scale as you grow</div>
+      </div>
+      <div class="fade-in" style="padding:24px;border-radius:10px;background:var(--bg2);text-align:center;">
+        <div style="font-size:28px;font-weight:900;color:var(--accent);margin-bottom:4px;" data-en="15%" data-zh="15%">15%</div>
+        <div style="font-size:14px;font-weight:600;color:var(--text);" data-en="Success-based cut" data-zh="效果抽成">Success-based cut</div>
+        <div style="font-size:13px;color:var(--text2);margin-top:4px;" data-en="Only on verified completions" data-zh="仅对核实完成收取">Only on verified completions</div>
+      </div>
+    </div>
+
+    <div class="fade-in" style="margin-top:24px;text-align:center;">
+      <p style="font-size:15px;font-weight:700;color:var(--accent);" data-en="You only pay when work gets done." data-zh="只有完成了才付钱。">You only pay when work gets done.</p>
+    </div>
+  </div>
+</div>
+
+<!-- — S9: Hard Questions — -->
+<div class="sw-gray">
+  <div class="section fade-in">
+    <div class="section-label" data-en="HARD QUESTIONS" data-zh="尖锐问题">HARD QUESTIONS</div>
+    <h2 class="section-title" data-en="The questions investors ask &mdash; and our <span style='color:var(--accent)'>answers</span>." data-zh="投资人会问的问题——以及我们的<span style='color:var(--accent)'>回答</span>。">The questions investors ask &mdash; and our <span style="color:var(--accent)">answers</span>.</h2>
+
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:32px;">
+      <div class="fade-in" style="padding:20px 22px;border-radius:10px;background:#fff;border:1px solid var(--border);">
+        <div style="font-size:14px;font-weight:800;color:var(--red);margin-bottom:6px;" data-en="Cold start" data-zh="冷启动">Cold start</div>
+        <div style="font-size:13px;color:var(--text2);margin-bottom:8px;" data-en="&ldquo;How do you get enough density in one area?&rdquo;" data-zh="「一个区域怎么攒够密度？」">&ldquo;How do you get enough density in one area?&rdquo;</div>
+        <div style="font-size:13px;font-weight:600;color:var(--text);" data-en="One neighborhood, 30 shops, 20 creators. Walk-in sales, not ads. We don't scale until repeat &gt;50%." data-zh="一个街区、30家店、20个博主。上门推销，不投广告。复购率不到50%不扩张。">One neighborhood, 30 shops, 20 creators. Walk-in sales, not ads. We don't scale until repeat &gt;50%.</div>
+      </div>
+      <div class="fade-in" style="padding:20px 22px;border-radius:10px;background:#fff;border:1px solid var(--border);">
+        <div style="font-size:14px;font-weight:800;color:var(--red);margin-bottom:6px;" data-en="Quality control" data-zh="质量控制">Quality control</div>
+        <div style="font-size:13px;color:var(--text2);margin-bottom:8px;" data-en="&ldquo;What prevents low-quality creators from flooding the system?&rdquo;" data-zh="「怎么防止低质量博主涌入？」">&ldquo;What prevents low-quality creators from flooding the system?&rdquo;</div>
+        <div style="font-size:13px;font-weight:600;color:var(--text);" data-en="5-tier scoring. Low performers lose access to campaigns. Quality is 25% of the score — bad content drops you fast." data-zh="5级评分体系。低质量者失去活动资格。内容质量占评分25%——做差了掉得快。">5-tier scoring. Low performers lose access to campaigns. Quality is 25% of the score — bad content drops you fast.</div>
+      </div>
+      <div class="fade-in" style="padding:20px 22px;border-radius:10px;background:#fff;border:1px solid var(--border);">
+        <div style="font-size:14px;font-weight:800;color:var(--red);margin-bottom:6px;" data-en="Attribution" data-zh="归因">Attribution</div>
+        <div style="font-size:13px;color:var(--text2);margin-bottom:8px;" data-en="&ldquo;How do merchants trust that results are real?&rdquo;" data-zh="「商家怎么相信效果是真的？」">&ldquo;How do merchants trust that results are real?&rdquo;</div>
+        <div style="font-size:13px;font-weight:600;color:var(--text);" data-en="5-layer verification: visit proof, content proof, unique codes, merchant confirmation, redemption data. Not likes — foot traffic." data-zh="5层核验：到店证明、内容证明、唯一码、商家确认、核销数据。不看点赞——看到店。">5-layer verification: visit proof, content proof, unique codes, merchant confirmation, redemption data. Not likes — foot traffic.</div>
+      </div>
+      <div class="fade-in" style="padding:20px 22px;border-radius:10px;background:#fff;border:1px solid var(--border);">
+        <div style="font-size:14px;font-weight:800;color:var(--red);margin-bottom:6px;" data-en="Disintermediation" data-zh="绕过平台">Disintermediation</div>
+        <div style="font-size:13px;color:var(--text2);margin-bottom:8px;" data-en="&ldquo;What stops merchants from taking creators off-platform?&rdquo;" data-zh="「商家会不会绕过平台直接找博主？」">&ldquo;What stops merchants from taking creators off-platform?&rdquo;</div>
+        <div style="font-size:13px;font-weight:600;color:var(--text);" data-en="Credit scores are non-portable. Verification only works on-platform. Repeat campaigns are faster inside Push than outside." data-zh="信用评分不可携带。核验只在平台内有效。在Push内复购比在外面快。">Credit scores are non-portable. Verification only works on-platform. Repeat campaigns are faster inside Push than outside.</div>
+      </div>
+      <div class="fade-in" style="padding:20px 22px;border-radius:10px;background:#fff;border:1px solid var(--border);">
+        <div style="font-size:14px;font-weight:800;color:var(--red);margin-bottom:6px;" data-en="Why now" data-zh="为什么是现在">Why now</div>
+        <div style="font-size:13px;color:var(--text2);margin-bottom:8px;" data-en="&ldquo;Why hasn't this worked before?&rdquo;" data-zh="「为什么以前没人做成？」">&ldquo;Why hasn't this worked before?&rdquo;</div>
+        <div style="font-size:13px;font-weight:600;color:var(--text);" data-en="Creator supply hit critical mass in 2024. Local businesses now spend on digital. But no one built the operations layer between them." data-zh="2024年创作者供给达到临界量。本地商家开始花钱做数字营销。但没人建两者之间的运营层。">Creator supply hit critical mass in 2024. Local businesses now spend on digital. But no one built the operations layer between them.</div>
+      </div>
+      <div class="fade-in" style="padding:20px 22px;border-radius:10px;background:#fff;border:1px solid var(--border);">
+        <div style="font-size:14px;font-weight:800;color:var(--red);margin-bottom:6px;" data-en="Execution risk" data-zh="执行风险">Execution risk</div>
+        <div style="font-size:13px;color:var(--text2);margin-bottom:8px;" data-en="&ldquo;This is operationally heavy. Can you actually run this?&rdquo;" data-zh="「运营这么重，你能跑起来吗？」">&ldquo;This is operationally heavy. Can you actually run this?&rdquo;</div>
+        <div style="font-size:13px;font-weight:600;color:var(--text);" data-en="Week 1 runs on a spreadsheet + DMs. We prove the unit before building the machine. $1,500 budget, 12-week plan, one neighborhood." data-zh="第一周只需要一张表格+私信。先跑通单元再造系统。$1500预算、12周计划、一个街区。">Week 1 runs on a spreadsheet + DMs. We prove the unit before building the machine. $1,500 budget, 12-week plan, one neighborhood.</div>
+      </div>
+    </div>
+
+    <div class="fade-in" style="margin-top:24px;text-align:center;">
+      <p style="font-size:14px;font-weight:700;color:var(--text2);" data-en="If you can prove merchant repeat, this is a real business. That's what we're building toward." data-zh="如果能证明商家复购，这就是一门真生意。这正是我们在做的。">If you can prove merchant repeat, this is a real business. That's what we're building toward.</p>
+      <a href="risk-defense.html" style="font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;" data-en="→ See all 16 risks and defenses" data-zh="→ 查看全部16个风险及防御">→ See all 16 risks and defenses</a>
+    </div>
+  </div>
+</div>
+
+<!-- — S9: Final CTA — -->
+<section class="hero" style="min-height:auto;padding:80px 0;">
+  <div class="hero-inner" style="text-align:center;">
+    <h2 class="fade-in" style="font-size:clamp(28px,4vw,42px);font-weight:900;color:#fff;letter-spacing:-1px;">
+      <span data-en="Run your first campaign <strong>this week</strong>." data-zh="<strong>这周</strong>就跑你的第一次活动。">Run your first campaign <strong>this week</strong>.</span>
+    </h2>
+    <div class="hero-ctas fade-in" style="margin-top:24px;justify-content:center;">
+      <a href="#workflow" class="hero-cta" data-en="Start a Campaign" data-zh="发起活动">Start a Campaign</a>
+      <a href="project-intro.html" class="hero-cta" style="background:transparent;border:1px solid rgba(255,255,255,0.3);" data-en="Apply as a Creator" data-zh="申请成为博主">Apply as a Creator</a>
+    </div>
+  </div>
+</section>
 
 <!-- — S6: Navigation cards — -->
 <div class="sw-gray">
@@ -1227,7 +1306,7 @@ footer{background:#0f0f1a;padding:48px 64px 32px;border-top:1px solid var(--bord
           <p><strong>Week 7–8:</strong> Second batch. 2+ repeat merchants from batch 1. Track repeat rate, completion, time-to-fill.</p>
           <h3>Phase 3: Validate Repeat (Week 9–12)</h3>
           <p><strong>Week 9–10:</strong> Scale to 15 merchants. Introduce basic creator scoring and standby notifications.</p>
-          <p><strong>Week 11–12:</strong> Transition to paid ($49/campaign or $99/month). Go/No-Go decision based on 7 key metrics.</p>
+          <p><strong>Week 11–12:</strong> Transition to paid ($49/campaign or $79/month). Go/No-Go decision based on 7 key metrics.</p>
           <h3>Budget: $1,500–$2,200 total</h3>
           <div class="doc-table-wrap"><table>
             <tr><th>Item</th><th>Cost</th></tr>
@@ -1250,7 +1329,7 @@ footer{background:#0f0f1a;padding:48px 64px 32px;border-top:1px solid var(--bord
           <h3>Phase 1: Free Launch (Week 1–8)</h3>
           <p>$0 for merchants. Creator compensation: Standard $25–35, Premium $40–50, Story-only $15–20. Push pays from own pocket to build data.</p>
           <h3>Phase 2: Introductory Paid (Week 9–12)</h3>
-          <p>Recommended: $99/month Basic (3 campaigns), $199/month Pro (8 campaigns). Creates habit and recurring revenue signal.</p>
+          <p>Recommended: $79/month Starter (3 campaigns), $249/month Growth (8 campaigns), $699/month Scale (unlimited). Creates habit and recurring revenue signal.</p>
           <h3>Payment Flow</h3>
           <p>Phase 1–2: Manual (Venmo/Zelle/Stripe invoice). Phase 3+: Automated via Stripe Connect with 15% take rate.</p>
           <h3>Pricing Comparison</h3>
@@ -1259,7 +1338,7 @@ footer{background:#0f0f1a;padding:48px 64px 32px;border-top:1px solid var(--bord
             <tr><td>DM a creator directly</td><td>$50–200/post + product</td><td>None</td><td>High</td></tr>
             <tr><td>Local marketing agency</td><td>$500–2,000/month</td><td>Low–Med</td><td>Low</td></tr>
             <tr><td>Instagram/Facebook Ads</td><td>$200–1,000/month</td><td>Medium</td><td>Medium</td></tr>
-            <tr><td style="color:#6ee7b7;font-weight:600">Push Basic</td><td style="color:#6ee7b7;font-weight:600">$99/month</td><td>Med–High</td><td>Very Low</td></tr>
+            <tr><td style="color:#6ee7b7;font-weight:600">Push Basic</td><td style="color:#6ee7b7;font-weight:600">$79/month</td><td>Med–High</td><td>Very Low</td></tr>
           </table></div>
           <h3>Revenue Projections (Conservative)</h3>
           <p>W9: $198 · W10: $297 · W11: $396 · W12: $495 · Total W9–12: ~$1,386 · Break-even at ~15 paying merchants (Month 4–5)</p>
@@ -1276,23 +1355,26 @@ footer{background:#0f0f1a;padding:48px 64px 32px;border-top:1px solid var(--bord
           <h2>V0.1 Creator Scoring Model</h2>
           <blockquote>Simple enough for spreadsheets, meaningful enough to predict outcomes, transparent enough for creators, resistant to gaming.</blockquote>
           <h3>Composite Formula</h3>
-          <p style="font-family:monospace;font-size:14px;color:var(--accent-light);background:rgba(79,70,229,0.15);padding:14px 18px;border-radius:8px;margin:12px 0">Push Score = (Completion × 0.30) + (Reliability × 0.20) + (Quality × 0.25) + (Satisfaction × 0.15) + (Engagement × 0.10)</p>
+          <p style="font-family:monospace;font-size:14px;color:var(--accent-light);background:rgba(79,70,229,0.15);padding:14px 18px;border-radius:8px;margin:12px 0">Push Score v2 = (Completion × 0.25) + (Quality × 0.25) + (Reliability × 0.20) + (Satisfaction × 0.15) + (Conversion × 0.10) + (Consistency × 0.05)</p>
+          <p style="font-size:12px;color:#9ca3af;margin:-4px 0 12px;">Recency-weighted: last 90 days count 1.5×. Category specialization adds up to 5% multiplier.</p>
           <h3>Score Dimensions</h3>
           <div class="doc-table-wrap"><table>
             <tr><th>Dimension</th><th>Weight</th><th>What It Measures</th></tr>
-            <tr><td>Completion</td><td>30%</td><td>Campaigns completed / accepted. Highest weight — non-completion is worthless to merchants.</td></tr>
-            <tr><td>Quality</td><td>25%</td><td>Merchant content rating 1–5.</td></tr>
-            <tr><td>Reliability</td><td>20%</td><td>On-time submissions and no-show rate.</td></tr>
-            <tr><td>Satisfaction</td><td>15%</td><td>Merchant rebook score 1–5.</td></tr>
-            <tr><td>Engagement</td><td>10%</td><td>Post engagement rate (most gameable — lowest weight).</td></tr>
+            <tr><td>Completion</td><td>25%</td><td>Campaigns completed / accepted. Core reliability signal.</td></tr>
+            <tr><td>Quality</td><td>25%</td><td>Merchant content rating 1–5. Directly drives conversion.</td></tr>
+            <tr><td>Reliability</td><td>20%</td><td>On-time submissions, brief compliance, no-show rate.</td></tr>
+            <tr><td>Satisfaction</td><td>15%</td><td>Merchant rebook score 1–5. Strongest trust signal.</td></tr>
+            <tr><td>Conversion Impact</td><td>10%</td><td>Redemption rate, foot traffic, new customer visits — actual business results.</td></tr>
+            <tr><td>Consistency</td><td>5%</td><td>Low variance across campaigns. Steady performers &gt; one-hit wonders.</td></tr>
           </table></div>
           <h3>Tier System</h3>
           <div class="doc-table-wrap"><table>
-            <tr><th>Tier</th><th>Push Score</th><th>Campaigns Required</th><th>Unlocks</th></tr>
-            <tr><td>New</td><td>N/A</td><td>0</td><td>Basic campaigns, max 2 active</td></tr>
-            <tr><td style="color:#fcd34d">Rising</td><td>50+</td><td>3+</td><td>All standard campaigns, standby eligible</td></tr>
-            <tr><td style="color:var(--accent-light)">Reliable</td><td>70+</td><td>8+</td><td>Priority matching, premium campaigns, higher payout</td></tr>
-            <tr><td style="color:#6ee7b7">Elite</td><td>85+</td><td>20+</td><td>Top-tier campaigns, highest payouts, featured profile</td></tr>
+            <tr><th>Tier</th><th>Score</th><th>Requirements</th><th>Payout</th><th>Key Perks</th></tr>
+            <tr><td style="color:#64748b;font-weight:700">Explorer</td><td>—</td><td>Profile + quality check</td><td>T+3</td><td>Basic campaigns, max 2 active</td></tr>
+            <tr><td style="color:#0ea5e9;font-weight:700">Operator</td><td>40+</td><td>3+ campaigns, 90%+ response, 0 violations</td><td>T+2</td><td>All standard, standby eligible, badge</td></tr>
+            <tr><td style="color:#10b981;font-weight:700">Proven</td><td>60+</td><td>8+ campaigns, 60+ days, 95%+ response</td><td>T+1, +5%</td><td>Premium campaigns, priority matching</td></tr>
+            <tr><td style="color:#d97706;font-weight:700">Closer</td><td>75+</td><td>15+ campaigns, 120+ days, 30%+ repeat</td><td>Same-day, +10%</td><td>Dedicated support, campaign co-design</td></tr>
+            <tr><td style="color:#7c3aed;font-weight:700">Partner</td><td>85+</td><td>25+ campaigns, 180+ days, 50%+ repeat, review</td><td>Instant, +15%</td><td>Co-branded deals, referral share, advisory</td></tr>
           </table></div>
           <h3>Score Decay</h3>
           <p>Active (1+ campaign/30d): No decay · 30–60d inactive: −2 pts/month · 60–90d: −5 pts/month · 90d+: Frozen, marked inactive</p>
@@ -1300,12 +1382,12 @@ footer{background:#0f0f1a;padding:48px 64px 32px;border-top:1px solid var(--bord
           <div class="doc-table-wrap"><table>
             <tr><th>Gaming Attempt</th><th>Detection</th><th>Prevention</th></tr>
             <tr><td>Only accepting easy campaigns</td><td>Track difficulty distribution</td><td>Require mix for tier promotion</td></tr>
-            <tr><td>Fake engagement (buying likes)</td><td>Engagement spike analysis</td><td>Engagement only 10% of score</td></tr>
+            <tr><td>Fake engagement (buying likes)</td><td>Replaced with Conversion Impact</td><td>Redemptions can't be faked; vanity metrics removed from scoring</td></tr>
             <tr><td>Colluding with friendly merchants</td><td>Repeated pairing detection</td><td>Flag pairs with &gt;3 consecutive</td></tr>
             <tr><td>Rushing low-quality content</td><td>Merchant content rating</td><td>Quality is 25% of score</td></tr>
           </table></div>
           <h3>Cold Start Handling</h3>
-          <p>First 3 campaigns are probationary. Provisional score starts at 60. Strong early performance triggers fast-track to Rising tier.</p>
+          <p>First 3 campaigns are probationary. Provisional score starts at 60. Strong early performance triggers fast-track to Operator tier.</p>
         </div>
       </div>
 
@@ -1421,7 +1503,7 @@ footer{background:#0f0f1a;padding:48px 64px 32px;border-top:1px solid var(--bord
   <div class="footer-inner">
     <div class="footer-brand">
       <div class="f-logo">PUSH</div>
-      <div class="f-tagline" data-en="Local Creator Performance Infrastructure" data-zh="本地创作者效果平台">Local Creator Performance Infrastructure</div>
+      <div class="f-tagline" data-en="The Operating System for Local Creator Commerce" data-zh="本地创作者商业操作系统">The Operating System for Local Creator Commerce</div>
     </div>
     <div class="footer-links">
       <a href="index.html" class="footer-link" data-en="Overview" data-zh="首页">Overview</a>

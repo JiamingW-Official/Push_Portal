@@ -14,6 +14,7 @@
 | 8 | Pricing & Unit Economics | `DOC-008` | Fee structure, pricing models, contribution margin, cost structure, financial projections | 2,500–4,000 words |
 | 9 | Metrics & Dashboard Framework | `DOC-009` | KPI definitions, dashboard structure, cohort analysis, experiment design | 2,500–3,500 words |
 | 10 | Technical Architecture & Data Model | `DOC-010` | Database schema, API endpoints, entity relationships, system integrations | 3,000–4,500 words |
+| 14 | Strategic Foundations | `DOC-014` | Core invariant, MVP loop, timing thesis, failure modes, beachhead wedge, behavior design, positioning lines, competitive alternatives | 3,000–4,500 words |
 
 ---
 
@@ -29,7 +30,15 @@ Use this table to find where each concept is **definitively** defined and explai
 | Problem statement | 01 | — |
 | Merchant value proposition | 01 | 07, 08 |
 | Creator value proposition | 01 | 03, 07 |
-| Competitive advantages | 01 | 07 |
+| Competitive advantages | 01 | 07, 14 |
+| Core invariant | 14 | 01 |
+| MVP loop | 14 | 02 |
+| Timing thesis (why now) | 14 | 01, 07 |
+| Failure modes | 14 | 04 |
+| Beachhead wedge | 14 | 07 |
+| Behavior design | 14 | 03, 04 |
+| Positioning lines | 14 | 01 |
+| Competitive alternatives | 14 | 01, 08 |
 
 ### Product Design
 | Concept | Primary Doc | Secondary Docs |
@@ -296,6 +305,7 @@ When working on Push:
 | 08 – Pricing & Unit Economics | Authoritative | [Date] | Finance |
 | 09 – Metrics & Dashboard | Authoritative | [Date] | Analytics |
 | 10 – Technical Architecture | Authoritative | [Date] | Engineering |
+| 14 – Strategic Foundations | Authoritative | 2026-04-06 | Strategy |
 
 ---
 
