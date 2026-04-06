@@ -79,6 +79,22 @@ a{text-decoration:none;color:inherit}
 }
 .lang-btn:hover{background:var(--accent-dark)}
 
+/* ===== DOC STRIP ===== */
+.doc-strip{
+  position:fixed;top:60px;left:0;right:0;z-index:999;
+  height:36px;background:#f8f9fa;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;
+  padding:0 24px;gap:16px;
+  font-size:12px;color:var(--text3);
+}
+.doc-strip a{
+  color:var(--accent);font-weight:500;
+  text-decoration:none;white-space:nowrap;
+  transition:opacity 0.18s;
+}
+.doc-strip a:hover{opacity:0.75;}
+
 @media(max-width:640px){
   .nav-links{display:none}
   .nav-logo{margin-right:auto}
@@ -270,8 +286,12 @@ section{padding:100px 24px}
 }
 .value-card::before{
   content:'';position:absolute;top:0;left:0;right:0;height:4px;
-  background:linear-gradient(90deg,var(--accent),var(--accent-light));
 }
+.values-grid .value-card:nth-child(1)::before { background: var(--accent); }
+.values-grid .value-card:nth-child(2)::before { background: var(--green); }
+.values-grid .value-card:nth-child(3)::before { background: #2563eb; }
+.values-grid .value-card:nth-child(4)::before { background: var(--orange); }
+.values-grid .value-card:nth-child(5)::before { background: #db2777; }
 .value-card:hover{
   transform:translateY(-6px);
   box-shadow:0 24px 60px var(--accent-glow);
@@ -528,6 +548,7 @@ section{padding:100px 24px}
 <!-- NAV -->
 <nav class="nav">
   <a href="index.html" class="nav-logo">PUSH</a>
+
   <div class="nav-links">
     <a href="index.html" data-en="Dashboard" data-zh="仪表盘">Dashboard</a>
     <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
@@ -543,6 +564,16 @@ section{padding:100px 24px}
     <button class="lang-btn" id="langBtn">中 / EN</button>
   </div>
 </nav>
+
+<!-- DOC STRIP -->
+<div class="doc-strip">
+  <span data-en="Technical Docs:" data-zh="技术文档：">Technical Docs:</span>
+  <a href="economics.html" data-en="Economics" data-zh="经济学">Economics</a>
+  <a href="attribution.html" data-en="Attribution" data-zh="归因">Attribution</a>
+  <a href="fraud-integrity.html" data-en="Fraud &amp; Trust" data-zh="欺诈与信任">Fraud &amp; Trust</a>
+  <a href="gtm-launch.html" data-en="GTM &amp; Launch" data-zh="上市与发布">GTM &amp; Launch</a>
+  <a href="metrics-dashboard.html" data-en="Metrics" data-zh="指标">Metrics</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -942,6 +973,11 @@ section{padding:100px 24px}
         <a href="retention-defense.html" class="footer-link" data-en="Retention" data-zh="留存机制">Retention</a>
         <a href="platform-value.html" class="footer-link current" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
         <a href="push-strategy-core.html" class="footer-link" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
+        <a href="economics.html" class="footer-link" data-en="Economics" data-zh="经济学">Economics</a>
+        <a href="attribution.html" class="footer-link" data-en="Attribution" data-zh="归因">Attribution</a>
+        <a href="fraud-integrity.html" class="footer-link" data-en="Fraud &amp; Trust" data-zh="欺诈与信任">Fraud &amp; Trust</a>
+        <a href="gtm-launch.html" class="footer-link" data-en="GTM &amp; Launch" data-zh="上市与发布">GTM &amp; Launch</a>
+        <a href="metrics-dashboard.html" class="footer-link" data-en="Metrics" data-zh="指标">Metrics</a>
       </div>
     </div>
     <div class="footer-bottom">

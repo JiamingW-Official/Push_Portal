@@ -35,7 +35,7 @@
 
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--text);line-height:1.6;overflow-x:hidden;}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--text);line-height:1.6;overflow-x:hidden;background:#fff;}
 
 /* ═══════════════════════════════════════════
    NAV
@@ -70,6 +70,24 @@ nav{
 }
 .lang-btn:hover{background:var(--accent-dark);}
 .nav-mobile-right{display:none;gap:8px;align-items:center;}
+
+/* ═══════════════════════════════════════════
+   DOC STRIP
+═══════════════════════════════════════════ */
+.doc-strip{
+  position:fixed;top:60px;left:0;right:0;z-index:999;
+  height:36px;background:#f8f9fa;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;
+  padding:0 24px;gap:16px;
+  font-size:12px;color:var(--text3);
+}
+.doc-strip a{
+  color:var(--accent);font-weight:500;
+  text-decoration:none;white-space:nowrap;
+  transition:opacity 0.18s;
+}
+.doc-strip a:hover{opacity:0.75;}
 
 /* ═══════════════════════════════════════════
    HERO
@@ -221,14 +239,14 @@ nav{
 }
 .layer-bar:hover{transform:translateX(6px);box-shadow:var(--shadow-lg);}
 
-/* Layer 4 — full width, indigo gradient, most prominent */
+/* Layer 4 — full width, solid indigo */
 .layer-4{
-  background:linear-gradient(135deg,#3730a3 0%,#4f46e5 60%,#6d28d9 100%);
+  background:var(--accent);
   width:100%;
 }
-/* Layer 3 — dark navy, slightly narrower visually via padding trick on small screens */
+/* Layer 3 — solid dark navy */
 .layer-3{
-  background:linear-gradient(135deg,#1e3a5f 0%,#1a3a6b 60%,#1e3a8a 100%);
+  background:var(--primary);
   width:92%;align-self:center;
 }
 /* Layer 2 — white/light, accent border, medium */
@@ -498,6 +516,16 @@ nav{
     <button class="lang-btn" onclick="toggleLang()">中 / EN</button>
   </div>
 </nav>
+
+<!-- DOC STRIP -->
+<div class="doc-strip">
+  <span data-en="Technical Docs:" data-zh="技术文档：">Technical Docs:</span>
+  <a href="economics.html" data-en="Economics" data-zh="经济学">Economics</a>
+  <a href="attribution.html" data-en="Attribution" data-zh="归因">Attribution</a>
+  <a href="fraud-integrity.html" data-en="Fraud &amp; Trust" data-zh="欺诈与信任">Fraud &amp; Trust</a>
+  <a href="gtm-launch.html" data-en="GTM &amp; Launch" data-zh="上市与发布">GTM &amp; Launch</a>
+  <a href="metrics-dashboard.html" data-en="Metrics" data-zh="指标">Metrics</a>
+</div>
 
 <!-- ═══════════════════════════════════════════
      HERO
@@ -831,6 +859,11 @@ nav{
         <a href="retention-defense.html" class="footer-link active" data-en="Retention" data-zh="留存防御">Retention</a>
         <a href="platform-value.html" class="footer-link" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
         <a href="push-strategy-core.html" class="footer-link" data-en="Strategy Core" data-zh="策略核心">Strategy Core</a>
+        <a href="economics.html" class="footer-link" data-en="Economics" data-zh="经济学">Economics</a>
+        <a href="attribution.html" class="footer-link" data-en="Attribution" data-zh="归因">Attribution</a>
+        <a href="fraud-integrity.html" class="footer-link" data-en="Fraud &amp; Trust" data-zh="欺诈与信任">Fraud &amp; Trust</a>
+        <a href="gtm-launch.html" class="footer-link" data-en="GTM &amp; Launch" data-zh="上市与发布">GTM &amp; Launch</a>
+        <a href="metrics-dashboard.html" class="footer-link" data-en="Metrics" data-zh="指标">Metrics</a>
       </div>
     </div>
     <div class="footer-copy">© 2025 PUSH Platform. All rights reserved.</div>

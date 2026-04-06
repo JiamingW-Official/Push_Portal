@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PUSH — Attribution & Verification Framework</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --accent: #4f46e5;
+  --accent-light: #818cf8;
+  --accent-dark: #3730a3;
+  --accent-bg: rgba(79,70,229,0.06);
+  --primary: #0f0f1a;
+  --green: #059669;
+  --green-bg: rgba(5,150,105,0.08);
+  --orange: #d97706;
+  --orange-bg: rgba(217,119,6,0.08);
+  --red: #dc2626;
+  --red-bg: rgba(220,38,38,0.08);
+  --text: #111827;
+  --text2: #4b5563;
+  --text3: #9ca3af;
+  --border: #e5e7eb;
+  --bg: #ffffff;
+  --bg2: #f8f9fa;
+  --radius: 12px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--text);line-height:1.6;overflow-x:hidden;}
+
+/* ── NAV ─────────────────────────────────────── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:60px;background:rgba(255,255,255,0.95);
+  border-bottom:1px solid var(--border);
+  -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+  display:flex;align-items:center;padding:0 24px;gap:12px;
+}
+.nav-logo{
+  font-size:22px;font-weight:900;color:var(--accent);
+  text-decoration:none;letter-spacing:-0.5px;flex-shrink:0;
+}
+.nav-links{
+  display:flex;align-items:center;gap:2px;flex:1;
+}
+.nav-links a{
+  font-size:12px;font-weight:500;color:var(--text2);
+  text-decoration:none;padding:5px 9px;border-radius:7px;
+  transition:color 0.15s,background 0.15s;white-space:nowrap;
+}
+.nav-links a:hover{color:var(--accent);background:var(--accent-bg);}
+.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;}
+.nav-right{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.nav-hub{
+  font-size:11px;font-weight:600;color:var(--text3);
+  text-decoration:none;letter-spacing:0.3px;
+  transition:color 0.15s;
+}
+.nav-hub:hover{color:var(--accent);}
+.lang-btn{
+  background:var(--accent);color:#fff;border:none;cursor:pointer;
+  font-size:12px;font-weight:700;padding:6px 13px;border-radius:7px;
+  transition:background 0.15s;letter-spacing:0.2px;
+}
+.lang-btn:hover{background:var(--accent-dark);}
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .nav-hub{display:none;}
+}
+
+/* ── HERO ─────────────────────────────────────── */
+.hero{
+  background:var(--primary);
+  padding:120px 40px 60px;
+  position:relative;overflow:hidden;
+}
+.hero-dots{
+  position:absolute;inset:0;
+  background-image:radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size:28px 28px;
+  pointer-events:none;
+}
+.hero-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1;}
+.hero-badge{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;font-weight:500;color:var(--accent-light);
+  letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:24px;display:block;
+}
+.hero-title{
+  font-size:clamp(2rem,4.5vw,3rem);font-weight:900;
+  letter-spacing:-1.5px;line-height:1.08;color:#fff;
+  max-width:700px;margin-bottom:20px;
+}
+.hero-sub{
+  font-size:16px;font-weight:400;
+  color:rgba(255,255,255,0.5);
+  max-width:580px;line-height:1.65;
+}
+
+/* ── SECTION CHROME ───────────────────────────── */
+.section{padding:80px 40px;}
+.section-inner{max-width:1100px;margin:0 auto;}
+.section-bg2{background:var(--bg2);}
+.section-dark{background:var(--primary);}
+
+.section-label{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:10px;
+}
+.section-title{
+  font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;letter-spacing:-1px;
+  color:var(--primary);line-height:1.1;margin-bottom:12px;
+}
+.section-title-white{color:#fff;}
+.section-sub{
+  font-size:15px;color:var(--text2);max-width:640px;line-height:1.7;
+  margin-bottom:52px;
+}
+.section-sub-white{color:rgba(255,255,255,0.5);}
+
+/* ── PRINCIPLE BLOCKQUOTE ─────────────────────── */
+blockquote.principle{
+  border-left:4px solid var(--accent);
+  padding:20px 28px;
+  font-size:18px;font-style:italic;color:var(--text);
+  background:transparent;line-height:1.7;margin:0;
+}
+blockquote.principle-dark{
+  border-left-color:var(--accent-light);
+  color:rgba(255,255,255,0.85);
+  background:rgba(255,255,255,0.04);
+  padding:24px 32px;
+}
+blockquote.principle cite{
+  display:block;margin-top:12px;
+  font-size:12px;font-style:normal;font-weight:600;
+  color:var(--text3);letter-spacing:1px;text-transform:uppercase;
+}
+
+/* ── ATTRIBUTION QUESTIONS ───────────────────── */
+.attr-questions{
+  display:flex;flex-direction:column;gap:0;
+  border:1px solid var(--border);margin-top:36px;
+}
+.attr-q{
+  display:grid;grid-template-columns:48px 1fr;
+  border-bottom:1px solid var(--border);
+}
+.attr-q:last-child{border-bottom:none;}
+.attr-q-num{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;font-weight:500;color:var(--accent);
+  padding:16px 16px;border-right:1px solid var(--border);
+  display:flex;align-items:flex-start;
+}
+.attr-q-text{
+  font-size:14px;color:var(--text);
+  padding:15px 20px;line-height:1.55;
+  font-weight:500;
+}
+
+/* ── ITEM ROW (numbered editorial) ───────────── */
+.item-rows{display:flex;flex-direction:column;}
+.item-row{
+  display:grid;grid-template-columns:72px 1fr;gap:0;
+  padding:28px 0;border-bottom:1px solid var(--border);
+  position:relative;
+  transition:background 0.15s;
+}
+.item-row:first-child{border-top:1px solid var(--border);}
+.item-row::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;
+  width:3px;background:transparent;
+  transition:background 0.15s;
+}
+.item-row:hover::before{background:var(--accent);}
+.item-row:hover{background:#fafafa;}
+.item-num{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:36px;font-weight:700;
+  color:rgba(79,70,229,0.18);
+  line-height:1;padding-top:4px;
+  letter-spacing:-1px;
+}
+.item-body{padding:0 20px 0 0;}
+.item-title{font-size:18px;font-weight:700;color:var(--primary);margin-bottom:4px;}
+.item-sub{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:10px;
+}
+.item-desc{font-size:14px;color:var(--text2);line-height:1.65;margin-bottom:10px;}
+.item-list{
+  list-style:none;display:flex;flex-wrap:wrap;gap:6px 16px;
+  padding:0;margin:0;
+}
+.item-list li{
+  font-size:13px;color:var(--text2);
+  padding-left:14px;position:relative;
+}
+.item-list li::before{
+  content:'—';position:absolute;left:0;color:var(--text3);
+}
+
+/* ── CONFIDENCE TABLE ─────────────────────────── */
+.data-table{
+  width:100%;border-collapse:collapse;
+  font-size:13px;margin-top:8px;
+}
+.data-table th{
+  background:var(--bg2);
+  font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  color:var(--text2);padding:12px 16px;
+  border-bottom:2px solid var(--border);text-align:left;
+}
+.data-table td{
+  padding:14px 16px;border-bottom:1px solid var(--border);
+  color:var(--text2);line-height:1.55;vertical-align:top;
+}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:hover td{background:var(--bg2);}
+.data-table .conf-label{
+  font-weight:700;font-size:12px;letter-spacing:0.5px;
+}
+.conf-low{color:var(--orange);}
+.conf-med{color:var(--accent);}
+.conf-high{color:var(--green);}
+
+/* ── CAMPAIGN TYPE GRID (2×2) ─────────────────── */
+.campaign-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:0;border:1px solid var(--border);
+}
+@media(max-width:640px){.campaign-grid{grid-template-columns:1fr;}}
+.campaign-cell{
+  padding:24px 28px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);
+}
+.campaign-cell:nth-child(2n){border-right:none;}
+.campaign-cell:nth-last-child(-n+2){border-bottom:none;}
+@media(max-width:640px){
+  .campaign-cell{border-right:none;}
+  .campaign-cell:last-child{border-bottom:none;}
+}
+.campaign-type{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:8px;
+}
+.campaign-title{
+  font-size:15px;font-weight:700;color:var(--primary);
+  margin-bottom:12px;
+}
+.campaign-list{
+  list-style:none;padding:0;margin:0;
+  display:flex;flex-direction:column;gap:6px;
+}
+.campaign-list li{
+  font-size:13px;color:var(--text2);
+  padding-left:14px;position:relative;
+  line-height:1.5;
+}
+.campaign-list li::before{
+  content:'·';position:absolute;left:3px;color:var(--accent);
+  font-size:16px;line-height:1;top:1px;
+}
+
+/* ── FAILURE MODE ROWS ────────────────────────── */
+.failure-rows{display:flex;flex-direction:column;gap:2px;}
+.failure-row{
+  display:grid;grid-template-columns:90px 240px 1fr;
+  align-items:stretch;
+  border-left:3px solid var(--orange);
+  background:#fff;
+  transition:border-left-color 0.15s,background 0.15s;
+}
+.failure-row:hover{border-left-color:#92400e;background:#fffdf8;}
+.failure-label{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--orange);padding:18px 16px;
+  border-right:1px solid var(--border);
+  display:flex;align-items:center;
+}
+.failure-title{
+  font-size:14px;font-weight:700;color:var(--primary);
+  padding:18px 20px;border-right:1px solid var(--border);
+  display:flex;align-items:center;
+}
+.failure-desc{
+  font-size:13px;color:var(--text2);
+  padding:18px 20px;line-height:1.6;
+  display:flex;align-items:center;
+}
+@media(max-width:700px){
+  .failure-row{grid-template-columns:1fr;border-top:1px solid var(--border);}
+  .failure-label,.failure-title{border-right:none;border-bottom:1px solid var(--border);padding:12px 16px;}
+  .failure-desc{padding:12px 16px;}
+}
+
+/* ── CHECKLIST ────────────────────────────────── */
+.checklist{
+  list-style:none;padding:0;margin:0;
+  display:flex;flex-direction:column;gap:0;
+}
+.checklist li{
+  font-size:14px;color:var(--text2);
+  padding:12px 0 12px 32px;
+  border-bottom:1px solid var(--border);
+  position:relative;line-height:1.55;
+}
+.checklist li:last-child{border-bottom:none;}
+.checklist li::before{
+  content:'✓';
+  position:absolute;left:0;top:12px;
+  font-size:12px;font-weight:700;color:var(--green);
+  font-family:'IBM Plex Mono',monospace;
+}
+
+/* ── REPORTING SPLIT ──────────────────────────── */
+.report-split{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:0;border:1px solid var(--border);
+}
+@media(max-width:640px){.report-split{grid-template-columns:1fr;}}
+.report-col{padding:28px;}
+.report-col:first-child{border-right:1px solid var(--border);}
+@media(max-width:640px){
+  .report-col:first-child{border-right:none;border-bottom:1px solid var(--border);}
+}
+.report-col-title{
+  font-size:15px;font-weight:700;color:var(--primary);
+  margin-bottom:4px;
+}
+.report-col-sub{
+  font-size:12px;color:var(--text3);margin-bottom:16px;
+  font-family:'IBM Plex Mono',monospace;letter-spacing:0.5px;
+}
+.report-col-note{
+  font-size:13px;font-weight:600;color:var(--accent);
+  padding:10px 14px;background:var(--accent-bg);
+  border-left:3px solid var(--accent);
+  margin-bottom:14px;line-height:1.5;
+}
+.report-list{
+  list-style:none;padding:0;margin:0;
+}
+.report-list li{
+  font-size:13px;color:var(--text2);
+  padding:9px 0;border-bottom:1px solid var(--border);
+  padding-left:14px;position:relative;line-height:1.5;
+}
+.report-list li:last-child{border-bottom:none;}
+.report-list li::before{
+  content:'→';position:absolute;left:0;color:var(--text3);font-size:11px;
+  top:11px;
+}
+
+/* ── SCROLL FADE ─────────────────────────────── */
+.fade-in{opacity:0;transition:opacity 0.5s ease;}
+.fade-in.visible{opacity:1;}
+
+/* ── FOOTER ──────────────────────────────────── */
+footer{
+  background:var(--primary);color:rgba(255,255,255,0.5);
+  padding:60px 40px;
+}
+.footer-inner{max-width:1100px;margin:0 auto;}
+.footer-logo{
+  font-size:20px;font-weight:900;color:#fff;
+  letter-spacing:-0.5px;margin-bottom:6px;
+}
+.footer-tagline{
+  font-size:13px;color:rgba(255,255,255,0.35);
+  margin-bottom:36px;
+}
+.footer-links{
+  display:flex;flex-wrap:wrap;gap:6px 0;
+  list-style:none;padding:0;margin:0 0 36px;
+}
+.footer-links li{margin-right:24px;}
+.footer-links a{
+  font-size:13px;color:rgba(255,255,255,0.45);
+  text-decoration:none;transition:color 0.15s;
+}
+.footer-links a:hover{color:#fff;}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.2);}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ─────────────────────────────────────── -->
+<nav>
+  <a href="index.html" class="nav-logo">PUSH</a>
+  <div class="nav-links">
+    <a href="index.html" data-en="Overview" data-zh="概览">Overview</a>
+    <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
+    <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="融资文档">Pitch Deck</a>
+    <a href="prospects.html" data-en="Prospects" data-zh="市场前景">Prospects</a>
+    <a href="challenges.html" data-en="Challenges" data-zh="挑战">Challenges</a>
+    <a href="risk-defense.html" data-en="Risk &amp; Defense" data-zh="风险与防御">Risk &amp; Defense</a>
+    <a href="retention-defense.html" data-en="Retention" data-zh="留存">Retention</a>
+    <a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
+    <a href="push-strategy-core.html" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
+    <a href="attribution.html" class="active" data-en="Attribution" data-zh="归因框架">Attribution</a>
+  </div>
+  <div class="nav-right">
+    <a href="index.html" class="nav-hub">DOC HUB ↗</a>
+    <button class="lang-btn" id="lang-btn">中 / EN</button>
+  </div>
+</nav>
+
+<!-- ── HERO ─────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-dots"></div>
+  <div class="hero-inner">
+    <span class="hero-badge" data-en="DOC — 07 · INTERNAL STRATEGY" data-zh="文档 — 07 · 内部战略">DOC — 07 · INTERNAL STRATEGY</span>
+    <h1 class="hero-title" data-en="Attribution &amp; Verification Framework" data-zh="归因与核验框架">Attribution &amp; Verification Framework</h1>
+    <p class="hero-sub" data-en="How Push builds credible attribution confidence without overclaiming certainty." data-zh="Push 如何建立可信的归因置信度，而不过度主张确定性。">How Push builds credible attribution confidence without overclaiming certainty.</p>
+  </div>
+</section>
+
+<!-- ── SECTION 1: PHILOSOPHY ──────────────────── -->
+<section class="section">
+  <div class="section-inner">
+    <div class="fade-in">
+      <div class="section-label" data-en="Core Philosophy" data-zh="核心理念">Core Philosophy</div>
+      <h2 class="section-title" data-en="Not Perfect. Credible." data-zh="不求完美，求可信">Not Perfect. Credible.</h2>
+      <p class="section-sub" data-en="Push does not need perfect attribution on day one. The objective is to make results more structured, trustworthy, and decision-useful than today's alternatives." data-zh="Push 不需要从第一天就拥有完美的归因。目标是让结果比当今的替代方案更有结构、更可信赖、更有助于决策。">Push does not need perfect attribution on day one. The objective is to make results more structured, trustworthy, and decision-useful than today's alternatives.</p>
+      <blockquote class="principle">
+        <span data-en="The bar is not scientific certainty. The bar is: more structured, more trustworthy, and more decision-useful than what merchants and creators have today." data-zh="标准不是科学确定性。标准是：比商家和创作者今天拥有的更有结构、更可信赖、更有助于决策。">The bar is not scientific certainty. The bar is: more structured, more trustworthy, and more decision-useful than what merchants and creators have today.</span>
+      </blockquote>
+    </div>
+
+    <div class="fade-in" style="margin-top:44px;">
+      <div class="section-label" data-en="What Attribution Must Answer" data-zh="归因必须回答的问题">What Attribution Must Answer</div>
+      <div class="attr-questions">
+        <div class="attr-q">
+          <span class="attr-q-num">01</span>
+          <span class="attr-q-text" data-en="Did the creator actually fulfill the campaign?" data-zh="创作者是否真正履行了活动？">Did the creator actually fulfill the campaign?</span>
+        </div>
+        <div class="attr-q">
+          <span class="attr-q-num">02</span>
+          <span class="attr-q-text" data-en="Did the audience receive the content?" data-zh="受众是否收到了内容？">Did the audience receive the content?</span>
+        </div>
+        <div class="attr-q">
+          <span class="attr-q-num">03</span>
+          <span class="attr-q-text" data-en="Did the campaign create meaningful merchant-side action?" data-zh="活动是否创造了有意义的商家端行动？">Did the campaign create meaningful merchant-side action?</span>
+        </div>
+        <div class="attr-q">
+          <span class="attr-q-num">04</span>
+          <span class="attr-q-text" data-en="Which creators are more commercially effective?" data-zh="哪些创作者更具商业效果？">Which creators are more commercially effective?</span>
+        </div>
+        <div class="attr-q">
+          <span class="attr-q-num">05</span>
+          <span class="attr-q-text" data-en="Which campaign types are worth repeating?" data-zh="哪些活动类型值得重复？">Which campaign types are worth repeating?</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 2: VERIFICATION LAYERS ─────────── -->
+<section class="section section-bg2">
+  <div class="section-inner">
+    <div class="fade-in">
+      <div class="section-label" data-en="Verification Architecture" data-zh="核验架构">Verification Architecture</div>
+      <h2 class="section-title" data-en="5 Verification Layers" data-zh="5 个核验层级">5 Verification Layers</h2>
+      <p class="section-sub" data-en="Each layer builds on the previous. Deeper layers require more infrastructure but produce stronger confidence signals for repeat buying decisions." data-zh="每个层级都建立在前一个层级之上。更深的层级需要更多基础设施，但能为复购决策产生更强的置信信号。">Each layer builds on the previous. Deeper layers require more infrastructure but produce stronger confidence signals for repeat buying decisions.</p>
+    </div>
+    <div class="item-rows">
+      <div class="item-row fade-in">
+        <div class="item-num">01</div>
+        <div class="item-body">
+          <div class="item-title" data-en="Fulfillment Verification" data-zh="履约核验">Fulfillment Verification</div>
+          <div class="item-sub" data-en="DID THE CREATOR SHOW UP?" data-zh="创作者出现了吗？">DID THE CREATOR SHOW UP?</div>
+          <p class="item-desc" data-en="Confirms the creator's physical or digital presence and execution. The baseline without which no other layer is credible." data-zh="确认创作者的实体或数字存在和执行。没有这个基线，其他任何层级都不可信。">Confirms the creator's physical or digital presence and execution. The baseline without which no other layer is credible.</p>
+          <ul class="item-list">
+            <li data-en="Visit proof" data-zh="到访证明">Visit proof</li>
+            <li data-en="Timestamped upload" data-zh="带时间戳的上传">Timestamped upload</li>
+            <li data-en="Merchant acknowledgement" data-zh="商家确认">Merchant acknowledgement</li>
+            <li data-en="Draft submission" data-zh="草稿提交">Draft submission</li>
+            <li data-en="Content link" data-zh="内容链接">Content link</li>
+            <li data-en="Presence evidence" data-zh="在场证明">Presence evidence</li>
+          </ul>
+        </div>
+      </div>
+      <div class="item-row fade-in">
+        <div class="item-num">02</div>
+        <div class="item-body">
+          <div class="item-title" data-en="Content Verification" data-zh="内容核验">Content Verification</div>
+          <div class="item-sub" data-en="DID THE CONTENT GO LIVE?" data-zh="内容发布了吗？">DID THE CONTENT GO LIVE?</div>
+          <p class="item-desc" data-en="Confirms the content was actually published and remained accessible. Prevents submission of draft content as completed work." data-zh="确认内容已实际发布并保持可访问性。防止将草稿内容作为完成工作提交。">Confirms the content was actually published and remained accessible. Prevents submission of draft content as completed work.</p>
+          <ul class="item-list">
+            <li data-en="Live URL check" data-zh="实时 URL 检查">Live URL check</li>
+            <li data-en="Screenshot evidence" data-zh="截图证据">Screenshot evidence</li>
+            <li data-en="Posting timestamp" data-zh="发布时间戳">Posting timestamp</li>
+            <li data-en="Persistence checks" data-zh="持久性检查">Persistence checks</li>
+            <li data-en="Basic compliance review" data-zh="基础合规审查">Basic compliance review</li>
+          </ul>
+        </div>
+      </div>
+      <div class="item-row fade-in">
+        <div class="item-num">03</div>
+        <div class="item-body">
+          <div class="item-title" data-en="Engagement Context" data-zh="互动背景">Engagement Context</div>
+          <div class="item-sub" data-en="DIRECTIONAL ONLY — NOT PRIMARY" data-zh="仅方向性——非主要信号">DIRECTIONAL ONLY — NOT PRIMARY</div>
+          <p class="item-desc" data-en="Useful for trending analysis and creator comparison, but weak as primary commercial evidence. Easy to inflate, hard to correlate with merchant outcomes." data-zh="用于趋势分析和创作者对比，但作为主要商业证据较弱。容易虚增，难以与商家结果关联。">Useful for trending analysis and creator comparison, but weak as primary commercial evidence. Easy to inflate, hard to correlate with merchant outcomes.</p>
+          <ul class="item-list">
+            <li data-en="Views" data-zh="浏览量">Views</li>
+            <li data-en="Clicks" data-zh="点击量">Clicks</li>
+            <li data-en="Saves" data-zh="收藏量">Saves</li>
+            <li data-en="Replies" data-zh="回复量">Replies</li>
+            <li data-en="Swipe actions" data-zh="滑动操作">Swipe actions</li>
+            <li data-en="Map opens" data-zh="地图打开">Map opens</li>
+          </ul>
+        </div>
+      </div>
+      <div class="item-row fade-in">
+        <div class="item-num">04</div>
+        <div class="item-body">
+          <div class="item-title" data-en="Merchant-Side Action" data-zh="商家端行动">Merchant-Side Action</div>
+          <div class="item-sub" data-en="DID SOMETHING HAPPEN AT THE MERCHANT?" data-zh="商家端发生了什么？">DID SOMETHING HAPPEN AT THE MERCHANT?</div>
+          <p class="item-desc" data-en="The most commercially meaningful layer. Confirms the campaign moved beyond content publication into actual business outcomes. Requires merchant-side infrastructure." data-zh="最具商业意义的层级。确认活动超越内容发布，产生了实际业务结果。需要商家端基础设施。">The most commercially meaningful layer. Confirms the campaign moved beyond content publication into actual business outcomes. Requires merchant-side infrastructure.</p>
+          <ul class="item-list">
+            <li data-en="Redemptions" data-zh="兑换">Redemptions</li>
+            <li data-en="Bookings" data-zh="预订">Bookings</li>
+            <li data-en="First-time visit markers" data-zh="首次到访标记">First-time visit markers</li>
+            <li data-en="Offer claims" data-zh="优惠领取">Offer claims</li>
+            <li data-en="Check-in completions" data-zh="签到完成">Check-in completions</li>
+            <li data-en="Event attendance confirmation" data-zh="活动出席确认">Event attendance confirmation</li>
+          </ul>
+        </div>
+      </div>
+      <div class="item-row fade-in">
+        <div class="item-num">05</div>
+        <div class="item-body">
+          <div class="item-title" data-en="Repeat Signal" data-zh="复购信号">Repeat Signal</div>
+          <div class="item-sub" data-en="THE STRONGEST LONG-TERM SIGNAL" data-zh="最强长期信号">THE STRONGEST LONG-TERM SIGNAL</div>
+          <p class="item-desc" data-en="Behavioral evidence that the campaign produced value worth repeating. Self-reinforcing: repeat behavior makes future attribution easier and more confident." data-zh="行为证据证明活动产生了值得重复的价值。自我强化：重复行为使未来的归因更容易、更有置信度。">Behavioral evidence that the campaign produced value worth repeating. Self-reinforcing: repeat behavior makes future attribution easier and more confident.</p>
+          <ul class="item-list">
+            <li data-en="Merchant repeat booking of creator" data-zh="商家重复预订创作者">Merchant repeat booking of creator</li>
+            <li data-en="Creator invited to higher-value campaign" data-zh="创作者受邀参与更高价值活动">Creator invited to higher-value campaign</li>
+            <li data-en="Repeat campaign type success" data-zh="重复活动类型成功">Repeat campaign type success</li>
+            <li data-en="Return merchant behavior" data-zh="商家回归行为">Return merchant behavior</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 3: CONFIDENCE SCORING ─────────── -->
+<section class="section">
+  <div class="section-inner">
+    <div class="fade-in">
+      <div class="section-label" data-en="Confidence System" data-zh="置信度体系">Confidence System</div>
+      <h2 class="section-title" data-en="3 Confidence Levels" data-zh="3 个置信度层级">3 Confidence Levels</h2>
+      <p class="section-sub" data-en="Every campaign result is assigned a confidence level based on available verification signals. Confidence level determines what decisions the result can support." data-zh="每个活动结果根据可用核验信号分配置信度级别。置信度级别决定结果能支持哪些决策。">Every campaign result is assigned a confidence level based on available verification signals. Confidence level determines what decisions the result can support.</p>
+    </div>
+    <table class="data-table fade-in">
+      <thead>
+        <tr>
+          <th data-en="Level" data-zh="级别">Level</th>
+          <th data-en="Signals Present" data-zh="存在的信号">Signals Present</th>
+          <th data-en="Suitable For" data-zh="适用于">Suitable For</th>
+          <th data-en="Not Suitable For" data-zh="不适用于">Not Suitable For</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="conf-label conf-low" data-en="LOW" data-zh="低">LOW</span></td>
+          <td data-en="Content posted, light engagement data, no redemption evidence" data-zh="内容已发布，轻微互动数据，无兑换证明">Content posted, light engagement data, no redemption evidence</td>
+          <td data-en="Creator activity tracking, directional comparison" data-zh="创作者活动追踪，方向性对比">Creator activity tracking, directional comparison</td>
+          <td data-en="Performance fee justification, repeat booking decisions" data-zh="绩效费用证明，复购决策">Performance fee justification, repeat booking decisions</td>
+        </tr>
+        <tr>
+          <td><span class="conf-label conf-med" data-en="MEDIUM" data-zh="中">MEDIUM</span></td>
+          <td data-en="Content posted, visit confirmed, claim or intent signal, limited merchant-side action" data-zh="内容已发布，到访已确认，领取或意向信号，有限商家端行动">Content posted, visit confirmed, claim or intent signal, limited merchant-side action</td>
+          <td data-en="Merchant reporting, general ROI narrative, creator ranking signals" data-zh="商家报告，总体 ROI 叙述，创作者排名信号">Merchant reporting, general ROI narrative, creator ranking signals</td>
+          <td data-en="High-confidence performance take rates, judicial dispute resolution" data-zh="高置信度绩效抽成，裁决性争议解决">High-confidence performance take rates, judicial dispute resolution</td>
+        </tr>
+        <tr>
+          <td><span class="conf-label conf-high" data-en="HIGH" data-zh="高">HIGH</span></td>
+          <td data-en="Content posted, fulfillment confirmed, merchant-side redemption or booking evidence, legible campaign outcome" data-zh="内容已发布，履约已确认，商家端兑换或预订证据，清晰的活动结果">Content posted, fulfillment confirmed, merchant-side redemption or booking evidence, legible campaign outcome</td>
+          <td data-en="Performance-based pricing, repeat booking decisions, premium tier qualification, financial product eligibility" data-zh="绩效定价，复购决策，高级层级资格，金融产品资格">Performance-based pricing, repeat booking decisions, premium tier qualification, financial product eligibility</td>
+          <td data-en="N/A — highest available confidence" data-zh="不适用——最高可用置信度">N/A — highest available confidence</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ── SECTION 4: ATTRIBUTION BY CAMPAIGN TYPE ── -->
+<section class="section section-bg2">
+  <div class="section-inner">
+    <div class="fade-in">
+      <div class="section-label" data-en="Campaign-Specific Logic" data-zh="活动专项逻辑">Campaign-Specific Logic</div>
+      <h2 class="section-title" data-en="Attribution by Campaign Type" data-zh="按活动类型的归因">Attribution by Campaign Type</h2>
+      <p class="section-sub" data-en="Different campaign goals require different proof logic. One-size-fits-all measurement is a failure mode, not a feature." data-zh="不同的活动目标需要不同的证明逻辑。一刀切的衡量是失败模式，而非特性。">Different campaign goals require different proof logic. One-size-fits-all measurement is a failure mode, not a feature.</p>
+    </div>
+    <div class="campaign-grid fade-in">
+      <div class="campaign-cell">
+        <div class="campaign-type" data-en="SAMPLING" data-zh="样品体验">SAMPLING</div>
+        <div class="campaign-title" data-en="Product or Experience Sampling" data-zh="产品或体验采样">Product or Experience Sampling</div>
+        <ul class="campaign-list">
+          <li data-en="Fulfillment completion" data-zh="履约完成">Fulfillment completion</li>
+          <li data-en="Content publication" data-zh="内容发布">Content publication</li>
+          <li data-en="Offer claim (if included)" data-zh="优惠领取（如包含）">Offer claim (if included)</li>
+          <li data-en="Merchant observation record" data-zh="商家观察记录">Merchant observation record</li>
+          <li data-en="Optional: redemption by audience" data-zh="可选：受众兑换">Optional: redemption by audience</li>
+        </ul>
+      </div>
+      <div class="campaign-cell">
+        <div class="campaign-type" data-en="EVENT FILL" data-zh="活动填充">EVENT FILL</div>
+        <div class="campaign-title" data-en="Event Attendance or Activation" data-zh="活动出席或激活">Event Attendance or Activation</div>
+        <ul class="campaign-list">
+          <li data-en="RSVP or attendance confirmation" data-zh="RSVP 或出席确认">RSVP or attendance confirmation</li>
+          <li data-en="Check-in at event" data-zh="活动签到">Check-in at event</li>
+          <li data-en="Event code usage" data-zh="活动码使用">Event code usage</li>
+          <li data-en="Time-window correlation" data-zh="时间窗口关联">Time-window correlation</li>
+        </ul>
+      </div>
+      <div class="campaign-cell">
+        <div class="campaign-type" data-en="PRODUCT LAUNCH" data-zh="产品发布">PRODUCT LAUNCH</div>
+        <div class="campaign-title" data-en="New Product Awareness Wave" data-zh="新产品意识波">New Product Awareness Wave</div>
+        <ul class="campaign-list">
+          <li data-en="Content publication evidence" data-zh="内容发布证据">Content publication evidence</li>
+          <li data-en="First-wave claims or redemptions" data-zh="首波领取或兑换">First-wave claims or redemptions</li>
+          <li data-en="Merchant-side awareness signal" data-zh="商家端意识信号">Merchant-side awareness signal</li>
+          <li data-en="Repeat demand in short window" data-zh="短期内的重复需求">Repeat demand in short window</li>
+        </ul>
+      </div>
+      <div class="campaign-cell">
+        <div class="campaign-type" data-en="OFF-PEAK TRAFFIC" data-zh="低峰流量">OFF-PEAK TRAFFIC</div>
+        <div class="campaign-title" data-en="Slow Period Traffic Generation" data-zh="淡季流量生成">Slow Period Traffic Generation</div>
+        <ul class="campaign-list">
+          <li data-en="Time-window redemption data" data-zh="时间窗口兑换数据">Time-window redemption data</li>
+          <li data-en="Visit counts during targeted periods" data-zh="目标期间的到访量">Visit counts during targeted periods</li>
+          <li data-en="Repeat merchant perception" data-zh="商家重复感知">Repeat merchant perception</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 5: FAILURE MODES ───────────────── -->
+<section class="section">
+  <div class="section-inner">
+    <div class="fade-in">
+      <div class="section-label" data-en="Risk Patterns" data-zh="风险模式">Risk Patterns</div>
+      <h2 class="section-title" data-en="4 Attribution Failure Modes" data-zh="4 种归因失败模式">4 Attribution Failure Modes</h2>
+      <p class="section-sub" data-en="Each failure mode appears to be an attribution choice but is actually a trust-destruction mechanism. Avoid at all cost stages." data-zh="每种失败模式看起来像是归因选择，实际上是信任破坏机制。在所有阶段都应避免。">Each failure mode appears to be an attribution choice but is actually a trust-destruction mechanism. Avoid at all cost stages.</p>
+    </div>
+    <div class="failure-rows fade-in">
+      <div class="failure-row">
+        <span class="failure-label" data-en="MODE A" data-zh="模式 A">MODE A</span>
+        <span class="failure-title" data-en="Over-Reliance on Views" data-zh="过度依赖浏览量">Over-Reliance on Views</span>
+        <span class="failure-desc" data-en="Views are easy to collect but weak as primary commercial signal. Reporting views as success creates merchant expectation misalignment and erodes repeat intent." data-zh="浏览量易于收集，但作为主要商业信号较弱。将浏览量作为成功指标会造成商家预期不符，侵蚀重复意向。">Views are easy to collect but weak as primary commercial signal. Reporting views as success creates merchant expectation misalignment and erodes repeat intent.</span>
+      </div>
+      <div class="failure-row">
+        <span class="failure-label" data-en="MODE B" data-zh="模式 B">MODE B</span>
+        <span class="failure-title" data-en="Overclaiming Causality" data-zh="过度主张因果">Overclaiming Causality</span>
+        <span class="failure-desc" data-en="Implying direct causality when only directional evidence exists. When actual outcomes disappoint, the credibility damage is disproportionate to any short-term gain." data-zh="当仅存在方向性证据时声称直接因果关系。当实际结果令人失望时，公信力损害与任何短期收益不成比例。">Implying direct causality when only directional evidence exists. When actual outcomes disappoint, the credibility damage is disproportionate to any short-term gain.</span>
+      </div>
+      <div class="failure-row">
+        <span class="failure-label" data-en="MODE C" data-zh="模式 C">MODE C</span>
+        <span class="failure-title" data-en="One-Size-Fits-All Measurement" data-zh="一刀切衡量">One-Size-Fits-All Measurement</span>
+        <span class="failure-desc" data-en="Different merchant goals require different proof logic. Applying the same metrics to a product sampling campaign and an off-peak traffic campaign produces misleading results for both." data-zh="不同商家目标需要不同的证明逻辑。对产品采样活动和低峰流量活动应用相同指标会对双方产生误导性结果。">Different merchant goals require different proof logic. Applying the same metrics to a product sampling campaign and an off-peak traffic campaign produces misleading results for both.</span>
+      </div>
+      <div class="failure-row">
+        <span class="failure-label" data-en="MODE D" data-zh="模式 D">MODE D</span>
+        <span class="failure-title" data-en="Poor Merchant Interpretation" data-zh="商家解读困难">Poor Merchant Interpretation</span>
+        <span class="failure-desc" data-en="Even accurate data fails if merchants can't understand what happened. Dashboards that flood merchants with superficial stats create confusion and undermine repeat confidence." data-zh="即使数据准确，如果商家无法理解发生了什么，也会失败。用表面统计数据淹没商家的仪表板会造成困惑，破坏重复置信度。">Even accurate data fails if merchants can't understand what happened. Dashboards that flood merchants with superficial stats create confusion and undermine repeat confidence.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 6: PLATFORM DESIGN IMPLICATIONS ── -->
+<section class="section section-bg2">
+  <div class="section-inner">
+    <div class="fade-in">
+      <div class="section-label" data-en="Design Implications" data-zh="设计含义">Design Implications</div>
+      <h2 class="section-title" data-en="How Attribution Shapes the Platform" data-zh="归因如何塑造平台">How Attribution Shapes the Platform</h2>
+      <p class="section-sub" data-en="Attribution is not a post-campaign reporting feature. It is a design constraint that shapes how campaigns are created, how creators are briefed, and what the dashboard shows." data-zh="归因不是活动后报告功能。它是一个设计约束，塑造活动创建方式、创作者简报方式和仪表板显示内容。">Attribution is not a post-campaign reporting feature. It is a design constraint that shapes how campaigns are created, how creators are briefed, and what the dashboard shows.</p>
+    </div>
+    <ul class="checklist fade-in">
+      <li data-en="Define verification method at campaign creation — not retrospectively" data-zh="在活动创建时定义核验方法——而非事后追溯">Define verification method at campaign creation — not retrospectively</li>
+      <li data-en="Match campaign type to appropriate proof logic before launch" data-zh="在启动前将活动类型与适当的证明逻辑匹配">Match campaign type to appropriate proof logic before launch</li>
+      <li data-en="Expose clear proof steps to creators upfront — no ambiguity about what counts" data-zh="提前向创作者说明清晰的证明步骤——对于什么算数没有歧义">Expose clear proof steps to creators upfront — no ambiguity about what counts</li>
+      <li data-en="Show confidence level in merchant dashboard alongside results — not just raw numbers" data-zh="在商家仪表板中与结果一起显示置信度——不仅仅是原始数字">Show confidence level in merchant dashboard alongside results — not just raw numbers</li>
+      <li data-en="Separate vanity indicators from business indicators in all reporting interfaces" data-zh="在所有报告界面中将虚荣指标与业务指标分开">Separate vanity indicators from business indicators in all reporting interfaces</li>
+      <li data-en="Maintain audit-friendly milestone logs throughout campaign lifecycle" data-zh="在整个活动生命周期中维护审计友好的里程碑日志">Maintain audit-friendly milestone logs throughout campaign lifecycle</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── SECTION 7: REPORTING LOGIC ─────────────── -->
+<section class="section">
+  <div class="section-inner">
+    <div class="fade-in">
+      <div class="section-label" data-en="Reporting Design" data-zh="报告设计">Reporting Design</div>
+      <h2 class="section-title" data-en="What Each Side Sees" data-zh="各方看到什么">What Each Side Sees</h2>
+      <p class="section-sub" data-en="Good reporting is not neutral. It converts attribution signals into decision support — for merchants to repeat, and for creators to improve." data-zh="好的报告不是中立的。它将归因信号转化为决策支持——帮助商家做出复购决定，帮助创作者改进。">Good reporting is not neutral. It converts attribution signals into decision support — for merchants to repeat, and for creators to improve.</p>
+    </div>
+    <div class="report-split fade-in">
+      <div class="report-col">
+        <div class="report-col-title" data-en="Merchant Reporting" data-zh="商家报告">Merchant Reporting</div>
+        <div class="report-col-sub" data-en="REPEAT DECISION SUPPORT" data-zh="复购决策支持">REPEAT DECISION SUPPORT</div>
+        <div class="report-col-note" data-en="Avoid dashboards that flood merchants with superficial stats. Show what matters for the next booking decision." data-zh="避免用表面统计数据淹没商家的仪表板。显示下次预订决策真正重要的内容。">Avoid dashboards that flood merchants with superficial stats. Show what matters for the next booking decision.</div>
+        <ul class="report-list">
+          <li data-en="What was delivered by the creator" data-zh="创作者交付了什么">What was delivered by the creator</li>
+          <li data-en="What was observed on the merchant side" data-zh="商家端观察到了什么">What was observed on the merchant side</li>
+          <li data-en="How strong the result confidence is" data-zh="结果置信度有多强">How strong the result confidence is</li>
+          <li data-en="How this creator compares to others" data-zh="此创作者与其他人相比如何">How this creator compares to others</li>
+          <li data-en="Whether the campaign is worth repeating" data-zh="活动是否值得重复">Whether the campaign is worth repeating</li>
+        </ul>
+      </div>
+      <div class="report-col">
+        <div class="report-col-title" data-en="Creator Reporting" data-zh="创作者报告">Creator Reporting</div>
+        <div class="report-col-sub" data-en="PROGRESSION SIGNAL" data-zh="进阶信号">PROGRESSION SIGNAL</div>
+        <div class="report-col-note" data-en="Attribution converts into progression logic. Converts what was verified into what they need to unlock higher-tier work." data-zh="归因转化为进阶逻辑。将已核验的内容转化为他们解锁更高层级工作所需的条件。">Attribution converts into progression logic. Converts what was verified into what they need to unlock higher-tier work.</div>
+        <ul class="report-list">
+          <li data-en="What was verified in this campaign" data-zh="此活动中核验了什么">What was verified in this campaign</li>
+          <li data-en="How their score changed as a result" data-zh="结果导致分数如何变化">How their score changed as a result</li>
+          <li data-en="Which metric category improved" data-zh="哪个指标类别提升">Which metric category improved</li>
+          <li data-en="What they need to unlock higher-tier work" data-zh="需要什么来解锁更高层级工作">What they need to unlock higher-tier work</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 8: FINAL STANDARD ─────────────── -->
+<section class="section section-dark">
+  <div class="section-inner">
+    <div class="fade-in">
+      <div class="section-label" data-en="Final Standard" data-zh="最终标准" style="color:var(--accent-light);">Final Standard</div>
+      <h2 class="section-title section-title-white" data-en="The Attribution Standard" data-zh="归因标准">The Attribution Standard</h2>
+      <p class="section-sub section-sub-white" data-en="Attribution quality is the foundation of trust. Trust enables repeat behavior. Repeat behavior generates sustainable economics." data-zh="归因质量是信任的基础。信任促进重复行为。重复行为产生可持续经济。">Attribution quality is the foundation of trust. Trust enables repeat behavior. Repeat behavior generates sustainable economics.</p>
+      <blockquote class="principle principle-dark" style="margin-top:32px;">
+        <span data-en="Attribution that increases trust, supports repeat buying decisions, improves creator sorting, resists manipulation, and stays honest about confidence limits. This makes Push more credible than informal creator commerce — and more valuable to every party in the transaction." data-zh="增加信任、支持复购决策、改善创作者分类、抵制操控、对置信限度保持诚实的归因。这使 Push 比非正式的创作者商务更可信——对交易中的每一方都更有价值。">Attribution that increases trust, supports repeat buying decisions, improves creator sorting, resists manipulation, and stays honest about confidence limits. This makes Push more credible than informal creator commerce — and more valuable to every party in the transaction.</span>
+        <cite data-en="PUSH — Attribution Framework Standard" data-zh="PUSH — 归因框架标准">PUSH — Attribution Framework Standard</cite>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">PUSH</div>
+    <div class="footer-tagline" data-en="Local creator performance infrastructure" data-zh="本地创作者效果基础设施">Local creator performance infrastructure</div>
+    <ul class="footer-links">
+      <li><a href="index.html" data-en="Overview" data-zh="概览">Overview</a></li>
+      <li><a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a></li>
+      <li><a href="pitch-deck.html" data-en="Pitch Deck" data-zh="融资文档">Pitch Deck</a></li>
+      <li><a href="prospects.html" data-en="Prospects" data-zh="市场前景">Prospects</a></li>
+      <li><a href="challenges.html" data-en="Challenges" data-zh="挑战">Challenges</a></li>
+      <li><a href="risk-defense.html" data-en="Risk &amp; Defense" data-zh="风险与防御">Risk &amp; Defense</a></li>
+      <li><a href="retention-defense.html" data-en="Retention" data-zh="留存">Retention</a></li>
+      <li><a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a></li>
+      <li><a href="push-strategy-core.html" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a></li>
+      <li><a href="economics.html" data-en="Economics" data-zh="经济模型">Economics</a></li>
+      <li><a href="attribution.html" data-en="Attribution" data-zh="归因框架">Attribution</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 PUSH. Internal strategy documentation.</div>
+  </div>
+</footer>
+
+<script>
+// ── BILINGUAL SYSTEM ──────────────────────────
+(function() {
+  let lang = localStorage.getItem('push-lang') || 'en';
+  function applyLang(l) {
+    lang = l;
+    localStorage.setItem('push-lang', l);
+    document.querySelectorAll('[data-en]').forEach(el => {
+      const val = el.getAttribute('data-' + l);
+      if (val !== null) el.innerHTML = val;
+    });
+    const btn = document.getElementById('lang-btn');
+    if (btn) btn.textContent = l === 'en' ? '中 / EN' : 'EN / 中';
+  }
+  document.getElementById('lang-btn').addEventListener('click', () => {
+    document.body.style.opacity = '0.8';
+    document.body.style.transition = 'opacity 0.15s';
+    setTimeout(() => { applyLang(lang === 'en' ? 'zh' : 'en'); document.body.style.opacity = '1'; }, 150);
+  });
+  applyLang(lang);
+})();
+
+// ── SCROLL FADE IN ────────────────────────────
+(function() {
+  const els = document.querySelectorAll('.fade-in');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  els.forEach(el => obs.observe(el));
+})();
+</script>
+</body>
+</html>

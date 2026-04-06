@@ -92,6 +92,22 @@
     }
     #lang-toggle:hover { background: var(--accent-dark); transform: translateY(-1px); }
 
+    /* ═══ DOC STRIP ═══ */
+    .doc-strip {
+      position: fixed; top: 60px; left: 0; right: 0; z-index: 999;
+      height: 36px; background: #f8f9fa;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center;
+      padding: 0 28px; gap: 16px;
+      font-size: 12px; color: var(--text3);
+    }
+    .doc-strip a {
+      color: var(--accent); font-weight: 500;
+      text-decoration: none; white-space: nowrap;
+      transition: opacity 0.18s;
+    }
+    .doc-strip a:hover { opacity: 0.75; }
+
     /* ═══════════════════════════════════════
        HERO
     ═══════════════════════════════════════ */
@@ -102,33 +118,6 @@
       text-align: center;
       padding: 120px 32px 90px;
       position: relative; overflow: hidden;
-    }
-
-    /* animated glow pulses */
-    .hero-glow {
-      position: absolute; inset: 0; pointer-events: none;
-    }
-    .hero-glow::before {
-      content: '';
-      position: absolute;
-      top: 20%; left: 15%;
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(79,70,229,0.22) 0%, transparent 65%);
-      border-radius: 50%;
-      animation: glowPulse 8s ease-in-out infinite;
-    }
-    .hero-glow::after {
-      content: '';
-      position: absolute;
-      bottom: 15%; right: 10%;
-      width: 480px; height: 480px;
-      background: radial-gradient(circle, rgba(129,140,248,0.15) 0%, transparent 65%);
-      border-radius: 50%;
-      animation: glowPulse 8s ease-in-out infinite 4s;
-    }
-    @keyframes glowPulse {
-      0%, 100% { transform: scale(1); opacity: 0.8; }
-      50% { transform: scale(1.18); opacity: 1; }
     }
 
     /* grid texture */
@@ -838,9 +827,18 @@
   </div>
 </nav>
 
+<!-- DOC STRIP -->
+<div class="doc-strip">
+  <span data-en="Technical Docs:" data-zh="技术文档：">Technical Docs:</span>
+  <a href="economics.html" data-en="Economics" data-zh="经济学">Economics</a>
+  <a href="attribution.html" data-en="Attribution" data-zh="归因">Attribution</a>
+  <a href="fraud-integrity.html" data-en="Fraud &amp; Trust" data-zh="欺诈与信任">Fraud &amp; Trust</a>
+  <a href="gtm-launch.html" data-en="GTM &amp; Launch" data-zh="上市与发布">GTM &amp; Launch</a>
+  <a href="metrics-dashboard.html" data-en="Metrics" data-zh="指标">Metrics</a>
+</div>
+
 <!-- ══════════════════════ HERO ══════════════════════ -->
 <section class="hero">
-  <div class="hero-glow"></div>
   <div class="hero-grid"></div>
   <div class="hero-content">
 
@@ -850,7 +848,8 @@
     </div>
 
     <h1 class="hero-title">
-      <span data-en="Push is not<br><span class='line-accent'>a matching tool.</span><br>Push is<br><span class='line-accent2'>a value settlement layer.</span>" data-zh="Push 不是撮合工具，<br><span class='line-accent'>而是价值结算层。</span>">Push is not<br><span class="line-accent">a matching tool.</span><br>Push is<br><span class="line-accent2">a value settlement layer.</span></span>
+      <span data-en="Push is not a matching tool." data-zh="Push 不是撮合工具，">Push is not a matching tool.</span><br>
+      <span class="line-accent" data-en="Push is a value settlement layer." data-zh="<span class='line-accent'>而是价值结算层。</span>">Push is a value settlement layer.</span>
     </h1>
 
     <p class="hero-sub" data-en="Matching tools have no moat. No long-term value. No high valuation. This page explains why Push is fundamentally different — and why it must be." data-zh="撮合工具没有护城河，没有长期价值，没有高估值。这一页解释 Push 为什么本质上不同——以及为什么必须如此。">Matching tools have no moat. No long-term value. No high valuation. This page explains why Push is fundamentally different — and why it must be.</p>
@@ -1186,6 +1185,11 @@
       <a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a>
       <a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
       <a href="push-strategy-core.html" class="active-link" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
+      <a href="economics.html" data-en="Economics" data-zh="经济学">Economics</a>
+      <a href="attribution.html" data-en="Attribution" data-zh="归因">Attribution</a>
+      <a href="fraud-integrity.html" data-en="Fraud &amp; Trust" data-zh="欺诈与信任">Fraud &amp; Trust</a>
+      <a href="gtm-launch.html" data-en="GTM &amp; Launch" data-zh="上市与发布">GTM &amp; Launch</a>
+      <a href="metrics-dashboard.html" data-en="Metrics" data-zh="指标">Metrics</a>
     </div>
     <div class="footer-copy" data-en="© 2025 PUSH Platform. Local Creator Performance Infrastructure." data-zh="© 2025 PUSH 平台。本地 Creator 表现基础设施。">© 2025 PUSH Platform. Local Creator Performance Infrastructure.</div>
   </div>

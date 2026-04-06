@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PUSH — GTM Experiments & Launch Loops</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --accent: #4f46e5;
+  --accent-light: #818cf8;
+  --accent-dark: #3730a3;
+  --accent-bg: rgba(79,70,229,0.06);
+  --primary: #0f0f1a;
+  --green: #059669;
+  --green-bg: rgba(5,150,105,0.08);
+  --orange: #d97706;
+  --orange-bg: rgba(217,119,6,0.08);
+  --red: #dc2626;
+  --red-bg: rgba(220,38,38,0.08);
+  --text: #111827;
+  --text2: #4b5563;
+  --text3: #9ca3af;
+  --border: #e5e7eb;
+  --bg: #ffffff;
+  --bg2: #f8f9fa;
+  --radius: 12px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--text);line-height:1.6;overflow-x:hidden;background:#fff;}
+
+/* ── FADE IN ── */
+.fade-in{opacity:0;transition:opacity 0.5s ease;}
+.fade-in.visible{opacity:1;}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:60px;background:rgba(255,255,255,0.95);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  display:flex;align-items:center;padding:0 28px;gap:12px;
+}
+.nav-logo{
+  font-size:22px;font-weight:900;color:var(--accent);
+  text-decoration:none;letter-spacing:-0.5px;flex-shrink:0;
+}
+.nav-links{
+  display:flex;align-items:center;gap:2px;flex:1;justify-content:center;flex-wrap:nowrap;
+}
+.nav-links a{
+  font-size:12px;font-weight:500;color:var(--text2);
+  text-decoration:none;padding:5px 9px;border-radius:7px;
+  transition:color 0.2s,background 0.2s;white-space:nowrap;
+}
+.nav-links a:hover{color:var(--accent);background:var(--accent-bg);}
+.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;}
+.lang-btn{
+  background:var(--accent);color:#fff;border:none;cursor:pointer;
+  font-size:12px;font-weight:700;padding:7px 14px;border-radius:8px;
+  transition:background 0.2s;flex-shrink:0;letter-spacing:0.3px;font-family:inherit;
+}
+.lang-btn:hover{background:var(--accent-dark);}
+@media(max-width:768px){
+  .nav-links{display:none;}
+}
+
+/* ── HERO ── */
+.hero{
+  background:var(--primary);
+  padding:120px 40px 64px;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.hero-inner{max-width:1100px;margin:0 auto;}
+.hero-doc-badge{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;font-weight:700;letter-spacing:2px;
+  color:var(--accent-light);text-transform:uppercase;
+  margin-bottom:20px;display:block;
+}
+.hero-title{
+  font-size:44px;font-weight:900;color:#fff;
+  letter-spacing:-1.5px;line-height:1.1;
+  margin-bottom:20px;
+}
+.hero-subtitle{
+  font-size:16px;font-weight:400;color:rgba(255,255,255,0.55);
+  max-width:640px;line-height:1.7;margin-bottom:14px;
+}
+.hero-principle{
+  font-size:14px;font-weight:600;color:var(--accent-light);
+  letter-spacing:0.2px;padding-top:14px;
+  border-top:1px solid rgba(255,255,255,0.1);
+  max-width:640px;
+}
+
+/* ── SECTIONS ── */
+.section{padding:80px 40px;}
+.section-inner{max-width:1100px;margin:0 auto;}
+.section-bg2{background:var(--bg2);}
+.section-white{background:#fff;}
+.section-dark{background:var(--primary);}
+
+.section-label{
+  font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:8px;
+}
+.section-title{
+  font-size:32px;font-weight:800;color:var(--primary);
+  letter-spacing:-0.5px;line-height:1.2;margin-bottom:12px;
+}
+.section-sub{
+  font-size:15px;color:var(--text2);max-width:640px;line-height:1.7;margin-bottom:40px;
+}
+.section-title-white{color:#fff;}
+.section-sub-white{color:rgba(255,255,255,0.55);}
+
+/* ── BLOCKQUOTE PRINCIPLE ── */
+blockquote.principle{
+  border-left:3px solid var(--accent);
+  padding:20px 28px;margin:0;
+  font-size:18px;font-style:italic;color:var(--text);
+  background:transparent;
+}
+blockquote.principle-white{
+  border-left:3px solid var(--accent-light);
+  padding:24px 32px;margin:0;
+  font-size:20px;font-style:italic;color:rgba(255,255,255,0.9);
+  background:transparent;
+}
+
+/* ── CHECKLIST ── */
+.check-list{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border);}
+.check-item{
+  display:flex;align-items:flex-start;gap:16px;
+  padding:16px 0;border-bottom:1px solid var(--border);
+}
+.check-icon{
+  width:20px;height:20px;border-radius:5px;
+  background:var(--green-bg);border:1.5px solid var(--green);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:1px;
+}
+.check-icon svg{width:11px;height:11px;stroke:var(--green);stroke-width:2.5;fill:none;}
+.check-label{font-size:14px;color:var(--text);font-weight:600;margin-bottom:2px;}
+.check-desc{font-size:13px;color:var(--text2);line-height:1.6;}
+
+/* ── NUMBERED EDITORIAL ROWS ── */
+.item-list{border-top:1px solid var(--border);}
+.item-row{
+  display:grid;
+  grid-template-columns:48px 1fr;
+  gap:0 28px;
+  padding:28px 0;
+  border-bottom:1px solid var(--border);
+}
+.item-num{
+  font-size:13px;font-weight:800;font-family:'JetBrains Mono',monospace;
+  color:var(--accent);letter-spacing:1px;padding-top:4px;
+}
+.item-title{font-size:18px;font-weight:700;color:var(--text);margin-bottom:4px;}
+.item-sub{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);margin-bottom:8px;}
+.item-desc{font-size:14px;color:var(--text2);line-height:1.7;}
+.item-meta{
+  display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;
+}
+.item-meta-tag{
+  font-size:11px;font-weight:700;font-family:'JetBrains Mono',monospace;
+  padding:4px 10px;border-radius:5px;letter-spacing:0.5px;
+}
+.tag-goal{background:var(--accent-bg);color:var(--accent);}
+.tag-method{background:var(--green-bg);color:var(--green);}
+.tag-track{background:var(--orange-bg);color:var(--orange);}
+
+/* ── WEDGE PILLS ── */
+.wedge-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;}
+.wedge-pill{
+  font-size:13px;font-weight:600;padding:8px 16px;
+  border-radius:100px;border:1px solid var(--border);
+  color:var(--text);background:#fff;
+}
+
+/* ── HYPER-LOCAL STAT STRIP ── */
+.stat-strip{
+  display:flex;align-items:stretch;gap:0;
+  border:1px solid var(--border);border-radius:var(--radius);
+  overflow:hidden;
+  background:#fff;
+}
+.stat-strip-item{
+  flex:1;padding:28px 24px;text-align:center;
+  border-right:1px solid var(--border);
+}
+.stat-strip-item:last-child{border-right:none;}
+.stat-num{
+  font-size:40px;font-weight:900;color:var(--primary);
+  letter-spacing:-2px;line-height:1;margin-bottom:4px;
+  font-family:'JetBrains Mono',monospace;
+}
+.stat-num span{color:var(--accent);}
+.stat-label{font-size:12px;color:var(--text3);font-weight:600;letter-spacing:0.5px;}
+.stat-desc{font-size:11px;color:var(--text3);margin-top:4px;}
+
+/* ── LOOP VISUALIZATION ── */
+.loop-section{border-top:1px solid rgba(255,255,255,0.08);}
+.loop-block{padding:36px 0;border-bottom:1px solid rgba(255,255,255,0.06);}
+.loop-block:last-child{border-bottom:none;}
+.loop-num{
+  font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:800;
+  color:var(--accent-light);letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:8px;
+}
+.loop-title{font-size:20px;font-weight:800;color:#fff;margin-bottom:20px;letter-spacing:-0.3px;}
+.loop-flow{
+  display:flex;align-items:center;flex-wrap:wrap;gap:8px;
+}
+.loop-step{
+  font-size:13px;font-weight:600;padding:7px 14px;
+  border-radius:6px;background:var(--accent-bg);color:var(--accent);
+  white-space:nowrap;border:1px solid rgba(79,70,229,0.15);
+}
+.loop-arrow{
+  font-size:16px;color:var(--text3);flex-shrink:0;
+}
+.loop-back{
+  font-size:11px;font-weight:700;font-family:'JetBrains Mono',monospace;
+  color:var(--accent-light);letter-spacing:1px;padding:6px 12px;
+  border:1px dashed rgba(129,140,248,0.4);border-radius:6px;
+  margin-left:4px;
+}
+
+/* ── WARN STRIPS ── */
+.warn-list{display:flex;flex-direction:column;gap:8px;}
+.warn-strip{
+  display:flex;gap:16px;align-items:flex-start;
+  padding:18px 20px;border-left:3px solid var(--red);
+  background:white;border-radius:0 8px 8px 0;
+  border-top:1px solid var(--border);border-right:1px solid var(--border);border-bottom:1px solid var(--border);
+}
+.warn-label{
+  font-size:10px;font-family:'JetBrains Mono',monospace;font-weight:800;
+  color:var(--red);letter-spacing:2px;white-space:nowrap;padding-top:2px;
+}
+.warn-title{font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px;}
+.warn-desc{font-size:13px;color:var(--text2);line-height:1.6;}
+
+/* ── METRICS GRID ── */
+.metrics-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+  border:1px solid var(--border);border-radius:var(--radius);
+  overflow:hidden;
+}
+.metric-item{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:18px 20px;border-bottom:1px solid var(--border);
+  border-right:1px solid var(--border);
+  background:#fff;
+}
+.metric-item:nth-child(even){border-right:none;}
+.metric-item:last-child{border-bottom:none;}
+.metric-item:nth-last-child(2){border-bottom:none;}
+.metric-icon{
+  font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:800;
+  color:var(--accent);min-width:24px;padding-top:1px;
+}
+.metric-label{font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;}
+.metric-why{font-size:12px;color:var(--text3);}
+
+/* ── EXPANSION CHECKLIST ── */
+.expand-list{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border);}
+.expand-item{
+  display:flex;align-items:flex-start;gap:16px;
+  padding:14px 0;border-bottom:1px solid var(--border);
+}
+.expand-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--accent);flex-shrink:0;margin-top:6px;
+}
+.expand-text{font-size:14px;color:var(--text2);line-height:1.5;}
+
+.callout-warning{
+  margin-top:28px;
+  padding:20px 24px;
+  border:1px solid var(--red);
+  border-left:4px solid var(--red);
+  border-radius:0 var(--radius) var(--radius) 0;
+  background:var(--red-bg);
+}
+.callout-warning-label{
+  font-size:10px;font-weight:800;font-family:'JetBrains Mono',monospace;
+  letter-spacing:2px;color:var(--red);text-transform:uppercase;margin-bottom:6px;
+}
+.callout-warning-text{font-size:15px;font-weight:700;color:var(--red);font-style:italic;}
+
+@media(max-width:900px){
+  .stat-strip{flex-direction:column;}
+  .stat-strip-item{border-right:none;border-bottom:1px solid var(--border);}
+  .metrics-grid{grid-template-columns:1fr;}
+  .metric-item:nth-child(even){border-right:none;}
+  .loop-flow{gap:6px;}
+}
+@media(max-width:600px){
+  .hero{padding:90px 20px 48px;}
+  .hero-title{font-size:30px;}
+  .section{padding:60px 20px;}
+  .section-title{font-size:26px;}
+  .item-row{grid-template-columns:36px 1fr;gap:0 16px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">PUSH</a>
+  <div class="nav-links">
+    <a href="index.html" data-en="Overview" data-zh="总览">Overview</a>
+    <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
+    <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演文件">Pitch Deck</a>
+    <a href="prospects.html" data-en="Prospects" data-zh="市场前景">Prospects</a>
+    <a href="challenges.html" data-en="Challenges" data-zh="挑战">Challenges</a>
+    <a href="risk-defense.html" data-en="Risk &amp; Defense" data-zh="风险防御">Risk &amp; Defense</a>
+    <a href="retention-defense.html" data-en="Retention" data-zh="留存">Retention</a>
+    <a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
+    <a href="push-strategy-core.html" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
+    <a href="gtm-launch.html" class="active" data-en="GTM &amp; Launch" data-zh="GTM与启动">GTM &amp; Launch</a>
+  </div>
+  <button class="lang-btn" id="lang-btn">中 / EN</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-doc-badge" data-en="DOC — 09 · GTM &amp; LAUNCH LOOPS" data-zh="文档 — 09 · GTM与启动循环">DOC — 09 · GTM &amp; LAUNCH LOOPS</span>
+    <h1 class="hero-title" data-en="GTM Experiments &amp; Launch Loops" data-zh="GTM 实验与启动循环">GTM Experiments &amp; Launch Loops</h1>
+    <p class="hero-subtitle" data-en="How Push launches as a concentrated market experiment, not a broad platform announcement." data-zh="Push 如何作为集中式市场实验启动，而非广泛的平台发布。">How Push launches as a concentrated market experiment, not a broad platform announcement.</p>
+    <p class="hero-principle" data-en="Density changes behavior for both creators and merchants. The first neighborhood becomes the blueprint for the next one." data-zh="密度改变创作者和商户的行为。第一个社区成为下一个社区的蓝图。">Density changes behavior for both creators and merchants. The first neighborhood becomes the blueprint for the next one.</p>
+  </div>
+</section>
+
+<!-- S1: LAUNCH PHILOSOPHY -->
+<section class="section section-bg2">
+  <div class="section-inner fade-in">
+    <div class="section-label" data-en="PHILOSOPHY" data-zh="核心理念">PHILOSOPHY</div>
+    <h2 class="section-title" data-en="Launch as a Concentrated Experiment" data-zh="作为集中实验启动">Launch as a Concentrated Experiment</h2>
+    <blockquote class="principle">
+      <p data-en="Push should NOT launch as a broad platform. Launch as a concentrated market experiment. The first goal is to prove: merchants repeat, creators progress, campaigns can be fulfilled cleanly, and local density changes behavior." data-zh="Push 不应该作为一个广泛的平台启动。而应作为一个集中的市场实验启动。第一个目标是证明：商户会重复使用、创作者会进步、活动能够干净地完成、本地密度能够改变行为。">Push should NOT launch as a broad platform. Launch as a concentrated market experiment. The first goal is to prove: merchants repeat, creators progress, campaigns can be fulfilled cleanly, and local density changes behavior.</p>
+      <p style="margin-top:16px;font-size:15px;font-style:normal;color:var(--text2);" data-en="Expansion without proof of these four things is likely fake progress. Every launch cohort should teach the platform something real — not just fill a user count." data-zh="在没有证明这四件事的情况下扩张很可能是虚假进展。每个启动群体都应该教会平台一些真实的东西——而不仅仅是填充用户数量。">Expansion without proof of these four things is likely fake progress. Every launch cohort should teach the platform something real — not just fill a user count.</p>
+    </blockquote>
+  </div>
+</section>
+
+<!-- S2: WEDGE SELECTION -->
+<section class="section section-white">
+  <div class="section-inner fade-in">
+    <div class="section-label" data-en="MARKET ENTRY" data-zh="市场进入">MARKET ENTRY</div>
+    <h2 class="section-title" data-en="Wedge Selection Criteria" data-zh="切入点选择标准">Wedge Selection Criteria</h2>
+    <p class="section-sub" data-en="A strong first wedge reduces operational complexity and maximizes the chance of early proof. Bad wedge selection makes everything harder." data-zh="强有力的第一个切入点可以降低运营复杂性并最大化早期证明的机会。糟糕的切入点选择会使一切变得更难。">A strong first wedge reduces operational complexity and maximizes the chance of early proof. Bad wedge selection makes everything harder.</p>
+    <div class="check-list">
+      <div class="check-item">
+        <div class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+        <div>
+          <div class="check-label" data-en="Clear Local Demand" data-zh="明确的本地需求">Clear Local Demand</div>
+          <div class="check-desc" data-en="Merchants in this category have an identifiable, recurring problem that better creator campaigns can solve — not just a theoretical use case." data-zh="该类别的商户有一个可识别的、反复出现的问题，更好的创作者活动可以解决——而不仅仅是一个理论用例。">Merchants in this category have an identifiable, recurring problem that better creator campaigns can solve — not just a theoretical use case.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+        <div>
+          <div class="check-label" data-en="Visual Creator Compatibility" data-zh="视觉创作者兼容性">Visual Creator Compatibility</div>
+          <div class="check-desc" data-en="The experience or product creates natural content opportunities — something worth visiting, experiencing, and sharing." data-zh="体验或产品创造了自然的内容机会——值得访问、体验和分享的东西。">The experience or product creates natural content opportunities — something worth visiting, experiencing, and sharing.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+        <div>
+          <div class="check-label" data-en="Frequent Consumer Purchase Behavior" data-zh="频繁的消费者购买行为">Frequent Consumer Purchase Behavior</div>
+          <div class="check-desc" data-en="Category has repeat purchase cycles — weekly, not annually. Repeat purchase frequency supports merchant campaign repetition." data-zh="该类别有重复购买周期——每周，而不是每年。重复购买频率支持商户活动重复。">Category has repeat purchase cycles — weekly, not annually. Repeat purchase frequency supports merchant campaign repetition.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+        <div>
+          <div class="check-label" data-en="Manageable Campaign Complexity" data-zh="可管理的活动复杂性">Manageable Campaign Complexity</div>
+          <div class="check-desc" data-en="Campaign deliverables are clear, proofs are simple, and fulfillment does not require complex logistics or extended time." data-zh="活动交付物清晰，证明简单，履约不需要复杂的物流或延长时间。">Campaign deliverables are clear, proofs are simple, and fulfillment does not require complex logistics or extended time.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
+        <div>
+          <div class="check-label" data-en="Merchant Openness to Experimentation" data-zh="商户对实验的开放性">Merchant Openness to Experimentation</div>
+          <div class="check-desc" data-en="Owners in this space are willing to try new acquisition models, tolerate some learning-period messiness, and give honest feedback." data-zh="该领域的所有者愿意尝试新的获客模式，容忍一些学习期的混乱，并给出诚实的反馈。">Owners in this space are willing to try new acquisition models, tolerate some learning-period messiness, and give honest feedback.</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:28px;">
+      <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:12px;font-family:'JetBrains Mono',monospace;" data-en="LIKELY STRONG WEDGES" data-zh="可能的强切入点">LIKELY STRONG WEDGES</div>
+      <div class="wedge-pills">
+        <span class="wedge-pill" data-en="Cafes &amp; Coffee" data-zh="咖啡馆">Cafes &amp; Coffee</span>
+        <span class="wedge-pill" data-en="Dessert Shops" data-zh="甜品店">Dessert Shops</span>
+        <span class="wedge-pill" data-en="Beauty Appointments" data-zh="美妆预约">Beauty Appointments</span>
+        <span class="wedge-pill" data-en="Boutique Fitness Intros" data-zh="精品健身体验">Boutique Fitness Intros</span>
+        <span class="wedge-pill" data-en="Small Events &amp; Openings" data-zh="小型活动与开业">Small Events &amp; Openings</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S3: HYPER-LOCAL MODEL -->
+<section class="section section-bg2">
+  <div class="section-inner fade-in">
+    <div class="section-label" data-en="LAUNCH MODEL" data-zh="启动模型">LAUNCH MODEL</div>
+    <h2 class="section-title" data-en="Hyper-Local Launch Structure" data-zh="超本地启动结构">Hyper-Local Launch Structure</h2>
+    <p class="section-sub" data-en="Start with one small zone where merchant density, creator proximity, and standby value reinforce each other." data-zh="从一个小区域开始，在那里商户密度、创作者邻近度和备选价值相互强化。">Start with one small zone where merchant density, creator proximity, and standby value reinforce each other.</p>
+    <div class="stat-strip">
+      <div class="stat-strip-item">
+        <div class="stat-num"><span>1</span></div>
+        <div class="stat-label" data-en="Neighborhood" data-zh="社区">Neighborhood</div>
+        <div class="stat-desc" data-en="Dense, walkable, single zone" data-zh="密集、可步行的单一区域">Dense, walkable, single zone</div>
+      </div>
+      <div class="stat-strip-item">
+        <div class="stat-num"><span>10</span></div>
+        <div class="stat-label" data-en="Merchants" data-zh="商户">Merchants</div>
+        <div class="stat-desc" data-en="Curated across 2–3 wedge categories" data-zh="跨2–3个切入点类别精选">Curated across 2–3 wedge categories</div>
+      </div>
+      <div class="stat-strip-item">
+        <div class="stat-num"><span>30</span></div>
+        <div class="stat-label" data-en="Curated Creators" data-zh="精选创作者">Curated Creators</div>
+        <div class="stat-desc" data-en="Hand-selected, not open platform sign-up" data-zh="手动选择，而非开放平台注册">Hand-selected, not open platform sign-up</div>
+      </div>
+      <div class="stat-strip-item">
+        <div class="stat-num" style="font-size:28px;letter-spacing:-1px;padding-top:4px;" data-en="Clear" data-zh="明确">Clear</div>
+        <div class="stat-label" data-en="Density Target" data-zh="密度目标">Density Target</div>
+        <div class="stat-desc" data-en="Map value visible, standby meaningful" data-zh="地图价值可见，备选有实际意义">Map value visible, standby meaningful</div>
+      </div>
+    </div>
+    <div style="margin-top:24px;padding:18px 24px;border:1px solid var(--border);border-radius:var(--radius);background:#fff;">
+      <div style="font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);margin-bottom:8px;font-family:'JetBrains Mono',monospace;" data-en="DESIGN INTENT" data-zh="设计意图">DESIGN INTENT</div>
+      <p style="font-size:14px;color:var(--text2);line-height:1.7;" data-en="Within this zone: merchants are dense enough that creators can visit multiple in one trip. Standby has real meaning — creators nearby can accept quickly. Map value becomes visible immediately. Each campaign feeds the next one's awareness." data-zh="在这个区域内：商户足够密集，创作者可以一次出行访问多家。备选具有真实意义——附近的创作者可以快速接受。地图价值立即可见。每个活动都为下一个活动的知名度做出贡献。">Within this zone: merchants are dense enough that creators can visit multiple in one trip. Standby has real meaning — creators nearby can accept quickly. Map value becomes visible immediately. Each campaign feeds the next one's awareness.</p>
+    </div>
+  </div>
+</section>
+
+<!-- S4: 4 GTM EXPERIMENTS -->
+<section class="section section-white">
+  <div class="section-inner fade-in">
+    <div class="section-label" data-en="EXPERIMENTS" data-zh="实验">EXPERIMENTS</div>
+    <h2 class="section-title" data-en="Four Early GTM Experiments" data-zh="四个早期GTM实验">Four Early GTM Experiments</h2>
+    <p class="section-sub" data-en="Each experiment is designed to produce a specific insight — not just usage data. Run in parallel across the first launch cohort." data-zh="每个实验都旨在产生特定的洞察——而不仅仅是使用数据。在第一个启动群体中并行运行。">Each experiment is designed to produce a specific insight — not just usage data. Run in parallel across the first launch cohort.</p>
+    <div class="item-list">
+      <div class="item-row">
+        <div class="item-num">A</div>
+        <div>
+          <div class="item-sub" data-en="MERCHANT SIDE" data-zh="商户侧">MERCHANT SIDE</div>
+          <div class="item-title" data-en="Merchant Pain Discovery" data-zh="商户痛点发现">Merchant Pain Discovery</div>
+          <div class="item-desc" data-en="Interview and onboard 10 merchants across the launch zone. Present multiple campaign objective types. Track which objectives produce the strongest enthusiasm response. Measure whether merchants care more about traffic, launch awareness, fill rate, or social proof — and whether this varies by category." data-zh="访谈并入驻启动区域的10家商户。呈现多种活动目标类型。跟踪哪些目标产生最强烈的热情响应。衡量商户更关心流量、启动知名度、填充率还是社会证明——以及这是否因类别而异。">Interview and onboard 10 merchants across the launch zone. Present multiple campaign objective types. Track which objectives produce the strongest enthusiasm response. Measure whether merchants care more about traffic, launch awareness, fill rate, or social proof — and whether this varies by category.</div>
+          <div class="item-meta">
+            <span class="item-meta-tag tag-goal" data-en="GOAL: Which objective resonates" data-zh="目标：哪种目标最有共鸣">GOAL: Which objective resonates</span>
+            <span class="item-meta-tag tag-track" data-en="TRACK: Enthusiasm by type" data-zh="追踪：按类型的热情度">TRACK: Enthusiasm by type</span>
+          </div>
+        </div>
+      </div>
+      <div class="item-row">
+        <div class="item-num">B</div>
+        <div>
+          <div class="item-sub" data-en="CREATOR SIDE" data-zh="创作者侧">CREATOR SIDE</div>
+          <div class="item-title" data-en="Creator Supply Quality Test" data-zh="创作者供应质量测试">Creator Supply Quality Test</div>
+          <div class="item-desc" data-en="Compare three creator segments: students, niche local creators, and vertical-focused creators (beauty/food/events). Track response speed to campaign offers, completion rate, and merchant-rated quality. Determine which segment delivers most value in the wedge categories chosen." data-zh="比较三个创作者细分：学生、小众本地创作者和垂直专注创作者（美妆/美食/活动）。跟踪对活动邀约的响应速度、完成率和商户评定的质量。确定哪个细分在所选切入点类别中提供最多价值。">Compare three creator segments: students, niche local creators, and vertical-focused creators (beauty/food/events). Track response speed to campaign offers, completion rate, and merchant-rated quality. Determine which segment delivers most value in the wedge categories chosen.</div>
+          <div class="item-meta">
+            <span class="item-meta-tag tag-goal" data-en="GOAL: Best creator profile" data-zh="目标：最佳创作者画像">GOAL: Best creator profile</span>
+            <span class="item-meta-tag tag-track" data-en="TRACK: Speed, completion, quality" data-zh="追踪：速度、完成率、质量">TRACK: Speed, completion, quality</span>
+          </div>
+        </div>
+      </div>
+      <div class="item-row">
+        <div class="item-num">C</div>
+        <div>
+          <div class="item-sub" data-en="STANDBY SYSTEM" data-zh="备选系统">STANDBY SYSTEM</div>
+          <div class="item-title" data-en="Standby Utility Test" data-zh="备选功能实用性测试">Standby Utility Test</div>
+          <div class="item-desc" data-en="Create controlled slot release moments — campaigns where a creator drops out and a standby slot opens. Measure fill speed: how quickly a standby creator accepts. Measure conversion to completion: do standby-filled slots complete at the same rate as direct-fill slots?" data-zh="创建受控的名额释放时刻——创作者退出并开放备选名额的活动。衡量填充速度：备选创作者接受的速度。衡量完成率转化：备选填充的名额是否与直接填充的名额以相同速率完成？">Create controlled slot release moments — campaigns where a creator drops out and a standby slot opens. Measure fill speed: how quickly a standby creator accepts. Measure conversion to completion: do standby-filled slots complete at the same rate as direct-fill slots?</div>
+          <div class="item-meta">
+            <span class="item-meta-tag tag-goal" data-en="GOAL: Does standby actually work" data-zh="目标：备选是否真正有效">GOAL: Does standby actually work</span>
+            <span class="item-meta-tag tag-track" data-en="TRACK: Fill speed &amp; completion" data-zh="追踪：填充速度与完成率">TRACK: Fill speed &amp; completion</span>
+          </div>
+        </div>
+      </div>
+      <div class="item-row">
+        <div class="item-num">D</div>
+        <div>
+          <div class="item-sub" data-en="MERCHANT REPEAT" data-zh="商户重复">MERCHANT REPEAT</div>
+          <div class="item-title" data-en="Merchant Repeat Trigger Test" data-zh="商户重复触发测试">Merchant Repeat Trigger Test</div>
+          <div class="item-desc" data-en="After first campaign completion, split merchants into two groups: Group A receives post-campaign performance recommendations and a next-campaign suggestion. Group B receives a standard summary only. Compare 30-day repeat campaign rate between groups. Secondary test: compare reporting depth — detailed vs. summary reporting effects on repeat intent." data-zh="第一次活动完成后，将商户分为两组：A组在活动后收到绩效建议和下一个活动建议。B组只收到标准摘要。比较各组30天内的重复活动率。次要测试：比较报告深度——详细报告与摘要报告对重复意图的影响。">After first campaign completion, split merchants into two groups: Group A receives post-campaign performance recommendations and a next-campaign suggestion. Group B receives a standard summary only. Compare 30-day repeat campaign rate between groups. Secondary test: compare reporting depth — detailed vs. summary reporting effects on repeat intent.</div>
+          <div class="item-meta">
+            <span class="item-meta-tag tag-goal" data-en="GOAL: Repeat drivers" data-zh="目标：重复驱动因素">GOAL: Repeat drivers</span>
+            <span class="item-meta-tag tag-track" data-en="TRACK: 30-day repeat rate" data-zh="追踪：30天重复率">TRACK: 30-day repeat rate</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S5: 3 LAUNCH LOOPS -->
+<section class="section section-dark">
+  <div class="section-inner fade-in">
+    <div class="section-label" style="color:var(--accent-light);" data-en="GROWTH MECHANICS" data-zh="增长机制">GROWTH MECHANICS</div>
+    <h2 class="section-title section-title-white" data-en="Three Launch Loops" data-zh="三个启动循环">Three Launch Loops</h2>
+    <p class="section-sub section-sub-white" data-en="Each loop is self-reinforcing. Growth emerges from repeated value, not novelty. The loops must be running before geographic expansion begins." data-zh="每个循环都是自我强化的。增长来自重复的价值，而不是新颖性。在地理扩张开始之前，这些循环必须运转起来。">Each loop is self-reinforcing. Growth emerges from repeated value, not novelty. The loops must be running before geographic expansion begins.</p>
+    <div class="loop-section">
+      <div class="loop-block">
+        <div class="loop-num" data-en="LOOP 01 · MERCHANT OUTCOME" data-zh="循环 01 · 商户成果">LOOP 01 · MERCHANT OUTCOME</div>
+        <div class="loop-title" data-en="Better outcomes → merchant trust → repeat demand" data-zh="更好的成果 → 商户信任 → 重复需求">Better outcomes → merchant trust → repeat demand</div>
+        <div class="loop-flow">
+          <span class="loop-step" data-en="Better Campaign Outcomes" data-zh="更好的活动成果">Better Campaign Outcomes</span>
+          <span class="loop-arrow">→</span>
+          <span class="loop-step" data-en="Stronger Merchant Trust" data-zh="更强的商户信任">Stronger Merchant Trust</span>
+          <span class="loop-arrow">→</span>
+          <span class="loop-step" data-en="Repeat Campaign Purchase" data-zh="重复购买活动">Repeat Campaign Purchase</span>
+          <span class="loop-arrow">→</span>
+          <span class="loop-step" data-en="More Demand Density" data-zh="更多需求密度">More Demand Density</span>
+          <span class="loop-arrow">→</span>
+          <span class="loop-step" data-en="Better Creator Opportunity Flow" data-zh="更好的创作者机会流">Better Creator Opportunity Flow</span>
+          <span class="loop-back" data-en="↩ LOOP" data-zh="↩ 循环">↩ LOOP</span>
+        </div>
+      </div>
+      <div class="loop-block">
+        <div class="loop-num" data-en="LOOP 02 · CREATOR PROGRESSION" data-zh="循环 02 · 创作者进步">LOOP 02 · CREATOR PROGRESSION</div>
+        <div class="loop-title" data-en="Better completion → better score → better access → stronger retention" data-zh="更好的完成率 → 更好的评分 → 更好的访问 → 更强的留存">Better completion → better score → better access → stronger retention</div>
+        <div class="loop-flow">
+          <span class="loop-step" data-en="Better Completion" data-zh="更好的完成率">Better Completion</span>
+          <span class="loop-arrow">→</span>
+          <span class="loop-step" data-en="Stronger Score" data-zh="更高的评分">Stronger Score</span>
+          <span class="loop-arrow">→</span>
+          <span class="loop-step" data-en="Better Campaign Access" data-zh="更好的活动访问权限">Better Campaign Access</span>
+          <span class="loop-arrow">→</span>
+          <span class="loop-step" data-en="Higher Payout" data-zh="更高的支付">Higher Payout</span>
+          <span class="loop-arrow">→</span>
+          <span class="loop-step" data-en="Stronger Creator Retention" data-zh="更强的创作者留存">Stronger Creator Retention</span>
+          <span class="loop-back" data-en="↩ LOOP" data-zh="↩ 循环">↩ LOOP</span>
+        </div>
+      </div>
+      <div class="loop-block">
+        <div class="loop-num" data-en="LOOP 03 · DATA ADVANTAGE" data-zh="循环 03 · 数据优势">LOOP 03 · DATA ADVANTAGE</div>
+        <div class="loop-title" data-en="More campaigns → better matching → higher repeat → stronger quality" data-zh="更多活动 → 更好的匹配 → 更高的重复率 → 更强的质量">More campaigns → better matching → higher repeat → stronger quality</div>
+        <div class="loop-flow">
+          <span class="loop-step" data-en="More Completed Campaigns" data-zh="更多完成的活动">More Completed Campaigns</span>
+          <span class="loop-arrow">→</span>
+          <span class="loop-step" data-en="Better Performance Comparison" data-zh="更好的绩效比较">Better Performance Comparison</span>
+          <span class="loop-arrow">→</span>
+          <span class="loop-step" data-en="Better Matching" data-zh="更好的匹配">Better Matching</span>
+          <span class="loop-arrow">→</span>
+          <span class="loop-step" data-en="Higher Repeat Rate" data-zh="更高的重复率">Higher Repeat Rate</span>
+          <span class="loop-arrow">→</span>
+          <span class="loop-step" data-en="Stronger Platform Quality Signal" data-zh="更强的平台质量信号">Stronger Platform Quality Signal</span>
+          <span class="loop-back" data-en="↩ LOOP" data-zh="↩ 循环">↩ LOOP</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S6: 4 GTM MISTAKES -->
+<section class="section section-white">
+  <div class="section-inner fade-in">
+    <div class="section-label" data-en="FAILURE MODES" data-zh="失败模式">FAILURE MODES</div>
+    <h2 class="section-title" data-en="Four GTM Mistakes to Avoid" data-zh="四个要避免的GTM错误">Four GTM Mistakes to Avoid</h2>
+    <p class="section-sub" data-en="These mistakes are common in platform launches and each one derails a different part of the launch loop." data-zh="这些错误在平台启动中很常见，每一个都会破坏启动循环的不同部分。">These mistakes are common in platform launches and each one derails a different part of the launch loop.</p>
+    <div class="warn-list">
+      <div class="warn-strip">
+        <div class="warn-label">A</div>
+        <div>
+          <div class="warn-title" data-en="Overbroad Geography" data-zh="地理范围过宽">Overbroad Geography</div>
+          <div class="warn-desc" data-en="Launching across a city or multiple neighborhoods before proving value in one. Wide launch kills density — creators can't fill campaigns efficiently, standby loses meaning, and map value disappears." data-zh="在证明一个区域价值之前跨城市或多个社区启动。广泛启动会破坏密度——创作者无法高效填充活动，备选失去意义，地图价值消失。">Launching across a city or multiple neighborhoods before proving value in one. Wide launch kills density — creators can't fill campaigns efficiently, standby loses meaning, and map value disappears.</div>
+        </div>
+      </div>
+      <div class="warn-strip">
+        <div class="warn-label">B</div>
+        <div>
+          <div class="warn-title" data-en="Overbroad Supply" data-zh="供应范围过宽">Overbroad Supply</div>
+          <div class="warn-desc" data-en="Attracting too many creators too early — especially unvetted ones — lowers average quality. Merchant trust depends on consistent creator output. One bad campaign can erode a merchant relationship built over weeks." data-zh="过早吸引过多创作者——尤其是未经审核的——会降低平均质量。商户信任依赖于一致的创作者输出。一次糟糕的活动可能会侵蚀数周建立的商户关系。">Attracting too many creators too early — especially unvetted ones — lowers average quality. Merchant trust depends on consistent creator output. One bad campaign can erode a merchant relationship built over weeks.</div>
+        </div>
+      </div>
+      <div class="warn-strip">
+        <div class="warn-label">C</div>
+        <div>
+          <div class="warn-title" data-en="Weak Merchant Education" data-zh="薄弱的商户教育">Weak Merchant Education</div>
+          <div class="warn-desc" data-en="If merchants don't understand the campaign's purpose, what a good outcome looks like, and what their role is in creator success — results disappoint. Education is not a one-time onboarding step; it's continuous." data-zh="如果商户不理解活动的目的、好的结果是什么样的以及他们在创作者成功中的角色——结果会令人失望。教育不是一次性的入驻步骤；它是持续性的。">If merchants don't understand the campaign's purpose, what a good outcome looks like, and what their role is in creator success — results disappoint. Education is not a one-time onboarding step; it's continuous.</div>
+        </div>
+      </div>
+      <div class="warn-strip">
+        <div class="warn-label">D</div>
+        <div>
+          <div class="warn-title" data-en="PR Before Repetition" data-zh="重复之前的公关">PR Before Repetition</div>
+          <div class="warn-desc" data-en="Generating awareness or press coverage before merchants are repeating and the launch loop is running creates shallow traction. New users arrive to a platform that hasn't proven it works — and churn immediately." data-zh="在商户重复使用和启动循环运转之前产生知名度或媒体报道会产生浅层吸引力。新用户到达一个尚未证明其有效的平台——并立即流失。">Generating awareness or press coverage before merchants are repeating and the launch loop is running creates shallow traction. New users arrive to a platform that hasn't proven it works — and churn immediately.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S7: WHAT TO MEASURE -->
+<section class="section section-bg2">
+  <div class="section-inner fade-in">
+    <div class="section-label" data-en="METRICS" data-zh="指标">METRICS</div>
+    <h2 class="section-title" data-en="What to Measure in GTM" data-zh="GTM中要衡量什么">What to Measure in GTM</h2>
+    <p class="section-sub" data-en="These metrics measure the launch loop's health, not vanity growth. They tell you whether the platform is delivering value — not just accumulating users." data-zh="这些指标衡量启动循环的健康状况，而不是虚荣增长。它们告诉你平台是否在传递价值——而不仅仅是积累用户。">These metrics measure the launch loop's health, not vanity growth. They tell you whether the platform is delivering value — not just accumulating users.</p>
+    <div class="metrics-grid">
+      <div class="metric-item">
+        <div class="metric-icon">01</div>
+        <div>
+          <div class="metric-label" data-en="Merchant Activation Rate" data-zh="商户激活率">Merchant Activation Rate</div>
+          <div class="metric-why" data-en="Are onboarded merchants actually running campaigns?" data-zh="已入驻的商户是否实际在运行活动？">Are onboarded merchants actually running campaigns?</div>
+        </div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-icon">02</div>
+        <div>
+          <div class="metric-label" data-en="Merchant Repeat Intent" data-zh="商户重复意向">Merchant Repeat Intent</div>
+          <div class="metric-why" data-en="Post-campaign signal: would they run another?" data-zh="活动后信号：他们会再次运行吗？">Post-campaign signal: would they run another?</div>
+        </div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-icon">03</div>
+        <div>
+          <div class="metric-label" data-en="Campaign Fill Speed" data-zh="活动填充速度">Campaign Fill Speed</div>
+          <div class="metric-why" data-en="How fast do creator slots fill after launch?" data-zh="活动启动后创作者名额填充的速度？">How fast do creator slots fill after launch?</div>
+        </div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-icon">04</div>
+        <div>
+          <div class="metric-label" data-en="Campaign Completion Rate" data-zh="活动完成率">Campaign Completion Rate</div>
+          <div class="metric-why" data-en="Filled slots that reach verified completion" data-zh="达到已验证完成的填充名额">Filled slots that reach verified completion</div>
+        </div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-icon">05</div>
+        <div>
+          <div class="metric-label" data-en="Creator Second-Campaign Rate" data-zh="创作者第二次活动率">Creator Second-Campaign Rate</div>
+          <div class="metric-why" data-en="Creators who apply for a second campaign within 30 days" data-zh="30天内申请第二次活动的创作者">Creators who apply for a second campaign within 30 days</div>
+        </div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-icon">06</div>
+        <div>
+          <div class="metric-label" data-en="Standby Response Rate" data-zh="备选响应率">Standby Response Rate</div>
+          <div class="metric-why" data-en="Speed and conversion rate of standby slot acceptance" data-zh="备选名额接受的速度和转化率">Speed and conversion rate of standby slot acceptance</div>
+        </div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-icon">07</div>
+        <div>
+          <div class="metric-label" data-en="Time-to-First-Value (Merchants)" data-zh="商户首次获得价值的时间">Time-to-First-Value (Merchants)</div>
+          <div class="metric-why" data-en="Days from onboarding to first tangible campaign result" data-zh="从入驻到第一个有形活动结果的天数">Days from onboarding to first tangible campaign result</div>
+        </div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-icon">08</div>
+        <div>
+          <div class="metric-label" data-en="Time-to-First-Earning (Creators)" data-zh="创作者首次获得收益的时间">Time-to-First-Earning (Creators)</div>
+          <div class="metric-why" data-en="Days from registration to first confirmed payout" data-zh="从注册到第一次确认支付的天数">Days from registration to first confirmed payout</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S8: EXPANSION LOGIC -->
+<section class="section section-white">
+  <div class="section-inner fade-in">
+    <div class="section-label" data-en="EXPANSION GATES" data-zh="扩张门槛">EXPANSION GATES</div>
+    <h2 class="section-title" data-en="When to Expand" data-zh="何时扩张">When to Expand</h2>
+    <p class="section-sub" data-en="Geographic or category expansion is only justified when the existing launch zone is demonstrably healthy. Expansion is not a goal — it's a consequence of working loops." data-zh="只有当现有启动区域明显健康时，地理或类别扩张才是合理的。扩张不是目标——它是运转良好的循环的结果。">Geographic or category expansion is only justified when the existing launch zone is demonstrably healthy. Expansion is not a goal — it's a consequence of working loops.</p>
+    <div class="expand-list">
+      <div class="expand-item">
+        <div class="expand-dot"></div>
+        <div class="expand-text" data-en="Merchant repeat exists — at least one repeat cohort from the first batch is running new campaigns without active solicitation." data-zh="商户重复存在——第一批中至少有一个重复群体在没有主动拉客的情况下运行新活动。">Merchant repeat exists — at least one repeat cohort from the first batch is running new campaigns without active solicitation.</div>
+      </div>
+      <div class="expand-item">
+        <div class="expand-dot"></div>
+        <div class="expand-text" data-en="Creator quality remains strong — completion rates have not declined as the cohort size grew. New creators onboarded meet baseline quality standards." data-zh="创作者质量保持强劲——随着队列规模增长，完成率没有下降。新入驻的创作者符合基准质量标准。">Creator quality remains strong — completion rates have not declined as the cohort size grew. New creators onboarded meet baseline quality standards.</div>
+      </div>
+      <div class="expand-item">
+        <div class="expand-dot"></div>
+        <div class="expand-text" data-en="Standby remains meaningful — slots are being filled by standby creators, not just sitting open. Standby response rate within acceptable range." data-zh="备选仍然有意义——名额正在被备选创作者填充，而不仅仅是保持开放。备选响应率在可接受范围内。">Standby remains meaningful — slots are being filled by standby creators, not just sitting open. Standby response rate within acceptable range.</div>
+      </div>
+      <div class="expand-item">
+        <div class="expand-dot"></div>
+        <div class="expand-text" data-en="Operations stay controlled — the current zone is manageable without fires. Disputes are below acceptable threshold. Integrity flags are rare." data-zh="运营保持可控——当前区域在没有问题的情况下可管理。争议低于可接受阈值。诚信标记很少见。">Operations stay controlled — the current zone is manageable without fires. Disputes are below acceptable threshold. Integrity flags are rare.</div>
+      </div>
+      <div class="expand-item">
+        <div class="expand-dot"></div>
+        <div class="expand-text" data-en="Campaign outcome quality is stable — merchant-reported satisfaction scores have not declined. Post-campaign recommendation uptake is positive." data-zh="活动结果质量稳定——商户报告的满意度分数没有下降。活动后建议的采纳率为正。">Campaign outcome quality is stable — merchant-reported satisfaction scores have not declined. Post-campaign recommendation uptake is positive.</div>
+      </div>
+    </div>
+    <div class="callout-warning">
+      <div class="callout-warning-label" data-en="CAUTION" data-zh="注意">CAUTION</div>
+      <div class="callout-warning-text" data-en="&ldquo;Expansion without these signals is likely fake progress.&rdquo;" data-zh="&ldquo;没有这些信号的扩张很可能是虚假的进展。&rdquo;">&ldquo;Expansion without these signals is likely fake progress.&rdquo;</div>
+    </div>
+  </div>
+</section>
+
+<!-- S9: FINAL STANDARD -->
+<section class="section section-dark">
+  <div class="section-inner fade-in">
+    <div class="section-label" style="color:var(--accent-light);" data-en="FINAL STANDARD" data-zh="最终标准">FINAL STANDARD</div>
+    <blockquote class="principle-white">
+      <p data-en="Each launch cohort teaches the platform something real. Growth emerges from repeated value, not novelty. Density changes behavior for both creators and merchants." data-zh="每个启动群体都教会平台一些真实的东西。增长来自重复的价值，而不是新颖性。密度改变创作者和商户的行为。">Each launch cohort teaches the platform something real. Growth emerges from repeated value, not novelty. Density changes behavior for both creators and merchants.</p>
+      <p style="margin-top:20px;font-size:16px;font-weight:700;font-style:normal;color:var(--accent-light);" data-en="The first neighborhood becomes a blueprint for the next one. Replicate only what worked — not the entire setup." data-zh="第一个社区成为下一个社区的蓝图。只复制有效的部分——而不是整个设置。">The first neighborhood becomes a blueprint for the next one. Replicate only what worked — not the entire setup.</p>
+    </blockquote>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:var(--primary);padding:56px 40px 40px;border-top:1px solid rgba(255,255,255,0.06);">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:40px;flex-wrap:wrap;margin-bottom:40px;">
+      <div>
+        <div style="font-size:24px;font-weight:900;color:var(--accent);letter-spacing:-0.5px;margin-bottom:8px;">PUSH</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.35);max-width:280px;line-height:1.6;" data-en="Creator-to-merchant performance platform. Local density drives platform value." data-zh="创作者与商户绩效平台。本地密度驱动平台价值。">Creator-to-merchant performance platform. Local density drives platform value.</div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px 16px;max-width:620px;">
+        <a href="index.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Overview" data-zh="总览">Overview</a>
+        <a href="project-intro.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
+        <a href="pitch-deck.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Pitch Deck" data-zh="路演文件">Pitch Deck</a>
+        <a href="prospects.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Prospects" data-zh="市场前景">Prospects</a>
+        <a href="challenges.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Challenges" data-zh="挑战">Challenges</a>
+        <a href="risk-defense.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Risk &amp; Defense" data-zh="风险防御">Risk &amp; Defense</a>
+        <a href="retention-defense.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Retention" data-zh="留存">Retention</a>
+        <a href="platform-value.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
+        <a href="push-strategy-core.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
+        <a href="fraud-integrity.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Fraud &amp; Integrity" data-zh="诚信运营">Fraud &amp; Integrity</a>
+        <a href="gtm-launch.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="GTM &amp; Launch" data-zh="GTM与启动">GTM &amp; Launch</a>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,0.06);padding-top:20px;font-size:11px;color:rgba(255,255,255,0.2);" data-en="PUSH Platform — Internal Strategy Documentation" data-zh="PUSH 平台 — 内部战略文档">PUSH Platform — Internal Strategy Documentation</div>
+  </div>
+</footer>
+
+<script>
+(function() {
+  let lang = localStorage.getItem('push-lang') || 'en';
+  function applyLang(l) {
+    lang = l;
+    localStorage.setItem('push-lang', l);
+    document.querySelectorAll('[data-en]').forEach(el => {
+      const val = el.getAttribute('data-' + l);
+      if (val !== null) el.innerHTML = val;
+    });
+    const btn = document.getElementById('lang-btn');
+    if (btn) btn.textContent = l === 'en' ? '中 / EN' : 'EN / 中';
+  }
+  document.getElementById('lang-btn').addEventListener('click', () => {
+    document.body.style.opacity = '0.8';
+    document.body.style.transition = 'opacity 0.15s';
+    setTimeout(() => { applyLang(lang === 'en' ? 'zh' : 'en'); document.body.style.opacity = '1'; }, 150);
+  });
+  applyLang(lang);
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.05 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+})();
+</script>
+</body>
+</html>
