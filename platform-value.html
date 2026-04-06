@@ -13,6 +13,7 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
 <link rel="prefetch" href="push-strategy-core.html">
+<script>/* lang-flash-fix */(function(){if(localStorage.getItem("push-lang")==="zh")document.documentElement.style.opacity="0";})()</script>
 <style>
 :root {
   --accent: #4f46e5;
@@ -481,6 +482,31 @@ section + section{border-top:1px solid var(--border);}
 @media(max-width:768px){
   .nav-links,.navlinks{display:none !important;}
   .nav-burger{display:flex !important;}
+}
+
+/* ── TEXT LAYOUT OPTIMIZATION ── */
+/* Chinese line-height */
+html[lang*="zh"] body{line-height:2.0;letter-spacing:0.01em;}
+/* Paragraph max-width */
+.section-sub,.hero-sub,.callout-box-quote,.mech-body,.bypass-body,.insight-text,.lose-bottom-quote{max-width:680px;}
+/* Card text padding */
+.bypass-card,.value-card,.lose-card{padding:20px 24px;}
+.value-card{padding:36px;}
+.lose-card{padding:36px;}
+.mech-strip{padding:20px 24px;}
+/* Heading gap */
+.section-title{margin-bottom:16px;}
+.hero h1{margin-bottom:16px;}
+/* List readability */
+li{margin-bottom:6px;line-height:1.7;}
+/* Strong styling */
+strong{font-weight:600;color:var(--text);}
+/* Section subtitle */
+.section-sub,.hero-sub{max-width:640px;}
+/* Mobile text */
+@media(max-width:640px){
+  body{font-size:15px;}
+  .section-title,.hero h1{font-size:28px;}
 }
 </style>
 </head>
@@ -968,6 +994,7 @@ BTN.addEventListener('click', () => {
   setTimeout(() => {
     lang = lang === 'en' ? 'zh' : 'en';
     localStorage.setItem('push-lang', lang);
+    /* lang-reveal */document.documentElement.style.opacity='1';
     applyLang();
     document.body.classList.remove('lang-fade');
   }, 150);

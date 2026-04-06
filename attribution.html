@@ -12,6 +12,7 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="prefetch" href="project-intro.html">
+<script>/* lang-flash-fix */(function(){if(localStorage.getItem("push-lang")==="zh")document.documentElement.style.opacity="0";})()</script>
 <style>
 :root {
   --accent: #4f46e5;
@@ -462,6 +463,21 @@ code.data-ex{
 /* ── ATTR QUESTION HOVER ────────────────────── */
 .attr-q{transition:background 0.2s;}
 .attr-q:hover{background:var(--bg2);}
+
+/* ── TEXT LAYOUT OPTIMIZATIONS ────────────────── */
+html[lang="zh"] body { line-height: 2.0; letter-spacing: 0.01em; }
+.section-sub, .item-desc, .campaign-list, .report-list, .checklist, .failure-desc { max-width: 680px; }
+.campaign-cell, .report-col, .attr-q-text { padding: 20px 24px; }
+.campaign-cell { padding: 24px 28px; }
+.report-col { padding: 28px; }
+.section-title { margin-bottom: 16px; }
+li { margin-bottom: 6px; line-height: 1.7; }
+strong { font-weight: 600; color: var(--text); }
+.section-sub { max-width: 640px; }
+@media (max-width: 768px) {
+  body { font-size: 15px; }
+  .hero-title, .section-title { font-size: 28px; }
+}
 </style>
 </head>
 <body>
@@ -893,6 +909,8 @@ code.data-ex{
   function applyLang(l) {
     lang = l;
     localStorage.setItem('push-lang', l);
+    /* lang-reveal */document.documentElement.style.opacity='1';
+    document.documentElement.setAttribute('lang', lang === 'zh' || l === 'zh' ? 'zh' : 'en');
     document.querySelectorAll('[data-en]').forEach(el => {
       const val = el.getAttribute('data-' + l);
       if (val !== null) el.innerHTML = val;

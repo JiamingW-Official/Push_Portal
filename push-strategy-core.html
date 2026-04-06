@@ -14,6 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" /></noscript>
+<script>/* lang-flash-fix */(function(){if(localStorage.getItem("push-lang")==="zh")document.documentElement.style.opacity="0";})()</script>
   <style>
     :root {
       --accent: #4f46e5;
@@ -763,6 +764,22 @@
       .nav-links,.navlinks{display:none !important;}
       .nav-burger{display:flex !important;}
     }
+
+    /* ── TEXT LAYOUT OPTIMIZATIONS ────────────────── */
+    html[lang="zh"] body { line-height: 2.0; letter-spacing: 0.01em; }
+    .section-sub, .section-sub-light, .bp-q-answer, .danger-body, .pillar-body, .moat-body { max-width: 680px; }
+    .fatal-card, .danger-card, .pillar-card, .bp-q, .moat-inner, .flywheel-loop, .platform-loop-strip { padding: 20px 24px; }
+    .fatal-card { padding: 36px 32px; }
+    .bp-q { padding: 32px 36px; }
+    .pillar-card { padding: 36px 30px 32px; }
+    .section-title, .section-title-light { margin-bottom: 16px; }
+    li { margin-bottom: 6px; line-height: 1.7; }
+    strong { font-weight: 600; color: var(--text); }
+    .section-sub, .section-sub-light { max-width: 640px; }
+    @media (max-width: 768px) {
+      body { font-size: 15px; }
+      .hero-title, .section-title, .section-title-light { font-size: 28px; }
+    }
   </style>
 </head>
 <body>
@@ -1225,6 +1242,7 @@
 
   document.getElementById('lang-toggle').addEventListener('click', toggleLang);
   applyLang(getLang());
+  /* lang-reveal */document.documentElement.style.opacity='1';
 
   /* SCROLL FADE-IN */
   const observer = new IntersectionObserver((entries) => {

@@ -13,6 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" as="style">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script>/* lang-flash-fix */(function(){if(localStorage.getItem("push-lang")==="zh")document.documentElement.style.opacity="0";})()</script>
 <style>
 :root {
   --accent: #4f46e5;
@@ -515,6 +516,23 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
   .nav-burger{display:flex !important;}
   #lang-btn{font-size:12px;padding:6px 12px;}
 }
+
+/* TEXT LAYOUT OPTIMIZATIONS */
+body.lang-zh{line-height:2.0;letter-spacing:0.01em;}
+html[lang="zh"] body{line-height:2.0;letter-spacing:0.01em;}
+p{max-width:680px;}
+.s1-desc,.s2-quote,.s3-pullquote,.moat-body,.rev-layer-body,.feature-body,.risk-text,.s7-insight,.timing-body{max-width:680px;}
+.story-col,.feature-card,.moat-card,.phase-card,.timing-card,.risk-head,.risk-body{padding:20px 24px;}
+h2,.s2-title,.s3-title,.s4-title,.s5-title,.s6-title,.s7-title,.s8-title,.s9-title{margin-bottom:16px;}
+li{margin-bottom:6px;line-height:1.7;}
+strong{font-weight:600;color:var(--text);}
+.dark strong{color:rgba(255,255,255,.9);}
+.slide-label,.section-label{max-width:640px;}
+@media(max-width:900px){
+  body{font-size:15px;}
+  .s1-title{font-size:28px;}
+  .s2-title,.s3-title,.s4-title,.s5-title,.s6-title,.s7-title,.s8-title,.s9-title{font-size:28px;}
+}
 </style>
 </head>
 <body>
@@ -1005,6 +1023,8 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
   function applyLang(l) {
     lang = l;
     localStorage.setItem('push-lang', l);
+    /* lang-reveal */document.documentElement.style.opacity='1';
+    document.documentElement.setAttribute('lang', lang === 'zh' || l === 'zh' ? 'zh' : 'en');
     document.querySelectorAll('[data-en]').forEach(function(el) {
       const val = el.getAttribute('data-' + l);
       if (val !== null) el.innerHTML = val;

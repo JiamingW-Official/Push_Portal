@@ -13,6 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" as="style">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script>/* lang-flash-fix */(function(){if(localStorage.getItem("push-lang")==="zh")document.documentElement.style.opacity="0";})()</script>
 <style>
 :root {
   --accent: #4f46e5;
@@ -338,6 +339,23 @@ footer{
 @media(max-width:768px){
   .nav-links,.navlinks{display:none !important;}
   .nav-burger{display:flex !important;}
+}
+
+/* TEXT LAYOUT OPTIMIZATIONS */
+body.lang-zh{line-height:2.0;letter-spacing:0.01em;}
+html[lang="zh"] body{line-height:2.0;letter-spacing:0.01em;}
+p,.rc-desc,.hero-subtitle,.section-sub,.rc-defense-title,.sys-text,.layer-desc,.closing-final{max-width:680px;}
+.rc-top,.rc-bottom{padding:20px 24px;}
+.sys-card{padding:24px 24px;}
+.layer-card{padding:20px 24px;}
+h2,.section-title,.hero-title{margin-bottom:16px;}
+li{margin-bottom:6px;line-height:1.7;}
+strong{font-weight:600;color:var(--text);}
+.system-section strong{color:rgba(255,255,255,.95);}
+.section-sub,.hero-subtitle{max-width:640px;}
+@media(max-width:640px){
+  body{font-size:15px;}
+  .section-title,.hero-title{font-size:28px;}
 }
 </style>
 </head>
@@ -1113,6 +1131,8 @@ function applyLang(lang) {
     if (mobileBtn) mobileBtn.textContent = lang === 'zh' ? 'EN / 中' : '中 / EN';
     currentLang = lang;
     localStorage.setItem('push-lang', lang);
+    /* lang-reveal */document.documentElement.style.opacity='1';
+    document.documentElement.setAttribute('lang', lang === 'zh' || l === 'zh' ? 'zh' : 'en');
     document.body.style.opacity = '1';
   }, 75);
 }
