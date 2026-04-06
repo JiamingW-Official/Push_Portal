@@ -34,19 +34,19 @@
   --border:#e5e7eb;
   --bg:#ffffff;
   --bg2:#f8f9fa;
-  --radius:12px;
+  --radius:8px;
   --shadow:0 4px 24px rgba(0,0,0,0.07);
-  --max-w:1100px;
+  --max-w:1000px;
 }
 html{scroll-behavior:smooth}
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.85;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;word-break:break-word;font-feature-settings:'cv02','cv03','cv04','cv11';}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.75;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;word-break:break-word;}
 h1,h2,h3,h4,h5,h6{letter-spacing:-0.02em;}
 
-/* NAV */
+/* — Nav — */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:200;
   height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;
-  background:#fffffffa;
+  background:#ffffff;
   border-bottom:1px solid var(--border);transition:box-shadow 0.2s;
 }
 nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
@@ -69,33 +69,17 @@ nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
 }
 #lang-btn:hover{background:var(--accent-dark)}
 
-/* SCROLL INDICATOR */
-.scroll-indicator{
-  position:absolute;bottom:44px;left:64px;
-  display:flex;flex-direction:column;align-items:flex-start;gap:10px;
-}
-.scroll-indicator span{
-  font-size:11px;font-weight:600;color:rgba(255,255,255,0.35);
-  letter-spacing:2px;text-transform:uppercase;
-}
-.scroll-line{
-  width:1px;height:44px;
-  background:linear-gradient(to bottom,rgba(255,255,255,0.45),rgba(255,255,255,0));
-  animation:scrollPulse 2.2s ease-in-out infinite;
-}
-@keyframes scrollPulse{0%,100%{opacity:0.35}50%{opacity:0.9}}
-
-/* HERO */
+/* — Hero — */
 .hero{
   background:var(--primary);
   padding:160px 64px 100px;
-  position:relative;min-height:560px;
+  position:relative;
 }
 .hero-inner{max-width:var(--max-w);margin:0 auto;}
 .hero-badge{
   display:inline-block;
-  font-size:11px;font-weight:700;letter-spacing:2.5px;
-  text-transform:uppercase;color:var(--accent-light);
+  font-size:13px;font-weight:600;letter-spacing:0.5px;
+  text-transform:none;color:var(--accent-light);
   margin-bottom:28px;
 }
 .hero-title{
@@ -111,12 +95,14 @@ nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
   margin-top:28px;
 }
 
-/* SECTION SHELL */
-section{padding:120px 64px;contain:layout style paint;}
+/* — Section Shell — */
+section{padding:120px 64px;contain:layout style paint;border-top:1px solid var(--border);}
+section:first-of-type{border-top:none;}
+section.bg-dark{border-top-color:rgba(255,255,255,0.08);}
 .section-inner{max-width:var(--max-w);margin:0 auto;}
-.section{padding:120px 64px;max-width:1100px;margin:0 auto;contain:layout style paint;}
+.section{padding:120px 64px;max-width:1000px;margin:0 auto;contain:layout style paint;}
 .section-label{
-  font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  font-size:13px;font-weight:600;letter-spacing:0.5px;text-transform:none;
   color:var(--accent);margin-bottom:18px;
   display:flex;align-items:center;gap:10px;
 }
@@ -125,19 +111,19 @@ section{padding:120px 64px;contain:layout style paint;}
   width:20px;height:2px;background:var(--accent);flex-shrink:0;
 }
 .section-title{
-  font-size:clamp(1.9rem,3.2vw,2.8rem);
+  font-size:36px;
   font-weight:900;letter-spacing:-1px;
-  color:var(--text);margin-bottom:18px;line-height:1.13;
+  color:var(--text);margin-bottom:8px;line-height:1.13;
 }
 .section-sub{
   font-size:16px;color:var(--text2);
-  max-width:680px;line-height:1.8;margin-bottom:56px;
+  max-width:680px;line-height:1.65;margin-bottom:56px;
 }
 .bg-white{background:var(--bg)}
-.bg-gray{background:var(--bg2)}
+.bg-gray{background:var(--bg)}
 .bg-dark{background:var(--primary)}
 
-/* SECTION 1 — PROBLEMS */
+/* — Problems — */
 .problems-grid{
   display:grid;grid-template-columns:1fr 1fr;
   gap:0 72px;margin-top:64px;
@@ -152,15 +138,13 @@ section{padding:120px 64px;contain:layout style paint;}
 .problems-grid > div{counter-reset:problem-counter;}
 .problem-item{
   margin-bottom:20px;padding:24px 28px;
-  border-radius:var(--radius);border:1px solid var(--border);
+  border-radius:8px;border:1px solid var(--border);
   background:var(--bg);position:relative;
   counter-increment:problem-counter;
-  transition:box-shadow 0.2s,border-color 0.2s,transform 0.2s;
+  transition:box-shadow 0.2s,border-color 0.2s;
 }
 .problem-item:hover{
-  box-shadow:0 8px 24px rgba(0,0,0,0.07);
-  border-color:rgba(79,70,229,0.2);
-  transform:translateX(4px);
+  box-shadow:0 2px 12px rgba(0,0,0,0.08);
 }
 .problem-item::before{
   content:'0' counter(problem-counter);
@@ -185,13 +169,14 @@ section{padding:120px 64px;contain:layout style paint;}
   display:inline-block;line-height:1.8;
 }
 
-/* SECTION 2 — INSIGHT */
+/* — Insight — */
 .insight-quote{
   font-size:22px;color:var(--text);
-  line-height:1.7;border-left:4px solid var(--accent);
+  line-height:1.7;
+  border:1px solid var(--border);
   padding:36px 44px;margin-bottom:64px;
   background:var(--bg);
-  border-radius:0 var(--radius) var(--radius) 0;
+  border-radius:8px;
   position:relative;
 }
 .insight-quote::before{
@@ -206,7 +191,7 @@ section{padding:120px 64px;contain:layout style paint;}
   gap:48px;
 }
 .compare-col{
-  padding:32px;border-radius:var(--radius);
+  padding:32px;border-radius:8px;
   border:1px solid var(--border);
 }
 .compare-col.others{background:var(--red-bg);border-color:rgba(220,38,38,0.15)}
@@ -230,9 +215,9 @@ section{padding:120px 64px;contain:layout style paint;}
 .compare-col.push .compare-item.pos:hover{color:var(--green);}
 .compare-icon{font-size:14px;flex-shrink:0;margin-top:2px}
 
-/* SECTION 3 — WORKFLOW */
+/* — Workflow — */
 .flow-strip{
-  border-radius:var(--radius);
+  border-radius:8px;
   padding:28px 36px;margin-bottom:16px;
 }
 .flow-strip.before{
@@ -244,7 +229,7 @@ section{padding:120px 64px;contain:layout style paint;}
   border:1px solid rgba(5,150,105,0.18);
 }
 .flow-strip-label{
-  font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  font-size:13px;font-weight:600;letter-spacing:0.5px;text-transform:none;
   margin-bottom:14px;display:flex;align-items:center;gap:8px;
 }
 .flow-strip.before .flow-strip-label{color:var(--red);}
@@ -259,7 +244,7 @@ section{padding:120px 64px;contain:layout style paint;}
   font-size:13px;color:var(--text3);font-style:italic;
 }
 
-/* MILESTONE FLOW */
+/* — Milestone Flow — */
 .milestone-flow{
   display:flex;align-items:flex-start;
   gap:0;margin:48px 0;overflow-x:auto;
@@ -296,7 +281,7 @@ section{padding:120px 64px;contain:layout style paint;}
   margin-top:14px;padding:0 4px;flex-shrink:0;
 }
 
-/* WORKFLOWS */
+/* — Workflows — */
 .workflow-grid{
   display:grid;grid-template-columns:1fr 1fr;
   gap:56px;margin-top:56px;
@@ -326,7 +311,7 @@ section{padding:120px 64px;contain:layout style paint;}
   font-size:13px;color:var(--text2);line-height:1.7;
 }
 
-/* SLA TABLE */
+/* — SLA Table — */
 .sla-section-label{
   margin-top:72px;
 }
@@ -350,14 +335,14 @@ section{padding:120px 64px;contain:layout style paint;}
 }
 .sla-miss{font-size:12px;color:var(--text3)}
 
-/* SECTION 4 — CREDIT */
+/* — Credit — */
 .score-formula{
   font-family:'Courier New',Courier,monospace;
   font-size:clamp(12px,1.8vw,16px);
   font-weight:700;color:var(--accent);
   background:var(--accent-bg);
   border:1px solid rgba(79,70,229,0.15);
-  padding:28px 36px;border-radius:var(--radius);
+  padding:28px 36px;border-radius:8px;
   margin-bottom:48px;line-height:1.7;
   word-break:break-word;
 }
@@ -410,20 +395,19 @@ section{padding:120px 64px;contain:layout style paint;}
   background:var(--accent);color:#fff;
 }
 
-/* TIER CARDS */
+/* — Tier Cards — */
 .tier-cards{
   display:grid;grid-template-columns:repeat(4,1fr);
   gap:16px;margin-bottom:36px;
 }
 .tier-card{
-  padding:28px;border-radius:var(--radius);
+  padding:28px;border-radius:8px;
   border:1px solid var(--border);
   background:var(--bg);
-  transition:transform 0.2s,box-shadow 0.2s,border-color 0.2s;
+  transition:box-shadow 0.2s,border-color 0.2s;
 }
 .tier-card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 16px 40px rgba(0,0,0,0.08);
+  box-shadow:0 2px 12px rgba(0,0,0,0.08);
 }
 .tier-card-name{
   font-size:15px;font-weight:700;margin-bottom:6px;
@@ -451,14 +435,14 @@ section{padding:120px 64px;contain:layout style paint;}
   background:rgba(79,70,229,0.04);
 }
 .tier-elite:hover{
-  box-shadow:0 16px 40px rgba(79,70,229,0.15);
+  box-shadow:0 2px 12px rgba(0,0,0,0.08);
 }
 
 .decay-note{
   font-size:14px;color:var(--text2);
   background:var(--orange-bg);
   border:1px solid rgba(217,119,6,0.15);
-  border-radius:var(--radius);
+  border-radius:8px;
   padding:20px 28px;line-height:2;
   margin-bottom:20px;
 }
@@ -466,30 +450,25 @@ section{padding:120px 64px;contain:layout style paint;}
   font-size:14px;color:var(--text2);
   background:var(--accent-bg);
   border:1px solid rgba(79,70,229,0.12);
-  border-radius:var(--radius);
+  border-radius:8px;
   padding:20px 28px;line-height:2;
 }
 
-/* SECTION 5 — PILLARS */
+/* — Pillars — */
 .pillars-list{margin-top:56px}
 .pillar-row{
   display:flex;gap:48px;align-items:flex-start;
   padding:40px 0;border-bottom:1px solid var(--border);
   transition:background 0.15s;position:relative;
 }
-.pillar-row::before{
-  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
-  background:var(--accent);opacity:0;transition:opacity 0.15s;
-}
-.pillar-row:hover::before{opacity:1;}
 .pillar-row:hover{background:rgba(79,70,229,0.02);}
 .pillar-row:last-child{border-bottom:none}
 .pillar-num{
-  font-size:72px;font-weight:900;
-  color:rgba(79,70,229,0.07);
-  letter-spacing:-3px;flex-shrink:0;line-height:1;
-  width:100px;text-align:right;
-  transition:color 0.15s;
+  font-size:16px;font-weight:700;
+  color:var(--text3);
+  letter-spacing:0;flex-shrink:0;line-height:1;
+  width:40px;text-align:right;
+  margin-top:4px;
 }
 .pillar-content{flex:1}
 .pillar-name{
@@ -499,21 +478,21 @@ section{padding:120px 64px;contain:layout style paint;}
 }
 .pillar-row:hover .pillar-name{color:var(--accent);}
 .pillar-sub{
-  font-size:11px;font-weight:600;color:var(--accent);
-  letter-spacing:2px;margin-bottom:16px;
-  text-transform:uppercase;
+  font-size:13px;font-weight:600;color:var(--accent);
+  letter-spacing:0.5px;margin-bottom:16px;
+  text-transform:none;
 }
 .pillar-body{
   font-size:15px;color:var(--text2);line-height:1.8;
 }
 
-/* SECTION 6 — IS / ISN'T */
+/* — Is / Isn't — */
 .is-grid{
   display:grid;grid-template-columns:1fr 1fr;
   gap:32px;margin-bottom:48px;
 }
 .is-col{
-  padding:32px;border-radius:var(--radius);
+  padding:32px;border-radius:8px;
   border:1px solid var(--border);
 }
 .is-col.yes{background:var(--green-bg);border-color:rgba(5,150,105,0.2)}
@@ -540,19 +519,19 @@ section{padding:120px 64px;contain:layout style paint;}
 .strategic-test{
   background:var(--accent-bg);
   border:1px solid rgba(79,70,229,0.15);
-  border-radius:var(--radius);
+  border-radius:8px;
   padding:32px 40px;
 }
 .strategic-test-label{
-  font-size:11px;font-weight:700;letter-spacing:2px;
-  text-transform:uppercase;color:var(--accent);
+  font-size:13px;font-weight:600;letter-spacing:0.5px;
+  text-transform:none;color:var(--accent);
   margin-bottom:14px;
 }
 .strategic-test-body{
   font-size:15px;color:var(--text);line-height:2;
 }
 
-/* SECTION 7 — THESIS */
+/* — Thesis — */
 .thesis-close{
   font-size:22px;font-style:italic;
   color:var(--accent-light);
@@ -577,7 +556,7 @@ section{padding:120px 64px;contain:layout style paint;}
 }
 .thesis-btn{
   display:inline-flex;align-items:center;gap:8px;
-  padding:14px 26px;border-radius:var(--radius);
+  padding:14px 26px;border-radius:8px;
   font-size:14px;font-weight:600;text-decoration:none;
   transition:background 0.2s,border-color 0.2s,color 0.2s,box-shadow 0.2s;border:1.5px solid;
 }
@@ -592,12 +571,12 @@ section{padding:120px 64px;contain:layout style paint;}
 }
 .thesis-btn.secondary:hover{border-color:var(--accent-light);color:#fff}
 .thesis-title{
-  font-size:clamp(1.9rem,3.2vw,2.8rem);
+  font-size:36px;
   font-weight:900;letter-spacing:-1px;
-  color:#fff;margin-bottom:20px;line-height:1.13;
+  color:#fff;margin-bottom:8px;line-height:1.13;
 }
 
-/* FOOTER */
+/* — Footer — */
 footer{
   background:#0a0a14;
   padding:72px 64px;color:rgba(255,255,255,0.5);
@@ -632,13 +611,13 @@ footer{
   text-align:center;padding-top:32px;
 }
 
-/* FADE IN */
+/* — Fade In — */
 .fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.55s cubic-bezier(0.25,0.46,0.45,0.94),transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94);will-change:opacity,transform;animation:fadeInFallback 0s 4s forwards;}
 .fade-in.visible{opacity:1;transform:none;animation:none;}
 .visible .fade-in{opacity:1;transform:none;}
 @keyframes fadeInFallback{to{opacity:1;transform:translateY(0);}}
 
-/* BACK TO TOP */
+/* — Back to Top — */
 #back-top{
   position:fixed;bottom:32px;right:32px;z-index:500;
   width:44px;height:44px;border-radius:50%;
@@ -651,11 +630,11 @@ footer{
 #back-top.visible{opacity:1;pointer-events:auto;}
 #back-top:hover{background:var(--accent);transform:translateY(-2px);}
 
-/* SLA ENHANCEMENTS */
+/* — SLA Enhancements — */
 .sla-time{font-weight:700;color:var(--accent);white-space:nowrap;}
 .sla-table tr:hover td{background:var(--bg2);}
 
-/* RESPONSIVE */
+/* — Responsive — */
 @media(max-width:960px){
   nav{padding:0 20px}
   .nav-links{gap:4px}
@@ -667,18 +646,17 @@ footer{
   .pillar-num{text-align:left;width:auto;font-size:48px}
   footer{padding:48px 24px}
   .footer-top{flex-direction:column;gap:32px}
-  .scroll-indicator{left:24px}
   .insight-quote{font-size:18px;padding:24px 28px}
   .score-bar-why{display:none}
   .strategic-test{padding:24px 28px}
 }
-/* ── MOBILE HAMBURGER ── */
+/* — Mobile Hamburger — */
 .nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;flex-shrink:0;margin-left:4px;}
 .nav-burger span{display:block;width:22px;height:2px;background:var(--text,#111827);border-radius:2px;transition:transform 0.2s,opacity 0.2s;}
 .nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
 .nav-burger.open span:nth-child(2){opacity:0;}
 .nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-.nav-mobile-panel{display:none;position:fixed;top:60px;left:0;right:0;background:#fffffffa;border-bottom:1px solid var(--border,#e5e7eb);padding:12px 16px 20px;flex-direction:column;gap:2px;z-index:999;box-shadow:0 8px 32px rgba(0,0,0,0.12);}
+.nav-mobile-panel{display:none;position:fixed;top:60px;left:0;right:0;background:#ffffff;border-bottom:1px solid var(--border,#e5e7eb);padding:12px 16px 20px;flex-direction:column;gap:2px;z-index:999;box-shadow:0 8px 32px rgba(0,0,0,0.12);}
 .nav-mobile-panel.open{display:flex;}
 .nav-mobile-panel a{padding:12px 16px;border-radius:8px;font-size:15px;font-weight:500;color:var(--text,#111827);text-decoration:none;transition:background 0.15s,color 0.15s;}
 .nav-mobile-panel a:hover{background:var(--bg2,#f8f9fa);}
@@ -735,10 +713,6 @@ footer{
     <div class="hero-badge" data-en="PROJECT INTRODUCTION" data-zh="项目介绍">PROJECT INTRODUCTION</div>
     <h1 class="hero-title" data-en="Push is infrastructure, not a marketplace." data-zh="Push 给合作立规矩——不只是撮合。">Push is infrastructure, not a marketplace.</h1>
     <p class="hero-sub" data-en="Most platforms help merchants and creators find each other. Push makes the collaboration quantifiable, accountable, and worth doing again. That's a different business entirely." data-zh="大多数平台帮你找到合作对象。Push 让合作可以量化、可以追责、值得一做再做。这是两件完全不同的事。">Most platforms help merchants and creators find each other. Push makes the collaboration quantifiable, accountable, and worth doing again. That's a different business entirely.</p>
-    <div class="scroll-indicator">
-      <span data-en="SCROLL" data-zh="继续阅读">SCROLL</span>
-      <div class="scroll-line"></div>
-    </div>
   </div>
 </div>
 
@@ -1108,7 +1082,7 @@ footer{
   </div>
 </section>
 
-<div style="max-width:700px; margin:40px auto; padding:24px 28px; border-left:3px solid var(--accent, #4f46e5); background:var(--bg2, #f8f9fa); border-radius:0 8px 8px 0; font-size:15px; line-height:1.8; color:var(--text2);">
+<div style="max-width:700px; margin:40px auto; padding:24px 28px; border:1px solid var(--border, #e5e7eb); background:var(--bg, #ffffff); border-radius:8px; font-size:15px; line-height:1.8; color:var(--text2);">
   <strong style="color:var(--text, #111827); display:block; margin-bottom:8px;" data-en="💡 A typical Push collaboration looks like this:" data-zh="💡 一次典型的 Push 合作是这样的：" class="bilingual-text">💡 A typical Push collaboration looks like this:</strong>
   <span data-en="A boba shop in Silver Lake posts a campaign: 'Need 3 creators to feature our new summer menu, $40 product + $60 cash each.' Push matches 3 creators based on their neighborhood activity, category fit, and fulfillment history. Creators visit, post, submit proof. The shop sees which posts drove foot traffic. Next month, they re-book the top performer with one click." data-zh="Silver Lake 的一家奶茶店发布活动：'需要 3 位创作者推广新夏季菜单，每人 $40 产品 + $60 现金。' Push 根据社区活跃度、品类匹配和履约历史匹配了 3 位创作者。创作者到店体验、发帖、提交凭证。店家看到哪些帖子带来了客流。下个月，一键复购表现最好的那位。" class="bilingual-text">A boba shop in Silver Lake posts a campaign: "Need 3 creators to feature our new summer menu, $40 product + $60 cash each." Push matches 3 creators based on their neighborhood activity, category fit, and fulfillment history. Creators visit, post, submit proof. The shop sees which posts drove foot traffic. Next month, they re-book the top performer with one click.</span>
 </div>
@@ -1336,7 +1310,7 @@ footer{
   </div>
 </section>
 
-<div style="max-width:800px; margin:40px auto; padding:24px; background:var(--bg2, #f8f9fa); border:1px solid var(--border, #e5e7eb); border-radius:12px;">
+<div style="max-width:800px; margin:40px auto; padding:24px; background:var(--bg2, #f8f9fa); border:1px solid var(--border, #e5e7eb); border-radius:8px;">
   <h3 style="font-size:16px; font-weight:700; margin-bottom:12px;" data-en="Continue Reading" data-zh="继续阅读" class="bilingual-text">Continue Reading</h3>
   <div style="display:flex; gap:16px; flex-wrap:wrap;">
     <a href="risk-defense.html" style="flex:1; min-width:200px; padding:16px; background:#fff; border:1px solid var(--border, #e5e7eb); border-radius:8px; text-decoration:none; transition:box-shadow 0.2s,border-color 0.2s;">

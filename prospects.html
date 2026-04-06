@@ -32,13 +32,12 @@
   --border: #e5e7eb;
   --bg: #ffffff;
   --bg2: #f8f9fa;
-  --radius: 14px;
-  --shadow: 0 4px 20px rgba(0,0,0,0.08);
-  --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
+  --radius: 8px;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.85;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;word-break:break-word;font-feature-settings:'cv02','cv03','cv04','cv11';}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.75;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;word-break:break-word;}
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
@@ -46,7 +45,7 @@ a:hover { text-decoration: underline; }
 nav{
   position:fixed;top:0;left:0;right:0;z-index:200;
   height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;
-  background:#fffffffa;
+  background:#ffffff;
   border-bottom:1px solid var(--border);transition:box-shadow 0.2s;
 }
 .nav-logo{font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;margin-right:8px;flex-shrink:0;text-decoration:none;}
@@ -64,76 +63,42 @@ nav{
 
 /* HERO */
 .hero {
-  padding: 120px 24px 60px;
-  text-align: center;
+  padding: 100px 24px 48px;
   position: relative;
-  overflow: hidden;
-  background: var(--bg2);
+  background: var(--bg);
   border-bottom: 1px solid var(--border);
+  max-width: 1000px;
+  margin: 0 auto;
 }
 .hero h1 {
-  font-size: 48px; font-weight: 900; margin-bottom: 12px;
-  color: var(--text);
+  font-size: 36px; font-weight: 800; margin-bottom: 8px;
+  color: var(--text); letter-spacing: -1px;
 }
-.hero p { color: var(--text2); font-size: 18px; max-width: 700px; margin: 0 auto; }
+.hero p { color: var(--text2); font-size: 16px; line-height: 1.65; max-width: 600px; }
 
 /* SECTION */
-.section { padding: 80px 24px; max-width: 1200px; margin: 0 auto; contain: layout style paint; }
-
-/* TIMELINE */
-.timeline {
-  position: relative;
-  padding: 40px 0;
-}
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 0; bottom: 0;
-  width: 2px;
-  background: var(--border);
-  transform: translateX(-50%);
-  border-radius: 2px;
-}
-.timeline-node {
-  position: absolute;
-  left: 50%;
-  width: 20px; height: 20px;
-  border-radius: 50%;
-  transform: translateX(-50%);
-  border: 3px solid var(--bg);
-  z-index: 2;
-}
+.section { padding: 64px 24px; max-width: 1000px; margin: 0 auto; background: var(--bg); border-top: 1px solid var(--border); }
 
 /* PHASE BLOCK */
 .phase {
   position: relative;
-  margin-bottom: 80px;
+  margin-bottom: 64px;
 }
+.phase:last-child { margin-bottom: 0; }
 .phase-header {
-  text-align: center;
-  margin-bottom: 32px;
-  position: relative;
-  z-index: 2;
-}
-.phase-icon {
-  width: 72px; height: 72px;
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 16px;
-  font-size: 32px;
+  margin-bottom: 28px;
 }
 .phase-label {
   display: inline-block;
-  padding: 4px 16px;
-  border-radius: 20px;
-  font-size: 11px; font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 8px;
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: none;
+  margin-bottom: 6px;
+  color: var(--text2);
 }
 .phase-title {
   font-size: 22px; font-weight: 800; letter-spacing: -0.02em;
+  color: var(--text);
 }
 
 /* BILINGUAL CARDS */
@@ -141,31 +106,25 @@ nav{
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
-  position: relative;
-  z-index: 2;
 }
 .lang-card {
   background: #fff;
-  border-radius: var(--radius);
-  padding: 32px;
+  border-radius: 8px;
+  padding: 28px;
   border: 1px solid var(--border);
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: box-shadow 0.2s;
 }
 .lang-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
 }
 .lang-label {
-  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.5px; text-transform: none;
   margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
   color: var(--text3);
 }
-.lang-label .dot {
-  width: 8px; height: 8px; border-radius: 50%; display: inline-block;
-}
 .item-list { list-style: none; }
 .item-list li {
-  padding: 12px 0;
+  padding: 10px 0;
   border-bottom: 1px solid var(--border);
   display: flex; align-items: flex-start; gap: 12px;
   font-size: 15px; color: var(--text2); line-height: 1.75;
@@ -175,6 +134,7 @@ nav{
   width: 28px; height: 28px; border-radius: 8px;
   display: flex; align-items: center; justify-content: center;
   font-size: 14px; flex-shrink: 0; margin-top: 2px;
+  background: var(--bg2);
 }
 .item-list li strong { color: var(--text); }
 
@@ -187,7 +147,7 @@ nav{
 }
 .metric-badge {
   background: #fff;
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 16px;
   text-align: center;
   border: 1px solid var(--border);
@@ -201,21 +161,17 @@ nav{
 
 /* END STATE */
 .end-state {
-  text-align: center;
-  padding: 80px 24px;
-  position: relative;
-  background: var(--bg2);
+  padding: 64px 24px;
+  background: var(--bg);
   border-top: 1px solid var(--border);
 }
 .end-state-inner {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
-  position: relative;
-  z-index: 2;
 }
 .end-state h2 {
-  font-size: 38px; font-weight: 900; margin-bottom: 24px;
-  color: var(--text);
+  font-size: 36px; font-weight: 800; margin-bottom: 8px;
+  color: var(--text); letter-spacing: -1px;
 }
 .end-state-grid {
   display: grid;
@@ -225,49 +181,33 @@ nav{
 }
 .end-card {
   background: #fff;
-  border-radius: var(--radius);
-  padding: 32px;
+  border-radius: 8px;
+  padding: 28px;
   border: 1px solid var(--border);
   text-align: left;
 }
 .end-card h3 {
-  font-size: 18px; font-weight: 700; margin-bottom: 12px; color: var(--accent);
+  font-size: 17px; font-weight: 700; margin-bottom: 10px; color: var(--text);
 }
 .end-card p {
   font-size: 15px; color: var(--text2); line-height: 1.75;
 }
 .analogy {
   margin-top: 40px;
-  padding: 32px;
-  background: var(--accent-bg);
-  border-radius: var(--radius);
+  padding: 24px 28px;
+  background: var(--bg2);
+  border-radius: 8px;
   border: 1px solid var(--border);
   display: inline-block;
   max-width: 600px;
 }
-.analogy .zh { font-size: 20px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
-.analogy .en { font-size: 16px; color: var(--text2); }
+.analogy .zh { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+.analogy .en { font-size: 16px; color: var(--text2); line-height: 1.65; }
 
-/* SHORT-TERM COLOR */
-.phase-short .phase-icon { background: var(--accent-bg); border: 2px solid var(--accent); }
-.phase-short .phase-label { background: var(--accent-bg); color: var(--accent); }
-.phase-short .phase-title { color: var(--accent); }
-.phase-short .item-icon { background: var(--accent-bg); color: var(--accent); }
-.phase-short .lang-label .dot { background: var(--accent); }
-
-/* MEDIUM-TERM COLOR */
-.phase-medium .phase-icon { background: var(--green-bg); border: 2px solid var(--green); }
-.phase-medium .phase-label { background: var(--green-bg); color: var(--green); }
-.phase-medium .phase-title { color: var(--green); }
-.phase-medium .item-icon { background: var(--green-bg); color: var(--green); }
-.phase-medium .lang-label .dot { background: var(--green); }
-
-/* LONG-TERM COLOR */
-.phase-long .phase-icon { background: var(--orange-bg); border: 2px solid var(--orange); }
-.phase-long .phase-label { background: var(--orange-bg); color: var(--orange); }
-.phase-long .phase-title { color: var(--orange); }
-.phase-long .item-icon { background: var(--orange-bg); color: var(--orange); }
-.phase-long .lang-label .dot { background: var(--orange); }
+/* Phase accent colors - subtle label only */
+.phase-short .phase-label { color: var(--accent); }
+.phase-medium .phase-label { color: var(--green); }
+.phase-long .phase-label { color: var(--orange); }
 
 /* FOOTER */
 .footer {
@@ -278,26 +218,10 @@ nav{
 /* RESPONSIVE */
 @media (max-width: 768px) {
   .bilingual-row, .end-state-grid { grid-template-columns: 1fr; }
-  .hero h1 { font-size: 32px; }
+  .hero h1 { font-size: 28px; }
   .phase-title { font-size: 18px; }
-  .timeline::before { left: 24px; }
   .metrics-row { grid-template-columns: 1fr 1fr; }
 }
-
-/* ANIMATIONS */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.phase { animation: fadeUp 0.5s ease-out both; }
-.phase:nth-child(2) { animation-delay: 0.15s; }
-.phase:nth-child(3) { animation-delay: 0.3s; }
-
-/* SCROLL ANIMATIONS */
-.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.55s ease,transform 0.55s ease;will-change:opacity,transform;}
-.visible .fade-in{opacity:1;transform:none;}
-.fade-in.visible{opacity:1;transform:none;}
-@keyframes fadeInFallback { to { opacity: 1; transform: translateY(0); } }
 
 /* LANG VISIBILITY */
 body.lang-en .lang-card:nth-child(odd) { display: none; }
@@ -308,13 +232,14 @@ body.lang-en .end-state-grid .end-card:nth-child(odd) { display: none; }
 body.lang-zh .end-state-grid .end-card:nth-child(even) { display: none; }
 body.lang-en .end-state-grid { grid-template-columns: 1fr; }
 body.lang-zh .end-state-grid { grid-template-columns: 1fr; }
-/* ── MOBILE HAMBURGER ── */
+
+/* MOBILE HAMBURGER */
 .nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;flex-shrink:0;margin-left:4px;}
 .nav-burger span{display:block;width:22px;height:2px;background:var(--text,#111827);border-radius:2px;transition:transform 0.2s,opacity 0.2s;}
 .nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
 .nav-burger.open span:nth-child(2){opacity:0;}
 .nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-.nav-mobile-panel{display:none;position:fixed;top:60px;left:0;right:0;background:#fffffffa;border-bottom:1px solid var(--border,#e5e7eb);padding:12px 16px 20px;flex-direction:column;gap:2px;z-index:999;box-shadow:0 8px 32px rgba(0,0,0,0.12);}
+.nav-mobile-panel{display:none;position:fixed;top:60px;left:0;right:0;background:#ffffff;border-bottom:1px solid var(--border,#e5e7eb);padding:12px 16px 20px;flex-direction:column;gap:2px;z-index:999;box-shadow:0 8px 32px rgba(0,0,0,0.12);}
 .nav-mobile-panel.open{display:flex;}
 .nav-mobile-panel a{padding:12px 16px;border-radius:8px;font-size:15px;font-weight:500;color:var(--text,#111827);text-decoration:none;transition:background 0.15s,color 0.15s;}
 .nav-mobile-panel a:hover{background:var(--bg2,#f8f9fa);}
@@ -373,11 +298,10 @@ body.lang-zh .analogy .en { display: none; }
   <p data-en="From one neighborhood to the infrastructure layer for local creator-driven demand across America." data-zh="从一个社区开始，做成全美本地商家靠创作者拉客的底层系统。">From one neighborhood to the infrastructure layer for local creator-driven demand across America.</p>
 </div>
 
-<!-- ====== SHORT-TERM ====== -->
+<!-- SHORT-TERM -->
 <div class="section">
 <div class="phase phase-short">
   <div class="phase-header">
-    <div class="phase-icon">&#x1F680;</div>
     <div class="phase-label" data-en="Phase 1" data-zh="第一阶段">Phase 1</div>
     <div class="phase-title" data-en="Short-term Vision (6 Months)" data-zh="短期愿景 (6个月)">Short-term Vision (6 Months)</div>
   </div>
@@ -385,7 +309,7 @@ body.lang-zh .analogy .en { display: none; }
   <div class="bilingual-row">
     <!-- Chinese -->
     <div class="lang-card">
-      <div class="lang-label"><span class="dot"></span> 中文</div>
+      <div class="lang-label">中文</div>
       <ul class="item-list">
         <li>
           <div class="item-icon">&#x1F3D8;</div>
@@ -412,7 +336,7 @@ body.lang-zh .analogy .en { display: none; }
 
     <!-- English -->
     <div class="lang-card">
-      <div class="lang-label"><span class="dot"></span> English</div>
+      <div class="lang-label">English</div>
       <ul class="item-list">
         <li>
           <div class="item-icon">&#x1F3D8;</div>
@@ -446,10 +370,9 @@ body.lang-zh .analogy .en { display: none; }
   </div>
 </div>
 
-<!-- ====== MEDIUM-TERM ====== -->
+<!-- MEDIUM-TERM -->
 <div class="phase phase-medium">
   <div class="phase-header">
-    <div class="phase-icon">&#x1F4C8;</div>
     <div class="phase-label" data-en="Phase 2" data-zh="第二阶段">Phase 2</div>
     <div class="phase-title" data-en="Medium-term Vision (1-2 Years)" data-zh="中期愿景 (1-2年)">Medium-term Vision (1-2 Years)</div>
   </div>
@@ -457,7 +380,7 @@ body.lang-zh .analogy .en { display: none; }
   <div class="bilingual-row">
     <!-- Chinese -->
     <div class="lang-card">
-      <div class="lang-label"><span class="dot"></span> 中文</div>
+      <div class="lang-label">中文</div>
       <ul class="item-list">
         <li>
           <div class="item-icon">&#x1F30D;</div>
@@ -484,7 +407,7 @@ body.lang-zh .analogy .en { display: none; }
 
     <!-- English -->
     <div class="lang-card">
-      <div class="lang-label"><span class="dot"></span> English</div>
+      <div class="lang-label">English</div>
       <ul class="item-list">
         <li>
           <div class="item-icon">&#x1F30D;</div>
@@ -518,10 +441,9 @@ body.lang-zh .analogy .en { display: none; }
   </div>
 </div>
 
-<!-- ====== LONG-TERM ====== -->
+<!-- LONG-TERM -->
 <div class="phase phase-long">
   <div class="phase-header">
-    <div class="phase-icon">&#x1F451;</div>
     <div class="phase-label" data-en="Phase 3" data-zh="第三阶段">Phase 3</div>
     <div class="phase-title" data-en="Long-term Vision (3-5 Years)" data-zh="长期愿景 (3-5年)">Long-term Vision (3-5 Years)</div>
   </div>
@@ -529,7 +451,7 @@ body.lang-zh .analogy .en { display: none; }
   <div class="bilingual-row">
     <!-- Chinese -->
     <div class="lang-card">
-      <div class="lang-label"><span class="dot"></span> 中文</div>
+      <div class="lang-label">中文</div>
       <ul class="item-list">
         <li>
           <div class="item-icon">&#x1F3D7;</div>
@@ -560,7 +482,7 @@ body.lang-zh .analogy .en { display: none; }
 
     <!-- English -->
     <div class="lang-card">
-      <div class="lang-label"><span class="dot"></span> English</div>
+      <div class="lang-label">English</div>
       <ul class="item-list">
         <li>
           <div class="item-icon">&#x1F3D7;</div>
@@ -592,32 +514,32 @@ body.lang-zh .analogy .en { display: none; }
 </div>
 </div>
 
-<!-- ====== THE END STATE ====== -->
+<!-- THE END STATE -->
 <div class="end-state">
   <div class="end-state-inner">
     <h2 data-en="The End State" data-zh="终极愿景">The End State</h2>
 
     <div class="end-state-grid">
       <div class="end-card">
-        <h3>&#x1F6AB; Not Just a Marketplace / 不只是一个市场</h3>
+        <h3>Not Just a Marketplace / 不只是一个市场</h3>
         <p>
           Push 的目标不是「做一个还不错的撮合平台」。我们要建的是一个全新的市场层——让本地商家靠创作者拉客变成标准动作，而这套流程过去根本不存在。
         </p>
       </div>
       <div class="end-card">
-        <h3>&#x1F6AB; Not Just a Marketplace</h3>
+        <h3>Not Just a Marketplace</h3>
         <p>
           The end state is NOT "a successful marketplace." It is a NEW MARKET LAYER for local creator-driven demand -- fundamental infrastructure that didn't exist before.
         </p>
       </div>
       <div class="end-card">
-        <h3>&#x26A1; A New Category / 全新品类</h3>
+        <h3>A New Category / 全新品类</h3>
         <p>
           就像 Stripe 把「在线收款」这件事标准化了一样，Push 要把「本地商家找创作者合作」这件事标准化。我们不是在优化一个现有流程，而是在创造一个之前没有的市场品类。
         </p>
       </div>
       <div class="end-card">
-        <h3>&#x26A1; A New Category</h3>
+        <h3>A New Category</h3>
         <p>
           Like Stripe for payments, Push for local creator acquisition. We are not optimizing an existing process -- we are creating an entirely new market category.
         </p>
@@ -631,18 +553,18 @@ body.lang-zh .analogy .en { display: none; }
   </div>
 </div>
 
-<!-- ── NEXT READING ── -->
-<div style="max-width:800px; margin:40px auto; padding:24px; background:var(--bg2, #f8f9fa); border:1px solid var(--border, #e5e7eb); border-radius:12px;">
+<!-- NEXT READING -->
+<div style="max-width:1000px; margin:0 auto; padding:40px 24px; border-top:1px solid var(--border);">
   <h3 style="font-size:16px; font-weight:700; margin-bottom:12px;" data-en="Continue Reading" data-zh="继续阅读" class="bilingual-text">Continue Reading</h3>
-  <a href="pitch-deck.html" style="display:block; padding:16px; background:#fff; border:1px solid var(--border, #e5e7eb); border-radius:8px; text-decoration:none; transition:transform 0.2s,box-shadow 0.2s; max-width:400px; margin-bottom:12px;">
-    <div style="font-size:13px; color:var(--text3, #9ca3af);" data-en="Next →" data-zh="下一步 →" class="bilingual-text">Next →</div>
+  <a href="pitch-deck.html" style="display:block; padding:16px; background:#fff; border:1px solid var(--border, #e5e7eb); border-radius:8px; text-decoration:none; max-width:400px; margin-bottom:12px; transition:box-shadow 0.2s;" onmouseover="this.style.boxShadow='0 2px 12px rgba(0,0,0,0.08)'" onmouseout="this.style.boxShadow='none'">
+    <div style="font-size:13px; color:var(--text3, #9ca3af);" data-en="Next" data-zh="下一步" class="bilingual-text">Next</div>
     <div style="font-size:15px; font-weight:600; color:var(--text, #111827);" data-en="Want to see how we'll execute the launch?" data-zh="想看看我们如何执行启动计划？" class="bilingual-text">Want to see how we'll execute the launch?</div>
-    <div style="font-size:13px; color:var(--accent, #4f46e5); margin-top:4px;" data-en="Pitch Deck →" data-zh="路演材料 →" class="bilingual-text">Pitch Deck →</div>
+    <div style="font-size:13px; color:var(--accent, #4f46e5); margin-top:4px;" data-en="Pitch Deck" data-zh="路演材料" class="bilingual-text">Pitch Deck</div>
   </a>
-  <a href="project-intro.html" style="display:block; padding:16px; background:#fff; border:1px solid var(--border, #e5e7eb); border-radius:8px; text-decoration:none; transition:transform 0.2s,box-shadow 0.2s; max-width:400px;">
-    <div style="font-size:13px; color:var(--text3, #9ca3af);" data-en="Also →" data-zh="另外 →" class="bilingual-text">Also →</div>
+  <a href="project-intro.html" style="display:block; padding:16px; background:#fff; border:1px solid var(--border, #e5e7eb); border-radius:8px; text-decoration:none; max-width:400px; transition:box-shadow 0.2s;" onmouseover="this.style.boxShadow='0 2px 12px rgba(0,0,0,0.08)'" onmouseout="this.style.boxShadow='none'">
+    <div style="font-size:13px; color:var(--text3, #9ca3af);" data-en="Also" data-zh="另外" class="bilingual-text">Also</div>
     <div style="font-size:15px; font-weight:600; color:var(--text, #111827);" data-en="See the full product design" data-zh="查看完整的产品设计" class="bilingual-text">See the full product design</div>
-    <div style="font-size:13px; color:var(--accent, #4f46e5); margin-top:4px;" data-en="Project Introduction →" data-zh="项目介绍 →" class="bilingual-text">Project Introduction →</div>
+    <div style="font-size:13px; color:var(--accent, #4f46e5); margin-top:4px;" data-en="Project Introduction" data-zh="项目介绍" class="bilingual-text">Project Introduction</div>
   </a>
 </div>
 
@@ -653,20 +575,9 @@ body.lang-zh .analogy .en { display: none; }
     <span data-en="You might also want: " data-zh="你可能还想看：" class="bilingual-text">You might also want: </span>
     <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演材料" class="bilingual-text">Pitch Deck</a> ·
     <a href="push-strategy-core.html" data-en="Strategy Core" data-zh="战略核心" class="bilingual-text">Strategy Core</a> ·
-    <a href="index.html" data-en="🏠 Dashboard" data-zh="🏠 首页" class="bilingual-text">🏠 Dashboard</a>
+    <a href="index.html" data-en="Dashboard" data-zh="首页" class="bilingual-text">Dashboard</a>
   </div>
 </div>
-
-<script>
-const fadeObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-}, { threshold: 0.01, rootMargin: '0px 0px 60px 0px' });
-document.querySelectorAll('.section').forEach(el => {
-  el.classList.add('fade-in');
-  fadeObserver.observe(el);
-});
-window.addEventListener('scroll', () => {}, { passive: true });
-</script>
 
 <script>
 (function() {

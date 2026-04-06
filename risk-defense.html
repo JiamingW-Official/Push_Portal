@@ -11,43 +11,37 @@
 <link rel="prefetch" href="retention-defense.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"></noscript>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" as="style">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
   --accent: #4f46e5;
   --accent-light: #818cf8;
   --accent-dark: #3730a3;
   --accent-bg: rgba(79,70,229,0.06);
-  --accent-glow: rgba(79,70,229,0.18);
   --primary: #0f0f1a;
   --green: #059669;
   --green-bg: rgba(5,150,105,0.08);
-  --green-glow: rgba(5,150,105,0.18);
   --orange: #d97706;
   --orange-bg: rgba(217,119,6,0.08);
-  --orange-glow: rgba(217,119,6,0.18);
   --red: #dc2626;
   --red-bg: rgba(220,38,38,0.08);
-  --red-glow: rgba(220,38,38,0.16);
   --text: #111827;
   --text2: #4b5563;
   --text3: #9ca3af;
   --border: #e5e7eb;
   --bg2: #f8f9fa;
-  --radius: 14px;
+  --radius: 8px;
   --shadow: 0 4px 20px rgba(0,0,0,0.08);
   --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
 }
 
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:var(--text);font-size:15px;line-height:1.85;overflow-x:hidden;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;word-break:break-word;font-feature-settings:'cv02','cv03','cv04','cv11';}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:var(--text);font-size:15px;line-height:1.75;overflow-x:hidden;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;word-break:break-word;}
 
-/* ═══════════════════════════════════════════
-   NAV
-═══════════════════════════════════════════ */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;background:#fffffffa;border-bottom:1px solid var(--border);transition:box-shadow 0.2s;}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;background:#ffffff;border-bottom:1px solid var(--border);transition:box-shadow 0.2s;}
 .nav-logo{font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;margin-right:8px;flex-shrink:0;text-decoration:none;}
 .nav-links{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
 .nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:color 0.15s,background 0.15s;white-space:nowrap;text-decoration:none;}
@@ -61,137 +55,97 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 .lang-btn:hover{background:var(--accent-dark);}
 .nav-mobile-right{display:none;gap:8px;align-items:center;}
 
-/* ═══════════════════════════════════════════
-   HERO
-═══════════════════════════════════════════ */
+/* HERO */
 .hero{
-  min-height:100vh;
-  background:linear-gradient(135deg,#0f0f1a 0%,#1a1a2e 40%,#1c0a3e 70%,#0f0f1a 100%);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;padding:100px 24px 80px;position:relative;overflow:hidden;
-}
-.hero-grid{
-  position:absolute;inset:0;
-  background-image:
-    linear-gradient(rgba(79,70,229,0.05) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(79,70,229,0.05) 1px,transparent 1px);
-  background-size:60px 60px;
-  -webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 40%,transparent 100%);
-  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 40%,transparent 100%);
-}
-.hero-glow{
-  position:absolute;top:20%;left:50%;transform:translateX(-50%);
-  width:700px;height:700px;border-radius:50%;
-  background:radial-gradient(circle,rgba(79,70,229,0.12) 0%,transparent 70%);
-  pointer-events:none;
+  background:var(--primary);
+  text-align:center;padding:120px 64px 80px;position:relative;overflow:hidden;
 }
 .hero-badge{
   display:inline-flex;align-items:center;gap:8px;
   background:rgba(217,119,6,0.18);border:1px solid rgba(217,119,6,0.45);
-  color:#fbbf24;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:#fbbf24;font-size:13px;font-weight:600;letter-spacing:0.5px;
+  text-transform:none;
   padding:8px 20px;border-radius:100px;margin-bottom:36px;position:relative;z-index:1;
 }
-.hero-badge::before{
-  content:'';width:8px;height:8px;border-radius:50%;
-  background:#f59e0b;animation:pulse-orange 1.5s ease-in-out infinite;flex-shrink:0;
-}
-@keyframes pulse-orange{
-  0%,100%{box-shadow:0 0 0 0 rgba(245,158,11,0.7);}
-  50%{box-shadow:0 0 0 8px rgba(245,158,11,0);}
-}
 .hero-title{
-  font-size:clamp(2.5rem,5vw,4.5rem);font-weight:900;
-  letter-spacing:-2px;line-height:1.05;color:#fff;
-  max-width:900px;margin-bottom:28px;position:relative;z-index:1;
+  font-size:36px;font-weight:900;
+  letter-spacing:-1px;line-height:1.1;color:#fff;
+  max-width:900px;margin:0 auto 16px;position:relative;z-index:1;
 }
 .hero-title span{color:var(--accent-light);}
 .hero-subtitle{
-  color:rgba(255,255,255,0.6);font-size:17px;font-weight:400;line-height:1.7;
-  max-width:680px;position:relative;z-index:1;margin-bottom:64px;
+  color:rgba(255,255,255,0.6);font-size:16px;font-weight:400;line-height:1.65;
+  max-width:680px;position:relative;z-index:1;margin:0 auto;
 }
-.hero-scroll{
-  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;gap:8px;
-  color:rgba(255,255,255,0.35);font-size:11px;font-weight:500;letter-spacing:1px;text-transform:uppercase;
-  animation:bounce 2s ease-in-out infinite;
-}
-@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(6px);}}
 
-/* ═══════════════════════════════════════════
-   QUICK NAV
-═══════════════════════════════════════════ */
+/* QUICK NAV */
 .quick-nav{
   background:#fff;border-bottom:1px solid var(--border);
   padding:16px 24px;position:sticky;top:60px;z-index:900;
 }
 .quick-nav-inner{
-  max-width:1100px;margin:0 auto;
-  display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;
+  max-width:1000px;margin:0 auto;
+  display:flex;gap:20px;overflow-x:auto;-webkit-overflow-scrolling:touch;
   scrollbar-width:none;
 }
 .quick-nav-inner::-webkit-scrollbar{display:none;}
 .qpill{
   display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
-  padding:7px 16px;border-radius:100px;border:1px solid var(--border);
-  font-size:13px;font-weight:600;color:var(--text2);
-  text-decoration:none;transition:all 0.2s;flex-shrink:0;
+  padding:4px 0;border:none;border-bottom:2px solid transparent;
+  font-size:14px;font-weight:500;color:var(--text3);
+  text-decoration:none;transition:color 0.2s,border-color 0.2s;flex-shrink:0;
+  border-radius:0;background:none;
 }
-.qpill:hover,.qpill.qactive{
-  background:var(--accent);border-color:var(--accent);color:#fff;
+.qpill:hover{
+  color:var(--text2);
+}
+.qpill.qactive{
+  color:var(--text);border-bottom:2px solid var(--accent);
 }
 .qpill .qcount{
-  background:rgba(255,255,255,0.25);border-radius:20px;
-  padding:1px 7px;font-size:11px;font-weight:700;
+  font-size:12px;font-weight:600;color:var(--text3);
 }
-.qpill:not(:hover):not(.qactive) .qcount{
-  background:var(--accent-bg);color:var(--accent);
+.qpill.qactive .qcount{
+  color:var(--accent);
 }
 
-/* ═══════════════════════════════════════════
-   SECTION CHROME
-═══════════════════════════════════════════ */
-.section{padding:120px 64px;contain:layout style paint;}
-.section-inner{max-width:1100px;margin:0 auto;}
-.section-bg2{background:var(--bg2);}
-.section-dark{background:var(--primary);}
+/* SECTION CHROME */
+.section{padding:80px 24px;contain:layout style paint;border-top:1px solid var(--border);}
+.section-inner{max-width:1000px;margin:0 auto;}
 
 .cat-label{
   display:inline-flex;align-items:center;gap:8px;
-  font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  font-size:13px;font-weight:600;letter-spacing:0.5px;text-transform:none;
   color:var(--accent);margin-bottom:12px;
 }
 .cat-label.dark-label{color:var(--accent-light);}
 .cat-icon{font-size:16px;}
 .section-title{
-  font-size:clamp(28px,4vw,42px);font-weight:900;letter-spacing:-1.5px;
-  color:var(--primary);line-height:1.1;margin-bottom:16px;
+  font-size:36px;font-weight:900;letter-spacing:-1px;
+  color:var(--primary);line-height:1.1;margin-bottom:8px;
 }
-.section-title-white{color:#fff;}
+.section-title-white{color:var(--primary);}
 .section-sub{
-  font-size:17px;font-weight:400;color:var(--text2);
-  max-width:680px;line-height:1.7;margin-bottom:64px;
+  font-size:16px;font-weight:400;color:var(--text2);
+  max-width:680px;line-height:1.65;margin-bottom:64px;
 }
-.section-sub-white{color:rgba(255,255,255,0.55);}
+.section-sub-white{color:var(--text2);}
 .section-header{margin-bottom:56px;}
 
-/* ═══════════════════════════════════════════
-   RISK CARD GRID
-═══════════════════════════════════════════ */
+/* RISK CARD GRID */
 .risk-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
 .risk-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;}
 .risk-grid-1{display:grid;grid-template-columns:1fr;gap:28px;max-width:860px;}
 
-/* ═══════════════════════════════════════════
-   RISK CARD
-═══════════════════════════════════════════ */
+/* RISK CARD */
 .risk-card{
-  background:#fff;border:1px solid var(--border);border-radius:var(--radius);
+  background:#fff;border:1px solid var(--border);border-radius:8px;
   overflow:hidden;display:flex;flex-direction:column;
-  transition:transform 0.25s ease,box-shadow 0.25s ease;cursor:default;
+  transition:box-shadow 0.25s ease;cursor:default;
 }
-.risk-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px var(--red-glow),var(--shadow-lg);}
-.risk-card.on-dark{background:rgba(255,255,255,0.97);border-color:rgba(255,255,255,0.15);}
-.risk-card.on-dark:hover{box-shadow:0 16px 48px rgba(0,0,0,0.4);}
+.risk-card:hover{box-shadow:0 2px 12px rgba(0,0,0,0.08);}
+.risk-card.on-dark{background:#fff;border-color:var(--border);}
+.risk-card.on-dark:hover{box-shadow:0 2px 12px rgba(0,0,0,0.08);}
 
 /* Card: top risk section */
 .rc-top{padding:24px 24px 20px;}
@@ -234,9 +188,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
   padding:20px 24px 24px;background:var(--green-bg);
   border-top:1px solid rgba(5,150,105,0.12);
   flex:1;display:flex;flex-direction:column;gap:10px;
-  transition:background 0.25s;
 }
-.risk-card:hover .rc-bottom{background:rgba(5,150,105,0.13);}
 .rc-defense-title{
   font-size:15px;font-weight:700;color:var(--green);line-height:1.45;
 }
@@ -250,16 +202,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
   width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;
 }
 .rc-insight{
-  margin-top:10px;background:rgba(5,150,105,0.1);border-left:3px solid var(--green);
+  margin-top:10px;background:rgba(5,150,105,0.1);
   border-radius:8px;padding:12px 14px;
   font-size:13px;font-weight:600;color:var(--green);line-height:1.55;font-style:italic;
 }
 
-/* ═══════════════════════════════════════════
-   SYSTEM SECTION (DARK)
-═══════════════════════════════════════════ */
-.system-section{background:var(--primary);padding:120px 64px;}
-.system-inner{max-width:1100px;margin:0 auto;}
+/* SYSTEM SECTION */
+.system-section{background:var(--primary);padding:80px 24px;}
+.system-inner{max-width:1000px;margin:0 auto;}
 .system-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px;}
 .sys-card{
   background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
@@ -284,9 +234,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 .sys-text{font-size:13px;color:rgba(255,255,255,0.7);line-height:1.6;}
 .sys-text strong{color:rgba(255,255,255,0.95);font-weight:700;}
 
-/* ═══════════════════════════════════════════
-   CLOSING SECTION
-═══════════════════════════════════════════ */
+/* CLOSING SECTION */
 .closing-box{
   background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);
   border-radius:var(--radius);padding:48px;text-align:center;
@@ -303,7 +251,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
   border-radius:var(--radius);padding:24px;text-align:center;
 }
 .layer-num{
-  font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  font-size:13px;font-weight:600;letter-spacing:0.5px;text-transform:none;
   color:var(--accent-light);margin-bottom:10px;
 }
 .layer-title{font-size:18px;font-weight:800;color:#fff;margin-bottom:6px;}
@@ -314,22 +262,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 }
 .closing-final span{color:rgba(255,255,255,0.9);}
 
-/* ═══════════════════════════════════════════
-   SCROLL FADE
-═══════════════════════════════════════════ */
+/* SCROLL FADE */
 .fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.55s ease,transform 0.55s ease;will-change:opacity,transform;animation:fadeInFallback 0s 4s forwards;}
 .visible .fade-in{opacity:1;transform:none;animation:none;}
 .fade-in.visible{opacity:1;transform:none;animation:none;}
 @keyframes fadeInFallback{to{opacity:1;transform:translateY(0);}}
 
-/* ═══════════════════════════════════════════
-   FOOTER
-═══════════════════════════════════════════ */
+/* FOOTER */
 footer{
   background:#080810;padding:56px 24px 40px;
   border-top:1px solid rgba(255,255,255,0.06);
 }
-.footer-inner{max-width:1100px;margin:0 auto;}
+.footer-inner{max-width:1000px;margin:0 auto;}
 .footer-top{display:flex;align-items:flex-start;justify-content:space-between;gap:40px;margin-bottom:40px;flex-wrap:wrap;}
 .footer-brand{}
 .footer-logo{font-size:24px;font-weight:900;color:var(--accent);letter-spacing:-0.5px;margin-bottom:8px;}
@@ -348,9 +292,7 @@ footer{
   font-size:12px;color:rgba(255,255,255,0.25);
 }
 
-/* ═══════════════════════════════════════════
-   MOBILE
-═══════════════════════════════════════════ */
+/* MOBILE */
 @media(max-width:640px){
   .nav-links{display:none;}
   .nav-mobile-right{display:flex;}
@@ -358,7 +300,8 @@ footer{
   .risk-grid-1{max-width:100%;}
   .section{padding:72px 20px;}
   .section-title{font-size:28px;}
-  .hero-title{letter-spacing:-1px;}
+  .hero{padding:100px 20px 60px;}
+  .hero-title{font-size:28px;letter-spacing:-0.5px;}
   .closing-box{padding:32px 24px;}
   .footer-top{flex-direction:column;}
 }
@@ -369,13 +312,13 @@ footer{
 @media(max-width:640px){
   .risk-grid-3{grid-template-columns:1fr;}
 }
-/* ── MOBILE HAMBURGER ── */
+/* MOBILE HAMBURGER */
 .nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;flex-shrink:0;margin-left:4px;}
 .nav-burger span{display:block;width:22px;height:2px;background:var(--text,#111827);border-radius:2px;transition:transform 0.2s,opacity 0.2s;}
 .nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
 .nav-burger.open span:nth-child(2){opacity:0;}
 .nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-.nav-mobile-panel{display:none;position:fixed;top:60px;left:0;right:0;background:#fffffffa;border-bottom:1px solid var(--border,#e5e7eb);padding:12px 16px 20px;flex-direction:column;gap:2px;z-index:999;box-shadow:0 8px 32px rgba(0,0,0,0.12);}
+.nav-mobile-panel{display:none;position:fixed;top:60px;left:0;right:0;background:#ffffff;border-bottom:1px solid var(--border,#e5e7eb);padding:12px 16px 20px;flex-direction:column;gap:2px;z-index:999;box-shadow:0 8px 32px rgba(0,0,0,0.12);}
 .nav-mobile-panel.open{display:flex;}
 .nav-mobile-panel a{padding:12px 16px;border-radius:8px;font-size:15px;font-weight:500;color:var(--text,#111827);text-decoration:none;transition:background 0.15s,color 0.15s;}
 .nav-mobile-panel a:hover{background:var(--bg2,#f8f9fa);}
@@ -390,7 +333,6 @@ footer{
 </head>
 <body>
 
-<!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
 <nav>
   <a href="index.html" class="nav-logo">PUSH</a>
   <div class="nav-links">
@@ -428,44 +370,38 @@ footer{
   </div>
 </div>
 
-<!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-badge" data-en="RISK REGISTER" data-zh="风险清单">RISK REGISTER</div>
+  <div class="hero-badge" data-en="Risk Register" data-zh="风险清单">Risk Register</div>
   <h1 class="hero-title" data-en="Risk Defense Playbook" data-zh="风险防御手册">Risk Defense Playbook</h1>
   <p class="hero-subtitle" data-en="For every risk we've identified, here's our specific defense strategy — not theory, but concrete mechanisms built into the platform." data-zh="我们识别的每个风险，都有具体的防御策略——不是理论，是平台内建的具体机制。">For every risk we've identified, here's our specific defense strategy — not theory, but concrete mechanisms built into the platform.</p>
-  <div class="hero-scroll">
-    <span data-en="scroll" data-zh="滚动">scroll</span>
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M4 9l4 4 4-4" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </div>
 </section>
 
-<!-- ═══════════════════════════════ CROSS-LINK ═══════════════════════════════ -->
-<div style="max-width:800px; margin:0 auto 32px; padding:12px 20px; background:var(--accent-bg, rgba(79,70,229,0.06)); border:1px solid var(--border, #e5e7eb); border-radius:8px; font-size:14px; color:var(--text2); text-align:center;">
+<!-- CROSS-LINK -->
+<div style="max-width:800px; margin:0 auto 32px; padding:12px 20px; background:var(--accent-bg, rgba(79,70,229,0.06)); border:1px solid var(--border, #e5e7eb); border-radius:8px; font-size:14px; color:var(--text2); text-align:center; margin-top:32px;">
   <span data-en="Want to understand why each challenge is structurally difficult first? See " data-zh="想先了解每个挑战为什么在结构上很难？请看 " class="bilingual-text">Want to understand why each challenge is structurally difficult first? See </span>
   <a href="challenges.html" style="font-weight:600;" data-en="Challenges →" data-zh="挑战分析 →" class="bilingual-text">Challenges →</a>
 </div>
 
-<!-- ═══════════════════════════════ LAYER POSITION ═══════════════════════════════ -->
+<!-- LAYER POSITION -->
 <div style="max-width:800px; margin:0 auto 24px; padding:10px 16px; background:var(--bg2, #f8f9fa); border-radius:8px; font-size:13px; color:var(--text3); text-align:center;">
   <span data-en="Part of the Defense narrative: Challenges (why it's hard) → Risk Defense (how we defend) → Retention (supply-side) → Platform Value (demand-side)" data-zh="防御叙事线：挑战（为什么难）→ 风险防御（怎么防）→ 留存机制（供给侧）→ 平台价值（需求侧）" class="bilingual-text">Part of the Defense narrative: Challenges (why it's hard) → Risk Defense (how we defend) → Retention (supply-side) → Platform Value (demand-side)</span>
 </div>
 
-<!-- ═══════════════════════════════ QUICK NAV ═══════════════════════════════ -->
+<!-- QUICK NAV -->
 <div class="quick-nav">
   <div class="quick-nav-inner">
-    <a href="#strategic" class="qpill"><span data-en="Strategic" data-zh="战略层">Strategic</span><span class="qcount">3</span></a>
-    <a href="#coldstart" class="qpill"><span data-en="Cold Start" data-zh="冷启动">Cold Start</span><span class="qcount">3</span></a>
-    <a href="#retention" class="qpill"><span data-en="Retention" data-zh="留存">Retention</span><span class="qcount">2</span></a>
-    <a href="#antibypass" class="qpill"><span data-en="Anti-Bypass" data-zh="反绕过">Anti-Bypass</span><span class="qcount">2</span></a>
-    <a href="#trust" class="qpill"><span data-en="Trust &amp; Fraud" data-zh="信任与欺诈">Trust &amp; Fraud</span><span class="qcount">3</span></a>
-    <a href="#operations" class="qpill"><span data-en="Operations" data-zh="运营">Operations</span><span class="qcount">2</span></a>
-    <a href="#competition" class="qpill"><span data-en="Competition" data-zh="竞争">Competition</span><span class="qcount">1</span></a>
+    <a href="#strategic" class="qpill"><span data-en="Strategic" data-zh="战略层">Strategic</span> <span class="qcount">3</span></a>
+    <a href="#coldstart" class="qpill"><span data-en="Cold Start" data-zh="冷启动">Cold Start</span> <span class="qcount">3</span></a>
+    <a href="#retention" class="qpill"><span data-en="Retention" data-zh="留存">Retention</span> <span class="qcount">2</span></a>
+    <a href="#antibypass" class="qpill"><span data-en="Anti-Bypass" data-zh="反绕过">Anti-Bypass</span> <span class="qcount">2</span></a>
+    <a href="#trust" class="qpill"><span data-en="Trust &amp; Fraud" data-zh="信任与欺诈">Trust &amp; Fraud</span> <span class="qcount">3</span></a>
+    <a href="#operations" class="qpill"><span data-en="Operations" data-zh="运营">Operations</span> <span class="qcount">2</span></a>
+    <a href="#competition" class="qpill"><span data-en="Competition" data-zh="竞争">Competition</span> <span class="qcount">1</span></a>
   </div>
 </div>
 
-<!-- ═══════════════════════════════ SECTION 1: STRATEGIC ═══════════════════════════════ -->
+<!-- SECTION 1: STRATEGIC -->
 <section class="section" id="strategic">
   <div class="section-inner">
     <div class="section-header fade-in">
@@ -562,8 +498,8 @@ footer{
   </div>
 </section>
 
-<!-- ═══════════════════════════════ SECTION 2: COLD START ═══════════════════════════════ -->
-<section class="section section-bg2" id="coldstart">
+<!-- SECTION 2: COLD START -->
+<section class="section" id="coldstart">
   <div class="section-inner">
     <div class="section-header fade-in">
       <div class="cat-label"><span class="cat-icon">🚀</span><span data-en="II. Cold Start &amp; Market Risks" data-zh="二、市场与冷启动风险">II. Cold Start &amp; Market Risks</span></div>
@@ -655,7 +591,7 @@ footer{
   </div>
 </section>
 
-<!-- ═══════════════════════════════ SECTION 3: RETENTION ═══════════════════════════════ -->
+<!-- SECTION 3: RETENTION -->
 <section class="section" id="retention">
   <div class="section-inner">
     <div class="section-header fade-in">
@@ -723,18 +659,18 @@ footer{
   </div>
 </section>
 
-<!-- ═══════════════════════════════ SECTION 4: ANTI-BYPASS (DARK) ═══════════════════════════════ -->
-<section class="section section-dark" id="antibypass">
+<!-- SECTION 4: ANTI-BYPASS -->
+<section class="section" id="antibypass">
   <div class="section-inner">
     <div class="section-header fade-in">
-      <div class="cat-label dark-label"><span class="cat-icon">🔐</span><span data-en="IV. Anti-Bypass Risks" data-zh="四、反绕平台风险">IV. Anti-Bypass Risks</span></div>
-      <h2 class="section-title section-title-white" data-en="Risks That Make Push Just a Dating App" data-zh="会让 Push 沦为「介绍所」的风险">Risks That Make Push Just a Dating App</h2>
-      <p class="section-sub section-sub-white" data-en="Once they've met through the platform, why keep using it?" data-zh="一旦通过平台认识了对方，为什么还要继续用它？">Once they've met through the platform, why keep using it?</p>
+      <div class="cat-label"><span class="cat-icon">🔐</span><span data-en="IV. Anti-Bypass Risks" data-zh="四、反绕平台风险">IV. Anti-Bypass Risks</span></div>
+      <h2 class="section-title" data-en="Risks That Make Push Just a Dating App" data-zh="会让 Push 沦为「介绍所」的风险">Risks That Make Push Just a Dating App</h2>
+      <p class="section-sub" data-en="Once they've met through the platform, why keep using it?" data-zh="一旦通过平台认识了对方，为什么还要继续用它？">Once they've met through the platform, why keep using it?</p>
     </div>
     <div class="risk-grid-2">
 
       <!-- RISK 09 -->
-      <div class="risk-card on-dark fade-in">
+      <div class="risk-card fade-in">
         <div class="rc-top">
           <div class="rc-badge" data-en="RISK 09" data-zh="风险 09">RISK 09</div>
           <div class="rc-title" data-en="Merchants &amp; Creators Go Private" data-zh="商家和 Creator 私下合作">Merchants &amp; Creators Go Private</div>
@@ -761,7 +697,7 @@ footer{
       </div>
 
       <!-- RISK 10 -->
-      <div class="risk-card on-dark fade-in" style="transition-delay:0.1s">
+      <div class="risk-card fade-in" style="transition-delay:0.1s">
         <div class="rc-top">
           <div class="rc-badge" data-en="RISK 10" data-zh="风险 10">RISK 10</div>
           <div class="rc-title" data-en="Off-Platform Deals Don't Affect Credit" data-zh="私下合作不影响平台信用，导致平台被空心化">Off-Platform Deals Don't Affect Credit</div>
@@ -791,7 +727,7 @@ footer{
   </div>
 </section>
 
-<!-- ═══════════════════════════════ SECTION 5: TRUST & FRAUD ═══════════════════════════════ -->
+<!-- SECTION 5: TRUST & FRAUD -->
 <section class="section" id="trust">
   <div class="section-inner">
     <div class="section-header fade-in">
@@ -885,8 +821,8 @@ footer{
   </div>
 </section>
 
-<!-- ═══════════════════════════════ SECTION 6: OPERATIONS ═══════════════════════════════ -->
-<section class="section section-bg2" id="operations">
+<!-- SECTION 6: OPERATIONS -->
+<section class="section" id="operations">
   <div class="section-inner">
     <div class="section-header fade-in">
       <div class="cat-label"><span class="cat-icon">⚙️</span><span data-en="VI. Operations Risks" data-zh="六、运营风险">VI. Operations Risks</span></div>
@@ -950,7 +886,7 @@ footer{
   </div>
 </section>
 
-<!-- ═══════════════════════════════ SECTION 7: COMPETITION ═══════════════════════════════ -->
+<!-- SECTION 7: COMPETITION -->
 <section class="section" id="competition">
   <div class="section-inner">
     <div class="section-header fade-in">
@@ -992,13 +928,13 @@ footer{
   </div>
 </section>
 
-<!-- ═══════════════════════════════ SECTION 8: COMPLETE SYSTEM (DARK) ═══════════════════════════════ -->
+<!-- SECTION 8: COMPLETE SYSTEM (DARK) -->
 <section class="system-section">
   <div class="system-inner">
     <div class="section-header fade-in" style="text-align:center;max-width:760px;margin:0 auto 0;">
       <div class="cat-label dark-label" style="justify-content:center;"><span data-en="Complete Defense Architecture" data-zh="完整防御架构">Complete Defense Architecture</span></div>
-      <h2 class="section-title section-title-white" data-en="The Complete Retention &amp; Anti-Bypass System" data-zh="完整留存与反绕过系统">The Complete Retention &amp; Anti-Bypass System</h2>
-      <p class="section-sub section-sub-white" style="margin:0 auto 0;max-width:620px;" data-en="Not just principles — a structural defense built into the platform architecture itself." data-zh="不只是原则——是内嵌在平台架构本身中的结构性防御。">Not just principles — a structural defense built into the platform architecture itself.</p>
+      <h2 class="section-title" style="color:#fff;" data-en="The Complete Retention &amp; Anti-Bypass System" data-zh="完整留存与反绕过系统">The Complete Retention &amp; Anti-Bypass System</h2>
+      <p class="section-sub" style="color:rgba(255,255,255,0.55);margin:0 auto 0;max-width:620px;" data-en="Not just principles — a structural defense built into the platform architecture itself." data-zh="不只是原则——是内嵌在平台架构本身中的结构性防御。">Not just principles — a structural defense built into the platform architecture itself.</p>
     </div>
     <div class="system-grid fade-in">
 
@@ -1082,17 +1018,17 @@ footer{
 
     <div class="closing-layers fade-in">
       <div class="layer-card">
-        <div class="layer-num" data-en="LAYER 01" data-zh="第一层">LAYER 01</div>
+        <div class="layer-num" data-en="Layer 01" data-zh="第一层">Layer 01</div>
         <div class="layer-title" data-en="Transaction Layer" data-zh="交易层">Transaction Layer</div>
         <div class="layer-desc" data-en="Complete the collaboration" data-zh="完成合作">Complete the collaboration</div>
       </div>
       <div class="layer-card">
-        <div class="layer-num" data-en="LAYER 02" data-zh="第二层">LAYER 02</div>
+        <div class="layer-num" data-en="Layer 02" data-zh="第二层">Layer 02</div>
         <div class="layer-title" data-en="Credit Layer" data-zh="信用层">Credit Layer</div>
         <div class="layer-desc" data-en="Accumulate non-portable assets" data-zh="积累不能带走的资产">Accumulate non-portable assets</div>
       </div>
       <div class="layer-card">
-        <div class="layer-num" data-en="LAYER 03" data-zh="第三层">LAYER 03</div>
+        <div class="layer-num" data-en="Layer 03" data-zh="第三层">Layer 03</div>
         <div class="layer-title" data-en="Opportunity Layer" data-zh="机会层">Opportunity Layer</div>
         <div class="layer-desc" data-en="Continuously control future high-quality opportunity flow" data-zh="持续控制未来高质量机会流">Continuously control future high-quality opportunity flow</div>
       </div>
@@ -1105,8 +1041,8 @@ footer{
   </div>
 </section>
 
-<!-- ═══════════════════════════════ NEXT READING ═══════════════════════════════ -->
-<div style="max-width:800px; margin:40px auto; padding:24px; background:var(--bg2, #f8f9fa); border:1px solid var(--border, #e5e7eb); border-radius:12px;">
+<!-- NEXT READING -->
+<div style="max-width:800px; margin:40px auto; padding:24px; background:var(--bg2, #f8f9fa); border:1px solid var(--border, #e5e7eb); border-radius:8px;">
   <h3 style="font-size:16px; font-weight:700; margin-bottom:12px;" data-en="Continue Reading" data-zh="继续阅读" class="bilingual-text">Continue Reading</h3>
   <a href="retention-defense.html" style="display:block; padding:16px; background:#fff; border:1px solid var(--border, #e5e7eb); border-radius:8px; text-decoration:none; transition:all 0.2s; max-width:400px;">
     <div style="font-size:13px; color:var(--text3, #9ca3af);" data-en="Next →" data-zh="下一步 →" class="bilingual-text">Next →</div>
@@ -1115,7 +1051,7 @@ footer{
   </a>
 </div>
 
-<!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
@@ -1148,7 +1084,7 @@ footer{
 </footer>
 
 <script>
-/* ─── LANGUAGE SYSTEM ─── */
+/* LANGUAGE SYSTEM */
 let currentLang = localStorage.getItem('push-lang') || 'en';
 
 function applyLang(lang) {
@@ -1178,7 +1114,7 @@ document.addEventListener('DOMContentLoaded', () => {
   applyLang(currentLang);
 });
 
-/* ─── SCROLL FADE IN ─── */
+/* SCROLL FADE IN */
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -1190,7 +1126,7 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('section').forEach(el => observer.observe(el));
 
-/* ─── QUICK NAV ACTIVE ─── */
+/* QUICK NAV ACTIVE */
 const sections = document.querySelectorAll('section[id]');
 const qpills = document.querySelectorAll('.qpill');
 
@@ -1235,7 +1171,7 @@ sections.forEach(s => sectionObserver.observe(s));
   });
 })();
 
-/* ─── NAV SHADOW ON SCROLL ─── */
+/* NAV SHADOW ON SCROLL */
 const navEl = document.querySelector('nav');
 window.addEventListener('scroll', () => {
   navEl.style.boxShadow = window.scrollY > 8 ? '0 2px 16px rgba(0,0,0,0.08)' : '';
