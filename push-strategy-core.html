@@ -41,49 +41,20 @@
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background: #fff;
       color: var(--text);
-      line-height: 1.75;
+      font-size: 15px;
+      line-height: 1.85;
       overflow-x: hidden;
     }
 
     /* ═══════════════════════════════════════
        NAV
     ═══════════════════════════════════════ */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      background: rgba(255,255,255,0.94);
-      -webkit-backdrop-filter: blur(18px);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border);
-      height: 60px;
-      display: flex; align-items: center;
-      padding: 0 28px;
-      gap: 0;
-    }
-
-    .nav-logo {
-      font-size: 22px; font-weight: 900;
-      color: var(--accent); letter-spacing: 2px;
-      text-decoration: none; flex-shrink: 0;
-      margin-right: 20px;
-      transition: opacity 0.2s;
-    }
-    .nav-logo:hover { opacity: 0.8; }
-
-    .nav-links {
-      display: flex; align-items: center;
-      gap: 2px; flex: 1; flex-wrap: wrap;
-    }
-    .nav-links a {
-      text-decoration: none; color: var(--text2);
-      font-size: 13px; font-weight: 500;
-      padding: 5px 11px; border-radius: 8px;
-      transition: all 0.2s; white-space: nowrap;
-    }
-    .nav-links a:hover { color: var(--accent); background: var(--accent-bg); }
-    .nav-links a.active {
-      color: var(--accent); background: var(--accent-bg);
-      font-weight: 700;
-    }
+    nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;background:rgba(255,255,255,0.95);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:box-shadow 0.2s;}
+    .nav-logo{font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;margin-right:8px;flex-shrink:0;text-decoration:none;}
+    .nav-links{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
+    .nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:all 0.15s;white-space:nowrap;text-decoration:none;}
+    .nav-links a:hover{color:var(--accent);background:var(--accent-bg);}
+    .nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);}
 
     .nav-right { margin-left: auto; flex-shrink: 0; }
     #lang-toggle {
@@ -221,10 +192,10 @@
     /* ═══════════════════════════════════════
        SHARED UTILITIES
     ═══════════════════════════════════════ */
-    .section-wrap { padding: 104px 32px; }
-    .section-wrap-gray { padding: 104px 32px; background: var(--bg2); }
-    .section-wrap-dark { padding: 104px 32px; background: var(--primary); }
-    .inner { max-width: 1200px; margin: 0 auto; }
+    .section-wrap { padding: 120px 64px; }
+    .section-wrap-gray { padding: 120px 64px; background: var(--bg2); }
+    .section-wrap-dark { padding: 120px 64px; background: var(--primary); }
+    .inner { max-width: 1100px; margin: 0 auto; }
     .inner-md { max-width: 960px; margin: 0 auto; }
 
     .section-label {
@@ -274,8 +245,8 @@
 
     /* ── FADE IN ── */
     .fade-in {
-      opacity: 0; transform: translateY(32px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
       animation: fadeInFallback 0s 4s forwards;
     }
     .fade-in.visible { opacity: 1; transform: translateY(0); animation: none; }
@@ -841,9 +812,7 @@
     #back-top.visible { opacity: 1; pointer-events: auto; }
     #back-top:hover { background: #4f46e5; transform: translateY(-2px); }
 
-    /* Fade-in with slide */
-    .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.55s ease, transform 0.55s ease; animation: fadeInFallback 0s 4s forwards; }
-    .fade-in.visible { opacity: 1; transform: translateY(0); animation: none; }
+    /* Fade-in with slide (duplicate kept for specificity — unified with above) */
 
     /* Danger cards — red hover */
     .danger-card {
@@ -972,10 +941,10 @@
 
     <h1 class="hero-title">
       <span data-en="Push is not a matching tool." data-zh="Push 不是撮合工具，">Push is not a matching tool.</span><br>
-      <span class="line-accent" data-en="Push is a value settlement layer." data-zh="<span class='line-accent'>而是价值结算层。</span>">Push is a value settlement layer.</span>
+      <span class="line-accent" data-en="Push is a value settlement layer." data-zh="<span class='line-accent'>而是让双方在这里结算价值、积累资产的系统。</span>">Push is a value settlement layer.</span>
     </h1>
 
-    <p class="hero-sub" data-en="Matching tools have no moat. No long-term value. No high valuation. This page explains why Push is fundamentally different — and why it must be." data-zh="撮合工具没有护城河，没有长期价值，没有高估值。这一页解释 Push 为什么本质上不同——以及为什么必须如此。">Matching tools have no moat. No long-term value. No high valuation. This page explains why Push is fundamentally different — and why it must be.</p>
+    <p class="hero-sub" data-en="Matching tools have no moat. No long-term value. No high valuation. This page explains why Push is fundamentally different — and why it must be." data-zh="撮合工具没有壁垒，没有长期价值，没有高估值。这一页解释 Push 为什么本质上不同——以及为什么必须如此。">Matching tools have no moat. No long-term value. No high valuation. This page explains why Push is fundamentally different — and why it must be.</p>
 
     <div class="hero-ctas">
       <a href="retention-defense.html" class="hero-cta hero-cta-primary" data-en="→ Creator Retention Architecture" data-zh="→ Creator 留存架构">→ Creator Retention Architecture</a>
@@ -1080,8 +1049,8 @@
     <div class="fade-in">
       <div class="section-label-light" data-en="THE CORE THESIS" data-zh="核心命题">THE CORE THESIS</div>
       <div class="section-divider-white"></div>
-      <h2 class="section-title-light" data-en="What Makes PUSH a Value Settlement Layer" data-zh="什么让 PUSH 成为价值结算层">What Makes PUSH a Value Settlement Layer</h2>
-      <p class="section-sub-light" data-en="A value settlement layer is where both sides book their earned value — and where leaving means losing that value." data-zh="价值结算层是双方在此结算自己积累的价值的地方——而离开意味着失去这些价值。">A value settlement layer is where both sides book their earned value — and where leaving means losing that value.</p>
+      <h2 class="section-title-light" data-en="What Makes PUSH a Value Settlement Layer" data-zh="PUSH 为什么不只是一个撮合工具">What Makes PUSH a Value Settlement Layer</h2>
+      <p class="section-sub-light" data-en="A value settlement layer is where both sides book their earned value — and where leaving means losing that value." data-zh="Push 要做的，是让双方在这里积累真实资产——一旦离开，这些资产就归零。这才是留住人的逻辑。">A value settlement layer is where both sides book their earned value — and where leaving means losing that value.</p>
     </div>
 
     <div class="pillar-grid">
@@ -1205,10 +1174,10 @@
   <div class="inner">
 
     <div class="fade-in">
-      <div class="section-label" data-en="THE MOAT" data-zh="护城河">THE MOAT</div>
+      <div class="section-label" data-en="THE MOAT" data-zh="竞争壁垒">THE MOAT</div>
       <div class="section-divider"></div>
-      <h2 class="section-title" data-en="How PUSH's Moat Compounds Over Time" data-zh="PUSH 护城河如何随时间复利">How PUSH's Moat Compounds Over Time</h2>
-      <p class="section-sub" data-en="The platform is not a moat from day one. The moat builds as data, credit, and trust compound." data-zh="平台第一天还没有护城河。护城河随着数据、信用和信任的复利而建立。">The platform is not a moat from day one. The moat builds as data, credit, and trust compound.</p>
+      <h2 class="section-title" data-en="How PUSH's Moat Compounds Over Time" data-zh="PUSH 的竞争壁垒如何随时间越积越深">How PUSH's Moat Compounds Over Time</h2>
+      <p class="section-sub" data-en="The platform is not a moat from day one. The moat builds as data, credit, and trust compound." data-zh="第一天没有壁垒。壁垒是随着数据、信用、信任慢慢积累起来的。">The platform is not a moat from day one. The moat builds as data, credit, and trust compound.</p>
     </div>
 
     <div class="moat-timeline fade-in fd1">
@@ -1221,7 +1190,7 @@
           <div class="moat-phase-icon">❄️</div>
           <div class="moat-title" data-en="Cold Start" data-zh="冷启动">Cold Start</div>
           <div class="moat-title-zh" data-en="冷启动" data-zh="Cold Start">冷启动</div>
-          <div class="moat-body" data-en="Matching tool phase. No real moat yet. Critical to establish quality habits now — the foundation for everything after." data-zh="撮合工具阶段，还没有真正的护城河。现在必须建立质量习惯——这是之后一切的基础。">Matching tool phase. No real moat yet. Critical to establish quality habits now — the foundation for everything after.</div>
+          <div class="moat-body" data-en="Matching tool phase. No real moat yet. Critical to establish quality habits now — the foundation for everything after." data-zh="撮合工具阶段，还没有真正的壁垒。现在必须把质量习惯建起来——这是之后一切的基础。">Matching tool phase. No real moat yet. Critical to establish quality habits now — the foundation for everything after.</div>
         </div>
       </div>
 
@@ -1241,8 +1210,8 @@
         <div class="moat-inner">
           <div class="moat-period" data-en="MONTH 10–18" data-zh="第 10–18 月">MONTH 10–18</div>
           <div class="moat-phase-icon">🏰</div>
-          <div class="moat-title" data-en="Moat Emerging" data-zh="护城河成形">Moat Emerging</div>
-          <div class="moat-title-zh" data-en="护城河成形" data-zh="Moat Emerging">护城河成形</div>
+          <div class="moat-title" data-en="Moat Emerging" data-zh="壁垒成形">Moat Emerging</div>
+          <div class="moat-title-zh" data-en="壁垒成形" data-zh="Moat Emerging">壁垒成形</div>
           <div class="moat-body" data-en="High-tier creators cannot easily replicate their PUSH standing elsewhere. Merchants dependent on campaign analytics and re-booking flows. Real retention achieved." data-zh="高等级创作者无法在其他平台轻易复制自己的地位。商家依赖活动分析和复购流程。真正的留存达成。">High-tier creators cannot easily replicate their PUSH standing elsewhere. Merchants dependent on campaign analytics and re-booking flows. Real retention achieved.</div>
         </div>
       </div>
@@ -1331,7 +1300,7 @@
 <footer>
   <div class="footer-inner">
     <a href="index.html" class="footer-logo">PUSH</a>
-    <div class="footer-tagline" data-en="From Transaction Entry Point to <em>Value Settlement Layer</em>" data-zh="从交易入口到<em>价值结算层</em>">From Transaction Entry Point to <em>Value Settlement Layer</em></div>
+    <div class="footer-tagline" data-en="From Transaction Entry Point to <em>Value Settlement Layer</em>" data-zh="从撮合入口，到<em>双方积累资产的系统</em>">From Transaction Entry Point to <em>Value Settlement Layer</em></div>
     <div class="footer-links">
       <a href="index.html" data-en="Overview" data-zh="首页">Dashboard</a>
       <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>

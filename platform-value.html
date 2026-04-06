@@ -39,41 +39,16 @@
 
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{
-  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;
-  background:#fff;color:var(--text);line-height:1.75;
-  transition:opacity 0.2s ease;
-}
-body.lang-fade{opacity:0.8}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:var(--text);font-size:15px;line-height:1.85;}
 a{text-decoration:none;color:inherit}
 
 /* ===== NAV ===== */
-.nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  height:60px;
-  background:rgba(255,255,255,0.92);
-  border-bottom:1px solid var(--border);
-  -webkit-backdrop-filter:blur(16px);
-  backdrop-filter:blur(16px);
-  display:flex;align-items:center;
-  padding:0 24px;gap:0;
-}
-.nav-logo{
-  font-size:22px;font-weight:900;color:var(--accent);
-  margin-right:32px;flex-shrink:0;letter-spacing:-0.5px;
-}
-.nav-links{
-  display:flex;align-items:center;gap:4px;flex:1;flex-wrap:nowrap;
-}
-.nav-links a{
-  padding:5px 11px;border-radius:7px;
-  font-size:13px;font-weight:500;color:var(--text2);
-  white-space:nowrap;transition:all 0.18s;
-}
-.nav-links a:hover{background:var(--accent-bg);color:var(--accent)}
-.nav-links a.active{
-  background:var(--accent-bg);color:var(--accent);font-weight:700;
-}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;background:rgba(255,255,255,0.95);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:box-shadow 0.2s;}
+.nav-logo{font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;margin-right:8px;flex-shrink:0;text-decoration:none;}
+.nav-links{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
+.nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:all 0.15s;white-space:nowrap;text-decoration:none;}
+.nav-links a:hover{color:var(--accent);background:var(--accent-bg);}
+.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);}
 .nav-right{margin-left:16px;flex-shrink:0}
 .lang-btn{
   background:var(--accent);color:#fff;
@@ -174,8 +149,8 @@ a{text-decoration:none;color:inherit}
 }
 
 /* ===== SECTIONS ===== */
-section{padding:100px 24px}
-.container{max-width:1160px;margin:0 auto}
+section{padding:120px 64px;}
+.container{max-width:1100px;margin:0 auto}
 
 .section-tag{
   font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
@@ -535,12 +510,12 @@ section{padding:100px 24px}
 }
 
 /* ===== SCROLL ANIMATION ===== */
-.fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease;animation:fadeInFallback 0s 4s forwards}
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.55s ease,transform 0.55s ease;}
 .fade-in.visible{opacity:1;transform:translateY(0);animation:none}
 @keyframes fadeInFallback{to{opacity:1;transform:translateY(0)}}
 
 @media(max-width:640px){
-  section{padding:72px 20px}
+  section{padding:72px 24px}
   .callout-box{padding:28px 24px}
   .callout-box-quote{font-size:16px}
   .mech-strip{flex-direction:column;gap:16px}
@@ -548,8 +523,8 @@ section{padding:100px 24px}
 }
 
 /* Nav scroll shadow */
-nav, .topnav, .nav { transition: box-shadow 0.2s; }
-nav.scrolled, .topnav.scrolled, .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
+nav { transition: box-shadow 0.2s; }
+nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
 
 /* Section label with accent line */
 .section-label, .section-num {
@@ -578,7 +553,6 @@ nav.scrolled, .topnav.scrolled, .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,
 #back-top:hover { background: #4f46e5; transform: translateY(-2px); }
 
 /* Fade-in with slide */
-.fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.55s ease, transform 0.55s ease; animation: fadeInFallback 0s 4s forwards; }
 .fade-in.visible { opacity: 1; transform: translateY(0); animation: none; }
 
 /* Value cards hover */
@@ -646,7 +620,7 @@ nav.scrolled, .topnav.scrolled, .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,
 <body>
 
 <!-- NAV -->
-<nav class="nav">
+<nav>
   <a href="index.html" class="nav-logo">PUSH</a>
 
   <div class="nav-links">
@@ -747,7 +721,7 @@ nav.scrolled, .topnav.scrolled, .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,
       <div class="section-tag red" data-en="THE PULL FACTORS" data-zh="流失诱因">THE PULL FACTORS</div>
       <div class="section-deco">02</div>
       <h2 class="section-title" data-en="Why Merchants Bypass" data-zh="商家为什么会绕平台">Why Merchants Bypass</h2>
-      <p class="section-sub" data-en="Understanding why is the first step to making the platform irreplaceable." data-zh="理解脱媒背后的自然逻辑">Understanding why is the first step to making the platform irreplaceable.</p>
+      <p class="section-sub" data-en="Understanding why is the first step to making the platform irreplaceable." data-zh="先搞清楚商家为什么想绕，才能让平台真的没法绕。">Understanding why is the first step to making the platform irreplaceable.</p>
     </div>
 
     <div class="bypass-grid">
@@ -787,7 +761,7 @@ nav.scrolled, .topnav.scrolled, .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,
       <div class="insight-icon">💡</div>
       <div>
         <div class="insight-label" data-en="KEY INSIGHT" data-zh="核心洞察">KEY INSIGHT</div>
-        <div class="insight-text" data-en="Don't try to ban private contact — that's naive. Make the platform more valuable." data-zh="核心洞察：不要试图靠条款禁止私联——那很幼稚。让平台本身更有价值。">Don't try to ban private contact — that's naive. Make the platform more valuable.</div>
+        <div class="insight-text" data-en="Don't try to ban private contact — that's naive. Make the platform more valuable." data-zh="靠条款禁止私下联系是没用的。让平台本身更值得用，才是正解。">Don't try to ban private contact — that's naive. Make the platform more valuable.</div>
       </div>
     </div>
   </div>
@@ -797,10 +771,10 @@ nav.scrolled, .topnav.scrolled, .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,
 <section class="s3">
   <div class="container">
     <div class="section-header fade-in">
-      <div class="section-tag white" data-en="IRREPLACEABLE ADVANTAGES" data-zh="不可替代的优势">IRREPLACEABLE ADVANTAGES</div>
+      <div class="section-tag white" data-en="IRREPLACEABLE ADVANTAGES" data-zh="私下合作给不了的东西">IRREPLACEABLE ADVANTAGES</div>
       <div class="section-deco white-deco">03</div>
       <h2 class="section-title white" data-en="Five Things Private Deals Can Never Provide" data-zh="私下合作永远无法提供的五件事">Five Things Private Deals Can Never Provide</h2>
-      <p class="section-sub white" data-en="These aren't features — they're structural advantages that compound over time." data-zh="这些不是功能——而是随时间复利累积的结构性优势。">These aren't features — they're structural advantages that compound over time.</p>
+      <p class="section-sub white" data-en="These aren't features — they're structural advantages that compound over time." data-zh="这些不是功能点，是随着时间越用越深的结构性优势。">These aren't features — they're structural advantages that compound over time.</p>
     </div>
 
     <div class="values-grid">
@@ -810,42 +784,42 @@ nav.scrolled, .topnav.scrolled, .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,
         <div class="value-title" data-en="Screening & Matching Efficiency" data-zh="筛选与匹配效率">Screening &amp; Matching Efficiency</div>
         <div class="value-sub" data-en="Find the right creator, faster" data-zh="更快找到合适的 Creator">Find the right creator, faster</div>
         <ul class="value-bullets">
-          <li data-en="Smart recommendations by category, location, performance history" data-zh="按类别、地点和历史表现智能推荐">Smart recommendations by category, location, performance history</li>
-          <li data-en="Auto-fill + standby when creators cancel" data-zh="Creator 取消时自动补位和备用">Auto-fill + standby when creators cancel</li>
-          <li data-en="Target-based filtering by tier and niche" data-zh="按等级和细分领域过滤目标">Target-based filtering by tier and niche</li>
-          <li data-en="Multi-campaign management from one dashboard" data-zh="从单一仪表盘管理多个活动">Multi-campaign management from one dashboard</li>
+          <li data-en="Smart recommendations by category, location, performance history" data-zh="按品类、地点、历史表现筛选推荐">Smart recommendations by category, location, performance history</li>
+          <li data-en="Auto-fill + standby when creators cancel" data-zh="Creator 临时取消，平台自动补人">Auto-fill + standby when creators cancel</li>
+          <li data-en="Target-based filtering by tier and niche" data-zh="按等级和垂类精准筛人">Target-based filtering by tier and niche</li>
+          <li data-en="Multi-campaign management from one dashboard" data-zh="一个后台管多个活动，不用来回切">Multi-campaign management from one dashboard</li>
         </ul>
         <div class="value-key">
           <div class="value-key-label" data-en="KEY TAKEAWAY" data-zh="核心要点">KEY TAKEAWAY</div>
-          <span data-en="Platform manages an acquisition program, not just introductions" data-zh="平台管理的是整套获客方案，不只是介绍">Platform manages an acquisition program, not just introductions</span>
+          <span data-en="Platform manages an acquisition program, not just introductions" data-zh="平台帮你跑整套找人流程，不只是牵个线">Platform manages an acquisition program, not just introductions</span>
         </div>
       </div>
       <!-- Value 02 -->
       <div class="value-card fade-in" style="transition-delay:0.07s">
         <div class="value-num">02</div>
-        <div class="value-title" data-en="Attribution & Data Intelligence" data-zh="可归因与数据积累">Attribution &amp; Data Intelligence</div>
-        <div class="value-sub" data-en="Know what works, and why" data-zh="知道什么有效，以及为什么">Know what works, and why</div>
+        <div class="value-title" data-en="Attribution & Data Intelligence" data-zh="效果可追、数据可用">Attribution &amp; Data Intelligence</div>
+        <div class="value-sub" data-en="Know what works, and why" data-zh="看清楚什么有用、什么在烧钱">Know what works, and why</div>
         <ul class="value-bullets">
-          <li data-en="Creator performance comparison across campaigns" data-zh="跨活动比较 Creator 表现">Creator performance comparison across campaigns</li>
-          <li data-en="Category analytics and ROI trends" data-zh="类别分析和 ROI 趋势">Category analytics and ROI trends</li>
+          <li data-en="Creator performance comparison across campaigns" data-zh="多个活动之间 Creator 效果横向对比">Creator performance comparison across campaigns</li>
+          <li data-en="Category analytics and ROI trends" data-zh="按品类看 ROI 走势">Category analytics and ROI trends</li>
           <li data-en="Cost per redemption tracking" data-zh="每次核销成本追踪">Cost per redemption tracking</li>
-          <li data-en="Fill rate, completion rate, no-show analytics" data-zh="填充率、完成率、缺席分析">Fill rate, completion rate, no-show analytics</li>
+          <li data-en="Fill rate, completion rate, no-show analytics" data-zh="到场率、完成率、爽约分析">Fill rate, completion rate, no-show analytics</li>
         </ul>
         <div class="value-key">
           <div class="value-key-label" data-en="KEY TAKEAWAY" data-zh="核心要点">KEY TAKEAWAY</div>
-          <span data-en="Platform is a performance dashboard, not just a middleman" data-zh="平台是效果操作后台，不只是中介">Platform is a performance dashboard, not just a middleman</span>
+          <span data-en="Platform is a performance dashboard, not just a middleman" data-zh="平台是你的效果后台，不只是个中间人">Platform is a performance dashboard, not just a middleman</span>
         </div>
       </div>
       <!-- Value 03 -->
       <div class="value-card fade-in" style="transition-delay:0.14s">
         <div class="value-num">03</div>
-        <div class="value-title" data-en="Payment, Dispute & Fulfillment Protection" data-zh="支付、争议与履约保障">Payment, Dispute &amp; Fulfillment Protection</div>
-        <div class="value-sub" data-en="Safe for both sides, every time" data-zh="对双方都安全，每次都是">Safe for both sides, every time</div>
+        <div class="value-title" data-en="Payment, Dispute & Fulfillment Protection" data-zh="付款、纠纷和履约都有保障">Payment, Dispute &amp; Fulfillment Protection</div>
+        <div class="value-sub" data-en="Safe for both sides, every time" data-zh="双方都有保障，不用靠信任扛风险">Safe for both sides, every time</div>
         <ul class="value-bullets">
-          <li data-en="Payout protection with escrow-style settlement" data-zh="托管式结算保护付款">Payout protection with escrow-style settlement</li>
-          <li data-en="Proof flow: upload → review → confirm → settle" data-zh="证明流程：上传→审核→确认→结算">Proof flow: upload → review → confirm → settle</li>
-          <li data-en="Dispute resolution with platform mediation" data-zh="平台调解解决争议">Dispute resolution with platform mediation</li>
-          <li data-en="Cancellation rules, no-show penalties" data-zh="取消规则、缺席处罚">Cancellation rules, no-show penalties</li>
+          <li data-en="Payout protection with escrow-style settlement" data-zh="资金托管，做完了再结">Payout protection with escrow-style settlement</li>
+          <li data-en="Proof flow: upload → review → confirm → settle" data-zh="上传证明→审核→确认→打款，流程清晰">Proof flow: upload → review → confirm → settle</li>
+          <li data-en="Dispute resolution with platform mediation" data-zh="有纠纷平台出面协调，不用自己扯皮">Dispute resolution with platform mediation</li>
+          <li data-en="Cancellation rules, no-show penalties" data-zh="有取消规则、爽约有记录">Cancellation rules, no-show penalties</li>
         </ul>
         <div class="value-key">
           <div class="value-key-label" data-en="KEY TAKEAWAY" data-zh="核心要点">KEY TAKEAWAY</div>
@@ -855,33 +829,33 @@ nav.scrolled, .topnav.scrolled, .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,
       <!-- Value 04 -->
       <div class="value-card fade-in" style="transition-delay:0.21s">
         <div class="value-num">04</div>
-        <div class="value-title" data-en="Continuous Supply & Rotation" data-zh="持续供给与轮换">Continuous Supply &amp; Rotation</div>
-        <div class="value-sub" data-en="Never run out of creators" data-zh="永不缺乏 Creator">Never run out of creators</div>
+        <div class="value-title" data-en="Continuous Supply & Rotation" data-zh="持续有人可用，不怕断供">Continuous Supply &amp; Rotation</div>
+        <div class="value-sub" data-en="Never run out of creators" data-zh="用完一个有下一个，不断档">Never run out of creators</div>
         <ul class="value-bullets">
-          <li data-en="Private deals bind you to 1–2 creators (what if they stop?)" data-zh="私下合作将你绑定在 1-2 个 Creator 上（如果他们停了怎么办？）">Private deals bind you to 1–2 creators (what if they stop?)</li>
-          <li data-en="Platform provides ongoing discovery and rotation" data-zh="平台提供持续的发现和轮换">Platform provides ongoing discovery and rotation</li>
-          <li data-en="Fresh faces keep content authentic" data-zh="新面孔保持内容真实性">Fresh faces keep content authentic</li>
-          <li data-en="Seasonal and category-specific matching" data-zh="季节性和特定类别匹配">Seasonal and category-specific matching</li>
+          <li data-en="Private deals bind you to 1–2 creators (what if they stop?)" data-zh="私下谈好的就那一两个人，他们不来了你没有备选">Private deals bind you to 1–2 creators (what if they stop?)</li>
+          <li data-en="Platform provides ongoing discovery and rotation" data-zh="平台持续帮你找新人、换新人">Platform provides ongoing discovery and rotation</li>
+          <li data-en="Fresh faces keep content authentic" data-zh="换新面孔，内容看起来更真">Fresh faces keep content authentic</li>
+          <li data-en="Seasonal and category-specific matching" data-zh="节假日和特定品类都能按需匹配">Seasonal and category-specific matching</li>
         </ul>
         <div class="value-key">
           <div class="value-key-label" data-en="KEY TAKEAWAY" data-zh="核心要点">KEY TAKEAWAY</div>
-          <span data-en="Merchants bypass for one deal; platform delivers an ongoing channel" data-zh="商家绕开只解决一次，平台解决持续获客">Merchants bypass for one deal; platform delivers an ongoing channel</span>
+          <span data-en="Merchants bypass for one deal; platform delivers an ongoing channel" data-zh="绕平台只是解决这一次，走平台是在建一个稳定渠道">Merchants bypass for one deal; platform delivers an ongoing channel</span>
         </div>
       </div>
       <!-- Value 05 -->
       <div class="value-card fade-in" style="transition-delay:0.28s">
         <div class="value-num">05</div>
-        <div class="value-title" data-en="Merchant Reputation System" data-zh="商家信用体系">Merchant Reputation System</div>
-        <div class="value-sub" data-en="Your track record works for you" data-zh="你的记录为你服务">Your track record works for you</div>
+        <div class="value-title" data-en="Merchant Reputation System" data-zh="商家也有口碑积累">Merchant Reputation System</div>
+        <div class="value-sub" data-en="Your track record works for you" data-zh="做得好的商家，Creator 自己会想来">Your track record works for you</div>
         <ul class="value-bullets">
-          <li data-en="Payment speed and reliability scoring" data-zh="付款速度和可靠性评分">Payment speed and reliability scoring</li>
-          <li data-en="Communication quality and responsiveness" data-zh="沟通质量和响应速度">Communication quality and responsiveness</li>
-          <li data-en="Promise fulfillment and creator satisfaction" data-zh="承诺履行和 Creator 满意度">Promise fulfillment and creator satisfaction</li>
-          <li data-en="Repeat booking rate signals quality" data-zh="重复预订率代表质量信号">Repeat booking rate signals quality</li>
+          <li data-en="Payment speed and reliability scoring" data-zh="打款快不快、靠不靠谱，有评分">Payment speed and reliability scoring</li>
+          <li data-en="Communication quality and responsiveness" data-zh="回消息快不快、说话算不算数">Communication quality and responsiveness</li>
+          <li data-en="Promise fulfillment and creator satisfaction" data-zh="答应的事有没有做到，Creator 满不满意">Promise fulfillment and creator satisfaction</li>
+          <li data-en="Repeat booking rate signals quality" data-zh="回头找同一个 Creator 的比例，说明这家值不值得合作">Repeat booking rate signals quality</li>
         </ul>
         <div class="value-key">
           <div class="value-key-label" data-en="KEY TAKEAWAY" data-zh="核心要点">KEY TAKEAWAY</div>
-          <span data-en="Good merchants attract better creators; bad merchants get filtered out" data-zh="好商家吸引更好的创作者；差商家自然被筛出">Good merchants attract better creators; bad merchants get filtered out</span>
+          <span data-en="Good merchants attract better creators; bad merchants get filtered out" data-zh="口碑好的商家 Creator 主动想接，口碑差的接不到好人">Good merchants attract better creators; bad merchants get filtered out</span>
         </div>
       </div>
     </div>
@@ -894,8 +868,8 @@ nav.scrolled, .topnav.scrolled, .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,
     <div class="section-header fade-in">
       <div class="section-tag green" data-en="RATIONAL DESIGN" data-zh="理性设计">RATIONAL DESIGN</div>
       <div class="section-deco">04</div>
-      <h2 class="section-title" data-en="How We Make Staying On-Platform The Rational Choice" data-zh="如何让留在平台成为理性选择">How We Make Staying On-Platform The Rational Choice</h2>
-      <p class="section-sub" data-en="Five mechanisms that make the platform path obviously superior." data-zh="五个让平台路径显而易见更优的机制。">Five mechanisms that make the platform path obviously superior.</p>
+      <h2 class="section-title" data-en="How We Make Staying On-Platform The Rational Choice" data-zh="怎么让走平台成为更划算的选择">How We Make Staying On-Platform The Rational Choice</h2>
+      <p class="section-sub" data-en="Five mechanisms that make the platform path obviously superior." data-zh="五个让走平台明显更合算的设计。">Five mechanisms that make the platform path obviously superior.</p>
     </div>
 
     <div class="mech-list">
@@ -903,7 +877,7 @@ nav.scrolled, .topnav.scrolled, .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,
         <div class="mech-num">01</div>
         <div class="mech-content">
           <div class="mech-title" data-en="Future opportunities only exist on-platform" data-zh="未来机会只在平台上">Future opportunities only exist on-platform</div>
-          <div class="mech-body" data-en="The next campaign, next high-paying merchant, next tier upgrade — all only through the platform. Bypassing today means missing tomorrow." data-zh="下一个活动、下一个高付费商家、下一次升级——全都只能通过平台获取。今天绕开意味着明天错过。">The next campaign, next high-paying merchant, next tier upgrade — all only through the platform. Bypassing today means missing tomorrow.</div>
+          <div class="mech-body" data-en="The next campaign, next high-paying merchant, next tier upgrade — all only through the platform. Bypassing today means missing tomorrow." data-zh="下一个好单、下一个高付费商家、下一次等级提升——只能走平台才有。今天绕开，明天这些就跟你没关系了。">The next campaign, next high-paying merchant, next tier upgrade — all only through the platform. Bypassing today means missing tomorrow.</div>
         </div>
       </div>
 
@@ -911,7 +885,7 @@ nav.scrolled, .topnav.scrolled, .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,
         <div class="mech-num">02</div>
         <div class="mech-content">
           <div class="mech-title" data-en="Private deals don't inherit platform credit" data-zh="私下合作不继承平台信用">Private deals don't inherit platform credit</div>
-          <div class="mech-body" data-en="Creator Passport scores and merchant reliability ratings only exist on-platform. Off-platform deals start from zero every time." data-zh="Creator Passport 分数和商家可靠性评级只存在于平台上。平台外的合作每次都从零开始。">Creator Passport scores and merchant reliability ratings only exist on-platform. Off-platform deals start from zero every time.</div>
+          <div class="mech-body" data-en="Creator Passport scores and merchant reliability ratings only exist on-platform. Off-platform deals start from zero every time." data-zh="Creator 的信用记录和商家的口碑评分，只在平台上有效。私下合作每次都是陌生人，没有历史。">Creator Passport scores and merchant reliability ratings only exist on-platform. Off-platform deals start from zero every time.</div>
         </div>
       </div>
 
@@ -919,7 +893,7 @@ nav.scrolled, .topnav.scrolled, .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,
         <div class="mech-num">03</div>
         <div class="mech-content">
           <div class="mech-title" data-en="On-platform re-booking is easier than DMs" data-zh="平台内复购比私下更省事">On-platform re-booking is easier than DMs</div>
-          <div class="mech-body" data-en="One-click: duplicate campaign → invite same creator → auto-set payout → auto-collect proof → auto-settle. Why negotiate via DM?" data-zh="一键操作：复制活动→邀请同一 Creator→自动设置报酬→自动收集证明→自动结算。为什么还要通过 DM 谈判？">One-click: duplicate campaign → invite same creator → auto-set payout → auto-collect proof → auto-settle. Why negotiate via DM?</div>
+          <div class="mech-body" data-en="One-click: duplicate campaign → invite same creator → auto-set payout → auto-collect proof → auto-settle. Why negotiate via DM?" data-zh="点一下：复制活动→邀请同一个 Creator→自动约好报酬→自动收证明→自动打款。发 DM 谈，反而更麻烦。">One-click: duplicate campaign → invite same creator → auto-set payout → auto-collect proof → auto-settle. Why negotiate via DM?</div>
           <div class="mech-highlight" data-en="duplicate → invite → payout → proof → settle — one click" data-zh="复制→邀请→报酬→证明→结算——一键搞定">duplicate → invite → payout → proof → settle — one click</div>
         </div>
       </div>
@@ -928,7 +902,7 @@ nav.scrolled, .topnav.scrolled, .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,
         <div class="mech-num">04</div>
         <div class="mech-content">
           <div class="mech-title" data-en="High-tier benefits only settle on-platform" data-zh="高 Tier 福利只能平台内结算">High-tier benefits only settle on-platform</div>
-          <div class="mech-body" data-en="Premium payouts, priority matching, exclusive campaigns, bonus multipliers — all tied to platform transactions. Private deals can't unlock these." data-zh="高额报酬、优先匹配、独家活动和奖金倍率都绑定在平台交易上。私下合作无法解锁这些奖励。">Premium payouts, priority matching, exclusive campaigns, bonus multipliers — all tied to platform transactions. Private deals can't unlock these.</div>
+          <div class="mech-body" data-en="Premium payouts, priority matching, exclusive campaigns, bonus multipliers — all tied to platform transactions. Private deals can't unlock these." data-zh="高报酬、优先接单、独家活动、奖金加成——这些都绑在平台交易上。私下合作拿不到。">Premium payouts, priority matching, exclusive campaigns, bonus multipliers — all tied to platform transactions. Private deals can't unlock these.</div>
         </div>
       </div>
 
@@ -936,7 +910,7 @@ nav.scrolled, .topnav.scrolled, .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,
         <div class="mech-num">05</div>
         <div class="mech-content">
           <div class="mech-title" data-en="Light rules, not heavy bans" data-zh="轻度规则，不重度封杀">Light rules, not heavy bans</div>
-          <div class="mech-body" data-en="Don't punish contact — incentivize transactions. Make the on-platform path so smooth that going off-platform feels like extra work." data-zh="不惩罚联系——激励交易。让平台内路径如此顺畅，以至于走平台外反而更麻烦。">Don't punish contact — incentivize transactions. Make the on-platform path so smooth that going off-platform feels like extra work.</div>
+          <div class="mech-body" data-en="Don't punish contact — incentivize transactions. Make the on-platform path so smooth that going off-platform feels like extra work." data-zh="不是靠罚款逼你走平台，是让平台内流程顺到走外面反而费劲。">Don't punish contact — incentivize transactions. Make the on-platform path so smooth that going off-platform feels like extra work.</div>
         </div>
       </div>
     </div>
@@ -947,10 +921,10 @@ nav.scrolled, .topnav.scrolled, .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,
 <section class="s5">
   <div class="container">
     <div class="section-header fade-in">
-      <div class="section-tag" data-en="COMPOUNDING SYSTEM" data-zh="复利系统">COMPOUNDING SYSTEM</div>
+      <div class="section-tag" data-en="COMPOUNDING SYSTEM" data-zh="正向循环">COMPOUNDING SYSTEM</div>
       <div class="section-deco">05</div>
-      <h2 class="section-title" data-en="The Retention & Anti-Bypass Flywheel" data-zh="留存与反绕平台飞轮">The Retention &amp; Anti-Bypass Flywheel</h2>
-      <p class="section-sub" data-en="Every transaction strengthens the loop — making escape more costly each time." data-zh="每一笔交易都在强化这个循环——让离开的代价越来越高。">Every transaction strengthens the loop — making escape more costly each time.</p>
+      <h2 class="section-title" data-en="The Retention & Anti-Bypass Flywheel" data-zh="留存与反绕平台的正向循环">The Retention &amp; Anti-Bypass Flywheel</h2>
+      <p class="section-sub" data-en="Every transaction strengthens the loop — making escape more costly each time." data-zh="每做一笔，这个循环就更紧一点——时间越长，离开的代价越高。">Every transaction strengthens the loop — making escape more costly each time.</p>
     </div>
 
     <div class="flywheel-grid fade-in">
@@ -1037,7 +1011,7 @@ nav.scrolled, .topnav.scrolled, .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,
       <div class="section-tag white" data-en="THE COST OF LEAVING" data-zh="离开的代价">THE COST OF LEAVING</div>
       <div class="section-deco white-deco">06</div>
       <h2 class="section-title white" data-en="What You Lose by Leaving" data-zh="离开会失去什么">What You Lose by Leaving</h2>
-      <p class="section-sub white" data-en="Everything built on-platform stays on-platform. That's not a bug — it's the design." data-zh="平台上建立的一切都留在平台上。这不是缺陷——而是设计的本意。">Everything built on-platform stays on-platform. That's not a bug — it's the design.</p>
+      <p class="section-sub white" data-en="Everything built on-platform stays on-platform. That's not a bug — it's the design." data-zh="在平台上建起来的东西，走了就没了。这不是 bug，是设计就该这样。">Everything built on-platform stays on-platform. That's not a bug — it's the design.</p>
     </div>
 
     <div class="lose-grid">
@@ -1050,12 +1024,12 @@ nav.scrolled, .topnav.scrolled, .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,
           </div>
         </div>
         <ul class="lose-items">
-          <li data-en="Accumulated Passport score" data-zh="累积的 Passport 分数">Accumulated Passport score</li>
+          <li data-en="Accumulated Passport score" data-zh="攒下来的 Passport 分">Accumulated Passport score</li>
           <li data-en="Tier status and tier perks" data-zh="等级状态和等级福利">Tier status and tier perks</li>
-          <li data-en="Priority matching with top merchants" data-zh="与顶级商家的优先匹配">Priority matching with top merchants</li>
-          <li data-en="Complete performance history" data-zh="完整的历史表现记录">Complete performance history</li>
-          <li data-en="Earnings multipliers and bonus access" data-zh="收益倍率和奖金访问权">Earnings multipliers and bonus access</li>
-          <li data-en="Premium and exclusive campaign access" data-zh="高端和独家活动访问权">Premium and exclusive campaign access</li>
+          <li data-en="Priority matching with top merchants" data-zh="和好商家优先匹配的资格">Priority matching with top merchants</li>
+          <li data-en="Complete performance history" data-zh="完整的接单历史">Complete performance history</li>
+          <li data-en="Earnings multipliers and bonus access" data-zh="收益加成和奖金资格">Earnings multipliers and bonus access</li>
+          <li data-en="Premium and exclusive campaign access" data-zh="高价活动和独家活动的接单资格">Premium and exclusive campaign access</li>
         </ul>
         <div class="lose-badge" data-en="ALL NON-TRANSFERABLE" data-zh="全部不可转移">ALL NON-TRANSFERABLE</div>
       </div>
@@ -1069,12 +1043,12 @@ nav.scrolled, .topnav.scrolled, .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,
           </div>
         </div>
         <ul class="lose-items">
-          <li data-en="Campaign analytics history and ROI data" data-zh="活动分析历史和 ROI 数据">Campaign analytics history and ROI data</li>
-          <li data-en="Creator performance benchmarks" data-zh="Creator 表现基准">Creator performance benchmarks</li>
-          <li data-en="One-click re-booking workflows" data-zh="一键复购工作流">One-click re-booking workflows</li>
-          <li data-en="Dispute protection and escrow settlement" data-zh="争议保护和托管结算">Dispute protection and escrow settlement</li>
-          <li data-en="Ongoing creator supply pipeline" data-zh="持续的 Creator 供给管道">Ongoing creator supply pipeline</li>
-          <li data-en="Merchant reputation score" data-zh="商家信誉评分">Merchant reputation score</li>
+          <li data-en="Campaign analytics history and ROI data" data-zh="历次活动的效果数据和 ROI">Campaign analytics history and ROI data</li>
+          <li data-en="Creator performance benchmarks" data-zh="各 Creator 效果对比的参考数据">Creator performance benchmarks</li>
+          <li data-en="One-click re-booking workflows" data-zh="一键再合作的操作流程">One-click re-booking workflows</li>
+          <li data-en="Dispute protection and escrow settlement" data-zh="有纠纷有人管、付款有托管">Dispute protection and escrow settlement</li>
+          <li data-en="Ongoing creator supply pipeline" data-zh="持续有新 Creator 可以选">Ongoing creator supply pipeline</li>
+          <li data-en="Merchant reputation score" data-zh="在平台上攒下来的口碑评分">Merchant reputation score</li>
         </ul>
         <div class="lose-badge" data-en="ALL PLATFORM-LOCKED" data-zh="全部锁定在平台内">ALL PLATFORM-LOCKED</div>
       </div>
@@ -1082,7 +1056,7 @@ nav.scrolled, .topnav.scrolled, .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,
 
     <div class="lose-bottom fade-in">
       <div class="lose-bottom-quote">
-        <span data-en='The real question isn&apos;t <strong>"how to prevent bypass"</strong> — it&apos;s <strong>"how to make the platform the place where value settles."</strong>' data-zh='真正的问题不是<strong>"如何防止绕过"</strong>——而是<strong>"如何让平台成为价值结算的地方"</strong>。'>The real question isn't <strong>"how to prevent bypass"</strong> — it's <strong>"how to make the platform the place where value settles."</strong></span>
+        <span data-en='The real question isn&apos;t <strong>"how to prevent bypass"</strong> — it&apos;s <strong>"how to make the platform the place where value settles."</strong>' data-zh='真正要想的不是<strong>"怎么防人绕平台"</strong>——而是<strong>"怎么让平台成为大家都想在里面做事的地方"</strong>。'>The real question isn't <strong>"how to prevent bypass"</strong> — it's <strong>"how to make the platform the place where value settles."</strong></span>
       </div>
     </div>
   </div>
@@ -1093,7 +1067,7 @@ nav.scrolled, .topnav.scrolled, .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,
   <h3 style="font-size:16px; font-weight:700; margin-bottom:12px;" data-en="Continue Reading" data-zh="继续阅读" class="bilingual-text">Continue Reading</h3>
   <a href="push-strategy-core.html" style="display:block; padding:16px; background:#fff; border:1px solid var(--border, #e5e7eb); border-radius:8px; text-decoration:none; transition:all 0.2s; max-width:400px;">
     <div style="font-size:13px; color:var(--text3, #9ca3af);" data-en="Next →" data-zh="下一步 →" class="bilingual-text">Next →</div>
-    <div style="font-size:15px; font-weight:600; color:var(--text, #111827);" data-en="See the core strategic thesis — why Push becomes a value settlement layer" data-zh="看核心战略论点——Push 如何成为价值结算层" class="bilingual-text">See the core strategic thesis — why Push becomes a value settlement layer</div>
+    <div style="font-size:15px; font-weight:600; color:var(--text, #111827);" data-en="See the core strategic thesis — why Push becomes a value settlement layer" data-zh="看核心战略思路——Push 怎么成为双方都离不开的地方" class="bilingual-text">See the core strategic thesis — why Push becomes a value settlement layer</div>
     <div style="font-size:13px; color:var(--accent, #4f46e5); margin-top:4px;" data-en="Strategy Core →" data-zh="战略核心 →" class="bilingual-text">Strategy Core →</div>
   </a>
 </div>
@@ -1104,7 +1078,7 @@ nav.scrolled, .topnav.scrolled, .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,
     <div class="footer-top">
       <div class="footer-brand">
         <div class="footer-logo">PUSH</div>
-        <div class="footer-tagline" data-en="Creator commerce infrastructure for the modern era." data-zh="现代时代的 Creator 商业基础设施。">Creator commerce infrastructure for the modern era.</div>
+        <div class="footer-tagline" data-en="Creator commerce infrastructure for the modern era." data-zh="本地 Creator 效果基础设施">Creator commerce infrastructure for the modern era.</div>
       </div>
       <div class="footer-links">
         <a href="index.html" class="footer-link" data-en="Overview" data-zh="首页">Dashboard</a>

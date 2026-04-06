@@ -34,35 +34,20 @@
 
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--text);line-height:1.6;overflow-x:hidden;background:#fff;}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:var(--text);font-size:15px;line-height:1.85;overflow-x:hidden;}
 
 /* ── FADE IN ── */
-.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.5s ease,transform 0.5s ease;animation:fadeInFallback 0s 4s forwards;}
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.55s ease,transform 0.55s ease;animation:fadeInFallback 0s 4s forwards;}
 .fade-in.visible{opacity:1;transform:translateY(0);animation:none;}
 @keyframes fadeInFallback{to{opacity:1;transform:translateY(0);}}
 
 /* ── NAV ── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:1000;
-  height:60px;background:rgba(255,255,255,0.95);
-  border-bottom:1px solid var(--border);
-  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  display:flex;align-items:center;padding:0 28px;gap:12px;
-}
-.nav-logo{
-  font-size:22px;font-weight:900;color:var(--accent);
-  text-decoration:none;letter-spacing:-0.5px;flex-shrink:0;
-}
-.nav-links{
-  display:flex;align-items:center;gap:2px;flex:1;justify-content:center;flex-wrap:nowrap;
-}
-.nav-links a{
-  font-size:12px;font-weight:500;color:var(--text2);
-  text-decoration:none;padding:5px 9px;border-radius:7px;
-  transition:color 0.2s,background 0.2s;white-space:nowrap;
-}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;background:rgba(255,255,255,0.95);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:box-shadow 0.2s;}
+.nav-logo{font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;margin-right:8px;flex-shrink:0;text-decoration:none;}
+.nav-links{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
+.nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:all 0.15s;white-space:nowrap;text-decoration:none;}
 .nav-links a:hover{color:var(--accent);background:var(--accent-bg);}
-.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;}
+.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);}
 .lang-btn{
   background:var(--accent);color:#fff;border:none;cursor:pointer;
   font-size:12px;font-weight:700;padding:7px 14px;border-radius:8px;
@@ -121,7 +106,7 @@ nav{
 }
 
 /* ── SECTIONS ── */
-.section{padding:80px 40px;}
+.section{padding:120px 64px;}
 .section-inner{max-width:1100px;margin:0 auto;}
 .section-bg2{background:var(--bg2);}
 .section-white{background:#fff;}
@@ -357,7 +342,7 @@ blockquote.principle p+p{margin-top:12px;}
 
 <!-- ── LAYER DESCRIPTION ── -->
 <div style="max-width:800px; margin:0 auto 24px; padding:10px 16px; background:var(--bg2, #f8f9fa); border-radius:8px; font-size:13px; color:var(--text3); text-align:center;">
-  <span data-en="Deep dive into Push's fraud prevention and platform integrity. For the broader risk landscape, see <a href='risk-defense.html'>Risk Defense</a>." data-zh="深入了解 Push 的欺诈防范与平台诚信。更广泛的风险全景请参阅<a href='risk-defense.html'>风险防御</a>。" class="bilingual-text">Deep dive into Push's fraud prevention and platform integrity. For the broader risk landscape, see <a href="risk-defense.html">Risk Defense</a>.</span>
+  <span data-en="Deep dive into Push's fraud prevention and platform integrity. For the broader risk landscape, see <a href='risk-defense.html'>Risk Defense</a>." data-zh="看看 Push 怎么做欺诈防控和平台诚信。完整风险分析看这里：<a href='risk-defense.html'>风险防御</a>。" class="bilingual-text">Deep dive into Push's fraud prevention and platform integrity. For the broader risk landscape, see <a href="risk-defense.html">Risk Defense</a>.</span>
 </div>
 
 <!-- S1: PHILOSOPHY -->
@@ -366,8 +351,8 @@ blockquote.principle p+p{margin-top:12px;}
     <div class="section-label" data-en="PHILOSOPHY" data-zh="核心理念">PHILOSOPHY</div>
     <h2 class="section-title" data-en="Goal: Preserve Trust, Not Punish" data-zh="目标：维护信任，而非惩罚">Goal: Preserve Trust, Not Punish</h2>
     <blockquote class="principle">
-      <p data-en="The goal is NOT aggressive policing. The goal is to preserve a trusted commercial environment while minimizing false positives and operational drag." data-zh="目标不是激进的执法。目标是在最大限度减少误判和运营阻力的同时，维护一个值得信赖的商业环境。">The goal is NOT aggressive policing. The goal is to preserve a trusted commercial environment while minimizing false positives and operational drag.</p>
-      <p style="margin-top:16px;font-size:15px;font-style:normal;color:var(--text2);" data-en="Fraud will emerge from opportunistic creators, weak merchant oversight, collusion, system loopholes, and incentive misalignment. The platform's response must be structural — not reactive, not punitive by default." data-zh="欺诈将来自机会主义创作者、薄弱的商户监督、勾结、系统漏洞和激励错位。平台的应对必须是结构性的——而不是被动的，也不是默认惩罚性的。">Fraud will emerge from opportunistic creators, weak merchant oversight, collusion, system loopholes, and incentive misalignment. The platform's response must be structural — not reactive, not punitive by default.</p>
+      <p data-en="The goal is NOT aggressive policing. The goal is to preserve a trusted commercial environment while minimizing false positives and operational drag." data-zh="目标不是拼命抓人。目标是在尽量减少误判和操作负担的前提下，维护一个值得信任的商业环境。">The goal is NOT aggressive policing. The goal is to preserve a trusted commercial environment while minimizing false positives and operational drag.</p>
+      <p style="margin-top:16px;font-size:15px;font-style:normal;color:var(--text2);" data-en="Fraud will emerge from opportunistic creators, weak merchant oversight, collusion, system loopholes, and incentive misalignment. The platform's response must be structural — not reactive, not punitive by default." data-zh="欺诈来自各种地方：钻空子的创作者、管理松散的商户、互相勾结、系统漏洞、激励设计不对。平台的应对方式必须从根上解决——不能只是打补丁，更不能动不动就罚人。">Fraud will emerge from opportunistic creators, weak merchant oversight, collusion, system loopholes, and incentive misalignment. The platform's response must be structural — not reactive, not punitive by default.</p>
     </blockquote>
   </div>
 </section>
@@ -377,14 +362,14 @@ blockquote.principle p+p{margin-top:12px;}
   <div class="section-inner fade-in">
     <div class="section-label" data-en="THREAT MODEL" data-zh="威胁模型">THREAT MODEL</div>
     <h2 class="section-title" data-en="Five Types of Fraud" data-zh="五种欺诈类型">Five Types of Fraud</h2>
-    <p class="section-sub" data-en="Distinct failure modes requiring distinct detection and enforcement approaches." data-zh="不同的失败模式需要不同的检测和执行方法。">Distinct failure modes requiring distinct detection and enforcement approaches.</p>
+    <p class="section-sub" data-en="Distinct failure modes requiring distinct detection and enforcement approaches." data-zh="不同的作弊方式需要不同的检测和处理手段。">Distinct failure modes requiring distinct detection and enforcement approaches.</p>
     <div class="item-list">
       <div class="item-row">
         <div class="item-num">01</div>
         <div>
           <div class="item-sub" data-en="CREATOR-SIDE" data-zh="创作者端">CREATOR-SIDE</div>
-          <div class="item-title" data-en="Fake Fulfillment" data-zh="虚假履约">Fake Fulfillment</div>
-          <div class="item-desc" data-en="Creator claims they visited, completed, or posted content — but did not truly satisfy the campaign requirement. Proof may be fabricated, edited, or submitted from a past session." data-zh="创作者声称已访问、完成或发布内容——但实际上并未真正满足活动要求。证明材料可能是伪造、编辑的，或来自过去的会话。">Creator claims they visited, completed, or posted content — but did not truly satisfy the campaign requirement. Proof may be fabricated, edited, or submitted from a past session.</div>
+          <div class="item-title" data-en="Fake Fulfillment" data-zh="假装完成">Fake Fulfillment</div>
+          <div class="item-desc" data-en="Creator claims they visited, completed, or posted content — but did not truly satisfy the campaign requirement. Proof may be fabricated, edited, or submitted from a past session." data-zh="创作者声称已到访、完成或发布了内容——但实际上根本没达到活动要求。证明材料可能是伪造的、改过的，或者挪用了以前任务的截图。">Creator claims they visited, completed, or posted content — but did not truly satisfy the campaign requirement. Proof may be fabricated, edited, or submitted from a past session.</div>
         </div>
       </div>
       <div class="item-row">
@@ -392,7 +377,7 @@ blockquote.principle p+p{margin-top:12px;}
         <div>
           <div class="item-sub" data-en="MERCHANT-SIDE" data-zh="商户端">MERCHANT-SIDE</div>
           <div class="item-title" data-en="Fake Merchant-Side Validation" data-zh="商户虚假验证">Fake Merchant-Side Validation</div>
-          <div class="item-desc" data-en="Merchant confirms weak or false completion for convenience or collusive reasons — approving work that does not meet campaign standards, reducing accountability and diluting platform quality." data-zh="商户出于便利或勾结原因确认虚假或不合格的完成——批准不符合活动标准的工作，降低问责制并稀释平台质量。">Merchant confirms weak or false completion for convenience or collusive reasons — approving work that does not meet campaign standards, reducing accountability and diluting platform quality.</div>
+          <div class="item-desc" data-en="Merchant confirms weak or false completion for convenience or collusive reasons — approving work that does not meet campaign standards, reducing accountability and diluting platform quality." data-zh="商户出于省事或勾结目的，给明显不合格的内容盖章通过——批准不达标的工作，让问责机制失效，整体平台质量下滑。">Merchant confirms weak or false completion for convenience or collusive reasons — approving work that does not meet campaign standards, reducing accountability and diluting platform quality.</div>
         </div>
       </div>
       <div class="item-row">
@@ -400,7 +385,7 @@ blockquote.principle p+p{margin-top:12px;}
         <div>
           <div class="item-sub" data-en="REDEMPTION-SIDE" data-zh="核销端">REDEMPTION-SIDE</div>
           <div class="item-title" data-en="Fake Redemption" data-zh="虚假核销">Fake Redemption</div>
-          <div class="item-desc" data-en="Offer usage inflated through self-redemption, friend loops, non-genuine visits, or repeated abuse of limited-use offers. Distorts campaign performance data and wastes merchant budget." data-zh="通过自我核销、朋友循环、非真实访问或重复滥用限制使用优惠来虚增优惠使用量。扭曲活动绩效数据并浪费商户预算。">Offer usage inflated through self-redemption, friend loops, non-genuine visits, or repeated abuse of limited-use offers. Distorts campaign performance data and wastes merchant budget.</div>
+          <div class="item-desc" data-en="Offer usage inflated through self-redemption, friend loops, non-genuine visits, or repeated abuse of limited-use offers. Distorts campaign performance data and wastes merchant budget." data-zh="自己核销、拉朋友刷、假装到访、反复用同一个限次优惠——把核销数字刷高。活动数据全失真，商户的钱白花。">Offer usage inflated through self-redemption, friend loops, non-genuine visits, or repeated abuse of limited-use offers. Distorts campaign performance data and wastes merchant budget.</div>
         </div>
       </div>
       <div class="item-row">
@@ -408,7 +393,7 @@ blockquote.principle p+p{margin-top:12px;}
         <div>
           <div class="item-sub" data-en="METRIC-SIDE" data-zh="指标端">METRIC-SIDE</div>
           <div class="item-title" data-en="Engagement Inflation" data-zh="互动数据虚增">Engagement Inflation</div>
-          <div class="item-desc" data-en="Creators present high vanity metrics — follower counts, likes, reach — with little true campaign value. Purchased followers, fake interactions, or inflated reach claims misrepresent actual influence." data-zh="创作者展示高虚荣指标——粉丝数、点赞数、覆盖范围——但实际活动价值很小。购买的粉丝、虚假互动或夸大的覆盖范围声明歪曲了实际影响力。">Creators present high vanity metrics — follower counts, likes, reach — with little true campaign value. Purchased followers, fake interactions, or inflated reach claims misrepresent actual influence.</div>
+          <div class="item-desc" data-en="Creators present high vanity metrics — follower counts, likes, reach — with little true campaign value. Purchased followers, fake interactions, or inflated reach claims misrepresent actual influence." data-zh="创作者拿出漂亮的粉丝数、点赞数、覆盖量——但对活动没实际帮助。买来的粉丝、刷出来的互动、虚报的覆盖数据，全是装门面的。">Creators present high vanity metrics — follower counts, likes, reach — with little true campaign value. Purchased followers, fake interactions, or inflated reach claims misrepresent actual influence.</div>
         </div>
       </div>
       <div class="item-row">
@@ -416,7 +401,7 @@ blockquote.principle p+p{margin-top:12px;}
         <div>
           <div class="item-sub" data-en="COORDINATION" data-zh="协调性">COORDINATION</div>
           <div class="item-title" data-en="Collusion" data-zh="勾结">Collusion</div>
-          <div class="item-desc" data-en="Merchant and creator coordinate to game payout, rating, or campaign status — mutually benefiting from fraudulent completion cycles at the expense of platform integrity and fair competition." data-zh="商户和创作者协调以操纵支付、评分或活动状态——以牺牲平台完整性和公平竞争为代价，相互从欺诈性完成周期中获益。">Merchant and creator coordinate to game payout, rating, or campaign status — mutually benefiting from fraudulent completion cycles at the expense of platform integrity and fair competition.</div>
+          <div class="item-desc" data-en="Merchant and creator coordinate to game payout, rating, or campaign status — mutually benefiting from fraudulent completion cycles at the expense of platform integrity and fair competition." data-zh="商户和创作者暗中配合，一起刷支付、评分或活动状态——两边都从虚假完成里捞好处，损害的是平台诚信和其他人的公平竞争机会。">Merchant and creator coordinate to game payout, rating, or campaign status — mutually benefiting from fraudulent completion cycles at the expense of platform integrity and fair competition.</div>
         </div>
       </div>
     </div>
@@ -428,16 +413,16 @@ blockquote.principle p+p{margin-top:12px;}
   <div class="section-inner fade-in">
     <div class="section-label" data-en="DETECTION" data-zh="检测">DETECTION</div>
     <h2 class="section-title" data-en="Integrity Risk Signals" data-zh="诚信风险信号">Integrity Risk Signals</h2>
-    <p class="section-sub" data-en="Behavioral patterns and data anomalies the platform monitors continuously — not as triggers for automatic punishment, but as inputs for risk scoring." data-zh="平台持续监控的行为模式和数据异常——不是作为自动惩罚的触发器，而是作为风险评分的输入。">Behavioral patterns and data anomalies the platform monitors continuously — not as triggers for automatic punishment, but as inputs for risk scoring.</p>
+    <p class="section-sub" data-en="Behavioral patterns and data anomalies the platform monitors continuously — not as triggers for automatic punishment, but as inputs for risk scoring." data-zh="平台持续监控的行为规律和数据异常——不是自动触发处罚，而是作为风险打分的参考依据。">Behavioral patterns and data anomalies the platform monitors continuously — not as triggers for automatic punishment, but as inputs for risk scoring.</p>
     <div class="signal-grid">
-      <div class="signal-item"><div class="signal-dot"></div><div class="signal-text" data-en="Sudden result spikes on a campaign after extended inactivity" data-zh="长期不活跃后活动结果突然飙升">Sudden result spikes on a campaign after extended inactivity</div></div>
-      <div class="signal-item"><div class="signal-dot"></div><div class="signal-text" data-en="Proof patterns that repeat unnaturally across submissions" data-zh="在提交中不自然重复的证明模式">Proof patterns that repeat unnaturally across submissions</div></div>
-      <div class="signal-item"><div class="signal-dot"></div><div class="signal-text" data-en="Same-device or same-location redemption anomalies" data-zh="相同设备或相同位置的核销异常">Same-device or same-location redemption anomalies</div></div>
-      <div class="signal-item"><div class="signal-dot"></div><div class="signal-text" data-en="Suspicious redemption timing relative to campaign open window" data-zh="相对于活动开放窗口的可疑核销时间">Suspicious redemption timing relative to campaign open window</div></div>
-      <div class="signal-item"><div class="signal-dot"></div><div class="signal-text" data-en="Merchant-creator pairs with abnormal mutual approval patterns" data-zh="具有异常相互批准模式的商户-创作者对">Merchant-creator pairs with abnormal mutual approval patterns</div></div>
-      <div class="signal-item"><div class="signal-dot"></div><div class="signal-text" data-en="Creators with high completion rates but weak merchant-reported value" data-zh="完成率高但商户报告价值低的创作者">Creators with high completion rates but weak merchant-reported value</div></div>
-      <div class="signal-item"><div class="signal-dot"></div><div class="signal-text" data-en="Creators who selectively target low-verification campaigns only" data-zh="专门针对低验证活动的创作者">Creators who selectively target low-verification campaigns only</div></div>
-      <div class="signal-item"><div class="signal-dot"></div><div class="signal-text" data-en="Engagement metrics inconsistent with historical account behavior" data-zh="与历史账户行为不一致的互动指标">Engagement metrics inconsistent with historical account behavior</div></div>
+      <div class="signal-item"><div class="signal-dot"></div><div class="signal-text" data-en="Sudden result spikes on a campaign after extended inactivity" data-zh="沉寂很久后突然活动结果暴增">Sudden result spikes on a campaign after extended inactivity</div></div>
+      <div class="signal-item"><div class="signal-dot"></div><div class="signal-text" data-en="Proof patterns that repeat unnaturally across submissions" data-zh="不同提交里的证明材料像是复制出来的">Proof patterns that repeat unnaturally across submissions</div></div>
+      <div class="signal-item"><div class="signal-dot"></div><div class="signal-text" data-en="Same-device or same-location redemption anomalies" data-zh="同一设备或同一位置反复核销">Same-device or same-location redemption anomalies</div></div>
+      <div class="signal-item"><div class="signal-dot"></div><div class="signal-text" data-en="Suspicious redemption timing relative to campaign open window" data-zh="核销时间点和活动开放时间对不上">Suspicious redemption timing relative to campaign open window</div></div>
+      <div class="signal-item"><div class="signal-dot"></div><div class="signal-text" data-en="Merchant-creator pairs with abnormal mutual approval patterns" data-zh="某对商户和创作者互相批准的频率异常高">Merchant-creator pairs with abnormal mutual approval patterns</div></div>
+      <div class="signal-item"><div class="signal-dot"></div><div class="signal-text" data-en="Creators with high completion rates but weak merchant-reported value" data-zh="完成率很高但商户说效果很差的创作者">Creators with high completion rates but weak merchant-reported value</div></div>
+      <div class="signal-item"><div class="signal-dot"></div><div class="signal-text" data-en="Creators who selectively target low-verification campaigns only" data-zh="只挑验证要求低的活动来接">Creators who selectively target low-verification campaigns only</div></div>
+      <div class="signal-item"><div class="signal-dot"></div><div class="signal-text" data-en="Engagement metrics inconsistent with historical account behavior" data-zh="互动数据和账号历史表现完全对不上">Engagement metrics inconsistent with historical account behavior</div></div>
     </div>
   </div>
 </section>
@@ -447,55 +432,55 @@ blockquote.principle p+p{margin-top:12px;}
   <div class="section-inner fade-in">
     <div class="section-label" data-en="ARCHITECTURE" data-zh="系统架构">ARCHITECTURE</div>
     <h2 class="section-title" data-en="Fraud Prevention by Design" data-zh="设计驱动的欺诈防范">Fraud Prevention by Design</h2>
-    <p class="section-sub" data-en="Structural mechanisms that reduce fraud opportunity without creating friction for honest users. Prevention is built in — not bolted on." data-zh="减少欺诈机会而不为诚实用户造成摩擦的结构性机制。预防是内置的——而不是附加的。">Structural mechanisms that reduce fraud opportunity without creating friction for honest users. Prevention is built in — not bolted on.</p>
+    <p class="section-sub" data-en="Structural mechanisms that reduce fraud opportunity without creating friction for honest users. Prevention is built in — not bolted on." data-zh="从设计上减少欺诈机会，同时不给正常用户添麻烦。防控是内建的——不是事后贴上去的。">Structural mechanisms that reduce fraud opportunity without creating friction for honest users. Prevention is built in — not bolted on.</p>
     <div class="check-list">
       <div class="check-item">
         <div class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
         <div>
           <div class="check-label" data-en="Milestone-Based Workflow" data-zh="里程碑制工作流">Milestone-Based Workflow</div>
-          <div class="check-desc" data-en="Campaigns progress through defined checkpoints, not a single pass/fail judgment. Each milestone is independently verifiable." data-zh="活动通过定义的检查点进行，而不是单一的通过/失败判断。每个里程碑都可以独立验证。">Campaigns progress through defined checkpoints, not a single pass/fail judgment. Each milestone is independently verifiable.</div>
+          <div class="check-desc" data-en="Campaigns progress through defined checkpoints, not a single pass/fail judgment. Each milestone is independently verifiable." data-zh="活动按设定节点推进，不是一刀切的通过/失败。每个节点可以单独核实。">Campaigns progress through defined checkpoints, not a single pass/fail judgment. Each milestone is independently verifiable.</div>
         </div>
       </div>
       <div class="check-item">
         <div class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
         <div>
           <div class="check-label" data-en="Campaign-Specific Proof Requirements" data-zh="活动专属证明要求">Campaign-Specific Proof Requirements</div>
-          <div class="check-desc" data-en="Each campaign type specifies what counts as valid proof — location check-in, content screenshot, engagement screenshot, merchant scan — reducing ambiguity and gaming." data-zh="每种活动类型指定什么算作有效证明——位置签到、内容截图、互动截图、商户扫描——减少歧义和操纵。">Each campaign type specifies what counts as valid proof — location check-in, content screenshot, engagement screenshot, merchant scan — reducing ambiguity and gaming.</div>
+          <div class="check-desc" data-en="Each campaign type specifies what counts as valid proof — location check-in, content screenshot, engagement screenshot, merchant scan — reducing ambiguity and gaming." data-zh="每种活动类型都明确说明什么算有效证明——位置打卡、内容截图、互动截图、商户扫码——减少模糊地带和钻空子的机会。">Each campaign type specifies what counts as valid proof — location check-in, content screenshot, engagement screenshot, merchant scan — reducing ambiguity and gaming.</div>
         </div>
       </div>
       <div class="check-item">
         <div class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
         <div>
           <div class="check-label" data-en="Selective Verification Depth" data-zh="选择性验证深度">Selective Verification Depth</div>
-          <div class="check-desc" data-en="Verification intensity is calibrated to campaign payout size and creator risk score — not applied uniformly. High-payout or flagged campaigns receive deeper review." data-zh="验证强度根据活动支付规模和创作者风险评分进行校准——不是统一应用。高支付或被标记的活动接受更深入的审查。">Verification intensity is calibrated to campaign payout size and creator risk score — not applied uniformly. High-payout or flagged campaigns receive deeper review.</div>
+          <div class="check-desc" data-en="Verification intensity is calibrated to campaign payout size and creator risk score — not applied uniformly. High-payout or flagged campaigns receive deeper review." data-zh="验证力度按活动金额和创作者风险分打分来定——不是所有人一套标准。金额高或已被标记的活动审查更严。">Verification intensity is calibrated to campaign payout size and creator risk score — not applied uniformly. High-payout or flagged campaigns receive deeper review.</div>
         </div>
       </div>
       <div class="check-item">
         <div class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
         <div>
           <div class="check-label" data-en="Creator Credit Impact" data-zh="创作者信用影响">Creator Credit Impact</div>
-          <div class="check-desc" data-en="Integrity status affects campaign access, payout timing, and tier eligibility — making a clean record economically valuable and fraud economically costly." data-zh="诚信状态影响活动访问权限、支付时间和级别资格——使清洁记录具有经济价值，使欺诈具有经济成本。">Integrity status affects campaign access, payout timing, and tier eligibility — making a clean record economically valuable and fraud economically costly.</div>
+          <div class="check-desc" data-en="Integrity status affects campaign access, payout timing, and tier eligibility — making a clean record economically valuable and fraud economically costly." data-zh="诚信状态直接影响能接什么活动、什么时候到账、能不能升级——保持干净记录有实实在在的经济好处，作弊有代价。">Integrity status affects campaign access, payout timing, and tier eligibility — making a clean record economically valuable and fraud economically costly.</div>
         </div>
       </div>
       <div class="check-item">
         <div class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
         <div>
           <div class="check-label" data-en="Merchant Accountability" data-zh="商户问责制">Merchant Accountability</div>
-          <div class="check-desc" data-en="Merchant validation is tracked and weighted. Approval patterns that diverge significantly from platform norms surface as merchant integrity signals — creating feedback both ways." data-zh="商户验证被跟踪和加权。与平台规范显著偏离的批准模式会作为商户诚信信号浮现——双向创建反馈。">Merchant validation is tracked and weighted. Approval patterns that diverge significantly from platform norms surface as merchant integrity signals — creating feedback both ways.</div>
+          <div class="check-desc" data-en="Merchant validation is tracked and weighted. Approval patterns that diverge significantly from platform norms surface as merchant integrity signals — creating feedback both ways." data-zh="商户的审批行为会被记录和加权。如果审批模式明显偏离平台正常水平，会被标记为商户诚信问题——双向都有约束。">Merchant validation is tracked and weighted. Approval patterns that diverge significantly from platform norms surface as merchant integrity signals — creating feedback both ways.</div>
         </div>
       </div>
       <div class="check-item">
         <div class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
         <div>
           <div class="check-label" data-en="Delayed Settlement Where Needed" data-zh="按需延迟结算">Delayed Settlement Where Needed</div>
-          <div class="check-desc" data-en="Payouts for flagged campaigns or high-risk creators are held pending review. Honest users typically proceed without delay; settlement holds apply selectively." data-zh="被标记活动或高风险创作者的支付在审查期间暂缓。诚实用户通常不会延迟进行；结算暂缓有选择性地适用。">Payouts for flagged campaigns or high-risk creators are held pending review. Honest users typically proceed without delay; settlement holds apply selectively.</div>
+          <div class="check-desc" data-en="Payouts for flagged campaigns or high-risk creators are held pending review. Honest users typically proceed without delay; settlement holds apply selectively." data-zh="被标记活动或高风险创作者的结算暂停等待审核。正常用户通常不受影响；这个限制只针对有问题的情况。">Payouts for flagged campaigns or high-risk creators are held pending review. Honest users typically proceed without delay; settlement holds apply selectively.</div>
         </div>
       </div>
       <div class="check-item">
         <div class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
         <div>
           <div class="check-label" data-en="Anomaly-Triggered Review, Not Universal Manual Review" data-zh="异常触发审查，而非全面人工审查">Anomaly-Triggered Review, Not Universal Manual Review</div>
-          <div class="check-desc" data-en="Manual review is expensive and creates friction for everyone. Reviews are triggered by anomaly scores, not by default — preserving platform efficiency and user experience." data-zh="人工审查成本高昂，会为所有人创造摩擦。审查由异常分数触发，而不是默认触发——保持平台效率和用户体验。">Manual review is expensive and creates friction for everyone. Reviews are triggered by anomaly scores, not by default — preserving platform efficiency and user experience.</div>
+          <div class="check-desc" data-en="Manual review is expensive and creates friction for everyone. Reviews are triggered by anomaly scores, not by default — preserving platform efficiency and user experience." data-zh="人工审查费时费力，对所有人都是负担。审查只在异常分数触发时启动，不是默认就审——保住平台效率和用户体验。">Manual review is expensive and creates friction for everyone. Reviews are triggered by anomaly scores, not by default — preserving platform efficiency and user experience.</div>
         </div>
       </div>
     </div>
@@ -507,7 +492,7 @@ blockquote.principle p+p{margin-top:12px;}
   <div class="section-inner fade-in">
     <div class="section-label" data-en="REVIEW SYSTEM" data-zh="审查系统">REVIEW SYSTEM</div>
     <h2 class="section-title" data-en="Three Review Tiers" data-zh="三级审查制度">Three Review Tiers</h2>
-    <p class="section-sub" data-en="Not all campaigns require the same scrutiny. Review depth scales with risk signals, not with payout alone." data-zh="并非所有活动都需要相同的审查。审查深度随风险信号而扩展，而不仅仅是支付金额。">Not all campaigns require the same scrutiny. Review depth scales with risk signals, not with payout alone.</p>
+    <p class="section-sub" data-en="Not all campaigns require the same scrutiny. Review depth scales with risk signals, not with payout alone." data-zh="不是所有活动都要一样严查。审查深度看风险信号，不只是看金额大小。">Not all campaigns require the same scrutiny. Review depth scales with risk signals, not with payout alone.</p>
     <div class="table-wrap">
       <table class="data-table">
         <thead>
@@ -543,52 +528,52 @@ blockquote.principle p+p{margin-top:12px;}
 <section class="section section-white">
   <div class="section-inner fade-in">
     <div class="section-label" data-en="ENFORCEMENT" data-zh="执行">ENFORCEMENT</div>
-    <h2 class="section-title" data-en="Consequence Framework" data-zh="后果框架">Consequence Framework</h2>
-    <p class="section-sub" data-en="Rule-based consequences that are explainable, consistent, and proportional. Every consequence must pass a proportionality test." data-zh="可解释、一致且相称的基于规则的后果。每个后果必须通过相称性测试。">Rule-based consequences that are explainable, consistent, and proportional. Every consequence must pass a proportionality test.</p>
+    <h2 class="section-title" data-en="Consequence Framework" data-zh="处罚规则">Consequence Framework</h2>
+    <p class="section-sub" data-en="Rule-based consequences that are explainable, consistent, and proportional. Every consequence must pass a proportionality test." data-zh="规则清晰、一致、力度和问题匹配。每一条处罚都要经得起"是否合理"的追问。">Rule-based consequences that are explainable, consistent, and proportional. Every consequence must pass a proportionality test.</p>
     <div class="table-wrap" style="margin-bottom:24px;">
       <table class="data-table">
         <thead>
           <tr>
-            <th data-en="CONSEQUENCE" data-zh="后果">CONSEQUENCE</th>
-            <th data-en="WHEN APPLIED" data-zh="适用时间">WHEN APPLIED</th>
-            <th data-en="INTENDED EFFECT" data-zh="预期效果">INTENDED EFFECT</th>
+            <th data-en="CONSEQUENCE" data-zh="处罚措施">CONSEQUENCE</th>
+            <th data-en="WHEN APPLIED" data-zh="什么情况触发">WHEN APPLIED</th>
+            <th data-en="INTENDED EFFECT" data-zh="目的">INTENDED EFFECT</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td data-en="Warning" data-zh="警告">Warning</td>
-            <td data-en="First anomaly, ambiguous proof, borderline lateness" data-zh="首次异常、模糊证明、边界迟到">First anomaly, ambiguous proof, borderline lateness</td>
-            <td data-en="Signals that behavior is being monitored; no economic impact" data-zh="表明行为正在被监控；无经济影响">Signals that behavior is being monitored; no economic impact</td>
+            <td data-en="First anomaly, ambiguous proof, borderline lateness" data-zh="第一次出现异常、证明材料模糊、轻微超时">First anomaly, ambiguous proof, borderline lateness</td>
+            <td data-en="Signals that behavior is being monitored; no economic impact" data-zh="告知用户行为已被记录；不影响收益">Signals that behavior is being monitored; no economic impact</td>
           </tr>
           <tr>
-            <td data-en="Score Reduction" data-zh="评分降低">Score Reduction</td>
-            <td data-en="Confirmed weak proof, late submission with weak justification" data-zh="确认的弱证明、没有充分理由的迟提交">Confirmed weak proof, late submission with weak justification</td>
-            <td data-en="Reduces access to premium campaigns; creates economic signal" data-zh="减少对优质活动的访问；创建经济信号">Reduces access to premium campaigns; creates economic signal</td>
+            <td data-en="Score Reduction" data-zh="信用分扣减">Score Reduction</td>
+            <td data-en="Confirmed weak proof, late submission with weak justification" data-zh="确认证明材料不合格、无正当理由迟交">Confirmed weak proof, late submission with weak justification</td>
+            <td data-en="Reduces access to premium campaigns; creates economic signal" data-zh="接不到好活动了；有实际经济影响">Reduces access to premium campaigns; creates economic signal</td>
           </tr>
           <tr>
-            <td data-en="Tier Downgrade" data-zh="级别降低">Tier Downgrade</td>
-            <td data-en="Repeated score reductions; consistent integrity pattern violations" data-zh="重复评分降低；持续的诚信模式违规">Repeated score reductions; consistent integrity pattern violations</td>
-            <td data-en="Removes access to higher-payout campaigns; status visible to merchants" data-zh="删除对高支付活动的访问；状态对商户可见">Removes access to higher-payout campaigns; status visible to merchants</td>
+            <td data-en="Tier Downgrade" data-zh="等级降级">Tier Downgrade</td>
+            <td data-en="Repeated score reductions; consistent integrity pattern violations" data-zh="反复被扣分；持续出现诚信问题">Repeated score reductions; consistent integrity pattern violations</td>
+            <td data-en="Removes access to higher-payout campaigns; status visible to merchants" data-zh="高报酬活动接不到；等级对商户可见">Removes access to higher-payout campaigns; status visible to merchants</td>
           </tr>
           <tr>
-            <td data-en="Payout Delay" data-zh="支付延迟">Payout Delay</td>
-            <td data-en="Triggered review status; pending investigation" data-zh="触发审查状态；等待调查">Triggered review status; pending investigation</td>
-            <td data-en="Creates time buffer for investigation without permanent harm" data-zh="创建调查时间缓冲，无永久性伤害">Creates time buffer for investigation without permanent harm</td>
+            <td data-en="Payout Delay" data-zh="结算暂缓">Payout Delay</td>
+            <td data-en="Triggered review status; pending investigation" data-zh="已触发审查；等待核实中">Triggered review status; pending investigation</td>
+            <td data-en="Creates time buffer for investigation without permanent harm" data-zh="给审查留出时间，不是永久处罚">Creates time buffer for investigation without permanent harm</td>
           </tr>
           <tr>
-            <td data-en="Campaign Ineligibility" data-zh="活动资格取消">Campaign Ineligibility</td>
-            <td data-en="Confirmed proof fabrication, confirmed redemption abuse" data-zh="确认的证明伪造、确认的核销滥用">Confirmed proof fabrication, confirmed redemption abuse</td>
-            <td data-en="Removes ability to participate in new campaigns; economic consequence" data-zh="取消参与新活动的能力；经济后果">Removes ability to participate in new campaigns; economic consequence</td>
+            <td data-en="Campaign Ineligibility" data-zh="禁止参与新活动">Campaign Ineligibility</td>
+            <td data-en="Confirmed proof fabrication, confirmed redemption abuse" data-zh="确认存在伪造证明、确认刷单行为">Confirmed proof fabrication, confirmed redemption abuse</td>
+            <td data-en="Removes ability to participate in new campaigns; economic consequence" data-zh="无法接新活动；有直接经济损失">Removes ability to participate in new campaigns; economic consequence</td>
           </tr>
           <tr>
-            <td data-en="Temporary Suspension" data-zh="临时暂停">Temporary Suspension</td>
-            <td data-en="Pattern of confirmed fraud; second major violation" data-zh="确认欺诈模式；第二次重大违规">Pattern of confirmed fraud; second major violation</td>
-            <td data-en="Platform access removed for defined period; strong deterrent signal" data-zh="平台访问在规定期限内删除；强烈震慑信号">Platform access removed for defined period; strong deterrent signal</td>
+            <td data-en="Temporary Suspension" data-zh="暂时封号">Temporary Suspension</td>
+            <td data-en="Pattern of confirmed fraud; second major violation" data-zh="多次确认欺诈；第二次严重违规">Pattern of confirmed fraud; second major violation</td>
+            <td data-en="Platform access removed for defined period; strong deterrent signal" data-zh="一段时间内无法使用平台；警示效果明确">Platform access removed for defined period; strong deterrent signal</td>
           </tr>
           <tr>
-            <td data-en="Permanent Removal" data-zh="永久移除">Permanent Removal</td>
-            <td data-en="Confirmed collusion, repeated suspension, systematic fraud" data-zh="确认勾结、重复暂停、系统性欺诈">Confirmed collusion, repeated suspension, systematic fraud</td>
-            <td data-en="Permanent removal from platform; reserved for worst cases only" data-zh="从平台永久移除；仅保留用于最严重的情况">Permanent removal from platform; reserved for worst cases only</td>
+            <td data-en="Permanent Removal" data-zh="永久封号">Permanent Removal</td>
+            <td data-en="Confirmed collusion, repeated suspension, systematic fraud" data-zh="确认勾结作弊、多次被封、系统性欺诈">Confirmed collusion, repeated suspension, systematic fraud</td>
+            <td data-en="Permanent removal from platform; reserved for worst cases only" data-zh="永久移出平台；只针对最严重的情况">Permanent removal from platform; reserved for worst cases only</td>
           </tr>
         </tbody>
       </table>
@@ -601,44 +586,44 @@ blockquote.principle p+p{margin-top:12px;}
   <div class="section-inner fade-in">
     <div class="section-label" data-en="MERCHANT CONTROLS" data-zh="商户管控">MERCHANT CONTROLS</div>
     <h2 class="section-title" data-en="Merchant Integrity Controls" data-zh="商户诚信管控">Merchant Integrity Controls</h2>
-    <p class="section-sub" data-en="Merchants are participants in the integrity system, not just victims of fraud. Merchant behavior affects the entire creator supply and campaign ecosystem." data-zh="商户是诚信系统的参与者，而不仅仅是欺诈的受害者。商户行为影响整个创作者供应和活动生态系统。">Merchants are participants in the integrity system, not just victims of fraud. Merchant behavior affects the entire creator supply and campaign ecosystem.</p>
+    <p class="section-sub" data-en="Merchants are participants in the integrity system, not just victims of fraud. Merchant behavior affects the entire creator supply and campaign ecosystem." data-zh="商户是诚信系统的一部分，不只是受害者。商户的行为方式直接影响整个创作者供给和活动生态。">Merchants are participants in the integrity system, not just victims of fraud. Merchant behavior affects the entire creator supply and campaign ecosystem.</p>
     <div class="item-list">
       <div class="item-row">
         <div class="item-num">→</div>
         <div>
           <div class="item-title" data-en="Bait-and-Switch Demands" data-zh="诱导欺骗要求">Bait-and-Switch Demands</div>
-          <div class="item-desc" data-en="Merchant changes deliverable expectations after creator accepts — adding requirements, changing content standards, or demanding revisions outside campaign scope. Tracked as merchant integrity violation." data-zh="创作者接受后商户更改交付物期望——添加要求、更改内容标准或要求活动范围之外的修订。跟踪为商户诚信违规。">Merchant changes deliverable expectations after creator accepts — adding requirements, changing content standards, or demanding revisions outside campaign scope. Tracked as merchant integrity violation.</div>
+          <div class="item-desc" data-en="Merchant changes deliverable expectations after creator accepts — adding requirements, changing content standards, or demanding revisions outside campaign scope. Tracked as merchant integrity violation." data-zh="创作者接单后，商户临时改条件——加要求、改内容标准、要求活动范围之外的修改。这类行为会被记录为商户诚信违规。">Merchant changes deliverable expectations after creator accepts — adding requirements, changing content standards, or demanding revisions outside campaign scope. Tracked as merchant integrity violation.</div>
         </div>
       </div>
       <div class="item-row">
         <div class="item-num">→</div>
         <div>
           <div class="item-title" data-en="Unfair Rejections" data-zh="不公平拒绝">Unfair Rejections</div>
-          <div class="item-desc" data-en="Merchant rejects valid work without clear justification. Rejection rate monitored relative to platform norms. Systematic unfair rejection creates platform-level creator churn." data-zh="商户在没有明确理由的情况下拒绝有效工作。拒绝率相对于平台规范进行监控。系统性的不公平拒绝会造成平台级别的创作者流失。">Merchant rejects valid work without clear justification. Rejection rate monitored relative to platform norms. Systematic unfair rejection creates platform-level creator churn.</div>
+          <div class="item-desc" data-en="Merchant rejects valid work without clear justification. Rejection rate monitored relative to platform norms. Systematic unfair rejection creates platform-level creator churn." data-zh="商户无正当理由拒绝合格的内容。拒绝率会和平台正常水平对比监控。如果系统性乱拒，会导致创作者大量离开平台。">Merchant rejects valid work without clear justification. Rejection rate monitored relative to platform norms. Systematic unfair rejection creates platform-level creator churn.</div>
         </div>
       </div>
       <div class="item-row">
         <div class="item-num">→</div>
         <div>
           <div class="item-title" data-en="Refusing Settlement" data-zh="拒绝结算">Refusing Settlement</div>
-          <div class="item-desc" data-en="Merchant delays or refuses payout for confirmed completed work. Platform enforcement step: settlement may be processed directly from merchant escrow with merchant integrity flag." data-zh="商户延迟或拒绝为确认完成的工作付款。平台执法步骤：可直接从商户托管账户处理结算，并标记商户诚信。">Merchant delays or refuses payout for confirmed completed work. Platform enforcement step: settlement may be processed directly from merchant escrow with merchant integrity flag.</div>
+          <div class="item-desc" data-en="Merchant delays or refuses payout for confirmed completed work. Platform enforcement step: settlement may be processed directly from merchant escrow with merchant integrity flag." data-zh="商户拖着不付或直接不付已确认完成的任务。平台可以直接从商户托管账户扣款结算，同时记录商户诚信问题。">Merchant delays or refuses payout for confirmed completed work. Platform enforcement step: settlement may be processed directly from merchant escrow with merchant integrity flag.</div>
         </div>
       </div>
       <div class="item-row">
         <div class="item-num">→</div>
         <div>
           <div class="item-title" data-en="Manipulating Proof Standards Post-Acceptance" data-zh="接受后操纵证明标准">Manipulating Proof Standards Post-Acceptance</div>
-          <div class="item-desc" data-en="Retroactively raising proof bar after campaign launched to avoid paying creators — a deliberate integrity violation with direct economic impact on creators." data-zh="在活动启动后追溯性地提高证明门槛以避免向创作者付款——这是对创作者产生直接经济影响的故意诚信违规。">Retroactively raising proof bar after campaign launched to avoid paying creators — a deliberate integrity violation with direct economic impact on creators.</div>
+          <div class="item-desc" data-en="Retroactively raising proof bar after campaign launched to avoid paying creators — a deliberate integrity violation with direct economic impact on creators." data-zh="活动发布之后偷偷提高验证标准，想赖掉对创作者的付款——这是故意的诚信问题，直接影响创作者收益。">Retroactively raising proof bar after campaign launched to avoid paying creators — a deliberate integrity violation with direct economic impact on creators.</div>
         </div>
       </div>
     </div>
     <div style="margin-top:28px;padding:20px 24px;background:#fff;border:1px solid var(--border);border-radius:var(--radius);">
       <div style="font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);margin-bottom:12px;font-family:'JetBrains Mono',monospace;" data-en="MERCHANT INTEGRITY AFFECTS" data-zh="商户诚信影响">MERCHANT INTEGRITY AFFECTS</div>
       <div style="display:flex;flex-wrap:wrap;gap:8px;">
-        <span style="font-size:13px;padding:6px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;color:var(--text2);" data-en="Creator visibility to their campaigns" data-zh="对其活动的创作者可见度">Creator visibility to their campaigns</span>
-        <span style="font-size:13px;padding:6px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;color:var(--text2);" data-en="Ability to attract strong creators" data-zh="吸引强创作者的能力">Ability to attract strong creators</span>
+        <span style="font-size:13px;padding:6px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;color:var(--text2);" data-en="Creator visibility to their campaigns" data-zh="哪些创作者能看到他们的活动">Creator visibility to their campaigns</span>
+        <span style="font-size:13px;padding:6px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;color:var(--text2);" data-en="Ability to attract strong creators" data-zh="能不能吸引到优质创作者">Ability to attract strong creators</span>
         <span style="font-size:13px;padding:6px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;color:var(--text2);" data-en="Support priority level" data-zh="支持优先级">Support priority level</span>
-        <span style="font-size:13px;padding:6px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;color:var(--text2);" data-en="Future campaign quality routing" data-zh="未来活动质量路由">Future campaign quality routing</span>
+        <span style="font-size:13px;padding:6px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;color:var(--text2);" data-en="Future campaign quality routing" data-zh="以后能匹配到什么质量的活动">Future campaign quality routing</span>
       </div>
     </div>
   </div>
@@ -649,7 +634,7 @@ blockquote.principle p+p{margin-top:12px;}
   <div class="section-inner fade-in">
     <div class="section-label" data-en="DISTINCTION" data-zh="区分">DISTINCTION</div>
     <h2 class="section-title" data-en="Fraud vs. Mistake" data-zh="欺诈与错误的区别">Fraud vs. Mistake</h2>
-    <p class="section-sub" data-en="This distinction matters for both fairness and retention. Treating mistakes as fraud destroys trust. Treating fraud as mistakes enables gaming." data-zh="这一区分对公平性和留存率都很重要。将错误视为欺诈会破坏信任。将欺诈视为错误则会助长操纵行为。">This distinction matters for both fairness and retention. Treating mistakes as fraud destroys trust. Treating fraud as mistakes enables gaming.</p>
+    <p class="section-sub" data-en="This distinction matters for both fairness and retention. Treating mistakes as fraud destroys trust. Treating fraud as mistakes enables gaming." data-zh="这个区分很关键，关乎公平和留存。把失误当欺诈处理，会毁掉信任。把欺诈当失误放过，会让人觉得有空子可钻。">This distinction matters for both fairness and retention. Treating mistakes as fraud destroys trust. Treating fraud as mistakes enables gaming.</p>
     <div class="split-cols">
       <div class="split-col split-mistake">
         <div class="split-col-head" data-en="MISTAKE / CONFUSION" data-zh="错误 / 混淆">MISTAKE / CONFUSION</div>
@@ -680,8 +665,8 @@ blockquote.principle p+p{margin-top:12px;}
   <div class="section-inner fade-in">
     <div class="section-label" style="color:var(--accent-light);" data-en="FINAL STANDARD" data-zh="最终标准">FINAL STANDARD</div>
     <blockquote class="principle-white">
-      <p data-en="Protect merchants without crushing creator trust. Discourage abuse without overburdening good users. Create consequences that matter economically. Make the platform safer than informal alternatives." data-zh="保护商户而不破坏创作者信任。阻止滥用而不过度负担优质用户。创造具有经济意义的后果。使平台比非正式替代品更安全。">Protect merchants without crushing creator trust. Discourage abuse without overburdening good users. Create consequences that matter economically. Make the platform safer than informal alternatives.</p>
-      <p style="margin-top:20px;font-size:16px;font-weight:700;font-style:normal;color:var(--accent-light);" data-en="Integrity is not just protection — it is part of the product." data-zh="诚信不仅仅是保护——它是产品的一部分。">Integrity is not just protection — it is part of the product.</p>
+      <p data-en="Protect merchants without crushing creator trust. Discourage abuse without overburdening good users. Create consequences that matter economically. Make the platform safer than informal alternatives." data-zh="保护商户，同时不伤创作者的信任。阻止滥用，同时不给好用户添麻烦。处罚要有实际经济影响。平台要比私下合作更安全可靠。">Protect merchants without crushing creator trust. Discourage abuse without overburdening good users. Create consequences that matter economically. Make the platform safer than informal alternatives.</p>
+      <p style="margin-top:20px;font-size:16px;font-weight:700;font-style:normal;color:var(--accent-light);" data-en="Integrity is not just protection — it is part of the product." data-zh="诚信不只是保护机制——它本身就是产品的一部分。">Integrity is not just protection — it is part of the product.</p>
     </blockquote>
   </div>
 </section>

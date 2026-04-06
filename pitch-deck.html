@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Push 投资者路演材料：市场机会、产品逻辑、商业模式、护城河与 GTM 策略。">
+<meta name="description" content="Push 投资者路演材料：市场机会、产品逻辑、商业模式、竞争壁垒与 GTM 策略。">
 <meta property="og:title" content="PUSH — 路演材料">
-<meta property="og:description" content="Push 投资者概览：本地创作者效果基础设施的市场、产品与模式。">
+<meta property="og:description" content="Push 投资者概览：怎么让本地创作者合作变得可量化、可重复、有壁垒。">
 <meta property="og:type" content="website">
 <title>PUSH — Pitch Deck</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,39 +36,27 @@
 
 html{scroll-behavior:smooth;}
 
-body{
-  font-family:'Inter',-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
-  color:var(--text);
-  overflow-x:hidden;
-  line-height:1.75;
-}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.85;overflow-x:hidden;}
 
 /* ── NAV ── */
 nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  height:60px;
-  background:rgba(255,255,255,0.9);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 28px;
-  gap:16px;
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;
+  background:rgba(255,255,255,0.95);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);transition:box-shadow 0.2s;
 }
+nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
 .nav-logo{
-  font-size:22px;font-weight:900;color:var(--accent);
-  text-decoration:none;letter-spacing:-1px;flex-shrink:0;
+  font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;
+  margin-right:8px;flex-shrink:0;text-decoration:none;
 }
-.nav-links{
-  display:flex;align-items:center;gap:2px;flex-wrap:nowrap;overflow:hidden;
-}
+.nav-links{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
 .nav-links a{
   font-size:12px;font-weight:500;color:var(--text2);
-  text-decoration:none;padding:5px 9px;border-radius:6px;
-  white-space:nowrap;transition:color .15s,background .15s;
+  padding:6px 12px;border-radius:8px;transition:all 0.15s;white-space:nowrap;text-decoration:none;
 }
-.nav-links a:hover{color:var(--text);background:var(--bg2);}
-.nav-links a.active{color:var(--accent);background:var(--accent-bg);}
+.nav-links a:hover{color:var(--accent);background:var(--accent-bg);}
+.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);}
 #lang-btn{
   flex-shrink:0;
   background:var(--accent);color:#fff;border:none;cursor:pointer;
@@ -590,8 +578,8 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
       <span class="slide-label" data-en="INVESTOR OVERVIEW" data-zh="投资者概览">INVESTOR OVERVIEW</span>
     </div>
     <div class="s1-title" data-en="Push" data-zh="Push">Push</div>
-    <div class="s1-sub" data-en="Local creator performance infrastructure." data-zh="本地创作者效果基础设施。">Local creator performance infrastructure.</div>
-    <p class="s1-desc" data-en="We structure, verify, and repeat local creator campaigns — giving merchants measurable ROI and creators a real career path." data-zh="我们把本地创作者合作结构化：有目标、有结果、值得反复做。商家拿到可量化的ROI，创作者有了真正的职业路径。">We structure, verify, and repeat local creator campaigns — giving merchants measurable ROI and creators a real career path.</p>
+    <div class="s1-sub" data-en="Local creator performance infrastructure." data-zh="让本地创作者合作可量化、可追责、值得反复做。">Local creator performance infrastructure.</div>
+    <p class="s1-desc" data-en="We structure, verify, and repeat local creator campaigns — giving merchants measurable ROI and creators a real career path." data-zh="我们给本地创作者合作立规矩：有目标、有核实、值得反复做。商家拿到看得见的ROI，创作者走上真正的职业路。">We structure, verify, and repeat local creator campaigns — giving merchants measurable ROI and creators a real career path.</p>
     <div class="s1-stats">
       <span class="stat-pill" data-en="$0 → $99/mo" data-zh="$0 起步 → ¥99/月">$0 → $99/mo</span>
       <span class="stat-pill" data-en="4 creator tiers" data-zh="4个创作者等级">4 creator tiers</span>
@@ -642,7 +630,7 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
       </div>
     </div>
 
-    <blockquote class="s2-quote" data-en="&ldquo;The market has abundant creator supply. It just isn&rsquo;t structured into a repeatable acquisition channel for local commerce.&rdquo;" data-zh="&ldquo;市场有足够多的创作者供给，只是没有被结构化成本地商业可重复使用的获客渠道。&rdquo;">"The market has abundant creator supply. It just isn't structured into a repeatable acquisition channel for local commerce."</blockquote>
+    <blockquote class="s2-quote" data-en="&ldquo;The market has abundant creator supply. It just isn&rsquo;t structured into a repeatable acquisition channel for local commerce.&rdquo;" data-zh="&ldquo;博主够多。但没人把这件事做成本地商家可以反复用的获客方式。&rdquo;">"The market has abundant creator supply. It just isn't structured into a repeatable acquisition channel for local commerce."</blockquote>
   </div>
 </section>
 
@@ -655,7 +643,7 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
       <span class="slide-num">03</span>
       <span class="slide-label" data-en="INSIGHT" data-zh="洞察">INSIGHT</span>
     </div>
-    <h2 class="s3-title" data-en="Creators aren&rsquo;t media. They&rsquo;re unstructured customer acquisition channels." data-zh="创作者不是媒体。他们是非结构化的客户获取渠道。">Creators aren't media. They're unstructured customer acquisition channels.</h2>
+    <h2 class="s3-title" data-en="Creators aren&rsquo;t media. They&rsquo;re unstructured customer acquisition channels." data-zh="创作者不是媒体。他们是一批没人管的客户获取渠道。">Creators aren't media. They're unstructured customer acquisition channels.</h2>
 
     <div class="s3-cols">
       <div class="s3-col others">
@@ -670,15 +658,15 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
       <div class="s3-col push">
         <div class="s3-col-title" data-en="What Push builds" data-zh="Push 在做什么">What Push builds</div>
         <ul class="s3-items">
-          <li data-en="Infrastructure layer (not a marketplace)" data-zh="基础设施（不是市场平台）">Infrastructure layer (not a marketplace)</li>
-          <li data-en="Structured campaign system (goal → verified outcome)" data-zh="目标→核实结果的结构化流程">Structured campaign system (goal → verified outcome)</li>
+          <li data-en="Infrastructure layer (not a marketplace)" data-zh="底层工具（不是撮合平台）">Infrastructure layer (not a marketplace)</li>
+          <li data-en="Structured campaign system (goal → verified outcome)" data-zh="有章法的合作流程（目标→核实结果）">Structured campaign system (goal → verified outcome)</li>
           <li data-en="Performance credit (completion rate, not follower count)" data-zh="按履约评分，不看粉丝">Performance credit (completion rate, not follower count)</li>
           <li data-en="Repeatable acquisition workflow (data feeds next campaign)" data-zh="可重复运营，数据反哺下次">Repeatable acquisition workflow (data feeds next campaign)</li>
         </ul>
       </div>
     </div>
 
-    <div class="s3-pullquote" data-en="Push lets local businesses buy customer acquisition from rising creators through verified fulfillment and conversion history." data-zh="Push 让本地商家通过已核验的履约记录，从上升中的创作者那里购买真实的获客能力。">Push lets local businesses buy customer acquisition from rising creators through verified fulfillment and conversion history.</div>
+    <div class="s3-pullquote" data-en="Push lets local businesses buy customer acquisition from rising creators through verified fulfillment and conversion history." data-zh="Push 让本地商家根据博主真实的履约记录和转化历史，有根据地花钱买客户。">Push lets local businesses buy customer acquisition from rising creators through verified fulfillment and conversion history.</div>
   </div>
 </section>
 
@@ -691,7 +679,7 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
       <span class="slide-num">04</span>
       <span class="slide-label" data-en="HOW IT WORKS" data-zh="如何运作">HOW IT WORKS</span>
     </div>
-    <h2 class="s4-title" data-en="Goal → Structure → Route → Verify → Settle → Repeat." data-zh="从目标到复购，全程结构化。">Goal → Structure → Route → Verify → Settle → Repeat.</h2>
+    <h2 class="s4-title" data-en="Goal → Structure → Route → Verify → Settle → Repeat." data-zh="从目标到复购，每一步都有章法。">Goal → Structure → Route → Verify → Settle → Repeat.</h2>
 
     <div class="milestone-row">
       <span class="milestone-pill" data-en="Accepted" data-zh="接受">Accepted</span>
@@ -742,7 +730,7 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
           <div class="rev-layer-name" data-en="Merchant Subscription" data-zh="商家订阅">Merchant Subscription</div>
           <div class="rev-layer-price" data-en="$0 free (wk 1–8) → $99/mo Basic → $199/mo Pro" data-zh="免费(第1-8周) → 基础版99美元/月 → 专业版199美元/月">$0 free (wk 1–8) → $99/mo Basic → $199/mo Pro</div>
         </div>
-        <p class="rev-layer-body" data-en="Stability layer. Subscription removes the per-campaign decision. Merchants who subscribe run more campaigns with less friction." data-zh="稳定层。订阅制消除了逐活动的决策摩擦。订阅的商家以更少摩擦开展更多活动。">Stability layer. Subscription removes the per-campaign decision. Merchants who subscribe run more campaigns with less friction.</p>
+        <p class="rev-layer-body" data-en="Stability layer. Subscription removes the per-campaign decision. Merchants who subscribe run more campaigns with less friction." data-zh="订了就省掉每次的来回——不用每次算值不值。订阅的商家跑的活动更多，花的精力更少。">Stability layer. Subscription removes the per-campaign decision. Merchants who subscribe run more campaigns with less friction.</p>
       </div>
       <div class="rev-layer">
         <div>
@@ -750,7 +738,7 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
           <div class="rev-layer-name" data-en="Campaign Service Fees" data-zh="活动服务费">Campaign Service Fees</div>
           <div class="rev-layer-price" data-en="$39/campaign (Basic overage) · $29/campaign (Pro overage)" data-zh="39美元/次（基础版超额）· 29美元/次（专业版超额）">$39/campaign (Basic overage) · $29/campaign (Pro overage)</div>
         </div>
-        <p class="rev-layer-body" data-en="Operational monetization tied to merchant action. Revenue grows as campaign volume grows." data-zh="与商家行为挂钩的运营变现。活动量增，收入随之增。">Operational monetization tied to merchant action. Revenue grows as campaign volume grows.</p>
+        <p class="rev-layer-body" data-en="Operational monetization tied to merchant action. Revenue grows as campaign volume grows." data-zh="商家活动跑多少，我们就收多少。活动量大，收入自然跟着涨。">Operational monetization tied to merchant action. Revenue grows as campaign volume grows.</p>
       </div>
       <div class="rev-layer">
         <div>
@@ -758,7 +746,7 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
           <div class="rev-layer-name" data-en="Performance Take Rate" data-zh="效果分成">Performance Take Rate <span style="font-size:12px;color:var(--text3);font-weight:500;">(future)</span></div>
           <div class="rev-layer-price" data-en="% of creator payout on premium campaigns" data-zh="高级活动创作者提现的百分比">% of creator payout on premium campaigns</div>
         </div>
-        <p class="rev-layer-body" data-en="The strongest long-term layer. Only viable when attribution is strong enough to justify performance-based pricing. Phase 3+." data-zh="最强的长期层。仅在归因足够强以支撑效果定价时才启动。第三阶段+。">The strongest long-term layer. Only viable when attribution is strong enough to justify performance-based pricing. Phase 3+.</p>
+        <p class="rev-layer-body" data-en="The strongest long-term layer. Only viable when attribution is strong enough to justify performance-based pricing. Phase 3+." data-zh="长期最强的一层。要等归因数据够扎实，才有底气做效果定价。第三阶段之后。">The strongest long-term layer. Only viable when attribution is strong enough to justify performance-based pricing. Phase 3+.</p>
       </div>
     </div>
 
@@ -819,23 +807,23 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
       <span class="slide-num">06</span>
       <span class="slide-label" data-en="DEFENSIBILITY" data-zh="防御性">DEFENSIBILITY</span>
     </div>
-    <h2 class="s6-title" data-en="The moat is proprietary credit data and switching cost." data-zh="护城河是专有信用数据和切换成本。">The moat is proprietary credit data and switching cost.</h2>
+    <h2 class="s6-title" data-en="The moat is proprietary credit data and switching cost." data-zh="壁垒是专有信用数据，和让人走不掉的切换成本。">The moat is proprietary credit data and switching cost.</h2>
 
     <div class="moat-grid">
       <div class="moat-card">
-        <div class="moat-num" data-en="MOAT 1" data-zh="护城河 1">MOAT 1</div>
-        <div class="moat-name" data-en="Creator Credit Capital (non-portable)" data-zh="创作者信用资产（不可迁移）">Creator Credit Capital (non-portable)</div>
-        <p class="moat-body" data-en="Every campaign builds a creator's Push Score: completion rate, merchant ratings, category expertise, geo-credit, dispute history. This data cannot be exported. A creator with 50 completed campaigns, 4.7 merchant rating, and Reliable tier status has built months of standing they cannot replicate elsewhere. Leaving means starting from zero." data-zh="每次合作都在积累 Push Score：完成率、商家评分、品类专长、地理信用、纠纷历史。这些数据无法导出。完成过50次合作、商家评分4.7、稳定可靠等级的创作者，积累了数月无法在其他平台复制的地位。离开就是从零开始。">Every campaign builds a creator's Push Score: completion rate, merchant ratings, category expertise, geo-credit, dispute history. This data cannot be exported. A creator with 50 completed campaigns, 4.7 merchant rating, and Reliable tier status has built months of standing they cannot replicate elsewhere. Leaving means starting from zero.</p>
+        <div class="moat-num" data-en="MOAT 1" data-zh="壁垒 1">MOAT 1</div>
+        <div class="moat-name" data-en="Creator Credit Capital (non-portable)" data-zh="创作者信用记录（带不走）">Creator Credit Capital (non-portable)</div>
+        <p class="moat-body" data-en="Every campaign builds a creator's Push Score: completion rate, merchant ratings, category expertise, geo-credit, dispute history. This data cannot be exported. A creator with 50 completed campaigns, 4.7 merchant rating, and Reliable tier status has built months of standing they cannot replicate elsewhere. Leaving means starting from zero." data-zh="每次合作都在积累 Push Score：完成率、商家评分、品类专长、本地信用、纠纷记录。这些数据导不走。做满50单、商家评分4.7、稳定可靠等级的博主，几个月的积累无法在别处重建。走了就从零开始。">Every campaign builds a creator's Push Score: completion rate, merchant ratings, category expertise, geo-credit, dispute history. This data cannot be exported. A creator with 50 completed campaigns, 4.7 merchant rating, and Reliable tier status has built months of standing they cannot replicate elsewhere. Leaving means starting from zero.</p>
       </div>
       <div class="moat-card">
-        <div class="moat-num" data-en="MOAT 2" data-zh="护城河 2">MOAT 2</div>
-        <div class="moat-name" data-en="Merchant Operations Data (locked in)" data-zh="商家运营数据（锁定）">Merchant Operations Data (locked in)</div>
-        <p class="moat-body" data-en="Campaign history, creator performance benchmarks, ROI trends, automated re-booking — all platform-specific. A merchant who's run 10 campaigns on Push has a creator comparison dataset they cannot access anywhere else. Their best decisions live in the platform." data-zh="活动历史、创作者表现基准、ROI趋势、自动化复购——全是平台专属。在 Push 跑过10次活动的商家，有一份在其他地方拿不到的创作者对比数据集。">Campaign history, creator performance benchmarks, ROI trends, automated re-booking — all platform-specific. A merchant who's run 10 campaigns on Push has a creator comparison dataset they cannot access anywhere else. Their best decisions live in the platform.</p>
+        <div class="moat-num" data-en="MOAT 2" data-zh="壁垒 2">MOAT 2</div>
+        <div class="moat-name" data-en="Merchant Operations Data (locked in)" data-zh="商家的运营数据（留在平台里）">Merchant Operations Data (locked in)</div>
+        <p class="moat-body" data-en="Campaign history, creator performance benchmarks, ROI trends, automated re-booking — all platform-specific. A merchant who's run 10 campaigns on Push has a creator comparison dataset they cannot access anywhere else. Their best decisions live in the platform." data-zh="活动历史、哪个博主效果好、ROI走势、自动复购推荐——全是平台独有的。在 Push 跑过10次活动的商家，有一份在别处找不到的博主对比记录。最好的决策都在这里。">Campaign history, creator performance benchmarks, ROI trends, automated re-booking — all platform-specific. A merchant who's run 10 campaigns on Push has a creator comparison dataset they cannot access anywhere else. Their best decisions live in the platform.</p>
       </div>
       <div class="moat-card">
-        <div class="moat-num" data-en="MOAT 3" data-zh="护城河 3">MOAT 3</div>
-        <div class="moat-name" data-en="Network-Locked Liquidity" data-zh="网络锁定的流动性">Network-Locked Liquidity</div>
-        <p class="moat-body" data-en="Verified, scored, tier-ranked local creators only exist inside Push. Verified, performing local merchants only exist inside Push. Neither side can recreate this network off-platform." data-zh="经过核验、有评分、有层级的本地创作者池，只存在于 Push 内部。经过核验、有表现记录的本地商家池，也只在 Push 内。双方都无法在平台外重建这个网络。">Verified, scored, tier-ranked local creators only exist inside Push. Verified, performing local merchants only exist inside Push. Neither side can recreate this network off-platform.</p>
+        <div class="moat-num" data-en="MOAT 3" data-zh="壁垒 3">MOAT 3</div>
+        <div class="moat-name" data-en="Network-Locked Liquidity" data-zh="网络本身就是壁垒">Network-Locked Liquidity</div>
+        <p class="moat-body" data-en="Verified, scored, tier-ranked local creators only exist inside Push. Verified, performing local merchants only exist inside Push. Neither side can recreate this network off-platform." data-zh="经过核验、有评分、有等级的本地博主池，只在 Push 里有。有过合作记录的本地商家库，也只在 Push 里。双方在平台外都凑不出这张网。">Verified, scored, tier-ranked local creators only exist inside Push. Verified, performing local merchants only exist inside Push. Neither side can recreate this network off-platform.</p>
       </div>
     </div>
   </div>
@@ -881,7 +869,7 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
           <li data-en="Scale to 15 merchants (referrals + walk-in outreach)" data-zh="扩展到15个商家（转介绍+主动拓展）">Scale to 15 merchants (referrals + walk-in outreach)</li>
           <li data-en="Introduce creator scoring + standby notifications" data-zh="引入创作者评分和候补通知">Introduce creator scoring + standby notifications</li>
           <li data-en="Transition to paid: $99/mo or $49/campaign" data-zh="转为付费：$99/月或$49/次">Transition to paid: $99/mo or $49/campaign</li>
-          <li data-en="Go/No-Go decision based on 7 metrics" data-zh="基于7个指标做去/留决策">Go/No-Go decision based on 7 metrics</li>
+          <li data-en="Go/No-Go decision based on 7 metrics" data-zh="根据7个指标决定继续还是停">Go/No-Go decision based on 7 metrics</li>
         </ul>
       </div>
     </div>
@@ -920,9 +908,9 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
         </div>
         <div class="risk-body">
           <div class="risk-section-label" data-en="THE RISK" data-zh="风险">THE RISK</div>
-          <p class="risk-text" data-en="If Push is seen as 'just another influencer app,' it competes in a red ocean with no moat." data-zh="如果 Push 被当成"又一个网红应用"，就直接掉进红海，没有护城河。">If Push is seen as "just another influencer app," it competes in a red ocean with no moat.</p>
+          <p class="risk-text" data-en="If Push is seen as 'just another influencer app,' it competes in a red ocean with no moat." data-zh="如果 Push 被当成"又一个网红应用"，就直接掉进红海，没有任何差异化优势。">If Push is seen as "just another influencer app," it competes in a red ocean with no moat.</p>
           <div class="risk-section-label" style="margin-top:12px;" data-en="DEFENSE" data-zh="防御">DEFENSE</div>
-          <p class="risk-text" data-en="Every external message centers on merchant ROI, verified outcomes, and structured workflows. Never 'discovery,' never 'social.'" data-zh="所有对外表达都围绕商家ROI、可核验结果和结构化工作流。永远不提"发现"、"探索"或"社交"。">Every external message centers on merchant ROI, verified outcomes, and structured workflows. Never "discovery," never "social."</p>
+          <p class="risk-text" data-en="Every external message centers on merchant ROI, verified outcomes, and structured workflows. Never 'discovery,' never 'social.'" data-zh="所有对外表达都说商家ROI、可核验结果、有规则的合作流程。不提"发现"、"探索"或"社交"。">Every external message centers on merchant ROI, verified outcomes, and structured workflows. Never "discovery," never "social."</p>
           <span class="defense-badge" data-en="✓ Managed" data-zh="✓ 已应对">✓ Managed</span>
         </div>
       </div>
@@ -970,16 +958,16 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
       <span class="slide-num">09</span>
       <span class="slide-label" data-en="THE OPPORTUNITY" data-zh="机会">THE OPPORTUNITY</span>
     </div>
-    <h2 class="s9-title" data-en="The creator economy scaled. The infrastructure didn't." data-zh="创作者经济扩大了，基础设施没跟上。">The creator economy scaled. The infrastructure didn't.</h2>
+    <h2 class="s9-title" data-en="The creator economy scaled. The infrastructure didn't." data-zh="创作者经济变大了，但后台那套运作方式还停在原地。">The creator economy scaled. The infrastructure didn't.</h2>
 
     <div class="timing-grid">
       <div class="timing-card">
         <div class="timing-num" data-en="SIGNAL 1" data-zh="信号 1">SIGNAL 1</div>
-        <p class="timing-body" data-en="Creator volume has exploded — micro-creators especially — but commercial infrastructure is still DMs and spreadsheets." data-zh="微型创作者数量爆炸，但商业基础设施还是私信和表格。">Creator volume has exploded — micro-creators especially — but commercial infrastructure is still DMs and spreadsheets.</p>
+        <p class="timing-body" data-en="Creator volume has exploded — micro-creators especially — but commercial infrastructure is still DMs and spreadsheets." data-zh="微型创作者越来越多，但合作这件事还是靠私信和表格在撑。">Creator volume has exploded — micro-creators especially — but commercial infrastructure is still DMs and spreadsheets.</p>
       </div>
       <div class="timing-card">
         <div class="timing-num" data-en="SIGNAL 2" data-zh="信号 2">SIGNAL 2</div>
-        <p class="timing-body" data-en="Local merchants are increasingly creator-curious but have no structured way to run campaigns, verify outcomes, or repeat what works." data-zh="本地商家越来越想尝试创作者合作，但没有结构化方式。">Local merchants are increasingly creator-curious but have no structured way to run campaigns, verify outcomes, or repeat what works.</p>
+        <p class="timing-body" data-en="Local merchants are increasingly creator-curious but have no structured way to run campaigns, verify outcomes, or repeat what works." data-zh="本地商家越来越想试试博主合作，但不知道怎么做才不乱、不亏、值得再来一次。">Local merchants are increasingly creator-curious but have no structured way to run campaigns, verify outcomes, or repeat what works.</p>
       </div>
       <div class="timing-card">
         <div class="timing-num" data-en="SIGNAL 3" data-zh="信号 3">SIGNAL 3</div>
@@ -988,7 +976,7 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
     </div>
 
     <div class="s9-closer">
-      <div class="s9-closer-text" data-en="Push wins by making the platform more <span class='s9-closer-accent'>economically rational</span> than off-platform behavior." data-zh="Push 的胜利在于：让平台内合作比平台外合作<span class='s9-closer-accent'>更具经济理性</span>。">Push wins by making the platform more <span class="s9-closer-accent">economically rational</span> than off-platform behavior.</div>
+      <div class="s9-closer-text" data-en="Push wins by making the platform more <span class='s9-closer-accent'>economically rational</span> than off-platform behavior." data-zh="Push 要赢，靠的是让平台内合作比私下合作<span class='s9-closer-accent'>明显更合算</span>。">Push wins by making the platform more <span class="s9-closer-accent">economically rational</span> than off-platform behavior.</div>
     </div>
 
     <div class="s9-links">
@@ -1014,7 +1002,7 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
     <div class="footer-top">
       <div class="footer-brand">
         <span class="logo">PUSH</span>
-        <p data-en="Local creator performance infrastructure." data-zh="本地创作者效果基础设施。">Local creator performance infrastructure.</p>
+        <p data-en="Local creator performance infrastructure." data-zh="让本地创作者合作可量化、值得反复做。">Local creator performance infrastructure.</p>
       </div>
       <div class="footer-links">
         <a href="index.html" data-en="Overview" data-zh="首页">Overview</a>

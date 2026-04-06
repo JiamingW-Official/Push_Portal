@@ -34,35 +34,20 @@
 
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--text);line-height:1.6;overflow-x:hidden;background:#fff;}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:var(--text);font-size:15px;line-height:1.85;overflow-x:hidden;}
 
 /* ── FADE IN ── */
-.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.5s ease,transform 0.5s ease;animation:fadeInFallback 0s 4s forwards;}
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.55s ease,transform 0.55s ease;animation:fadeInFallback 0s 4s forwards;}
 .fade-in.visible{opacity:1;transform:translateY(0);animation:none;}
 @keyframes fadeInFallback{to{opacity:1;transform:translateY(0);}}
 
 /* ── NAV ── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:1000;
-  height:60px;background:rgba(255,255,255,0.95);
-  border-bottom:1px solid var(--border);
-  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  display:flex;align-items:center;padding:0 28px;gap:12px;
-}
-.nav-logo{
-  font-size:22px;font-weight:900;color:var(--accent);
-  text-decoration:none;letter-spacing:-0.5px;flex-shrink:0;
-}
-.nav-links{
-  display:flex;align-items:center;gap:2px;flex:1;justify-content:center;flex-wrap:nowrap;
-}
-.nav-links a{
-  font-size:12px;font-weight:500;color:var(--text2);
-  text-decoration:none;padding:5px 9px;border-radius:7px;
-  transition:color 0.2s,background 0.2s;white-space:nowrap;
-}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;background:rgba(255,255,255,0.95);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:box-shadow 0.2s;}
+.nav-logo{font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;margin-right:8px;flex-shrink:0;text-decoration:none;}
+.nav-links{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
+.nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:all 0.15s;white-space:nowrap;text-decoration:none;}
 .nav-links a:hover{color:var(--accent);background:var(--accent-bg);}
-.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;}
+.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);}
 .lang-btn{
   background:var(--accent);color:#fff;border:none;cursor:pointer;
   font-size:12px;font-weight:700;padding:7px 14px;border-radius:8px;
@@ -121,7 +106,7 @@ nav{
 }
 
 /* ── SECTIONS ── */
-.section{padding:80px 40px;}
+.section{padding:120px 64px;}
 .section-inner{max-width:1100px;margin:0 auto;}
 .section-bg2{background:var(--bg2);}
 .section-white{background:#fff;}
@@ -378,24 +363,24 @@ blockquote.principle-white{
   <div class="hero-inner">
     <span class="hero-doc-badge" data-en="DOC — 09 · GTM &amp; LAUNCH LOOPS" data-zh="文档 — 09 · GTM与启动循环">DOC — 09 · GTM &amp; LAUNCH LOOPS</span>
     <h1 class="hero-title" data-en="GTM Experiments &amp; Launch Loops" data-zh="GTM 实验与启动循环">GTM Experiments &amp; Launch Loops</h1>
-    <p class="hero-subtitle" data-en="How Push launches as a concentrated market experiment, not a broad platform announcement." data-zh="Push 如何作为集中式市场实验启动，而非广泛的平台发布。">How Push launches as a concentrated market experiment, not a broad platform announcement.</p>
-    <p class="hero-principle" data-en="Density changes behavior for both creators and merchants. The first neighborhood becomes the blueprint for the next one." data-zh="密度改变创作者和商户的行为。第一个社区成为下一个社区的蓝图。">Density changes behavior for both creators and merchants. The first neighborhood becomes the blueprint for the next one.</p>
+    <p class="hero-subtitle" data-en="How Push launches as a concentrated market experiment, not a broad platform announcement." data-zh="Push 怎么上线——不是全面铺开，而是在一个小地方集中验证。">How Push launches as a concentrated market experiment, not a broad platform announcement.</p>
+    <p class="hero-principle" data-en="Density changes behavior for both creators and merchants. The first neighborhood becomes the blueprint for the next one." data-zh="足够密集才能改变创作者和商户的行为方式。第一个街区跑通了，就是下一个的模板。">Density changes behavior for both creators and merchants. The first neighborhood becomes the blueprint for the next one.</p>
   </div>
 </section>
 
 <!-- ── LAYER DESCRIPTION ── -->
 <div style="max-width:800px; margin:0 auto 24px; padding:10px 16px; background:var(--bg2, #f8f9fa); border-radius:8px; font-size:13px; color:var(--text3); text-align:center;">
-  <span data-en="Deep dive into Push's go-to-market launch plan. For the investor-facing summary, see <a href='pitch-deck.html'>Pitch Deck</a>." data-zh="深入了解 Push 的市场进入与启动计划。投资者摘要请参阅<a href='pitch-deck.html'>路演材料</a>。" class="bilingual-text">Deep dive into Push's go-to-market launch plan. For the investor-facing summary, see <a href="pitch-deck.html">Pitch Deck</a>.</span>
+  <span data-en="Deep dive into Push's go-to-market launch plan. For the investor-facing summary, see <a href='pitch-deck.html'>Pitch Deck</a>." data-zh="看看 Push 怎么上线、怎么进市场。投资者版本看这里：<a href='pitch-deck.html'>路演材料</a>。" class="bilingual-text">Deep dive into Push's go-to-market launch plan. For the investor-facing summary, see <a href="pitch-deck.html">Pitch Deck</a>.</span>
 </div>
 
 <!-- S1: LAUNCH PHILOSOPHY -->
 <section class="section section-bg2">
   <div class="section-inner fade-in">
     <div class="section-label" data-en="PHILOSOPHY" data-zh="核心理念">PHILOSOPHY</div>
-    <h2 class="section-title" data-en="Launch as a Concentrated Experiment" data-zh="作为集中实验启动">Launch as a Concentrated Experiment</h2>
+    <h2 class="section-title" data-en="Launch as a Concentrated Experiment" data-zh="先集中跑一个点，跑通再说">Launch as a Concentrated Experiment</h2>
     <blockquote class="principle">
-      <p data-en="Push should NOT launch as a broad platform. Launch as a concentrated market experiment. The first goal is to prove: merchants repeat, creators progress, campaigns can be fulfilled cleanly, and local density changes behavior." data-zh="Push 不应该作为一个广泛的平台启动。而应作为一个集中的市场实验启动。第一个目标是证明：商户会重复使用、创作者会进步、活动能够干净地完成、本地密度能够改变行为。">Push should NOT launch as a broad platform. Launch as a concentrated market experiment. The first goal is to prove: merchants repeat, creators progress, campaigns can be fulfilled cleanly, and local density changes behavior.</p>
-      <p style="margin-top:16px;font-size:15px;font-style:normal;color:var(--text2);" data-en="Expansion without proof of these four things is likely fake progress. Every launch cohort should teach the platform something real — not just fill a user count." data-zh="在没有证明这四件事的情况下扩张很可能是虚假进展。每个启动群体都应该教会平台一些真实的东西——而不仅仅是填充用户数量。">Expansion without proof of these four things is likely fake progress. Every launch cohort should teach the platform something real — not just fill a user count.</p>
+      <p data-en="Push should NOT launch as a broad platform. Launch as a concentrated market experiment. The first goal is to prove: merchants repeat, creators progress, campaigns can be fulfilled cleanly, and local density changes behavior." data-zh="Push 不应该一上来就全面铺开。先作为一个集中的小范围测试启动。第一步要验证的是：商户会回来继续用、创作者在进步、活动能够干净完成、本地密集部署能改变人的行为。">Push should NOT launch as a broad platform. Launch as a concentrated market experiment. The first goal is to prove: merchants repeat, creators progress, campaigns can be fulfilled cleanly, and local density changes behavior.</p>
+      <p style="margin-top:16px;font-size:15px;font-style:normal;color:var(--text2);" data-en="Expansion without proof of these four things is likely fake progress. Every launch cohort should teach the platform something real — not just fill a user count." data-zh="这四件事没验证就急着扩张，大概率是假进展。每一批上线都应该让平台学到真实的东西——不只是把用户数字堆高。">Expansion without proof of these four things is likely fake progress. Every launch cohort should teach the platform something real — not just fill a user count.</p>
     </blockquote>
   </div>
 </section>
@@ -405,41 +390,41 @@ blockquote.principle-white{
   <div class="section-inner fade-in">
     <div class="section-label" data-en="MARKET ENTRY" data-zh="市场进入">MARKET ENTRY</div>
     <h2 class="section-title" data-en="Wedge Selection Criteria" data-zh="切入点选择标准">Wedge Selection Criteria</h2>
-    <p class="section-sub" data-en="A strong first wedge reduces operational complexity and maximizes the chance of early proof. Bad wedge selection makes everything harder." data-zh="强有力的第一个切入点可以降低运营复杂性并最大化早期证明的机会。糟糕的切入点选择会使一切变得更难。">A strong first wedge reduces operational complexity and maximizes the chance of early proof. Bad wedge selection makes everything harder.</p>
+    <p class="section-sub" data-en="A strong first wedge reduces operational complexity and maximizes the chance of early proof. Bad wedge selection makes everything harder." data-zh="切入点选对了，运营压力小，早期验证机会也大。切入点选错了，什么都难做。">A strong first wedge reduces operational complexity and maximizes the chance of early proof. Bad wedge selection makes everything harder.</p>
     <div class="check-list">
       <div class="check-item">
         <div class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
         <div>
           <div class="check-label" data-en="Clear Local Demand" data-zh="明确的本地需求">Clear Local Demand</div>
-          <div class="check-desc" data-en="Merchants in this category have an identifiable, recurring problem that better creator campaigns can solve — not just a theoretical use case." data-zh="该类别的商户有一个可识别的、反复出现的问题，更好的创作者活动可以解决——而不仅仅是一个理论用例。">Merchants in this category have an identifiable, recurring problem that better creator campaigns can solve — not just a theoretical use case.</div>
+          <div class="check-desc" data-en="Merchants in this category have an identifiable, recurring problem that better creator campaigns can solve — not just a theoretical use case." data-zh="这个品类的商户有明确的、反复存在的问题，创作者活动能真正解决——不是理论上能解决，是实际有需求。">Merchants in this category have an identifiable, recurring problem that better creator campaigns can solve — not just a theoretical use case.</div>
         </div>
       </div>
       <div class="check-item">
         <div class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
         <div>
           <div class="check-label" data-en="Visual Creator Compatibility" data-zh="视觉创作者兼容性">Visual Creator Compatibility</div>
-          <div class="check-desc" data-en="The experience or product creates natural content opportunities — something worth visiting, experiencing, and sharing." data-zh="体验或产品创造了自然的内容机会——值得访问、体验和分享的东西。">The experience or product creates natural content opportunities — something worth visiting, experiencing, and sharing.</div>
+          <div class="check-desc" data-en="The experience or product creates natural content opportunities — something worth visiting, experiencing, and sharing." data-zh="这个地方或产品自然适合出内容——有东西可看、可体验、值得分享。">The experience or product creates natural content opportunities — something worth visiting, experiencing, and sharing.</div>
         </div>
       </div>
       <div class="check-item">
         <div class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
         <div>
           <div class="check-label" data-en="Frequent Consumer Purchase Behavior" data-zh="频繁的消费者购买行为">Frequent Consumer Purchase Behavior</div>
-          <div class="check-desc" data-en="Category has repeat purchase cycles — weekly, not annually. Repeat purchase frequency supports merchant campaign repetition." data-zh="该类别有重复购买周期——每周，而不是每年。重复购买频率支持商户活动重复。">Category has repeat purchase cycles — weekly, not annually. Repeat purchase frequency supports merchant campaign repetition.</div>
+          <div class="check-desc" data-en="Category has repeat purchase cycles — weekly, not annually. Repeat purchase frequency supports merchant campaign repetition." data-zh="这个品类有频繁的消费周期——按周来算，不是按年。复购频率高，商户才会反复跑活动。">Category has repeat purchase cycles — weekly, not annually. Repeat purchase frequency supports merchant campaign repetition.</div>
         </div>
       </div>
       <div class="check-item">
         <div class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
         <div>
           <div class="check-label" data-en="Manageable Campaign Complexity" data-zh="可管理的活动复杂性">Manageable Campaign Complexity</div>
-          <div class="check-desc" data-en="Campaign deliverables are clear, proofs are simple, and fulfillment does not require complex logistics or extended time." data-zh="活动交付物清晰，证明简单，履约不需要复杂的物流或延长时间。">Campaign deliverables are clear, proofs are simple, and fulfillment does not require complex logistics or extended time.</div>
+          <div class="check-desc" data-en="Campaign deliverables are clear, proofs are simple, and fulfillment does not require complex logistics or extended time." data-zh="活动要做什么说得清楚，证明材料简单，完成任务不需要复杂的流程或很长时间。">Campaign deliverables are clear, proofs are simple, and fulfillment does not require complex logistics or extended time.</div>
         </div>
       </div>
       <div class="check-item">
         <div class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
         <div>
           <div class="check-label" data-en="Merchant Openness to Experimentation" data-zh="商户对实验的开放性">Merchant Openness to Experimentation</div>
-          <div class="check-desc" data-en="Owners in this space are willing to try new acquisition models, tolerate some learning-period messiness, and give honest feedback." data-zh="该领域的所有者愿意尝试新的获客模式，容忍一些学习期的混乱，并给出诚实的反馈。">Owners in this space are willing to try new acquisition models, tolerate some learning-period messiness, and give honest feedback.</div>
+          <div class="check-desc" data-en="Owners in this space are willing to try new acquisition models, tolerate some learning-period messiness, and give honest feedback." data-zh="这个行业的老板愿意尝试新拉客方式，能接受磨合期的摩擦，愿意给真实反馈。">Owners in this space are willing to try new acquisition models, tolerate some learning-period messiness, and give honest feedback.</div>
         </div>
       </div>
     </div>
@@ -461,32 +446,32 @@ blockquote.principle-white{
   <div class="section-inner fade-in">
     <div class="section-label" data-en="LAUNCH MODEL" data-zh="启动模型">LAUNCH MODEL</div>
     <h2 class="section-title" data-en="Hyper-Local Launch Structure" data-zh="超本地启动结构">Hyper-Local Launch Structure</h2>
-    <p class="section-sub" data-en="Start with one small zone where merchant density, creator proximity, and standby value reinforce each other." data-zh="从一个小区域开始，在那里商户密度、创作者邻近度和备选价值相互强化。">Start with one small zone where merchant density, creator proximity, and standby value reinforce each other.</p>
+    <p class="section-sub" data-en="Start with one small zone where merchant density, creator proximity, and standby value reinforce each other." data-zh="先从一个小区域开始，让商户密度、创作者距离近、备选机制这三件事互相加强。">Start with one small zone where merchant density, creator proximity, and standby value reinforce each other.</p>
     <div class="stat-strip">
       <div class="stat-strip-item">
         <div class="stat-num"><span>1</span></div>
         <div class="stat-label" data-en="Neighborhood" data-zh="社区">Neighborhood</div>
-        <div class="stat-desc" data-en="Dense, walkable, single zone" data-zh="密集、可步行的单一区域">Dense, walkable, single zone</div>
+        <div class="stat-desc" data-en="Dense, walkable, single zone" data-zh="商户密集、步行可达的单一街区">Dense, walkable, single zone</div>
       </div>
       <div class="stat-strip-item">
         <div class="stat-num"><span>10</span></div>
         <div class="stat-label" data-en="Merchants" data-zh="商户">Merchants</div>
-        <div class="stat-desc" data-en="Curated across 2–3 wedge categories" data-zh="跨2–3个切入点类别精选">Curated across 2–3 wedge categories</div>
+        <div class="stat-desc" data-en="Curated across 2–3 wedge categories" data-zh="覆盖2–3个切入品类，精心挑选">Curated across 2–3 wedge categories</div>
       </div>
       <div class="stat-strip-item">
         <div class="stat-num"><span>30</span></div>
         <div class="stat-label" data-en="Curated Creators" data-zh="精选创作者">Curated Creators</div>
-        <div class="stat-desc" data-en="Hand-selected, not open platform sign-up" data-zh="手动选择，而非开放平台注册">Hand-selected, not open platform sign-up</div>
+        <div class="stat-desc" data-en="Hand-selected, not open platform sign-up" data-zh="逐一挑选，不是开放注册">Hand-selected, not open platform sign-up</div>
       </div>
       <div class="stat-strip-item">
         <div class="stat-num" style="font-size:28px;letter-spacing:-1px;padding-top:4px;" data-en="Clear" data-zh="明确">Clear</div>
         <div class="stat-label" data-en="Density Target" data-zh="密度目标">Density Target</div>
-        <div class="stat-desc" data-en="Map value visible, standby meaningful" data-zh="地图价值可见，备选有实际意义">Map value visible, standby meaningful</div>
+        <div class="stat-desc" data-en="Map value visible, standby meaningful" data-zh="地图上能看到价值，备选有实际意义">Map value visible, standby meaningful</div>
       </div>
     </div>
     <div style="margin-top:24px;padding:18px 24px;border:1px solid var(--border);border-radius:var(--radius);background:#fff;">
       <div style="font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);margin-bottom:8px;font-family:'JetBrains Mono',monospace;" data-en="DESIGN INTENT" data-zh="设计意图">DESIGN INTENT</div>
-      <p style="font-size:14px;color:var(--text2);line-height:1.7;" data-en="Within this zone: merchants are dense enough that creators can visit multiple in one trip. Standby has real meaning — creators nearby can accept quickly. Map value becomes visible immediately. Each campaign feeds the next one's awareness." data-zh="在这个区域内：商户足够密集，创作者可以一次出行访问多家。备选具有真实意义——附近的创作者可以快速接受。地图价值立即可见。每个活动都为下一个活动的知名度做出贡献。">Within this zone: merchants are dense enough that creators can visit multiple in one trip. Standby has real meaning — creators nearby can accept quickly. Map value becomes visible immediately. Each campaign feeds the next one's awareness.</p>
+      <p style="font-size:14px;color:var(--text2);line-height:1.7;" data-en="Within this zone: merchants are dense enough that creators can visit multiple in one trip. Standby has real meaning — creators nearby can accept quickly. Map value becomes visible immediately. Each campaign feeds the next one's awareness." data-zh="在这个区域内：商户够密，创作者一次出门可以跑几家。备选有真实意义——附近的创作者能快速接单。地图价值一眼就能看到。每个活动都在给下一个活动铺知名度。">Within this zone: merchants are dense enough that creators can visit multiple in one trip. Standby has real meaning — creators nearby can accept quickly. Map value becomes visible immediately. Each campaign feeds the next one's awareness.</p>
     </div>
   </div>
 </section>
@@ -496,17 +481,17 @@ blockquote.principle-white{
   <div class="section-inner fade-in">
     <div class="section-label" data-en="EXPERIMENTS" data-zh="实验">EXPERIMENTS</div>
     <h2 class="section-title" data-en="Four Early GTM Experiments" data-zh="四个早期GTM实验">Four Early GTM Experiments</h2>
-    <p class="section-sub" data-en="Each experiment is designed to produce a specific insight — not just usage data. Run in parallel across the first launch cohort." data-zh="每个实验都旨在产生特定的洞察——而不仅仅是使用数据。在第一个启动群体中并行运行。">Each experiment is designed to produce a specific insight — not just usage data. Run in parallel across the first launch cohort.</p>
+    <p class="section-sub" data-en="Each experiment is designed to produce a specific insight — not just usage data. Run in parallel across the first launch cohort." data-zh="每个测试都要得出具体结论——不只是收集用户行为数据。在第一批上线时并行跑。">Each experiment is designed to produce a specific insight — not just usage data. Run in parallel across the first launch cohort.</p>
     <div class="item-list">
       <div class="item-row">
         <div class="item-num">A</div>
         <div>
           <div class="item-sub" data-en="MERCHANT SIDE" data-zh="商户侧">MERCHANT SIDE</div>
           <div class="item-title" data-en="Merchant Pain Discovery" data-zh="商户痛点发现">Merchant Pain Discovery</div>
-          <div class="item-desc" data-en="Interview and onboard 10 merchants across the launch zone. Present multiple campaign objective types. Track which objectives produce the strongest enthusiasm response. Measure whether merchants care more about traffic, launch awareness, fill rate, or social proof — and whether this varies by category." data-zh="访谈并入驻启动区域的10家商户。呈现多种活动目标类型。跟踪哪些目标产生最强烈的热情响应。衡量商户更关心流量、启动知名度、填充率还是社会证明——以及这是否因类别而异。">Interview and onboard 10 merchants across the launch zone. Present multiple campaign objective types. Track which objectives produce the strongest enthusiasm response. Measure whether merchants care more about traffic, launch awareness, fill rate, or social proof — and whether this varies by category.</div>
+          <div class="item-desc" data-en="Interview and onboard 10 merchants across the launch zone. Present multiple campaign objective types. Track which objectives produce the strongest enthusiasm response. Measure whether merchants care more about traffic, launch awareness, fill rate, or social proof — and whether this varies by category." data-zh="访谈并入驻启动区域的10家商户。展示不同类型的活动目标。看哪种目标让商户最来劲。搞清楚商户更在意引流、打知名度、填充率还是口碑——以及不同品类之间有没有差异。">Interview and onboard 10 merchants across the launch zone. Present multiple campaign objective types. Track which objectives produce the strongest enthusiasm response. Measure whether merchants care more about traffic, launch awareness, fill rate, or social proof — and whether this varies by category.</div>
           <div class="item-meta">
-            <span class="item-meta-tag tag-goal" data-en="GOAL: Which objective resonates" data-zh="目标：哪种目标最有共鸣">GOAL: Which objective resonates</span>
-            <span class="item-meta-tag tag-track" data-en="TRACK: Enthusiasm by type" data-zh="追踪：按类型的热情度">TRACK: Enthusiasm by type</span>
+            <span class="item-meta-tag tag-goal" data-en="GOAL: Which objective resonates" data-zh="要弄清楚：哪种活动目标最对商户胃口">GOAL: Which objective resonates</span>
+            <span class="item-meta-tag tag-track" data-en="TRACK: Enthusiasm by type" data-zh="追踪：不同目标类型的商户反应">TRACK: Enthusiasm by type</span>
           </div>
         </div>
       </div>
@@ -515,10 +500,10 @@ blockquote.principle-white{
         <div>
           <div class="item-sub" data-en="CREATOR SIDE" data-zh="创作者侧">CREATOR SIDE</div>
           <div class="item-title" data-en="Creator Supply Quality Test" data-zh="创作者供应质量测试">Creator Supply Quality Test</div>
-          <div class="item-desc" data-en="Compare three creator segments: students, niche local creators, and vertical-focused creators (beauty/food/events). Track response speed to campaign offers, completion rate, and merchant-rated quality. Determine which segment delivers most value in the wedge categories chosen." data-zh="比较三个创作者细分：学生、小众本地创作者和垂直专注创作者（美妆/美食/活动）。跟踪对活动邀约的响应速度、完成率和商户评定的质量。确定哪个细分在所选切入点类别中提供最多价值。">Compare three creator segments: students, niche local creators, and vertical-focused creators (beauty/food/events). Track response speed to campaign offers, completion rate, and merchant-rated quality. Determine which segment delivers most value in the wedge categories chosen.</div>
+          <div class="item-desc" data-en="Compare three creator segments: students, niche local creators, and vertical-focused creators (beauty/food/events). Track response speed to campaign offers, completion rate, and merchant-rated quality. Determine which segment delivers most value in the wedge categories chosen." data-zh="对比三类创作者：学生、本地小众创作者、垂直专注型（美妆/美食/活动）。追踪接单响应速度、完成率和商户给的评分。搞清楚哪类创作者在选定品类里最有价值。">Compare three creator segments: students, niche local creators, and vertical-focused creators (beauty/food/events). Track response speed to campaign offers, completion rate, and merchant-rated quality. Determine which segment delivers most value in the wedge categories chosen.</div>
           <div class="item-meta">
-            <span class="item-meta-tag tag-goal" data-en="GOAL: Best creator profile" data-zh="目标：最佳创作者画像">GOAL: Best creator profile</span>
-            <span class="item-meta-tag tag-track" data-en="TRACK: Speed, completion, quality" data-zh="追踪：速度、完成率、质量">TRACK: Speed, completion, quality</span>
+            <span class="item-meta-tag tag-goal" data-en="GOAL: Best creator profile" data-zh="要弄清楚：哪类创作者最合用">GOAL: Best creator profile</span>
+            <span class="item-meta-tag tag-track" data-en="TRACK: Speed, completion, quality" data-zh="追踪：接单速度、完成率、质量">TRACK: Speed, completion, quality</span>
           </div>
         </div>
       </div>
@@ -527,10 +512,10 @@ blockquote.principle-white{
         <div>
           <div class="item-sub" data-en="STANDBY SYSTEM" data-zh="备选系统">STANDBY SYSTEM</div>
           <div class="item-title" data-en="Standby Utility Test" data-zh="备选功能实用性测试">Standby Utility Test</div>
-          <div class="item-desc" data-en="Create controlled slot release moments — campaigns where a creator drops out and a standby slot opens. Measure fill speed: how quickly a standby creator accepts. Measure conversion to completion: do standby-filled slots complete at the same rate as direct-fill slots?" data-zh="创建受控的名额释放时刻——创作者退出并开放备选名额的活动。衡量填充速度：备选创作者接受的速度。衡量完成率转化：备选填充的名额是否与直接填充的名额以相同速率完成？">Create controlled slot release moments — campaigns where a creator drops out and a standby slot opens. Measure fill speed: how quickly a standby creator accepts. Measure conversion to completion: do standby-filled slots complete at the same rate as direct-fill slots?</div>
+          <div class="item-desc" data-en="Create controlled slot release moments — campaigns where a creator drops out and a standby slot opens. Measure fill speed: how quickly a standby creator accepts. Measure conversion to completion: do standby-filled slots complete at the same rate as direct-fill slots?" data-zh="人工制造备选名额开放的情况——有创作者退出、备选名额空出来。测填充速度：备选创作者多快会接单。测完成率：备选顶上来的名额和正常填充的名额完成率有没有差别。">Create controlled slot release moments — campaigns where a creator drops out and a standby slot opens. Measure fill speed: how quickly a standby creator accepts. Measure conversion to completion: do standby-filled slots complete at the same rate as direct-fill slots?</div>
           <div class="item-meta">
-            <span class="item-meta-tag tag-goal" data-en="GOAL: Does standby actually work" data-zh="目标：备选是否真正有效">GOAL: Does standby actually work</span>
-            <span class="item-meta-tag tag-track" data-en="TRACK: Fill speed &amp; completion" data-zh="追踪：填充速度与完成率">TRACK: Fill speed &amp; completion</span>
+            <span class="item-meta-tag tag-goal" data-en="GOAL: Does standby actually work" data-zh="要弄清楚：备选机制到底有没有用">GOAL: Does standby actually work</span>
+            <span class="item-meta-tag tag-track" data-en="TRACK: Fill speed &amp; completion" data-zh="追踪：填充速度和完成率">TRACK: Fill speed &amp; completion</span>
           </div>
         </div>
       </div>
@@ -539,10 +524,10 @@ blockquote.principle-white{
         <div>
           <div class="item-sub" data-en="MERCHANT REPEAT" data-zh="商户重复">MERCHANT REPEAT</div>
           <div class="item-title" data-en="Merchant Repeat Trigger Test" data-zh="商户重复触发测试">Merchant Repeat Trigger Test</div>
-          <div class="item-desc" data-en="After first campaign completion, split merchants into two groups: Group A receives post-campaign performance recommendations and a next-campaign suggestion. Group B receives a standard summary only. Compare 30-day repeat campaign rate between groups. Secondary test: compare reporting depth — detailed vs. summary reporting effects on repeat intent." data-zh="第一次活动完成后，将商户分为两组：A组在活动后收到绩效建议和下一个活动建议。B组只收到标准摘要。比较各组30天内的重复活动率。次要测试：比较报告深度——详细报告与摘要报告对重复意图的影响。">After first campaign completion, split merchants into two groups: Group A receives post-campaign performance recommendations and a next-campaign suggestion. Group B receives a standard summary only. Compare 30-day repeat campaign rate between groups. Secondary test: compare reporting depth — detailed vs. summary reporting effects on repeat intent.</div>
+          <div class="item-desc" data-en="After first campaign completion, split merchants into two groups: Group A receives post-campaign performance recommendations and a next-campaign suggestion. Group B receives a standard summary only. Compare 30-day repeat campaign rate between groups. Secondary test: compare reporting depth — detailed vs. summary reporting effects on repeat intent." data-zh="第一次活动完成后，把商户分成两组：A组收到活动效果分析和下一步建议；B组只收到一份标准总结。比较两组30天内的复投率。同时测报告详细程度的影响——详细报告和简略报告哪个更能促使商户再投。">After first campaign completion, split merchants into two groups: Group A receives post-campaign performance recommendations and a next-campaign suggestion. Group B receives a standard summary only. Compare 30-day repeat campaign rate between groups. Secondary test: compare reporting depth — detailed vs. summary reporting effects on repeat intent.</div>
           <div class="item-meta">
-            <span class="item-meta-tag tag-goal" data-en="GOAL: Repeat drivers" data-zh="目标：重复驱动因素">GOAL: Repeat drivers</span>
-            <span class="item-meta-tag tag-track" data-en="TRACK: 30-day repeat rate" data-zh="追踪：30天重复率">TRACK: 30-day repeat rate</span>
+            <span class="item-meta-tag tag-goal" data-en="GOAL: Repeat drivers" data-zh="要弄清楚：什么让商户愿意再投">GOAL: Repeat drivers</span>
+            <span class="item-meta-tag tag-track" data-en="TRACK: 30-day repeat rate" data-zh="追踪：30天内复投率">TRACK: 30-day repeat rate</span>
           </div>
         </div>
       </div>
@@ -553,55 +538,55 @@ blockquote.principle-white{
 <!-- S5: 3 LAUNCH LOOPS -->
 <section class="section section-dark">
   <div class="section-inner fade-in">
-    <div class="section-label" style="color:var(--accent-light);" data-en="GROWTH MECHANICS" data-zh="增长机制">GROWTH MECHANICS</div>
-    <h2 class="section-title section-title-white" data-en="Three Launch Loops" data-zh="三个启动循环">Three Launch Loops</h2>
-    <p class="section-sub section-sub-white" data-en="Each loop is self-reinforcing. Growth emerges from repeated value, not novelty. The loops must be running before geographic expansion begins." data-zh="每个循环都是自我强化的。增长来自重复的价值，而不是新颖性。在地理扩张开始之前，这些循环必须运转起来。">Each loop is self-reinforcing. Growth emerges from repeated value, not novelty. The loops must be running before geographic expansion begins.</p>
+    <div class="section-label" style="color:var(--accent-light);" data-en="GROWTH MECHANICS" data-zh="增长循环">GROWTH MECHANICS</div>
+    <h2 class="section-title section-title-white" data-en="Three Launch Loops" data-zh="三个增长循环">Three Launch Loops</h2>
+    <p class="section-sub section-sub-white" data-en="Each loop is self-reinforcing. Growth emerges from repeated value, not novelty. The loops must be running before geographic expansion begins." data-zh="每个循环都能自我加强。增长靠的是反复产生价值，不是靠新鲜感。这些循环得先跑起来，才能考虑扩张地区。">Each loop is self-reinforcing. Growth emerges from repeated value, not novelty. The loops must be running before geographic expansion begins.</p>
     <div class="loop-section">
       <div class="loop-block">
-        <div class="loop-num" data-en="LOOP 01 · MERCHANT OUTCOME" data-zh="循环 01 · 商户成果">LOOP 01 · MERCHANT OUTCOME</div>
-        <div class="loop-title" data-en="Better outcomes → merchant trust → repeat demand" data-zh="更好的成果 → 商户信任 → 重复需求">Better outcomes → merchant trust → repeat demand</div>
+        <div class="loop-num" data-en="LOOP 01 · MERCHANT OUTCOME" data-zh="循环 01 · 商户结果">LOOP 01 · MERCHANT OUTCOME</div>
+        <div class="loop-title" data-en="Better outcomes → merchant trust → repeat demand" data-zh="效果好 → 商户信任 → 持续下单">Better outcomes → merchant trust → repeat demand</div>
         <div class="loop-flow">
-          <span class="loop-step" data-en="Better Campaign Outcomes" data-zh="更好的活动成果">Better Campaign Outcomes</span>
+          <span class="loop-step" data-en="Better Campaign Outcomes" data-zh="活动效果好">Better Campaign Outcomes</span>
           <span class="loop-arrow">→</span>
-          <span class="loop-step" data-en="Stronger Merchant Trust" data-zh="更强的商户信任">Stronger Merchant Trust</span>
+          <span class="loop-step" data-en="Stronger Merchant Trust" data-zh="商户更信任平台">Stronger Merchant Trust</span>
           <span class="loop-arrow">→</span>
-          <span class="loop-step" data-en="Repeat Campaign Purchase" data-zh="重复购买活动">Repeat Campaign Purchase</span>
+          <span class="loop-step" data-en="Repeat Campaign Purchase" data-zh="商户持续买活动">Repeat Campaign Purchase</span>
           <span class="loop-arrow">→</span>
-          <span class="loop-step" data-en="More Demand Density" data-zh="更多需求密度">More Demand Density</span>
+          <span class="loop-step" data-en="More Demand Density" data-zh="需求越来越密集">More Demand Density</span>
           <span class="loop-arrow">→</span>
-          <span class="loop-step" data-en="Better Creator Opportunity Flow" data-zh="更好的创作者机会流">Better Creator Opportunity Flow</span>
+          <span class="loop-step" data-en="Better Creator Opportunity Flow" data-zh="创作者机会更多">Better Creator Opportunity Flow</span>
           <span class="loop-back" data-en="↩ LOOP" data-zh="↩ 循环">↩ LOOP</span>
         </div>
       </div>
       <div class="loop-block">
-        <div class="loop-num" data-en="LOOP 02 · CREATOR PROGRESSION" data-zh="循环 02 · 创作者进步">LOOP 02 · CREATOR PROGRESSION</div>
-        <div class="loop-title" data-en="Better completion → better score → better access → stronger retention" data-zh="更好的完成率 → 更好的评分 → 更好的访问 → 更强的留存">Better completion → better score → better access → stronger retention</div>
+        <div class="loop-num" data-en="LOOP 02 · CREATOR PROGRESSION" data-zh="循环 02 · 创作者成长">LOOP 02 · CREATOR PROGRESSION</div>
+        <div class="loop-title" data-en="Better completion → better score → better access → stronger retention" data-zh="完成得好 → 分数高 → 能接更好的活动 → 越来越不想走">Better completion → better score → better access → stronger retention</div>
         <div class="loop-flow">
-          <span class="loop-step" data-en="Better Completion" data-zh="更好的完成率">Better Completion</span>
+          <span class="loop-step" data-en="Better Completion" data-zh="完成质量高">Better Completion</span>
           <span class="loop-arrow">→</span>
-          <span class="loop-step" data-en="Stronger Score" data-zh="更高的评分">Stronger Score</span>
+          <span class="loop-step" data-en="Stronger Score" data-zh="信用分更高">Stronger Score</span>
           <span class="loop-arrow">→</span>
-          <span class="loop-step" data-en="Better Campaign Access" data-zh="更好的活动访问权限">Better Campaign Access</span>
+          <span class="loop-step" data-en="Better Campaign Access" data-zh="能接更好的活动">Better Campaign Access</span>
           <span class="loop-arrow">→</span>
-          <span class="loop-step" data-en="Higher Payout" data-zh="更高的支付">Higher Payout</span>
+          <span class="loop-step" data-en="Higher Payout" data-zh="收益更高">Higher Payout</span>
           <span class="loop-arrow">→</span>
-          <span class="loop-step" data-en="Stronger Creator Retention" data-zh="更强的创作者留存">Stronger Creator Retention</span>
+          <span class="loop-step" data-en="Stronger Creator Retention" data-zh="创作者留下来">Stronger Creator Retention</span>
           <span class="loop-back" data-en="↩ LOOP" data-zh="↩ 循环">↩ LOOP</span>
         </div>
       </div>
       <div class="loop-block">
-        <div class="loop-num" data-en="LOOP 03 · DATA ADVANTAGE" data-zh="循环 03 · 数据优势">LOOP 03 · DATA ADVANTAGE</div>
-        <div class="loop-title" data-en="More campaigns → better matching → higher repeat → stronger quality" data-zh="更多活动 → 更好的匹配 → 更高的重复率 → 更强的质量">More campaigns → better matching → higher repeat → stronger quality</div>
+        <div class="loop-num" data-en="LOOP 03 · DATA ADVANTAGE" data-zh="循环 03 · 数据积累优势">LOOP 03 · DATA ADVANTAGE</div>
+        <div class="loop-title" data-en="More campaigns → better matching → higher repeat → stronger quality" data-zh="活动越多 → 匹配越准 → 复投率越高 → 整体质量越好">More campaigns → better matching → higher repeat → stronger quality</div>
         <div class="loop-flow">
-          <span class="loop-step" data-en="More Completed Campaigns" data-zh="更多完成的活动">More Completed Campaigns</span>
+          <span class="loop-step" data-en="More Completed Campaigns" data-zh="完成的活动越来越多">More Completed Campaigns</span>
           <span class="loop-arrow">→</span>
-          <span class="loop-step" data-en="Better Performance Comparison" data-zh="更好的绩效比较">Better Performance Comparison</span>
+          <span class="loop-step" data-en="Better Performance Comparison" data-zh="能比较出谁好谁差">Better Performance Comparison</span>
           <span class="loop-arrow">→</span>
-          <span class="loop-step" data-en="Better Matching" data-zh="更好的匹配">Better Matching</span>
+          <span class="loop-step" data-en="Better Matching" data-zh="匹配更精准">Better Matching</span>
           <span class="loop-arrow">→</span>
-          <span class="loop-step" data-en="Higher Repeat Rate" data-zh="更高的重复率">Higher Repeat Rate</span>
+          <span class="loop-step" data-en="Higher Repeat Rate" data-zh="复投率更高">Higher Repeat Rate</span>
           <span class="loop-arrow">→</span>
-          <span class="loop-step" data-en="Stronger Platform Quality Signal" data-zh="更强的平台质量信号">Stronger Platform Quality Signal</span>
+          <span class="loop-step" data-en="Stronger Platform Quality Signal" data-zh="平台质量信号更强">Stronger Platform Quality Signal</span>
           <span class="loop-back" data-en="↩ LOOP" data-zh="↩ 循环">↩ LOOP</span>
         </div>
       </div>
@@ -614,34 +599,34 @@ blockquote.principle-white{
   <div class="section-inner fade-in">
     <div class="section-label" data-en="FAILURE MODES" data-zh="失败模式">FAILURE MODES</div>
     <h2 class="section-title" data-en="Four GTM Mistakes to Avoid" data-zh="四个要避免的GTM错误">Four GTM Mistakes to Avoid</h2>
-    <p class="section-sub" data-en="These mistakes are common in platform launches and each one derails a different part of the launch loop." data-zh="这些错误在平台启动中很常见，每一个都会破坏启动循环的不同部分。">These mistakes are common in platform launches and each one derails a different part of the launch loop.</p>
+    <p class="section-sub" data-en="These mistakes are common in platform launches and each one derails a different part of the launch loop." data-zh="这几个坑在平台上线时很常见，每一个都会把增长循环的某个环节搞垮。">These mistakes are common in platform launches and each one derails a different part of the launch loop.</p>
     <div class="warn-list">
       <div class="warn-strip">
         <div class="warn-label">A</div>
         <div>
           <div class="warn-title" data-en="Overbroad Geography" data-zh="地理范围过宽">Overbroad Geography</div>
-          <div class="warn-desc" data-en="Launching across a city or multiple neighborhoods before proving value in one. Wide launch kills density — creators can't fill campaigns efficiently, standby loses meaning, and map value disappears." data-zh="在证明一个区域价值之前跨城市或多个社区启动。广泛启动会破坏密度——创作者无法高效填充活动，备选失去意义，地图价值消失。">Launching across a city or multiple neighborhoods before proving value in one. Wide launch kills density — creators can't fill campaigns efficiently, standby loses meaning, and map value disappears.</div>
+          <div class="warn-desc" data-en="Launching across a city or multiple neighborhoods before proving value in one. Wide launch kills density — creators can't fill campaigns efficiently, standby loses meaning, and map value disappears." data-zh="还没在一个区域证明价值就跑去铺全城甚至多个街区。铺得太广密度就没了——创作者接不到就近的活动，备选也没意义，地图也没价值。">Launching across a city or multiple neighborhoods before proving value in one. Wide launch kills density — creators can't fill campaigns efficiently, standby loses meaning, and map value disappears.</div>
         </div>
       </div>
       <div class="warn-strip">
         <div class="warn-label">B</div>
         <div>
           <div class="warn-title" data-en="Overbroad Supply" data-zh="供应范围过宽">Overbroad Supply</div>
-          <div class="warn-desc" data-en="Attracting too many creators too early — especially unvetted ones — lowers average quality. Merchant trust depends on consistent creator output. One bad campaign can erode a merchant relationship built over weeks." data-zh="过早吸引过多创作者——尤其是未经审核的——会降低平均质量。商户信任依赖于一致的创作者输出。一次糟糕的活动可能会侵蚀数周建立的商户关系。">Attracting too many creators too early — especially unvetted ones — lowers average quality. Merchant trust depends on consistent creator output. One bad campaign can erode a merchant relationship built over weeks.</div>
+          <div class="warn-desc" data-en="Attracting too many creators too early — especially unvetted ones — lowers average quality. Merchant trust depends on consistent creator output. One bad campaign can erode a merchant relationship built over weeks." data-zh="太早引入太多创作者——尤其是没筛选过的——平均质量就会下滑。商户信任靠的是稳定的输出水准。一次烂活动可能毁掉好几周建立起来的商户关系。">Attracting too many creators too early — especially unvetted ones — lowers average quality. Merchant trust depends on consistent creator output. One bad campaign can erode a merchant relationship built over weeks.</div>
         </div>
       </div>
       <div class="warn-strip">
         <div class="warn-label">C</div>
         <div>
           <div class="warn-title" data-en="Weak Merchant Education" data-zh="薄弱的商户教育">Weak Merchant Education</div>
-          <div class="warn-desc" data-en="If merchants don't understand the campaign's purpose, what a good outcome looks like, and what their role is in creator success — results disappoint. Education is not a one-time onboarding step; it's continuous." data-zh="如果商户不理解活动的目的、好的结果是什么样的以及他们在创作者成功中的角色——结果会令人失望。教育不是一次性的入驻步骤；它是持续性的。">If merchants don't understand the campaign's purpose, what a good outcome looks like, and what their role is in creator success — results disappoint. Education is not a one-time onboarding step; it's continuous.</div>
+          <div class="warn-desc" data-en="If merchants don't understand the campaign's purpose, what a good outcome looks like, and what their role is in creator success — results disappoint. Education is not a one-time onboarding step; it's continuous." data-zh="商户搞不清楚活动要干什么、好结果长什么样、他们自己在里面是什么角色——结果就会让人失望。培训不是入驻时做一次就完了的事，要持续跟进。">If merchants don't understand the campaign's purpose, what a good outcome looks like, and what their role is in creator success — results disappoint. Education is not a one-time onboarding step; it's continuous.</div>
         </div>
       </div>
       <div class="warn-strip">
         <div class="warn-label">D</div>
         <div>
           <div class="warn-title" data-en="PR Before Repetition" data-zh="重复之前的公关">PR Before Repetition</div>
-          <div class="warn-desc" data-en="Generating awareness or press coverage before merchants are repeating and the launch loop is running creates shallow traction. New users arrive to a platform that hasn't proven it works — and churn immediately." data-zh="在商户重复使用和启动循环运转之前产生知名度或媒体报道会产生浅层吸引力。新用户到达一个尚未证明其有效的平台——并立即流失。">Generating awareness or press coverage before merchants are repeating and the launch loop is running creates shallow traction. New users arrive to a platform that hasn't proven it works — and churn immediately.</div>
+          <div class="warn-desc" data-en="Generating awareness or press coverage before merchants are repeating and the launch loop is running creates shallow traction. New users arrive to a platform that hasn't proven it works — and churn immediately." data-zh="商户还没开始复投、增长循环还没跑起来就去做宣传造势，吸引来的人走得比来得还快。新用户来了发现平台还没跑通——直接走人。">Generating awareness or press coverage before merchants are repeating and the launch loop is running creates shallow traction. New users arrive to a platform that hasn't proven it works — and churn immediately.</div>
         </div>
       </div>
     </div>
@@ -653,62 +638,62 @@ blockquote.principle-white{
   <div class="section-inner fade-in">
     <div class="section-label" data-en="METRICS" data-zh="指标">METRICS</div>
     <h2 class="section-title" data-en="What to Measure in GTM" data-zh="GTM中要衡量什么">What to Measure in GTM</h2>
-    <p class="section-sub" data-en="These metrics measure the launch loop's health, not vanity growth. They tell you whether the platform is delivering value — not just accumulating users." data-zh="这些指标衡量启动循环的健康状况，而不是虚荣增长。它们告诉你平台是否在传递价值——而不仅仅是积累用户。">These metrics measure the launch loop's health, not vanity growth. They tell you whether the platform is delivering value — not just accumulating users.</p>
+    <p class="section-sub" data-en="These metrics measure the launch loop's health, not vanity growth. They tell you whether the platform is delivering value — not just accumulating users." data-zh="这些数字反映的是增长循环是否健康，不是表面流量。它们告诉你平台有没有真正在创造价值——而不只是在堆用户数。">These metrics measure the launch loop's health, not vanity growth. They tell you whether the platform is delivering value — not just accumulating users.</p>
     <div class="metrics-grid">
       <div class="metric-item">
         <div class="metric-icon">01</div>
         <div>
           <div class="metric-label" data-en="Merchant Activation Rate" data-zh="商户激活率">Merchant Activation Rate</div>
-          <div class="metric-why" data-en="Are onboarded merchants actually running campaigns?" data-zh="已入驻的商户是否实际在运行活动？">Are onboarded merchants actually running campaigns?</div>
+          <div class="metric-why" data-en="Are onboarded merchants actually running campaigns?" data-zh="入驻了的商户有没有真的在发活动？">Are onboarded merchants actually running campaigns?</div>
         </div>
       </div>
       <div class="metric-item">
         <div class="metric-icon">02</div>
         <div>
           <div class="metric-label" data-en="Merchant Repeat Intent" data-zh="商户重复意向">Merchant Repeat Intent</div>
-          <div class="metric-why" data-en="Post-campaign signal: would they run another?" data-zh="活动后信号：他们会再次运行吗？">Post-campaign signal: would they run another?</div>
+          <div class="metric-why" data-en="Post-campaign signal: would they run another?" data-zh="活动结束后问一下：他们愿不愿意再来一次？">Post-campaign signal: would they run another?</div>
         </div>
       </div>
       <div class="metric-item">
         <div class="metric-icon">03</div>
         <div>
           <div class="metric-label" data-en="Campaign Fill Speed" data-zh="活动填充速度">Campaign Fill Speed</div>
-          <div class="metric-why" data-en="How fast do creator slots fill after launch?" data-zh="活动启动后创作者名额填充的速度？">How fast do creator slots fill after launch?</div>
+          <div class="metric-why" data-en="How fast do creator slots fill after launch?" data-zh="活动发布后，名额多快会被接满？">How fast do creator slots fill after launch?</div>
         </div>
       </div>
       <div class="metric-item">
         <div class="metric-icon">04</div>
         <div>
           <div class="metric-label" data-en="Campaign Completion Rate" data-zh="活动完成率">Campaign Completion Rate</div>
-          <div class="metric-why" data-en="Filled slots that reach verified completion" data-zh="达到已验证完成的填充名额">Filled slots that reach verified completion</div>
+          <div class="metric-why" data-en="Filled slots that reach verified completion" data-zh="已接单的名额里有多少真正验收完成了">Filled slots that reach verified completion</div>
         </div>
       </div>
       <div class="metric-item">
         <div class="metric-icon">05</div>
         <div>
           <div class="metric-label" data-en="Creator Second-Campaign Rate" data-zh="创作者第二次活动率">Creator Second-Campaign Rate</div>
-          <div class="metric-why" data-en="Creators who apply for a second campaign within 30 days" data-zh="30天内申请第二次活动的创作者">Creators who apply for a second campaign within 30 days</div>
+          <div class="metric-why" data-en="Creators who apply for a second campaign within 30 days" data-zh="30天内又来接第二个活动的创作者比例">Creators who apply for a second campaign within 30 days</div>
         </div>
       </div>
       <div class="metric-item">
         <div class="metric-icon">06</div>
         <div>
           <div class="metric-label" data-en="Standby Response Rate" data-zh="备选响应率">Standby Response Rate</div>
-          <div class="metric-why" data-en="Speed and conversion rate of standby slot acceptance" data-zh="备选名额接受的速度和转化率">Speed and conversion rate of standby slot acceptance</div>
+          <div class="metric-why" data-en="Speed and conversion rate of standby slot acceptance" data-zh="备选名额有多快被接、接了多少比例真正完成">Speed and conversion rate of standby slot acceptance</div>
         </div>
       </div>
       <div class="metric-item">
         <div class="metric-icon">07</div>
         <div>
           <div class="metric-label" data-en="Time-to-First-Value (Merchants)" data-zh="商户首次获得价值的时间">Time-to-First-Value (Merchants)</div>
-          <div class="metric-why" data-en="Days from onboarding to first tangible campaign result" data-zh="从入驻到第一个有形活动结果的天数">Days from onboarding to first tangible campaign result</div>
+          <div class="metric-why" data-en="Days from onboarding to first tangible campaign result" data-zh="从入驻到跑出第一个实际活动结果用了多少天">Days from onboarding to first tangible campaign result</div>
         </div>
       </div>
       <div class="metric-item">
         <div class="metric-icon">08</div>
         <div>
           <div class="metric-label" data-en="Time-to-First-Earning (Creators)" data-zh="创作者首次获得收益的时间">Time-to-First-Earning (Creators)</div>
-          <div class="metric-why" data-en="Days from registration to first confirmed payout" data-zh="从注册到第一次确认支付的天数">Days from registration to first confirmed payout</div>
+          <div class="metric-why" data-en="Days from registration to first confirmed payout" data-zh="从注册到第一笔到账，用了多少天">Days from registration to first confirmed payout</div>
         </div>
       </div>
     </div>
@@ -720,32 +705,32 @@ blockquote.principle-white{
   <div class="section-inner fade-in">
     <div class="section-label" data-en="EXPANSION GATES" data-zh="扩张门槛">EXPANSION GATES</div>
     <h2 class="section-title" data-en="When to Expand" data-zh="何时扩张">When to Expand</h2>
-    <p class="section-sub" data-en="Geographic or category expansion is only justified when the existing launch zone is demonstrably healthy. Expansion is not a goal — it's a consequence of working loops." data-zh="只有当现有启动区域明显健康时，地理或类别扩张才是合理的。扩张不是目标——它是运转良好的循环的结果。">Geographic or category expansion is only justified when the existing launch zone is demonstrably healthy. Expansion is not a goal — it's a consequence of working loops.</p>
+    <p class="section-sub" data-en="Geographic or category expansion is only justified when the existing launch zone is demonstrably healthy. Expansion is not a goal — it's a consequence of working loops." data-zh="只有现有区域明确健康了，才有理由扩张地区或品类。扩张不是目的——它是增长循环跑通之后自然发生的事。">Geographic or category expansion is only justified when the existing launch zone is demonstrably healthy. Expansion is not a goal — it's a consequence of working loops.</p>
     <div class="expand-list">
       <div class="expand-item">
         <div class="expand-dot"></div>
-        <div class="expand-text" data-en="Merchant repeat exists — at least one repeat cohort from the first batch is running new campaigns without active solicitation." data-zh="商户重复存在——第一批中至少有一个重复群体在没有主动拉客的情况下运行新活动。">Merchant repeat exists — at least one repeat cohort from the first batch is running new campaigns without active solicitation.</div>
+        <div class="expand-text" data-en="Merchant repeat exists — at least one repeat cohort from the first batch is running new campaigns without active solicitation." data-zh="商户有自发复投——第一批里至少有一部分商户不需要主动催，自己就回来跑新活动了。">Merchant repeat exists — at least one repeat cohort from the first batch is running new campaigns without active solicitation.</div>
       </div>
       <div class="expand-item">
         <div class="expand-dot"></div>
-        <div class="expand-text" data-en="Creator quality remains strong — completion rates have not declined as the cohort size grew. New creators onboarded meet baseline quality standards." data-zh="创作者质量保持强劲——随着队列规模增长，完成率没有下降。新入驻的创作者符合基准质量标准。">Creator quality remains strong — completion rates have not declined as the cohort size grew. New creators onboarded meet baseline quality standards.</div>
+        <div class="expand-text" data-en="Creator quality remains strong — completion rates have not declined as the cohort size grew. New creators onboarded meet baseline quality standards." data-zh="创作者质量没有下滑——随着人数增加，完成率没有跌。新入驻的创作者达到基本质量要求。">Creator quality remains strong — completion rates have not declined as the cohort size grew. New creators onboarded meet baseline quality standards.</div>
       </div>
       <div class="expand-item">
         <div class="expand-dot"></div>
-        <div class="expand-text" data-en="Standby remains meaningful — slots are being filled by standby creators, not just sitting open. Standby response rate within acceptable range." data-zh="备选仍然有意义——名额正在被备选创作者填充，而不仅仅是保持开放。备选响应率在可接受范围内。">Standby remains meaningful — slots are being filled by standby creators, not just sitting open. Standby response rate within acceptable range.</div>
+        <div class="expand-text" data-en="Standby remains meaningful — slots are being filled by standby creators, not just sitting open. Standby response rate within acceptable range." data-zh="备选机制还在起作用——空出来的名额真的被备选创作者接走了，不是干晾着。响应率在正常范围内。">Standby remains meaningful — slots are being filled by standby creators, not just sitting open. Standby response rate within acceptable range.</div>
       </div>
       <div class="expand-item">
         <div class="expand-dot"></div>
-        <div class="expand-text" data-en="Operations stay controlled — the current zone is manageable without fires. Disputes are below acceptable threshold. Integrity flags are rare." data-zh="运营保持可控——当前区域在没有问题的情况下可管理。争议低于可接受阈值。诚信标记很少见。">Operations stay controlled — the current zone is manageable without fires. Disputes are below acceptable threshold. Integrity flags are rare.</div>
+        <div class="expand-text" data-en="Operations stay controlled — the current zone is manageable without fires. Disputes are below acceptable threshold. Integrity flags are rare." data-zh="运营没有乱套——当前区域能正常管住，没有频繁出问题。争议数量在可接受线以下。诚信问题很少见。">Operations stay controlled — the current zone is manageable without fires. Disputes are below acceptable threshold. Integrity flags are rare.</div>
       </div>
       <div class="expand-item">
         <div class="expand-dot"></div>
-        <div class="expand-text" data-en="Campaign outcome quality is stable — merchant-reported satisfaction scores have not declined. Post-campaign recommendation uptake is positive." data-zh="活动结果质量稳定——商户报告的满意度分数没有下降。活动后建议的采纳率为正。">Campaign outcome quality is stable — merchant-reported satisfaction scores have not declined. Post-campaign recommendation uptake is positive.</div>
+        <div class="expand-text" data-en="Campaign outcome quality is stable — merchant-reported satisfaction scores have not declined. Post-campaign recommendation uptake is positive." data-zh="活动结果质量稳定——商户的满意度没有下滑。活动后给出的建议有人在采纳、有用。">Campaign outcome quality is stable — merchant-reported satisfaction scores have not declined. Post-campaign recommendation uptake is positive.</div>
       </div>
     </div>
     <div class="callout-warning">
       <div class="callout-warning-label" data-en="CAUTION" data-zh="注意">CAUTION</div>
-      <div class="callout-warning-text" data-en="&ldquo;Expansion without these signals is likely fake progress.&rdquo;" data-zh="&ldquo;没有这些信号的扩张很可能是虚假的进展。&rdquo;">&ldquo;Expansion without these signals is likely fake progress.&rdquo;</div>
+      <div class="callout-warning-text" data-en="&ldquo;Expansion without these signals is likely fake progress.&rdquo;" data-zh="&ldquo;这几个信号不对劲就急着扩，大概率是在自欺欺人。&rdquo;">&ldquo;Expansion without these signals is likely fake progress.&rdquo;</div>
     </div>
   </div>
 </section>
@@ -755,8 +740,8 @@ blockquote.principle-white{
   <div class="section-inner fade-in">
     <div class="section-label" style="color:var(--accent-light);" data-en="FINAL STANDARD" data-zh="最终标准">FINAL STANDARD</div>
     <blockquote class="principle-white">
-      <p data-en="Each launch cohort teaches the platform something real. Growth emerges from repeated value, not novelty. Density changes behavior for both creators and merchants." data-zh="每个启动群体都教会平台一些真实的东西。增长来自重复的价值，而不是新颖性。密度改变创作者和商户的行为。">Each launch cohort teaches the platform something real. Growth emerges from repeated value, not novelty. Density changes behavior for both creators and merchants.</p>
-      <p style="margin-top:20px;font-size:16px;font-weight:700;font-style:normal;color:var(--accent-light);" data-en="The first neighborhood becomes a blueprint for the next one. Replicate only what worked — not the entire setup." data-zh="第一个社区成为下一个社区的蓝图。只复制有效的部分——而不是整个设置。">The first neighborhood becomes a blueprint for the next one. Replicate only what worked — not the entire setup.</p>
+      <p data-en="Each launch cohort teaches the platform something real. Growth emerges from repeated value, not novelty. Density changes behavior for both creators and merchants." data-zh="每一批上线都得教会平台一些实在的东西。增长靠的是持续产生价值，不是新鲜劲。密集部署才能改变创作者和商户的行为。">Each launch cohort teaches the platform something real. Growth emerges from repeated value, not novelty. Density changes behavior for both creators and merchants.</p>
+      <p style="margin-top:20px;font-size:16px;font-weight:700;font-style:normal;color:var(--accent-light);" data-en="The first neighborhood becomes a blueprint for the next one. Replicate only what worked — not the entire setup." data-zh="第一个街区跑通了就是下一个的模板。只复制真正有效的那部分——不是把整套照搬过去。">The first neighborhood becomes a blueprint for the next one. Replicate only what worked — not the entire setup.</p>
     </blockquote>
   </div>
 </section>

@@ -36,35 +36,16 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
-  color: var(--text); line-height: 1.65;
-  background: #fff; overflow-x: hidden;
-}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:var(--text);font-size:15px;line-height:1.85;overflow-x:hidden;}
 a { text-decoration: none; color: inherit; }
 
 /* ═══ NAV ═══ */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  height: 60px; background: rgba(255,255,255,0.93);
-  border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-  display: flex; align-items: center; padding: 0 24px; gap: 0;
-}
-.nav-logo {
-  font-size: 22px; font-weight: 900; color: var(--accent);
-  margin-right: 28px; flex-shrink: 0; letter-spacing: -0.5px;
-}
-.nav-links {
-  display: flex; align-items: center; gap: 2px; flex: 1;
-}
-.nav-links a {
-  font-size: 13px; font-weight: 500; color: var(--text2);
-  padding: 5px 11px; border-radius: 8px;
-  transition: all 0.18s; white-space: nowrap;
-}
-.nav-links a:hover { color: var(--accent); background: var(--accent-bg); }
-.nav-links a.active { color: var(--accent); background: var(--accent-bg); font-weight: 700; }
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;background:rgba(255,255,255,0.95);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:box-shadow 0.2s;}
+.nav-logo{font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;margin-right:8px;flex-shrink:0;text-decoration:none;}
+.nav-links{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
+.nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:all 0.15s;white-space:nowrap;text-decoration:none;}
+.nav-links a:hover{color:var(--accent);background:var(--accent-bg);}
+.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);}
 .nav-right { margin-left: auto; flex-shrink: 0; }
 .lang-btn {
   background: var(--accent); color: #fff; border: none; cursor: pointer;
@@ -135,11 +116,11 @@ nav {
 }
 
 /* ═══ SHARED SECTION ═══ */
-.section { padding: 92px 32px; }
+.section { padding: 120px 64px; }
 .section-gray { background: var(--bg2); }
 .section-white { background: #fff; }
 .section-dark { background: var(--primary); }
-.container { max-width: 1140px; margin: 0 auto; }
+.container { max-width: 1100px; margin: 0 auto; }
 
 .section-label {
   font-size: 11px; font-weight: 700;
@@ -165,11 +146,7 @@ nav {
 .section-sub-white { color: rgba(255,255,255,0.55); }
 
 /* ═══ FADE IN ═══ */
-.fade-in {
-  opacity: 0; transform: translateY(24px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-  animation: fadeInFallback 0s 4s forwards;
-}
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.55s ease,transform 0.55s ease;animation:fadeInFallback 0s 4s forwards;}
 .fade-in.visible { opacity: 1; transform: translateY(0); animation: none; }
 @keyframes fadeInFallback { to { opacity: 1; transform: translateY(0); } }
 
@@ -524,39 +501,39 @@ nav {
   <div class="hero-grid"></div>
   <div class="hero-inner">
     <div class="hero-doc-badge" data-en="DOC — 10" data-zh="文档 — 10">DOC — 10</div>
-    <h1 class="hero-title" data-en="Metrics Dashboard &amp; Decision System" data-zh="指标体系与决策系统">Metrics Dashboard &amp; Decision System</h1>
-    <div class="hero-title-zh" data-en="指标体系与决策系统" data-zh="Metrics Dashboard &amp; Decision System">指标体系与决策系统</div>
-    <p class="hero-sub" data-en="Which metrics matter, how to interpret them, and how to avoid making bad decisions from shallow data." data-zh="哪些指标重要、如何解读它们，以及如何避免从浅层数据做出错误决策。">Which metrics matter, how to interpret them, and how to avoid making bad decisions from shallow data.</p>
+    <h1 class="hero-title" data-en="Metrics Dashboard &amp; Decision System" data-zh="数据看板与决策规则">Metrics Dashboard &amp; Decision System</h1>
+    <div class="hero-title-zh" data-en="数据看板与决策规则" data-zh="Metrics Dashboard &amp; Decision System">数据看板与决策规则</div>
+    <p class="hero-sub" data-en="Which metrics matter, how to interpret them, and how to avoid making bad decisions from shallow data." data-zh="哪些数字真的重要、怎么读懂它们，以及怎么避免被表面数字带偏。">Which metrics matter, how to interpret them, and how to avoid making bad decisions from shallow data.</p>
     <p class="hero-sub-zh" data-en="哪些指标重要、如何解读它们，以及如何避免从浅层数据做出错误决策。" data-zh="Which metrics matter, how to interpret them, and how to avoid making bad decisions from shallow data.">哪些指标重要、如何解读它们，以及如何避免从浅层数据做出错误决策。</p>
   </div>
 </section>
 
 <!-- ── LAYER DESCRIPTION ── -->
 <div style="max-width:800px; margin:0 auto 24px; padding:10px 16px; background:var(--bg2, #f8f9fa); border-radius:8px; font-size:13px; color:var(--text3); text-align:center;">
-  <span data-en="Deep dive into Push's key metrics and KPIs. For attribution methodology, see <a href='attribution.html'>Attribution</a>." data-zh="深入了解 Push 的核心指标与 KPI。归因方法论请参阅<a href='attribution.html'>归因框架</a>。" class="bilingual-text">Deep dive into Push's key metrics and KPIs. For attribution methodology, see <a href="attribution.html">Attribution</a>.</span>
+  <span data-en="Deep dive into Push's key metrics and KPIs. For attribution methodology, see <a href='attribution.html'>Attribution</a>." data-zh="看看 Push 用什么数字衡量健康。归因做法请参阅<a href='attribution.html'>归因方法</a>。" class="bilingual-text">Deep dive into Push's key metrics and KPIs. For attribution methodology, see <a href="attribution.html">Attribution</a>.</span>
 </div>
 
 <!-- SECTION 1 — PHILOSOPHY + NORTH STAR -->
 <section class="section section-gray">
   <div class="container">
     <div class="fade-in">
-      <div class="section-label" data-en="METRIC PHILOSOPHY" data-zh="指标哲学">METRIC PHILOSOPHY</div>
-      <h2 class="section-title" data-en="What We Optimize For" data-zh="我们优化的目标">What We Optimize For</h2>
-      <p class="philosophy-body" data-en="Optimize for trust, repeatability, creator quality, merchant quality, clean transactions, and defensible data accumulation. Metrics must answer: Is the marketplace healthy? Is the workflow working? Is retention real? Is the wedge correct? Is the platform getting stronger?" data-zh="优化信任、可重复性、Creator 质量、商家质量、清洁交易以及可防御的数据积累。指标必须回答：市场是否健康？工作流是否运转？留存是否真实？切入点是否正确？平台是否在变强？">Optimize for trust, repeatability, creator quality, merchant quality, clean transactions, and defensible data accumulation. Metrics must answer: Is the marketplace healthy? Is the workflow working? Is retention real? Is the wedge correct? Is the platform getting stronger?</p>
+      <div class="section-label" data-en="METRIC PHILOSOPHY" data-zh="用数据说什么">METRIC PHILOSOPHY</div>
+      <h2 class="section-title" data-en="What We Optimize For" data-zh="我们在优化什么">What We Optimize For</h2>
+      <p class="philosophy-body" data-en="Optimize for trust, repeatability, creator quality, merchant quality, clean transactions, and defensible data accumulation. Metrics must answer: Is the marketplace healthy? Is the workflow working? Is retention real? Is the wedge correct? Is the platform getting stronger?" data-zh="要优化的是：信任、复购、创作者质量、商户质量、干净的交易、以及积累起来真正有用的数据。数字必须能回答这几个问题：市场有没有在健康运转？流程是不是顺畅？留存是不是真实的？切入品类选对了吗？平台在变强还是在原地踏步？">Optimize for trust, repeatability, creator quality, merchant quality, clean transactions, and defensible data accumulation. Metrics must answer: Is the marketplace healthy? Is the workflow working? Is retention real? Is the wedge correct? Is the platform getting stronger?</p>
     </div>
 
     <div class="metrics-5q fade-in" style="margin-bottom: 40px;">
-      <div class="metrics-5q-item" data-en="Is the marketplace healthy?" data-zh="市场是否健康？">Is the marketplace healthy?</div>
-      <div class="metrics-5q-item" data-en="Is the workflow working?" data-zh="工作流是否运转？">Is the workflow working?</div>
-      <div class="metrics-5q-item" data-en="Is retention real?" data-zh="留存是否真实？">Is retention real?</div>
-      <div class="metrics-5q-item" data-en="Is the wedge correct?" data-zh="切入点是否正确？">Is the wedge correct?</div>
-      <div class="metrics-5q-item" data-en="Is the platform getting stronger?" data-zh="平台是否在变强？">Is the platform getting stronger?</div>
+      <div class="metrics-5q-item" data-en="Is the marketplace healthy?" data-zh="市场在健康运转吗？">Is the marketplace healthy?</div>
+      <div class="metrics-5q-item" data-en="Is the workflow working?" data-zh="流程跑得顺吗？">Is the workflow working?</div>
+      <div class="metrics-5q-item" data-en="Is retention real?" data-zh="留存是真实的吗？">Is retention real?</div>
+      <div class="metrics-5q-item" data-en="Is the wedge correct?" data-zh="切入品类选对了吗？">Is the wedge correct?</div>
+      <div class="metrics-5q-item" data-en="Is the platform getting stronger?" data-zh="平台在变强吗？">Is the platform getting stronger?</div>
     </div>
 
     <div class="north-star-blockquote fade-in">
-      <div class="north-star-label" data-en="NORTH STAR METRIC" data-zh="北极星指标">NORTH STAR METRIC</div>
-      <div class="north-star-quote" data-en='"Verified repeat campaign value generated per active merchant cohort"' data-zh='"每个活跃商家队列产生的经核实重复活动价值"'>"Verified repeat campaign value generated per active merchant cohort"</div>
-      <div class="north-star-quote-zh" data-en="— Ties value to merchants, requires campaign completion quality, emphasizes repeat behavior, discourages vanity metrics." data-zh="— 将价值与商家绑定，要求活动完成质量，强调重复行为，抵制虚荣指标。">— Ties value to merchants, requires campaign completion quality, emphasizes repeat behavior, discourages vanity metrics.</div>
+      <div class="north-star-label" data-en="NORTH STAR METRIC" data-zh="最重要的数字">NORTH STAR METRIC</div>
+      <div class="north-star-quote" data-en='"Verified repeat campaign value generated per active merchant cohort"' data-zh='"每批活跃商户产生的经核实复投活动价值"'>"Verified repeat campaign value generated per active merchant cohort"</div>
+      <div class="north-star-quote-zh" data-en="— Ties value to merchants, requires campaign completion quality, emphasizes repeat behavior, discourages vanity metrics." data-zh="— 把价值和商户绑在一起，要求活动真正完成、有质量，强调商户复投行为，防止被虚荣数字迷惑。">— Ties value to merchants, requires campaign completion quality, emphasizes repeat behavior, discourages vanity metrics.</div>
     </div>
   </div>
 </section>
@@ -565,9 +542,9 @@ nav {
 <section class="section section-white">
   <div class="container">
     <div class="fade-in" style="margin-bottom: 36px;">
-      <div class="section-label section-label-green" data-en="MERCHANT METRICS" data-zh="商家指标">MERCHANT METRICS</div>
-      <h2 class="section-title" data-en="Merchant Performance Tracking" data-zh="商家表现追踪">Merchant Performance Tracking</h2>
-      <p class="section-sub" data-en="Three lenses: activation quality, operational quality, and long-term retention health." data-zh="三个维度：激活质量、运营质量、长期留存健康度。">Three lenses: activation quality, operational quality, and long-term retention health.</p>
+      <div class="section-label section-label-green" data-en="MERCHANT METRICS" data-zh="商户数据">MERCHANT METRICS</div>
+      <h2 class="section-title" data-en="Merchant Performance Tracking" data-zh="商户表现怎么看">Merchant Performance Tracking</h2>
+      <p class="section-sub" data-en="Three lenses: activation quality, operational quality, and long-term retention health." data-zh="三个角度：激活质量、运营质量、长期留存是否健康。">Three lenses: activation quality, operational quality, and long-term retention health.</p>
     </div>
     <div class="metrics-table-wrap fade-in">
       <div class="metrics-3col">
@@ -610,9 +587,9 @@ nav {
 <section class="section section-gray">
   <div class="container">
     <div class="fade-in" style="margin-bottom: 36px;">
-      <div class="section-label" data-en="CREATOR METRICS" data-zh="Creator 指标">CREATOR METRICS</div>
-      <h2 class="section-title" data-en="Creator Performance Tracking" data-zh="Creator 表现追踪">Creator Performance Tracking</h2>
-      <p class="section-sub" data-en="Activation speed, completion quality, and compound retention behavior over time." data-zh="激活速度、完成质量，以及随时间复利的留存行为。">Activation speed, completion quality, and compound retention behavior over time.</p>
+      <div class="section-label" data-en="CREATOR METRICS" data-zh="创作者数据">CREATOR METRICS</div>
+      <h2 class="section-title" data-en="Creator Performance Tracking" data-zh="创作者表现怎么看">Creator Performance Tracking</h2>
+      <p class="section-sub" data-en="Activation speed, completion quality, and compound retention behavior over time." data-zh="激活速度、完成质量，以及留存行为随时间的变化。">Activation speed, completion quality, and compound retention behavior over time.</p>
     </div>
     <div class="metrics-table-wrap fade-in">
       <div class="metrics-3col">
@@ -656,9 +633,9 @@ nav {
 <section class="section section-white">
   <div class="container">
     <div class="fade-in" style="margin-bottom: 36px;">
-      <div class="section-label" data-en="OPERATIONAL METRICS" data-zh="运营指标">OPERATIONAL METRICS</div>
-      <h2 class="section-title" data-en="Campaign &amp; Marketplace Liquidity" data-zh="活动与市场流动性">Campaign &amp; Marketplace Liquidity</h2>
-      <p class="section-sub" data-en="Campaign health and supply-demand balance across the marketplace." data-zh="活动健康度与市场供需平衡情况。">Campaign health and supply-demand balance across the marketplace.</p>
+      <div class="section-label" data-en="OPERATIONAL METRICS" data-zh="运营数据">OPERATIONAL METRICS</div>
+      <h2 class="section-title" data-en="Campaign &amp; Marketplace Liquidity" data-zh="活动流转和市场供需">Campaign &amp; Marketplace Liquidity</h2>
+      <p class="section-sub" data-en="Campaign health and supply-demand balance across the marketplace." data-zh="活动健不健康、供需有没有失衡。">Campaign health and supply-demand balance across the marketplace.</p>
     </div>
     <div class="two-col fade-in">
       <div>
@@ -699,9 +676,9 @@ nav {
 <section class="section section-gray">
   <div class="container">
     <div class="fade-in" style="margin-bottom: 36px;">
-      <div class="section-label section-label-red" data-en="TRUST &amp; ECONOMICS" data-zh="信任与经济">TRUST &amp; ECONOMICS</div>
-      <h2 class="section-title" data-en="Integrity &amp; Economic Health" data-zh="诚信与经济健康">Integrity &amp; Economic Health</h2>
-      <p class="section-sub" data-en="Platform integrity signals and unit economics — the financial foundation of a scalable marketplace." data-zh="平台诚信信号与单位经济——可扩展市场的财务基础。">Platform integrity signals and unit economics — the financial foundation of a scalable marketplace.</p>
+      <div class="section-label section-label-red" data-en="TRUST &amp; ECONOMICS" data-zh="诚信与财务">TRUST &amp; ECONOMICS</div>
+      <h2 class="section-title" data-en="Integrity &amp; Economic Health" data-zh="诚信和经济是不是健康的">Integrity &amp; Economic Health</h2>
+      <p class="section-sub" data-en="Platform integrity signals and unit economics — the financial foundation of a scalable marketplace." data-zh="平台诚信的风险信号，以及单位经济——能不能规模化的财务基础。">Platform integrity signals and unit economics — the financial foundation of a scalable marketplace.</p>
     </div>
     <div class="two-col fade-in">
       <div>
@@ -743,9 +720,9 @@ nav {
 <section class="section section-white">
   <div class="container">
     <div class="fade-in" style="margin-bottom: 40px;">
-      <div class="section-label" data-en="DECISION RULES" data-zh="决策规则">DECISION RULES</div>
-      <h2 class="section-title" data-en="Four Rules for Reading the Data" data-zh="读懂数据的四条规则">Four Rules for Reading the Data</h2>
-      <p class="section-sub" data-en="When signals conflict, these rules clarify where the real problem lives. Don't treat symptoms — treat root causes." data-zh="当信号冲突时，这些规则明确了真正问题所在。不要治标，要治本。">When signals conflict, these rules clarify where the real problem lives. Don't treat symptoms — treat root causes.</p>
+      <div class="section-label" data-en="DECISION RULES" data-zh="数据决策规则">DECISION RULES</div>
+      <h2 class="section-title" data-en="Four Rules for Reading the Data" data-zh="读数字的四条规则">Four Rules for Reading the Data</h2>
+      <p class="section-sub" data-en="When signals conflict, these rules clarify where the real problem lives. Don't treat symptoms — treat root causes." data-zh="信号打架的时候，这几条规则帮你找到真正的问题在哪。不要打补丁，要找根因。">When signals conflict, these rules clarify where the real problem lives. Don't treat symptoms — treat root causes.</p>
     </div>
 
     <div class="decision-rules">
@@ -753,48 +730,48 @@ nav {
       <div class="decision-rule fade-in">
         <div class="rule-if">
           <span class="rule-label">IF</span>
-          <span class="rule-condition" data-en="merchant repeat is low but campaign fill is high" data-zh="商家复购率低但活动填充率高">merchant repeat is low but campaign fill is high</span>
+          <span class="rule-condition" data-en="merchant repeat is low but campaign fill is high" data-zh="商户复投率低但活动填充率高">merchant repeat is low but campaign fill is high</span>
         </div>
         <div class="rule-arrow">→</div>
         <div class="rule-then">
           <span class="rule-label">THEN</span>
-          <span class="rule-action" data-en="problem is likely campaign outcome quality, not supply quantity" data-zh="问题很可能是活动结果质量，而非供给数量">problem is likely campaign outcome quality, not supply quantity</span>
+          <span class="rule-action" data-en="problem is likely campaign outcome quality, not supply quantity" data-zh="问题大概率是活动效果不够好，不是供给量的问题">problem is likely campaign outcome quality, not supply quantity</span>
         </div>
       </div>
 
       <div class="decision-rule fade-in" style="transition-delay:0.08s;">
         <div class="rule-if">
           <span class="rule-label">IF</span>
-          <span class="rule-condition" data-en="creator signups are high but completion is low" data-zh="Creator注册量高但完成率低">creator signups are high but completion is low</span>
+          <span class="rule-condition" data-en="creator signups are high but completion is low" data-zh="创作者注册量高但完成率低">creator signups are high but completion is low</span>
         </div>
         <div class="rule-arrow">→</div>
         <div class="rule-then">
           <span class="rule-label">THEN</span>
-          <span class="rule-action" data-en="supply quality is weak, not top-of-funnel volume" data-zh="供给质量薄弱，而非漏斗顶端数量问题">supply quality is weak, not top-of-funnel volume</span>
+          <span class="rule-action" data-en="supply quality is weak, not top-of-funnel volume" data-zh="是创作者质量太差的问题，不是获客量的问题">supply quality is weak, not top-of-funnel volume</span>
         </div>
       </div>
 
       <div class="decision-rule fade-in" style="transition-delay:0.16s;">
         <div class="rule-if">
           <span class="rule-label">IF</span>
-          <span class="rule-condition" data-en="standby usage is high but fulfillment quality drops" data-zh="备用使用率高但履约质量下降">standby usage is high but fulfillment quality drops</span>
+          <span class="rule-condition" data-en="standby usage is high but fulfillment quality drops" data-zh="备选使用率高但完成质量在下滑">standby usage is high but fulfillment quality drops</span>
         </div>
         <div class="rule-arrow">→</div>
         <div class="rule-then">
           <span class="rule-label">THEN</span>
-          <span class="rule-action" data-en="urgency is working, but screening is weak" data-zh="紧急机制有效，但筛选机制薄弱">urgency is working, but screening is weak</span>
+          <span class="rule-action" data-en="urgency is working, but screening is weak" data-zh="备选响应没问题，但筛选太松了">urgency is working, but screening is weak</span>
         </div>
       </div>
 
       <div class="decision-rule fade-in" style="transition-delay:0.24s;">
         <div class="rule-if">
           <span class="rule-label">IF</span>
-          <span class="rule-condition" data-en="support load rises faster than completed campaigns" data-zh="支持负载增速超过已完成活动增速">support load rises faster than completed campaigns</span>
+          <span class="rule-condition" data-en="support load rises faster than completed campaigns" data-zh="客服工单量增速比完成活动量增速还快">support load rises faster than completed campaigns</span>
         </div>
         <div class="rule-arrow">→</div>
         <div class="rule-then">
           <span class="rule-label">THEN</span>
-          <span class="rule-action" data-en="workflow is not scaling cleanly" data-zh="工作流未能清洁扩展">workflow is not scaling cleanly</span>
+          <span class="rule-action" data-en="workflow is not scaling cleanly" data-zh="流程没有在干净地扩展，需要靠人撑着">workflow is not scaling cleanly</span>
         </div>
       </div>
 
@@ -806,59 +783,59 @@ nav {
 <section class="section section-gray">
   <div class="container">
     <div class="fade-in" style="margin-bottom: 40px;">
-      <div class="section-label section-label-orange" data-en="DASHBOARD STRUCTURE" data-zh="仪表盘结构">DASHBOARD STRUCTURE</div>
-      <h2 class="section-title" data-en="Four Dashboard Layers" data-zh="四层仪表盘">Four Dashboard Layers</h2>
-      <p class="section-sub" data-en="Different audiences need different views. Each dashboard is optimized for a specific decision-making context." data-zh="不同受众需要不同视角。每个仪表盘针对特定决策场景优化。">Different audiences need different views. Each dashboard is optimized for a specific decision-making context.</p>
+      <div class="section-label section-label-orange" data-en="DASHBOARD STRUCTURE" data-zh="数据看板结构">DASHBOARD STRUCTURE</div>
+      <h2 class="section-title" data-en="Four Dashboard Layers" data-zh="四个数据看板">Four Dashboard Layers</h2>
+      <p class="section-sub" data-en="Different audiences need different views. Each dashboard is optimized for a specific decision-making context." data-zh="不同角色需要看不同的东西。每个看板针对特定的决策场景。">Different audiences need different views. Each dashboard is optimized for a specific decision-making context.</p>
     </div>
 
     <div class="dashboard-2x2">
 
       <div class="dashboard-card fade-in" style="transition-delay:0.05s;">
         <div class="dc-badge dc-exec" data-en="EXECUTIVE" data-zh="高管">EXECUTIVE</div>
-        <div class="dc-title" data-en="Executive Dashboard" data-zh="高管仪表盘">Executive Dashboard</div>
-        <div class="dc-subtitle" data-en="Retention · Revenue Quality · Integrity Health" data-zh="留存 · 收入质量 · 诚信健康">Retention · Revenue Quality · Integrity Health</div>
+        <div class="dc-title" data-en="Executive Dashboard" data-zh="高管看板">Executive Dashboard</div>
+        <div class="dc-subtitle" data-en="Retention · Revenue Quality · Integrity Health" data-zh="留存 · 收入质量 · 诚信状况">Retention · Revenue Quality · Integrity Health</div>
         <ul class="dc-items">
-          <li data-en="Merchant &amp; creator repeat rates" data-zh="商家与Creator复购率">Merchant &amp; creator repeat rates</li>
+          <li data-en="Merchant &amp; creator repeat rates" data-zh="商户和创作者的复投率">Merchant &amp; creator repeat rates</li>
           <li data-en="Campaign quality scores" data-zh="活动质量评分">Campaign quality scores</li>
-          <li data-en="Net revenue quality (by cohort)" data-zh="净收入质量（按队列）">Net revenue quality (by cohort)</li>
-          <li data-en="Integrity health summary" data-zh="诚信健康摘要">Integrity health summary</li>
+          <li data-en="Net revenue quality (by cohort)" data-zh="净收入质量（按批次）">Net revenue quality (by cohort)</li>
+          <li data-en="Integrity health summary" data-zh="诚信状况汇总">Integrity health summary</li>
         </ul>
       </div>
 
       <div class="dashboard-card fade-in" style="transition-delay:0.1s;">
         <div class="dc-badge dc-product" data-en="PRODUCT" data-zh="产品">PRODUCT</div>
-        <div class="dc-title" data-en="Product Dashboard" data-zh="产品仪表盘">Product Dashboard</div>
-        <div class="dc-subtitle" data-en="Workflow Friction · Activation · Completion States" data-zh="工作流摩擦 · 激活 · 完成状态">Workflow Friction · Activation · Completion States</div>
+        <div class="dc-title" data-en="Product Dashboard" data-zh="产品看板">Product Dashboard</div>
+        <div class="dc-subtitle" data-en="Workflow Friction · Activation · Completion States" data-zh="流程摩擦点 · 激活 · 完成状态">Workflow Friction · Activation · Completion States</div>
         <ul class="dc-items">
-          <li data-en="Workflow friction points" data-zh="工作流摩擦点">Workflow friction points</li>
-          <li data-en="Activation milestone drop-off" data-zh="激活里程碑流失">Activation milestone drop-off</li>
-          <li data-en="Standby behavior patterns" data-zh="备用行为模式">Standby behavior patterns</li>
-          <li data-en="Campaign completion state funnel" data-zh="活动完成状态漏斗">Campaign completion state funnel</li>
+          <li data-en="Workflow friction points" data-zh="哪里有摩擦卡住了">Workflow friction points</li>
+          <li data-en="Activation milestone drop-off" data-zh="激活节点的流失在哪">Activation milestone drop-off</li>
+          <li data-en="Standby behavior patterns" data-zh="备选行为规律">Standby behavior patterns</li>
+          <li data-en="Campaign completion state funnel" data-zh="活动完成漏斗">Campaign completion state funnel</li>
         </ul>
       </div>
 
       <div class="dashboard-card fade-in" style="transition-delay:0.15s;">
         <div class="dc-badge dc-ops" data-en="OPS" data-zh="运营">OPS</div>
-        <div class="dc-title" data-en="Operations Dashboard" data-zh="运营仪表盘">Operations Dashboard</div>
-        <div class="dc-subtitle" data-en="Exceptions · Disputes · Payout Delays" data-zh="异常 · 纠纷 · 结算延迟">Exceptions · Disputes · Payout Delays</div>
+        <div class="dc-title" data-en="Operations Dashboard" data-zh="运营看板">Operations Dashboard</div>
+        <div class="dc-subtitle" data-en="Exceptions · Disputes · Payout Delays" data-zh="异常问题 · 纠纷 · 结算延迟">Exceptions · Disputes · Payout Delays</div>
         <ul class="dc-items">
-          <li data-en="Exception and escalation volume" data-zh="异常与升级量">Exception and escalation volume</li>
-          <li data-en="Active disputes and resolution time" data-zh="活跃纠纷与处理时间">Active disputes and resolution time</li>
+          <li data-en="Exception and escalation volume" data-zh="异常和升级问题的数量">Exception and escalation volume</li>
+          <li data-en="Active disputes and resolution time" data-zh="当前纠纷数量和解决时长">Active disputes and resolution time</li>
           <li data-en="Payout delay rate" data-zh="结算延迟率">Payout delay rate</li>
-          <li data-en="Fraud trigger alerts" data-zh="欺诈触发警告">Fraud trigger alerts</li>
-          <li data-en="Merchant approval bottlenecks" data-zh="商家审批瓶颈">Merchant approval bottlenecks</li>
+          <li data-en="Fraud trigger alerts" data-zh="欺诈触发警报">Fraud trigger alerts</li>
+          <li data-en="Merchant approval bottlenecks" data-zh="商户审批卡在哪里">Merchant approval bottlenecks</li>
         </ul>
       </div>
 
       <div class="dashboard-card fade-in" style="transition-delay:0.2s;">
         <div class="dc-badge dc-gtm" data-en="GTM" data-zh="市场拓展">GTM</div>
-        <div class="dc-title" data-en="GTM Dashboard" data-zh="市场拓展仪表盘">GTM Dashboard</div>
-        <div class="dc-subtitle" data-en="Pipeline · Supply Quality · Neighborhood Density" data-zh="管道 · 供给质量 · 社区密度">Pipeline · Supply Quality · Neighborhood Density</div>
+        <div class="dc-title" data-en="GTM Dashboard" data-zh="GTM 看板">GTM Dashboard</div>
+        <div class="dc-subtitle" data-en="Pipeline · Supply Quality · Neighborhood Density" data-zh="获客漏斗 · 供给质量 · 街区密度">Pipeline · Supply Quality · Neighborhood Density</div>
         <ul class="dc-items">
-          <li data-en="Merchant acquisition pipeline" data-zh="商家获取管道">Merchant acquisition pipeline</li>
-          <li data-en="Creator supply quality by vertical" data-zh="按垂直行业的Creator供给质量">Creator supply quality by vertical</li>
-          <li data-en="Vertical comparisons" data-zh="垂直行业对比">Vertical comparisons</li>
-          <li data-en="Neighborhood creator density quality" data-zh="社区Creator密度质量">Neighborhood creator density quality</li>
+          <li data-en="Merchant acquisition pipeline" data-zh="商户获取漏斗">Merchant acquisition pipeline</li>
+          <li data-en="Creator supply quality by vertical" data-zh="各品类创作者供给质量">Creator supply quality by vertical</li>
+          <li data-en="Vertical comparisons" data-zh="品类横向对比">Vertical comparisons</li>
+          <li data-en="Neighborhood creator density quality" data-zh="各街区创作者密度质量">Neighborhood creator density quality</li>
         </ul>
       </div>
 
@@ -870,9 +847,9 @@ nav {
 <section class="section section-white">
   <div class="container">
     <div class="fade-in" style="margin-bottom: 40px;">
-      <div class="section-label section-label-red" data-en="METRICS TRAPS" data-zh="指标陷阱">METRICS TRAPS</div>
-      <h2 class="section-title" data-en="Four Traps That Corrupt Decisions" data-zh="四个扭曲决策的陷阱">Four Traps That Corrupt Decisions</h2>
-      <p class="section-sub" data-en="Good metrics discipline means knowing what NOT to celebrate as much as what to celebrate." data-zh="良好的指标纪律意味着既要知道庆祝什么，也要知道不该庆祝什么。">Good metrics discipline means knowing what NOT to celebrate as much as what to celebrate.</p>
+      <div class="section-label section-label-red" data-en="METRICS TRAPS" data-zh="数字陷阱">METRICS TRAPS</div>
+      <h2 class="section-title" data-en="Four Traps That Corrupt Decisions" data-zh="四个会带偏决策的陷阱">Four Traps That Corrupt Decisions</h2>
+      <p class="section-sub" data-en="Good metrics discipline means knowing what NOT to celebrate as much as what to celebrate." data-zh="好的数据纪律不只是知道该庆祝什么，还要知道哪些数字根本不该在意。">Good metrics discipline means knowing what NOT to celebrate as much as what to celebrate.</p>
     </div>
 
     <div class="traps-list">
@@ -880,8 +857,8 @@ nav {
         <div class="trap-icon" data-en="A" data-zh="A">A</div>
         <div>
           <div class="trap-badge" data-en="TRAP A" data-zh="陷阱 A">TRAP A</div>
-          <div class="trap-title" data-en="Celebrating Signups" data-zh="庆祝注册量">Celebrating Signups</div>
-          <p class="trap-body" data-en="Signups without completion or repeat are weak. A surge in creator or merchant registrations that doesn't convert to completed campaigns and repeat usage is a vanity metric — it reveals nothing about platform health." data-zh="没有完成或复购的注册量是虚弱的。Creator或商家注册量激增，若不能转化为已完成活动和重复使用，就是虚荣指标——它对平台健康毫无意义。">Signups without completion or repeat are weak. A surge in creator or merchant registrations that doesn't convert to completed campaigns and repeat usage is a vanity metric — it reveals nothing about platform health.</p>
+          <div class="trap-title" data-en="Celebrating Signups" data-zh="把注册量当成绩">Celebrating Signups</div>
+          <p class="trap-body" data-en="Signups without completion or repeat are weak. A surge in creator or merchant registrations that doesn't convert to completed campaigns and repeat usage is a vanity metric — it reveals nothing about platform health." data-zh="没有完成和复投的注册量是空的。创作者或商户注册量暴涨，但转化不成实际完成和复投，就是装门面的数字——完全反映不了平台是否健康。">Signups without completion or repeat are weak. A surge in creator or merchant registrations that doesn't convert to completed campaigns and repeat usage is a vanity metric — it reveals nothing about platform health.</p>
         </div>
       </div>
 
@@ -889,8 +866,8 @@ nav {
         <div class="trap-icon" data-en="B" data-zh="B">B</div>
         <div>
           <div class="trap-badge" data-en="TRAP B" data-zh="陷阱 B">TRAP B</div>
-          <div class="trap-title" data-en="Overvaluing Views" data-zh="过度重视浏览量">Overvaluing Views</div>
-          <p class="trap-body" data-en="Views are not the core business outcome. Content reach and impressions are secondary effects. The core business outcome is a verified redemption that a merchant found valuable enough to repeat. Views without attribution to transactions are decorative." data-zh="浏览量不是核心业务结果。内容触达和曝光量是次要效果。核心业务结果是商家认为有价值并愿意重复的经核实核销。与交易无关联的浏览量是装饰性的。">Views are not the core business outcome. Content reach and impressions are secondary effects. The core business outcome is a verified redemption that a merchant found valuable enough to repeat. Views without attribution to transactions are decorative.</p>
+          <div class="trap-title" data-en="Overvaluing Views" data-zh="太在意浏览量">Overvaluing Views</div>
+          <p class="trap-body" data-en="Views are not the core business outcome. Content reach and impressions are secondary effects. The core business outcome is a verified redemption that a merchant found valuable enough to repeat. Views without attribution to transactions are decorative." data-zh="浏览量不是核心业务结果。内容触达和曝光量是副产品。核心业务结果是商户认为值得再来一次的经核实核销。跟交易挂不上钩的浏览量是装饰。">Views are not the core business outcome. Content reach and impressions are secondary effects. The core business outcome is a verified redemption that a merchant found valuable enough to repeat. Views without attribution to transactions are decorative.</p>
         </div>
       </div>
 
@@ -898,8 +875,8 @@ nav {
         <div class="trap-icon" data-en="C" data-zh="C">C</div>
         <div>
           <div class="trap-badge" data-en="TRAP C" data-zh="陷阱 C">TRAP C</div>
-          <div class="trap-title" data-en="Ignoring Support Cost" data-zh="忽视支持成本">Ignoring Support Cost</div>
-          <p class="trap-body" data-en="A campaign that works only with heavy manual intervention is not healthy. If support cost per completed campaign is rising faster than volume, the workflow is not scaling — it's being manually propped up. High GMV with high support load is not healthy growth." data-zh="只有在大量人工干预下才能完成的活动并不健康。如果每完成活动支持成本增速超过活动量增速，工作流并未在扩展——而是在手工支撑。高GMV伴随高支持负载不是健康增长。">A campaign that works only with heavy manual intervention is not healthy. If support cost per completed campaign is rising faster than volume, the workflow is not scaling — it's being manually propped up. High GMV with high support load is not healthy growth.</p>
+          <div class="trap-title" data-en="Ignoring Support Cost" data-zh="不管客服成本">Ignoring Support Cost</div>
+          <p class="trap-body" data-en="A campaign that works only with heavy manual intervention is not healthy. If support cost per completed campaign is rising faster than volume, the workflow is not scaling — it's being manually propped up. High GMV with high support load is not healthy growth." data-zh="靠大量人工才能跑完的活动不健康。如果单个活动的客服成本增速超过活动量增速，说明流程不是在扩展——是在靠人工撑着。GMV高但客服负担也高，不是健康增长。">A campaign that works only with heavy manual intervention is not healthy. If support cost per completed campaign is rising faster than volume, the workflow is not scaling — it's being manually propped up. High GMV with high support load is not healthy growth.</p>
         </div>
       </div>
 
@@ -907,8 +884,8 @@ nav {
         <div class="trap-icon" data-en="D" data-zh="D">D</div>
         <div>
           <div class="trap-badge" data-en="TRAP D" data-zh="陷阱 D">TRAP D</div>
-          <div class="trap-title" data-en="Mistaking Repeat for Quality" data-zh="将重复误当质量">Mistaking Repeat for Quality</div>
-          <p class="trap-body" data-en="Repeat matters only if economics remain healthy and trust remains high. A merchant who repeats because they have no better option — not because the platform delivered real value — is not a retention win. Monitor repeat rate alongside contribution margin and dispute rate together." data-zh="重复只有在经济健康且信任度高的情况下才有意义。因为没有更好选择而重复的商家——而非因平台真正交付价值——不是留存的胜利。需将复购率与贡献利润率和纠纷率一同监控。">Repeat matters only if economics remain healthy and trust remains high. A merchant who repeats because they have no better option — not because the platform delivered real value — is not a retention win. Monitor repeat rate alongside contribution margin and dispute rate together.</p>
+          <div class="trap-title" data-en="Mistaking Repeat for Quality" data-zh="把复投当质量好">Mistaking Repeat for Quality</div>
+          <p class="trap-body" data-en="Repeat matters only if economics remain healthy and trust remains high. A merchant who repeats because they have no better option — not because the platform delivered real value — is not a retention win. Monitor repeat rate alongside contribution margin and dispute rate together." data-zh="复投有意义，前提是经济还健康、信任度还在。商户因为没有更好选择而留下来——不是因为平台真的有价值——这不是留存的胜利。要把复投率和贡献利润率、纠纷率放在一起看。">Repeat matters only if economics remain healthy and trust remains high. A merchant who repeats because they have no better option — not because the platform delivered real value — is not a retention win. Monitor repeat rate alongside contribution margin and dispute rate together.</p>
         </div>
       </div>
     </div>
@@ -920,12 +897,12 @@ nav {
   <div class="container">
     <div class="fade-in" style="text-align:center; margin-bottom: 48px;">
       <div class="section-label section-label-light" data-en="THE FINAL STANDARD" data-zh="最终标准">THE FINAL STANDARD</div>
-      <h2 class="section-title section-title-white" data-en="What Good Dashboards Do" data-zh="好的仪表盘该做什么">What Good Dashboards Do</h2>
-      <p class="section-sub section-sub-white" style="margin: 0 auto;" data-en="The purpose of measurement is not to describe the company — it is to discipline it." data-zh="衡量的目的不是描述公司——而是约束它。">The purpose of measurement is not to describe the company — it is to discipline it.</p>
+      <h2 class="section-title section-title-white" data-en="What Good Dashboards Do" data-zh="好的数据看板应该做什么">What Good Dashboards Do</h2>
+      <p class="section-sub section-sub-white" style="margin: 0 auto;" data-en="The purpose of measurement is not to describe the company — it is to discipline it." data-zh="看数据的目的不是描述公司——是用来约束它。">The purpose of measurement is not to describe the company — it is to discipline it.</p>
     </div>
     <div class="final-blockquote fade-in">
-      <p class="final-quote-text" data-en="Clarify where the system is getting stronger. Expose false progress quickly. Distinguish volume from quality. Help the team make sharper, not noisier, decisions. Good dashboards do not just describe the company — they discipline it." data-zh="明确系统在哪些方面正在变强。迅速暴露虚假进展。区分数量与质量。帮助团队做出更清晰而非更嘈杂的决策。好的仪表盘不只是描述公司——而是约束它。">Clarify where the system is getting stronger. Expose false progress quickly. Distinguish volume from quality. Help the team make sharper, not noisier, decisions. Good dashboards do not just describe the company — they discipline it.</p>
-      <div class="final-quote-zh" data-en="明确系统在哪些方面正在变强。迅速暴露虚假进展。区分数量与质量。帮助团队做出更清晰而非更嘈杂的决策。好的仪表盘不只是描述公司——而是约束它。" data-zh="Clarify where the system is getting stronger. Expose false progress quickly. Distinguish volume from quality. Help the team make sharper, not noisier, decisions. Good dashboards do not just describe the company — they discipline it.">明确系统在哪些方面正在变强。迅速暴露虚假进展。区分数量与质量。帮助团队做出更清晰而非更嘈杂的决策。好的仪表盘不只是描述公司——而是约束它。</div>
+      <p class="final-quote-text" data-en="Clarify where the system is getting stronger. Expose false progress quickly. Distinguish volume from quality. Help the team make sharper, not noisier, decisions. Good dashboards do not just describe the company — they discipline it." data-zh="说清楚哪里在变强。快速暴露假进展。把数量和质量分开。帮团队做更清晰、更有重点的决策，而不是更多噪音。好的数据看板不只是在描述公司——而是在约束它。">Clarify where the system is getting stronger. Expose false progress quickly. Distinguish volume from quality. Help the team make sharper, not noisier, decisions. Good dashboards do not just describe the company — they discipline it.</p>
+      <div class="final-quote-zh" data-en="说清楚哪里在变强。快速暴露假进展。把数量和质量分开。帮团队做更清晰、更有重点的决策，而不是更多噪音。好的数据看板不只是在描述公司——而是在约束它。" data-zh="Clarify where the system is getting stronger. Expose false progress quickly. Distinguish volume from quality. Help the team make sharper, not noisier, decisions. Good dashboards do not just describe the company — they discipline it.">说清楚哪里在变强。快速暴露假进展。把数量和质量分开。帮团队做更清晰、更有重点的决策，而不是更多噪音。好的数据看板不只是在描述公司——而是在约束它。</div>
     </div>
   </div>
 </section>
@@ -936,7 +913,7 @@ nav {
   <a href="attribution.html" style="display:block; padding:16px; background:#fff; border:1px solid var(--border, #e5e7eb); border-radius:8px; text-decoration:none; transition:all 0.2s; max-width:400px;">
     <div style="font-size:13px; color:var(--text3, #9ca3af);" data-en="Next →" data-zh="下一步 →" class="bilingual-text">Next →</div>
     <div style="font-size:15px; font-weight:600; color:var(--text, #111827);" data-en="See how we measure attribution" data-zh="了解我们如何衡量归因" class="bilingual-text">See how we measure attribution</div>
-    <div style="font-size:13px; color:var(--accent, #4f46e5); margin-top:4px;" data-en="Attribution Framework →" data-zh="归因框架 →" class="bilingual-text">Attribution Framework →</div>
+    <div style="font-size:13px; color:var(--accent, #4f46e5); margin-top:4px;" data-en="Attribution Framework →" data-zh="归因做法 →" class="bilingual-text">Attribution Framework →</div>
   </a>
 </div>
 

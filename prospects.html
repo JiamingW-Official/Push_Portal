@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Push — 本地创作者效果基础设施">
+<meta name="description" content="Push — 本地商家靠创作者拉客的标准流程">
 <meta property="og:title" content="PUSH">
 <meta property="og:description" content="Push 让每次创作者合作都可以量化、追踪、复购。">
 <meta property="og:type" content="website">
@@ -36,34 +36,22 @@
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.75; font-size: 15px; }
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.85;}
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
 /* NAV */
-.topnav, nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
-  display: flex; align-items: center;
-  padding: 0 24px; height: 60px; gap: 8px;
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;
+  background:rgba(255,255,255,0.95);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);transition:box-shadow 0.2s;
 }
-.logo, .nav-logo {
-  font-weight: 900; font-size: 22px; color: var(--accent);
-  letter-spacing: 2px; text-decoration: none; flex-shrink: 0;
-  margin-right: 16px;
-}
-.navlinks, .nav-links {
-  display: flex; gap: 2px; flex-wrap: wrap; flex: 1;
-}
-.navlinks a, .nav-links a {
-  padding: 5px 12px; border-radius: 8px; font-size: 12px; font-weight: 500;
-  color: var(--text2); transition: all 0.2s; text-decoration: none;
-  white-space: nowrap;
-}
-.navlinks a:hover, .nav-links a:hover { color: var(--text); background: var(--bg2); }
-.navlinks a.active, .nav-links a.active { color: var(--accent); background: var(--accent-bg); font-weight: 700; }
+.nav-logo{font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;margin-right:8px;flex-shrink:0;text-decoration:none;}
+.nav-links{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
+.nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:all 0.15s;white-space:nowrap;text-decoration:none;}
+.nav-links a:hover{color:var(--accent);background:var(--accent-bg);}
+.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);}
 #lang-btn {
   background: var(--accent); color: #fff; border: none;
   padding: 7px 16px; border-radius: 8px; font-size: 12px; font-weight: 700;
@@ -304,8 +292,8 @@ a:hover { text-decoration: underline; }
 .phase:nth-child(3) { animation-delay: 0.3s; }
 
 /* SCROLL ANIMATIONS */
-.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; animation: fadeInFallback 0s 4s forwards; }
-.fade-in.visible { opacity: 1; transform: translateY(0); animation: none; }
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.55s ease,transform 0.55s ease;}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
 @keyframes fadeInFallback { to { opacity: 1; transform: translateY(0); } }
 
 /* LANG VISIBILITY */
@@ -331,7 +319,7 @@ body.lang-zh .end-state-grid { grid-template-columns: 1fr; }
 .nav-mobile-panel .mobile-lang-row{display:flex;align-items:center;padding:12px 16px 4px;gap:12px;border-top:1px solid var(--border,#e5e7eb);margin-top:8px;}
 .nav-mobile-panel .mobile-lang-label{font-size:12px;color:var(--text3,#9ca3af);font-weight:500;}
 @media(max-width:768px){
-  .nav-links,.navlinks{display:none !important;}
+  .nav-links{display:none !important;}
   .nav-burger{display:flex !important;}
   #lang-btn{font-size:12px;padding:6px 12px;}
 }
@@ -342,9 +330,9 @@ body.lang-zh .analogy .en { display: none; }
 <body>
 
 <!-- NAV -->
-<nav class="topnav">
-  <a href="index.html" class="logo">PUSH</a>
-  <div class="navlinks">
+<nav>
+  <a href="index.html" class="nav-logo">PUSH</a>
+  <div class="nav-links">
     <a href="index.html" data-en="Overview" data-zh="首页">Overview</a>
     <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
     <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
@@ -379,7 +367,7 @@ body.lang-zh .analogy .en { display: none; }
 <!-- HERO -->
 <div class="hero">
   <h1 data-en="Future Prospects &amp; Vision" data-zh="未来愿景与规划">Future Prospects &amp; Vision</h1>
-  <p data-en="From one neighborhood to the infrastructure layer for local creator-driven demand across America." data-zh="从一个社区出发，构建覆盖全美的本地创作者驱动需求的基础设施层。">From one neighborhood to the infrastructure layer for local creator-driven demand across America.</p>
+  <p data-en="From one neighborhood to the infrastructure layer for local creator-driven demand across America." data-zh="从一个社区开始，做成全美本地商家靠创作者拉客的底层系统。">From one neighborhood to the infrastructure layer for local creator-driven demand across America.</p>
 </div>
 
 <!-- ====== SHORT-TERM ====== -->
@@ -398,23 +386,23 @@ body.lang-zh .analogy .en { display: none; }
       <ul class="item-list">
         <li>
           <div class="item-icon">&#x1F3D8;</div>
-          <div><strong>首个密集社区启动</strong><br>在Silver Lake (LA)、Williamsburg (NYC) 或 Mission (SF) 中选择一个社区率先上线</div>
+          <div><strong>先在一个社区死磕</strong><br>Silver Lake、Williamsburg 或 Mission——选一个，先把这一个地方跑通</div>
         </li>
         <li>
           <div class="item-icon">&#x1F4B0;</div>
-          <div><strong>15+活跃商户（5+付费），25+活跃创作者</strong><br>建立首批商户和创作者网络，形成双边市场雏形</div>
+          <div><strong>15+活跃商户（5+付费），25+活跃创作者</strong><br>把第一批商户和创作者拉进来，让两边都跑起来</div>
         </li>
         <li>
           <div class="item-icon">&#x1F504;</div>
-          <div><strong>验证商户复购行为</strong><br>目标：40%以上的商户复购率，证明产品价值</div>
+          <div><strong>验证商户复购</strong><br>目标40%以上复购率，商户愿意再来才说明产品真的有用</div>
         </li>
         <li>
           <div class="item-icon">&#x1F4B3;</div>
-          <div><strong>验证付费意愿</strong><br>商户愿意支付 $99/月 的订阅费用</div>
+          <div><strong>验证付费意愿</strong><br>商户真的愿意每月掏 $99 订阅</div>
         </li>
         <li>
           <div class="item-icon">&#x1F4CA;</div>
-          <div><strong>构建创作者评分系统</strong><br>基于真实数据建立创作者表现评分体系</div>
+          <div><strong>搭创作者评分系统</strong><br>用真实履约数据给创作者打分，不靠感觉</div>
         </li>
       </ul>
     </div>
@@ -470,23 +458,23 @@ body.lang-zh .analogy .en { display: none; }
       <ul class="item-list">
         <li>
           <div class="item-icon">&#x1F30D;</div>
-          <div><strong>拓展至3-5个社区/城市</strong><br>复制成功模式，在多个密集型社区验证可扩展性</div>
+          <div><strong>拓展至3-5个社区/城市</strong><br>把第一个社区跑通的打法复制过去，验证能不能在其他地方同样跑起来</div>
         </li>
         <li>
           <div class="item-icon">&#x1F4B3;</div>
-          <div><strong>自动化 Stripe Connect 支付</strong><br>实现商户与创作者之间的自动分账和结算</div>
+          <div><strong>自动化 Stripe Connect 支付</strong><br>商户付款后自动打给创作者，不靠人工处理</div>
         </li>
         <li>
           <div class="item-icon">&#x1F916;</div>
-          <div><strong>ML驱动的高级创作者评分</strong><br>利用机器学习优化创作者匹配和效果预测</div>
+          <div><strong>ML驱动的创作者评分</strong><br>用机器学习做更准的创作者匹配，预测哪个创作者适合哪家店</div>
         </li>
         <li>
           <div class="item-icon">&#x1F4A1;</div>
-          <div><strong>垂直领域扩展</strong><br>从餐饮扩展到美容、健身、活动等本地服务领域</div>
+          <div><strong>扩品类</strong><br>从餐饮打开，往美容、健身、活动等本地场景延伸</div>
         </li>
         <li>
           <div class="item-icon">&#x1F4C8;</div>
-          <div><strong>规模化增长</strong><br>500+商户，2000+创作者，月经常性收入突破 $50K</div>
+          <div><strong>规模目标</strong><br>500+商户，2000+创作者，月经常性收入 $50K+</div>
         </li>
       </ul>
     </div>
@@ -542,27 +530,27 @@ body.lang-zh .analogy .en { display: none; }
       <ul class="item-list">
         <li>
           <div class="item-icon">&#x1F3D7;</div>
-          <div><strong>本地创作者驱动需求的基础设施层</strong><br>成为覆盖全美的本地创作者获客基础设施</div>
+          <div><strong>本地创作者带客的底层系统</strong><br>成为全美本地商家找创作者合作的默认平台</div>
         </li>
         <li>
           <div class="item-icon">&#x1F6E1;</div>
-          <div><strong>专有创作者表现数据护城河</strong><br>独有的创作者效果数据成为核心竞争壁垒</div>
+          <div><strong>专有创作者表现数据壁垒</strong><br>我们积累的创作者效果数据别人没有，是真正难复制的竞争优势</div>
         </li>
         <li>
           <div class="item-icon">&#x1F5A5;</div>
-          <div><strong>商户自助服务平台</strong><br>商户可自主发布需求、选择创作者、管理活动</div>
+          <div><strong>商户自助</strong><br>商户自己发需求、挑创作者、跟进活动，不用我们每次都介入</div>
         </li>
         <li>
           <div class="item-icon">&#x1F393;</div>
-          <div><strong>创作者职业发展工具</strong><br>为创作者提供成长路径、培训和收入管理工具</div>
+          <div><strong>创作者成长工具</strong><br>给创作者清晰的成长路径、培训和收入管理，让他们把这里当职业来做</div>
         </li>
         <li>
           <div class="item-icon">&#x1F517;</div>
-          <div><strong>POS/CRM系统集成</strong><br>与主流收银和客户管理系统深度对接</div>
+          <div><strong>接入POS/CRM系统</strong><br>直接和商家现有的收银、客户管理系统打通，效果数据自动同步</div>
         </li>
         <li>
           <div class="item-icon">&#x1F310;</div>
-          <div><strong>网络效应形成赢家通吃格局</strong><br>双边网络效应推动市场集中，建立竞争优势</div>
+          <div><strong>网络效应锁定市场</strong><br>两边用户越多，平台越好用——到了临界点就很难有第二名</div>
         </li>
       </ul>
     </div>
@@ -610,7 +598,7 @@ body.lang-zh .analogy .en { display: none; }
       <div class="end-card">
         <h3>&#x1F6AB; Not Just a Marketplace / 不只是一个市场</h3>
         <p>
-          Push 的终极目标不是成为「一个成功的交易平台」。我们要构建的是一个全新的市场层 -- 本地创作者驱动需求的基础设施。
+          Push 的目标不是「做一个还不错的撮合平台」。我们要建的是一个全新的市场层——让本地商家靠创作者拉客变成标准动作，而这套流程过去根本不存在。
         </p>
       </div>
       <div class="end-card">
@@ -622,7 +610,7 @@ body.lang-zh .analogy .en { display: none; }
       <div class="end-card">
         <h3>&#x26A1; A New Category / 全新品类</h3>
         <p>
-          就像 Stripe 之于支付，Push 之于本地创作者获客。我们不是优化现有流程，而是创造一个全新的市场品类。
+          就像 Stripe 把「在线收款」这件事标准化了一样，Push 要把「本地商家找创作者合作」这件事标准化。我们不是在优化一个现有流程，而是在创造一个之前没有的市场品类。
         </p>
       </div>
       <div class="end-card">

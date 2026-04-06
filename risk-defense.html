@@ -40,32 +40,17 @@
 
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--text);line-height:1.6;overflow-x:hidden;}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:var(--text);font-size:15px;line-height:1.85;overflow-x:hidden;}
 
 /* ═══════════════════════════════════════════
    NAV
 ═══════════════════════════════════════════ */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:1000;
-  height:60px;background:rgba(255,255,255,0.92);
-  border-bottom:1px solid var(--border);
-  -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
-  display:flex;align-items:center;padding:0 24px;gap:16px;
-}
-.nav-logo{
-  font-size:22px;font-weight:900;color:var(--accent);
-  text-decoration:none;letter-spacing:-0.5px;flex-shrink:0;
-}
-.nav-links{
-  display:flex;align-items:center;gap:4px;flex:1;justify-content:center;
-}
-.nav-links a{
-  font-size:13px;font-weight:500;color:var(--text2);
-  text-decoration:none;padding:5px 11px;border-radius:8px;
-  transition:color 0.2s,background 0.2s;white-space:nowrap;
-}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;background:rgba(255,255,255,0.95);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:box-shadow 0.2s;}
+.nav-logo{font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;margin-right:8px;flex-shrink:0;text-decoration:none;}
+.nav-links{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
+.nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:all 0.15s;white-space:nowrap;text-decoration:none;}
 .nav-links a:hover{color:var(--accent);background:var(--accent-bg);}
-.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;}
+.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);}
 .lang-btn{
   background:var(--accent);color:#fff;border:none;cursor:pointer;
   font-size:12px;font-weight:700;padding:7px 18px;border-radius:8px;
@@ -163,7 +148,7 @@ nav{
 /* ═══════════════════════════════════════════
    SECTION CHROME
 ═══════════════════════════════════════════ */
-.section{padding:100px 24px;}
+.section{padding:120px 64px;}
 .section-inner{max-width:1100px;margin:0 auto;}
 .section-bg2{background:var(--bg2);}
 .section-dark{background:var(--primary);}
@@ -271,7 +256,7 @@ nav{
 /* ═══════════════════════════════════════════
    SYSTEM SECTION (DARK)
 ═══════════════════════════════════════════ */
-.system-section{background:var(--primary);padding:100px 24px;}
+.system-section{background:var(--primary);padding:120px 64px;}
 .system-inner{max-width:1100px;margin:0 auto;}
 .system-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px;}
 .sys-card{
@@ -330,7 +315,7 @@ nav{
 /* ═══════════════════════════════════════════
    SCROLL FADE
 ═══════════════════════════════════════════ */
-.fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease;animation:fadeInFallback 0s 4s forwards;}
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.55s ease,transform 0.55s ease;animation:fadeInFallback 0s 4s forwards;}
 .fade-in.visible{opacity:1;transform:translateY(0);animation:none;}
 @keyframes fadeInFallback{to{opacity:1;transform:translateY(0);}}
 
@@ -495,7 +480,7 @@ footer{
           <ul class="rc-bullets">
             <li data-en="Merchants see you as just a matching tool" data-zh="商家觉得你只是撮合">Merchants see you as just a matching tool</li>
             <li data-en="Creators see you as a freebie app" data-zh="Creator 觉得你只是发福利">Creators see you as a freebie app</li>
-            <li data-en="Investors see no moat" data-zh="投资人觉得没有护城河">Investors see no moat</li>
+            <li data-en="Investors see no moat" data-zh="投资人觉得没有壁垒">Investors see no moat</li>
             <li data-en="Product team loses direction" data-zh="团队做功能时容易跑偏">Product team loses direction</li>
           </ul>
         </div>
@@ -505,7 +490,7 @@ footer{
           <div class="rc-divider-line"></div>
         </div>
         <div class="rc-bottom">
-          <div class="rc-defense-title" data-en="&ldquo;Push is not a content platform. Push is local creator-driven acquisition infrastructure.&rdquo;" data-zh="&ldquo;Push 不是内容平台，而是本地 creator-driven acquisition infrastructure。&rdquo;">&ldquo;Push is not a content platform. Push is local creator-driven acquisition infrastructure.&rdquo;</div>
+          <div class="rc-defense-title" data-en="&ldquo;Push is not a content platform. Push is local creator-driven acquisition infrastructure.&rdquo;" data-zh="&ldquo;Push 不是内容平台，是帮本地商家用创作者来获客的基础设施。&rdquo;">&ldquo;Push is not a content platform. Push is local creator-driven acquisition infrastructure.&rdquo;</div>
           <ul class="rc-defense-bullets">
             <li data-en="All messaging centers on: merchant ROI, creator credit, structured campaigns, verification, repeatability" data-zh="所有对外表达围绕：商家 ROI、creator 信用、结构化活动、验证、可重复性">All messaging centers on: merchant ROI, creator credit, structured campaigns, verification, repeatability</li>
             <li data-en="Never position as: &ldquo;discover,&rdquo; &ldquo;种草,&rdquo; &ldquo;creator community&rdquo;" data-zh="永远不要包装成「发现」「种草」「达人社群」">Never position as: &ldquo;discover,&rdquo; &ldquo;种草,&rdquo; &ldquo;creator community&rdquo;</li>
@@ -712,7 +697,7 @@ footer{
           <div class="rc-desc" data-en="Merchants might try once out of curiosity, but if they don't return, the platform has no healthy economics." data-zh="商家可能第一次觉得新鲜，但如果第二次不来，平台就没有健康经济性。">Merchants might try once out of curiosity, but if they don't return, the platform has no healthy economics.</div>
           <ul class="rc-bullets">
             <li data-en="High CAC, low LTV — platform looks busy but bleeds money" data-zh="高 CAC，低 LTV。平台看起来活跃，但实际在亏损">High CAC, low LTV — platform looks busy but bleeds money</li>
-            <li data-en="No repeat = no data compounding = no moat" data-zh="没有复购 = 没有数据复利 = 没有护城河">No repeat = no data compounding = no moat</li>
+            <li data-en="No repeat = no data compounding = no moat" data-zh="没有复购 = 数据积累不起来 = 没有壁垒">No repeat = no data compounding = no moat</li>
           </ul>
         </div>
         <div class="rc-divider">
@@ -768,7 +753,7 @@ footer{
             <li data-en="For merchants: supply continuity, repeat automation, creator comparison, ROI dashboard, standby refill, dispute protection" data-zh="对商家：持续供给、复购自动化、Creator 对比、ROI 后台、候补填充、争议保护">For merchants: supply continuity, repeat automation, creator comparison, ROI dashboard, standby refill, dispute protection</li>
             <li data-en="For creators: credit accumulation, tier progression, priority access, better campaign pool, fast payout, future earning unlocks" data-zh="对 Creator：信用积累、Tier 晋升、优先权限、更好的活动池、快速提现、未来收益解锁">For creators: credit accumulation, tier progression, priority access, better campaign pool, fast payout, future earning unlocks</li>
           </ul>
-          <div class="rc-insight" data-en="&ldquo;Platform cannot be only an introduction layer. It must be a value compounding layer.&rdquo;" data-zh="&ldquo;平台不能只是 introduction layer，必须是 value compounding layer。&rdquo;">&ldquo;Platform cannot be only an introduction layer. It must be a value compounding layer.&rdquo;</div>
+          <div class="rc-insight" data-en="&ldquo;Platform cannot be only an introduction layer. It must be a value compounding layer.&rdquo;" data-zh="&ldquo;平台不能只是「认识一下」，必须是双方在这里越合作越离不开的地方。&rdquo;">&ldquo;Platform cannot be only an introduction layer. It must be a value compounding layer.&rdquo;</div>
         </div>
       </div>
 

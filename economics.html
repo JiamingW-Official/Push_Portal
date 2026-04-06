@@ -34,30 +34,15 @@
 
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--text);line-height:1.6;overflow-x:hidden;}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:var(--text);font-size:15px;line-height:1.85;overflow-x:hidden;}
 
 /* ── NAV ─────────────────────────────────────── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:1000;
-  height:60px;background:rgba(255,255,255,0.95);
-  border-bottom:1px solid var(--border);
-  -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
-  display:flex;align-items:center;padding:0 24px;gap:12px;
-}
-.nav-logo{
-  font-size:22px;font-weight:900;color:var(--accent);
-  text-decoration:none;letter-spacing:-0.5px;flex-shrink:0;
-}
-.nav-links{
-  display:flex;align-items:center;gap:2px;flex:1;
-}
-.nav-links a{
-  font-size:12px;font-weight:500;color:var(--text2);
-  text-decoration:none;padding:5px 9px;border-radius:7px;
-  transition:color 0.15s,background 0.15s;white-space:nowrap;
-}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;background:rgba(255,255,255,0.95);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:box-shadow 0.2s;}
+.nav-logo{font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;margin-right:8px;flex-shrink:0;text-decoration:none;}
+.nav-links{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
+.nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:all 0.15s;white-space:nowrap;text-decoration:none;}
 .nav-links a:hover{color:var(--accent);background:var(--accent-bg);}
-.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;}
+.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);}
 .nav-right{display:flex;align-items:center;gap:10px;flex-shrink:0;}
 .nav-hub{
   font-size:11px;font-weight:600;color:var(--text3);
@@ -124,7 +109,7 @@ nav{
 }
 
 /* ── SECTION CHROME ───────────────────────────── */
-.section{padding:80px 40px;}
+.section{padding:120px 64px;}
 .section-inner{max-width:1100px;margin:0 auto;}
 .section-bg2{background:var(--bg2);}
 .section-dark{background:var(--primary);}
@@ -350,7 +335,7 @@ blockquote.principle cite{
 }
 
 /* ── SCROLL FADE ─────────────────────────────── */
-.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.5s ease,transform 0.5s ease;animation:fadeInFallback 0s 4s forwards;}
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.55s ease,transform 0.55s ease;animation:fadeInFallback 0s 4s forwards;}
 .fade-in.visible{opacity:1;transform:translateY(0);animation:none;}
 @keyframes fadeInFallback{to{opacity:1;transform:translateY(0);}}
 
@@ -396,7 +381,7 @@ footer{
     <a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a>
     <a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
     <a href="push-strategy-core.html" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
-    <a href="economics.html" class="active" data-en="Economics" data-zh="经济模型">Economics</a>
+    <a href="economics.html" class="active" data-en="Economics" data-zh="收费与收入">Economics</a>
   </div>
   <div class="nav-right">
     <a href="index.html" class="nav-hub">DOC HUB ↗</a>
@@ -416,7 +401,7 @@ footer{
   <a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a>
   <a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
   <a href="push-strategy-core.html" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
-  <a href="economics.html" class="active" data-en="Economics" data-zh="经济模型">Economics</a>
+  <a href="economics.html" class="active" data-en="Economics" data-zh="收费与收入">Economics</a>
   <div class="mobile-lang-row">
     <span class="mobile-lang-label" data-en="Language" data-zh="语言">Language</span>
     <button id="lang-btn-mobile" style="background:var(--accent,#4f46e5);color:#fff;border:none;padding:6px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">中 / EN</button>
@@ -428,14 +413,14 @@ footer{
   <div class="hero-dots"></div>
   <div class="hero-inner">
     <span class="hero-badge" data-en="DOC — 06 · INTERNAL STRATEGY" data-zh="文档 — 06 · 内部战略">DOC — 06 · INTERNAL STRATEGY</span>
-    <h1 class="hero-title" data-en="Unit Economics &amp; Revenue Modeling" data-zh="单元经济与营收建模">Unit Economics &amp; Revenue Modeling</h1>
-    <p class="hero-sub" data-en="How Push thinks about revenue quality, cost structure, and the path to a durable business model." data-zh="Push 如何思考营收质量、成本结构和可持续商业模式之路。">How Push thinks about revenue quality, cost structure, and the path to a durable business model.</p>
+    <h1 class="hero-title" data-en="Unit Economics &amp; Revenue Modeling" data-zh="单笔经济账与收入来源">Unit Economics &amp; Revenue Modeling</h1>
+    <p class="hero-sub" data-en="How Push thinks about revenue quality, cost structure, and the path to a durable business model." data-zh="Push 怎么看收入质量、成本结构，以及走向可持续盈利的路径。">How Push thinks about revenue quality, cost structure, and the path to a durable business model.</p>
   </div>
 </section>
 
 <!-- ── LAYER DESCRIPTION ── -->
 <div style="max-width:800px; margin:0 auto 24px; padding:10px 16px; background:var(--bg2, #f8f9fa); border-radius:8px; font-size:13px; color:var(--text3); text-align:center;">
-  <span data-en="Deep dive into Push's economic model and pricing. For the strategic context, see <a href='push-strategy-core.html'>Strategy Core</a>." data-zh="深入了解 Push 的经济模型与定价。战略背景请参阅<a href='push-strategy-core.html'>战略核心</a>。" class="bilingual-text">Deep dive into Push's economic model and pricing. For the strategic context, see <a href="push-strategy-core.html">Strategy Core</a>.</span>
+  <span data-en="Deep dive into Push's economic model and pricing. For the strategic context, see <a href='push-strategy-core.html'>Strategy Core</a>." data-zh="这里讲 Push 的收费方式和收入结构。想看战略背景，请看<a href='push-strategy-core.html'>战略核心</a>。" class="bilingual-text">Deep dive into Push's economic model and pricing. For the strategic context, see <a href="push-strategy-core.html">Strategy Core</a>.</span>
 </div>
 
 <!-- ── SECTION 1: CORE PRINCIPLE ─────────────── -->
@@ -443,37 +428,37 @@ footer{
   <div class="section-inner">
     <div class="fade-in">
       <div class="section-label" data-en="Core Economic Principle" data-zh="核心经济原则">Core Economic Principle</div>
-      <h2 class="section-title" data-en="What Push Optimizes For" data-zh="Push 优化的目标">What Push Optimizes For</h2>
-      <p class="section-sub" data-en="Not signups, campaigns created, map opens, or profile views. The north star is high-quality, repeatable, margin-positive demand routing." data-zh="不是注册量、活动创建数、地图打开次数或主页浏览量。北极星是高质量、可重复、正利润的需求路由。">Not signups, campaigns created, map opens, or profile views. The north star is high-quality, repeatable, margin-positive demand routing.</p>
+      <h2 class="section-title" data-en="What Push Optimizes For" data-zh="Push 真正要优化什么">What Push Optimizes For</h2>
+      <p class="section-sub" data-en="Not signups, campaigns created, map opens, or profile views. The north star is high-quality, repeatable, margin-positive demand routing." data-zh="不是注册量、创建了多少个活动、地图打开次数或主页浏览量。真正的目标是：把高质量、可重复、能赚钱的需求对接做扎实。">Not signups, campaigns created, map opens, or profile views. The north star is high-quality, repeatable, margin-positive demand routing.</p>
       <blockquote class="principle">
-        <span data-en="Win by: merchant repeat rate, creator completion quality, transaction reliability, high-confidence attribution, and repeatable contribution margin." data-zh="胜出之道：商家复购率、创作者完成质量、交易可靠性、高置信归因以及可重复的边际贡献。">Win by: merchant repeat rate, creator completion quality, transaction reliability, high-confidence attribution, and repeatable contribution margin.</span>
+        <span data-en="Win by: merchant repeat rate, creator completion quality, transaction reliability, high-confidence attribution, and repeatable contribution margin." data-zh="怎么算赢：商家愿意继续来、创作者完成质量高、交易靠得住、归因有依据、每次边际贡献是正的。">Win by: merchant repeat rate, creator completion quality, transaction reliability, high-confidence attribution, and repeatable contribution margin.</span>
       </blockquote>
     </div>
 
     <div class="win-grid fade-in" style="margin-top:40px;">
       <div class="win-item">
         <div class="win-item-label" data-en="Merchant Repeat Rate" data-zh="商家复购率">Merchant Repeat Rate</div>
-        <div class="win-item-text" data-en="Merchants return when platform value exceeds friction. Primary health signal." data-zh="当平台价值超过摩擦成本时，商家会回归。主要健康信号。">Merchants return when platform value exceeds friction. Primary health signal.</div>
+        <div class="win-item-text" data-en="Merchants return when platform value exceeds friction. Primary health signal." data-zh="商家愿意回来，说明平台给的价值盖过了麻烦。这是最核心的健康指标。">Merchants return when platform value exceeds friction. Primary health signal.</div>
       </div>
       <div class="win-item">
         <div class="win-item-label" data-en="Creator Completion Quality" data-zh="创作者完成质量">Creator Completion Quality</div>
-        <div class="win-item-text" data-en="Fulfillment without exception handling. Clean execution reduces operational overhead." data-zh="无需异常处理的履约。清晰执行降低运营开销。">Fulfillment without exception handling. Clean execution reduces operational overhead.</div>
+        <div class="win-item-text" data-en="Fulfillment without exception handling. Clean execution reduces operational overhead." data-zh="顺利完成、不需要处理各种例外情况。执行越干净，运营成本越低。">Fulfillment without exception handling. Clean execution reduces operational overhead.</div>
       </div>
       <div class="win-item">
         <div class="win-item-label" data-en="Transaction Reliability" data-zh="交易可靠性">Transaction Reliability</div>
-        <div class="win-item-text" data-en="End-to-end completion rate. A failed transaction costs more than it was worth." data-zh="端到端完成率。一次失败的交易比其价值代价更高。">End-to-end completion rate. A failed transaction costs more than it was worth.</div>
+        <div class="win-item-text" data-en="End-to-end completion rate. A failed transaction costs more than it was worth." data-zh="从头到尾都能完成的比例。一笔失败的交易消耗的资源，比它本身的价值还多。">End-to-end completion rate. A failed transaction costs more than it was worth.</div>
       </div>
       <div class="win-item">
-        <div class="win-item-label" data-en="High-Confidence Attribution" data-zh="高置信归因">High-Confidence Attribution</div>
-        <div class="win-item-text" data-en="Verified proof of performance. Enables premium pricing and repeat buying decisions." data-zh="经验证的绩效证明。支持溢价定价和复购决策。">Verified proof of performance. Enables premium pricing and repeat buying decisions.</div>
+        <div class="win-item-label" data-en="High-Confidence Attribution" data-zh="高可信度的归因">High-Confidence Attribution</div>
+        <div class="win-item-text" data-en="Verified proof of performance. Enables premium pricing and repeat buying decisions." data-zh="有核验依据的效果证明。让收更高的费用有底气，也让商家的复购决策更有依据。">Verified proof of performance. Enables premium pricing and repeat buying decisions.</div>
       </div>
       <div class="win-item">
         <div class="win-item-label" data-en="Contribution Margin Quality" data-zh="边际贡献质量">Contribution Margin Quality</div>
-        <div class="win-item-text" data-en="Revenue that covers variable cost cleanly. The metric that determines if the business is real." data-zh="清晰覆盖可变成本的收入。决定业务是否真实可行的指标。">Revenue that covers variable cost cleanly. The metric that determines if the business is real.</div>
+        <div class="win-item-text" data-en="Revenue that covers variable cost cleanly. The metric that determines if the business is real." data-zh="收入扣掉可变成本后还有剩。这个数字决定这门生意到底是不是真的能跑起来。">Revenue that covers variable cost cleanly. The metric that determines if the business is real.</div>
       </div>
       <div class="win-item">
         <div class="win-item-label" data-en="Repeatability" data-zh="可重复性">Repeatability</div>
-        <div class="win-item-text" data-en="Systematic, not anecdotal. Each repeat cycle should cost less and produce more." data-zh="系统性而非个案性。每个重复周期应成本更低、产出更多。">Systematic, not anecdotal. Each repeat cycle should cost less and produce more.</div>
+        <div class="win-item-text" data-en="Systematic, not anecdotal. Each repeat cycle should cost less and produce more." data-zh="要可以系统复制，而不是靠运气或单个案例。每次重复做，成本要更低、产出要更多。">Systematic, not anecdotal. Each repeat cycle should cost less and produce more.</div>
       </div>
     </div>
   </div>
@@ -483,70 +468,70 @@ footer{
 <section class="section section-bg2">
   <div class="section-inner">
     <div class="fade-in">
-      <div class="section-label" data-en="Revenue Architecture" data-zh="营收架构">Revenue Architecture</div>
-      <h2 class="section-title" data-en="5 Revenue Layers" data-zh="5 个营收层级">5 Revenue Layers</h2>
-      <p class="section-sub" data-en="Each layer has a distinct role. Layering order matters — later layers only work when earlier ones have proven reliability." data-zh="每个层级都有其独特角色。分层顺序至关重要——后期层级只有在前期层级证明可靠性后才能发挥作用。">Each layer has a distinct role. Layering order matters — later layers only work when earlier ones have proven reliability.</p>
+      <div class="section-label" data-en="Revenue Architecture" data-zh="收入来源">Revenue Architecture</div>
+      <h2 class="section-title" data-en="5 Revenue Layers" data-zh="5 种收入来源">5 Revenue Layers</h2>
+      <p class="section-sub" data-en="Each layer has a distinct role. Layering order matters — later layers only work when earlier ones have proven reliability." data-zh="每种收入方式各有各的作用。顺序很重要——后面的收入方式只有在前面的跑稳之后才能开。">Each layer has a distinct role. Layering order matters — later layers only work when earlier ones have proven reliability.</p>
     </div>
     <div class="item-rows">
       <div class="item-row fade-in">
         <div class="item-num">01</div>
         <div class="item-body">
-          <div class="item-title" data-en="Merchant Subscription Revenue" data-zh="商家订阅收入">Merchant Subscription Revenue</div>
-          <div class="item-sub" data-en="STABILITY LAYER" data-zh="稳定层">STABILITY LAYER</div>
-          <p class="item-desc" data-en="The predictable foundation. Recurring revenue that funds baseline operations and reduces dependence on transactional volume fluctuations." data-zh="可预测的基础。经常性收入为基础运营提供资金，减少对交易量波动的依赖。">The predictable foundation. Recurring revenue that funds baseline operations and reduces dependence on transactional volume fluctuations.</p>
+          <div class="item-title" data-en="Merchant Subscription Revenue" data-zh="商家订阅费">Merchant Subscription Revenue</div>
+          <div class="item-sub" data-en="STABILITY LAYER" data-zh="稳定收入层">STABILITY LAYER</div>
+          <p class="item-desc" data-en="The predictable foundation. Recurring revenue that funds baseline operations and reduces dependence on transactional volume fluctuations." data-zh="最稳定的收入基础。每月固定收费，用来覆盖基础运营成本，不会随每月交易量的波动而大起大落。">The predictable foundation. Recurring revenue that funds baseline operations and reduces dependence on transactional volume fluctuations.</p>
           <ul class="item-list">
-            <li data-en="Campaign access &amp; creation tools" data-zh="活动访问与创建工具">Campaign access &amp; creation tools</li>
+            <li data-en="Campaign access &amp; creation tools" data-zh="发起和管理活动的权限及工具">Campaign access &amp; creation tools</li>
             <li data-en="Creator filtering &amp; matching dashboard" data-zh="创作者筛选与匹配仪表板">Creator filtering &amp; matching dashboard</li>
-            <li data-en="Repeat campaign automation" data-zh="重复活动自动化">Repeat campaign automation</li>
-            <li data-en="Basic reporting &amp; analytics" data-zh="基础报告与分析">Basic reporting &amp; analytics</li>
+            <li data-en="Repeat campaign automation" data-zh="活动自动重复发起">Repeat campaign automation</li>
+            <li data-en="Basic reporting &amp; analytics" data-zh="基础报告与数据">Basic reporting &amp; analytics</li>
           </ul>
         </div>
       </div>
       <div class="item-row fade-in">
         <div class="item-num">02</div>
         <div class="item-body">
-          <div class="item-title" data-en="Campaign Service Fees" data-zh="活动服务费">Campaign Service Fees</div>
-          <div class="item-sub" data-en="OPERATIONAL MONETIZATION" data-zh="运营变现">OPERATIONAL MONETIZATION</div>
-          <p class="item-desc" data-en="Per-campaign fees that capture value from the operational infrastructure Push provides: routing, workflow, settlement, reporting." data-zh="每次活动费用，捕获 Push 提供的运营基础设施价值：路由、工作流、结算、报告。">Per-campaign fees that capture value from the operational infrastructure Push provides: routing, workflow, settlement, reporting.</p>
+          <div class="item-title" data-en="Campaign Service Fees" data-zh="单次活动服务费">Campaign Service Fees</div>
+          <div class="item-sub" data-en="OPERATIONAL MONETIZATION" data-zh="按量收费">OPERATIONAL MONETIZATION</div>
+          <p class="item-desc" data-en="Per-campaign fees that capture value from the operational infrastructure Push provides: routing, workflow, settlement, reporting." data-zh="每发起一个活动收一次费，对应 Push 提供的那套运营服务：撮合创作者、管理流程、结算付款、出报告。">Per-campaign fees that capture value from the operational infrastructure Push provides: routing, workflow, settlement, reporting.</p>
           <ul class="item-list">
-            <li data-en="Creator routing &amp; workflow structure" data-zh="创作者路由与工作流结构">Creator routing &amp; workflow structure</li>
-            <li data-en="Proof collection &amp; settlement" data-zh="证明收集与结算">Proof collection &amp; settlement</li>
-            <li data-en="Campaign lifecycle reporting" data-zh="活动生命周期报告">Campaign lifecycle reporting</li>
+            <li data-en="Creator routing &amp; workflow structure" data-zh="创作者匹配与流程管理">Creator routing &amp; workflow structure</li>
+            <li data-en="Proof collection &amp; settlement" data-zh="核验材料收集与付款结算">Proof collection &amp; settlement</li>
+            <li data-en="Campaign lifecycle reporting" data-zh="活动全流程报告">Campaign lifecycle reporting</li>
           </ul>
         </div>
       </div>
       <div class="item-row fade-in">
         <div class="item-num">03</div>
         <div class="item-body">
-          <div class="item-title" data-en="Performance-Based Take Rate" data-zh="绩效抽成">Performance-Based Take Rate</div>
-          <div class="item-sub" data-en="STRONGEST LONG-TERM LAYER" data-zh="最强长期层级">STRONGEST LONG-TERM LAYER</div>
-          <p class="item-desc" data-en="The highest-margin, most defensible revenue. Fees contingent on verified completion, legible outcomes, and merchant-side success events. Requires attribution confidence before deploying." data-zh="利润率最高、最具防御性的收入。费用取决于经验证的完成、清晰的结果和商家端成功事件。部署前需要归因置信度。">The highest-margin, most defensible revenue. Fees contingent on verified completion, legible outcomes, and merchant-side success events. Requires attribution confidence before deploying.</p>
+          <div class="item-title" data-en="Performance-Based Take Rate" data-zh="按效果抽成">Performance-Based Take Rate</div>
+          <div class="item-sub" data-en="STRONGEST LONG-TERM LAYER" data-zh="长期最强的收入方式">STRONGEST LONG-TERM LAYER</div>
+          <p class="item-desc" data-en="The highest-margin, most defensible revenue. Fees contingent on verified completion, legible outcomes, and merchant-side success events. Requires attribution confidence before deploying." data-zh="毛利率最高、也最难被竞品复制的一种收费方式。只有在活动被核验完成、结果清晰可查、商家那边有实际动作时才收费。必须先把归因做扎实才能开这个收入源。">The highest-margin, most defensible revenue. Fees contingent on verified completion, legible outcomes, and merchant-side success events. Requires attribution confidence before deploying.</p>
           <ul class="item-list">
-            <li data-en="Verified completion events" data-zh="经验证的完成事件">Verified completion events</li>
-            <li data-en="Payout size gating" data-zh="支付规模门控">Payout size gating</li>
-            <li data-en="Redemption outcome correlation" data-zh="兑换结果关联">Redemption outcome correlation</li>
+            <li data-en="Verified completion events" data-zh="经核验的完成事件">Verified completion events</li>
+            <li data-en="Payout size gating" data-zh="按结果决定付款金额">Payout size gating</li>
+            <li data-en="Redemption outcome correlation" data-zh="关联兑换结果">Redemption outcome correlation</li>
           </ul>
         </div>
       </div>
       <div class="item-row fade-in">
         <div class="item-num">04</div>
         <div class="item-body">
-          <div class="item-title" data-en="Creator Premium Revenue" data-zh="创作者高级订阅收入">Creator Premium Revenue</div>
-          <div class="item-sub" data-en="OPTIONAL ACCELERATION ONLY" data-zh="仅可选加速">OPTIONAL ACCELERATION ONLY</div>
-          <p class="item-desc" data-en="Only if it genuinely improves earning velocity, opportunity access, and payout timing. NOT a vanity subscription. Should not launch until the underlying value is demonstrable." data-zh="仅当其真正提高收入速度、机会获取和支付时效时。不是虚荣订阅。在基础价值可展示之前不应推出。">Only if it genuinely improves earning velocity, opportunity access, and payout timing. NOT a vanity subscription. Should not launch until the underlying value is demonstrable.</p>
+          <div class="item-title" data-en="Creator Premium Revenue" data-zh="创作者付费会员">Creator Premium Revenue</div>
+          <div class="item-sub" data-en="OPTIONAL ACCELERATION ONLY" data-zh="仅在真有实际价值时开">OPTIONAL ACCELERATION ONLY</div>
+          <p class="item-desc" data-en="Only if it genuinely improves earning velocity, opportunity access, and payout timing. NOT a vanity subscription. Should not launch until the underlying value is demonstrable." data-zh="只有当它真的能帮创作者更快接到活、更快拿到钱时才开这个功能。不能做成没有实质内容的付费徽章。没有拿得出手的价值之前不要上线。">Only if it genuinely improves earning velocity, opportunity access, and payout timing. NOT a vanity subscription. Should not launch until the underlying value is demonstrable.</p>
           <ul class="item-list">
-            <li data-en="Priority pipeline access" data-zh="优先通道访问">Priority pipeline access</li>
-            <li data-en="Faster payout timing" data-zh="更快支付时效">Faster payout timing</li>
-            <li data-en="Higher-quality campaign eligibility" data-zh="更高质量活动资格">Higher-quality campaign eligibility</li>
+            <li data-en="Priority pipeline access" data-zh="优先查看新活动">Priority pipeline access</li>
+            <li data-en="Faster payout timing" data-zh="提前拿到钱">Faster payout timing</li>
+            <li data-en="Higher-quality campaign eligibility" data-zh="有资格接更好的活">Higher-quality campaign eligibility</li>
           </ul>
         </div>
       </div>
       <div class="item-row fade-in">
         <div class="item-num">05</div>
         <div class="item-body">
-          <div class="item-title" data-en="Future Financial Products" data-zh="未来金融产品">Future Financial Products</div>
-          <div class="item-sub" data-en="POST-TRUST LAYER" data-zh="后信任层">POST-TRUST LAYER</div>
-          <p class="item-desc" data-en="Only after core transactional trust is proven. Premature financial product launch without operational credibility creates risk exposure without corresponding margin." data-zh="仅在核心交易信任被证实后。在没有运营可信度的情况下过早推出金融产品会造成风险敞口而无对应利润。">Only after core transactional trust is proven. Premature financial product launch without operational credibility creates risk exposure without corresponding margin.</p>
+          <div class="item-title" data-en="Future Financial Products" data-zh="未来的金融服务">Future Financial Products</div>
+          <div class="item-sub" data-en="POST-TRUST LAYER" data-zh="建立信任之后才能开">POST-TRUST LAYER</div>
+          <p class="item-desc" data-en="Only after core transactional trust is proven. Premature financial product launch without operational credibility creates risk exposure without corresponding margin." data-zh="只有核心交易跑稳、平台信誉建立起来之后才能开。在这之前推金融产品，风险大、利润薄，得不偿失。">Only after core transactional trust is proven. Premature financial product launch without operational credibility creates risk exposure without corresponding margin.</p>
           <ul class="item-list">
             <li data-en="Payout acceleration" data-zh="支付加速">Payout acceleration</li>
             <li data-en="Creator cash advance" data-zh="创作者预付款">Creator cash advance</li>
@@ -565,48 +550,48 @@ footer{
   <div class="section-inner">
     <div class="fade-in">
       <div class="section-label" data-en="Cost Structure" data-zh="成本结构">Cost Structure</div>
-      <h2 class="section-title" data-en="Variable vs. Fixed Costs" data-zh="可变成本 vs. 固定成本">Variable vs. Fixed Costs</h2>
-      <p class="section-sub" data-en="Understanding which costs scale with activity and which are structural determines what margin improvement requires." data-zh="了解哪些成本随活动量扩展，哪些是结构性的，决定了利润改善需要什么条件。">Understanding which costs scale with activity and which are structural determines what margin improvement requires.</p>
+      <h2 class="section-title" data-en="Variable vs. Fixed Costs" data-zh="哪些成本随量走，哪些是固定的">Variable vs. Fixed Costs</h2>
+      <p class="section-sub" data-en="Understanding which costs scale with activity and which are structural determines what margin improvement requires." data-zh="搞清楚哪些成本跟活动量挂钩、哪些是固定开支，才能知道要改善利润率需要动哪里。">Understanding which costs scale with activity and which are structural determines what margin improvement requires.</p>
     </div>
 
     <div class="cost-grid fade-in">
       <div class="cost-col">
-        <div class="cost-col-label variable" data-en="Variable Costs" data-zh="可变成本">Variable Costs</div>
+        <div class="cost-col-label variable" data-en="Variable Costs" data-zh="可变成本（随量波动）">Variable Costs</div>
         <ul class="clean-list variable">
-          <li data-en="Payment processing" data-zh="支付处理">Payment processing</li>
-          <li data-en="Fraud review &amp; investigation" data-zh="欺诈审查与调查">Fraud review &amp; investigation</li>
-          <li data-en="Support intervention" data-zh="支持干预">Support intervention</li>
-          <li data-en="Merchant onboarding" data-zh="商家引导">Merchant onboarding</li>
-          <li data-en="Creator dispute resolution" data-zh="创作者争议解决">Creator dispute resolution</li>
-          <li data-en="Verification overhead" data-zh="验证开销">Verification overhead</li>
-          <li data-en="Local density activation" data-zh="本地密度激活">Local density activation</li>
+          <li data-en="Payment processing" data-zh="支付手续费">Payment processing</li>
+          <li data-en="Fraud review &amp; investigation" data-zh="欺诈审查与核查">Fraud review &amp; investigation</li>
+          <li data-en="Support intervention" data-zh="客服介入处理">Support intervention</li>
+          <li data-en="Merchant onboarding" data-zh="商家入驻引导">Merchant onboarding</li>
+          <li data-en="Creator dispute resolution" data-zh="创作者纠纷处理">Creator dispute resolution</li>
+          <li data-en="Verification overhead" data-zh="核验投入">Verification overhead</li>
+          <li data-en="Local density activation" data-zh="本地市场启动成本">Local density activation</li>
         </ul>
       </div>
       <div class="cost-col">
-        <div class="cost-col-label fixed" data-en="Fixed / Semi-Fixed Costs" data-zh="固定 / 半固定成本">Fixed / Semi-Fixed Costs</div>
+        <div class="cost-col-label fixed" data-en="Fixed / Semi-Fixed Costs" data-zh="固定或半固定成本">Fixed / Semi-Fixed Costs</div>
         <ul class="clean-list fixed">
-          <li data-en="Engineering &amp; product development" data-zh="工程与产品开发">Engineering &amp; product development</li>
-          <li data-en="Infrastructure &amp; hosting" data-zh="基础设施与托管">Infrastructure &amp; hosting</li>
-          <li data-en="Account management" data-zh="账户管理">Account management</li>
-          <li data-en="Operational tooling" data-zh="运营工具">Operational tooling</li>
-          <li data-en="Growth experimentation" data-zh="增长实验">Growth experimentation</li>
+          <li data-en="Engineering &amp; product development" data-zh="工程与产品研发">Engineering &amp; product development</li>
+          <li data-en="Infrastructure &amp; hosting" data-zh="服务器与基础设施">Infrastructure &amp; hosting</li>
+          <li data-en="Account management" data-zh="客户关系维护">Account management</li>
+          <li data-en="Operational tooling" data-zh="运营工具订阅">Operational tooling</li>
+          <li data-en="Growth experimentation" data-zh="增长测试投入">Growth experimentation</li>
         </ul>
       </div>
     </div>
 
     <div style="margin-top:48px;" class="fade-in">
-      <div class="section-label" data-en="What Good Unit Economics Looks Like" data-zh="良好单元经济学的样子">What Good Unit Economics Looks Like</div>
+      <div class="section-label" data-en="What Good Unit Economics Looks Like" data-zh="单笔经济账跑好是什么状态">What Good Unit Economics Looks Like</div>
       <div class="cost-grid" style="margin-top:16px;">
         <ul class="clean-list fixed">
-          <li data-en="Fast campaign fill time" data-zh="快速活动填充时间">Fast campaign fill time</li>
-          <li data-en="Low fraud review burden" data-zh="低欺诈审查负担">Low fraud review burden</li>
-          <li data-en="Clear verification path" data-zh="清晰的验证路径">Clear verification path</li>
-          <li data-en="Limited creator / merchant confusion" data-zh="有限的创作者/商家困惑">Limited creator / merchant confusion</li>
+          <li data-en="Fast campaign fill time" data-zh="活动很快就能找到合适的创作者">Fast campaign fill time</li>
+          <li data-en="Low fraud review burden" data-zh="几乎不需要人工审查欺诈">Low fraud review burden</li>
+          <li data-en="Clear verification path" data-zh="核验流程清晰、没有歧义">Clear verification path</li>
+          <li data-en="Limited creator / merchant confusion" data-zh="创作者和商家几乎不会搞不清楚怎么操作">Limited creator / merchant confusion</li>
         </ul>
         <ul class="clean-list fixed">
-          <li data-en="Minimal manual intervention" data-zh="最少人工干预">Minimal manual intervention</li>
-          <li data-en="Repeatable merchant behavior" data-zh="可重复的商家行为">Repeatable merchant behavior</li>
-          <li data-en="Creator progression value" data-zh="创作者发展价值">Creator progression value</li>
+          <li data-en="Minimal manual intervention" data-zh="人工干预极少">Minimal manual intervention</li>
+          <li data-en="Repeatable merchant behavior" data-zh="商家持续回来复购">Repeatable merchant behavior</li>
+          <li data-en="Creator progression value" data-zh="创作者在平台上有成长路径">Creator progression value</li>
         </ul>
       </div>
     </div>
@@ -617,34 +602,34 @@ footer{
 <section class="section section-bg2">
   <div class="section-inner">
     <div class="fade-in">
-      <div class="section-label" data-en="Stakeholder Economics" data-zh="利益相关者经济">Stakeholder Economics</div>
-      <h2 class="section-title" data-en="Why They Stay" data-zh="他们为何留存">Why They Stay</h2>
-      <p class="section-sub" data-en="Sustainable economics require both sides to perceive compounding value over time." data-zh="可持续经济要求双方随时间感受到复利价值。">Sustainable economics require both sides to perceive compounding value over time.</p>
+      <div class="section-label" data-en="Stakeholder Economics" data-zh="商家和创作者的算账逻辑">Stakeholder Economics</div>
+      <h2 class="section-title" data-en="Why They Stay" data-zh="他们为什么留下来">Why They Stay</h2>
+      <p class="section-sub" data-en="Sustainable economics require both sides to perceive compounding value over time." data-zh="能持续的生意，要求商家和创作者双方都能感受到：用得越久、越值得继续用。">Sustainable economics require both sides to perceive compounding value over time.</p>
     </div>
 
     <div class="logic-split">
       <div class="logic-box fade-in">
-        <div class="logic-box-title" data-en="Merchant Economic Logic" data-zh="商家经济逻辑">Merchant Economic Logic</div>
-        <div class="logic-box-sub" data-en="Why merchants continue using Push" data-zh="商家持续使用 Push 的原因">Why merchants continue using Push</div>
-        <div class="logic-box-core" data-en="More structured, accountable, and repeatable than direct DM outreach or local agencies." data-zh="比直接私信联系或本地机构更有结构、更负责任、更可重复。">More structured, accountable, and repeatable than direct DM outreach or local agencies.</div>
+        <div class="logic-box-title" data-en="Merchant Economic Logic" data-zh="商家的算账方式">Merchant Economic Logic</div>
+        <div class="logic-box-sub" data-en="Why merchants continue using Push" data-zh="商家继续用 Push 的理由">Why merchants continue using Push</div>
+        <div class="logic-box-core" data-en="More structured, accountable, and repeatable than direct DM outreach or local agencies." data-zh="比自己发私信找人或交给本地中介更有条理、更能追责、更容易复制。">More structured, accountable, and repeatable than direct DM outreach or local agencies.</div>
         <ul class="logic-list">
-          <li data-en="Legible acquisition cost" data-zh="清晰的获客成本">Legible acquisition cost</li>
-          <li data-en="Superior creator quality vs. ad hoc" data-zh="优于临时方案的创作者质量">Superior creator quality vs. ad hoc</li>
-          <li data-en="Low campaign setup friction" data-zh="低活动设置摩擦">Low campaign setup friction</li>
-          <li data-en="Strong repeat performance signals" data-zh="强重复绩效信号">Strong repeat performance signals</li>
-          <li data-en="Easier off-peak traffic management" data-zh="更易管理的低峰时段流量">Easier off-peak traffic management</li>
+          <li data-en="Legible acquisition cost" data-zh="拉新客户的费用看得清楚">Legible acquisition cost</li>
+          <li data-en="Superior creator quality vs. ad hoc" data-zh="比自己临时找人质量更有保障">Superior creator quality vs. ad hoc</li>
+          <li data-en="Low campaign setup friction" data-zh="发起一次活动不费劲">Low campaign setup friction</li>
+          <li data-en="Strong repeat performance signals" data-zh="有数据支撑下次是否继续做">Strong repeat performance signals</li>
+          <li data-en="Easier off-peak traffic management" data-zh="淡季引流更容易操作">Easier off-peak traffic management</li>
         </ul>
       </div>
       <div class="logic-box fade-in">
-        <div class="logic-box-title" data-en="Creator Economic Logic" data-zh="创作者经济逻辑">Creator Economic Logic</div>
-        <div class="logic-box-sub" data-en="Why creators continue using Push" data-zh="创作者持续使用 Push 的原因">Why creators continue using Push</div>
-        <div class="logic-box-core" data-en="Earnings become clearer, more merit-based, and more cumulative on platform." data-zh="平台上的收入变得更清晰、更基于实绩、更具积累性。">Earnings become clearer, more merit-based, and more cumulative on platform.</div>
+        <div class="logic-box-title" data-en="Creator Economic Logic" data-zh="创作者的算账方式">Creator Economic Logic</div>
+        <div class="logic-box-sub" data-en="Why creators continue using Push" data-zh="创作者继续用 Push 的理由">Why creators continue using Push</div>
+        <div class="logic-box-core" data-en="Earnings become clearer, more merit-based, and more cumulative on platform." data-zh="在平台上做得越久，收入越清晰、越按实际表现来、也越有积累感。">Earnings become clearer, more merit-based, and more cumulative on platform.</div>
         <ul class="logic-list">
-          <li data-en="Improving deal flow quality over time" data-zh="随时间提升的交易流质量">Improving deal flow quality over time</li>
-          <li data-en="Performance-gated access to better campaigns" data-zh="基于绩效的更好活动访问权">Performance-gated access to better campaigns</li>
-          <li data-en="More predictable payout timing" data-zh="更可预测的支付时效">More predictable payout timing</li>
-          <li data-en="Merchant quality filtering" data-zh="商家质量过滤">Merchant quality filtering</li>
-          <li data-en="On-platform earnings exceeding alternatives" data-zh="平台内收入超越替代方案">On-platform earnings exceeding alternatives</li>
+          <li data-en="Improving deal flow quality over time" data-zh="接到的活儿质量越来越好">Improving deal flow quality over time</li>
+          <li data-en="Performance-gated access to better campaigns" data-zh="表现好才能接更好的活，有正向激励">Performance-gated access to better campaigns</li>
+          <li data-en="More predictable payout timing" data-zh="什么时候能收到钱更可预期">More predictable payout timing</li>
+          <li data-en="Merchant quality filtering" data-zh="平台帮你过滤掉质量差的商家">Merchant quality filtering</li>
+          <li data-en="On-platform earnings exceeding alternatives" data-zh="在平台上赚的比自己找的多">On-platform earnings exceeding alternatives</li>
         </ul>
       </div>
     </div>
@@ -655,31 +640,31 @@ footer{
 <section class="section">
   <div class="section-inner">
     <div class="fade-in">
-      <div class="section-label" data-en="Diagnostic Framework" data-zh="诊断框架">Diagnostic Framework</div>
-      <h2 class="section-title" data-en="7 Contribution Margin Questions" data-zh="7 个边际贡献问题">7 Contribution Margin Questions</h2>
-      <p class="section-sub" data-en="The questions that reveal whether unit economics are improving or deteriorating. Ask these before and after every significant operational change." data-zh="揭示单元经济是否在改善或恶化的问题。在每次重大运营变化前后都应提出这些问题。">The questions that reveal whether unit economics are improving or deteriorating. Ask these before and after every significant operational change.</p>
+      <div class="section-label" data-en="Diagnostic Framework" data-zh="诊断用的核心问题">Diagnostic Framework</div>
+      <h2 class="section-title" data-en="7 Contribution Margin Questions" data-zh="7 个判断单笔经济是否健康的问题">7 Contribution Margin Questions</h2>
+      <p class="section-sub" data-en="The questions that reveal whether unit economics are improving or deteriorating. Ask these before and after every significant operational change." data-zh="这几个问题能帮你看清单笔的经济账是在变好还是变差。每次做重大运营调整前后都应该问一遍。">The questions that reveal whether unit economics are improving or deteriorating. Ask these before and after every significant operational change.</p>
     </div>
     <ol class="q-list fade-in">
       <li>
-        <div data-en="How much manual work does one campaign require?" data-zh="一次活动需要多少手动工作？">How much manual work does one campaign require?</div>
+        <div data-en="How much manual work does one campaign require?" data-zh="跑完一次活动需要多少人工介入？">How much manual work does one campaign require?</div>
       </li>
       <li>
-        <div data-en="Which campaign types create the highest operational burden?" data-zh="哪些活动类型产生最高的运营负担？">Which campaign types create the highest operational burden?</div>
+        <div data-en="Which campaign types create the highest operational burden?" data-zh="哪类活动最消耗运营资源？">Which campaign types create the highest operational burden?</div>
       </li>
       <li>
-        <div data-en="Which merchant verticals generate the cleanest repeats?" data-zh="哪些商家垂直领域产生最干净的复购？">Which merchant verticals generate the cleanest repeats?</div>
+        <div data-en="Which merchant verticals generate the cleanest repeats?" data-zh="哪些行业的商家复购最顺、最省事？">Which merchant verticals generate the cleanest repeats?</div>
       </li>
       <li>
-        <div data-en="Which creator cohorts produce the lowest support load?" data-zh="哪些创作者群体产生最低的支持负载？">Which creator cohorts produce the lowest support load?</div>
+        <div data-en="Which creator cohorts produce the lowest support load?" data-zh="哪类创作者最少需要客服处理？">Which creator cohorts produce the lowest support load?</div>
       </li>
       <li>
-        <div data-en="What percent of campaigns require exception handling?" data-zh="多少比例的活动需要异常处理？">What percent of campaigns require exception handling?</div>
+        <div data-en="What percent of campaigns require exception handling?" data-zh="有多少比例的活动需要额外处理异常情况？">What percent of campaigns require exception handling?</div>
       </li>
       <li>
-        <div data-en="Which workflows reduce human intervention over time?" data-zh="哪些工作流随时间减少人工干预？">Which workflows reduce human intervention over time?</div>
+        <div data-en="Which workflows reduce human intervention over time?" data-zh="哪些流程随时间能越来越少依赖人工？">Which workflows reduce human intervention over time?</div>
       </li>
       <li>
-        <div data-en="Which creator cohorts progress to higher-value work without additional support cost?" data-zh="哪些创作者群体在没有额外支持成本的情况下晋升到更高价值的工作？">Which creator cohorts progress to higher-value work without additional support cost?</div>
+        <div data-en="Which creator cohorts progress to higher-value work without additional support cost?" data-zh="哪些创作者能自然升级到更高价值的活，不需要额外的运营支持？">Which creator cohorts progress to higher-value work without additional support cost?</div>
       </li>
     </ol>
   </div>
@@ -689,30 +674,30 @@ footer{
 <section class="section section-bg2">
   <div class="section-inner">
     <div class="fade-in">
-      <div class="section-label" data-en="Risk Patterns" data-zh="风险模式">Risk Patterns</div>
+      <div class="section-label" data-en="Risk Patterns" data-zh="常见陷阱">Risk Patterns</div>
       <h2 class="section-title" data-en="4 Economic Traps" data-zh="4 个经济陷阱">4 Economic Traps</h2>
-      <p class="section-sub" data-en="Each trap looks like progress on surface metrics while underlying economics deteriorate. Recognizing them early is the work." data-zh="每个陷阱在表面指标上看起来像进步，而底层经济却在恶化。早期识别它们才是关键。">Each trap looks like progress on surface metrics while underlying economics deteriorate. Recognizing them early is the work.</p>
+      <p class="section-sub" data-en="Each trap looks like progress on surface metrics while underlying economics deteriorate. Recognizing them early is the work." data-zh="这几个陷阱的共同点是：表面数据好看，但底层经济账越算越差。越早发现越好处理。">Each trap looks like progress on surface metrics while underlying economics deteriorate. Recognizing them early is the work.</p>
     </div>
     <div class="trap-rows fade-in">
       <div class="trap-row">
         <span class="trap-label" data-en="TRAP A" data-zh="陷阱 A">TRAP A</span>
-        <span class="trap-title" data-en="High Gross Activity, Low Net Value" data-zh="高总活动量，低净价值">High Gross Activity, Low Net Value</span>
-        <span class="trap-desc" data-en="Many signups and campaigns created, but low merchant repeat and heavy manual support. Volume without retention and quality signals a broken model." data-zh="大量注册和活动创建，但商家复购率低且手动支持繁重。没有留存的量只是破碎模型的信号。">Many signups and campaigns created, but low merchant repeat and heavy manual support. Volume without retention and quality signals a broken model.</span>
+        <span class="trap-title" data-en="High Gross Activity, Low Net Value" data-zh="活动量大、实际价值低">High Gross Activity, Low Net Value</span>
+        <span class="trap-desc" data-en="Many signups and campaigns created, but low merchant repeat and heavy manual support. Volume without retention and quality signals a broken model." data-zh="注册多、活动创建多，但商家复购率低、人工支持压力大。量没有留存和质量支撑，说明底层逻辑有问题。">Many signups and campaigns created, but low merchant repeat and heavy manual support. Volume without retention and quality signals a broken model.</span>
       </div>
       <div class="trap-row">
         <span class="trap-label" data-en="TRAP B" data-zh="陷阱 B">TRAP B</span>
-        <span class="trap-title" data-en="Premium Revenue Without Real Utility" data-zh="没有真实效用的溢价收入">Premium Revenue Without Real Utility</span>
-        <span class="trap-desc" data-en="Charging creators before proving that premium access actually improves their outcomes. Short-term revenue, long-term trust erosion and churn." data-zh="在证明高级访问权实际上改善创作者结果之前收费。短期收入，长期信任侵蚀和流失。">Charging creators before proving that premium access actually improves their outcomes. Short-term revenue, long-term trust erosion and churn.</span>
+        <span class="trap-title" data-en="Premium Revenue Without Real Utility" data-zh="没有实际好处就收会员费">Premium Revenue Without Real Utility</span>
+        <span class="trap-desc" data-en="Charging creators before proving that premium access actually improves their outcomes. Short-term revenue, long-term trust erosion and churn." data-zh="还没证明付费会员真的能让创作者赚更多，就开始收费。短期多了点收入，长期信任跌了、流失率上来了。">Charging creators before proving that premium access actually improves their outcomes. Short-term revenue, long-term trust erosion and churn.</span>
       </div>
       <div class="trap-row">
         <span class="trap-label" data-en="TRAP C" data-zh="陷阱 C">TRAP C</span>
-        <span class="trap-title" data-en="Weak Attribution, Aggressive Pricing" data-zh="薄弱归因，激进定价">Weak Attribution, Aggressive Pricing</span>
-        <span class="trap-desc" data-en="Taking performance fees before the system can reliably verify performance. Creates merchant distrust and attribution disputes that undermine repeat behavior." data-zh="在系统能够可靠验证绩效之前收取绩效费用。造成商家不信任和归因争议，破坏复购行为。">Taking performance fees before the system can reliably verify performance. Creates merchant distrust and attribution disputes that undermine repeat behavior.</span>
+        <span class="trap-title" data-en="Weak Attribution, Aggressive Pricing" data-zh="归因没做好就按效果收费">Weak Attribution, Aggressive Pricing</span>
+        <span class="trap-desc" data-en="Taking performance fees before the system can reliably verify performance. Creates merchant distrust and attribution disputes that undermine repeat behavior." data-zh="系统还没能力可靠核验效果，就开始按绩效收费。结果是商家不信任、产生争议，不愿意继续合作。">Taking performance fees before the system can reliably verify performance. Creates merchant distrust and attribution disputes that undermine repeat behavior.</span>
       </div>
       <div class="trap-row">
         <span class="trap-label" data-en="TRAP D" data-zh="陷阱 D">TRAP D</span>
-        <span class="trap-title" data-en="Excessive Subsidy Dependence" data-zh="过度依赖补贴">Excessive Subsidy Dependence</span>
-        <span class="trap-desc" data-en="Relying on giveaways or deep discounts to prop up retention without underlying economics improving. Masks the real state of the business." data-zh="依靠赠品或深度折扣支撑留存而不改善底层经济。掩盖了业务的真实状态。">Relying on giveaways or deep discounts to prop up retention without underlying economics improving. Masks the real state of the business.</span>
+        <span class="trap-title" data-en="Excessive Subsidy Dependence" data-zh="靠补贴撑留存">Excessive Subsidy Dependence</span>
+        <span class="trap-desc" data-en="Relying on giveaways or deep discounts to prop up retention without underlying economics improving. Masks the real state of the business." data-zh="靠送东西或大力打折来维持留存率，但根本的收费逻辑没有改善。这只是在掩盖业务的真实状况。">Relying on giveaways or deep discounts to prop up retention without underlying economics improving. Masks the real state of the business.</span>
       </div>
     </div>
   </div>
@@ -722,39 +707,39 @@ footer{
 <section class="section">
   <div class="section-inner">
     <div class="fade-in">
-      <div class="section-label" data-en="Development Roadmap" data-zh="发展路线图">Development Roadmap</div>
-      <h2 class="section-title" data-en="3 Economic Phases" data-zh="3 个经济阶段">3 Economic Phases</h2>
-      <p class="section-sub" data-en="Each phase has a distinct economic objective. Later phases are unavailable without the foundational work of earlier ones." data-zh="每个阶段都有不同的经济目标。没有早期阶段的基础工作，后期阶段不可用。">Each phase has a distinct economic objective. Later phases are unavailable without the foundational work of earlier ones.</p>
+      <div class="section-label" data-en="Development Roadmap" data-zh="发展路线">Development Roadmap</div>
+      <h2 class="section-title" data-en="3 Economic Phases" data-zh="3 个发展阶段">3 Economic Phases</h2>
+      <p class="section-sub" data-en="Each phase has a distinct economic objective. Later phases are unavailable without the foundational work of earlier ones." data-zh="每个阶段要做的事情不一样。后面的阶段必须建立在前面阶段跑通的基础上，不能跳步。">Each phase has a distinct economic objective. Later phases are unavailable without the foundational work of earlier ones.</p>
     </div>
     <div class="phase-grid fade-in">
       <div class="phase-col">
         <div class="phase-num" data-en="PHASE 01" data-zh="阶段 01">PHASE 01</div>
-        <div class="phase-title" data-en="Foundation: Transaction &amp; Trust" data-zh="基础：交易与信任">Foundation: Transaction &amp; Trust</div>
+        <div class="phase-title" data-en="Foundation: Transaction &amp; Trust" data-zh="打基础：让交易跑稳">Foundation: Transaction &amp; Trust</div>
         <ul class="phase-items">
-          <li data-en="Transaction completion reliability" data-zh="交易完成可靠性">Transaction completion reliability</li>
-          <li data-en="Merchant repeat behavior" data-zh="商家重复行为">Merchant repeat behavior</li>
-          <li data-en="Workflow reliability" data-zh="工作流可靠性">Workflow reliability</li>
-          <li data-en="Clean vertical selection" data-zh="干净的垂直领域选择">Clean vertical selection</li>
+          <li data-en="Transaction completion reliability" data-zh="交易能稳定完成">Transaction completion reliability</li>
+          <li data-en="Merchant repeat behavior" data-zh="商家愿意再来">Merchant repeat behavior</li>
+          <li data-en="Workflow reliability" data-zh="流程跑得通、不出岔子">Workflow reliability</li>
+          <li data-en="Clean vertical selection" data-zh="先聚焦在容易跑通的行业">Clean vertical selection</li>
         </ul>
       </div>
       <div class="phase-col">
         <div class="phase-num" data-en="PHASE 02" data-zh="阶段 02">PHASE 02</div>
-        <div class="phase-title" data-en="Efficiency: Fees &amp; Quality" data-zh="效率：费用与质量">Efficiency: Fees &amp; Quality</div>
+        <div class="phase-title" data-en="Efficiency: Fees &amp; Quality" data-zh="提效：把费用和质量做好">Efficiency: Fees &amp; Quality</div>
         <ul class="phase-items">
-          <li data-en="Campaign fee consistency" data-zh="活动费用一致性">Campaign fee consistency</li>
-          <li data-en="Creator quality differentiation" data-zh="创作者质量差异化">Creator quality differentiation</li>
-          <li data-en="Support efficiency improvement" data-zh="支持效率提升">Support efficiency improvement</li>
-          <li data-en="Basic dashboard utility" data-zh="基础仪表板实用性">Basic dashboard utility</li>
+          <li data-en="Campaign fee consistency" data-zh="活动收费稳定可预期">Campaign fee consistency</li>
+          <li data-en="Creator quality differentiation" data-zh="创作者质量能区分出差异">Creator quality differentiation</li>
+          <li data-en="Support efficiency improvement" data-zh="客服和处理效率提升">Support efficiency improvement</li>
+          <li data-en="Basic dashboard utility" data-zh="仪表板能实际帮到用户">Basic dashboard utility</li>
         </ul>
       </div>
       <div class="phase-col">
         <div class="phase-num" data-en="PHASE 03" data-zh="阶段 03">PHASE 03</div>
-        <div class="phase-title" data-en="Scale: Premium &amp; Expansion" data-zh="规模：高级版与扩张">Scale: Premium &amp; Expansion</div>
+        <div class="phase-title" data-en="Scale: Premium &amp; Expansion" data-zh="规模化：开放高级功能和扩张">Scale: Premium &amp; Expansion</div>
         <ul class="phase-items">
-          <li data-en="Better take-rate logic" data-zh="更好的抽成逻辑">Better take-rate logic</li>
-          <li data-en="Premium tier economics" data-zh="高级层级经济">Premium tier economics</li>
-          <li data-en="Optional financial products" data-zh="可选金融产品">Optional financial products</li>
-          <li data-en="Multi-location merchant expansion" data-zh="多地点商家扩张">Multi-location merchant expansion</li>
+          <li data-en="Better take-rate logic" data-zh="优化抽成比例和触发条件">Better take-rate logic</li>
+          <li data-en="Premium tier economics" data-zh="付费高级会员的收费逻辑">Premium tier economics</li>
+          <li data-en="Optional financial products" data-zh="金融服务（垫资、快速结算等）">Optional financial products</li>
+          <li data-en="Multi-location merchant expansion" data-zh="支持多门店商家">Multi-location merchant expansion</li>
         </ul>
       </div>
     </div>
@@ -766,11 +751,11 @@ footer{
   <div class="section-inner">
     <div class="fade-in">
       <div class="section-label" data-en="Final Standard" data-zh="最终标准" style="color:var(--accent-light);">Final Standard</div>
-      <h2 class="section-title section-title-white" data-en="The Compounding Logic" data-zh="复利逻辑">The Compounding Logic</h2>
-      <p class="section-sub section-sub-white" data-en="If unit economics are working, each cycle of usage should make the next cycle cheaper and more reliable." data-zh="如果单元经济在运作，每个使用周期应该让下一个周期成本更低、更可靠。">If unit economics are working, each cycle of usage should make the next cycle cheaper and more reliable.</p>
+      <h2 class="section-title section-title-white" data-en="The Compounding Logic" data-zh="越做越划算的逻辑">The Compounding Logic</h2>
+      <p class="section-sub section-sub-white" data-en="If unit economics are working, each cycle of usage should make the next cycle cheaper and more reliable." data-zh="如果单笔经济账跑通了，每做一轮就应该让下一轮成本更低、跑得更稳。">If unit economics are working, each cycle of usage should make the next cycle cheaper and more reliable.</p>
       <blockquote class="principle principle-dark" style="margin-top:32px;">
-        <span data-en="Every repeated merchant becomes cheaper to serve. Every high-quality creator becomes more valuable to route. Every clean campaign improves future matching and margin quality." data-zh="每个重复商家的服务成本更低。每个高质量创作者的路由价值更高。每次干净的活动都提升未来的匹配和利润质量。">Every repeated merchant becomes cheaper to serve. Every high-quality creator becomes more valuable to route. Every clean campaign improves future matching and margin quality.</span>
-        <cite data-en="PUSH — Unit Economics Standard" data-zh="PUSH — 单元经济标准">PUSH — Unit Economics Standard</cite>
+        <span data-en="Every repeated merchant becomes cheaper to serve. Every high-quality creator becomes more valuable to route. Every clean campaign improves future matching and margin quality." data-zh="每一个回头的商家，服务成本越来越低。每一个优质创作者，匹配价值越来越高。每一次顺利的活动，都让下次的匹配和利润变得更好。">Every repeated merchant becomes cheaper to serve. Every high-quality creator becomes more valuable to route. Every clean campaign improves future matching and margin quality.</span>
+        <cite data-en="PUSH — Unit Economics Standard" data-zh="PUSH — 单笔经济标准">PUSH — Unit Economics Standard</cite>
       </blockquote>
     </div>
   </div>
@@ -780,8 +765,8 @@ footer{
 <div style="max-width:800px; margin:40px auto; padding:24px; background:var(--bg2, #f8f9fa); border:1px solid var(--border, #e5e7eb); border-radius:12px;">
   <h3 style="font-size:16px; font-weight:700; margin-bottom:12px;" data-en="Continue Reading" data-zh="继续阅读" class="bilingual-text">Continue Reading</h3>
   <a href="push-strategy-core.html" style="display:block; padding:16px; background:#fff; border:1px solid var(--border, #e5e7eb); border-radius:8px; text-decoration:none; transition:all 0.2s; max-width:400px;">
-    <div style="font-size:13px; color:var(--text3, #9ca3af);" data-en="Next →" data-zh="下一步 →" class="bilingual-text">Next →</div>
-    <div style="font-size:15px; font-weight:600; color:var(--text, #111827);" data-en="See the full strategic thesis" data-zh="查看完整的战略论述" class="bilingual-text">See the full strategic thesis</div>
+    <div style="font-size:13px; color:var(--text3, #9ca3af);" data-en="Next →" data-zh="下一篇 →" class="bilingual-text">Next →</div>
+    <div style="font-size:15px; font-weight:600; color:var(--text, #111827);" data-en="See the full strategic thesis" data-zh="看完整的战略思路" class="bilingual-text">See the full strategic thesis</div>
     <div style="font-size:13px; color:var(--accent, #4f46e5); margin-top:4px;" data-en="Strategy Core →" data-zh="战略核心 →" class="bilingual-text">Strategy Core →</div>
   </a>
 </div>
@@ -790,7 +775,7 @@ footer{
 <footer>
   <div class="footer-inner">
     <div class="footer-logo">PUSH</div>
-    <div class="footer-tagline" data-en="Local creator performance infrastructure" data-zh="本地创作者效果基础设施">Local creator performance infrastructure</div>
+    <div class="footer-tagline" data-en="Local creator performance infrastructure" data-zh="本地创作者效果平台">Local creator performance infrastructure</div>
     <ul class="footer-links">
       <li><a href="index.html" data-en="Overview" data-zh="首页">Overview</a></li>
       <li><a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a></li>
@@ -801,12 +786,12 @@ footer{
       <li><a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a></li>
       <li><a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a></li>
       <li><a href="push-strategy-core.html" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a></li>
-      <li><a href="economics.html" data-en="Economics" data-zh="经济模型">Economics</a></li>
-      <li><a href="attribution.html" data-en="Attribution" data-zh="归因体系">Attribution</a></li>
+      <li><a href="economics.html" data-en="Economics" data-zh="收费与收入">Economics</a></li>
+      <li><a href="attribution.html" data-en="Attribution" data-zh="归因系统">Attribution</a></li>
     </ul>
     <div class="footer-copy">© 2026 PUSH. Internal strategy documentation.</div>
     <div style="margin-top:16px; font-size:13px;">
-      <span data-en="You might also want: " data-zh="你可能还想看：" class="bilingual-text">You might also want: </span>
+      <span data-en="You might also want: " data-zh="相关阅读：" class="bilingual-text">You might also want: </span>
       <a href="push-strategy-core.html" data-en="Strategy Core" data-zh="战略核心" class="bilingual-text">Strategy Core</a> ·
       <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演材料" class="bilingual-text">Pitch Deck</a> ·
       <a href="index.html" data-en="🏠 Dashboard" data-zh="🏠 首页" class="bilingual-text">🏠 Dashboard</a>

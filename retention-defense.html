@@ -39,34 +39,17 @@
 
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--text);line-height:1.75;overflow-x:hidden;background:#fff;}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:var(--text);font-size:15px;line-height:1.85;}
 
 /* ═══════════════════════════════════════════
    NAV
 ═══════════════════════════════════════════ */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:1000;
-  height:60px;background:rgba(255,255,255,0.92);
-  border-bottom:1px solid var(--border);
-  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-  display:flex;align-items:center;padding:0 24px;gap:16px;
-}
-.nav-logo{
-  font-size:22px;font-weight:900;color:var(--accent);
-  text-decoration:none;letter-spacing:-0.5px;flex-shrink:0;
-}
-.nav-links{
-  display:flex;align-items:center;gap:4px;flex:1;justify-content:center;
-}
-.nav-links a{
-  font-size:13px;font-weight:500;color:var(--text2);
-  text-decoration:none;padding:5px 11px;border-radius:8px;
-  transition:color 0.2s,background 0.2s;white-space:nowrap;
-}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;background:rgba(255,255,255,0.95);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:box-shadow 0.2s;}
+.nav-logo{font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;margin-right:8px;flex-shrink:0;text-decoration:none;}
+.nav-links{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
+.nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:all 0.15s;white-space:nowrap;text-decoration:none;}
 .nav-links a:hover{color:var(--accent);background:var(--accent-bg);}
-.nav-links a.active{
-  color:var(--accent);background:var(--accent-bg);font-weight:700;
-}
+.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);}
 .lang-btn{
   background:var(--accent);color:#fff;border:none;cursor:pointer;
   font-size:12px;font-weight:700;padding:7px 14px;border-radius:8px;
@@ -155,7 +138,7 @@ nav{
 /* ═══════════════════════════════════════════
    SHARED SECTION CHROME
 ═══════════════════════════════════════════ */
-.section{padding:100px 24px;}
+.section{padding:120px 64px;}
 .section-inner{max-width:1100px;margin:0 auto;}
 .section-bg2{background:var(--bg2);}
 .section-dark{background:var(--primary);}
@@ -191,11 +174,7 @@ nav{
 /* ═══════════════════════════════════════════
    SCROLL FADE IN
 ═══════════════════════════════════════════ */
-.fade-in{
-  opacity:0;transform:translateY(24px);
-  transition:opacity 0.6s ease,transform 0.6s ease;
-  animation:fadeInFallback 0s 4s forwards;
-}
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.55s ease,transform 0.55s ease;}
 .fade-in.visible{opacity:1;transform:translateY(0);animation:none;}
 @keyframes fadeInFallback{to{opacity:1;transform:translateY(0);}}
 
@@ -495,12 +474,12 @@ nav{
   .hero-title{font-size:clamp(2rem,7vw,3rem);letter-spacing:-1px;}
   .hero-subtitle-box{padding:16px 20px;font-size:14px;}
   .deco-number{font-size:80px;}
-  .section{padding:72px 20px;}
+  .section{padding:72px 24px;}
 }
 
 /* Nav scroll shadow */
-nav, .topnav { transition: box-shadow 0.2s; }
-nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
+nav { transition: box-shadow 0.2s; }
+nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
 
 /* Section label with accent line */
 .section-label, .section-num {
@@ -529,7 +508,6 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
 #back-top:hover { background: #4f46e5; transform: translateY(-2px); }
 
 /* Fade-in with slide */
-.fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.55s ease, transform 0.55s ease; animation: fadeInFallback 0s 4s forwards; }
 .fade-in.visible { opacity: 1; transform: translateY(0); animation: none; }
 
 /* Layer bar hover */
@@ -699,7 +677,7 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
         <div class="deco-number">01</div>
         <div class="section-label" data-en="ROOT CAUSES" data-zh="根本原因">ROOT CAUSES</div>
         <h2 class="section-title" data-en="Why Creators Leave" data-zh="创作者为什么会流失：3个根本原因">Why Creators Leave</h2>
-        <p class="section-sub" data-en="Most creator churn isn't random. It's predictable, driven by three structural perception failures that compound over time. If we don't address these by design, the platform will hemorrhage its best creators." data-zh="大多数 Creator 流失并非随机——它是可预测的，由三种结构性认知失误驱动，随着时间推移会不断加剧。如果不在设计层面解决这些问题，平台将不断流失最优质的 Creator。">Most creator churn isn't random. It's predictable, driven by three structural perception failures that compound over time. If we don't address these by design, the platform will hemorrhage its best creators.</p>
+        <p class="section-sub" data-en="Most creator churn isn't random. It's predictable, driven by three structural perception failures that compound over time. If we don't address these by design, the platform will hemorrhage its best creators." data-zh="大多数 Creator 流失都不是偶然的。背后有三个固定原因，时间越长越严重。如果产品设计上不正面处理这些问题，平台会持续把最好的 Creator 推走。">Most creator churn isn't random. It's predictable, driven by three structural perception failures that compound over time. If we don't address these by design, the platform will hemorrhage its best creators.</p>
       </div>
 
       <div class="cause-cards">
@@ -738,7 +716,7 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
     <div class="fade-in" style="text-align:center;margin-bottom:56px;">
       <div class="section-label" data-en="RETENTION ARCHITECTURE" data-zh="留存架构">RETENTION ARCHITECTURE</div>
       <h2 class="section-title" data-en="The Four Layers of Retention" data-zh="留存的四个层次">The Four Layers of Retention</h2>
-      <p class="section-sub" style="margin:0 auto;" data-en="From weakest foundation to the most powerful lock-in. Real retention lives in the top two layers." data-zh="从最弱（底部）到最强（顶部）的结构。真正的留存来自顶部两层，不是底部。">From weakest foundation to the most powerful lock-in. Real retention lives in the top two layers.</p>
+      <p class="section-sub" style="margin:0 auto;" data-en="From weakest foundation to the most powerful lock-in. Real retention lives in the top two layers." data-zh="从最弱到最强排下来。真正让 Creator 走不了的，是顶部两层，底部那些只能拉人进来。">From weakest foundation to the most powerful lock-in. Real retention lives in the top two layers.</p>
     </div>
 
     <div class="pyramid-label" data-en="↑ STRONGEST RETENTION AT TOP · WEAKEST AT BOTTOM ↓" data-zh="↑ 顶部留存力最强 · 底部最弱 ↓">↑ STRONGEST RETENTION AT TOP · WEAKEST AT BOTTOM ↓</div>
@@ -752,7 +730,7 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
           <div class="layer-title" data-en="Earning Efficiency" data-zh="收入效率">Earning Efficiency</div>
           <span class="power-pill pill-green" data-en="Retention: Very High" data-zh="留存力：极高">Retention: Very High</span>
         </div>
-        <div class="layer-body" data-en="Creators earn more, faster, and more reliably on PUSH. High-tier creators get priority matching, lower platform fees, and 3-day payouts. PUSH becomes the highest ROI use of their time — and that's the strongest retention force that exists." data-zh="创作者在 Push 上赚得更多、更快、更稳定。高等级获得优先匹配、更低抽成、3天提现（vs 14天）。平台成为他们时间回报最高的选择。">Creators earn more, faster, and more reliably on PUSH. High-tier creators get priority matching, lower platform fees, and 3-day payouts. PUSH becomes the highest ROI use of their time — and that's the strongest retention force that exists.</div>
+        <div class="layer-body" data-en="Creators earn more, faster, and more reliably on PUSH. High-tier creators get priority matching, lower platform fees, and 3-day payouts. PUSH becomes the highest ROI use of their time — and that's the strongest retention force that exists." data-zh="在 Push 上能赚更多、结款更快、活更稳。高等级的接单优先、抽成低、3天到账。这里是他们用时间换钱效率最高的地方，不需要别的理由。">Creators earn more, faster, and more reliably on PUSH. High-tier creators get priority matching, lower platform fees, and 3-day payouts. PUSH becomes the highest ROI use of their time — and that's the strongest retention force that exists.</div>
       </div>
 
       <div class="layer-arrow fade-in">
@@ -768,7 +746,7 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
           <div class="layer-title" data-en="Platform-Internal Credit Capital" data-zh="平台内信用资本">Platform-Internal Credit Capital</div>
           <span class="power-pill pill-accent" data-en="Retention: Critical" data-zh="留存力：决定性">Retention: Critical</span>
         </div>
-        <div class="layer-body" data-en="Non-exportable assets that took months to build. The instant a creator leaves PUSH, they lose everything — permanently. This is the most structural form of switching cost." data-zh="创作者在平台内积累的专属资产，无法导出。一旦离开，全部归零。立即且永久：">Non-exportable assets that took months to build. The instant a creator leaves PUSH, they lose everything — permanently. This is the most structural form of switching cost.</div>
+        <div class="layer-body" data-en="Non-exportable assets that took months to build. The instant a creator leaves PUSH, they lose everything — permanently. This is the most structural form of switching cost." data-zh="在平台上攒下来的东西——评分、记录、等级——一旦离开全部归零，而且是立即、永久的。这才是真正的沉没成本：花了那么多时间建起来的东西，你舍不得扔。">Non-exportable assets that took months to build. The instant a creator leaves PUSH, they lose everything — permanently. This is the most structural form of switching cost.</div>
         <div class="asset-tags" style="margin-top:14px;">
           <span class="asset-tag" data-en="Fulfillment History" data-zh="履约历史">Fulfillment History</span>
           <span class="asset-tag" data-en="Completion Rate" data-zh="完成率">Completion Rate</span>
@@ -793,7 +771,7 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
           <div class="layer-title" data-en="Growth Feeling" data-zh="成长感">Growth Feeling</div>
           <span class="power-pill pill-orange" data-en="Retention: Moderate" data-zh="留存力：中等">Retention: Moderate</span>
         </div>
-        <div class="layer-body" data-en="New → Rising → Reliable → Elite. Each tier is visibly different — better campaigns, higher earning potential, exclusive access. Creators feel progression, not stagnation. Visible status creates emotional investment." data-zh="等级升级解锁真实赚钱能力。新人→上升中→稳定可靠→顶级认证。每一级明显更好，下一级始终在视野内——近到感觉够得到。">New → Rising → Reliable → Elite. Each tier is visibly different — better campaigns, higher earning potential, exclusive access. Creators feel progression, not stagnation. Visible status creates emotional investment.</div>
+        <div class="layer-body" data-en="New → Rising → Reliable → Elite. Each tier is visibly different — better campaigns, higher earning potential, exclusive access. Creators feel progression, not stagnation. Visible status creates emotional investment." data-zh="等级升了，赚钱能力真的变了。新人→成长中→靠谱→顶级。每一级都明显比上一级好，下一级又看得到、感觉能够得着。有方向的人才会留下来。">New → Rising → Reliable → Elite. Each tier is visibly different — better campaigns, higher earning potential, exclusive access. Creators feel progression, not stagnation. Visible status creates emotional investment.</div>
       </div>
 
       <div class="layer-arrow fade-in">
@@ -809,7 +787,7 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
           <div class="layer-title" data-en="Instant Incentives" data-zh="即时激励">Instant Incentives</div>
           <span class="power-pill pill-red" data-en="Retention: Weak" data-zh="留存力：弱">Retention: Weak</span>
         </div>
-        <div class="layer-body" data-en="Free samples and sign-up bonuses attract creators initially but do not retain them. Necessary to start the funnel — but dangerously insufficient on their own. Relying on this layer alone = guaranteed churn." data-zh="免费体验、注册奖励、首次合作奖励。入门必需品，但留存力最弱。如果只有这一层，用完就走。福利拉新，留不住人。">Free samples and sign-up bonuses attract creators initially but do not retain them. Necessary to start the funnel — but dangerously insufficient on their own. Relying on this layer alone = guaranteed churn.</div>
+        <div class="layer-body" data-en="Free samples and sign-up bonuses attract creators initially but do not retain them. Necessary to start the funnel — but dangerously insufficient on their own. Relying on this layer alone = guaranteed churn." data-zh="免费体验、注册奖励、首单福利。拉人进来必须有，但光靠这些留不住人。用完就走，因为没有别的理由留。">Free samples and sign-up bonuses attract creators initially but do not retain them. Necessary to start the funnel — but dangerously insufficient on their own. Relying on this layer alone = guaranteed churn.</div>
       </div>
 
     </div>
@@ -824,7 +802,7 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
     <div class="fade-in" style="margin-bottom:56px;">
       <div class="section-label" data-en="SYSTEM DESIGN" data-zh="系统设计">SYSTEM DESIGN</div>
       <h2 class="section-title" data-en="Four Anti-Freeloading Mechanisms" data-zh="四大反薅羊毛机制">Four Anti-Freeloading Mechanisms</h2>
-      <p class="section-sub" data-en="Structural design decisions — not policies — that make one-time extraction impossible and long-term commitment naturally rewarding." data-zh="结构性设计决策——而非规则——让一次性套利变得不可能，让长期承诺自然而然地获得回报。">Structural design decisions — not policies — that make one-time extraction impossible and long-term commitment naturally rewarding.</p>
+      <p class="section-sub" data-en="Structural design decisions — not policies — that make one-time extraction impossible and long-term commitment naturally rewarding." data-zh="靠的是产品结构，不是规则。让一次薅完就走这件事本身变得没有意义，让长期做下去自然越来越值。">Structural design decisions — not policies — that make one-time extraction impossible and long-term commitment naturally rewarding.</p>
     </div>
 
     <div class="mech-grid">
@@ -834,7 +812,7 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
         <div class="mech-body">
           <span class="mech-icon">🎫</span>
           <div class="mech-title" data-en="Sample Campaigns = Entry Tickets" data-zh="样品活动 = 入门票">Sample Campaigns = Entry Tickets</div>
-          <p class="mech-desc" data-en="New creators get maximum 3 sample campaign slots. Each one requires hitting quality thresholds to unlock the next. No-shows or failures burn tickets permanently — and burn them publicly." data-zh="新 Creator 最多获得 3 个样品活动名额。每次都需要达到质量门槛才能解锁下一次。不出现或失败会永久消耗名额——并且公开记录。">New creators get maximum 3 sample campaign slots. Each one requires hitting quality thresholds to unlock the next. No-shows or failures burn tickets permanently — and burn them publicly.</p>
+          <p class="mech-desc" data-en="New creators get maximum 3 sample campaign slots. Each one requires hitting quality thresholds to unlock the next. No-shows or failures burn tickets permanently — and burn them publicly." data-zh="新 Creator 最多拿到 3 个样品活动名额。每次要达到质量标准才能解锁下一次。缺席或失败直接消耗名额，不补，有记录。">New creators get maximum 3 sample campaign slots. Each one requires hitting quality thresholds to unlock the next. No-shows or failures burn tickets permanently — and burn them publicly.</p>
           <div class="mech-highlight" data-en="3 max → quality gate → unlock more access" data-zh="最多 3 次 → 质量门槛 → 解锁更多权限">3 max → quality gate → unlock more access</div>
         </div>
       </div>
@@ -844,7 +822,7 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
         <div class="mech-body">
           <span class="mech-icon">⭐</span>
           <div class="mech-title" data-en="High-Tier Value Must Be Extremely Real" data-zh="高 Tier 价值极度真实">High-Tier Value Must Be Extremely Real</div>
-          <p class="mech-desc" data-en="Tier status must come with concrete, verifiable advantages that creators can feel every single time they log in — not just vague prestige." data-zh="Tier 状态必须带来具体、可核实的优势，让 Creator 每次登录都能感受到——而不仅仅是模糊的声望。">Tier status must come with concrete, verifiable advantages that creators can feel every single time they log in — not just vague prestige.</p>
+          <p class="mech-desc" data-en="Tier status must come with concrete, verifiable advantages that creators can feel every single time they log in — not just vague prestige." data-zh="等级必须对应看得见、用得上的好处，每次用平台都能感受到差距——不是挂个头衔好看。">Tier status must come with concrete, verifiable advantages that creators can feel every single time they log in — not just vague prestige.</p>
           <ul class="benefit-list">
             <li data-en="Paid gigs and recurring brand deals" data-zh="付费工作与品牌长期合作">Paid gigs and recurring brand deals</li>
             <li data-en="Priority campaign matching queue" data-zh="优先活动匹配队列">Priority campaign matching queue</li>
@@ -861,7 +839,7 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
         <div class="mech-body">
           <span class="mech-icon">🔑</span>
           <div class="mech-title" data-en="History Becomes a Scarce Pass" data-zh="历史变稀缺通行证">History Becomes a Scarce Pass</div>
-          <p class="mech-desc" data-en="90-day completion rate, merchant ratings, dispute-free record, and geo-category credit build into a platform passport that grants access to top-tier campaigns. This cannot be faked, purchased, or built elsewhere in months." data-zh="90天完成率、商家评分、无纠纷记录和地域类目信用积累成一个平台通行证，授予对顶级活动的访问权限。这无法伪造、购买，也无法在数月内在其他平台建立。">90-day completion rate, merchant ratings, dispute-free record, and geo-category credit build into a platform passport that grants access to top-tier campaigns. This cannot be faked, purchased, or built elsewhere in months.</p>
+          <p class="mech-desc" data-en="90-day completion rate, merchant ratings, dispute-free record, and geo-category credit build into a platform passport that grants access to top-tier campaigns. This cannot be faked, purchased, or built elsewhere in months." data-zh="90天完成记录、商家评分、无纠纷历史、地区品类口碑——这些攒在一起变成你的平台通行证，可以接到更好的单子。没法造假，没法花钱买，换个平台从头来。">90-day completion rate, merchant ratings, dispute-free record, and geo-category credit build into a platform passport that grants access to top-tier campaigns. This cannot be faked, purchased, or built elsewhere in months.</p>
           <div class="mech-highlight" data-en="Months of history → irreplaceable asset → real switching cost" data-zh="数月历史 → 不可替代资产 → 真实切换成本">Months of history → irreplaceable asset → real switching cost</div>
         </div>
       </div>
@@ -871,7 +849,7 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
         <div class="mech-body">
           <span class="mech-icon">⚠️</span>
           <div class="mech-title" data-en="Loss Aversion Design" data-zh="损失厌恶设计">Loss Aversion Design</div>
-          <p class="mech-desc" data-en="People fear loss 2× more than equivalent gain. Design what creators actively LOSE when they go inactive — make the loss concrete, visible, and emotionally salient." data-zh="人们对损失的恐惧是等值收益的 2 倍。设计 Creator 不活跃时会主动失去什么——让损失具体、可见且情感显著。">People fear loss 2× more than equivalent gain. Design what creators actively LOSE when they go inactive — make the loss concrete, visible, and emotionally salient.</p>
+          <p class="mech-desc" data-en="People fear loss 2× more than equivalent gain. Design what creators actively LOSE when they go inactive — make the loss concrete, visible, and emotionally salient." data-zh="人对失去的感受比得到的强两倍。平台要让 Creator 清楚看到：不活跃就会掉等级、失去优先权、费率涨回去——让这种损失感是真实的。">People fear loss 2× more than equivalent gain. Design what creators actively LOSE when they go inactive — make the loss concrete, visible, and emotionally salient.</p>
           <div class="loss-grid">
             <div class="loss-item" data-en="Tier Level" data-zh="Tier 等级">Tier Level</div>
             <div class="loss-item" data-en="Priority Access" data-zh="优先权限">Priority Access</div>
@@ -893,9 +871,9 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
 <section class="section section-dark">
   <div class="section-inner">
     <div class="fade-in" style="text-align:center;margin-bottom:56px;">
-      <div class="section-label" style="color:var(--accent-light);" data-en="COMPOUNDING SYSTEM" data-zh="复利系统">COMPOUNDING SYSTEM</div>
-      <h2 class="section-title section-title-white" data-en="The Creator Retention Flywheel" data-zh="Creator 留存飞轮">The Creator Retention Flywheel</h2>
-      <p class="section-sub section-sub-white" style="margin:0 auto;" data-en="Each completed campaign makes the next one more valuable. The flywheel accelerates over time, making PUSH increasingly hard to leave." data-zh="每次完成的活动都让下一次更有价值。飞轮随时间加速，使 PUSH 越来越难以离开。">Each completed campaign makes the next one more valuable. The flywheel accelerates over time, making PUSH increasingly hard to leave.</p>
+      <div class="section-label" style="color:var(--accent-light);" data-en="COMPOUNDING SYSTEM" data-zh="正向循环">COMPOUNDING SYSTEM</div>
+      <h2 class="section-title section-title-white" data-en="The Creator Retention Flywheel" data-zh="Creator 留存的正向循环">The Creator Retention Flywheel</h2>
+      <p class="section-sub section-sub-white" style="margin:0 auto;" data-en="Each completed campaign makes the next one more valuable. The flywheel accelerates over time, making PUSH increasingly hard to leave." data-zh="做完一单，下一单就更值钱。这个循环越转越快，时间越长离开的代价越高。">Each completed campaign makes the next one more valuable. The flywheel accelerates over time, making PUSH increasingly hard to leave.</p>
     </div>
 
     <div class="flywheel-wrap fade-in">
@@ -933,7 +911,7 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
     </div>
 
     <div class="flywheel-quote fade-in">
-      <p class="quote-text" data-en='"A creator with 20 completed campaigns, 95% completion rate, and Reliable tier status has built something that took months. They cannot replicate this anywhere else. They will not throw it away for a slightly better one-time offer."' data-zh='"一个完成了 20 次活动、95% 完成率、可靠级 Tier 的 Creator，已经积累了数月的成果。他们无法在其他平台复制这些。他们不会因为稍好一点的一次性优惠就把这些丢掉。"'>"A creator with 20 completed campaigns, 95% completion rate, and Reliable tier status has built something that took months. They cannot replicate this anywhere else. They will not throw it away for a slightly better one-time offer."</p>
+      <p class="quote-text" data-en='"A creator with 20 completed campaigns, 95% completion rate, and Reliable tier status has built something that took months. They cannot replicate this anywhere else. They will not throw it away for a slightly better one-time offer."' data-zh='"做了 20 单、完成率 95%、拿到可靠级的 Creator，已经在这里存了好几个月的东西。这些换个平台重头来。不会为了别人稍微好一点的一次性条件就全扔掉。"'>"A creator with 20 completed campaigns, 95% completion rate, and Reliable tier status has built something that took months. They cannot replicate this anywhere else. They will not throw it away for a slightly better one-time offer."</p>
     </div>
   </div>
 </section>
@@ -946,32 +924,32 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
     <div class="fade-in" style="margin-bottom:56px;">
       <div class="section-label" style="color:var(--red);" data-en="FAILURE MODES" data-zh="失败模式">FAILURE MODES</div>
       <h2 class="section-title" data-en="Mistakes That Will Destroy Retention" data-zh="会毁掉留存的错误">Mistakes That Will Destroy Retention</h2>
-      <p class="section-sub" data-en="These aren't edge cases. They're the default failure modes of every creator marketplace that didn't think deeply enough about the retention architecture." data-zh="这些不是边缘情况。它们是每个没有深入思考留存架构的 Creator 市场的默认失败模式。">These aren't edge cases. They're the default failure modes of every creator marketplace that didn't think deeply enough about the retention architecture.</p>
+      <p class="section-sub" data-en="These aren't edge cases. They're the default failure modes of every creator marketplace that didn't think deeply enough about the retention architecture." data-zh="这些不是例外情况，是每个没想清楚留存怎么做的 Creator 平台最后都会碰到的坑。">These aren't edge cases. They're the default failure modes of every creator marketplace that didn't think deeply enough about the retention architecture.</p>
     </div>
 
     <div class="mistakes-grid">
       <div class="mistake-card fade-in" style="transition-delay:0.05s;">
         <div class="mistake-badge" data-en="MISTAKE 01" data-zh="错误 01">MISTAKE 01</div>
         <div class="mistake-title" data-en="Treating Perks as Retention" data-zh="把福利当留存">Treating Perks as Retention</div>
-        <p class="mistake-body" data-en="Discounts, badges, and referral credits feel like retention strategy but they're not. Perks are instantly copyable by any competitor. Real retention requires structural switching costs — assets the creator cannot take with them." data-zh="折扣、徽章和推荐积分感觉像是留存策略，但实际上不是。福利可以被任何竞争对手立即复制。真正的留存需要结构性切换成本——Creator 无法带走的资产。">Discounts, badges, and referral credits feel like retention strategy but they're not. Perks are instantly copyable by any competitor. Real retention requires structural switching costs — assets the creator cannot take with them.</p>
+        <p class="mistake-body" data-en="Discounts, badges, and referral credits feel like retention strategy but they're not. Perks are instantly copyable by any competitor. Real retention requires structural switching costs — assets the creator cannot take with them." data-zh="折扣、勋章、邀请积分看起来像在做留存，其实不是。竞争对手明天就能复制。真正让 Creator 留下来的，是他们在平台上建起来的、走了就带不走的东西。">Discounts, badges, and referral credits feel like retention strategy but they're not. Perks are instantly copyable by any competitor. Real retention requires structural switching costs — assets the creator cannot take with them.</p>
       </div>
 
       <div class="mistake-card fade-in" style="transition-delay:0.1s;">
         <div class="mistake-badge" data-en="MISTAKE 02" data-zh="错误 02">MISTAKE 02</div>
         <div class="mistake-title" data-en="Making Tiers Too Easy to Game" data-zh="Tier 太容易刷">Making Tiers Too Easy to Game</div>
-        <p class="mistake-body" data-en="If creators can reach Elite tier in 2 weeks with low-quality completions, the tier system loses all credibility. Tiers must be hard to achieve, meaningful when reached, and visibly worth protecting once earned." data-zh="如果 Creator 能在 2 周内以低质量完成度达到精英 Tier，Tier 系统将失去所有可信度。Tier 必须难以达到、达到后有意义，且一旦获得就明显值得保护。">If creators can reach Elite tier in 2 weeks with low-quality completions, the tier system loses all credibility. Tiers must be hard to achieve, meaningful when reached, and visibly worth protecting once earned.</p>
+        <p class="mistake-body" data-en="If creators can reach Elite tier in 2 weeks with low-quality completions, the tier system loses all credibility. Tiers must be hard to achieve, meaningful when reached, and visibly worth protecting once earned." data-zh="2 周就能刷到顶级，等级就没有意义了。等级要真的难升，升上去要真的不一样，拿到了要真的舍不得丢。">If creators can reach Elite tier in 2 weeks with low-quality completions, the tier system loses all credibility. Tiers must be hard to achieve, meaningful when reached, and visibly worth protecting once earned.</p>
       </div>
 
       <div class="mistake-card fade-in" style="transition-delay:0.15s;">
         <div class="mistake-badge" data-en="MISTAKE 03" data-zh="错误 03">MISTAKE 03</div>
         <div class="mistake-title" data-en="Creator Platform Assets Too Weak" data-zh="平台资产太弱">Creator Platform Assets Too Weak</div>
-        <p class="mistake-body" data-en="If a creator's history and ratings on PUSH don't unlock dramatically better opportunities, there's no reason to stay. The platform passport must be a meaningful key — not a participation trophy." data-zh="如果 Creator 在 PUSH 上的历史和评分不能解锁明显更好的机会，就没有理由留下来。平台通行证必须是一把有意义的钥匙——而不是参与奖杯。">If a creator's history and ratings on PUSH don't unlock dramatically better opportunities, there's no reason to stay. The platform passport must be a meaningful key — not a participation trophy.</p>
+        <p class="mistake-body" data-en="If a creator's history and ratings on PUSH don't unlock dramatically better opportunities, there's no reason to stay. The platform passport must be a meaningful key — not a participation trophy." data-zh="如果在平台上做了很久，却解锁不了比新人更好的机会，就没理由留。平台的历史记录要是真能打开更好的单子，不是装饰品。">If a creator's history and ratings on PUSH don't unlock dramatically better opportunities, there's no reason to stay. The platform passport must be a meaningful key — not a participation trophy.</p>
       </div>
 
       <div class="mistake-card fade-in" style="transition-delay:0.2s;">
         <div class="mistake-badge" data-en="MISTAKE 04" data-zh="错误 04">MISTAKE 04</div>
         <div class="mistake-title" data-en="Adding Friction Without Benefit" data-zh="平台只增加摩擦">Adding Friction Without Benefit</div>
-        <p class="mistake-body" data-en="Verification requirements, strict policies, and compliance rules that aren't matched by commensurate earnings and access feel punitive, not professional. Every friction point must be justified by a visible, concrete reward." data-zh="验证要求、严格政策和合规规则如果没有与之相匹配的收入和访问权限，会让人感觉惩罚性而非专业性。每个摩擦点都必须通过可见、具体的奖励来证明其合理性。">Verification requirements, strict policies, and compliance rules that aren't matched by commensurate earnings and access feel punitive, not professional. Every friction point must be justified by a visible, concrete reward.</p>
+        <p class="mistake-body" data-en="Verification requirements, strict policies, and compliance rules that aren't matched by commensurate earnings and access feel punitive, not professional. Every friction point must be justified by a visible, concrete reward." data-zh="如果平台要求多、审核严，但赚到的钱跟在其他地方差不多，Creator 就会觉得这里在刁难人。每一个麻烦都要有对应的好处，不然就是在赶人走。">Verification requirements, strict policies, and compliance rules that aren't matched by commensurate earnings and access feel punitive, not professional. Every friction point must be justified by a visible, concrete reward.</p>
       </div>
     </div>
   </div>

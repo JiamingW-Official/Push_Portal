@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Push 项目完整介绍：痛点分析、解决方案、7步工作流、创作者信用体系与战略架构。">
 <meta property="og:title" content="PUSH — 项目介绍">
-<meta property="og:description" content="Push 是基础设施，不是撮合平台。完整的战略、系统和执行逻辑。">
+<meta property="og:description" content="Push 不是撮合平台——我们给本地创作者合作立规矩、建信用、让它值得反复做。完整的战略、系统和执行逻辑。">
 <meta property="og:type" content="website">
 <title>PUSH — Project Introduction</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,37 +36,27 @@
   --max-w:1100px;
 }
 html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);line-height:1.75;-webkit-font-smoothing:antialiased}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.85;}
 
 /* NAV */
 nav{
-  position:fixed;top:0;left:0;right:0;height:60px;
-  background:rgba(255,255,255,0.92);
-  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 32px;z-index:1000;gap:16px;
-  transition:box-shadow 0.2s;
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;
+  background:rgba(255,255,255,0.95);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);transition:box-shadow 0.2s;
 }
 nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
 .nav-logo{
-  font-size:22px;font-weight:900;color:var(--accent);
-  text-decoration:none;flex-shrink:0;letter-spacing:-0.5px;
+  font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;
+  margin-right:8px;flex-shrink:0;text-decoration:none;
 }
-.nav-links{
-  display:flex;align-items:center;gap:6px;
-  flex-wrap:nowrap;overflow-x:auto;
-  scrollbar-width:none;
-}
-.nav-links::-webkit-scrollbar{display:none}
+.nav-links{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
 .nav-links a{
   font-size:12px;font-weight:500;color:var(--text2);
-  text-decoration:none;white-space:nowrap;
-  padding:5px 10px;border-radius:6px;
-  transition:color 0.2s,background 0.2s;
+  padding:6px 12px;border-radius:8px;transition:all 0.15s;white-space:nowrap;text-decoration:none;
 }
-.nav-links a:hover{color:var(--accent);background:var(--accent-bg)}
-.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:600}
+.nav-links a:hover{color:var(--accent);background:var(--accent-bg);}
+.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);}
 #lang-btn{
   flex-shrink:0;background:var(--accent);color:#fff;
   border:none;padding:6px 14px;border-radius:7px;
@@ -120,6 +110,7 @@ nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
 /* SECTION SHELL */
 section{padding:120px 64px}
 .section-inner{max-width:var(--max-w);margin:0 auto;}
+.section{padding:120px 64px;max-width:1100px;margin:0 auto;}
 .section-label{
   font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
   color:var(--accent);margin-bottom:18px;
@@ -737,7 +728,7 @@ footer{
 <div class="hero">
   <div class="hero-inner">
     <div class="hero-badge" data-en="PROJECT INTRODUCTION" data-zh="项目介绍">PROJECT INTRODUCTION</div>
-    <h1 class="hero-title" data-en="Push is infrastructure, not a marketplace." data-zh="Push 是基础设施，不是撮合平台。">Push is infrastructure, not a marketplace.</h1>
+    <h1 class="hero-title" data-en="Push is infrastructure, not a marketplace." data-zh="Push 给合作立规矩——不只是撮合。">Push is infrastructure, not a marketplace.</h1>
     <p class="hero-sub" data-en="Most platforms help merchants and creators find each other. Push makes the collaboration quantifiable, accountable, and worth doing again. That's a different business entirely." data-zh="大多数平台帮你找到合作对象。Push 让合作可以量化、可以追责、值得一做再做。这是两件完全不同的事。">Most platforms help merchants and creators find each other. Push makes the collaboration quantifiable, accountable, and worth doing again. That's a different business entirely.</p>
     <div class="scroll-indicator">
       <span data-en="SCROLL" data-zh="继续阅读">SCROLL</span>
@@ -823,7 +814,7 @@ footer{
   <div class="section-inner">
     <div class="section-label fade-in" data-en="CORE INSIGHT" data-zh="核心洞察">CORE INSIGHT</div>
 
-    <blockquote class="insight-quote fade-in" data-en="&quot;Creators are not media inventory. They are unstructured customer acquisition channels. The real opportunity is not to 'help creators collaborate with merchants' — it's to standardize, verify, rank, and route creator-driven demand.&quot;" data-zh="创作者不是媒体库存，而是非结构化的客户获取渠道。真正的机会不是"帮创作者和商家搭上线"——而是把这种需求标准化、可核验、可排名、可路由。">"Creators are not media inventory. They are unstructured customer acquisition channels. The real opportunity is not to 'help creators collaborate with merchants' — it's to standardize, verify, rank, and route creator-driven demand."</blockquote>
+    <blockquote class="insight-quote fade-in" data-en="&quot;Creators are not media inventory. They are unstructured customer acquisition channels. The real opportunity is not to 'help creators collaborate with merchants' — it's to standardize, verify, rank, and route creator-driven demand.&quot;" data-zh="创作者不是媒体资源，他们是散乱的客户获取渠道。真正的机会不是帮你找到博主——而是把这件事变得有据可查、可打分、可重复。">"Creators are not media inventory. They are unstructured customer acquisition channels. The real opportunity is not to 'help creators collaborate with merchants' — it's to standardize, verify, rank, and route creator-driven demand."</blockquote>
 
     <div class="compare-grid">
       <div class="compare-col others fade-in">
@@ -854,7 +845,7 @@ footer{
         <div class="compare-col-head" data-en="What Push does" data-zh="Push 在做什么">What Push does</div>
         <div class="compare-item pos">
           <span class="compare-icon">✓</span>
-          <span data-en="Structure every campaign with goals and verification" data-zh="把每次合作结构化，有目标有核实">Structure every campaign with goals and verification</span>
+          <span data-en="Structure every campaign with goals and verification" data-zh="每次合作都有目标、有核实、有规矩">Structure every campaign with goals and verification</span>
         </div>
         <div class="compare-item pos">
           <span class="compare-icon">✓</span>
@@ -893,7 +884,7 @@ footer{
 
     <div class="flow-strip after fade-in">
       <div class="flow-strip-label" data-en="✅ Push flow" data-zh="✅ Push 的方式">✅ Push flow</div>
-      <div class="flow-steps" data-en="Merchant sets goal → Campaign auto-structures → Creators ranked by score → 7-step tracking → Verified proof → 24hr settlement → Data compounds, next campaign is smarter" data-zh="商家选定目标 → 自动生成方案 → 按评分匹配博主 → 全程7步追踪 → 完成后核实 → 24小时结款 → 数据沉淀，下次更准">Merchant sets goal → Campaign auto-structures → Creators ranked by score → 7-step tracking → Verified proof → 24hr settlement → Data compounds, next campaign is smarter</div>
+      <div class="flow-steps" data-en="Merchant sets goal → Campaign auto-structures → Creators ranked by score → 7-step tracking → Verified proof → 24hr settlement → Data compounds, next campaign is smarter" data-zh="商家选定目标 → 自动生成方案 → 按评分匹配博主 → 全程7步追踪 → 完成后核实 → 24小时结款 → 数据越积越多，下次更准">Merchant sets goal → Campaign auto-structures → Creators ranked by score → 7-step tracking → Verified proof → 24hr settlement → Data compounds, next campaign is smarter</div>
       <div class="flow-note" data-en="Every step creates data. Data makes the next campaign better." data-zh="每一步都产生数据。数据让下次更好。">Every step creates data. Data makes the next campaign better.</div>
     </div>
 
@@ -1199,7 +1190,7 @@ footer{
 <section class="bg-white">
   <div class="section-inner">
     <div class="section-label fade-in" data-en="STRATEGIC ARCHITECTURE" data-zh="战略架构">STRATEGIC ARCHITECTURE</div>
-    <h2 class="section-title fade-in" data-en="Five systems. One infrastructure." data-zh="五个系统，一套基础设施。">Five systems. One infrastructure.</h2>
+    <h2 class="section-title fade-in" data-en="Five systems. One infrastructure." data-zh="五个系统，一套底层机制。">Five systems. One infrastructure.</h2>
 
     <div class="pillars-list">
       <div class="pillar-row fade-in">
@@ -1281,7 +1272,7 @@ footer{
         </div>
         <div class="is-item yes">
           <span class="is-icon" style="color:var(--green)">✓</span>
-          <span data-en="Operating infrastructure between merchants and creators" data-zh="商家与创作者之间的运营基础设施">Operating infrastructure between merchants and creators</span>
+          <span data-en="Operating infrastructure between merchants and creators" data-zh="商家与创作者之间的一套有章法的运作体系">Operating infrastructure between merchants and creators</span>
         </div>
       </div>
 
@@ -1324,9 +1315,9 @@ footer{
     <h2 class="thesis-title fade-in" data-en="The end state is a new market layer." data-zh="终态是一个新的市场层级。">The end state is a new market layer.</h2>
 
     <ul class="thesis-list fade-in">
-      <li data-en="Standardizes local creator acquisition" data-zh="本地创作者获客标准化">Standardizes local creator acquisition</li>
+      <li data-en="Standardizes local creator acquisition" data-zh="把本地博主获客这件事标准化，做成可重复的流程">Standardizes local creator acquisition</li>
       <li data-en="Ranks creators by commercial performance" data-zh="创作者按商业表现排名">Ranks creators by commercial performance</li>
-      <li data-en="Routes merchants toward better outcomes" data-zh="商家被引导向更好的结果">Routes merchants toward better outcomes</li>
+      <li data-en="Routes merchants toward better outcomes" data-zh="让商家每次找到更合适的博主，越用越准">Routes merchants toward better outcomes</li>
       <li data-en="Compounds proprietary creator performance data" data-zh="积累专有创作者表现数据">Compounds proprietary creator performance data</li>
       <li data-en="Creates lock-in through access, trust, and workflow" data-zh="通过权限、信任和工作流形成锁定">Creates lock-in through access, trust, and workflow</li>
     </ul>
@@ -1362,7 +1353,7 @@ footer{
     <div class="footer-top">
       <div>
         <span class="footer-logo">PUSH</span>
-        <div class="footer-tagline" data-en="Infrastructure for local creator-merchant commerce." data-zh="本地创作者-商家合作的运营基础设施。">Infrastructure for local creator-merchant commerce.</div>
+        <div class="footer-tagline" data-en="Infrastructure for local creator-merchant commerce." data-zh="让本地创作者合作变得有章法、可量化、值得反复做。">Infrastructure for local creator-merchant commerce.</div>
       </div>
       <div class="footer-links">
         <a href="index.html" data-en="Overview" data-zh="首页">Overview</a>

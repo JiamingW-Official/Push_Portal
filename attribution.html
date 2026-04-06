@@ -34,30 +34,15 @@
 
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--text);line-height:1.6;overflow-x:hidden;}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:var(--text);font-size:15px;line-height:1.85;overflow-x:hidden;}
 
 /* ── NAV ─────────────────────────────────────── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:1000;
-  height:60px;background:rgba(255,255,255,0.95);
-  border-bottom:1px solid var(--border);
-  -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
-  display:flex;align-items:center;padding:0 24px;gap:12px;
-}
-.nav-logo{
-  font-size:22px;font-weight:900;color:var(--accent);
-  text-decoration:none;letter-spacing:-0.5px;flex-shrink:0;
-}
-.nav-links{
-  display:flex;align-items:center;gap:2px;flex:1;
-}
-.nav-links a{
-  font-size:12px;font-weight:500;color:var(--text2);
-  text-decoration:none;padding:5px 9px;border-radius:7px;
-  transition:color 0.15s,background 0.15s;white-space:nowrap;
-}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;background:rgba(255,255,255,0.95);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:box-shadow 0.2s;}
+.nav-logo{font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;margin-right:8px;flex-shrink:0;text-decoration:none;}
+.nav-links{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
+.nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:all 0.15s;white-space:nowrap;text-decoration:none;}
 .nav-links a:hover{color:var(--accent);background:var(--accent-bg);}
-.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;}
+.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);}
 .nav-right{display:flex;align-items:center;gap:10px;flex-shrink:0;}
 .nav-hub{
   font-size:11px;font-weight:600;color:var(--text3);
@@ -124,7 +109,7 @@ nav{
 }
 
 /* ── SECTION CHROME ───────────────────────────── */
-.section{padding:80px 40px;}
+.section{padding:120px 64px;}
 .section-inner{max-width:1100px;margin:0 auto;}
 .section-bg2{background:var(--bg2);}
 .section-dark{background:var(--primary);}
@@ -383,7 +368,7 @@ blockquote.principle cite{
 }
 
 /* ── SCROLL FADE ─────────────────────────────── */
-.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.5s ease,transform 0.5s ease;animation:fadeInFallback 0s 4s forwards;}
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.55s ease,transform 0.55s ease;animation:fadeInFallback 0s 4s forwards;}
 .fade-in.visible{opacity:1;transform:translateY(0);animation:none;}
 @keyframes fadeInFallback{to{opacity:1;transform:translateY(0);}}
 
@@ -429,7 +414,7 @@ footer{
     <a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a>
     <a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
     <a href="push-strategy-core.html" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
-    <a href="attribution.html" class="active" data-en="Attribution" data-zh="归因体系">Attribution</a>
+    <a href="attribution.html" class="active" data-en="Attribution" data-zh="归因系统">Attribution</a>
   </div>
   <div class="nav-right">
     <a href="index.html" class="nav-hub">DOC HUB ↗</a>
@@ -449,7 +434,7 @@ footer{
   <a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a>
   <a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
   <a href="push-strategy-core.html" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
-  <a href="attribution.html" class="active" data-en="Attribution" data-zh="归因体系">Attribution</a>
+  <a href="attribution.html" class="active" data-en="Attribution" data-zh="归因系统">Attribution</a>
   <div class="mobile-lang-row">
     <span class="mobile-lang-label" data-en="Language" data-zh="语言">Language</span>
     <button id="lang-btn-mobile" style="background:var(--accent,#4f46e5);color:#fff;border:none;padding:6px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">中 / EN</button>
@@ -461,14 +446,14 @@ footer{
   <div class="hero-dots"></div>
   <div class="hero-inner">
     <span class="hero-badge" data-en="DOC — 07 · INTERNAL STRATEGY" data-zh="文档 — 07 · 内部战略">DOC — 07 · INTERNAL STRATEGY</span>
-    <h1 class="hero-title" data-en="Attribution &amp; Verification Framework" data-zh="归因与核验框架">Attribution &amp; Verification Framework</h1>
-    <p class="hero-sub" data-en="How Push builds credible attribution confidence without overclaiming certainty." data-zh="Push 如何建立可信的归因置信度，而不过度主张确定性。">How Push builds credible attribution confidence without overclaiming certainty.</p>
+    <h1 class="hero-title" data-en="Attribution &amp; Verification Framework" data-zh="归因与核验">Attribution &amp; Verification Framework</h1>
+    <p class="hero-sub" data-en="How Push builds credible attribution confidence without overclaiming certainty." data-zh="Push 怎么在不过分夸大的情况下，让每次活动的结果都有凭有据、可信可查。">How Push builds credible attribution confidence without overclaiming certainty.</p>
   </div>
 </section>
 
 <!-- ── LAYER DESCRIPTION ── -->
 <div style="max-width:800px; margin:0 auto 24px; padding:10px 16px; background:var(--bg2, #f8f9fa); border-radius:8px; font-size:13px; color:var(--text3); text-align:center;">
-  <span data-en="Deep dive into Push's attribution framework. For the full product overview, see <a href='project-intro.html'>Project Introduction</a>." data-zh="深入了解 Push 的归因框架。完整产品概览请参阅<a href='project-intro.html'>项目介绍</a>。" class="bilingual-text">Deep dive into Push's attribution framework. For the full product overview, see <a href="project-intro.html">Project Introduction</a>.</span>
+  <span data-en="Deep dive into Push's attribution framework. For the full product overview, see <a href='project-intro.html'>Project Introduction</a>." data-zh="这里专门讲归因怎么做。想看完整产品介绍，请看<a href='project-intro.html'>项目介绍</a>。" class="bilingual-text">Deep dive into Push's attribution framework. For the full product overview, see <a href="project-intro.html">Project Introduction</a>.</span>
 </div>
 
 <!-- ── SECTION 1: PHILOSOPHY ──────────────────── -->
@@ -477,34 +462,34 @@ footer{
     <div class="fade-in">
       <div class="section-label" data-en="Core Philosophy" data-zh="核心理念">Core Philosophy</div>
       <h2 class="section-title" data-en="Not Perfect. Credible." data-zh="不求完美，求可信">Not Perfect. Credible.</h2>
-      <p class="section-sub" data-en="Push does not need perfect attribution on day one. The objective is to make results more structured, trustworthy, and decision-useful than today's alternatives." data-zh="Push 不需要从第一天就拥有完美的归因。目标是让结果比当今的替代方案更有结构、更可信赖、更有助于决策。">Push does not need perfect attribution on day one. The objective is to make results more structured, trustworthy, and decision-useful than today's alternatives.</p>
+      <p class="section-sub" data-en="Push does not need perfect attribution on day one. The objective is to make results more structured, trustworthy, and decision-useful than today's alternatives." data-zh="Push 不需要从第一天就做到完美归因。目标是：结果要有依据、能说清楚、能帮商家决定下次要不要再做。">Push does not need perfect attribution on day one. The objective is to make results more structured, trustworthy, and decision-useful than today's alternatives.</p>
       <blockquote class="principle">
-        <span data-en="The bar is not scientific certainty. The bar is: more structured, more trustworthy, and more decision-useful than what merchants and creators have today." data-zh="标准不是科学确定性。标准是：比商家和创作者今天拥有的更有结构、更可信赖、更有助于决策。">The bar is not scientific certainty. The bar is: more structured, more trustworthy, and more decision-useful than what merchants and creators have today.</span>
+        <span data-en="The bar is not scientific certainty. The bar is: more structured, more trustworthy, and more decision-useful than what merchants and creators have today." data-zh="要求不是科学级别的确定性。要求是：比商家和创作者现在能拿到的东西更有结构、更可信、更有参考价值。">The bar is not scientific certainty. The bar is: more structured, more trustworthy, and more decision-useful than what merchants and creators have today.</span>
       </blockquote>
     </div>
 
     <div class="fade-in" style="margin-top:44px;">
-      <div class="section-label" data-en="What Attribution Must Answer" data-zh="归因必须回答的问题">What Attribution Must Answer</div>
+      <div class="section-label" data-en="What Attribution Must Answer" data-zh="归因要回答的问题">What Attribution Must Answer</div>
       <div class="attr-questions">
         <div class="attr-q">
           <span class="attr-q-num">01</span>
-          <span class="attr-q-text" data-en="Did the creator actually fulfill the campaign?" data-zh="创作者是否真正履行了活动？">Did the creator actually fulfill the campaign?</span>
+          <span class="attr-q-text" data-en="Did the creator actually fulfill the campaign?" data-zh="创作者有没有按要求完成这次任务？">Did the creator actually fulfill the campaign?</span>
         </div>
         <div class="attr-q">
           <span class="attr-q-num">02</span>
-          <span class="attr-q-text" data-en="Did the audience receive the content?" data-zh="受众是否收到了内容？">Did the audience receive the content?</span>
+          <span class="attr-q-text" data-en="Did the audience receive the content?" data-zh="内容有没有真的触达到受众？">Did the audience receive the content?</span>
         </div>
         <div class="attr-q">
           <span class="attr-q-num">03</span>
-          <span class="attr-q-text" data-en="Did the campaign create meaningful merchant-side action?" data-zh="活动是否创造了有意义的商家端行动？">Did the campaign create meaningful merchant-side action?</span>
+          <span class="attr-q-text" data-en="Did the campaign create meaningful merchant-side action?" data-zh="这次活动有没有在商家那边带来实际反应？">Did the campaign create meaningful merchant-side action?</span>
         </div>
         <div class="attr-q">
           <span class="attr-q-num">04</span>
-          <span class="attr-q-text" data-en="Which creators are more commercially effective?" data-zh="哪些创作者更具商业效果？">Which creators are more commercially effective?</span>
+          <span class="attr-q-text" data-en="Which creators are more commercially effective?" data-zh="哪些创作者带来的商业效果更好？">Which creators are more commercially effective?</span>
         </div>
         <div class="attr-q">
           <span class="attr-q-num">05</span>
-          <span class="attr-q-text" data-en="Which campaign types are worth repeating?" data-zh="哪些活动类型值得重复？">Which campaign types are worth repeating?</span>
+          <span class="attr-q-text" data-en="Which campaign types are worth repeating?" data-zh="哪类活动值得继续做？">Which campaign types are worth repeating?</span>
         </div>
       </div>
     </div>
@@ -515,22 +500,22 @@ footer{
 <section class="section section-bg2">
   <div class="section-inner">
     <div class="fade-in">
-      <div class="section-label" data-en="Verification Architecture" data-zh="核验架构">Verification Architecture</div>
+      <div class="section-label" data-en="Verification Architecture" data-zh="核验方式">Verification Architecture</div>
       <h2 class="section-title" data-en="5 Verification Layers" data-zh="5 个核验层级">5 Verification Layers</h2>
-      <p class="section-sub" data-en="Each layer builds on the previous. Deeper layers require more infrastructure but produce stronger confidence signals for repeat buying decisions." data-zh="每个层级都建立在前一个层级之上。更深的层级需要更多基础设施，但能为复购决策产生更强的置信信号。">Each layer builds on the previous. Deeper layers require more infrastructure but produce stronger confidence signals for repeat buying decisions.</p>
+      <p class="section-sub" data-en="Each layer builds on the previous. Deeper layers require more infrastructure but produce stronger confidence signals for repeat buying decisions." data-zh="每一层都建立在上一层的基础上。越深的层级需要的配套越多，但给商家决定是否复购提供的依据也越扎实。">Each layer builds on the previous. Deeper layers require more infrastructure but produce stronger confidence signals for repeat buying decisions.</p>
     </div>
     <div class="item-rows">
       <div class="item-row fade-in">
         <div class="item-num">01</div>
         <div class="item-body">
           <div class="item-title" data-en="Fulfillment Verification" data-zh="履约核验">Fulfillment Verification</div>
-          <div class="item-sub" data-en="DID THE CREATOR SHOW UP?" data-zh="创作者出现了吗？">DID THE CREATOR SHOW UP?</div>
-          <p class="item-desc" data-en="Confirms the creator's physical or digital presence and execution. The baseline without which no other layer is credible." data-zh="确认创作者的实体或数字存在和执行。没有这个基线，其他任何层级都不可信。">Confirms the creator's physical or digital presence and execution. The baseline without which no other layer is credible.</p>
+          <div class="item-sub" data-en="DID THE CREATOR SHOW UP?" data-zh="创作者有没有到场？">DID THE CREATOR SHOW UP?</div>
+          <p class="item-desc" data-en="Confirms the creator's physical or digital presence and execution. The baseline without which no other layer is credible." data-zh="确认创作者是否真的到场、真的完成了任务。这是最基础的一层——没有它，后面的核验都没有意义。">Confirms the creator's physical or digital presence and execution. The baseline without which no other layer is credible.</p>
           <ul class="item-list">
             <li data-en="Visit proof" data-zh="到访证明">Visit proof</li>
-            <li data-en="Timestamped upload" data-zh="带时间戳的上传">Timestamped upload</li>
+            <li data-en="Timestamped upload" data-zh="带时间戳的上传记录">Timestamped upload</li>
             <li data-en="Merchant acknowledgement" data-zh="商家确认">Merchant acknowledgement</li>
-            <li data-en="Draft submission" data-zh="草稿提交">Draft submission</li>
+            <li data-en="Draft submission" data-zh="内容草稿提交">Draft submission</li>
             <li data-en="Content link" data-zh="内容链接">Content link</li>
             <li data-en="Presence evidence" data-zh="在场证明">Presence evidence</li>
           </ul>
@@ -540,13 +525,13 @@ footer{
         <div class="item-num">02</div>
         <div class="item-body">
           <div class="item-title" data-en="Content Verification" data-zh="内容核验">Content Verification</div>
-          <div class="item-sub" data-en="DID THE CONTENT GO LIVE?" data-zh="内容发布了吗？">DID THE CONTENT GO LIVE?</div>
-          <p class="item-desc" data-en="Confirms the content was actually published and remained accessible. Prevents submission of draft content as completed work." data-zh="确认内容已实际发布并保持可访问性。防止将草稿内容作为完成工作提交。">Confirms the content was actually published and remained accessible. Prevents submission of draft content as completed work.</p>
+          <div class="item-sub" data-en="DID THE CONTENT GO LIVE?" data-zh="内容有没有真的发出去？">DID THE CONTENT GO LIVE?</div>
+          <p class="item-desc" data-en="Confirms the content was actually published and remained accessible. Prevents submission of draft content as completed work." data-zh="确认内容是否真正发布、是否还能访问到。防止创作者把草稿当完成稿交付。">Confirms the content was actually published and remained accessible. Prevents submission of draft content as completed work.</p>
           <ul class="item-list">
-            <li data-en="Live URL check" data-zh="实时 URL 检查">Live URL check</li>
-            <li data-en="Screenshot evidence" data-zh="截图证据">Screenshot evidence</li>
+            <li data-en="Live URL check" data-zh="链接是否可访问">Live URL check</li>
+            <li data-en="Screenshot evidence" data-zh="发布截图">Screenshot evidence</li>
             <li data-en="Posting timestamp" data-zh="发布时间戳">Posting timestamp</li>
-            <li data-en="Persistence checks" data-zh="持久性检查">Persistence checks</li>
+            <li data-en="Persistence checks" data-zh="内容是否持续可见">Persistence checks</li>
             <li data-en="Basic compliance review" data-zh="基础合规审查">Basic compliance review</li>
           </ul>
         </div>
@@ -554,9 +539,9 @@ footer{
       <div class="item-row fade-in">
         <div class="item-num">03</div>
         <div class="item-body">
-          <div class="item-title" data-en="Engagement Context" data-zh="互动背景">Engagement Context</div>
-          <div class="item-sub" data-en="DIRECTIONAL ONLY — NOT PRIMARY" data-zh="仅方向性——非主要信号">DIRECTIONAL ONLY — NOT PRIMARY</div>
-          <p class="item-desc" data-en="Useful for trending analysis and creator comparison, but weak as primary commercial evidence. Easy to inflate, hard to correlate with merchant outcomes." data-zh="用于趋势分析和创作者对比，但作为主要商业证据较弱。容易虚增，难以与商家结果关联。">Useful for trending analysis and creator comparison, but weak as primary commercial evidence. Easy to inflate, hard to correlate with merchant outcomes.</p>
+          <div class="item-title" data-en="Engagement Context" data-zh="互动数据">Engagement Context</div>
+          <div class="item-sub" data-en="DIRECTIONAL ONLY — NOT PRIMARY" data-zh="只做参考，不是主要依据">DIRECTIONAL ONLY — NOT PRIMARY</div>
+          <p class="item-desc" data-en="Useful for trending analysis and creator comparison, but weak as primary commercial evidence. Easy to inflate, hard to correlate with merchant outcomes." data-zh="可以用来看趋势、横向比较创作者，但单独作为商业结果的证明太弱。数字容易刷，跟商家实际收益很难对上。">Useful for trending analysis and creator comparison, but weak as primary commercial evidence. Easy to inflate, hard to correlate with merchant outcomes.</p>
           <ul class="item-list">
             <li data-en="Views" data-zh="浏览量">Views</li>
             <li data-en="Clicks" data-zh="点击量">Clicks</li>
@@ -570,9 +555,9 @@ footer{
       <div class="item-row fade-in">
         <div class="item-num">04</div>
         <div class="item-body">
-          <div class="item-title" data-en="Merchant-Side Action" data-zh="商家端行动">Merchant-Side Action</div>
-          <div class="item-sub" data-en="DID SOMETHING HAPPEN AT THE MERCHANT?" data-zh="商家端发生了什么？">DID SOMETHING HAPPEN AT THE MERCHANT?</div>
-          <p class="item-desc" data-en="The most commercially meaningful layer. Confirms the campaign moved beyond content publication into actual business outcomes. Requires merchant-side infrastructure." data-zh="最具商业意义的层级。确认活动超越内容发布，产生了实际业务结果。需要商家端基础设施。">The most commercially meaningful layer. Confirms the campaign moved beyond content publication into actual business outcomes. Requires merchant-side infrastructure.</p>
+          <div class="item-title" data-en="Merchant-Side Action" data-zh="商家端的实际反应">Merchant-Side Action</div>
+          <div class="item-sub" data-en="DID SOMETHING HAPPEN AT THE MERCHANT?" data-zh="商家那边有没有真的发生什么？">DID SOMETHING HAPPEN AT THE MERCHANT?</div>
+          <p class="item-desc" data-en="The most commercially meaningful layer. Confirms the campaign moved beyond content publication into actual business outcomes. Requires merchant-side infrastructure." data-zh="商业意义最强的一层。证明这次活动不只是发了内容，而是真的带动了商家的业务。需要商家侧有相应的数据采集手段。">The most commercially meaningful layer. Confirms the campaign moved beyond content publication into actual business outcomes. Requires merchant-side infrastructure.</p>
           <ul class="item-list">
             <li data-en="Redemptions" data-zh="兑换">Redemptions</li>
             <li data-en="Bookings" data-zh="预订">Bookings</li>
@@ -587,13 +572,13 @@ footer{
         <div class="item-num">05</div>
         <div class="item-body">
           <div class="item-title" data-en="Repeat Signal" data-zh="复购信号">Repeat Signal</div>
-          <div class="item-sub" data-en="THE STRONGEST LONG-TERM SIGNAL" data-zh="最强长期信号">THE STRONGEST LONG-TERM SIGNAL</div>
-          <p class="item-desc" data-en="Behavioral evidence that the campaign produced value worth repeating. Self-reinforcing: repeat behavior makes future attribution easier and more confident." data-zh="行为证据证明活动产生了值得重复的价值。自我强化：重复行为使未来的归因更容易、更有置信度。">Behavioral evidence that the campaign produced value worth repeating. Self-reinforcing: repeat behavior makes future attribution easier and more confident.</p>
+          <div class="item-sub" data-en="THE STRONGEST LONG-TERM SIGNAL" data-zh="最有说服力的长期信号">THE STRONGEST LONG-TERM SIGNAL</div>
+          <p class="item-desc" data-en="Behavioral evidence that the campaign produced value worth repeating. Self-reinforcing: repeat behavior makes future attribution easier and more confident." data-zh="商家或创作者主动再来，是最直接的价值证明。而且这个信号会形成正循环：复购行为越多，后续的归因就越容易做、也越准。">Behavioral evidence that the campaign produced value worth repeating. Self-reinforcing: repeat behavior makes future attribution easier and more confident.</p>
           <ul class="item-list">
-            <li data-en="Merchant repeat booking of creator" data-zh="商家重复预订创作者">Merchant repeat booking of creator</li>
-            <li data-en="Creator invited to higher-value campaign" data-zh="创作者受邀参与更高价值活动">Creator invited to higher-value campaign</li>
-            <li data-en="Repeat campaign type success" data-zh="重复活动类型成功">Repeat campaign type success</li>
-            <li data-en="Return merchant behavior" data-zh="商家回归行为">Return merchant behavior</li>
+            <li data-en="Merchant repeat booking of creator" data-zh="商家再次预约同一创作者">Merchant repeat booking of creator</li>
+            <li data-en="Creator invited to higher-value campaign" data-zh="创作者被邀参与更高价值的活动">Creator invited to higher-value campaign</li>
+            <li data-en="Repeat campaign type success" data-zh="同类活动再次取得好结果">Repeat campaign type success</li>
+            <li data-en="Return merchant behavior" data-zh="商家回头继续合作">Return merchant behavior</li>
           </ul>
         </div>
       </div>
@@ -605,37 +590,37 @@ footer{
 <section class="section">
   <div class="section-inner">
     <div class="fade-in">
-      <div class="section-label" data-en="Confidence System" data-zh="置信度体系">Confidence System</div>
-      <h2 class="section-title" data-en="3 Confidence Levels" data-zh="3 个置信度层级">3 Confidence Levels</h2>
-      <p class="section-sub" data-en="Every campaign result is assigned a confidence level based on available verification signals. Confidence level determines what decisions the result can support." data-zh="每个活动结果根据可用核验信号分配置信度级别。置信度级别决定结果能支持哪些决策。">Every campaign result is assigned a confidence level based on available verification signals. Confidence level determines what decisions the result can support.</p>
+      <div class="section-label" data-en="Confidence System" data-zh="置信度评级">Confidence System</div>
+      <h2 class="section-title" data-en="3 Confidence Levels" data-zh="3 个置信度级别">3 Confidence Levels</h2>
+      <p class="section-sub" data-en="Every campaign result is assigned a confidence level based on available verification signals. Confidence level determines what decisions the result can support." data-zh="每次活动结果都会根据已有的核验信号评定一个置信度级别。级别决定了这份结果能用来支撑哪些决策。">Every campaign result is assigned a confidence level based on available verification signals. Confidence level determines what decisions the result can support.</p>
     </div>
     <table class="data-table fade-in">
       <thead>
         <tr>
           <th data-en="Level" data-zh="级别">Level</th>
-          <th data-en="Signals Present" data-zh="存在的信号">Signals Present</th>
-          <th data-en="Suitable For" data-zh="适用于">Suitable For</th>
-          <th data-en="Not Suitable For" data-zh="不适用于">Not Suitable For</th>
+          <th data-en="Signals Present" data-zh="已有哪些核验信号">Signals Present</th>
+          <th data-en="Suitable For" data-zh="可以用于">Suitable For</th>
+          <th data-en="Not Suitable For" data-zh="不适合用于">Not Suitable For</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td><span class="conf-label conf-low" data-en="LOW" data-zh="低">LOW</span></td>
-          <td data-en="Content posted, light engagement data, no redemption evidence" data-zh="内容已发布，轻微互动数据，无兑换证明">Content posted, light engagement data, no redemption evidence</td>
-          <td data-en="Creator activity tracking, directional comparison" data-zh="创作者活动追踪，方向性对比">Creator activity tracking, directional comparison</td>
-          <td data-en="Performance fee justification, repeat booking decisions" data-zh="绩效费用证明，复购决策">Performance fee justification, repeat booking decisions</td>
+          <td data-en="Content posted, light engagement data, no redemption evidence" data-zh="内容已发布、有轻量互动数据、没有兑换记录">Content posted, light engagement data, no redemption evidence</td>
+          <td data-en="Creator activity tracking, directional comparison" data-zh="追踪创作者活跃度、做横向对比参考">Creator activity tracking, directional comparison</td>
+          <td data-en="Performance fee justification, repeat booking decisions" data-zh="收取绩效费用、决定是否复购">Performance fee justification, repeat booking decisions</td>
         </tr>
         <tr>
           <td><span class="conf-label conf-med" data-en="MEDIUM" data-zh="中">MEDIUM</span></td>
-          <td data-en="Content posted, visit confirmed, claim or intent signal, limited merchant-side action" data-zh="内容已发布，到访已确认，领取或意向信号，有限商家端行动">Content posted, visit confirmed, claim or intent signal, limited merchant-side action</td>
-          <td data-en="Merchant reporting, general ROI narrative, creator ranking signals" data-zh="商家报告，总体 ROI 叙述，创作者排名信号">Merchant reporting, general ROI narrative, creator ranking signals</td>
-          <td data-en="High-confidence performance take rates, judicial dispute resolution" data-zh="高置信度绩效抽成，裁决性争议解决">High-confidence performance take rates, judicial dispute resolution</td>
+          <td data-en="Content posted, visit confirmed, claim or intent signal, limited merchant-side action" data-zh="内容已发布、到访已确认、有优惠领取或意向信号、商家端有少量行为记录">Content posted, visit confirmed, claim or intent signal, limited merchant-side action</td>
+          <td data-en="Merchant reporting, general ROI narrative, creator ranking signals" data-zh="给商家的汇报材料、大致的 ROI 说明、创作者排名参考">Merchant reporting, general ROI narrative, creator ranking signals</td>
+          <td data-en="High-confidence performance take rates, judicial dispute resolution" data-zh="收高置信度绩效费、解决有争议的纠纷">High-confidence performance take rates, judicial dispute resolution</td>
         </tr>
         <tr>
           <td><span class="conf-label conf-high" data-en="HIGH" data-zh="高">HIGH</span></td>
-          <td data-en="Content posted, fulfillment confirmed, merchant-side redemption or booking evidence, legible campaign outcome" data-zh="内容已发布，履约已确认，商家端兑换或预订证据，清晰的活动结果">Content posted, fulfillment confirmed, merchant-side redemption or booking evidence, legible campaign outcome</td>
-          <td data-en="Performance-based pricing, repeat booking decisions, premium tier qualification, financial product eligibility" data-zh="绩效定价，复购决策，高级层级资格，金融产品资格">Performance-based pricing, repeat booking decisions, premium tier qualification, financial product eligibility</td>
-          <td data-en="N/A — highest available confidence" data-zh="不适用——最高可用置信度">N/A — highest available confidence</td>
+          <td data-en="Content posted, fulfillment confirmed, merchant-side redemption or booking evidence, legible campaign outcome" data-zh="内容已发布、履约已确认、有商家端兑换或预约记录、活动结果清晰可查">Content posted, fulfillment confirmed, merchant-side redemption or booking evidence, legible campaign outcome</td>
+          <td data-en="Performance-based pricing, repeat booking decisions, premium tier qualification, financial product eligibility" data-zh="按绩效定价、决定复购、开放高级权限资格、金融产品申请">Performance-based pricing, repeat booking decisions, premium tier qualification, financial product eligibility</td>
+          <td data-en="N/A — highest available confidence" data-zh="不适用——这是最高级别">N/A — highest available confidence</td>
         </tr>
       </tbody>
     </table>
@@ -646,49 +631,49 @@ footer{
 <section class="section section-bg2">
   <div class="section-inner">
     <div class="fade-in">
-      <div class="section-label" data-en="Campaign-Specific Logic" data-zh="活动专项逻辑">Campaign-Specific Logic</div>
-      <h2 class="section-title" data-en="Attribution by Campaign Type" data-zh="按活动类型的归因">Attribution by Campaign Type</h2>
-      <p class="section-sub" data-en="Different campaign goals require different proof logic. One-size-fits-all measurement is a failure mode, not a feature." data-zh="不同的活动目标需要不同的证明逻辑。一刀切的衡量是失败模式，而非特性。">Different campaign goals require different proof logic. One-size-fits-all measurement is a failure mode, not a feature.</p>
+      <div class="section-label" data-en="Campaign-Specific Logic" data-zh="按活动类型区分">Campaign-Specific Logic</div>
+      <h2 class="section-title" data-en="Attribution by Campaign Type" data-zh="不同类型活动的归因方式">Attribution by Campaign Type</h2>
+      <p class="section-sub" data-en="Different campaign goals require different proof logic. One-size-fits-all measurement is a failure mode, not a feature." data-zh="不同类型的活动目的不同，要核验的东西也不一样。用一套标准衡量所有活动，结果只会让人误解。">Different campaign goals require different proof logic. One-size-fits-all measurement is a failure mode, not a feature.</p>
     </div>
     <div class="campaign-grid fade-in">
       <div class="campaign-cell">
-        <div class="campaign-type" data-en="SAMPLING" data-zh="样品体验">SAMPLING</div>
-        <div class="campaign-title" data-en="Product or Experience Sampling" data-zh="产品或体验采样">Product or Experience Sampling</div>
+        <div class="campaign-type" data-en="SAMPLING" data-zh="产品/体验试用">SAMPLING</div>
+        <div class="campaign-title" data-en="Product or Experience Sampling" data-zh="请创作者试用产品或体验服务">Product or Experience Sampling</div>
         <ul class="campaign-list">
-          <li data-en="Fulfillment completion" data-zh="履约完成">Fulfillment completion</li>
-          <li data-en="Content publication" data-zh="内容发布">Content publication</li>
-          <li data-en="Offer claim (if included)" data-zh="优惠领取（如包含）">Offer claim (if included)</li>
+          <li data-en="Fulfillment completion" data-zh="确认任务完成">Fulfillment completion</li>
+          <li data-en="Content publication" data-zh="内容已发布">Content publication</li>
+          <li data-en="Offer claim (if included)" data-zh="优惠已领取（如有）">Offer claim (if included)</li>
           <li data-en="Merchant observation record" data-zh="商家观察记录">Merchant observation record</li>
-          <li data-en="Optional: redemption by audience" data-zh="可选：受众兑换">Optional: redemption by audience</li>
+          <li data-en="Optional: redemption by audience" data-zh="可选：受众是否来兑换">Optional: redemption by audience</li>
         </ul>
       </div>
       <div class="campaign-cell">
-        <div class="campaign-type" data-en="EVENT FILL" data-zh="活动填充">EVENT FILL</div>
-        <div class="campaign-title" data-en="Event Attendance or Activation" data-zh="活动出席或激活">Event Attendance or Activation</div>
+        <div class="campaign-type" data-en="EVENT FILL" data-zh="活动引流">EVENT FILL</div>
+        <div class="campaign-title" data-en="Event Attendance or Activation" data-zh="带动活动出席或现场参与">Event Attendance or Activation</div>
         <ul class="campaign-list">
           <li data-en="RSVP or attendance confirmation" data-zh="RSVP 或出席确认">RSVP or attendance confirmation</li>
-          <li data-en="Check-in at event" data-zh="活动签到">Check-in at event</li>
-          <li data-en="Event code usage" data-zh="活动码使用">Event code usage</li>
-          <li data-en="Time-window correlation" data-zh="时间窗口关联">Time-window correlation</li>
+          <li data-en="Check-in at event" data-zh="现场签到">Check-in at event</li>
+          <li data-en="Event code usage" data-zh="活动专属码是否被使用">Event code usage</li>
+          <li data-en="Time-window correlation" data-zh="活动时间段内的数据关联">Time-window correlation</li>
         </ul>
       </div>
       <div class="campaign-cell">
-        <div class="campaign-type" data-en="PRODUCT LAUNCH" data-zh="产品发布">PRODUCT LAUNCH</div>
-        <div class="campaign-title" data-en="New Product Awareness Wave" data-zh="新产品意识波">New Product Awareness Wave</div>
+        <div class="campaign-type" data-en="PRODUCT LAUNCH" data-zh="新品发布">PRODUCT LAUNCH</div>
+        <div class="campaign-title" data-en="New Product Awareness Wave" data-zh="新品曝光与引爆">New Product Awareness Wave</div>
         <ul class="campaign-list">
-          <li data-en="Content publication evidence" data-zh="内容发布证据">Content publication evidence</li>
-          <li data-en="First-wave claims or redemptions" data-zh="首波领取或兑换">First-wave claims or redemptions</li>
-          <li data-en="Merchant-side awareness signal" data-zh="商家端意识信号">Merchant-side awareness signal</li>
-          <li data-en="Repeat demand in short window" data-zh="短期内的重复需求">Repeat demand in short window</li>
+          <li data-en="Content publication evidence" data-zh="内容已发布的证明">Content publication evidence</li>
+          <li data-en="First-wave claims or redemptions" data-zh="首批优惠领取或兑换记录">First-wave claims or redemptions</li>
+          <li data-en="Merchant-side awareness signal" data-zh="商家端的知名度提升信号">Merchant-side awareness signal</li>
+          <li data-en="Repeat demand in short window" data-zh="短时间内是否出现复购需求">Repeat demand in short window</li>
         </ul>
       </div>
       <div class="campaign-cell">
-        <div class="campaign-type" data-en="OFF-PEAK TRAFFIC" data-zh="低峰流量">OFF-PEAK TRAFFIC</div>
-        <div class="campaign-title" data-en="Slow Period Traffic Generation" data-zh="淡季流量生成">Slow Period Traffic Generation</div>
+        <div class="campaign-type" data-en="OFF-PEAK TRAFFIC" data-zh="补冷场流量">OFF-PEAK TRAFFIC</div>
+        <div class="campaign-title" data-en="Slow Period Traffic Generation" data-zh="淡季引流">Slow Period Traffic Generation</div>
         <ul class="campaign-list">
-          <li data-en="Time-window redemption data" data-zh="时间窗口兑换数据">Time-window redemption data</li>
-          <li data-en="Visit counts during targeted periods" data-zh="目标期间的到访量">Visit counts during targeted periods</li>
-          <li data-en="Repeat merchant perception" data-zh="商家重复感知">Repeat merchant perception</li>
+          <li data-en="Time-window redemption data" data-zh="指定时间段内的兑换数据">Time-window redemption data</li>
+          <li data-en="Visit counts during targeted periods" data-zh="目标时段的到访人数">Visit counts during targeted periods</li>
+          <li data-en="Repeat merchant perception" data-zh="商家对这次活动的感受和复购意愿">Repeat merchant perception</li>
         </ul>
       </div>
     </div>
@@ -699,30 +684,30 @@ footer{
 <section class="section">
   <div class="section-inner">
     <div class="fade-in">
-      <div class="section-label" data-en="Risk Patterns" data-zh="风险模式">Risk Patterns</div>
-      <h2 class="section-title" data-en="4 Attribution Failure Modes" data-zh="4 种归因失败模式">4 Attribution Failure Modes</h2>
-      <p class="section-sub" data-en="Each failure mode appears to be an attribution choice but is actually a trust-destruction mechanism. Avoid at all cost stages." data-zh="每种失败模式看起来像是归因选择，实际上是信任破坏机制。在所有阶段都应避免。">Each failure mode appears to be an attribution choice but is actually a trust-destruction mechanism. Avoid at all cost stages.</p>
+      <div class="section-label" data-en="Risk Patterns" data-zh="常见风险">Risk Patterns</div>
+      <h2 class="section-title" data-en="4 Attribution Failure Modes" data-zh="4 种归因做法的坑">4 Attribution Failure Modes</h2>
+      <p class="section-sub" data-en="Each failure mode appears to be an attribution choice but is actually a trust-destruction mechanism. Avoid at all cost stages." data-zh="这几种做法看起来像是在认真做归因，实际上是在慢慢破坏信任。不管在哪个阶段都要避开。">Each failure mode appears to be an attribution choice but is actually a trust-destruction mechanism. Avoid at all cost stages.</p>
     </div>
     <div class="failure-rows fade-in">
       <div class="failure-row">
         <span class="failure-label" data-en="MODE A" data-zh="模式 A">MODE A</span>
-        <span class="failure-title" data-en="Over-Reliance on Views" data-zh="过度依赖浏览量">Over-Reliance on Views</span>
-        <span class="failure-desc" data-en="Views are easy to collect but weak as primary commercial signal. Reporting views as success creates merchant expectation misalignment and erodes repeat intent." data-zh="浏览量易于收集，但作为主要商业信号较弱。将浏览量作为成功指标会造成商家预期不符，侵蚀重复意向。">Views are easy to collect but weak as primary commercial signal. Reporting views as success creates merchant expectation misalignment and erodes repeat intent.</span>
+        <span class="failure-title" data-en="Over-Reliance on Views" data-zh="靠播放量说话">Over-Reliance on Views</span>
+        <span class="failure-desc" data-en="Views are easy to collect but weak as primary commercial signal. Reporting views as success creates merchant expectation misalignment and erodes repeat intent." data-zh="播放量最好收集，但作为商业结果的证明太弱。把浏览量说成"成功"会让商家预期落空，之后就不会再来了。">Views are easy to collect but weak as primary commercial signal. Reporting views as success creates merchant expectation misalignment and erodes repeat intent.</span>
       </div>
       <div class="failure-row">
         <span class="failure-label" data-en="MODE B" data-zh="模式 B">MODE B</span>
-        <span class="failure-title" data-en="Overclaiming Causality" data-zh="过度主张因果">Overclaiming Causality</span>
-        <span class="failure-desc" data-en="Implying direct causality when only directional evidence exists. When actual outcomes disappoint, the credibility damage is disproportionate to any short-term gain." data-zh="当仅存在方向性证据时声称直接因果关系。当实际结果令人失望时，公信力损害与任何短期收益不成比例。">Implying direct causality when only directional evidence exists. When actual outcomes disappoint, the credibility damage is disproportionate to any short-term gain.</span>
+        <span class="failure-title" data-en="Overclaiming Causality" data-zh="过度夸大因果关系">Overclaiming Causality</span>
+        <span class="failure-desc" data-en="Implying direct causality when only directional evidence exists. When actual outcomes disappoint, the credibility damage is disproportionate to any short-term gain." data-zh="只有方向性参考时就断言是直接因果。一旦实际结果不达预期，公信力损失远超短期收益。">Implying direct causality when only directional evidence exists. When actual outcomes disappoint, the credibility damage is disproportionate to any short-term gain.</span>
       </div>
       <div class="failure-row">
         <span class="failure-label" data-en="MODE C" data-zh="模式 C">MODE C</span>
-        <span class="failure-title" data-en="One-Size-Fits-All Measurement" data-zh="一刀切衡量">One-Size-Fits-All Measurement</span>
-        <span class="failure-desc" data-en="Different merchant goals require different proof logic. Applying the same metrics to a product sampling campaign and an off-peak traffic campaign produces misleading results for both." data-zh="不同商家目标需要不同的证明逻辑。对产品采样活动和低峰流量活动应用相同指标会对双方产生误导性结果。">Different merchant goals require different proof logic. Applying the same metrics to a product sampling campaign and an off-peak traffic campaign produces misleading results for both.</span>
+        <span class="failure-title" data-en="One-Size-Fits-All Measurement" data-zh="用同一套指标衡量所有活动">One-Size-Fits-All Measurement</span>
+        <span class="failure-desc" data-en="Different merchant goals require different proof logic. Applying the same metrics to a product sampling campaign and an off-peak traffic campaign produces misleading results for both." data-zh="不同活动的目的不一样，要看的指标也不一样。拿同一套数据去衡量试用活动和淡季引流活动，两边都会得出误导性的结论。">Different merchant goals require different proof logic. Applying the same metrics to a product sampling campaign and an off-peak traffic campaign produces misleading results for both.</span>
       </div>
       <div class="failure-row">
         <span class="failure-label" data-en="MODE D" data-zh="模式 D">MODE D</span>
-        <span class="failure-title" data-en="Poor Merchant Interpretation" data-zh="商家解读困难">Poor Merchant Interpretation</span>
-        <span class="failure-desc" data-en="Even accurate data fails if merchants can't understand what happened. Dashboards that flood merchants with superficial stats create confusion and undermine repeat confidence." data-zh="即使数据准确，如果商家无法理解发生了什么，也会失败。用表面统计数据淹没商家的仪表板会造成困惑，破坏重复置信度。">Even accurate data fails if merchants can't understand what happened. Dashboards that flood merchants with superficial stats create confusion and undermine repeat confidence.</span>
+        <span class="failure-title" data-en="Poor Merchant Interpretation" data-zh="商家看不懂报告">Poor Merchant Interpretation</span>
+        <span class="failure-desc" data-en="Even accurate data fails if merchants can't understand what happened. Dashboards that flood merchants with superficial stats create confusion and undermine repeat confidence." data-zh="数据准确也没用，商家看不懂等于白费。一堆表面数字塞满仪表板只会让商家一头雾水，下次就不想继续了。">Even accurate data fails if merchants can't understand what happened. Dashboards that flood merchants with superficial stats create confusion and undermine repeat confidence.</span>
       </div>
     </div>
   </div>
@@ -732,17 +717,17 @@ footer{
 <section class="section section-bg2">
   <div class="section-inner">
     <div class="fade-in">
-      <div class="section-label" data-en="Design Implications" data-zh="设计含义">Design Implications</div>
-      <h2 class="section-title" data-en="How Attribution Shapes the Platform" data-zh="归因如何塑造平台">How Attribution Shapes the Platform</h2>
-      <p class="section-sub" data-en="Attribution is not a post-campaign reporting feature. It is a design constraint that shapes how campaigns are created, how creators are briefed, and what the dashboard shows." data-zh="归因不是活动后报告功能。它是一个设计约束，塑造活动创建方式、创作者简报方式和仪表板显示内容。">Attribution is not a post-campaign reporting feature. It is a design constraint that shapes how campaigns are created, how creators are briefed, and what the dashboard shows.</p>
+      <div class="section-label" data-en="Design Implications" data-zh="对产品设计的影响">Design Implications</div>
+      <h2 class="section-title" data-en="How Attribution Shapes the Platform" data-zh="归因怎么影响产品设计">How Attribution Shapes the Platform</h2>
+      <p class="section-sub" data-en="Attribution is not a post-campaign reporting feature. It is a design constraint that shapes how campaigns are created, how creators are briefed, and what the dashboard shows." data-zh="归因不是活动做完再加的报告功能。它是一个前置的设计约束，决定了活动怎么创建、创作者的任务怎么说清楚、仪表板显示什么内容。">Attribution is not a post-campaign reporting feature. It is a design constraint that shapes how campaigns are created, how creators are briefed, and what the dashboard shows.</p>
     </div>
     <ul class="checklist fade-in">
-      <li data-en="Define verification method at campaign creation — not retrospectively" data-zh="在活动创建时定义核验方法——而非事后追溯">Define verification method at campaign creation — not retrospectively</li>
-      <li data-en="Match campaign type to appropriate proof logic before launch" data-zh="在启动前将活动类型与适当的证明逻辑匹配">Match campaign type to appropriate proof logic before launch</li>
-      <li data-en="Expose clear proof steps to creators upfront — no ambiguity about what counts" data-zh="提前向创作者说明清晰的证明步骤——对于什么算数没有歧义">Expose clear proof steps to creators upfront — no ambiguity about what counts</li>
-      <li data-en="Show confidence level in merchant dashboard alongside results — not just raw numbers" data-zh="在商家仪表板中与结果一起显示置信度——不仅仅是原始数字">Show confidence level in merchant dashboard alongside results — not just raw numbers</li>
-      <li data-en="Separate vanity indicators from business indicators in all reporting interfaces" data-zh="在所有报告界面中将虚荣指标与业务指标分开">Separate vanity indicators from business indicators in all reporting interfaces</li>
-      <li data-en="Maintain audit-friendly milestone logs throughout campaign lifecycle" data-zh="在整个活动生命周期中维护审计友好的里程碑日志">Maintain audit-friendly milestone logs throughout campaign lifecycle</li>
+      <li data-en="Define verification method at campaign creation — not retrospectively" data-zh="建活动时就定好核验方式，而不是事后补救">Define verification method at campaign creation — not retrospectively</li>
+      <li data-en="Match campaign type to appropriate proof logic before launch" data-zh="上线前先确认活动类型和对应的证明方式匹配">Match campaign type to appropriate proof logic before launch</li>
+      <li data-en="Expose clear proof steps to creators upfront — no ambiguity about what counts" data-zh="提前告诉创作者需要提交什么证明，不能有歧义">Expose clear proof steps to creators upfront — no ambiguity about what counts</li>
+      <li data-en="Show confidence level in merchant dashboard alongside results — not just raw numbers" data-zh="商家仪表板显示结果时要附上置信度，不能只甩一堆数字">Show confidence level in merchant dashboard alongside results — not just raw numbers</li>
+      <li data-en="Separate vanity indicators from business indicators in all reporting interfaces" data-zh="所有报告界面里，虚荣指标和业务指标要分开展示">Separate vanity indicators from business indicators in all reporting interfaces</li>
+      <li data-en="Maintain audit-friendly milestone logs throughout campaign lifecycle" data-zh="整个活动过程中持续记录可查的节点日志">Maintain audit-friendly milestone logs throughout campaign lifecycle</li>
     </ul>
   </div>
 </section>
@@ -751,32 +736,32 @@ footer{
 <section class="section">
   <div class="section-inner">
     <div class="fade-in">
-      <div class="section-label" data-en="Reporting Design" data-zh="报告设计">Reporting Design</div>
-      <h2 class="section-title" data-en="What Each Side Sees" data-zh="各方看到什么">What Each Side Sees</h2>
-      <p class="section-sub" data-en="Good reporting is not neutral. It converts attribution signals into decision support — for merchants to repeat, and for creators to improve." data-zh="好的报告不是中立的。它将归因信号转化为决策支持——帮助商家做出复购决定，帮助创作者改进。">Good reporting is not neutral. It converts attribution signals into decision support — for merchants to repeat, and for creators to improve.</p>
+      <div class="section-label" data-en="Reporting Design" data-zh="报告展示设计">Reporting Design</div>
+      <h2 class="section-title" data-en="What Each Side Sees" data-zh="商家和创作者各看到什么">What Each Side Sees</h2>
+      <p class="section-sub" data-en="Good reporting is not neutral. It converts attribution signals into decision support — for merchants to repeat, and for creators to improve." data-zh="好的报告不只是把数据摆出来。它要把核验信号转化成可以指导行动的信息——帮商家决定要不要继续，帮创作者知道下次怎么做得更好。">Good reporting is not neutral. It converts attribution signals into decision support — for merchants to repeat, and for creators to improve.</p>
     </div>
     <div class="report-split fade-in">
       <div class="report-col">
-        <div class="report-col-title" data-en="Merchant Reporting" data-zh="商家报告">Merchant Reporting</div>
-        <div class="report-col-sub" data-en="REPEAT DECISION SUPPORT" data-zh="复购决策支持">REPEAT DECISION SUPPORT</div>
-        <div class="report-col-note" data-en="Avoid dashboards that flood merchants with superficial stats. Show what matters for the next booking decision." data-zh="避免用表面统计数据淹没商家的仪表板。显示下次预订决策真正重要的内容。">Avoid dashboards that flood merchants with superficial stats. Show what matters for the next booking decision.</div>
+        <div class="report-col-title" data-en="Merchant Reporting" data-zh="给商家看的报告">Merchant Reporting</div>
+        <div class="report-col-sub" data-en="REPEAT DECISION SUPPORT" data-zh="帮商家决定要不要再来">REPEAT DECISION SUPPORT</div>
+        <div class="report-col-note" data-en="Avoid dashboards that flood merchants with superficial stats. Show what matters for the next booking decision." data-zh="不要用一堆表面数字把商家淹没。只展示跟下次决策真正相关的信息。">Avoid dashboards that flood merchants with superficial stats. Show what matters for the next booking decision.</div>
         <ul class="report-list">
-          <li data-en="What was delivered by the creator" data-zh="创作者交付了什么">What was delivered by the creator</li>
-          <li data-en="What was observed on the merchant side" data-zh="商家端观察到了什么">What was observed on the merchant side</li>
-          <li data-en="How strong the result confidence is" data-zh="结果置信度有多强">How strong the result confidence is</li>
-          <li data-en="How this creator compares to others" data-zh="此创作者与其他人相比如何">How this creator compares to others</li>
-          <li data-en="Whether the campaign is worth repeating" data-zh="活动是否值得重复">Whether the campaign is worth repeating</li>
+          <li data-en="What was delivered by the creator" data-zh="创作者做了什么、交付了什么">What was delivered by the creator</li>
+          <li data-en="What was observed on the merchant side" data-zh="商家那边观察到了哪些变化">What was observed on the merchant side</li>
+          <li data-en="How strong the result confidence is" data-zh="这次结果的置信度是高是低">How strong the result confidence is</li>
+          <li data-en="How this creator compares to others" data-zh="和其他创作者相比怎么样">How this creator compares to others</li>
+          <li data-en="Whether the campaign is worth repeating" data-zh="这次活动值不值得再做">Whether the campaign is worth repeating</li>
         </ul>
       </div>
       <div class="report-col">
-        <div class="report-col-title" data-en="Creator Reporting" data-zh="创作者报告">Creator Reporting</div>
-        <div class="report-col-sub" data-en="PROGRESSION SIGNAL" data-zh="进阶信号">PROGRESSION SIGNAL</div>
-        <div class="report-col-note" data-en="Attribution converts into progression logic. Converts what was verified into what they need to unlock higher-tier work." data-zh="归因转化为进阶逻辑。将已核验的内容转化为他们解锁更高层级工作所需的条件。">Attribution converts into progression logic. Converts what was verified into what they need to unlock higher-tier work.</div>
+        <div class="report-col-title" data-en="Creator Reporting" data-zh="给创作者看的报告">Creator Reporting</div>
+        <div class="report-col-sub" data-en="PROGRESSION SIGNAL" data-zh="告诉创作者如何往上走">PROGRESSION SIGNAL</div>
+        <div class="report-col-note" data-en="Attribution converts into progression logic. Converts what was verified into what they need to unlock higher-tier work." data-zh="归因结果直接转化为升级参考：这次核验通过了什么，还差什么才能接更好的活。">Attribution converts into progression logic. Converts what was verified into what they need to unlock higher-tier work.</div>
         <ul class="report-list">
-          <li data-en="What was verified in this campaign" data-zh="此活动中核验了什么">What was verified in this campaign</li>
-          <li data-en="How their score changed as a result" data-zh="结果导致分数如何变化">How their score changed as a result</li>
-          <li data-en="Which metric category improved" data-zh="哪个指标类别提升">Which metric category improved</li>
-          <li data-en="What they need to unlock higher-tier work" data-zh="需要什么来解锁更高层级工作">What they need to unlock higher-tier work</li>
+          <li data-en="What was verified in this campaign" data-zh="这次活动核验了哪些内容">What was verified in this campaign</li>
+          <li data-en="How their score changed as a result" data-zh="分数因此有什么变化">How their score changed as a result</li>
+          <li data-en="Which metric category improved" data-zh="哪个指标方面有所提升">Which metric category improved</li>
+          <li data-en="What they need to unlock higher-tier work" data-zh="还需要做什么才能接更高级别的活">What they need to unlock higher-tier work</li>
         </ul>
       </div>
     </div>
@@ -788,11 +773,11 @@ footer{
   <div class="section-inner">
     <div class="fade-in">
       <div class="section-label" data-en="Final Standard" data-zh="最终标准" style="color:var(--accent-light);">Final Standard</div>
-      <h2 class="section-title section-title-white" data-en="The Attribution Standard" data-zh="归因标准">The Attribution Standard</h2>
-      <p class="section-sub section-sub-white" data-en="Attribution quality is the foundation of trust. Trust enables repeat behavior. Repeat behavior generates sustainable economics." data-zh="归因质量是信任的基础。信任促进重复行为。重复行为产生可持续经济。">Attribution quality is the foundation of trust. Trust enables repeat behavior. Repeat behavior generates sustainable economics.</p>
+      <h2 class="section-title section-title-white" data-en="The Attribution Standard" data-zh="归因的判断标准">The Attribution Standard</h2>
+      <p class="section-sub section-sub-white" data-en="Attribution quality is the foundation of trust. Trust enables repeat behavior. Repeat behavior generates sustainable economics." data-zh="归因做得好，商家才信得过。信得过，才愿意再来。愿意再来，才有可持续的收入。">Attribution quality is the foundation of trust. Trust enables repeat behavior. Repeat behavior generates sustainable economics.</p>
       <blockquote class="principle principle-dark" style="margin-top:32px;">
-        <span data-en="Attribution that increases trust, supports repeat buying decisions, improves creator sorting, resists manipulation, and stays honest about confidence limits. This makes Push more credible than informal creator commerce — and more valuable to every party in the transaction." data-zh="增加信任、支持复购决策、改善创作者分类、抵制操控、对置信限度保持诚实的归因。这使 Push 比非正式的创作者商务更可信——对交易中的每一方都更有价值。">Attribution that increases trust, supports repeat buying decisions, improves creator sorting, resists manipulation, and stays honest about confidence limits. This makes Push more credible than informal creator commerce — and more valuable to every party in the transaction.</span>
-        <cite data-en="PUSH — Attribution Framework Standard" data-zh="PUSH — 归因框架标准">PUSH — Attribution Framework Standard</cite>
+        <span data-en="Attribution that increases trust, supports repeat buying decisions, improves creator sorting, resists manipulation, and stays honest about confidence limits. This makes Push more credible than informal creator commerce — and more valuable to every party in the transaction." data-zh="好的归因要能增加信任、支持复购决策、帮助筛出好的创作者、抵抗数据作弊，同时对结论的可信程度保持诚实。做到这些，Push 就比私下找人合作更可信，对交易各方也都更有价值。">Attribution that increases trust, supports repeat buying decisions, improves creator sorting, resists manipulation, and stays honest about confidence limits. This makes Push more credible than informal creator commerce — and more valuable to every party in the transaction.</span>
+        <cite data-en="PUSH — Attribution Framework Standard" data-zh="PUSH — 归因标准">PUSH — Attribution Framework Standard</cite>
       </blockquote>
     </div>
   </div>
@@ -802,8 +787,8 @@ footer{
 <div style="max-width:800px; margin:40px auto; padding:24px; background:var(--bg2, #f8f9fa); border:1px solid var(--border, #e5e7eb); border-radius:12px;">
   <h3 style="font-size:16px; font-weight:700; margin-bottom:12px;" data-en="Continue Reading" data-zh="继续阅读" class="bilingual-text">Continue Reading</h3>
   <a href="project-intro.html" style="display:block; padding:16px; background:#fff; border:1px solid var(--border, #e5e7eb); border-radius:8px; text-decoration:none; transition:all 0.2s; max-width:400px;">
-    <div style="font-size:13px; color:var(--text3, #9ca3af);" data-en="Next →" data-zh="下一步 →" class="bilingual-text">Next →</div>
-    <div style="font-size:15px; font-weight:600; color:var(--text, #111827);" data-en="See how attribution feeds into the scoring system" data-zh="了解归因如何驱动评分系统" class="bilingual-text">See how attribution feeds into the scoring system</div>
+    <div style="font-size:13px; color:var(--text3, #9ca3af);" data-en="Next →" data-zh="下一篇 →" class="bilingual-text">Next →</div>
+    <div style="font-size:15px; font-weight:600; color:var(--text, #111827);" data-en="See how attribution feeds into the scoring system" data-zh="看归因结果怎么接入评分系统" class="bilingual-text">See how attribution feeds into the scoring system</div>
     <div style="font-size:13px; color:var(--accent, #4f46e5); margin-top:4px;" data-en="Project Introduction →" data-zh="项目介绍 →" class="bilingual-text">Project Introduction →</div>
   </a>
 </div>
@@ -812,7 +797,7 @@ footer{
 <footer>
   <div class="footer-inner">
     <div class="footer-logo">PUSH</div>
-    <div class="footer-tagline" data-en="Local creator performance infrastructure" data-zh="本地创作者效果基础设施">Local creator performance infrastructure</div>
+    <div class="footer-tagline" data-en="Local creator performance infrastructure" data-zh="本地创作者效果平台">Local creator performance infrastructure</div>
     <ul class="footer-links">
       <li><a href="index.html" data-en="Overview" data-zh="首页">Overview</a></li>
       <li><a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a></li>
@@ -823,12 +808,12 @@ footer{
       <li><a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a></li>
       <li><a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a></li>
       <li><a href="push-strategy-core.html" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a></li>
-      <li><a href="economics.html" data-en="Economics" data-zh="经济模型">Economics</a></li>
-      <li><a href="attribution.html" data-en="Attribution" data-zh="归因体系">Attribution</a></li>
+      <li><a href="economics.html" data-en="Economics" data-zh="收费与收入">Economics</a></li>
+      <li><a href="attribution.html" data-en="Attribution" data-zh="归因系统">Attribution</a></li>
     </ul>
     <div class="footer-copy">© 2026 PUSH. Internal strategy documentation.</div>
     <div style="margin-top:16px; font-size:13px;">
-      <span data-en="You might also want: " data-zh="你可能还想看：" class="bilingual-text">You might also want: </span>
+      <span data-en="You might also want: " data-zh="相关阅读：" class="bilingual-text">You might also want: </span>
       <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍" class="bilingual-text">Project Intro</a> ·
       <a href="metrics-dashboard.html" data-en="Metrics Dashboard" data-zh="指标看板" class="bilingual-text">Metrics Dashboard</a> ·
       <a href="index.html" data-en="🏠 Dashboard" data-zh="🏠 首页" class="bilingual-text">🏠 Dashboard</a>

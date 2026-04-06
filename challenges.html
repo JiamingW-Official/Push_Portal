@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Push — 本地创作者效果基础设施">
+<meta name="description" content="Push — 本地商家靠创作者拉客的标准流程">
 <meta property="og:title" content="PUSH">
 <meta property="og:description" content="Push 让每次创作者合作都可以量化、追踪、复购。">
 <meta property="og:type" content="website">
@@ -38,34 +38,22 @@
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg2); color: var(--text); line-height: 1.75; font-size: 15px; }
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.85;}
 a { color: var(--accent); text-decoration: none; }
 a:hover { color: var(--accent-light); text-decoration: none; }
 
 /* NAV */
-.topnav, nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
-  display: flex; align-items: center;
-  padding: 0 24px; height: 60px; gap: 8px;
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;
+  background:rgba(255,255,255,0.95);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);transition:box-shadow 0.2s;
 }
-.logo, .nav-logo {
-  font-weight: 900; font-size: 22px; color: var(--accent);
-  letter-spacing: 2px; text-decoration: none; flex-shrink: 0;
-  margin-right: 16px;
-}
-.navlinks, .nav-links {
-  display: flex; gap: 2px; flex-wrap: wrap; flex: 1;
-}
-.navlinks a, .nav-links a {
-  padding: 5px 12px; border-radius: 8px; font-size: 12px; font-weight: 500;
-  color: var(--text2); transition: all 0.2s; text-decoration: none;
-  white-space: nowrap;
-}
-.navlinks a:hover, .nav-links a:hover { color: var(--text); background: var(--bg2); }
-.navlinks a.active, .nav-links a.active { color: var(--accent); background: var(--accent-bg); font-weight: 700; }
+.nav-logo{font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;margin-right:8px;flex-shrink:0;text-decoration:none;}
+.nav-links{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
+.nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:all 0.15s;white-space:nowrap;text-decoration:none;}
+.nav-links a:hover{color:var(--accent);background:var(--accent-bg);}
+.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);}
 #lang-btn {
   background: var(--accent); color: #fff; border: none;
   padding: 7px 16px; border-radius: 8px; font-size: 12px; font-weight: 700;
@@ -248,9 +236,8 @@ a:hover { color: var(--accent-light); text-decoration: none; }
 }
 
 /* SCROLL ANIMATIONS */
-.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; animation: fadeInFallback 0s 4s forwards; }
-.fade-in.visible { opacity: 1; transform: translateY(0); animation: none; }
-@keyframes fadeInFallback { to { opacity: 1; transform: translateY(0); } }
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.55s ease,transform 0.55s ease;}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
 
 /* LANG VISIBILITY */
 body.lang-en .col-zh, body.lang-en .lang-tag { display: none; }
@@ -273,7 +260,7 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
 .nav-mobile-panel .mobile-lang-row{display:flex;align-items:center;padding:12px 16px 4px;gap:12px;border-top:1px solid var(--border,#e5e7eb);margin-top:8px;}
 .nav-mobile-panel .mobile-lang-label{font-size:12px;color:var(--text3,#9ca3af);font-weight:500;}
 @media(max-width:768px){
-  .nav-links,.navlinks{display:none !important;}
+  .nav-links{display:none !important;}
   .nav-burger{display:flex !important;}
   #lang-btn{font-size:12px;padding:6px 12px;}
 }
@@ -282,9 +269,9 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
 <body>
 
 <!-- NAV -->
-<nav class="topnav">
-  <a href="index.html" class="logo">PUSH</a>
-  <div class="navlinks">
+<nav>
+  <a href="index.html" class="nav-logo">PUSH</a>
+  <div class="nav-links">
     <a href="index.html" data-en="Overview" data-zh="首页">Overview</a>
     <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
     <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
@@ -319,7 +306,7 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
 <!-- HERO -->
 <div class="hero">
   <h1 data-en="Why These Problems Are Hard" data-zh="这些问题为什么难解">Why These Problems Are Hard</h1>
-  <p data-en="Understanding the structural reasons behind each challenge — not just what they are, but why they resist simple solutions." data-zh="理解每个挑战背后的结构性原因——不只是问题是什么，而是为什么它们抗拒简单的解法。">Understanding the structural reasons behind each challenge — not just what they are, but why they resist simple solutions.</p>
+  <p data-en="Understanding the structural reasons behind each challenge — not just what they are, but why they resist simple solutions." data-zh="看看每个挑战背后为什么难搞——不只是说问题是什么，而是为什么没有简单解法。">Understanding the structural reasons behind each challenge — not just what they are, but why they resist simple solutions.</p>
 
   <div class="legend">
     <div class="legend-item"><div class="legend-dot critical"></div><span data-en="Existential" data-zh="生死攸关">Existential</span></div>
@@ -396,7 +383,7 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
           <div class="lang-tag">中文</div>
           <div class="desc-text">商家和创作者在首次联系后绕过平台直接合作。这是所有撮合平台的核心威胁——一旦双方建立联系，平台就可能被架空。</div>
           <div class="defense-label critical">应对策略</div>
-          <div class="defense-text">信用积累、重复合作自动化、新机会可见性、快速结算、候补机制、商户活动历史和可信的争议解决——让平台内价值持续复利增长。</div>
+          <div class="defense-text">在平台里积累信用、自动化重复合作、让新机会持续可见、快速打款、候补机制、保留活动历史、有靠谱的争议处理——让离开平台的成本越来越高。</div>
         </div>
         <div class="col-en">
           <div class="lang-tag">English</div>
@@ -448,7 +435,7 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
           <div class="lang-tag">中文</div>
           <div class="desc-text">创作者冲着免费福利而来，拿完即走。如果平台沦为"薅羊毛"工具，创作者质量将持续下降，形成恶性循环。</div>
           <div class="defense-label critical">应对策略</div>
-          <div class="defense-text">建立成长体系、清晰的收益阶梯、减少对免费福利的依赖、候补机制、高价值解锁和平台专属声誉资本。</div>
+          <div class="defense-text">设计清晰的成长路径和收益阶梯、减少平台对免费福利的依赖、候补机制、高价值任务解锁、在平台上积累的口碑只在这里有效。</div>
         </div>
         <div class="col-en">
           <div class="lang-tag">English</div>
@@ -472,9 +459,9 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
       <div class="bilingual">
         <div class="col-zh">
           <div class="lang-tag">中文</div>
-          <div class="desc-text">无法证明推广活动的实际效果。如果商家看不到明确的因果关系，就不会持续投入——这直接威胁商业模式的可持续性。</div>
+          <div class="desc-text">没法证明投放真的起了作用。商家看不到因果关系就不会继续掏钱——这是整个生意能不能持续跑的关键。</div>
           <div class="defense-label critical">应对策略</div>
-          <div class="defense-text">多层验证体系、专属优惠码、签到打卡证明、商家二次确认，构建完整的效果追踪链。</div>
+          <div class="defense-text">多重验证：专属优惠码、打卡签到截图、商家二次确认——每一步都留证据，让效果有据可查。</div>
         </div>
         <div class="col-en">
           <div class="lang-tag">English</div>
@@ -533,9 +520,9 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
       <div class="bilingual">
         <div class="col-zh">
           <div class="lang-tag">中文</div>
-          <div class="desc-text">功能容易被复制，平台陷入同质化竞争。当竞争对手提供类似服务时，价格战不可避免。</div>
+          <div class="desc-text">功能很容易被抄，平台容易陷入价格战。竞争对手一旦做出类似产品，靠功能差异很难撑住。</div>
           <div class="defense-label high">应对策略</div>
-          <div class="defense-text">积累专有数据资产、打造工作流优势，形成难以复制的壁垒。</div>
+          <div class="defense-text">靠数据积累和工作流深度来建壁垒——这些东西抄不走。</div>
         </div>
         <div class="col-en">
           <div class="lang-tag">English</div>
@@ -559,9 +546,9 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
       <div class="bilingual">
         <div class="col-zh">
           <div class="lang-tag">中文</div>
-          <div class="desc-text">试图跨太多品类或社区同时启动。密度不足导致用户体验差、转化率低，无法形成有效的供需匹配。</div>
+          <div class="desc-text">一开始就想覆盖太多品类和社区。密度不够的话，供需根本匹配不上，体验差、转化低，哪头都做不好。</div>
           <div class="defense-label high">应对策略</div>
-          <div class="defense-text">聚焦单个密集区域、一到两个强势垂直品类，创始人亲自管理供需两端。</div>
+          <div class="defense-text">死守一个密集社区、一两个强势品类，创始人亲自把供需两头都管住再说扩张。</div>
         </div>
         <div class="col-en">
           <div class="lang-tag">English</div>
@@ -587,7 +574,7 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
           <div class="lang-tag">中文</div>
           <div class="desc-text">低质量创作者抢占优质机会，劣币驱逐良币。如果好机会总被不靠谱的人抢走，优质创作者将离开平台。</div>
           <div class="defense-label high">应对策略</div>
-          <div class="defense-text">根据履约质量、平台历史、可靠性和表现进阶设置准入门槛，优质机会优先匹配高分创作者。</div>
+          <div class="defense-text">好机会设门槛：履约记录、平台历史、可靠性分数够了才能抢——高分创作者优先拿优质任务。</div>
         </div>
         <div class="col-en">
           <div class="lang-tag">English</div>
@@ -620,9 +607,9 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
       <div class="bilingual">
         <div class="col-zh">
           <div class="lang-tag">中文</div>
-          <div class="desc-text">审批流程瓶颈、结算延迟、客服工单爆炸。随着规模增长，人工处理环节成为严重卡点，影响用户体验。</div>
+          <div class="desc-text">审批卡着、结算拖着、客服票爆了。规模一大，所有要人工处理的环节都会成为瓶颈，用户直接感受到慢。</div>
           <div class="defense-label medium">应对策略</div>
-          <div class="defense-text">流程自动化、分级审批、智能客服分流，减少人工依赖。</div>
+          <div class="defense-text">把审批、结算、分流都自动化，只留真正需要判断的事情给人处理。</div>
         </div>
         <div class="col-en">
           <div class="lang-tag">English</div>
@@ -646,9 +633,9 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
       <div class="bilingual">
         <div class="col-zh">
           <div class="lang-tag">中文</div>
-          <div class="desc-text">早期依赖大量手动操作（匹配、审核、沟通），但这些无法线性扩展。团队人数不可能与业务同比增长。</div>
+          <div class="desc-text">早期靠人工撑（匹配、审核、沟通），但人力不可能跟着业务一起线性增长，迟早会撑不住。</div>
           <div class="defense-label medium">应对策略</div>
-          <div class="defense-text">识别可自动化环节并优先投入，保留人工仅用于高价值决策点。</div>
+          <div class="defense-text">找出哪些环节能自动化，先投这里；人工只留给真正需要判断的决策点。</div>
         </div>
         <div class="col-en">
           <div class="lang-tag">English</div>
@@ -672,9 +659,9 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
       <div class="bilingual">
         <div class="col-zh">
           <div class="lang-tag">中文</div>
-          <div class="desc-text">快速增长过程中维持服务质量。规模扩大往往伴随着标准下降、匹配精度降低、用户满意度下滑。</div>
+          <div class="desc-text">规模一跑起来，质量就容易掉。匹配越来越随便，标准越来越松，用户满意度跌了都不知道。</div>
           <div class="defense-label medium">应对策略</div>
-          <div class="defense-text">建立质量指标监控、设置增长节奏控制、在关键节点保留质量门槛。</div>
+          <div class="defense-text">盯质量指标、控增长节奏，在关键节点设质量门槛，不让业务跑得比质量快太多。</div>
         </div>
         <div class="col-en">
           <div class="lang-tag">English</div>
