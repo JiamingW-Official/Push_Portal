@@ -491,6 +491,87 @@ nav{
   .deco-number{font-size:80px;}
   .section{padding:72px 20px;}
 }
+
+/* Nav scroll shadow */
+nav, .topnav { transition: box-shadow 0.2s; }
+nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
+
+/* Section label with accent line */
+.section-label, .section-num {
+  display: flex; align-items: center; gap: 10px;
+}
+.section-label::before {
+  content: ''; display: block;
+  width: 20px; height: 2px; background: currentColor; flex-shrink: 0;
+  opacity: 0.7;
+}
+
+/* Better card hover everywhere */
+.card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(0,0,0,0.09); }
+
+/* Back to top button */
+#back-top {
+  position: fixed; bottom: 32px; right: 32px; z-index: 500;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: #0f0f1a; color: #fff; border: none;
+  font-size: 18px; font-weight: 700; cursor: pointer;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s, background 0.15s;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+#back-top.visible { opacity: 1; pointer-events: auto; }
+#back-top:hover { background: #4f46e5; transform: translateY(-2px); }
+
+/* Fade-in with slide */
+.fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* Layer bar hover */
+.layer, .layer-bar {
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: default;
+}
+.layer:hover, .layer-bar:hover {
+  transform: translateX(6px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+/* Mechanism cards — dramatic hover */
+.mechanism-card, .mech-card {
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+.mechanism-card:hover, .mech-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.09);
+  border-color: rgba(79,70,229,0.3);
+}
+
+/* Warning cards — red glow on hover */
+.warning-card, .warn-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.warning-card:hover, .warn-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(220,38,38,0.12);
+}
+
+/* Flywheel steps hover */
+.flywheel-step, .fw-step {
+  transition: all 0.15s;
+}
+.flywheel-step:hover, .fw-step:hover {
+  background: var(--accent); color: #fff;
+  border-color: var(--accent); transform: scale(1.04);
+}
+
+/* Loss items — red hover */
+.loss-item {
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.loss-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(220,38,38,0.15);
+}
 </style>
 </head>
 <body>
@@ -921,6 +1002,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Apply immediately too
 applyLang(currentLang);
+
+// Nav scroll shadow
+(function() {
+  const nav = document.querySelector('nav, .topnav');
+  if (nav) window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
+})();
+
+// Back to top
+(function() {
+  const btn = document.getElementById('back-top');
+  if (btn) {
+    window.addEventListener('scroll', () => btn.classList.toggle('visible', window.scrollY > 400), { passive: true });
+    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  }
+})();
+
+// Staggered fade-in
+(function() {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.transitionDelay = e.target.dataset.delay || '0s';
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+})();
 </script>
+<button id="back-top" aria-label="Back to top">↑</button>
 </body>
 </html>
