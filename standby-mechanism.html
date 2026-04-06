@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Push Standby 机制：基于 tier、位置、表现和时效性的实时补位系统，提高商家执行成功率、博主参与度和平台流动性。">
+<meta property="og:title" content="PUSH — Standby Mechanism">
+<meta property="og:description" content="Push 的 Standby 不是候补名单，而是实时补位引擎。">
+<meta property="og:type" content="website">
+<title>PUSH — Standby Mechanism: Real-Time Slot Routing Engine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" as="style">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script>(function(){if(localStorage.getItem("push-lang")==="zh")document.documentElement.style.opacity="0";})()</script>
+<style>
+:root {
+  --accent: #4f46e5;
+  --accent-light: #818cf8;
+  --accent-dark: #3730a3;
+  --accent-bg: rgba(79,70,229,0.06);
+  --primary: #0f0f1a;
+  --green: #059669;
+  --green-bg: rgba(5,150,105,0.08);
+  --orange: #d97706;
+  --orange-bg: rgba(217,119,6,0.08);
+  --red: #dc2626;
+  --red-bg: rgba(220,38,38,0.08);
+  --text: #111827;
+  --text2: #4b5563;
+  --text3: #9ca3af;
+  --border: #e5e7eb;
+  --bg: #ffffff;
+  --bg2: #f8f9fa;
+  --radius: 8px;
+  --shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.75;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;word-break:break-word;}
+html[lang="zh"] body{line-height:2.0;letter-spacing:0.01em;}
+html[lang="zh"] .hero h1{line-height:1.25;}
+html[lang="zh"] .section-title{line-height:1.5;}
+strong{font-weight:700;color:var(--text);}
+.hero strong{color:inherit;}
+p{max-width:680px;}
+a{color:var(--accent);text-decoration:none;transition:color 0.15s;}
+a:hover{color:var(--accent-light);}
+.nav-logo,.nav-logo:hover{color:var(--accent);}
+
+/* Scroll progress */
+.scroll-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-light));z-index:300;width:0;pointer-events:none;box-shadow:0 0 8px rgba(79,70,229,0.4);}
+
+/* Nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;background:#ffffff;border-bottom:1px solid var(--border);transition:box-shadow 0.2s;}
+nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
+.nav-logo{font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;margin-right:8px;flex-shrink:0;text-decoration:none;}
+.nav-links{display:flex;gap:6px;flex-wrap:wrap;flex:1;}
+.nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:color 0.15s,background-color 0.15s;white-space:nowrap;text-decoration:none;}
+.nav-links a:hover{color:var(--accent);}
+.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);position:relative;}
+.nav-links a.active::after{content:'';position:absolute;bottom:0;left:12px;right:12px;height:2px;background:var(--accent);border-radius:1px;}
+#lang-btn{flex-shrink:0;background:var(--accent);color:#fff;font-weight:700;font-size:13px;padding:7px 18px;border-radius:8px;border:none;cursor:pointer;transition:background 0.15s;}
+#lang-btn:hover{background:var(--accent-dark);}
+
+/* Fade-in */
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.45s ease,transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94);will-change:opacity,transform;animation:fadeInFallback 0s 4s forwards;}
+.fade-in.visible,.visible .fade-in{opacity:1;transform:none;animation:none;}
+@keyframes fadeInFallback{to{opacity:1;transform:translateY(0);}}
+
+/* Hero */
+.hero{background:#0f0f1a;padding:140px 64px 80px;display:flex;align-items:center;}
+.hero-inner{max-width:1000px;width:100%;margin:0 auto;}
+.hero-label{font-size:13px;font-weight:600;letter-spacing:0.5px;color:var(--accent-light);margin-bottom:28px;display:flex;align-items:center;gap:10px;}
+.hero-label::before{content:'';display:block;width:20px;height:2px;background:var(--accent-light);flex-shrink:0;}
+.hero h1{font-size:clamp(3rem,5.5vw,4.5rem);font-weight:800;letter-spacing:-2.5px;color:#fff;line-height:1.1;margin-bottom:0;max-width:800px;}
+.hero h1 .accent-line{color:var(--accent-light);display:block;margin-top:16px;}
+.hero-sub{font-size:16px;color:rgba(255,255,255,0.55);line-height:1.65;margin-top:24px;max-width:640px;}
+
+/* Section wrappers */
+.sw-white{background:var(--bg);}
+.sw-gray{background:var(--bg);border-top:1px solid var(--border);}
+.sw-gray + .sw-white{border-top:1px solid var(--border);}
+.sw-white + .sw-white{border-top:1px solid var(--border);}
+.sw-dark{background:var(--primary);}
+.section{padding:80px 64px;max-width:1000px;margin:0 auto;}
+
+.section-label{font-size:13px;font-weight:600;letter-spacing:0.5px;color:var(--accent);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.section-label::before{content:'';display:block;width:20px;height:2px;background:var(--accent);flex-shrink:0;}
+.section-label-dark{color:var(--accent-light);}
+.section-label-dark::before{background:var(--accent-light);}
+.section-title{font-size:clamp(26px,3.5vw,36px);font-weight:800;letter-spacing:-0.5px;color:var(--primary);margin-bottom:16px;line-height:1.4;}
+.section-title-white{color:#fff;}
+.section-sub{font-size:16px;color:var(--text2);line-height:1.65;max-width:640px;}
+.section-sub-dark{color:rgba(255,255,255,0.5);}
+
+/* Cards */
+.card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px;}
+.card-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:40px;}
+.card{border-radius:var(--radius);padding:32px;border:1px solid var(--border);background:#fff;display:flex;flex-direction:column;gap:12px;transition:border-color 0.25s ease,box-shadow 0.25s ease,transform 0.25s ease;}
+.card:hover{border-color:var(--accent-light);box-shadow:0 4px 20px rgba(79,70,229,0.1);transform:translateY(-2px);}
+.card-icon{font-size:28px;margin-bottom:4px;}
+.card-title{font-size:17px;font-weight:800;color:var(--text);}
+.card-body{font-size:14px;color:var(--text2);line-height:1.75;flex:1;}
+
+/* Scenario cards */
+.scenario{border-radius:var(--radius);padding:28px 32px;border:1px solid var(--border);background:#fff;margin-bottom:16px;transition:border-color 0.2s,box-shadow 0.2s;}
+.scenario:hover{border-color:var(--accent-light);box-shadow:0 2px 12px rgba(0,0,0,0.08);}
+.scenario-label{font-size:11px;font-weight:700;letter-spacing:0.8px;color:var(--accent);margin-bottom:8px;}
+.scenario-title{font-size:16px;font-weight:800;color:var(--text);margin-bottom:8px;}
+.scenario-body{font-size:14px;color:var(--text2);line-height:1.75;}
+.scenario-compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px;}
+.scenario-no{padding:14px 18px;border-radius:var(--radius);background:var(--red-bg);border:1px solid rgba(220,38,38,0.12);}
+.scenario-yes{padding:14px 18px;border-radius:var(--radius);background:var(--green-bg);border:1px solid rgba(5,150,105,0.12);}
+.scenario-no .sc-label{font-size:11px;font-weight:700;color:var(--red);margin-bottom:4px;}
+.scenario-yes .sc-label{font-size:11px;font-weight:700;color:var(--green);margin-bottom:4px;}
+.scenario-no .sc-text,.scenario-yes .sc-text{font-size:13px;color:var(--text2);line-height:1.6;}
+
+/* Priority table */
+.priority-table{width:100%;border-collapse:collapse;margin-top:32px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);}
+.priority-table th{background:var(--primary);color:#fff;font-size:12px;font-weight:700;letter-spacing:0.5px;text-align:left;padding:14px 20px;}
+.priority-table td{padding:12px 20px;border-top:1px solid var(--border);font-size:14px;color:var(--text2);line-height:1.6;}
+.priority-table tr:hover td{background:var(--accent-bg);}
+.priority-table .factor-name{font-weight:700;color:var(--text);}
+
+/* Trigger pills */
+.trigger-grid{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;}
+.trigger-pill{padding:10px 20px;border-radius:100px;background:var(--accent-bg);border:1px solid rgba(79,70,229,0.15);font-size:13px;font-weight:600;color:var(--accent);transition:background 0.2s,transform 0.2s;}
+.trigger-pill:hover{background:rgba(79,70,229,0.12);transform:translateY(-1px);}
+
+/* Benefit sections */
+.benefit-header{display:flex;align-items:center;gap:12px;margin-bottom:24px;}
+.benefit-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+.benefit-icon-merchant{background:var(--green-bg);border:1px solid rgba(5,150,105,0.15);}
+.benefit-icon-creator{background:var(--accent-bg);border:1px solid rgba(79,70,229,0.15);}
+.benefit-icon-platform{background:var(--orange-bg);border:1px solid rgba(217,119,6,0.15);}
+.benefit-role{font-size:11px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;}
+.benefit-role-merchant{color:var(--green);}
+.benefit-role-creator{color:var(--accent);}
+.benefit-role-platform{color:var(--orange);}
+
+/* Highlight callout */
+.callout{padding:28px 32px;border-radius:var(--radius);margin-top:32px;font-size:16px;font-weight:700;line-height:1.6;}
+.callout-accent{background:var(--accent-bg);border:1px solid rgba(79,70,229,0.2);color:var(--accent);}
+.callout-dark{background:var(--primary);border:1px solid rgba(255,255,255,0.1);color:#fff;}
+.callout-green{background:var(--green-bg);border:1px solid rgba(5,150,105,0.15);color:var(--green);}
+.callout-red{background:var(--red-bg);border:1px solid rgba(220,38,38,0.15);color:var(--red);}
+
+/* Comparison grid */
+.vs-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:32px;}
+.vs-card{border-radius:var(--radius);padding:28px;border:1px solid var(--border);}
+.vs-card-old{background:#fff8f8;border-color:rgba(220,38,38,0.15);}
+.vs-card-new{background:#f0fdf4;border-color:rgba(5,150,105,0.15);}
+.vs-card-label{font-size:12px;font-weight:700;margin-bottom:12px;}
+.vs-card-old .vs-card-label{color:var(--red);}
+.vs-card-new .vs-card-label{color:var(--green);}
+.vs-card ul{list-style:none;padding:0;}
+.vs-card li{font-size:14px;color:var(--text2);line-height:1.75;padding:6px 0;border-bottom:1px solid rgba(0,0,0,0.04);}
+.vs-card li:last-child{border-bottom:none;}
+
+/* Deck versions */
+.deck-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:32px;}
+.deck-card{border-radius:var(--radius);padding:24px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);transition:background 0.2s;}
+.deck-card:hover{background:rgba(255,255,255,0.1);}
+.deck-card-label{font-size:11px;font-weight:700;letter-spacing:0.5px;color:var(--accent-light);margin-bottom:10px;}
+.deck-card-text{font-size:15px;font-weight:600;color:#fff;line-height:1.6;}
+
+/* Tier priority visual */
+.tier-priority{display:flex;flex-direction:column;gap:8px;margin-top:24px;}
+.tier-row{display:grid;grid-template-columns:16px 80px 1fr auto;align-items:center;gap:12px;padding:14px 20px;border-radius:var(--radius);border:1px solid var(--border);background:#fff;transition:transform 0.2s;}
+.tier-row:hover{transform:translateX(4px);}
+.tier-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
+.tier-name{font-size:14px;font-weight:700;color:var(--text);}
+.tier-access{font-size:13px;color:var(--text2);}
+.tier-bar{height:6px;border-radius:3px;min-width:60px;}
+
+/* Back to top */
+#back-top{position:fixed;bottom:32px;right:32px;z-index:500;width:44px;height:44px;border-radius:50%;background:var(--primary);color:#fff;border:none;font-size:18px;font-weight:700;cursor:pointer;opacity:0;pointer-events:none;transition:opacity 0.3s ease,transform 0.25s ease,background 0.25s ease;box-shadow:0 4px 16px rgba(0,0,0,0.2);display:flex;align-items:center;justify-content:center;}
+#back-top.visible{opacity:1;pointer-events:auto;}
+#back-top:hover{background:var(--accent);transform:translateY(-3px);box-shadow:0 6px 20px rgba(79,70,229,0.35);}
+
+/* Footer */
+footer{background:#0f0f1a;padding:48px 64px 32px;border-top:1px solid var(--border);font-size:13px;color:var(--text3);}
+.footer-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 2fr 1fr;gap:32px;align-items:start;}
+.footer-brand .f-logo{font-size:24px;font-weight:900;color:var(--accent);letter-spacing:2px;margin-bottom:8px;}
+.footer-brand .f-tagline{font-size:13px;color:rgba(255,255,255,0.4);}
+.footer-links{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
+.footer-link{color:rgba(255,255,255,0.4);font-size:13px;text-decoration:none;transition:color 0.2s ease;}
+.footer-link:hover{color:#fff;}
+.footer-copy{text-align:right;font-size:12px;color:rgba(255,255,255,0.3);line-height:1.8;align-self:center;}
+
+/* Mobile */
+@media(max-width:768px){
+  .nav-links{display:none !important;}
+  .nav-burger{display:flex !important;}
+  .hero{padding:120px 20px 80px;}
+  .hero h1{font-size:clamp(2rem,7vw,3rem);letter-spacing:-1.5px;line-height:1.2;}
+  html[lang="zh"] .hero h1{line-height:1.35;}
+  .section{padding:48px 20px;}
+  .section-title{font-size:28px;max-width:90vw;}
+  .card-grid,.card-grid-2,.vs-grid,.deck-grid{grid-template-columns:1fr;}
+  .scenario-compare{grid-template-columns:1fr;}
+  .footer-inner{grid-template-columns:1fr;text-align:center;}
+  .footer-links{justify-content:center;}
+  .footer-copy{text-align:center;}
+  #back-top{bottom:20px;right:16px;width:40px;height:40px;font-size:16px;}
+  .priority-table{font-size:13px;}
+  .priority-table th,.priority-table td{padding:10px 12px;}
+  .trigger-grid{gap:8px;}
+  .trigger-pill{font-size:12px;padding:8px 14px;}
+}
+/* Hamburger */
+.nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;flex-shrink:0;margin-left:4px;}
+.nav-burger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:transform 0.2s,opacity 0.2s;}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-burger.open span:nth-child(2){opacity:0;}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.nav-mobile-panel{display:none;position:fixed;top:60px;left:0;right:0;background:#ffffff;border-bottom:1px solid var(--border);padding:12px 16px 20px;flex-direction:column;gap:2px;z-index:999;box-shadow:0 8px 32px rgba(0,0,0,0.12);}
+.nav-mobile-panel.open{display:flex;}
+.nav-mobile-panel a{padding:12px 16px;border-radius:8px;font-size:15px;font-weight:500;color:var(--text);text-decoration:none;transition:background 0.15s,color 0.15s;}
+.nav-mobile-panel a:hover{background:var(--bg2);}
+.nav-mobile-panel a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;}
+.nav-mobile-panel .mobile-lang-row{display:flex;align-items:center;padding:12px 16px 4px;gap:12px;border-top:1px solid var(--border);margin-top:8px;}
+.nav-mobile-panel .mobile-lang-label{font-size:12px;color:var(--text3);font-weight:500;}
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scroll-progress"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">PUSH</a>
+  <div class="nav-links">
+    <a href="index.html" data-en="Overview" data-zh="首页">Overview</a>
+    <a href="project-intro.html" data-en="Product" data-zh="产品介绍">Product</a>
+    <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
+    <a href="investor-qa.html" data-en="Investor Q&amp;A" data-zh="投资人问答">Investor Q&amp;A</a>
+    <a href="challenges.html" data-en="Challenges" data-zh="挑战分析">Challenges</a>
+    <a href="risk-defense.html" data-en="Defense" data-zh="风险防御">Defense</a>
+    <a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a>
+    <a href="push-strategy-core.html" data-en="Strategy" data-zh="战略核心">Strategy</a>
+  </div>
+  <button id="lang-btn" onclick="toggleLang()">中 / EN</button>
+  <button class="nav-burger" id="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-mobile-panel" id="nav-mobile-panel">
+  <a href="index.html" data-en="Overview" data-zh="首页">Overview</a>
+  <a href="project-intro.html" data-en="Product" data-zh="产品介绍">Product</a>
+  <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
+  <a href="investor-qa.html" data-en="Investor Q&amp;A" data-zh="投资人问答">Investor Q&amp;A</a>
+  <a href="challenges.html" data-en="Challenges" data-zh="挑战分析">Challenges</a>
+  <a href="risk-defense.html" data-en="Defense" data-zh="风险防御">Defense</a>
+  <a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a>
+  <a href="push-strategy-core.html" data-en="Strategy" data-zh="战略核心">Strategy</a>
+  <div class="mobile-lang-row">
+    <span class="mobile-lang-label">Language</span>
+    <button id="lang-btn-mobile" onclick="toggleLang()" style="background:var(--accent);color:#fff;border:none;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">中 / EN</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-label fade-in" data-en="CORE MECHANISM" data-zh="核心机制">CORE MECHANISM</div>
+    <h1 class="fade-in">
+      <span data-en="Standby is not a waitlist." data-zh="Standby 不是候补名单。">Standby is not a waitlist.</span>
+      <span class="accent-line" data-en="It's Push's <strong>real-time slot routing engine</strong>." data-zh="它是 Push 的<strong>实时补位引擎</strong>。">It's Push's <strong>real-time slot routing engine</strong>.</span>
+    </h1>
+    <p class="hero-sub fade-in" data-en="Standby routes time-sensitive local demand to qualified creators in real time. It increases merchant fill rate, creator engagement, and platform liquidity &mdash; the mechanism that turns Push from an information board into a living market." data-zh="Standby 把有时效性的本地需求，实时路由给最合适的博主。它同时提高商家的执行成功率、博主的参与度和平台的流动性——是 Push 从信息展示变成动态市场的关键机制。">Standby routes time-sensitive local demand to qualified creators in real time. It increases merchant fill rate, creator engagement, and platform liquidity &mdash; the mechanism that turns Push from an information board into a living market.</p>
+  </div>
+</section>
+
+<!-- S1: WHAT IS STANDBY -->
+<div class="sw-white">
+  <div class="section fade-in">
+    <div class="section-label" data-en="DEFINITION" data-zh="定义">DEFINITION</div>
+    <h2 class="section-title" data-en="What Standby actually is." data-zh="Standby 到底是什么。">What Standby actually is.</h2>
+    <p class="section-sub" data-en="When a campaign has open slots, a creator drops out, or a merchant adds last-minute capacity &mdash; qualified creators in the standby pool get prioritized access to fill the gap." data-zh="当一个活动还有空位、有人临时退出、或者商家临时追加名额时，符合条件的博主可以进入候补池，并按优先级获得补位机会。">When a campaign has open slots, a creator drops out, or a merchant adds last-minute capacity &mdash; qualified creators in the standby pool get prioritized access to fill the gap.</p>
+
+    <div class="callout callout-accent" style="margin-top:32px;" data-en="Standby transforms <strong>uncertainty</strong> into <strong>dispatchable opportunity</strong>." data-zh="Standby 把「不确定性」转化为「可调度的机会」。">Standby transforms <strong>uncertainty</strong> into <strong>dispatchable opportunity</strong>.</div>
+
+    <p style="margin-top:32px;font-size:15px;color:var(--text2);line-height:1.75;" data-en="Local creator campaigns have inherent volatility: merchants can't always fill every slot perfectly, creators can't always apply at the right time, people cancel, no-show, or underperform. Without standby, every gap becomes a lost opportunity, slower execution, merchant distrust, and creator idleness." data-zh="本地博主活动天然有波动性：商家不可能每次都招满合适的人，博主不可能每次都恰好在正确时间申请，有人会取消、迟到、失联、做不到。如果没有 Standby，这些空位就会变成流失的机会、拖慢的执行、商家的不信任和博主的闲置。">Local creator campaigns have inherent volatility: merchants can't always fill every slot perfectly, creators can't always apply at the right time, people cancel, no-show, or underperform. Without standby, every gap becomes a lost opportunity, slower execution, merchant distrust, and creator idleness.</p>
+  </div>
+</div>
+
+<!-- S2: WHY PUSH NEEDS STANDBY -->
+<div class="sw-gray">
+  <div class="section fade-in">
+    <div class="section-label" data-en="WHY IT MATTERS" data-zh="为什么必须有">WHY IT MATTERS</div>
+    <h2 class="section-title" data-en="Push is a real-time supply-demand system. Standby is what makes it work." data-zh="Push 是一个实时供需系统。Standby 是让它跑起来的关键。">Push is a real-time supply-demand system. Standby is what makes it work.</h2>
+    <p class="section-sub" data-en="Every campaign has a time window, a location, a slot count, and a specific goal. This creates natural liquidity problems that standby solves." data-zh="每个活动都有时间窗口、地点、名额和具体目标。这种系统天然会遇到流动性问题，Standby 就是解法。">Every campaign has a time window, a location, a slot count, and a specific goal. This creates natural liquidity problems that standby solves.</p>
+
+    <!-- Scenario 1 -->
+    <div class="scenario fade-in" style="margin-top:40px;">
+      <div class="scenario-label" data-en="SCENARIO 1" data-zh="场景一">SCENARIO 1</div>
+      <div class="scenario-title" data-en="Creator drops out last-minute" data-zh="博主临时放鸽子">Creator drops out last-minute</div>
+      <div class="scenario-body" data-en="A cafe campaign has 5 creators. One cancels 12 hours before the deadline." data-zh="一个咖啡馆活动有 5 个博主，其中 1 个在截止前 12 小时突然取消。">A cafe campaign has 5 creators. One cancels 12 hours before the deadline.</div>
+      <div class="scenario-compare">
+        <div class="scenario-no">
+          <div class="sc-label" data-en="WITHOUT STANDBY" data-zh="没有 Standby">WITHOUT STANDBY</div>
+          <div class="sc-text" data-en="Merchant has to repost, re-recruit, re-negotiate. The slot likely goes unfilled." data-zh="商家要重新发布、重新招人、重新沟通。这个名额大概率就浪费了。">Merchant has to repost, re-recruit, re-negotiate. The slot likely goes unfilled.</div>
+        </div>
+        <div class="scenario-yes">
+          <div class="sc-label" data-en="WITH STANDBY" data-zh="有 Standby">WITH STANDBY</div>
+          <div class="sc-text" data-en="Platform instantly pushes the slot to qualified standby creators. Filled in 3 hours." data-zh="平台立刻把空位推给符合条件的候补博主，3 小时内补满。">Platform instantly pushes the slot to qualified standby creators. Filled in 3 hours.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scenario 2 -->
+    <div class="scenario fade-in">
+      <div class="scenario-label" data-en="SCENARIO 2" data-zh="场景二">SCENARIO 2</div>
+      <div class="scenario-title" data-en="Merchant wants to add more slots mid-campaign" data-zh="商家临时加码">Merchant wants to add more slots mid-campaign</div>
+      <div class="scenario-body" data-en="A merchant sees good results and decides to add 2 more creator slots this week." data-zh="某个商家发现效果不错，决定当周临时再加 2 个名额。">A merchant sees good results and decides to add 2 more creator slots this week.</div>
+      <div class="scenario-compare">
+        <div class="scenario-no">
+          <div class="sc-label" data-en="WITHOUT STANDBY" data-zh="没有 Standby">WITHOUT STANDBY</div>
+          <div class="sc-text" data-en="Has to create a new campaign from scratch. Loses momentum." data-zh="只能重新发活动，白白浪费势头。">Has to create a new campaign from scratch. Loses momentum.</div>
+        </div>
+        <div class="scenario-yes">
+          <div class="sc-label" data-en="WITH STANDBY" data-zh="有 Standby">WITH STANDBY</div>
+          <div class="sc-text" data-en="Platform releases slots from the standby pool immediately. No friction." data-zh="平台直接从候补池中释放名额，零摩擦。">Platform releases slots from the standby pool immediately. No friction.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scenario 3 -->
+    <div class="scenario fade-in">
+      <div class="scenario-label" data-en="SCENARIO 3" data-zh="场景三">SCENARIO 3</div>
+      <div class="scenario-title" data-en="Creator happens to be nearby" data-zh="博主刚好在附近">Creator happens to be nearby</div>
+      <div class="scenario-body" data-en="A creator didn't apply originally, but is in SoHo today and sees a campaign slot about to close." data-zh="一个博主本来没申请，但今天刚好在 SoHo，看到附近有活动名额即将关闭。">A creator didn't apply originally, but is in SoHo today and sees a campaign slot about to close.</div>
+      <div class="scenario-compare">
+        <div class="scenario-no">
+          <div class="sc-label" data-en="WITHOUT STANDBY" data-zh="没有 Standby">WITHOUT STANDBY</div>
+          <div class="sc-text" data-en="Missed opportunity. Creator can't enter late." data-zh="错过就是错过，没有后门。">Missed opportunity. Creator can't enter late.</div>
+        </div>
+        <div class="scenario-yes">
+          <div class="sc-label" data-en="WITH STANDBY" data-zh="有 Standby">WITH STANDBY</div>
+          <div class="sc-text" data-en="Standby gives them a lightweight entry into the opportunity flow." data-zh="Standby 让他用更轻的方式进入机会流。">Standby gives them a lightweight entry into the opportunity flow.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-accent" data-en="Standby upgrades Push from a &ldquo;sign-up system&rdquo; to a <strong>real-time dispatch system</strong>." data-zh="Standby 把 Push 从「报名系统」升级成了<strong>实时调度系统</strong>。">Standby upgrades Push from a &ldquo;sign-up system&rdquo; to a <strong>real-time dispatch system</strong>.</div>
+  </div>
+</div>
+
+<!-- S3: CORE LOGIC -->
+<div class="sw-white">
+  <div class="section fade-in">
+    <div class="section-label" data-en="CORE LOGIC" data-zh="核心逻辑">CORE LOGIC</div>
+    <h2 class="section-title" data-en="Not first-come-first-served. <span style='color:var(--accent)'>Priority-based allocation.</span>" data-zh="不是先到先得，而是<span style='color:var(--accent)'>按优先级分配</span>。">Not first-come-first-served. <span style="color:var(--accent)">Priority-based allocation.</span></h2>
+
+    <!-- Who can enter -->
+    <h3 style="font-size:20px;font-weight:800;color:var(--text);margin-top:48px;margin-bottom:8px;" data-en="1. Who can enter standby" data-zh="一、谁能进入候补池">1. Who can enter standby</h3>
+    <p style="font-size:15px;color:var(--text2);margin-bottom:16px;" data-en="Not everyone qualifies. The standby pool is gated, not open." data-zh="不是所有人都能进。候补池有门槛，不是开放的。">Not everyone qualifies. The standby pool is gated, not open.</p>
+
+    <div class="card-grid fade-in" style="grid-template-columns:repeat(3,1fr);">
+      <div class="card">
+        <div class="card-icon">🎖️</div>
+        <div class="card-title" data-en="Creator Tier" data-zh="博主等级">Creator Tier</div>
+        <div class="card-body" data-en="Higher tiers get standby access first. Partner and Closer see opportunities Explorer can't." data-zh="高等级优先进入。Partner 和 Closer 能看到 Explorer 看不到的机会。">Higher tiers get standby access first. Partner and Closer see opportunities Explorer can't.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">📍</div>
+        <div class="card-title" data-en="Location Match" data-zh="地理匹配">Location Match</div>
+        <div class="card-body" data-en="Proximity to the campaign location. Local creators get priority over distant ones." data-zh="离活动地点的距离。本地博主优先于远距离博主。">Proximity to the campaign location. Local creators get priority over distant ones.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">📊</div>
+        <div class="card-title" data-en="Performance History" data-zh="履约记录">Performance History</div>
+        <div class="card-body" data-en="Completion rate, reliability score, response speed, and merchant satisfaction." data-zh="完成率、可靠性评分、响应速度和商家满意度。">Completion rate, reliability score, response speed, and merchant satisfaction.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🏷️</div>
+        <div class="card-title" data-en="Category Fit" data-zh="类目匹配">Category Fit</div>
+        <div class="card-body" data-en="Creators with experience in the same F&amp;B subcategory (cafes, boba, bakeries) get priority." data-zh="在同一餐饮子类目（咖啡、奶茶、烘焙）有经验的博主优先。">Creators with experience in the same F&amp;B subcategory (cafes, boba, bakeries) get priority.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <div class="card-title" data-en="Recent Activity" data-zh="近期活跃度">Recent Activity</div>
+        <div class="card-body" data-en="Active creators in the last 30 days are prioritized over dormant ones." data-zh="30 天内有活跃记录的博主优先于沉默博主。">Active creators in the last 30 days are prioritized over dormant ones.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">⭐</div>
+        <div class="card-title" data-en="Premium Status" data-zh="高级状态">Premium Status</div>
+        <div class="card-body" data-en="Creators on merchant whitelists or with premium badges get additional priority weight." data-zh="在商家白名单中或拥有高级标记的博主获得额外优先权重。">Creators on merchant whitelists or with premium badges get additional priority weight.</div>
+      </div>
+    </div>
+
+    <!-- When it triggers -->
+    <h3 style="font-size:20px;font-weight:800;color:var(--text);margin-top:56px;margin-bottom:8px;" data-en="2. When standby triggers" data-zh="二、什么时候触发">2. When standby triggers</h3>
+    <p style="font-size:15px;color:var(--text2);margin-bottom:8px;" data-en="Regular applications are the standard supply. Standby is the emergency &amp; acceleration supply." data-zh="正式申请是常规供给。Standby 是应急与加速供给。">Regular applications are the standard supply. Standby is the emergency &amp; acceleration supply.</p>
+    <div class="trigger-grid fade-in">
+      <div class="trigger-pill" data-en="Creator cancels" data-zh="博主取消">Creator cancels</div>
+      <div class="trigger-pill" data-en="Slot unfilled near deadline" data-zh="截止前名额未满">Slot unfilled near deadline</div>
+      <div class="trigger-pill" data-en="Merchant adds capacity" data-zh="商家临时追加名额">Merchant adds capacity</div>
+      <div class="trigger-pill" data-en="Fast-fill mode activated" data-zh="快速补位模式开启">Fast-fill mode activated</div>
+      <div class="trigger-pill" data-en="Last 24-hour sprint" data-zh="最后 24 小时冲刺">Last 24-hour sprint</div>
+    </div>
+
+    <!-- How allocation works -->
+    <h3 style="font-size:20px;font-weight:800;color:var(--text);margin-top:56px;margin-bottom:8px;" data-en="3. How allocation works" data-zh="三、怎么分配">3. How allocation works</h3>
+    <p style="font-size:15px;color:var(--text2);margin-bottom:8px;" data-en="The platform decides who deserves the opportunity first, then lets them compete on speed." data-zh="平台先决定谁更值得拥有这个机会，再让他们竞争速度。">The platform decides who deserves the opportunity first, then lets them compete on speed.</p>
+
+    <table class="priority-table fade-in">
+      <thead>
+        <tr>
+          <th data-en="Step" data-zh="步骤">Step</th>
+          <th data-en="Action" data-zh="操作">Action</th>
+          <th data-en="Detail" data-zh="说明">Detail</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="factor-name">1</td>
+          <td data-en="Filter" data-zh="筛选">Filter</td>
+          <td data-en="Only creators matching campaign requirements" data-zh="只保留符合活动条件的博主">Only creators matching campaign requirements</td>
+        </tr>
+        <tr>
+          <td class="factor-name">2</td>
+          <td data-en="Rank" data-zh="排序">Rank</td>
+          <td data-en="Sort by tier, score, proximity, response history" data-zh="按等级、评分、距离、响应历史排序">Sort by tier, score, proximity, response history</td>
+        </tr>
+        <tr>
+          <td class="factor-name">3</td>
+          <td data-en="Push" data-zh="推送">Push</td>
+          <td data-en="Notify top-ranked candidates first" data-zh="先通知排名最高的候选人">Notify top-ranked candidates first</td>
+        </tr>
+        <tr>
+          <td class="factor-name">4</td>
+          <td data-en="Confirm" data-zh="确认">Confirm</td>
+          <td data-en="First to confirm gets the slot" data-zh="最快确认的人拿到名额">First to confirm gets the slot</td>
+        </tr>
+        <tr>
+          <td class="factor-name">5</td>
+          <td data-en="Cascade" data-zh="顺延">Cascade</td>
+          <td data-en="If no response within window, cascade to next tier" data-zh="超时未响应则顺延到下一批">If no response within window, cascade to next tier</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- S4: BENEFITS FOR MERCHANTS -->
+<div class="sw-gray">
+  <div class="section fade-in">
+    <div class="section-label" data-en="MERCHANT VALUE" data-zh="商家价值">MERCHANT VALUE</div>
+    <h2 class="section-title" data-en="For merchants: <span style='color:var(--green)'>buy certainty</span>." data-zh="对商家来说：买到的是<span style='color:var(--green)'>确定性</span>。">For merchants: <span style="color:var(--green)">buy certainty</span>.</h2>
+
+    <div class="card-grid fade-in">
+      <div class="card">
+        <div class="card-icon">📈</div>
+        <div class="card-title" data-en="Higher fill rate" data-zh="更高的填充率">Higher fill rate</div>
+        <div class="card-body" data-en="Fewer empty slots. Faster execution. More stable outcomes. Merchants' biggest fear &mdash; posting a campaign that doesn't fill &mdash; is eliminated." data-zh="更少空位、更快执行、更稳定的结果。商家最怕的事——发了活动却招不满——被彻底解决。">Fewer empty slots. Faster execution. More stable outcomes. Merchants' biggest fear &mdash; posting a campaign that doesn't fill &mdash; is eliminated.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔄</div>
+        <div class="card-title" data-en="Zero re-recruitment friction" data-zh="零二次招人摩擦">Zero re-recruitment friction</div>
+        <div class="card-body" data-en="Without standby, a single dropout means: re-post, re-communicate, re-review. With standby, the platform handles the swap automatically." data-zh="没有 Standby，一个人退出就意味着：重新发布、重新沟通、再次审核。有了 Standby，平台自动调度完成。">Without standby, a single dropout means: re-post, re-communicate, re-review. With standby, the platform handles the swap automatically.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🤝</div>
+        <div class="card-title" data-en="Builds trust in the platform" data-zh="增强对平台的信任">Builds trust in the platform</div>
+        <div class="card-body" data-en="Merchant repeat depends on one question: &ldquo;When something goes wrong, can the platform self-correct?&rdquo; Standby is that self-correction." data-zh="商家复购取决于一个问题：「出了问题，平台能不能自动补救？」Standby 就是这个自动补救。">Merchant repeat depends on one question: &ldquo;When something goes wrong, can the platform self-correct?&rdquo; Standby is that self-correction.</div>
+      </div>
+    </div>
+
+    <div class="callout callout-green" data-en="Standby lets merchants buy <strong>certainty of execution</strong>, not just access to creators." data-zh="Standby 让商家买到的不只是博主资源，而是<strong>执行的确定性</strong>。">Standby lets merchants buy <strong>certainty of execution</strong>, not just access to creators.</div>
+  </div>
+</div>
+
+<!-- S5: BENEFITS FOR CREATORS -->
+<div class="sw-white">
+  <div class="section fade-in">
+    <div class="section-label" data-en="CREATOR VALUE" data-zh="博主价值">CREATOR VALUE</div>
+    <h2 class="section-title" data-en="For creators: <span style='color:var(--accent)'>always another chance</span>." data-zh="对博主来说：<span style='color:var(--accent)'>机会不止一次</span>。">For creators: <span style="color:var(--accent)">always another chance</span>.</h2>
+
+    <div class="card-grid fade-in">
+      <div class="card">
+        <div class="card-icon">🎯</div>
+        <div class="card-title" data-en="Higher opportunity density" data-zh="更高的机会密度">Higher opportunity density</div>
+        <div class="card-body" data-en="Not selected in the main pool ≠ no chance. Last-minute slots = new opportunities. Being nearby = quick grab. This dramatically increases creator activity." data-zh="没被主池选中 ≠ 完全没机会。临时空位 = 新机会。刚好在附近 = 快速抢位。这会显著提高博主的活跃感。">Not selected in the main pool ≠ no chance. Last-minute slots = new opportunities. Being nearby = quick grab. This dramatically increases creator activity.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔥</div>
+        <div class="card-title" data-en="Natural FOMO &amp; engagement" data-zh="天然的紧迫感和参与感">Natural FOMO &amp; engagement</div>
+        <div class="card-body" data-en="&ldquo;Only 2 slots left.&rdquo; &ldquo;Last 6 hours.&rdquo; &ldquo;Nearby cafe just released a slot.&rdquo; Standby makes creators feel like they're participating in a real market, not browsing a static board." data-zh="「只剩 2 个名额」「最后 6 小时」「附近咖啡馆刚释放名额」。Standby 让博主感觉在参与一个真实市场，而不是刷一个静态平台。">Only 2 slots left. Last 6 hours. Nearby cafe just released a slot. Standby makes creators feel like they're participating in a real market, not browsing a static board.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">⬆️</div>
+        <div class="card-title" data-en="Tier = real power, not just a badge" data-zh="升级 = 真实权力，不只是徽章">Tier = real power, not just a badge</div>
+        <div class="card-body" data-en="Higher tier = higher standby priority = faster access to better-paying campaigns. Creators directly feel: upgrading = earning more money today, not someday." data-zh="高等级 = 更高候补优先级 = 更快拿到高价活动。博主直接感受到：升级 = 今天就能多赚钱，不是将来。">Higher tier = higher standby priority = faster access to better-paying campaigns. Creators directly feel: upgrading = earning more money today, not someday.</div>
+      </div>
+    </div>
+
+    <!-- Tier priority visual -->
+    <h3 style="font-size:18px;font-weight:800;color:var(--text);margin-top:48px;margin-bottom:16px;" data-en="Standby access by tier" data-zh="各等级的 Standby 权限">Standby access by tier</h3>
+    <div class="tier-priority fade-in">
+      <div class="tier-row">
+        <div class="tier-dot" style="background:#7c3aed;"></div>
+        <div class="tier-name" style="color:#7c3aed;">Partner</div>
+        <div class="tier-access" data-en="Exclusive high-value campaign standby + instant push + auto-accept option" data-zh="专属高价活动候补 + 即时推送 + 自动接单选项">Exclusive high-value campaign standby + instant push + auto-accept option</div>
+        <div class="tier-bar" style="width:100%;background:linear-gradient(90deg,#7c3aed,#a78bfa);"></div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-dot" style="background:#f59e0b;"></div>
+        <div class="tier-name" style="color:#f59e0b;">Closer</div>
+        <div class="tier-access" data-en="Priority push for all campaigns + early notification window" data-zh="所有活动优先推送 + 提前通知窗口">Priority push for all campaigns + early notification window</div>
+        <div class="tier-bar" style="width:85%;background:linear-gradient(90deg,#f59e0b,#fbbf24);"></div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-dot" style="background:#10b981;"></div>
+        <div class="tier-name" style="color:#10b981;">Proven</div>
+        <div class="tier-access" data-en="Standard standby access + push notifications for matching categories" data-zh="标准候补权限 + 匹配类目的推送通知">Standard standby access + push notifications for matching categories</div>
+        <div class="tier-bar" style="width:65%;background:linear-gradient(90deg,#10b981,#34d399);"></div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-dot" style="background:#0ea5e9;"></div>
+        <div class="tier-name" style="color:#0ea5e9;">Operator</div>
+        <div class="tier-access" data-en="Standby eligible for standard campaigns only" data-zh="仅可候补标准活动">Standby eligible for standard campaigns only</div>
+        <div class="tier-bar" style="width:40%;background:linear-gradient(90deg,#0ea5e9,#38bdf8);"></div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-dot" style="background:#64748b;"></div>
+        <div class="tier-name" style="color:#64748b;">Explorer</div>
+        <div class="tier-access" data-en="Can view standby slots but no push priority" data-zh="可以看到候补名额但没有推送优先">Can view standby slots but no push priority</div>
+        <div class="tier-bar" style="width:20%;background:linear-gradient(90deg,#64748b,#94a3b8);"></div>
+      </div>
+    </div>
+
+    <div class="callout callout-accent" data-en="Creators keep coming back because standby creates a daily reason to check: &ldquo;Is there a slot I can grab right now?&rdquo;" data-zh="博主会不断回来，因为 Standby 创造了每天回来看看的理由：「今天有没有我能临时拿下的单子？」">Creators keep coming back because standby creates a daily reason to check: &ldquo;Is there a slot I can grab right now?&rdquo;</div>
+  </div>
+</div>
+
+<!-- S6: BENEFITS FOR PLATFORM -->
+<div class="sw-gray">
+  <div class="section fade-in">
+    <div class="section-label" data-en="PLATFORM VALUE" data-zh="平台价值">PLATFORM VALUE</div>
+    <h2 class="section-title" data-en="For the platform: <span style='color:var(--orange)'>liquidity infrastructure</span>." data-zh="对平台来说：<span style='color:var(--orange)'>流动性基础设施</span>。">For the platform: <span style="color:var(--orange)">liquidity infrastructure</span>.</h2>
+
+    <div class="card-grid fade-in">
+      <div class="card">
+        <div class="card-icon">💧</div>
+        <div class="card-title" data-en="Liquidity engine" data-zh="流动性引擎">Liquidity engine</div>
+        <div class="card-body" data-en="Every marketplace fears supply-demand mismatch. Standby dynamically absorbs gaps, raises transaction completion rate, and prevents the system from stalling due to minor volatility." data-zh="任何市场最怕供需失配。Standby 动态消化空位、提高交易完成率，不会因为小波动就卡住系统。">Every marketplace fears supply-demand mismatch. Standby dynamically absorbs gaps, raises transaction completion rate, and prevents the system from stalling due to minor volatility.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">📡</div>
+        <div class="card-title" data-en="Real-time market feel" data-zh="实时市场感">Real-time market feel</div>
+        <div class="card-body" data-en="Without standby, Push is a static campaign board. With it, the platform has: fills, releases, countdowns, competition, push notifications, last-minute grabs &mdash; a living market." data-zh="没有 Standby，Push 就是一个静态活动看板。有了它，平台有：填补、释放、限时、争抢、推送通知、最后时刻补位——一个活的市场。">Without standby, Push is a static campaign board. With it, the platform has: fills, releases, countdowns, competition, push notifications, last-minute grabs &mdash; a living market.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🛡️</div>
+        <div class="card-title" data-en="Anti-disintermediation weapon" data-zh="反绕过平台的武器">Anti-disintermediation weapon</div>
+        <div class="card-body" data-en="Private deals can only access a fixed roster. Push's standby provides: new backup creators, fast fills, higher-tier availability, more flexible opportunity flow than any private arrangement." data-zh="私下合作只能固定找几个人。Push 的 Standby 持续提供：新的替补博主、快速补位、更高等级博主的临时空档、比私下合作更灵活的机会流。">Private deals can only access a fixed roster. Push's standby provides: new backup creators, fast fills, higher-tier availability, more flexible opportunity flow than any private arrangement.</div>
+      </div>
+    </div>
+
+    <div class="callout callout-dark" data-en="Private deals solve one collaboration. <strong>Standby helps Push own the continuous supply advantage.</strong>" data-zh="私下合作能解决一次合作。<strong>Standby 帮 Push 保住了「持续供给优势」。</strong>">Private deals solve one collaboration. <strong>Standby helps Push own the continuous supply advantage.</strong></div>
+  </div>
+</div>
+
+<!-- S7: WHY STRONGER THAN A WAITLIST -->
+<div class="sw-white">
+  <div class="section fade-in">
+    <div class="section-label" data-en="DIFFERENTIATION" data-zh="差异化">DIFFERENTIATION</div>
+    <h2 class="section-title" data-en="Why Push's standby is stronger than a <span style='color:var(--red)'>static waiting list</span>." data-zh="为什么 Push 的 Standby 比<span style='color:var(--red)'>普通候补名单</span>强得多。">Why Push's standby is stronger than a <span style="color:var(--red)">static waiting list</span>.</h2>
+
+    <div class="vs-grid fade-in">
+      <div class="vs-card vs-card-old">
+        <div class="vs-card-label" data-en="STATIC WAITING LIST" data-zh="普通候补名单">STATIC WAITING LIST</div>
+        <ul>
+          <li data-en="Passive &mdash; creators just wait" data-zh="被动——博主只能等">Passive &mdash; creators just wait</li>
+          <li data-en="No screening or filtering" data-zh="没有筛选机制">No screening or filtering</li>
+          <li data-en="No real-time responsiveness" data-zh="没有实时性">No real-time responsiveness</li>
+          <li data-en="No tiered value differentiation" data-zh="没有分层价值">No tiered value differentiation</li>
+          <li data-en="FIFO (first in, first out)" data-zh="先进先出，谁排在前面谁先">FIFO (first in, first out)</li>
+        </ul>
+      </div>
+      <div class="vs-card vs-card-new">
+        <div class="vs-card-label" data-en="PUSH STANDBY ENGINE" data-zh="Push Standby 引擎">PUSH STANDBY ENGINE</div>
+        <ul>
+          <li data-en="Active &mdash; platform pushes opportunities" data-zh="主动——平台推送机会">Active &mdash; platform pushes opportunities</li>
+          <li data-en="Filtered by tier, score, category" data-zh="按等级、评分、类目筛选">Filtered by tier, score, category</li>
+          <li data-en="Real-time trigger &amp; allocation" data-zh="实时触发和分配">Real-time trigger &amp; allocation</li>
+          <li data-en="Higher tier = higher priority" data-zh="等级越高，优先级越高">Higher tier = higher priority</li>
+          <li data-en="Priority-based with speed tiebreaker" data-zh="按优先级分配，速度决定胜负">Priority-based with speed tiebreaker</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout callout-accent" data-en="Push's standby is a <strong>real-time matching engine that routes time-sensitive demand to the most qualified creator</strong>." data-zh="Push 的 Standby 本质上是一个<strong>把时间敏感需求路由给最合适博主的即时匹配引擎</strong>。">Push's standby is a <strong>real-time matching engine that routes time-sensitive demand to the most qualified creator</strong>.</div>
+  </div>
+</div>
+
+<!-- S8: STANDBY + RETENTION -->
+<div class="sw-gray">
+  <div class="section fade-in">
+    <div class="section-label" data-en="RETENTION IMPACT" data-zh="留存影响">RETENTION IMPACT</div>
+    <h2 class="section-title" data-en="Standby is a <span style='color:var(--accent)'>retention multiplier</span>." data-zh="Standby 是<span style='color:var(--accent)'>留存倍增器</span>。">Standby is a <span style="color:var(--accent)">retention multiplier</span>.</h2>
+
+    <div class="card-grid fade-in">
+      <div class="card">
+        <div class="card-icon">🔄</div>
+        <div class="card-title" data-en="Creates &ldquo;come back and check&rdquo; behavior" data-zh="创造「随时回来看看」的习惯">Creates &ldquo;come back and check&rdquo; behavior</div>
+        <div class="card-body" data-en="If the platform is a static feed, creators visit once and leave. Standby creates: &ldquo;there might be a slot right now,&rdquo; &ldquo;something nearby might open up,&rdquo; &ldquo;high tier might get an exclusive push.&rdquo; This increases return frequency." data-zh="如果平台只是静态 feed，博主看一次就走。Standby 创造了：「现在可能有名额」「附近可能有机会」「高等级可能有专属推送」。这会增加回访频率。">If the platform is a static feed, creators visit once and leave. Standby creates: there might be a slot right now, something nearby might open up, high tier might get an exclusive push. This increases return frequency.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">💼</div>
+        <div class="card-title" data-en="Transforms into job marketplace behavior" data-zh="转化为工作市场行为">Transforms into job marketplace behavior</div>
+        <div class="card-body" data-en="Creators aren't just making content &mdash; they're waiting for and competing for high-quality opportunities. This makes Push behave more like a job/marketplace than a content community." data-zh="博主不只是做内容，而是在等待和抢占高质量机会。这让 Push 更像一个工作/交易市场，而不是内容社区。">Creators aren't just making content &mdash; they're waiting for and competing for high-quality opportunities. This makes Push behave more like a job/marketplace than a content community.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🎁</div>
+        <div class="card-title" data-en="Instant reward for progression" data-zh="升级立刻有奖励">Instant reward for progression</div>
+        <div class="card-body" data-en="When upgrading tier visibly increases standby priority, progression isn't &ldquo;someday useful&rdquo; &mdash; it's &ldquo;different today.&rdquo; This turns the tier system from a badge into a revenue driver." data-zh="当升级等级明显提升候补优先级时，升级就不仅仅是「未来可能有用」，而是「今天就有差别」。这让等级系统从徽章变成收入驱动器。">When upgrading tier visibly increases standby priority, progression isn't someday useful &mdash; it's different today. This turns the tier system from a badge into a revenue driver.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S9: STANDBY + ANTI-DISINTERMEDIATION -->
+<div class="sw-white">
+  <div class="section fade-in">
+    <div class="section-label" data-en="ANTI-BYPASS" data-zh="反绕过">ANTI-BYPASS</div>
+    <h2 class="section-title" data-en="Why standby makes bypassing Push <span style='color:var(--red)'>irrational</span>." data-zh="为什么 Standby 让绕过 Push 变得<span style='color:var(--red)'>不划算</span>。">Why standby makes bypassing Push <span style="color:var(--red)">irrational</span>.</h2>
+    <p class="section-sub" data-en="The biggest limitation of private merchant-creator deals is that they can't replicate what standby provides." data-zh="商家和博主私下合作最大的短板，就是无法复制 Standby 提供的能力。">The biggest limitation of private merchant-creator deals is that they can't replicate what standby provides.</p>
+
+    <div class="card-grid-2 fade-in" style="margin-top:40px;">
+      <div class="card">
+        <div class="card-title" data-en="Private deals offer:" data-zh="私下合作能提供：">Private deals offer:</div>
+        <div class="card-body" data-en="A fixed roster of 2&ndash;3 familiar creators. No backup. No expansion. No priority routing. If someone drops, you're on your own." data-zh="固定的 2-3 个熟悉博主。没有备选、没有扩展、没有优先路由。有人退出，只能自己想办法。">A fixed roster of 2&ndash;3 familiar creators. No backup. No expansion. No priority routing. If someone drops, you're on your own.</div>
+      </div>
+      <div class="card" style="border-color:var(--accent-light);background:var(--accent-bg);">
+        <div class="card-title" style="color:var(--accent);" data-en="Push standby offers:" data-zh="Push Standby 提供：">Push standby offers:</div>
+        <div class="card-body" data-en="Continuous access to new backup creators. Fast fill on demand. Higher-tier availability at any moment. More flexible opportunity flow than any private arrangement. Dynamic supply control." data-zh="持续提供新的替补博主。按需快速补位。随时可用的更高等级博主。比任何私下安排都更灵活的机会流。动态供给控制。">Continuous access to new backup creators. Fast fill on demand. Higher-tier availability at any moment. More flexible opportunity flow than any private arrangement. Dynamic supply control.</div>
+      </div>
+    </div>
+
+    <div class="callout callout-dark" data-en="Standby helps Push <strong>platformize both &ldquo;temporary gaps&rdquo; and &ldquo;instant supply&rdquo;</strong> &mdash; the two things private deals can never solve." data-zh="Standby 帮 Push 把「临时空位」和「即时供给」都<strong>平台化</strong>了——这恰恰是私下合作永远解决不了的两件事。">Standby helps Push <strong>platformize both &ldquo;temporary gaps&rdquo; and &ldquo;instant supply&rdquo;</strong> &mdash; the two things private deals can never solve.</div>
+  </div>
+</div>
+
+<!-- S10: DECK VERSIONS -->
+<div class="sw-dark">
+  <div class="section fade-in">
+    <div class="section-label section-label-dark" data-en="HOW TO PITCH IT" data-zh="怎么对外讲">HOW TO PITCH IT</div>
+    <h2 class="section-title section-title-white" data-en="Three ways to explain standby." data-zh="三种对外讲法。">Three ways to explain standby.</h2>
+
+    <div class="deck-grid fade-in">
+      <div class="deck-card">
+        <div class="deck-card-label" data-en="ONE-LINER" data-zh="一句话版">ONE-LINER</div>
+        <div class="deck-card-text" data-en="Standby lets Push refill empty campaign slots in real time with qualified creators." data-zh="Standby 让 Push 能用合格的博主实时补满活动空位。">Standby lets Push refill empty campaign slots in real time with qualified creators.</div>
+      </div>
+      <div class="deck-card">
+        <div class="deck-card-label" data-en="BUSINESS VERSION" data-zh="商业版">BUSINESS VERSION</div>
+        <div class="deck-card-text" data-en="Standby increases fill rate, reduces merchant friction, and gives better creators faster access to high-quality campaigns." data-zh="Standby 提高填充率、减少商家摩擦，并让优秀博主更快拿到高价活动。">Standby increases fill rate, reduces merchant friction, and gives better creators faster access to high-quality campaigns.</div>
+      </div>
+      <div class="deck-card" style="border-color:var(--accent);background:rgba(79,70,229,0.15);">
+        <div class="deck-card-label" data-en="INVESTOR VERSION" data-zh="投资人版">INVESTOR VERSION</div>
+        <div class="deck-card-text" data-en="Standby is Push's liquidity engine &mdash; it routes time-sensitive local demand to qualified creators in real time." data-zh="Standby 是 Push 的流动性引擎——把有时效性的本地需求实时路由给最合适的博主。">Standby is Push's liquidity engine &mdash; it routes time-sensitive local demand to qualified creators in real time.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FINAL CALLOUT -->
+<div class="sw-white">
+  <div class="section fade-in" style="text-align:center;">
+    <div style="padding:48px 40px;border-radius:12px;background:var(--accent-bg);border:2px solid var(--accent);max-width:800px;margin:0 auto;">
+      <p style="font-size:clamp(18px,2.5vw,22px);font-weight:800;color:var(--text);line-height:1.6;max-width:none;" data-en="Push's standby mechanism is not a regular waitlist. It's a real-time fill system based on tier, location, performance, and urgency. It simultaneously raises merchant execution success, creator engagement, and platform liquidity &mdash; the key mechanism that turns Push from an &ldquo;information platform&rdquo; into a <span style='color:var(--accent)'>dynamic market</span>." data-zh="Push 的 Standby 机制不是普通候补名单，而是一个基于等级、位置、表现和时效性的实时补位系统。它同时提高商家的执行成功率、博主的参与度和平台的流动性，是 Push 从「信息平台」变成<span style='color:var(--accent)'>动态市场</span>的关键机制。">Push's standby mechanism is not a regular waitlist. It's a real-time fill system based on tier, location, performance, and urgency. It simultaneously raises merchant execution success, creator engagement, and platform liquidity &mdash; the key mechanism that turns Push from an &ldquo;information platform&rdquo; into a <span style="color:var(--accent)">dynamic market</span>.</p>
+    </div>
+  </div>
+</div>
+
+<button id="back-top" aria-label="Back to top">↑</button>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="f-logo">PUSH</div>
+      <div class="f-tagline" data-en="The Operating System for Local Creator Commerce" data-zh="本地博主商业化操作系统">The Operating System for Local Creator Commerce</div>
+    </div>
+    <div class="footer-links">
+      <a href="index.html" class="footer-link" data-en="Overview" data-zh="首页">Overview</a>
+      <a href="project-intro.html" class="footer-link" data-en="Product" data-zh="产品介绍">Product</a>
+      <a href="pitch-deck.html" class="footer-link" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
+      <a href="investor-qa.html" class="footer-link" data-en="Investor Q&amp;A" data-zh="投资人问答">Investor Q&amp;A</a>
+      <a href="challenges.html" class="footer-link" data-en="Challenges" data-zh="挑战分析">Challenges</a>
+      <a href="risk-defense.html" class="footer-link" data-en="Defense" data-zh="风险防御">Defense</a>
+      <a href="retention-defense.html" class="footer-link" data-en="Retention" data-zh="留存机制">Retention</a>
+      <a href="push-strategy-core.html" class="footer-link" data-en="Strategy" data-zh="战略核心">Strategy</a>
+    </div>
+    <div class="footer-copy">
+      <div data-en="© 2026 Push" data-zh="© 2026 Push">© 2026 Push</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function() {
+  let lang = localStorage.getItem('push-lang') || 'en';
+  function applyLang(l) {
+    lang = l;
+    localStorage.setItem('push-lang', l);
+    document.documentElement.setAttribute('lang', l);
+    document.querySelectorAll('[data-en]').forEach(el => {
+      const val = el.getAttribute('data-' + l);
+      if (val !== null) el.innerHTML = val;
+    });
+    const btn = document.getElementById('lang-btn');
+    if (btn) btn.textContent = l === 'en' ? '中 / EN' : 'EN / 中';
+    const mBtn = document.getElementById('lang-btn-mobile');
+    if (mBtn) mBtn.textContent = l === 'en' ? '中 / EN' : 'EN / 中';
+  }
+  window.toggleLang = function() {
+    document.body.style.opacity = '0.8';
+    document.body.style.transition = 'opacity 0.15s';
+    setTimeout(() => { applyLang(lang === 'en' ? 'zh' : 'en'); document.body.style.opacity = '1'; }, 150);
+  };
+  applyLang(lang);
+  document.documentElement.style.opacity = '1';
+})();
+
+/* Scroll fade-in */
+const fadeObs = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      fadeObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.01, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-in').forEach(el => fadeObs.observe(el));
+
+/* Nav scroll shadow */
+(function() {
+  const nav = document.querySelector('nav');
+  let raf = false;
+  window.addEventListener('scroll', () => {
+    if (raf) return;
+    raf = true;
+    requestAnimationFrame(() => { nav.classList.toggle('scrolled', window.scrollY > 40); raf = false; });
+  }, { passive: true });
+})();
+
+/* Back to top */
+(function() {
+  const btn = document.getElementById('back-top');
+  let raf = false;
+  window.addEventListener('scroll', () => {
+    if (raf) return;
+    raf = true;
+    requestAnimationFrame(() => { btn.classList.toggle('visible', window.scrollY > 400); raf = false; });
+  }, { passive: true });
+  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+})();
+
+/* Scroll progress */
+(function() {
+  const bar = document.getElementById('scroll-progress');
+  let raf = false;
+  window.addEventListener('scroll', () => {
+    if (raf) return;
+    raf = true;
+    requestAnimationFrame(() => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = h > 0 ? (window.scrollY / h * 100) + '%' : '0';
+      raf = false;
+    });
+  }, { passive: true });
+})();
+
+/* Mobile burger */
+(function() {
+  const burger = document.getElementById('nav-burger');
+  const panel = document.getElementById('nav-mobile-panel');
+  if (!burger || !panel) return;
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    panel.classList.toggle('open');
+  });
+  panel.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => { burger.classList.remove('open'); panel.classList.remove('open'); });
+  });
+})();
+</script>
+</body>
+</html>
