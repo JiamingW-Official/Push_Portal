@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PUSH Team Dashboard</title>
+<style>
+:root {
+  --bg: #0a0a0f;
+  --bg2: #12121a;
+  --bg3: #1a1a2e;
+  --bg4: #242440;
+  --accent: #6c5ce7;
+  --accent2: #a29bfe;
+  --green: #00cec9;
+  --orange: #fdcb6e;
+  --red: #e17055;
+  --pink: #fd79a8;
+  --blue: #74b9ff;
+  --text: #dfe6e9;
+  --text2: #b2bec3;
+  --text3: #636e72;
+  --radius: 16px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.3);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+a { color: var(--accent2); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* NAV */
+.topnav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(10,10,15,0.92); backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(108,92,231,0.2);
+  display: flex; align-items: center; padding: 0 24px; height: 60px; gap: 8px;
+}
+.topnav .logo { font-weight: 800; font-size: 22px; color: var(--accent2); letter-spacing: 2px; margin-right: 32px; }
+.topnav .navlinks { display: flex; gap: 4px; flex-wrap: wrap; }
+.topnav .navlinks a {
+  padding: 6px 14px; border-radius: 8px; font-size: 13px; font-weight: 500;
+  color: var(--text2); transition: all 0.2s;
+}
+.topnav .navlinks a:hover, .topnav .navlinks a.active { background: var(--bg3); color: #fff; text-decoration: none; }
+
+/* SECTIONS */
+.section { padding: 80px 24px 40px; max-width: 1400px; margin: 0 auto; }
+.section-title {
+  font-size: 32px; font-weight: 800; margin-bottom: 8px;
+  background: linear-gradient(135deg, var(--accent2), var(--green));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.section-sub { color: var(--text2); font-size: 15px; margin-bottom: 32px; }
+
+/* CARDS */
+.grid { display: grid; gap: 20px; }
+.grid-2 { grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); }
+.grid-3 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+.grid-4 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.grid-5 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.card {
+  background: var(--bg2); border: 1px solid rgba(108,92,231,0.15);
+  border-radius: var(--radius); padding: 24px; transition: all 0.3s;
+}
+.card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow); }
+.card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.card-icon {
+  width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+  font-size: 20px; flex-shrink: 0;
+}
+.card-title { font-size: 16px; font-weight: 700; }
+.card-desc { color: var(--text2); font-size: 14px; line-height: 1.7; }
+
+/* STAT CARDS */
+.stat-card { text-align: center; padding: 28px 20px; }
+.stat-number { font-size: 40px; font-weight: 800; }
+.stat-label { color: var(--text2); font-size: 13px; margin-top: 4px; }
+
+/* TAGS */
+.tag {
+  display: inline-block; padding: 3px 10px; border-radius: 6px; font-size: 11px; font-weight: 600;
+  margin: 2px 4px 2px 0;
+}
+.tag-purple { background: rgba(108,92,231,0.2); color: var(--accent2); }
+.tag-green { background: rgba(0,206,201,0.2); color: var(--green); }
+.tag-orange { background: rgba(253,203,110,0.2); color: var(--orange); }
+.tag-red { background: rgba(225,112,85,0.2); color: var(--red); }
+.tag-blue { background: rgba(116,185,255,0.2); color: var(--blue); }
+.tag-pink { background: rgba(253,121,168,0.2); color: var(--pink); }
+
+/* TABLES */
+.table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid rgba(108,92,231,0.15); }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th { background: var(--bg3); color: var(--accent2); font-weight: 600; text-align: left; padding: 12px 16px; white-space: nowrap; }
+td { padding: 10px 16px; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text2); }
+tr:hover td { background: rgba(108,92,231,0.05); }
+
+/* PROGRESS BARS */
+.progress-bar { height: 8px; background: var(--bg3); border-radius: 4px; overflow: hidden; margin-top: 8px; }
+.progress-fill { height: 100%; border-radius: 4px; transition: width 1s ease; }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 32px; }
+.timeline::before { content: ''; position: absolute; left: 12px; top: 0; bottom: 0; width: 2px; background: var(--bg4); }
+.timeline-item { position: relative; margin-bottom: 28px; }
+.timeline-dot {
+  position: absolute; left: -27px; top: 4px; width: 14px; height: 14px;
+  border-radius: 50%; border: 3px solid var(--accent); background: var(--bg);
+}
+.timeline-item.active .timeline-dot { background: var(--accent); box-shadow: 0 0 12px var(--accent); }
+.timeline-title { font-weight: 700; font-size: 15px; margin-bottom: 4px; }
+.timeline-desc { color: var(--text2); font-size: 13px; }
+
+/* FLOW DIAGRAM */
+.flow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 16px 0; }
+.flow-step {
+  background: var(--bg3); border: 1px solid rgba(108,92,231,0.2); border-radius: 10px;
+  padding: 10px 16px; font-size: 13px; font-weight: 600; white-space: nowrap;
+}
+.flow-arrow { color: var(--accent); font-size: 18px; }
+
+/* TABS */
+.tabs { display: flex; gap: 4px; margin-bottom: 24px; flex-wrap: wrap; }
+.tab-btn {
+  padding: 8px 18px; border-radius: 8px; border: 1px solid rgba(108,92,231,0.2);
+  background: transparent; color: var(--text2); font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.tab-btn:hover { border-color: var(--accent); color: #fff; }
+.tab-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* DONUT CHART */
+.donut-wrap { display: flex; align-items: center; gap: 24px; }
+.donut { position: relative; width: 120px; height: 120px; flex-shrink: 0; }
+.donut svg { transform: rotate(-90deg); }
+.donut-label {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-size: 24px; font-weight: 800;
+}
+.donut-legend { display: flex; flex-direction: column; gap: 6px; }
+.legend-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text2); }
+.legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+
+/* HERO */
+.hero {
+  min-height: 400px; display: flex; flex-direction: column; justify-content: center;
+  align-items: center; text-align: center; padding: 120px 24px 60px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(108,92,231,0.15) 0%, transparent 60%);
+}
+.hero h1 { font-size: 56px; font-weight: 900; letter-spacing: -1px; margin-bottom: 16px; }
+.hero h1 span { background: linear-gradient(135deg, var(--accent2), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero p { color: var(--text2); font-size: 18px; max-width: 600px; }
+
+/* DOC HUB */
+.doc-sidebar {
+  position: sticky; top: 80px; background: var(--bg2); border-radius: var(--radius);
+  border: 1px solid rgba(108,92,231,0.15); padding: 16px; max-height: calc(100vh - 100px);
+  overflow-y: auto;
+}
+.doc-sidebar a {
+  display: block; padding: 8px 12px; border-radius: 8px; font-size: 13px;
+  color: var(--text2); transition: all 0.2s; margin-bottom: 2px;
+}
+.doc-sidebar a:hover, .doc-sidebar a.active { background: var(--bg3); color: #fff; text-decoration: none; }
+.doc-content { background: var(--bg2); border-radius: var(--radius); border: 1px solid rgba(108,92,231,0.15); padding: 32px; }
+.doc-content h2 { font-size: 24px; font-weight: 800; margin-bottom: 16px; color: var(--accent2); }
+.doc-content h3 { font-size: 18px; font-weight: 700; margin: 24px 0 12px; color: #fff; }
+.doc-content h4 { font-size: 15px; font-weight: 600; margin: 16px 0 8px; color: var(--green); }
+.doc-content p, .doc-content li { color: var(--text2); font-size: 14px; line-height: 1.8; }
+.doc-content ul, .doc-content ol { padding-left: 20px; margin: 8px 0; }
+.doc-content blockquote {
+  border-left: 3px solid var(--accent); padding: 12px 16px; margin: 16px 0;
+  background: rgba(108,92,231,0.08); border-radius: 0 8px 8px 0; font-style: italic;
+}
+.doc-content .doc-table { margin: 16px 0; }
+.doc-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; margin-bottom: 16px; }
+
+/* PILL NAV */
+.pill-nav { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+.pill {
+  padding: 6px 16px; border-radius: 20px; border: 1px solid rgba(108,92,231,0.3);
+  background: transparent; color: var(--text2); font-size: 12px; font-weight: 600;
+  cursor: pointer; transition: all 0.2s;
+}
+.pill:hover { border-color: var(--accent); color: #fff; }
+.pill.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* SCORE GAUGE */
+.gauge { text-align: center; }
+.gauge svg { max-width: 160px; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .topnav { padding: 0 12px; }
+  .topnav .navlinks a { padding: 4px 8px; font-size: 11px; }
+  .hero h1 { font-size: 36px; }
+  .grid-2, .grid-3, .grid-4, .grid-5 { grid-template-columns: 1fr; }
+  .section { padding: 60px 16px 32px; }
+  .flow { flex-direction: column; align-items: flex-start; }
+}
+
+/* ACCORDION */
+.accordion-header {
+  cursor: pointer; padding: 16px; background: var(--bg3); border-radius: 10px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-weight: 600; font-size: 15px; margin-bottom: 4px; transition: all 0.2s;
+}
+.accordion-header:hover { background: var(--bg4); }
+.accordion-header .arrow { transition: transform 0.3s; }
+.accordion-header.open .arrow { transform: rotate(180deg); }
+.accordion-body { display: none; padding: 16px 16px 16px 24px; }
+.accordion-body.open { display: block; }
+
+/* ANIMATED BAR */
+.bar-chart { display: flex; flex-direction: column; gap: 12px; }
+.bar-row { display: flex; align-items: center; gap: 12px; }
+.bar-label { width: 140px; font-size: 13px; color: var(--text2); flex-shrink: 0; text-align: right; }
+.bar-track { flex: 1; height: 24px; background: var(--bg3); border-radius: 6px; overflow: hidden; position: relative; }
+.bar-fill { height: 100%; border-radius: 6px; transition: width 1.5s ease; display: flex; align-items: center; padding-left: 8px; font-size: 11px; font-weight: 700; color: #fff; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="topnav">
+  <div class="logo">PUSH</div>
+  <div class="navlinks">
+    <a href="#overview" class="active">Overview</a>
+    <a href="#strategy">Strategy</a>
+    <a href="#workflow">Workflow</a>
+    <a href="#painpoints">Pain Points</a>
+    <a href="#risks">Risks</a>
+    <a href="#execution">Execution</a>
+    <a href="#coldstart">Cold Start</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#scoring">Scoring</a>
+    <a href="#dochub">Doc Hub</a>
+    <a href="project-intro.html">Project Intro</a>
+    <a href="pitch-deck.html">Pitch Deck</a>
+    <a href="prospects.html">Prospects</a>
+    <a href="challenges.html">Challenges</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="overview">
+  <h1><span>PUSH</span> Team Dashboard</h1>
+  <p>Local creator performance infrastructure — a unified view of strategy, operations, and execution across all 8 core documents.</p>
+</div>
+
+<!-- OVERVIEW STATS -->
+<div class="section">
+  <div class="section-title">Platform Overview</div>
+  <div class="section-sub">Key metrics and strategic alignment at a glance</div>
+
+  <div class="grid grid-5" style="margin-bottom:32px">
+    <div class="card stat-card">
+      <div class="stat-number" style="color:var(--accent2)">8</div>
+      <div class="stat-label">Core Documents</div>
+    </div>
+    <div class="card stat-card">
+      <div class="stat-number" style="color:var(--green)">5</div>
+      <div class="stat-label">Strategic Pillars</div>
+    </div>
+    <div class="card stat-card">
+      <div class="stat-number" style="color:var(--orange)">4</div>
+      <div class="stat-label">Creator Tiers</div>
+    </div>
+    <div class="card stat-card">
+      <div class="stat-number" style="color:var(--pink)">16</div>
+      <div class="stat-label">Identified Risks</div>
+    </div>
+    <div class="card stat-card">
+      <div class="stat-number" style="color:var(--blue)">12</div>
+      <div class="stat-label">Week Execution Plan</div>
+    </div>
+  </div>
+
+  <!-- Document Map -->
+  <div class="grid grid-3">
+    <div class="card" style="border-left: 3px solid var(--accent)">
+      <div class="card-header"><div class="card-icon" style="background:rgba(108,92,231,0.2)">01</div><div class="card-title">Master Strategy</div></div>
+      <div class="card-desc">Strategic definition, pillars, company thesis, red flags</div>
+      <div style="margin-top:12px"><span class="tag tag-purple">Strategy</span><span class="tag tag-purple">Vision</span></div>
+    </div>
+    <div class="card" style="border-left: 3px solid var(--green)">
+      <div class="card-header"><div class="card-icon" style="background:rgba(0,206,201,0.2)">02</div><div class="card-title">Workflow Architecture</div></div>
+      <div class="card-desc">20x workflow, milestone states, SLAs, ops processes</div>
+      <div style="margin-top:12px"><span class="tag tag-green">Workflow</span><span class="tag tag-green">SLAs</span></div>
+    </div>
+    <div class="card" style="border-left: 3px solid var(--orange)">
+      <div class="card-header"><div class="card-icon" style="background:rgba(253,203,110,0.2)">03</div><div class="card-title">Pain Points Map</div></div>
+      <div class="card-desc">Root cause analysis, merchant/creator/platform pain diagnosis</div>
+      <div style="margin-top:12px"><span class="tag tag-orange">Diagnosis</span><span class="tag tag-orange">Root Cause</span></div>
+    </div>
+    <div class="card" style="border-left: 3px solid var(--red)">
+      <div class="card-header"><div class="card-icon" style="background:rgba(225,112,85,0.2)">04</div><div class="card-title">Risk Register</div></div>
+      <div class="card-desc">16 risks across strategic, marketplace, behavioral, fraud, operational</div>
+      <div style="margin-top:12px"><span class="tag tag-red">Risk</span><span class="tag tag-red">Defense</span></div>
+    </div>
+    <div class="card" style="border-left: 3px solid var(--blue)">
+      <div class="card-header"><div class="card-icon" style="background:rgba(116,185,255,0.2)">05</div><div class="card-title">Execution Playbook</div></div>
+      <div class="card-desc">10 execution skills, founder ops standards, what good looks like</div>
+      <div style="margin-top:12px"><span class="tag tag-blue">Execution</span><span class="tag tag-blue">Skills</span></div>
+    </div>
+    <div class="card" style="border-left: 3px solid var(--pink)">
+      <div class="card-header"><div class="card-icon" style="background:rgba(253,121,168,0.2)">11</div><div class="card-title">Cold Start Plan</div></div>
+      <div class="card-desc">12-week step-by-step launch from zero, 3 phases</div>
+      <div style="margin-top:12px"><span class="tag tag-pink">Launch</span><span class="tag tag-pink">12 Weeks</span></div>
+    </div>
+    <div class="card" style="border-left: 3px solid var(--green)">
+      <div class="card-header"><div class="card-icon" style="background:rgba(0,206,201,0.2)">12</div><div class="card-title">V0.1 Pricing Model</div></div>
+      <div class="card-desc">Fee structures, payment flows, financial projections</div>
+      <div style="margin-top:12px"><span class="tag tag-green">Pricing</span><span class="tag tag-green">Revenue</span></div>
+    </div>
+    <div class="card" style="border-left: 3px solid var(--accent)">
+      <div class="card-header"><div class="card-icon" style="background:rgba(108,92,231,0.2)">13</div><div class="card-title">Creator Scoring</div></div>
+      <div class="card-desc">Composite scoring formula, tier system, anti-gaming</div>
+      <div style="margin-top:12px"><span class="tag tag-purple">Scoring</span><span class="tag tag-purple">Tiers</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- STRATEGY SECTION -->
+<div class="section" id="strategy">
+  <div class="section-title">01 — Master Strategy</div>
+  <div class="section-sub">Strategic definition, pillars, and company-building thesis</div>
+
+  <!-- What Push IS / IS NOT -->
+  <div class="grid grid-2" style="margin-bottom:32px">
+    <div class="card" style="border: 1px solid rgba(0,206,201,0.3)">
+      <h3 style="color:var(--green);font-size:18px;margin-bottom:16px">Push IS</h3>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;align-items:center;gap:10px"><span style="color:var(--green);font-size:18px">&#10003;</span><span>A transaction system</span></div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="color:var(--green);font-size:18px">&#10003;</span><span>A trust system</span></div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="color:var(--green);font-size:18px">&#10003;</span><span>A creator credit system</span></div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="color:var(--green);font-size:18px">&#10003;</span><span>A local demand orchestration system</span></div>
+      </div>
+    </div>
+    <div class="card" style="border: 1px solid rgba(225,112,85,0.3)">
+      <h3 style="color:var(--red);font-size:18px;margin-bottom:16px">Push is NOT</h3>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;align-items:center;gap:10px"><span style="color:var(--red);font-size:18px">&#10007;</span><span>A generic influencer marketplace</span></div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="color:var(--red);font-size:18px">&#10007;</span><span>A local discovery app</span></div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="color:var(--red);font-size:18px">&#10007;</span><span>A content community or reward app</span></div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="color:var(--red);font-size:18px">&#10007;</span><span>A lightweight loyalty system</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Core Insight -->
+  <div class="card" style="margin-bottom:32px; border-left:4px solid var(--accent); background: linear-gradient(135deg, rgba(108,92,231,0.08), transparent)">
+    <div style="font-size:13px;color:var(--accent2);font-weight:700;margin-bottom:8px">CORE INSIGHT</div>
+    <div style="font-size:18px;font-weight:600;color:#fff;margin-bottom:8px">Creators are not just media inventory. They are unstructured customer acquisition channels.</div>
+    <div class="card-desc">The real opportunity is to standardize, verify, rank, and route creator-driven demand. This is the difference between a marketplace and infrastructure.</div>
+  </div>
+
+  <!-- 5 Strategic Pillars -->
+  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:#fff">5 Strategic Pillars</h3>
+  <div class="grid grid-5" style="margin-bottom:32px">
+    <div class="card" style="text-align:center;padding:20px">
+      <div style="font-size:32px;margin-bottom:8px">&#127919;</div>
+      <div style="font-weight:700;margin-bottom:6px;color:var(--accent2)">Offer OS</div>
+      <div style="font-size:12px;color:var(--text2)">Convert merchant intent into structured campaigns</div>
+    </div>
+    <div class="card" style="text-align:center;padding:20px">
+      <div style="font-size:32px;margin-bottom:8px">&#11088;</div>
+      <div style="font-weight:700;margin-bottom:6px;color:var(--green)">Creator Credit</div>
+      <div style="font-size:12px;color:var(--text2)">Value creators by performance, not followers</div>
+    </div>
+    <div class="card" style="text-align:center;padding:20px">
+      <div style="font-size:32px;margin-bottom:8px">&#128269;</div>
+      <div style="font-weight:700;margin-bottom:6px;color:var(--orange)">Attribution</div>
+      <div style="font-size:12px;color:var(--text2)">Verify whether campaigns produced real value</div>
+    </div>
+    <div class="card" style="text-align:center;padding:20px">
+      <div style="font-size:32px;margin-bottom:8px">&#127759;</div>
+      <div style="font-weight:700;margin-bottom:6px;color:var(--pink)">Demand Surface</div>
+      <div style="font-size:12px;color:var(--text2)">Real-time demand interface with live opportunities</div>
+    </div>
+    <div class="card" style="text-align:center;padding:20px">
+      <div style="font-size:32px;margin-bottom:8px">&#9889;</div>
+      <div style="font-weight:700;margin-bottom:6px;color:var(--blue)">Liquidity Layer</div>
+      <div style="font-size:12px;color:var(--text2)">Standby mechanism for urgency and fill rate</div>
+    </div>
+  </div>
+
+  <!-- Priority Matrix -->
+  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:#fff">Priority Matrix</h3>
+  <div class="grid grid-3">
+    <div class="card" style="border-top:3px solid var(--green)">
+      <div style="font-weight:700;color:var(--green);margin-bottom:12px">Highest Priority</div>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:6px">
+        <li style="font-size:13px;color:var(--text2)">&#9679; Verifiable campaign outcomes</li>
+        <li style="font-size:13px;color:var(--text2)">&#9679; Creator scoring architecture</li>
+        <li style="font-size:13px;color:var(--text2)">&#9679; Repeat merchant workflow</li>
+        <li style="font-size:13px;color:var(--text2)">&#9679; Creator retention via earning progression</li>
+        <li style="font-size:13px;color:var(--text2)">&#9679; Anti-disintermediation design</li>
+        <li style="font-size:13px;color:var(--text2)">&#9679; Standby and time-sensitive mechanics</li>
+      </ul>
+    </div>
+    <div class="card" style="border-top:3px solid var(--orange)">
+      <div style="font-weight:700;color:var(--orange);margin-bottom:12px">Medium Priority</div>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:6px">
+        <li style="font-size:13px;color:var(--text2)">&#9679; Premium membership logic</li>
+        <li style="font-size:13px;color:var(--text2)">&#9679; Advanced analytics</li>
+        <li style="font-size:13px;color:var(--text2)">&#9679; Vertical-specific templates</li>
+        <li style="font-size:13px;color:var(--text2)">&#9679; Quality-of-life automation</li>
+      </ul>
+    </div>
+    <div class="card" style="border-top:3px solid var(--text3)">
+      <div style="font-weight:700;color:var(--text3);margin-bottom:12px">Low Priority</div>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:6px">
+        <li style="font-size:13px;color:var(--text2)">&#9679; Social/community features</li>
+        <li style="font-size:13px;color:var(--text2)">&#9679; Broad creator expression tools</li>
+        <li style="font-size:13px;color:var(--text2)">&#9679; Ornamental loyalty features</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Strategic Decision Test -->
+  <div class="card" style="margin-top:32px;background:var(--bg3)">
+    <div style="font-size:13px;color:var(--orange);font-weight:700;margin-bottom:12px">STRATEGIC DECISION TEST</div>
+    <div style="font-size:14px;color:var(--text2);line-height:1.8">Every major decision should answer at least one positively:<br>
+    1. Does this improve merchant ROI clarity?<br>
+    2. Does this improve creator earning power or quality sorting?<br>
+    3. Does this deepen platform defensibility?<br>
+    4. Does this reduce fraud, friction, or repeat campaign cost?<br>
+    5. Does this make future transactions more likely to stay on-platform?<br>
+    <strong style="color:var(--red)">If the answer is no, the idea is likely noise.</strong></div>
+  </div>
+</div>
+
+<!-- WORKFLOW SECTION -->
+<div class="section" id="workflow">
+  <div class="section-title">02 — Workflow Architecture</div>
+  <div class="section-sub">20x workflow design: from merchant goal to repeat optimization</div>
+
+  <!-- Flow Comparison -->
+  <div class="grid grid-2" style="margin-bottom:32px">
+    <div class="card" style="border-top:3px solid var(--text3)">
+      <div style="font-weight:700;color:var(--text3);margin-bottom:12px">Traditional Basic Flow</div>
+      <div class="flow">
+        <span class="flow-step" style="opacity:0.6">Post</span><span class="flow-arrow">&rarr;</span>
+        <span class="flow-step" style="opacity:0.6">Apply</span><span class="flow-arrow">&rarr;</span>
+        <span class="flow-step" style="opacity:0.6">Accept</span><span class="flow-arrow">&rarr;</span>
+        <span class="flow-step" style="opacity:0.6">Content</span><span class="flow-arrow">&rarr;</span>
+        <span class="flow-step" style="opacity:0.6">Pay?</span>
+      </div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--green)">
+      <div style="font-weight:700;color:var(--green);margin-bottom:12px">20x Push Flow</div>
+      <div class="flow">
+        <span class="flow-step">Goal</span><span class="flow-arrow">&rarr;</span>
+        <span class="flow-step">Structure</span><span class="flow-arrow">&rarr;</span>
+        <span class="flow-step">Route</span><span class="flow-arrow">&rarr;</span>
+        <span class="flow-step">Verify</span><span class="flow-arrow">&rarr;</span>
+        <span class="flow-step">Settle</span><span class="flow-arrow">&rarr;</span>
+        <span class="flow-step" style="border-color:var(--green)">Repeat</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Milestone States -->
+  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:#fff">Campaign Milestone States</h3>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:32px">
+    <div style="background:var(--bg3);padding:12px 20px;border-radius:10px;text-align:center;min-width:100px">
+      <div style="font-size:24px;margin-bottom:4px">1</div><div style="font-size:12px;color:var(--text2)">Accepted</div>
+    </div>
+    <div style="color:var(--accent);display:flex;align-items:center;font-size:20px">&rarr;</div>
+    <div style="background:var(--bg3);padding:12px 20px;border-radius:10px;text-align:center;min-width:100px">
+      <div style="font-size:24px;margin-bottom:4px">2</div><div style="font-size:12px;color:var(--text2)">Scheduled</div>
+    </div>
+    <div style="color:var(--accent);display:flex;align-items:center;font-size:20px">&rarr;</div>
+    <div style="background:var(--bg3);padding:12px 20px;border-radius:10px;text-align:center;min-width:100px">
+      <div style="font-size:24px;margin-bottom:4px">3</div><div style="font-size:12px;color:var(--text2)">Visited</div>
+    </div>
+    <div style="color:var(--accent);display:flex;align-items:center;font-size:20px">&rarr;</div>
+    <div style="background:var(--bg3);padding:12px 20px;border-radius:10px;text-align:center;min-width:100px">
+      <div style="font-size:24px;margin-bottom:4px">4</div><div style="font-size:12px;color:var(--text2)">Proof Submitted</div>
+    </div>
+    <div style="color:var(--accent);display:flex;align-items:center;font-size:20px">&rarr;</div>
+    <div style="background:var(--bg3);padding:12px 20px;border-radius:10px;text-align:center;min-width:100px">
+      <div style="font-size:24px;margin-bottom:4px">5</div><div style="font-size:12px;color:var(--text2)">Published</div>
+    </div>
+    <div style="color:var(--accent);display:flex;align-items:center;font-size:20px">&rarr;</div>
+    <div style="background:var(--bg3);padding:12px 20px;border-radius:10px;text-align:center;min-width:100px">
+      <div style="font-size:24px;margin-bottom:4px">6</div><div style="font-size:12px;color:var(--text2)">Verified</div>
+    </div>
+    <div style="color:var(--green);display:flex;align-items:center;font-size:20px">&rarr;</div>
+    <div style="background:rgba(0,206,201,0.15);padding:12px 20px;border-radius:10px;text-align:center;min-width:100px;border:1px solid rgba(0,206,201,0.3)">
+      <div style="font-size:24px;margin-bottom:4px;color:var(--green)">7</div><div style="font-size:12px;color:var(--green)">Settled</div>
+    </div>
+  </div>
+
+  <!-- SLA Tables -->
+  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:#fff">SLA Framework</h3>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab(event,'sla-merchant')">Merchant SLAs</button>
+    <button class="tab-btn" onclick="switchTab(event,'sla-creator')">Creator SLAs</button>
+    <button class="tab-btn" onclick="switchTab(event,'sla-ops')">Platform Ops SLAs</button>
+  </div>
+  <div class="tab-content active" id="sla-merchant">
+    <div class="table-wrap"><table>
+      <tr><th>Stage</th><th>SLA</th><th>If Exceeded</th></tr>
+      <tr><td>Campaign setup</td><td>48 hours</td><td>Reminder; offer assistance</td></tr>
+      <tr><td>Application review</td><td>24 hours</td><td>Auto-approve top-scored applicants</td></tr>
+      <tr><td>Proof confirmation</td><td>24 hours</td><td>Auto-approve if meets criteria</td></tr>
+      <tr><td>Post-campaign feedback</td><td>48 hours</td><td>Defaults to "satisfactory"</td></tr>
+    </table></div>
+  </div>
+  <div class="tab-content" id="sla-creator">
+    <div class="table-wrap"><table>
+      <tr><th>Stage</th><th>SLA</th><th>If Exceeded</th></tr>
+      <tr><td>Campaign acceptance</td><td>12 hours</td><td>Slot opens to next candidate</td></tr>
+      <tr><td>Visit completion</td><td>3-5 days</td><td>Warning at 50%; auto-cancel at deadline +24h</td></tr>
+      <tr><td>Proof submission</td><td>24 hours</td><td>Reminder; score impact warning</td></tr>
+      <tr><td>Content publication</td><td>48 hours</td><td>Final reminder; non-completion recorded</td></tr>
+    </table></div>
+  </div>
+  <div class="tab-content" id="sla-ops">
+    <div class="table-wrap"><table>
+      <tr><th>Stage</th><th>SLA</th><th>If Exceeded</th></tr>
+      <tr><td>Dispute acknowledgment</td><td>4 hours</td><td>Auto-escalation to priority queue</td></tr>
+      <tr><td>Dispute resolution</td><td>48 hours</td><td>Escalate to senior review</td></tr>
+      <tr><td>Creator payout</td><td>24 hours</td><td>Auto-process if no fraud flags</td></tr>
+      <tr><td>Fraud flag review</td><td>24 hours</td><td>Settlement held; both parties notified</td></tr>
+    </table></div>
+  </div>
+
+  <!-- Merchant Workflow Stages -->
+  <h3 style="font-size:20px;font-weight:700;margin:32px 0 20px;color:#fff">Merchant Workflow (6 Stages)</h3>
+  <div class="grid grid-3">
+    <div class="card"><div style="font-size:28px;color:var(--accent2);font-weight:800;margin-bottom:8px">1</div><div style="font-weight:700;margin-bottom:6px">Onboarding</div><div class="card-desc">Location, category, capacity, demand windows, preferred creators</div></div>
+    <div class="card"><div style="font-size:28px;color:var(--accent2);font-weight:800;margin-bottom:8px">2</div><div style="font-weight:700;margin-bottom:6px">Goal Selection</div><div class="card-desc">New visits, weekday traffic, launch item, event attendance, fill slots</div></div>
+    <div class="card"><div style="font-size:28px;color:var(--accent2);font-weight:800;margin-bottom:8px">3</div><div style="font-weight:700;margin-bottom:6px">Campaign Structure</div><div class="card-desc">Offer, payout, slots, dates, creator requirements, verification</div></div>
+    <div class="card"><div style="font-size:28px;color:var(--accent2);font-weight:800;margin-bottom:8px">4</div><div style="font-weight:700;margin-bottom:6px">Candidate Routing</div><div class="card-desc">Ranked candidates by history, fit, reliability, efficiency</div></div>
+    <div class="card"><div style="font-size:28px;color:var(--accent2);font-weight:800;margin-bottom:8px">5</div><div style="font-weight:700;margin-bottom:6px">Execution</div><div class="card-desc">Clear deliverables, locked schedule, milestone tracking</div></div>
+    <div class="card"><div style="font-size:28px;color:var(--accent2);font-weight:800;margin-bottom:8px">6</div><div style="font-weight:700;margin-bottom:6px">Review & Repeat</div><div class="card-desc">Result summary, repeat recommendation, next campaign seed</div></div>
+  </div>
+</div>
+
+<!-- PAIN POINTS SECTION -->
+<div class="section" id="painpoints">
+  <div class="section-title">03 — Pain Points & Root Cause Map</div>
+  <div class="section-sub">Diagnosing structural causes, not just visible symptoms</div>
+
+  <div class="grid grid-3" style="margin-bottom:32px">
+    <!-- Merchant Pain Points -->
+    <div class="card">
+      <h3 style="color:var(--orange);font-size:16px;margin-bottom:16px">Merchant Pain Points</h3>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div><div style="font-weight:600;font-size:14px">A: Cannot Judge Creator Quality</div><div style="font-size:12px;color:var(--text3);margin-top:2px">Root: No normalized credit layer</div></div>
+        <div><div style="font-weight:600;font-size:14px">B: Unclear ROI</div><div style="font-size:12px;color:var(--text3);margin-top:2px">Root: No structured attribution</div></div>
+        <div><div style="font-weight:600;font-size:14px">C: Operational Friction</div><div style="font-size:12px;color:var(--text3);margin-top:2px">Root: Ad hoc relationship work</div></div>
+        <div><div style="font-weight:600;font-size:14px">D: Fear of Being Burned</div><div style="font-size:12px;color:var(--text3);margin-top:2px">Root: No consequence-backed trust</div></div>
+      </div>
+    </div>
+    <!-- Creator Pain Points -->
+    <div class="card">
+      <h3 style="color:var(--pink);font-size:16px;margin-bottom:16px">Creator Pain Points</h3>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div><div style="font-weight:600;font-size:14px">A: No Pricing Power</div><div style="font-size:12px;color:var(--text3);margin-top:2px">Root: No standardized credit system</div></div>
+        <div><div style="font-weight:600;font-size:14px">B: Income Instability</div><div style="font-size:12px;color:var(--text3);margin-top:2px">Root: No structured pipeline</div></div>
+        <div><div style="font-weight:600;font-size:14px">C: Exploitative Low-End Offers</div><div style="font-size:12px;color:var(--text3);margin-top:2px">Root: No onboarding vs growth distinction</div></div>
+        <div><div style="font-weight:600;font-size:14px">D: Trust Asymmetry</div><div style="font-size:12px;color:var(--text3);margin-top:2px">Root: Weak merchant accountability</div></div>
+      </div>
+    </div>
+    <!-- Platform Pain Points -->
+    <div class="card">
+      <h3 style="color:var(--blue);font-size:16px;margin-bottom:16px">Platform Pain Points</h3>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div><div style="font-weight:600;font-size:14px">A: Cold Start</div><div style="font-size:12px;color:var(--text3);margin-top:2px">Root: Two-sided market dependency</div></div>
+        <div><div style="font-weight:600;font-size:14px">B: Fraud</div><div style="font-size:12px;color:var(--text3);margin-top:2px">Root: Weak verification / no anomaly detection</div></div>
+        <div><div style="font-weight:600;font-size:14px">C: Disintermediation</div><div style="font-size:12px;color:var(--text3);margin-top:2px">Root: Introduction-only perception</div></div>
+        <div><div style="font-weight:600;font-size:14px">D: Commoditization</div><div style="font-size:12px;color:var(--text3);margin-top:2px">Root: Over-index discovery, under-invest credit</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Root Cause Framework -->
+  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:#fff">5 Root Causes</h3>
+  <div class="grid grid-5" style="margin-bottom:32px">
+    <div class="card stat-card" style="padding:20px"><div style="font-size:28px;margin-bottom:8px;color:var(--accent2)">1</div><div style="font-size:13px;color:var(--text2)">Lack of Structure</div></div>
+    <div class="card stat-card" style="padding:20px"><div style="font-size:28px;margin-bottom:8px;color:var(--green)">2</div><div style="font-size:13px;color:var(--text2)">Lack of Verification</div></div>
+    <div class="card stat-card" style="padding:20px"><div style="font-size:28px;margin-bottom:8px;color:var(--orange)">3</div><div style="font-size:13px;color:var(--text2)">Lack of Repeatability</div></div>
+    <div class="card stat-card" style="padding:20px"><div style="font-size:28px;margin-bottom:8px;color:var(--pink)">4</div><div style="font-size:13px;color:var(--text2)">Lack of Durable Incentives</div></div>
+    <div class="card stat-card" style="padding:20px"><div style="font-size:28px;margin-bottom:8px;color:var(--blue)">5</div><div style="font-size:13px;color:var(--text2)">Lack of Compounding Data</div></div>
+  </div>
+
+  <!-- Priority Severity -->
+  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:#fff">Pain Severity Map</h3>
+  <div class="bar-chart">
+    <div class="bar-row"><div class="bar-label">Weak ROI confidence</div><div class="bar-track"><div class="bar-fill" style="width:95%;background:var(--red)">Critical</div></div></div>
+    <div class="bar-row"><div class="bar-label">Creator low retention</div><div class="bar-track"><div class="bar-fill" style="width:90%;background:var(--red)">Critical</div></div></div>
+    <div class="bar-row"><div class="bar-label">Off-platform leakage</div><div class="bar-track"><div class="bar-fill" style="width:88%;background:var(--red)">Critical</div></div></div>
+    <div class="bar-row"><div class="bar-label">Fraud & fake value</div><div class="bar-track"><div class="bar-fill" style="width:85%;background:var(--red)">Critical</div></div></div>
+    <div class="bar-row"><div class="bar-label">Poor campaign design</div><div class="bar-track"><div class="bar-fill" style="width:60%;background:var(--orange)">Medium</div></div></div>
+    <div class="bar-row"><div class="bar-label">Weak supply matching</div><div class="bar-track"><div class="bar-fill" style="width:55%;background:var(--orange)">Medium</div></div></div>
+    <div class="bar-row"><div class="bar-label">Social/community gaps</div><div class="bar-track"><div class="bar-fill" style="width:25%;background:var(--text3)">Low</div></div></div>
+  </div>
+</div>
+
+<!-- RISKS SECTION -->
+<div class="section" id="risks">
+  <div class="section-title">04 — Risk Register & Defense Playbook</div>
+  <div class="section-sub">16 identified risks across 6 categories with active defenses</div>
+
+  <!-- Risk Categories Chart -->
+  <div class="grid grid-2" style="margin-bottom:32px">
+    <div class="card">
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;color:#fff">Risk by Category</h3>
+      <div class="bar-chart">
+        <div class="bar-row"><div class="bar-label">Strategic</div><div class="bar-track"><div class="bar-fill" style="width:50%;background:var(--accent)">3 risks</div></div></div>
+        <div class="bar-row"><div class="bar-label">Marketplace</div><div class="bar-track"><div class="bar-fill" style="width:50%;background:var(--green)">3 risks</div></div></div>
+        <div class="bar-row"><div class="bar-label">Behavioral</div><div class="bar-track"><div class="bar-fill" style="width:50%;background:var(--orange)">3 risks</div></div></div>
+        <div class="bar-row"><div class="bar-label">Fraud</div><div class="bar-track"><div class="bar-fill" style="width:50%;background:var(--red)">3 risks</div></div></div>
+        <div class="bar-row"><div class="bar-label">Operational</div><div class="bar-track"><div class="bar-fill" style="width:50%;background:var(--pink)">3 risks</div></div></div>
+        <div class="bar-row"><div class="bar-label">Competitive</div><div class="bar-track"><div class="bar-fill" style="width:17%;background:var(--blue)">1 risk</div></div></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;color:#fff">Risk Prioritization</h3>
+      <div style="margin-bottom:16px">
+        <div style="font-weight:600;color:var(--red);margin-bottom:8px">Existential</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px">
+          <span class="tag tag-red">Poor merchant retention</span>
+          <span class="tag tag-red">Low creator quality</span>
+          <span class="tag tag-red">Disintermediation</span>
+          <span class="tag tag-red">Weak attribution</span>
+          <span class="tag tag-red">Cold start failure</span>
+        </div>
+      </div>
+      <div style="margin-bottom:16px">
+        <div style="font-weight:600;color:var(--orange);margin-bottom:8px">Major</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px">
+          <span class="tag tag-orange">Fraud</span>
+          <span class="tag tag-orange">Commoditization</span>
+          <span class="tag tag-orange">Supply opportunism</span>
+          <span class="tag tag-orange">Weak wedge</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-weight:600;color:var(--text3);margin-bottom:8px">Manageable</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px">
+          <span class="tag" style="background:rgba(99,110,114,0.2);color:var(--text3)">UI complexity</span>
+          <span class="tag" style="background:rgba(99,110,114,0.2);color:var(--text3)">Feature prioritization</span>
+          <span class="tag" style="background:rgba(99,110,114,0.2);color:var(--text3)">Support inefficiency</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key Risks Accordion -->
+  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:#fff">Key Risks & Defenses</h3>
+  <div style="display:flex;flex-direction:column;gap:4px">
+    <div><div class="accordion-header" onclick="toggleAccordion(this)"><span><span class="tag tag-red">Existential</span> R1: Derivative Positioning</span><span class="arrow">&#9660;</span></div><div class="accordion-body"><p style="color:var(--text2);font-size:14px"><strong style="color:var(--red)">Consequence:</strong> Weak investor conviction, easy dismissal.<br><strong style="color:var(--green)">Defense:</strong> Position as local creator performance infrastructure, not a marketplace.</p></div></div>
+    <div><div class="accordion-header" onclick="toggleAccordion(this)"><span><span class="tag tag-red">Existential</span> R4: Cold Start Failure</span><span class="arrow">&#9660;</span></div><div class="accordion-body"><p style="color:var(--text2);font-size:14px"><strong style="color:var(--red)">Consequence:</strong> Low liquidity, poor experience, weak retention.<br><strong style="color:var(--green)">Defense:</strong> Create density manually: founder-led acquisition, curated onboarding, concentrated volume.</p></div></div>
+    <div><div class="accordion-header" onclick="toggleAccordion(this)"><span><span class="tag tag-red">Existential</span> R7: Disintermediation</span><span class="arrow">&#9660;</span></div><div class="accordion-body"><p style="color:var(--text2);font-size:14px"><strong style="color:var(--red)">Consequence:</strong> Platform loses revenue and data.<br><strong style="color:var(--green)">Defense:</strong> Make on-platform value superior: credit accumulation, workflow automation, faster payouts, standby access.</p></div></div>
+    <div><div class="accordion-header" onclick="toggleAccordion(this)"><span><span class="tag tag-orange">Major</span> R10-12: Fraud (Fake Proof / Redemption / Engagement)</span><span class="arrow">&#9660;</span></div><div class="accordion-body"><p style="color:var(--text2);font-size:14px"><strong style="color:var(--red)">Consequence:</strong> Erosion of trust and data quality.<br><strong style="color:var(--green)">Defense:</strong> Timestamped uploads, geo checks, merchant verification, pattern analysis, anomaly review. De-emphasize vanity metrics.</p></div></div>
+    <div><div class="accordion-header" onclick="toggleAccordion(this)"><span><span class="tag tag-orange">Major</span> R16: Large Platform Expansion</span><span class="arrow">&#9660;</span></div><div class="accordion-body"><p style="color:var(--text2);font-size:14px"><strong style="color:var(--red)">Consequence:</strong> Push features copied at surface level.<br><strong style="color:var(--green)">Defense:</strong> Focused vertical depth, better workflow, stronger creator credit layer, better merchant repeat mechanics.</p></div></div>
+  </div>
+</div>
+
+<!-- EXECUTION SECTION -->
+<div class="section" id="execution">
+  <div class="section-title">05 — Execution Skills Playbook</div>
+  <div class="section-sub">The 10 core skills required to build Push into a defensible company</div>
+
+  <div class="grid grid-2" style="margin-bottom:32px">
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:36px;height:36px;border-radius:10px;background:rgba(108,92,231,0.2);display:flex;align-items:center;justify-content:center;font-size:16px">1</div><div style="font-weight:700">Merchant Acquisition</div></div>
+      <div class="card-desc">Acquire the right initial merchants: cafes, dessert shops, beauty studios, boutique fitness, pop-ups. Strong = motivated, responsive, willing to test repeatedly.</div>
+    </div>
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:36px;height:36px;border-radius:10px;background:rgba(0,206,201,0.2);display:flex;align-items:center;justify-content:center;font-size:16px">2</div><div style="font-weight:700">Creator Quality Sourcing</div></div>
+      <div class="card-desc">Recruit creators who can become reliable commercial operators. Distinguish aesthetic quality from business reliability. Avoid freebie opportunists.</div>
+    </div>
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:36px;height:36px;border-radius:10px;background:rgba(253,203,110,0.2);display:flex;align-items:center;justify-content:center;font-size:16px">3</div><div style="font-weight:700">Campaign Design</div></div>
+      <div class="card-desc">Attractive, measurable, operationally realistic campaigns. One clear goal, simple requirements, verifiable steps, believable payout, reason to repeat.</div>
+    </div>
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:36px;height:36px;border-radius:10px;background:rgba(225,112,85,0.2);display:flex;align-items:center;justify-content:center;font-size:16px">4</div><div style="font-weight:700">Operational Discipline</div></div>
+      <div class="card-desc">Clear milestone states, standard response templates, quick exception identification. Ops feel predictable, fair, visible, low-drama, rule-based.</div>
+    </div>
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:36px;height:36px;border-radius:10px;background:rgba(116,185,255,0.2);display:flex;align-items:center;justify-content:center;font-size:16px">5</div><div style="font-weight:700">Data Interpretation</div></div>
+      <div class="card-desc">Use limited early data intelligently. Separate signal from noise. Measure retention correctly. Track 9 key metrics.</div>
+    </div>
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:36px;height:36px;border-radius:10px;background:rgba(253,121,168,0.2);display:flex;align-items:center;justify-content:center;font-size:16px">6</div><div style="font-weight:700">Anti-Cliche Positioning</div></div>
+      <div class="card-desc">Avoid lazy platform analogies. Frame around outcomes and infrastructure. Explain the moat in operational and economic terms.</div>
+    </div>
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:36px;height:36px;border-radius:10px;background:rgba(108,92,231,0.2);display:flex;align-items:center;justify-content:center;font-size:16px">7</div><div style="font-weight:700">Retention Architecture</div></div>
+      <div class="card-desc">Make platform participation economically compounding. Creators see improved earnings; merchants get faster performance; off-platform feels irrational.</div>
+    </div>
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:36px;height:36px;border-radius:10px;background:rgba(0,206,201,0.2);display:flex;align-items:center;justify-content:center;font-size:16px">8</div><div style="font-weight:700">Risk Management</div></div>
+      <div class="card-desc">Recognize danger early. Identify fraud patterns, weak verticals, creator opportunism, merchant churn risk. Know when a campaign type is structurally bad.</div>
+    </div>
+    <div class="card" style="grid-column:span 2">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px"><div style="width:36px;height:36px;border-radius:10px;background:rgba(253,203,110,0.2);display:flex;align-items:center;justify-content:center;font-size:16px">9</div><div style="font-weight:700">Founder Operating Skill</div></div>
+      <div class="card-desc">Act as system integrator. Talk to merchants directly. Understand creator psychology. Resist ornamental feature temptation. <strong style="color:var(--red)">Mistakes to avoid:</strong> building for aesthetics before economics, expanding before density, adding social features too early, confusing signup growth with useful supply.</div>
+    </div>
+  </div>
+</div>
+
+<!-- COLD START SECTION -->
+<div class="section" id="coldstart">
+  <div class="section-title">11 — Cold Start Execution Plan</div>
+  <div class="section-sub">12-week step-by-step launch from zero in a single US neighborhood</div>
+
+  <!-- Phase Overview -->
+  <div class="grid grid-3" style="margin-bottom:32px">
+    <div class="card" style="border-top:3px solid var(--accent)">
+      <div style="font-size:12px;color:var(--accent2);font-weight:700;margin-bottom:4px">PHASE 1</div>
+      <div style="font-weight:700;font-size:18px;margin-bottom:8px">Foundation</div>
+      <div style="color:var(--text2);font-size:13px">Week 1-4</div>
+      <div style="margin-top:12px;font-size:13px;color:var(--text2)">Build supply on both sides manually. Zone selection, merchant scouting, creator outreach, website MVP, dry run.</div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--green)">
+      <div style="font-size:12px;color:var(--green);font-weight:700;margin-bottom:4px">PHASE 2</div>
+      <div style="font-weight:700;font-size:18px;margin-bottom:8px">First Campaigns</div>
+      <div style="color:var(--text2);font-size:13px">Week 5-8</div>
+      <div style="margin-top:12px;font-size:13px;color:var(--text2)">Prove the workflow works. Execute 5 campaigns, daily ops, iterate, track repeat rates, second batch.</div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--orange)">
+      <div style="font-size:12px;color:var(--orange);font-weight:700;margin-bottom:4px">PHASE 3</div>
+      <div style="font-weight:700;font-size:18px;margin-bottom:8px">Validate Repeat</div>
+      <div style="color:var(--text2);font-size:13px">Week 9-12</div>
+      <div style="margin-top:12px;font-size:13px;color:var(--text2)">Prove merchants come back. Scale to 15 merchants, introduce scoring, standby, transition to paid.</div>
+    </div>
+  </div>
+
+  <!-- Timeline -->
+  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:#fff">Week-by-Week Timeline</h3>
+  <div class="timeline">
+    <div class="timeline-item active"><div class="timeline-dot"></div><div class="timeline-title">Week 1: Zone Selection & Scouting</div><div class="timeline-desc">Pick ONE neighborhood. Scout 30 merchant prospects. Research 50 creator prospects.</div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-title">Week 2: First Merchant Conversations</div><div class="timeline-desc">15 conversations &rarr; 8 soft commitments &rarr; 5-6 committed for first batch.</div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-title">Week 3: Creator Outreach & Website MVP</div><div class="timeline-desc">Get 20 creators signed up. Build landing page, signup forms, campaign listing, admin dashboard.</div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-title">Week 4: Campaign Setup & Dry Run</div><div class="timeline-desc">Set up 5 campaigns manually. Match creators. Do 1-2 campaigns yourself to refine the flow.</div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-title">Week 5-6: Execute First Batch</div><div class="timeline-desc">5 merchants x 2-3 creators = 10-15 slots. Daily ops: check proofs, confirm, track, pay within 24h.</div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-title">Week 7-8: Second Batch + Improvements</div><div class="timeline-desc">5-8 more campaigns including 2+ repeat merchants. Track repeat rates, iterate website.</div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-title">Week 9-10: Scale to 15 Merchants</div><div class="timeline-desc">Referrals + walk-in outreach. Introduce basic creator scoring and standby notifications.</div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-title">Week 11-12: First Paid Campaigns</div><div class="timeline-desc">Transition to $49/campaign or $99/month. Go/No-Go decision based on 7 key metrics.</div></div>
+  </div>
+
+  <!-- Targets -->
+  <h3 style="font-size:20px;font-weight:700;margin:32px 0 20px;color:#fff">Week 12 Success Targets</h3>
+  <div class="grid grid-4">
+    <div class="card stat-card"><div class="stat-number" style="color:var(--green);font-size:32px">40%+</div><div class="stat-label">Merchant Repeat Rate</div></div>
+    <div class="card stat-card"><div class="stat-number" style="color:var(--accent2);font-size:32px">85%+</div><div class="stat-label">Completion Rate</div></div>
+    <div class="card stat-card"><div class="stat-number" style="color:var(--orange);font-size:32px">&lt;48h</div><div class="stat-label">Time-to-Fill</div></div>
+    <div class="card stat-card"><div class="stat-number" style="color:var(--pink);font-size:32px">25+</div><div class="stat-label">Total Campaigns</div></div>
+  </div>
+
+  <!-- Budget -->
+  <h3 style="font-size:20px;font-weight:700;margin:32px 0 20px;color:#fff">12-Week Budget</h3>
+  <div class="card" style="max-width:600px">
+    <div class="bar-chart">
+      <div class="bar-row"><div class="bar-label">Creator payments</div><div class="bar-track"><div class="bar-fill" style="width:75%;background:var(--accent)">$1,050-1,750</div></div></div>
+      <div class="bar-row"><div class="bar-label">Scouting costs</div><div class="bar-track"><div class="bar-fill" style="width:13%;background:var(--green)">$200</div></div></div>
+      <div class="bar-row"><div class="bar-label">Tools & hosting</div><div class="bar-track"><div class="bar-fill" style="width:5%;background:var(--orange)">$15-50</div></div></div>
+      <div class="bar-row"><div class="bar-label">Miscellaneous</div><div class="bar-track"><div class="bar-fill" style="width:13%;background:var(--text3)">$200</div></div></div>
+    </div>
+    <div style="margin-top:16px;text-align:right;font-size:18px;font-weight:800;color:var(--green)">Total: $1,500 - $2,200</div>
+  </div>
+</div>
+
+<!-- PRICING SECTION -->
+<div class="section" id="pricing">
+  <div class="section-title">12 — V0.1 Pricing Model</div>
+  <div class="section-sub">Price for learning, not for revenue. Remove friction, prove willingness to pay.</div>
+
+  <!-- Pricing Phases -->
+  <div class="grid grid-2" style="margin-bottom:32px">
+    <div class="card" style="border-top:3px solid var(--accent)">
+      <div style="font-size:12px;color:var(--accent2);font-weight:700;margin-bottom:8px">PHASE 1 (Week 1-8)</div>
+      <div style="font-size:36px;font-weight:900;color:var(--green);margin-bottom:8px">$0</div>
+      <div style="font-size:14px;color:var(--text2);margin-bottom:16px">Everything free. Goal: data and repeat behavior.</div>
+      <div class="table-wrap"><table>
+        <tr><th>Campaign Type</th><th>Creator Gets</th></tr>
+        <tr><td>Standard F&B + 1 post</td><td>Free item + $25-35 cash</td></tr>
+        <tr><td>Premium (Reel/TikTok)</td><td>Free item + $40-50 cash</td></tr>
+        <tr><td>Story-only</td><td>Free item + $15-20 cash</td></tr>
+      </table></div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--green)">
+      <div style="font-size:12px;color:var(--green);font-weight:700;margin-bottom:8px">PHASE 2 (Week 9-12)</div>
+      <div style="font-size:36px;font-weight:900;color:var(--green);margin-bottom:8px">$99<span style="font-size:16px;color:var(--text2)">/mo</span></div>
+      <div style="font-size:14px;color:var(--text2);margin-bottom:16px">Basic plan: Up to 3 campaigns/month</div>
+      <div class="table-wrap"><table>
+        <tr><th>Plan</th><th>Price</th><th>Campaigns</th><th>Extra</th></tr>
+        <tr><td>Basic</td><td>$99/mo</td><td>3/month</td><td>$39 each</td></tr>
+        <tr><td>Pro</td><td>$199/mo</td><td>8/month</td><td>$29 each</td></tr>
+      </table></div>
+    </div>
+  </div>
+
+  <!-- Competitive Comparison -->
+  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:#fff">Push vs Alternatives</h3>
+  <div class="table-wrap" style="margin-bottom:32px"><table>
+    <tr><th>Method</th><th>Cost</th><th>Measurability</th><th>Effort</th></tr>
+    <tr><td>DM a creator directly</td><td>$50-200/post + product</td><td><span class="tag tag-red">None</span></td><td><span class="tag tag-red">High</span></td></tr>
+    <tr><td>Local marketing agency</td><td>$500-2000/month</td><td><span class="tag tag-orange">Low-Med</span></td><td><span class="tag tag-green">Low</span></td></tr>
+    <tr><td>Instagram/Facebook Ads</td><td>$200-1000/month</td><td><span class="tag tag-orange">Medium</span></td><td><span class="tag tag-orange">Medium</span></td></tr>
+    <tr style="background:rgba(0,206,201,0.08)"><td style="font-weight:700;color:var(--green)">Push Basic</td><td style="font-weight:700;color:var(--green)">$99/month</td><td><span class="tag tag-green">Med-High</span></td><td><span class="tag tag-green">Very Low</span></td></tr>
+  </table></div>
+
+  <!-- Revenue Projections -->
+  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:#fff">Revenue Projections (Conservative)</h3>
+  <div class="card" style="max-width:500px">
+    <div class="bar-chart">
+      <div class="bar-row"><div class="bar-label">Week 9</div><div class="bar-track"><div class="bar-fill" style="width:14%;background:var(--accent)">$198</div></div></div>
+      <div class="bar-row"><div class="bar-label">Week 10</div><div class="bar-track"><div class="bar-fill" style="width:21%;background:var(--accent)">$297</div></div></div>
+      <div class="bar-row"><div class="bar-label">Week 11</div><div class="bar-track"><div class="bar-fill" style="width:28%;background:var(--accent)">$396</div></div></div>
+      <div class="bar-row"><div class="bar-label">Week 12</div><div class="bar-track"><div class="bar-fill" style="width:36%;background:var(--green)">$495</div></div></div>
+    </div>
+    <div style="margin-top:16px;text-align:right;font-size:16px;font-weight:700;color:var(--accent2)">Total W9-12: ~$1,386</div>
+  </div>
+
+  <!-- Pricing Rules -->
+  <h3 style="font-size:20px;font-weight:700;margin:32px 0 20px;color:#fff">Pricing Guardrails</h3>
+  <div class="grid grid-2">
+    <div class="card" style="border-left:3px solid var(--red)">
+      <div style="font-weight:700;color:var(--red);margin-bottom:8px">NEVER</div>
+      <ul style="list-style:none;font-size:13px;color:var(--text2)">
+        <li>&#10007; Charge before 1 free campaign completed</li>
+        <li>&#10007; Pay creators below $15 minimum</li>
+        <li>&#10007; Offer annual contracts in Phase 1-2</li>
+      </ul>
+    </div>
+    <div class="card" style="border-left:3px solid var(--green)">
+      <div style="font-weight:700;color:var(--green);margin-bottom:8px">ALWAYS</div>
+      <ul style="list-style:none;font-size:13px;color:var(--text2)">
+        <li>&#10003; Pay creators within 24 hours</li>
+        <li>&#10003; Full refund if zero completions</li>
+        <li>&#10003; Monthly only, cancel anytime</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SCORING SECTION -->
+<div class="section" id="scoring">
+  <div class="section-title">13 — Creator Scoring Model</div>
+  <div class="section-sub">Composite formula, tier system, anti-gaming measures</div>
+
+  <!-- Scoring Formula Visual -->
+  <div class="card" style="margin-bottom:32px; background: linear-gradient(135deg, rgba(108,92,231,0.1), transparent); border:1px solid rgba(108,92,231,0.3)">
+    <div style="font-size:13px;color:var(--accent2);font-weight:700;margin-bottom:12px">PUSH SCORE FORMULA</div>
+    <div style="font-size:16px;font-weight:600;color:#fff;font-family:monospace;margin-bottom:16px">
+      Push Score = (Completion x 0.30) + (Reliability x 0.20) + (Quality x 0.25) + (Satisfaction x 0.15) + (Engagement x 0.10)
+    </div>
+    <div style="font-size:13px;color:var(--text2)">Score range: 0-100 | Higher scores predict better campaign outcomes</div>
+  </div>
+
+  <!-- Score Dimensions -->
+  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:#fff">Score Dimensions</h3>
+  <div class="grid grid-5" style="margin-bottom:32px">
+    <div class="card" style="text-align:center">
+      <div style="position:relative;width:80px;height:80px;margin:0 auto 12px">
+        <svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="35" fill="none" stroke="var(--bg3)" stroke-width="6"/><circle cx="40" cy="40" r="35" fill="none" stroke="var(--accent)" stroke-width="6" stroke-dasharray="66 154" stroke-linecap="round" transform="rotate(-90 40 40)"/></svg>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:var(--accent)">30%</div>
+      </div>
+      <div style="font-weight:700;font-size:13px">Completion</div>
+      <div style="font-size:11px;color:var(--text3);margin-top:4px">Campaigns completed / accepted</div>
+    </div>
+    <div class="card" style="text-align:center">
+      <div style="position:relative;width:80px;height:80px;margin:0 auto 12px">
+        <svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="35" fill="none" stroke="var(--bg3)" stroke-width="6"/><circle cx="40" cy="40" r="35" fill="none" stroke="var(--green)" stroke-width="6" stroke-dasharray="55 165" stroke-linecap="round" transform="rotate(-90 40 40)"/></svg>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:var(--green)">25%</div>
+      </div>
+      <div style="font-weight:700;font-size:13px">Quality</div>
+      <div style="font-size:11px;color:var(--text3);margin-top:4px">Merchant content rating</div>
+    </div>
+    <div class="card" style="text-align:center">
+      <div style="position:relative;width:80px;height:80px;margin:0 auto 12px">
+        <svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="35" fill="none" stroke="var(--bg3)" stroke-width="6"/><circle cx="40" cy="40" r="35" fill="none" stroke="var(--orange)" stroke-width="6" stroke-dasharray="44 176" stroke-linecap="round" transform="rotate(-90 40 40)"/></svg>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:var(--orange)">20%</div>
+      </div>
+      <div style="font-weight:700;font-size:13px">Reliability</div>
+      <div style="font-size:11px;color:var(--text3);margin-top:4px">On-time, no-shows</div>
+    </div>
+    <div class="card" style="text-align:center">
+      <div style="position:relative;width:80px;height:80px;margin:0 auto 12px">
+        <svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="35" fill="none" stroke="var(--bg3)" stroke-width="6"/><circle cx="40" cy="40" r="35" fill="none" stroke="var(--pink)" stroke-width="6" stroke-dasharray="33 187" stroke-linecap="round" transform="rotate(-90 40 40)"/></svg>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:var(--pink)">15%</div>
+      </div>
+      <div style="font-weight:700;font-size:13px">Satisfaction</div>
+      <div style="font-size:11px;color:var(--text3);margin-top:4px">Merchant rebook score</div>
+    </div>
+    <div class="card" style="text-align:center">
+      <div style="position:relative;width:80px;height:80px;margin:0 auto 12px">
+        <svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="35" fill="none" stroke="var(--bg3)" stroke-width="6"/><circle cx="40" cy="40" r="35" fill="none" stroke="var(--blue)" stroke-width="6" stroke-dasharray="22 198" stroke-linecap="round" transform="rotate(-90 40 40)"/></svg>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:var(--blue)">10%</div>
+      </div>
+      <div style="font-weight:700;font-size:13px">Engagement</div>
+      <div style="font-size:11px;color:var(--text3);margin-top:4px">Post engagement rate</div>
+    </div>
+  </div>
+
+  <!-- Tier System -->
+  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:#fff">Tier System</h3>
+  <div class="table-wrap" style="margin-bottom:32px"><table>
+    <tr><th>Tier</th><th>Push Score</th><th>Badge</th><th>Campaigns Req.</th><th>Unlocks</th></tr>
+    <tr><td style="font-weight:600">New</td><td>N/A</td><td style="font-size:20px">&#127381;</td><td>0</td><td>Basic campaigns, max 2 active</td></tr>
+    <tr><td style="font-weight:600;color:var(--orange)">Rising</td><td>50+</td><td style="font-size:20px">&#11088;</td><td>3+</td><td>All standard campaigns, standby eligible</td></tr>
+    <tr><td style="font-weight:600;color:var(--accent2)">Reliable</td><td>70+</td><td style="font-size:20px">&#11088;&#11088;</td><td>8+</td><td>Priority matching, premium campaigns, higher payout</td></tr>
+    <tr><td style="font-weight:600;color:var(--green)">Elite</td><td>85+</td><td style="font-size:20px">&#11088;&#11088;&#11088;</td><td>20+</td><td>Top-tier campaigns, highest payouts, featured profile</td></tr>
+  </table></div>
+
+  <!-- Score Decay & Disputes -->
+  <div class="grid grid-2">
+    <div class="card">
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;color:#fff">Score Decay</h3>
+      <div style="font-size:13px;color:var(--text2);line-height:1.8">
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span>Active (1+ campaign/30d)</span><span style="color:var(--green)">No decay</span></div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span>Inactive 30-60 days</span><span style="color:var(--orange)">-2 pts/month</span></div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span>Inactive 60-90 days</span><span style="color:var(--red)">-5 pts/month</span></div>
+        <div style="display:flex;justify-content:space-between"><span>Inactive 90+ days</span><span style="color:var(--text3)">Frozen, marked inactive</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;color:#fff">Dispute Impact</h3>
+      <div style="font-size:13px;color:var(--text2);line-height:1.8">
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span>Creator at fault</span><span style="color:var(--red)">-15 points</span></div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span>Partially at fault</span><span style="color:var(--orange)">-8 points</span></div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span>Not creator's fault</span><span style="color:var(--text3)">No impact</span></div>
+        <div style="display:flex;justify-content:space-between"><span>Resolved in favor</span><span style="color:var(--green)">+2 points</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Anti-Gaming -->
+  <h3 style="font-size:20px;font-weight:700;margin:32px 0 20px;color:#fff">Anti-Gaming Measures</h3>
+  <div class="table-wrap"><table>
+    <tr><th>Gaming Attempt</th><th>Detection</th><th>Prevention</th></tr>
+    <tr><td>Only accepting easy campaigns</td><td>Track difficulty distribution</td><td>Require mix for tier promotion</td></tr>
+    <tr><td>Fake engagement (buying likes)</td><td>Engagement spike analysis</td><td>Engagement only 10% of score</td></tr>
+    <tr><td>Colluding with friendly merchants</td><td>Repeated pairing detection</td><td>Flag pairs with >3 consecutive</td></tr>
+    <tr><td>Rushing low-quality content</td><td>Merchant content rating</td><td>Quality is 25% of score</td></tr>
+  </table></div>
+</div>
+
+<!-- DOCUMENT HUB -->
+<div class="section" id="dochub">
+  <div class="section-title">Document Hub</div>
+  <div class="section-sub">Browse full content of all 8 PUSH strategic documents</div>
+
+  <div class="tabs" id="doc-tabs">
+    <button class="tab-btn active" onclick="switchDocTab(event,'doc-00')">00 Index</button>
+    <button class="tab-btn" onclick="switchDocTab(event,'doc-01')">01 Strategy</button>
+    <button class="tab-btn" onclick="switchDocTab(event,'doc-02')">02 Workflow</button>
+    <button class="tab-btn" onclick="switchDocTab(event,'doc-03')">03 Pain Points</button>
+    <button class="tab-btn" onclick="switchDocTab(event,'doc-04')">04 Risks</button>
+    <button class="tab-btn" onclick="switchDocTab(event,'doc-05')">05 Execution</button>
+    <button class="tab-btn" onclick="switchDocTab(event,'doc-11')">11 Cold Start</button>
+    <button class="tab-btn" onclick="switchDocTab(event,'doc-12')">12 Pricing</button>
+    <button class="tab-btn" onclick="switchDocTab(event,'doc-13')">13 Scoring</button>
+  </div>
+
+  <!-- Doc 00 -->
+  <div class="tab-content active" id="doc-00">
+    <div class="doc-content">
+      <div class="doc-badge" style="background:rgba(108,92,231,0.2);color:var(--accent2)">DOC-00 | Document Index</div>
+      <h2>PUSH Document Index & Navigation Guide</h2>
+      <h3>Document Map: All 13 Authoritative Documents</h3>
+      <div class="table-wrap doc-table"><table>
+        <tr><th>#</th><th>Title</th><th>Authoritative For</th></tr>
+        <tr><td>01</td><td>Master Strategy</td><td>Vision, positioning, problem statement, differentiation</td></tr>
+        <tr><td>02</td><td>20x Workflow Architecture</td><td>Workflow stages, SLAs, merchant/creator/ops processes</td></tr>
+        <tr><td>03</td><td>Pain Points & Root Cause Map</td><td>Pain diagnosis, root cause framework, symptom vs cause</td></tr>
+        <tr><td>04</td><td>Risk Register & Defense</td><td>Risk identification, prioritization, defense strategies</td></tr>
+        <tr><td>05</td><td>Execution Skills Playbook</td><td>Execution competencies, founder skills, standards</td></tr>
+        <tr><td>11</td><td>Cold Start Execution Plan</td><td>12-week launch plan, acquisition tactics</td></tr>
+        <tr><td>12</td><td>V0.1 Pricing Model</td><td>Fee structures, payment flows, projections</td></tr>
+        <tr><td>13</td><td>V0.1 Creator Scoring</td><td>Scoring weights, tier thresholds, calculations</td></tr>
+      </table></div>
+      <h3>Reading Paths by Role</h3>
+      <div class="grid grid-3" style="margin-top:12px">
+        <div class="card"><div style="font-weight:700;margin-bottom:8px;color:var(--accent2)">New to Push</div><div class="card-desc">4-6 hours: Doc 01 &rarr; 04 &rarr; 03 &rarr; 02 &rarr; 08 &rarr; 09</div></div>
+        <div class="card"><div style="font-weight:700;margin-bottom:8px;color:var(--green)">Investor Prep</div><div class="card-desc">3-4 hours: Doc 01 &rarr; 07 &rarr; 08 &rarr; 09 &rarr; 03 &rarr; 04</div></div>
+        <div class="card"><div style="font-weight:700;margin-bottom:8px;color:var(--orange)">Product Leadership</div><div class="card-desc">5-7 hours: Doc 01 &rarr; 04 &rarr; 03 &rarr; 05 &rarr; 06 &rarr; 02 &rarr; 09</div></div>
+        <div class="card"><div style="font-weight:700;margin-bottom:8px;color:var(--red)">Operations & Fraud</div><div class="card-desc">4-5 hours: Doc 02 &rarr; 06 &rarr; 05 &rarr; 03 &rarr; 04</div></div>
+        <div class="card"><div style="font-weight:700;margin-bottom:8px;color:var(--pink)">GTM & Growth</div><div class="card-desc">3-4 hours: Doc 07 &rarr; 01 &rarr; 03 &rarr; 04 &rarr; 08</div></div>
+        <div class="card"><div style="font-weight:700;margin-bottom:8px;color:var(--blue)">Engineering</div><div class="card-desc">3-4 hours: Doc 10 &rarr; 04 &rarr; 02 &rarr; 05</div></div>
+      </div>
+      <h3>Skill System Architecture</h3>
+      <p>Push uses a tiered, specialized skill architecture across 8 tiers: Strategy, Product Design, Operations, Growth/GTM, Finance, Analytics, Communications, and Technical.</p>
+      <div class="table-wrap doc-table" style="margin-top:12px"><table>
+        <tr><th>Tier</th><th>Example Skills</th><th>Example Use</th></tr>
+        <tr><td>1: Strategy</td><td>push-strategy-advisor, push-positioning</td><td>"Should we build a new campaign type?"</td></tr>
+        <tr><td>2: Product</td><td>push-campaign-designer, push-creator-scoring</td><td>"Design the campaign workflow"</td></tr>
+        <tr><td>3: Operations</td><td>push-fraud-ops, push-settlement-ops</td><td>"Review this disputed proof"</td></tr>
+        <tr><td>4: Growth</td><td>push-gtm-experiments, push-cold-start</td><td>"Bootstrap a new city"</td></tr>
+        <tr><td>5: Finance</td><td>push-unit-economics, push-pricing-strategist</td><td>"What should we charge?"</td></tr>
+        <tr><td>6: Analytics</td><td>push-metrics-designer, push-experiment-design</td><td>"Design retention dashboard"</td></tr>
+        <tr><td>7: Comms</td><td>push-pitch-deck, push-investor-narrative</td><td>"Draft onboarding email"</td></tr>
+        <tr><td>8: Technical</td><td>push-data-model, push-api-architect</td><td>"Design creator tier API"</td></tr>
+      </table></div>
+    </div>
+  </div>
+
+  <!-- Doc 01 -->
+  <div class="tab-content" id="doc-01">
+    <div class="doc-content">
+      <div class="doc-badge" style="background:rgba(108,92,231,0.2);color:var(--accent2)">DOC-01 | v1.1 | Active</div>
+      <h2>PUSH Master Strategy</h2>
+      <blockquote>Push is a local creator performance infrastructure layer that helps merchants acquire customers through measurable creator-driven demand.</blockquote>
+      <h3>Core Problem</h3>
+      <h4>Merchant Problem</h4><p>Cannot judge creator quality, compare creators beyond followers, run structured campaigns, or avoid wasting money on low performers.</p>
+      <h4>Creator Problem</h4><p>Lack pricing power, verifiable performance records, upward mobility, and a stable path from free samples to paid work.</p>
+      <h4>Market Problem</h4><p>The creator economy has abundant supply, but not structured into a repeatable acquisition channel for local commerce.</p>
+      <h3>5 Strategic Pillars</h3>
+      <p><strong>1. Offer OS:</strong> Convert merchant intent into structured campaigns (launch item, drive off-peak traffic, fill event attendance).</p>
+      <p><strong>2. Creator Credit:</strong> Value creators by completion rate, reliability, merchant satisfaction, repeat booking, dispute history.</p>
+      <p><strong>3. Attribution:</strong> Verify via unique codes, check-in proof, merchant confirmation, content verification, redemption evidence.</p>
+      <p><strong>4. Demand Surface:</strong> Real-time demand interface showing where opportunities are, when they close, who qualifies.</p>
+      <p><strong>5. Liquidity Layer:</strong> Standby mechanism for slot fill rate, creator engagement, urgency, merchant confidence.</p>
+      <h3>Company-Building Thesis</h3>
+      <p>The end state is a new market layer for local creator-driven demand: standardize local creator acquisition, rank by performance, route toward better outcomes, compound proprietary data, create lock-in through access, trust, and workflow.</p>
+      <h3>Strategic Red Flags</h3>
+      <p>The company becomes weak if it behaves like: a sample-giveaway app, creator coupon engine, posting board, local discovery map with weak economics, or content engagement platform with shallow verification.</p>
+    </div>
+  </div>
+
+  <!-- Doc 02 -->
+  <div class="tab-content" id="doc-02">
+    <div class="doc-content">
+      <div class="doc-badge" style="background:rgba(0,206,201,0.2);color:var(--green)">DOC-02 | v1.1 | Active</div>
+      <h2>20x Workflow Architecture</h2>
+      <blockquote>The workflow should feel like a controlled economic system, not a manual project-management pipeline.</blockquote>
+      <h3>Design Principles</h3><p>Fast to understand, hard to misuse, easy to repeat, measurable at every stage, resilient against drop-off and fraud, produces better data over time.</p>
+      <h3>Merchant Workflow (6 Stages)</h3>
+      <p><strong>1. Onboarding:</strong> Business info + operational intelligence (demand windows, AOV, high-margin products, capacity).</p>
+      <p><strong>2. Goal Selection:</strong> Drive visits, increase weekday traffic, launch item, boost event attendance, fill underperforming slots.</p>
+      <p><strong>3. Campaign Structuring:</strong> Offer, payout, slots, dates, creator requirements, verification, approval rules.</p>
+      <p><strong>4. Candidate Routing:</strong> Ranked by fulfillment history, local fit, category match, reliability.</p>
+      <p><strong>5. Execution:</strong> Clear deliverables, locked schedule, 7 milestone states.</p>
+      <p><strong>6. Review & Repeat:</strong> Result summary, repeat recommendation, next campaign seed.</p>
+      <h3>7 Milestone States</h3><p>Accepted &rarr; Scheduled &rarr; Visited &rarr; Proof Submitted &rarr; Content Published &rarr; Verified &rarr; Settled</p>
+      <h3>Creator Workflow (5 Stages)</h3>
+      <p>Onboarding &rarr; Opportunity Discovery &rarr; Application/Standby &rarr; Fulfillment &rarr; Settlement & Progression</p>
+      <h3>20x vs Basic Flow</h3>
+      <p><strong>Basic:</strong> Post &rarr; Apply &rarr; Accept &rarr; Content &rarr; Pay?</p>
+      <p><strong>20x Push:</strong> Goal &rarr; Structure &rarr; Route &rarr; Verify &rarr; Settle &rarr; Repeat</p>
+      <h3>Workflow Failure Points</h3><p>Vague instructions, creator ghosting, proof confusion, approval delays, weak fraud controls, low standby response, payout delays, incomplete data.</p>
+    </div>
+  </div>
+
+  <!-- Doc 03 -->
+  <div class="tab-content" id="doc-03">
+    <div class="doc-content">
+      <div class="doc-badge" style="background:rgba(253,203,110,0.2);color:var(--orange)">DOC-03 | v1.1 | Active</div>
+      <h2>Pain Points & Root Cause Map</h2>
+      <blockquote>The strongest businesses correctly identify which complaints are structural and build around resolving them.</blockquote>
+      <h3>Merchant Pain Points</h3>
+      <p><strong>A. Cannot Judge Creator Quality:</strong> Merchants evaluate by followers and aesthetics (weak signals). Root: no normalized credit layer.</p>
+      <p><strong>B. Unclear ROI:</strong> Cannot answer "did this creator bring real visits?" Root: no structured attribution.</p>
+      <p><strong>C. Operational Friction:</strong> No time for outreach, negotiation, tracking. Root: ad hoc relationship work.</p>
+      <p><strong>D. Fear of Being Burned:</strong> No-shows, low quality, take-and-disappear. Root: no consequence-backed trust.</p>
+      <h3>Creator Pain Points</h3>
+      <p><strong>A. No Pricing Power:</strong> Cannot prove worth. Root: no standardized credit system.</p>
+      <p><strong>B. Income Instability:</strong> Random deal flow, low-quality offers. Root: no structured pipeline.</p>
+      <p><strong>C. Exploitative Low-End:</strong> Trapped in "free sample" loops. Root: no distinction between onboarding and growth.</p>
+      <p><strong>D. Trust Asymmetry:</strong> Don't know if merchants pay fairly. Root: weak merchant accountability.</p>
+      <h3>Platform Pain Points</h3>
+      <p><strong>A. Cold Start</strong> (two-sided dependency), <strong>B. Fraud</strong> (weak verification), <strong>C. Disintermediation</strong> (introduction-only perception), <strong>D. Commoditization</strong> (under-invest in credit/attribution).</p>
+      <h3>5 Root Causes</h3><p>Lack of structure, verification, repeatability, durable incentives, and compounding data.</p>
+    </div>
+  </div>
+
+  <!-- Doc 04 -->
+  <div class="tab-content" id="doc-04">
+    <div class="doc-content">
+      <div class="doc-badge" style="background:rgba(225,112,85,0.2);color:var(--red)">DOC-04 | v1.1 | Active</div>
+      <h2>Risk Register & Defense Playbook</h2>
+      <blockquote>Push wins by making the platform more economically rational than off-platform behavior.</blockquote>
+      <h3>Strategic Risks (R1-R3)</h3>
+      <p><strong>R1 Derivative Positioning:</strong> Position as infrastructure, not marketplace.</p>
+      <p><strong>R2 Weak Wedge:</strong> Start with one dense area, 1-2 strong verticals.</p>
+      <p><strong>R3 Feature Drift:</strong> Only features improving ROI, progression, defensibility, trust.</p>
+      <h3>Marketplace Risks (R4-R6)</h3>
+      <p><strong>R4 Cold Start:</strong> Founder-led density creation.</p>
+      <p><strong>R5 Low Merchant Retention:</strong> Better templates, reporting, creator sorting, fill speed.</p>
+      <p><strong>R6 Low Creator Retention:</strong> Strong progression, limited freebie dependency, clear earnings ladder.</p>
+      <h3>Behavioral Risks (R7-R9)</h3>
+      <p><strong>R7 Disintermediation:</strong> Superior on-platform value (credit, automation, payouts).</p>
+      <p><strong>R8 Opportunist Supply:</strong> Gate opportunities behind performance history.</p>
+      <p><strong>R9 Merchant Abuse:</strong> Track merchant behavior and build accountability.</p>
+      <h3>Fraud Risks (R10-R12)</h3><p>Fake proof, fake redemption, engagement inflation. Defense: timestamped uploads, geo checks, merchant verification, pattern analysis.</p>
+      <h3>Operational Risks (R13-R15)</h3><p>Approval bottlenecks (SLA nudges), settlement delays (explicit rules), support explosion (exception-based ops).</p>
+      <h3>Competitive (R16)</h3><p>Large platforms may copy features; defend with vertical depth, workflow, credit layer.</p>
+    </div>
+  </div>
+
+  <!-- Doc 05 -->
+  <div class="tab-content" id="doc-05">
+    <div class="doc-content">
+      <div class="doc-badge" style="background:rgba(116,185,255,0.2);color:var(--blue)">DOC-05 | v1.1 | Active</div>
+      <h2>Execution Skills Playbook</h2>
+      <blockquote>Push will succeed only if the team can: acquire right merchants, recruit right creators, verify/route value, and convert repetition into data, trust, and lock-in.</blockquote>
+      <h3>9 Core Skills</h3>
+      <p><strong>1. Merchant Acquisition:</strong> Identify merchants with visible acquisition need. Best targets: cafes, dessert shops, beauty studios, boutique fitness, pop-ups.</p>
+      <p><strong>2. Creator Quality Sourcing:</strong> Distinguish aesthetic quality from business reliability. Avoid freebie opportunists.</p>
+      <p><strong>3. Campaign Design:</strong> One clear goal, simple requirements, verifiable steps, believable payout, reason to repeat.</p>
+      <p><strong>4. Operational Discipline:</strong> Clear milestone states, standard templates, quick exception ID. Ops feel predictable and rule-based.</p>
+      <p><strong>5. Data Interpretation:</strong> 9 key metrics: merchant repeat rate, creator repeat completion, fill rate, standby response, time-to-fill, payout speed, dispute rate, progression rate, on-platform repeat rate.</p>
+      <p><strong>6. Anti-Cliche Positioning:</strong> Frame around outcomes and infrastructure, not lazy platform analogies.</p>
+      <p><strong>7. Retention Architecture:</strong> Make participation economically compounding. Off-platform must feel irrational.</p>
+      <p><strong>8. Risk Management:</strong> Recognize danger early. Identify fraud patterns, weak verticals, churn risk.</p>
+      <p><strong>9. Founder Operating:</strong> System integrator. Resist ornamental features. Avoid: aesthetics before economics, expanding before density, social features too early.</p>
+    </div>
+  </div>
+
+  <!-- Doc 11 -->
+  <div class="tab-content" id="doc-11">
+    <div class="doc-content">
+      <div class="doc-badge" style="background:rgba(253,121,168,0.2);color:var(--pink)">DOC-11 | v1.0 | Active</div>
+      <h2>Cold Start Execution Plan</h2>
+      <blockquote>Step-by-step execution for the first 12 weeks, starting from zero merchants and zero creators.</blockquote>
+      <h3>Phase 1: Foundation (Week 1-4)</h3>
+      <p><strong>Week 1:</strong> Zone selection (ONE neighborhood, 30+ indie F&B shops), scout 30 merchants, research 50 creators.</p>
+      <p><strong>Week 2:</strong> 15 in-person merchant conversations during slow periods. Target: 8 soft commits, 5-6 firm.</p>
+      <p><strong>Week 3:</strong> DM 50 micro-creators (1K-15K followers). Build website MVP (Next.js + Vercel + Supabase).</p>
+      <p><strong>Week 4:</strong> Set up 5 campaigns manually. Do 1-2 yourself as dry run.</p>
+      <h3>Phase 2: First Campaigns (Week 5-8)</h3>
+      <p><strong>Week 5-6:</strong> 5 merchants x 2-3 creators = 10-15 slots. Daily ops. Pay within 24h via Venmo/Zelle.</p>
+      <p><strong>Week 7-8:</strong> Second batch. 2+ repeat merchants from batch 1. Track repeat rate, completion, time-to-fill.</p>
+      <h3>Phase 3: Validate Repeat (Week 9-12)</h3>
+      <p><strong>Week 9-10:</strong> Scale to 15 merchants. Introduce scoring and standby.</p>
+      <p><strong>Week 11-12:</strong> Transition to paid ($49/campaign or $99/month). Go/No-Go decision.</p>
+      <h3>Budget: $1,500 - $2,200 total</h3>
+      <h3>Week 12 Targets</h3><p>Merchant repeat 40%+, completion 85%+, time-to-fill <48h, willingness to pay 30%+, 25+ campaigns completed.</p>
+    </div>
+  </div>
+
+  <!-- Doc 12 -->
+  <div class="tab-content" id="doc-12">
+    <div class="doc-content">
+      <div class="doc-badge" style="background:rgba(0,206,201,0.2);color:var(--green)">DOC-12 | v1.0 | Active</div>
+      <h2>V0.1 Pricing Model</h2>
+      <blockquote>Price for learning, not for revenue.</blockquote>
+      <h3>Phase 1: Free Launch (Week 1-8)</h3>
+      <p>$0 for merchants. Creator compensation: Standard $25-35, Premium $40-50, Story-only $15-20. Push pays from own pocket.</p>
+      <h3>Phase 2: Introductory Paid (Week 9-12)</h3>
+      <p>Recommended: $99/month Basic (3 campaigns), $199/month Pro (8 campaigns). Creates habit and recurring revenue signal.</p>
+      <h3>Payment Flow</h3>
+      <p>Phase 1-2: Manual (Venmo/Zelle/Stripe invoice). Phase 3+: Automated via Stripe Connect with 15% take rate.</p>
+      <h3>Pricing Comparison</h3>
+      <p>Push $99/month is cheaper than DM ($50-200/post), agencies ($500-2000/month), and ads ($200-1000/month) with less effort.</p>
+      <h3>Revenue Projection</h3><p>W9: $198, W10: $297, W11: $396, W12: $495. Total W9-12: ~$1,386. Break-even at ~15 paying merchants (Month 4-5).</p>
+      <h3>Guardrails</h3><p>Never charge before 1 free campaign. Always pay creators within 24h. Minimum $15 payout. Monthly only, cancel anytime.</p>
+    </div>
+  </div>
+
+  <!-- Doc 13 -->
+  <div class="tab-content" id="doc-13">
+    <div class="doc-content">
+      <div class="doc-badge" style="background:rgba(108,92,231,0.2);color:var(--accent2)">DOC-13 | v1.0 | Active</div>
+      <h2>V0.1 Creator Scoring Model</h2>
+      <blockquote>Simple enough for spreadsheets, meaningful enough to predict outcomes, transparent enough for creators, resistant to gaming.</blockquote>
+      <h3>Composite Formula</h3>
+      <p style="font-family:monospace;font-size:14px;color:var(--accent2);margin:12px 0">Push Score = (Completion x 0.30) + (Reliability x 0.20) + (Quality x 0.25) + (Satisfaction x 0.15) + (Engagement x 0.10)</p>
+      <h3>Dimensions</h3>
+      <p><strong>Completion (30%):</strong> campaigns completed / accepted. Highest weight because non-completion is worthless to merchants.</p>
+      <p><strong>Quality (25%):</strong> Merchant content rating 1-5.</p>
+      <p><strong>Reliability (20%):</strong> On-time submissions and no-show rate.</p>
+      <p><strong>Satisfaction (15%):</strong> Merchant rebook score 1-5.</p>
+      <p><strong>Engagement (10%):</strong> Post engagement rate (most gameable, lowest weight).</p>
+      <h3>Tier System</h3>
+      <p>New (N/A) &rarr; Rising (50+, 3 campaigns) &rarr; Reliable (70+, 8 campaigns) &rarr; Elite (85+, 20 campaigns). Promotion requires 2 consecutive campaigns at threshold. Demotion has 3-campaign grace period.</p>
+      <h3>Cold Start</h3><p>First 3 campaigns are probationary. Provisional score starts at 60. Strong early performance triggers fast-track.</p>
+      <h3>Score Decay</h3><p>Active: no decay. 30-60d inactive: -2/month. 60-90d: -5/month. 90d+: frozen.</p>
+      <h3>Anti-Gaming</h3><p>Track difficulty distribution, engagement spike analysis, repeated pairing detection, merchant content ratings.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div style="text-align:center;padding:60px 24px;color:var(--text3);font-size:13px;border-top:1px solid rgba(108,92,231,0.1)">
+  <div style="font-weight:700;color:var(--accent2);font-size:16px;margin-bottom:8px">PUSH</div>
+  <div>Local Creator Performance Infrastructure</div>
+  <div style="margin-top:8px">8 Core Documents | 5 Strategic Pillars | 12-Week Execution Plan</div>
+  <div style="margin-top:16px;color:var(--text3)">Last updated: April 2026</div>
+</div>
+
+<footer style="background:rgba(10,10,15,0.95);border-top:1px solid rgba(108,92,231,0.2);padding:40px 24px;text-align:center;color:var(--text2);font-size:14px;">
+  <div style="max-width:1400px;margin:0 auto;">
+    <p style="margin-bottom:12px;font-weight:600;color:var(--accent2);font-size:16px;">PUSH Team Dashboard</p>
+    <p style="margin-bottom:16px;">Explore more:
+      <a href="project-intro.html" style="color:var(--accent);margin:0 8px;">Project Intro</a> |
+      <a href="pitch-deck.html" style="color:var(--accent);margin:0 8px;">Pitch Deck</a> |
+      <a href="prospects.html" style="color:var(--accent);margin:0 8px;">Prospects</a> |
+      <a href="challenges.html" style="color:var(--accent);margin:0 8px;">Challenges</a>
+    </p>
+    <p style="opacity:0.5;">&copy; 2025 Push Team. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+// Tab switching
+function switchTab(e, id) {
+  const parent = e.target.closest('.section') || document;
+  const tabs = e.target.closest('.tabs');
+  tabs.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  e.target.classList.add('active');
+  // Find sibling tab-contents
+  let el = tabs.nextElementSibling;
+  while (el && el.classList.contains('tab-content')) {
+    el.classList.remove('active');
+    el = el.nextElementSibling;
+  }
+  document.getElementById(id).classList.add('active');
+}
+
+// Doc Hub tab switching
+function switchDocTab(e, id) {
+  document.querySelectorAll('#doc-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+  e.target.classList.add('active');
+  document.querySelectorAll('#dochub .tab-content').forEach(c => c.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+// Accordion
+function toggleAccordion(header) {
+  header.classList.toggle('open');
+  const body = header.nextElementSibling;
+  body.classList.toggle('open');
+}
+
+// Active nav highlighting
+window.addEventListener('scroll', () => {
+  const sections = document.querySelectorAll('.section, .hero');
+  const navLinks = document.querySelectorAll('.topnav .navlinks a');
+  let current = '';
+  sections.forEach(s => {
+    if (s.id && window.scrollY >= s.offsetTop - 100) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.remove('active');
+    if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

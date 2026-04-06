@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PUSH - Challenges & Risks</title>
+<style>
+:root {
+  --bg: #0a0a0f;
+  --bg2: #12121a;
+  --bg3: #1a1a2e;
+  --bg4: #242440;
+  --accent: #6c5ce7;
+  --accent2: #a29bfe;
+  --green: #00cec9;
+  --orange: #fdcb6e;
+  --red: #e17055;
+  --pink: #fd79a8;
+  --blue: #74b9ff;
+  --text: #dfe6e9;
+  --text2: #b2bec3;
+  --text3: #636e72;
+  --radius: 16px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.3);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+a { color: var(--accent2); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* NAV */
+.topnav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(10,10,15,0.92); backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(108,92,231,0.2);
+  display: flex; align-items: center; padding: 0 24px; height: 60px; gap: 8px;
+}
+.topnav .logo { font-weight: 800; font-size: 22px; color: var(--accent2); letter-spacing: 2px; margin-right: 32px; }
+.topnav .navlinks { display: flex; gap: 4px; flex-wrap: wrap; }
+.topnav .navlinks a {
+  padding: 6px 14px; border-radius: 8px; font-size: 13px; font-weight: 500;
+  color: var(--text2); transition: all 0.2s;
+}
+.topnav .navlinks a:hover, .topnav .navlinks a.active { background: var(--bg3); color: #fff; text-decoration: none; }
+
+/* HERO */
+.hero {
+  padding: 100px 24px 40px;
+  max-width: 1400px; margin: 0 auto;
+  text-align: center;
+}
+.hero h1 {
+  font-size: 42px; font-weight: 900;
+  background: linear-gradient(135deg, var(--red), var(--orange), var(--accent2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; margin-bottom: 8px;
+}
+.hero p { color: var(--text2); font-size: 18px; max-width: 700px; margin: 0 auto; }
+
+/* SEVERITY LEGEND */
+.legend {
+  display: flex; gap: 24px; justify-content: center; margin: 32px auto 0;
+  flex-wrap: wrap;
+}
+.legend-item {
+  display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text2);
+}
+.legend-dot {
+  width: 12px; height: 12px; border-radius: 50%;
+}
+.legend-dot.critical { background: var(--red); box-shadow: 0 0 8px var(--red); }
+.legend-dot.high { background: var(--orange); box-shadow: 0 0 8px var(--orange); }
+.legend-dot.medium { background: var(--accent2); box-shadow: 0 0 8px var(--accent2); }
+
+/* SECTION */
+.section {
+  padding: 40px 24px; max-width: 1400px; margin: 0 auto;
+}
+.section-label {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 26px; font-weight: 800; margin-bottom: 24px;
+  padding-bottom: 8px; border-bottom: 3px solid;
+}
+.section-label.critical { border-color: var(--red); color: var(--red); }
+.section-label.high { border-color: var(--orange); color: var(--orange); }
+.section-label.medium { border-color: var(--accent2); color: var(--accent2); }
+
+/* CARD GRID */
+.card-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+  gap: 24px;
+}
+
+/* CHALLENGE CARD */
+.challenge-card {
+  background: var(--bg2);
+  border: 1px solid rgba(108,92,231,0.15);
+  border-radius: var(--radius);
+  padding: 0;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.challenge-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+
+/* Card header with number badge */
+.card-header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 20px 24px 0;
+}
+.card-num {
+  width: 36px; height: 36px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 15px; color: #fff; flex-shrink: 0;
+}
+.card-num.critical { background: linear-gradient(135deg, var(--red), #c0392b); }
+.card-num.high { background: linear-gradient(135deg, var(--orange), #e67e22); }
+.card-num.medium { background: linear-gradient(135deg, var(--accent2), var(--accent)); }
+
+.card-title {
+  font-size: 15px; font-weight: 700; color: #fff;
+}
+
+/* Severity meter */
+.severity-bar-wrap {
+  padding: 12px 24px 0;
+}
+.severity-label {
+  display: flex; justify-content: space-between;
+  font-size: 11px; color: var(--text3); margin-bottom: 4px;
+}
+.severity-track {
+  width: 100%; height: 6px; background: var(--bg3); border-radius: 3px; overflow: hidden;
+}
+.severity-fill {
+  height: 100%; border-radius: 3px; transition: width 1s ease;
+}
+.severity-fill.critical { background: linear-gradient(90deg, var(--red), #ff6b6b); }
+.severity-fill.high { background: linear-gradient(90deg, var(--orange), #ffeaa7); }
+.severity-fill.medium { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+
+/* Bilingual content */
+.bilingual {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0; padding: 16px 24px 20px;
+}
+.col-zh, .col-en {
+  padding: 0;
+}
+.col-zh {
+  padding-right: 16px;
+  border-right: 1px solid rgba(108,92,231,0.1);
+}
+.col-en {
+  padding-left: 16px;
+}
+.lang-tag {
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1.5px; margin-bottom: 8px;
+  color: var(--text3);
+}
+.desc-text {
+  font-size: 13px; color: var(--text2); line-height: 1.7; margin-bottom: 10px;
+}
+.defense-label {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1px; margin-bottom: 4px;
+}
+.defense-label.critical { color: var(--green); }
+.defense-label.high { color: var(--green); }
+.defense-label.medium { color: var(--green); }
+.defense-text {
+  font-size: 12px; color: var(--green); line-height: 1.6;
+  padding: 8px 10px;
+  background: rgba(0,206,201,0.06);
+  border-radius: 8px;
+  border-left: 3px solid var(--green);
+}
+
+/* SUMMARY STATS */
+.stats-row {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px; margin-bottom: 40px;
+}
+.stat-card {
+  background: var(--bg2); border-radius: var(--radius);
+  padding: 20px 24px; text-align: center;
+  border: 1px solid rgba(108,92,231,0.12);
+}
+.stat-num { font-size: 36px; font-weight: 900; }
+.stat-num.critical { color: var(--red); }
+.stat-num.high { color: var(--orange); }
+.stat-num.medium { color: var(--accent2); }
+.stat-num.total { background: linear-gradient(135deg, var(--red), var(--orange), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.stat-label { font-size: 12px; color: var(--text3); margin-top: 4px; }
+
+/* FOOTER */
+.footer {
+  text-align: center; padding: 40px 24px; color: var(--text3); font-size: 13px;
+  border-top: 1px solid rgba(108,92,231,0.1); margin-top: 40px;
+}
+
+@media (max-width: 900px) {
+  .card-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .bilingual { grid-template-columns: 1fr; }
+  .col-zh { border-right: none; padding-right: 0; padding-bottom: 12px; border-bottom: 1px solid rgba(108,92,231,0.1); margin-bottom: 12px; }
+  .col-en { padding-left: 0; }
+  .hero h1 { font-size: 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="topnav">
+  <div class="logo">PUSH</div>
+  <div class="navlinks">
+    <a href="index.html">Dashboard</a>
+    <a href="challenges.html" class="active">Challenges</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Challenges & Risks / 挑战与风险</h1>
+  <p>PUSH 平台面临的核心挑战、风险评估及应对策略<br>Core challenges, risk assessment, and defense strategies for the PUSH platform</p>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot critical"></div>Existential / 生死攸关</div>
+    <div class="legend-item"><div class="legend-dot high"></div>Major / 重大风险</div>
+    <div class="legend-item"><div class="legend-dot medium"></div>Operational / 运营挑战</div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="section">
+  <div class="stats-row">
+    <div class="stat-card"><div class="stat-num total">12</div><div class="stat-label">Total Challenges / 挑战总数</div></div>
+    <div class="stat-card"><div class="stat-num critical">5</div><div class="stat-label">Existential / 生存级</div></div>
+    <div class="stat-card"><div class="stat-num high">4</div><div class="stat-label">Major / 重大级</div></div>
+    <div class="stat-card"><div class="stat-num medium">3</div><div class="stat-label">Operational / 运营级</div></div>
+  </div>
+</div>
+
+<!-- EXISTENTIAL -->
+<div class="section">
+  <div class="section-label critical">Existential Challenges / 生存级挑战</div>
+
+  <div class="card-grid">
+
+    <!-- 1. Cold Start -->
+    <div class="challenge-card">
+      <div class="card-header">
+        <div class="card-num critical">1</div>
+        <div class="card-title">Cold Start Problem / 冷启动问题</div>
+      </div>
+      <div class="severity-bar-wrap">
+        <div class="severity-label"><span>Risk Severity / 风险等级</span><span>95%</span></div>
+        <div class="severity-track"><div class="severity-fill critical" style="width:95%"></div></div>
+      </div>
+      <div class="bilingual">
+        <div class="col-zh">
+          <div class="lang-tag">中文</div>
+          <div class="desc-text">双边市场困境：没有创作者，商家不来；没有商家，创作者不来。经典的鸡生蛋问题，是所有平台型产品最根本的挑战。</div>
+          <div class="defense-label critical">应对策略</div>
+          <div class="defense-text">超本地化密度策略，创始人亲自手动匹配，先在小区域内形成供需闭环。</div>
+        </div>
+        <div class="col-en">
+          <div class="lang-tag">English</div>
+          <div class="desc-text">Two-sided market dilemma: no creators without merchants, no merchants without creators. The classic chicken-and-egg problem is the most fundamental challenge for any platform business.</div>
+          <div class="defense-label critical">Defense Strategy</div>
+          <div class="defense-text">Hyper-local density strategy, founder-led manual matching, build supply-demand loops in small areas first.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Disintermediation -->
+    <div class="challenge-card">
+      <div class="card-header">
+        <div class="card-num critical">2</div>
+        <div class="card-title">Disintermediation Risk / 脱媒风险</div>
+      </div>
+      <div class="severity-bar-wrap">
+        <div class="severity-label"><span>Risk Severity / 风险等级</span><span>90%</span></div>
+        <div class="severity-track"><div class="severity-fill critical" style="width:90%"></div></div>
+      </div>
+      <div class="bilingual">
+        <div class="col-zh">
+          <div class="lang-tag">中文</div>
+          <div class="desc-text">商家和创作者在首次联系后绕过平台直接合作。这是所有撮合平台的核心威胁——一旦双方建立联系，平台就可能被架空。</div>
+          <div class="defense-label critical">应对策略</div>
+          <div class="defense-text">让平台内价值持续复利增长：信用体系、自动化工具、支付结算、备选资源池，形成离不开的生态。</div>
+        </div>
+        <div class="col-en">
+          <div class="lang-tag">English</div>
+          <div class="desc-text">Merchants and creators bypass the platform after first contact. This is the core threat to all matching platforms -- once both sides connect, the platform risks becoming irrelevant.</div>
+          <div class="defense-label critical">Defense Strategy</div>
+          <div class="defense-text">Make on-platform value compounding: credit system, automation tools, payouts, standby pool -- create an ecosystem too valuable to leave.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Merchant Retention -->
+    <div class="challenge-card">
+      <div class="card-header">
+        <div class="card-num critical">3</div>
+        <div class="card-title">Merchant Retention / 商家留存</div>
+      </div>
+      <div class="severity-bar-wrap">
+        <div class="severity-label"><span>Risk Severity / 风险等级</span><span>85%</span></div>
+        <div class="severity-track"><div class="severity-fill critical" style="width:85%"></div></div>
+      </div>
+      <div class="bilingual">
+        <div class="col-zh">
+          <div class="lang-tag">中文</div>
+          <div class="desc-text">商家尝试一次后不再回来。首次体验不佳、ROI不清晰、流程复杂都会导致商家流失，而获客成本高昂。</div>
+          <div class="defense-label critical">应对策略</div>
+          <div class="defense-text">优化模板体系、增强报告功能、改进创作者排序、提升填充速度、让ROI一目了然。</div>
+        </div>
+        <div class="col-en">
+          <div class="lang-tag">English</div>
+          <div class="desc-text">Merchants try once and don't return. Poor first experience, unclear ROI, and complex workflows all cause merchant churn, while acquisition costs remain high.</div>
+          <div class="defense-label critical">Defense Strategy</div>
+          <div class="defense-text">Better templates, enhanced reporting, improved creator sorting, faster fill speed, ROI legibility.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Creator Quality -->
+    <div class="challenge-card">
+      <div class="card-header">
+        <div class="card-num critical">4</div>
+        <div class="card-title">Creator Quality Retention / 创作者质量留存</div>
+      </div>
+      <div class="severity-bar-wrap">
+        <div class="severity-label"><span>Risk Severity / 风险等级</span><span>80%</span></div>
+        <div class="severity-track"><div class="severity-fill critical" style="width:80%"></div></div>
+      </div>
+      <div class="bilingual">
+        <div class="col-zh">
+          <div class="lang-tag">中文</div>
+          <div class="desc-text">创作者冲着免费福利而来，拿完即走。如果平台沦为"薅羊毛"工具，创作者质量将持续下降，形成恶性循环。</div>
+          <div class="defense-label critical">应对策略</div>
+          <div class="defense-text">建立成长体系、清晰的收益阶梯、减少对免费福利的依赖，让优质创作者看到长期价值。</div>
+        </div>
+        <div class="col-en">
+          <div class="lang-tag">English</div>
+          <div class="desc-text">Creators join for freebies, then disappear. If the platform becomes a freebie-harvesting tool, creator quality spirals downward in a vicious cycle.</div>
+          <div class="defense-label critical">Defense Strategy</div>
+          <div class="defense-text">Progression system, clear earnings ladder, limited freebie dependency -- show quality creators long-term value.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Weak Attribution -->
+    <div class="challenge-card">
+      <div class="card-header">
+        <div class="card-num critical">5</div>
+        <div class="card-title">Weak Attribution / 归因能力薄弱</div>
+      </div>
+      <div class="severity-bar-wrap">
+        <div class="severity-label"><span>Risk Severity / 风险等级</span><span>82%</span></div>
+        <div class="severity-track"><div class="severity-fill critical" style="width:82%"></div></div>
+      </div>
+      <div class="bilingual">
+        <div class="col-zh">
+          <div class="lang-tag">中文</div>
+          <div class="desc-text">无法证明推广活动的实际效果。如果商家看不到明确的因果关系，就不会持续投入——这直接威胁商业模式的可持续性。</div>
+          <div class="defense-label critical">应对策略</div>
+          <div class="defense-text">多层验证体系、专属优惠码、签到打卡证明、商家二次确认，构建完整的效果追踪链。</div>
+        </div>
+        <div class="col-en">
+          <div class="lang-tag">English</div>
+          <div class="desc-text">Can't prove campaigns actually worked. If merchants can't see clear causation, they won't keep investing -- this directly threatens business model sustainability.</div>
+          <div class="defense-label critical">Defense Strategy</div>
+          <div class="defense-text">Multi-layer verification, unique codes, check-in proof, merchant confirmation -- build a complete attribution chain.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MAJOR -->
+<div class="section">
+  <div class="section-label high">Major Challenges / 重大挑战</div>
+
+  <div class="card-grid">
+
+    <!-- 6. Fraud -->
+    <div class="challenge-card">
+      <div class="card-header">
+        <div class="card-num high">6</div>
+        <div class="card-title">Fraud / 欺诈风险</div>
+      </div>
+      <div class="severity-bar-wrap">
+        <div class="severity-label"><span>Risk Severity / 风险等级</span><span>75%</span></div>
+        <div class="severity-track"><div class="severity-fill high" style="width:75%"></div></div>
+      </div>
+      <div class="bilingual">
+        <div class="col-zh">
+          <div class="lang-tag">中文</div>
+          <div class="desc-text">虚假证明、自我核销、互动数据造假。作弊行为会侵蚀平台信任基础，降低商家对效果数据的信心。</div>
+          <div class="defense-label high">应对策略</div>
+          <div class="defense-text">带时间戳的上传验证、地理位置校验、异常行为检测，多维度反欺诈体系。</div>
+        </div>
+        <div class="col-en">
+          <div class="lang-tag">English</div>
+          <div class="desc-text">Fake proof, self-redemption, engagement inflation. Cheating erodes platform trust and undermines merchant confidence in performance data.</div>
+          <div class="defense-label high">Defense Strategy</div>
+          <div class="defense-text">Timestamped uploads, geo checks, anomaly detection -- multi-dimensional anti-fraud system.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. Commoditization -->
+    <div class="challenge-card">
+      <div class="card-header">
+        <div class="card-num high">7</div>
+        <div class="card-title">Commoditization / 同质化竞争</div>
+      </div>
+      <div class="severity-bar-wrap">
+        <div class="severity-label"><span>Risk Severity / 风险等级</span><span>65%</span></div>
+        <div class="severity-track"><div class="severity-fill high" style="width:65%"></div></div>
+      </div>
+      <div class="bilingual">
+        <div class="col-zh">
+          <div class="lang-tag">中文</div>
+          <div class="desc-text">功能容易被复制，平台陷入同质化竞争。当竞争对手提供类似服务时，价格战不可避免。</div>
+          <div class="defense-label high">应对策略</div>
+          <div class="defense-text">积累专有数据资产、打造工作流优势，形成难以复制的壁垒。</div>
+        </div>
+        <div class="col-en">
+          <div class="lang-tag">English</div>
+          <div class="desc-text">Features are easily copied, platform falls into commodity competition. When competitors offer similar services, price wars become inevitable.</div>
+          <div class="defense-label high">Defense Strategy</div>
+          <div class="defense-text">Proprietary data assets, workflow superiority -- build hard-to-replicate moats.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. Large Platform Threat -->
+    <div class="challenge-card">
+      <div class="card-header">
+        <div class="card-num high">8</div>
+        <div class="card-title">Large Platform Threat / 大平台威胁</div>
+      </div>
+      <div class="severity-bar-wrap">
+        <div class="severity-label"><span>Risk Severity / 风险等级</span><span>70%</span></div>
+        <div class="severity-track"><div class="severity-fill high" style="width:70%"></div></div>
+      </div>
+      <div class="bilingual">
+        <div class="col-zh">
+          <div class="lang-tag">中文</div>
+          <div class="desc-text">TikTok、Yelp 等大平台可能进入本地推广领域。它们拥有海量用户和雄厚资金，一旦切入可能快速蚕食市场。</div>
+          <div class="defense-label high">应对策略</div>
+          <div class="defense-text">深耕垂直领域、聚焦本地化运营，做大平台不愿做的脏活累活。</div>
+        </div>
+        <div class="col-en">
+          <div class="lang-tag">English</div>
+          <div class="desc-text">Competitive threat from large platforms like TikTok and Yelp entering local promotion. They have massive user bases and deep pockets to quickly capture market share.</div>
+          <div class="defense-label high">Defense Strategy</div>
+          <div class="defense-text">Vertical depth, local focus -- do the hard, unglamorous work that big platforms won't bother with.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. Supply Opportunism -->
+    <div class="challenge-card">
+      <div class="card-header">
+        <div class="card-num high">9</div>
+        <div class="card-title">Supply Opportunism / 供给端投机</div>
+      </div>
+      <div class="severity-bar-wrap">
+        <div class="severity-label"><span>Risk Severity / 风险等级</span><span>60%</span></div>
+        <div class="severity-track"><div class="severity-fill high" style="width:60%"></div></div>
+      </div>
+      <div class="bilingual">
+        <div class="col-zh">
+          <div class="lang-tag">中文</div>
+          <div class="desc-text">低质量创作者抢占优质机会，劣币驱逐良币。如果好机会总被不靠谱的人抢走，优质创作者将离开平台。</div>
+          <div class="defense-label high">应对策略</div>
+          <div class="defense-text">根据历史表现设置准入门槛，优质机会优先匹配高分创作者。</div>
+        </div>
+        <div class="col-en">
+          <div class="lang-tag">English</div>
+          <div class="desc-text">Low-quality creators grab premium opportunities, driving out good ones. If unreliable creators always snag the best gigs, quality creators will leave.</div>
+          <div class="defense-label high">Defense Strategy</div>
+          <div class="defense-text">Gate opportunities behind performance -- prioritize high-scoring creators for premium gigs.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- OPERATIONAL -->
+<div class="section">
+  <div class="section-label medium">Operational Challenges / 运营挑战</div>
+
+  <div class="card-grid">
+
+    <!-- 10. Bottlenecks -->
+    <div class="challenge-card">
+      <div class="card-header">
+        <div class="card-num medium">10</div>
+        <div class="card-title">Approval Bottlenecks / 审批与结算瓶颈</div>
+      </div>
+      <div class="severity-bar-wrap">
+        <div class="severity-label"><span>Risk Severity / 风险等级</span><span>55%</span></div>
+        <div class="severity-track"><div class="severity-fill medium" style="width:55%"></div></div>
+      </div>
+      <div class="bilingual">
+        <div class="col-zh">
+          <div class="lang-tag">中文</div>
+          <div class="desc-text">审批流程瓶颈、结算延迟、客服工单爆炸。随着规模增长，人工处理环节成为严重卡点，影响用户体验。</div>
+          <div class="defense-label medium">应对策略</div>
+          <div class="defense-text">流程自动化、分级审批、智能客服分流，减少人工依赖。</div>
+        </div>
+        <div class="col-en">
+          <div class="lang-tag">English</div>
+          <div class="desc-text">Approval bottlenecks, settlement delays, support load explosion. As scale grows, manual processes become severe chokepoints impacting user experience.</div>
+          <div class="defense-label medium">Defense Strategy</div>
+          <div class="defense-text">Process automation, tiered approvals, smart support routing -- reduce manual dependency.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11. Scaling Manual Ops -->
+    <div class="challenge-card">
+      <div class="card-header">
+        <div class="card-num medium">11</div>
+        <div class="card-title">Scaling Manual Operations / 手动运营扩展</div>
+      </div>
+      <div class="severity-bar-wrap">
+        <div class="severity-label"><span>Risk Severity / 风险等级</span><span>50%</span></div>
+        <div class="severity-track"><div class="severity-fill medium" style="width:50%"></div></div>
+      </div>
+      <div class="bilingual">
+        <div class="col-zh">
+          <div class="lang-tag">中文</div>
+          <div class="desc-text">早期依赖大量手动操作（匹配、审核、沟通），但这些无法线性扩展。团队人数不可能与业务同比增长。</div>
+          <div class="defense-label medium">应对策略</div>
+          <div class="defense-text">识别可自动化环节并优先投入，保留人工仅用于高价值决策点。</div>
+        </div>
+        <div class="col-en">
+          <div class="lang-tag">English</div>
+          <div class="desc-text">Early reliance on heavy manual operations (matching, review, communication) that don't scale linearly. Team size can't grow proportionally with the business.</div>
+          <div class="defense-label medium">Defense Strategy</div>
+          <div class="defense-text">Identify automatable processes and prioritize investment; reserve manual effort for high-value decision points.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12. Quality While Growing -->
+    <div class="challenge-card">
+      <div class="card-header">
+        <div class="card-num medium">12</div>
+        <div class="card-title">Quality vs Growth / 质量与增长的平衡</div>
+      </div>
+      <div class="severity-bar-wrap">
+        <div class="severity-label"><span>Risk Severity / 风险等级</span><span>50%</span></div>
+        <div class="severity-track"><div class="severity-fill medium" style="width:50%"></div></div>
+      </div>
+      <div class="bilingual">
+        <div class="col-zh">
+          <div class="lang-tag">中文</div>
+          <div class="desc-text">快速增长过程中维持服务质量。规模扩大往往伴随着标准下降、匹配精度降低、用户满意度下滑。</div>
+          <div class="defense-label medium">应对策略</div>
+          <div class="defense-text">建立质量指标监控、设置增长节奏控制、在关键节点保留质量门槛。</div>
+        </div>
+        <div class="col-en">
+          <div class="lang-tag">English</div>
+          <div class="desc-text">Maintaining quality while growing fast. Scale often brings declining standards, reduced matching accuracy, and falling user satisfaction.</div>
+          <div class="defense-label medium">Defense Strategy</div>
+          <div class="defense-text">Quality metric monitoring, growth pacing controls, quality gates at critical checkpoints.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  PUSH Platform -- Challenges & Risks Analysis / PUSH 平台挑战与风险分析
+</div>
+
+</body>
+</html>
