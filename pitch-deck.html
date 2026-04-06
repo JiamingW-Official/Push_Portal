@@ -197,11 +197,39 @@ section{
   color:var(--text3);font-size:12px;top:2px;
 }
 .bottom-line{
-  font-size:13px;font-weight:700;
+  font-size:14px;font-weight:700;
   background:var(--red-bg);color:var(--red);
-  padding:10px 14px;border-radius:8px;
+  padding:12px 16px;border-radius:8px;
   font-family:monospace;
+  border-left:3px solid var(--red);
 }
+
+/* -- Slide 2 visual enhancements -- */
+.story-col:first-child .story-col-title::before{content:'\1F3EA\00a0';font-size:16px;}
+.story-col:last-child .story-col-title::before{content:'\1F3A8\00a0';font-size:16px;}
+.story-list li:nth-child(even){background:rgba(0,0,0,0.02);border-radius:4px;}
+.story-list{counter-reset:story-step;}
+.story-list li{counter-increment:story-step;padding-left:24px;}
+.story-list li::before{
+  content:counter(story-step);
+  color:var(--accent);font-size:11px;font-weight:700;
+  top:0;left:0;
+  width:18px;height:18px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--accent-bg);border-radius:50%;
+  margin-top:4px;
+}
+@media(min-width:769px){
+  .s2-cols{position:relative;}
+  .s2-cols::after{
+    content:'';position:absolute;
+    top:10%;bottom:10%;left:50%;
+    width:1px;
+    background:linear-gradient(to bottom,transparent,var(--accent-light),transparent);
+    pointer-events:none;
+  }
+}
+
 .s2-quote{
   font-size:20px;font-style:italic;color:var(--text);
   padding:24px 28px 24px 32px;background:var(--bg2);border-radius:var(--radius);
@@ -240,17 +268,46 @@ section{
 .s4-title{font-size:36px;font-weight:800;color:#fff;letter-spacing:-1px;margin-bottom:8px;line-height:1.4;}
 .milestone-row{
   display:flex;flex-wrap:wrap;gap:10px;margin-top:36px;margin-bottom:48px;
-  align-items:center;
+  align-items:center;position:relative;padding:12px 0;
+  counter-reset:step;
 }
+/* connecting line behind pills */
+.milestone-row::before{
+  content:'';position:absolute;top:50%;left:0;
+  height:2px;background:rgba(255,255,255,.12);
+  transform:translateY(-50%);
+  width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1);
+  z-index:0;
+}
+.milestone-row.pipeline-active::before{width:100%;}
 .milestone-pill{
   font-size:13px;font-weight:600;font-family:monospace;
   background:rgba(255,255,255,.08);
   border:1px solid rgba(255,255,255,.14);
   color:rgba(255,255,255,.9);
-  padding:8px 16px;border-radius:30px;
+  padding:8px 16px 8px 12px;border-radius:30px;
   display:flex;align-items:center;gap:8px;
-  transition:background .3s,border-color .3s,transform .2s;
+  transition:background .3s,border-color .3s,transform .2s,opacity .5s ease,translate .5s ease;
+  position:relative;z-index:1;
+  opacity:0;translate:0 10px;
+  counter-increment:step;
 }
+/* numbered circle on each pill */
+.milestone-pill::before{
+  content:counter(step);
+  display:inline-flex;align-items:center;justify-content:center;
+  width:20px;height:20px;border-radius:50%;flex-shrink:0;
+  background:var(--accent);color:#fff;font-size:10px;font-weight:700;font-family:var(--sans);
+  line-height:1;
+}
+.milestone-row.pipeline-active .milestone-pill{opacity:1;translate:0 0;}
+.milestone-row.pipeline-active .milestone-pill:nth-child(1){transition-delay:0s;}
+.milestone-row.pipeline-active .milestone-pill:nth-child(2){transition-delay:.1s;}
+.milestone-row.pipeline-active .milestone-pill:nth-child(3){transition-delay:.2s;}
+.milestone-row.pipeline-active .milestone-pill:nth-child(4){transition-delay:.3s;}
+.milestone-row.pipeline-active .milestone-pill:nth-child(5){transition-delay:.4s;}
+.milestone-row.pipeline-active .milestone-pill:nth-child(6){transition-delay:.5s;}
+.milestone-row.pipeline-active .milestone-pill:nth-child(7){transition-delay:.6s;}
 .milestone-pill:hover{background:rgba(79,70,229,.2);border-color:rgba(79,70,229,.4);transform:scale(1.04);}
 .milestone-pill:last-child{background:rgba(79,70,229,.15);border-color:rgba(79,70,229,.3);color:var(--accent-light);}
 .milestone-pill:not(:last-child)::after{
@@ -348,6 +405,12 @@ section{
 }
 .moat-name{font-size:17px;font-weight:800;color:var(--text);margin-bottom:12px;letter-spacing:-.3px;line-height:1.3;}
 .moat-body{font-size:14px;color:var(--text2);line-height:1.65;}
+.moat-icon{font-size:28px;margin-bottom:12px;display:block;}
+.moat-strength{margin-top:18px;padding-top:14px;border-top:1px solid var(--border);}
+.moat-strength-track{height:6px;background:var(--bg);border-radius:3px;overflow:hidden;}
+.moat-bar{height:100%;width:0;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--accent-light));transition:width 1.2s cubic-bezier(.22,1,.36,1);}
+.moat-strength-label{display:flex;justify-content:space-between;align-items:center;margin-top:6px;font-size:12px;font-weight:600;color:var(--text2);letter-spacing:.2px;}
+.moat-strength-label span:last-child{color:var(--accent);font-weight:700;}
 
 /* -- Slide 7 -- */
 #s7{background:#0f0f1a;}
@@ -489,8 +552,11 @@ footer{
   .s9-closer{padding:32px 16px;}
 }
 @media(max-width:600px){
-  .milestone-row{gap:6px;}
+  .milestone-row{gap:8px;flex-direction:column;align-items:stretch;}
+  .milestone-row::before{top:0;left:10px;width:2px!important;height:0;transform:none;transition:height 1.2s cubic-bezier(.4,0,.2,1);}
+  .milestone-row.pipeline-active::before{height:100%;width:2px!important;}
   .milestone-pill{font-size:11px;padding:6px 11px;}
+  .milestone-pill:not(:last-child)::after{display:none;}
   .s9-closer-text{font-size:1.15rem;}
   .s2-quote{font-size:16px;padding:18px 20px 18px 24px;}
   .compare-table{font-size:11px;}
@@ -606,11 +672,102 @@ strong{font-weight:600;color:var(--text);}
 @media(max-width:768px){
   footer{padding:32px 20px 24px;}
 }
+/* Risk severity & defense progress */
+.risk-severity{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:10px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;
+  padding:2px 8px 2px 6px;border-radius:10px;margin-left:8px;
+  vertical-align:middle;line-height:1;
+}
+.risk-severity.critical{color:#dc2626;background:rgba(220,38,38,0.12);}
+.risk-severity.high{color:#ea580c;background:rgba(234,88,12,0.12);}
+.risk-severity .dot{
+  width:6px;height:6px;border-radius:50%;flex-shrink:0;
+}
+.risk-severity.critical .dot{background:#dc2626;animation:pulse-dot 1.4s ease-in-out infinite;}
+.risk-severity.high .dot{background:#ea580c;}
+@keyframes pulse-dot{
+  0%,100%{opacity:1;transform:scale(1);}
+
+/* -- Compare-table data bars -- */
+.compare-table tr.highlight td{
+  border-left:3px solid var(--accent);
+  box-shadow:inset 4px 0 12px -4px rgba(79,70,229,0.25);
+}
+.compare-table tr.highlight td:not(:first-child){border-left:none;box-shadow:none;}
+.data-bar{
+  display:block;height:4px;border-radius:2px;margin-top:6px;
+  width:0%;transition:width 0.8s cubic-bezier(.22,1,.36,1);
+}
+.data-bar.bar-red{background:var(--red);}
+.data-bar.bar-orange{background:var(--orange);}
+.data-bar.bar-yellow{background:#eab308;}
+.data-bar.bar-green{background:var(--green);}
+.data-bar-check{
+  display:inline-block;margin-left:4px;font-size:11px;color:var(--green);
+  opacity:0;transition:opacity 0.4s 0.6s;
+}
+#s5 .fade.visible .data-bar{width:var(--bar-w);}
+#s5 .fade.visible .data-bar-check{opacity:1;}
+  50%{opacity:0.4;transform:scale(0.6);}
+}
+.defense-progress{
+  width:100%;height:4px;border-radius:2px;background:rgba(0,0,0,0.06);
+  margin-top:8px;overflow:hidden;
+}
+.defense-bar{
+  height:100%;border-radius:2px;background:var(--green);
+  width:0%;transition:width 1.2s cubic-bezier(0.22,1,0.36,1);
+}
+.defense-bar.animated{width:var(--coverage);}
+
+/* -- Slide indicator badge -- */
+#slide-indicator{
+  position:fixed;bottom:24px;left:24px;z-index:200;
+  font-size:12px;font-family:monospace;color:var(--text3);
+  background:rgba(255,255,255,0.9);
+  padding:6px 12px;border-radius:20px;
+  border:1px solid var(--border);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  pointer-events:none;user-select:none;
+  transition:color 0.3s,background 0.3s,border-color 0.3s;
+  line-height:1.4;
+}
+#slide-indicator.dark-mode{
+  background:rgba(15,15,26,0.85);
+  color:rgba(255,255,255,0.45);
+  border-color:rgba(255,255,255,0.1);
+}
+@media(max-width:768px){
+  #slide-indicator{display:none;}
+  .slide-dots{display:none;}
+}
+
+/* Slide dot navigation */
+.slide-dots{position:fixed;right:20px;top:50%;transform:translateY(-50%);z-index:100;display:flex;flex-direction:column;gap:12px;}
+.slide-dots a{display:block;width:8px;height:8px;border-radius:50%;background:rgba(0,0,0,0.15);transition:all 0.3s;position:relative;}
+.slide-dots a.active{background:var(--accent);width:10px;height:10px;box-shadow:0 0 0 3px rgba(79,70,229,0.2);}
+.slide-dots a:hover{background:var(--accent-light);transform:scale(1.3);}
+.slide-dots .dot-tip{position:absolute;right:20px;top:50%;transform:translateY(-50%);background:#0f0f1a;color:#fff;font-size:11px;font-weight:600;padding:4px 10px;border-radius:4px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity 0.2s;}
+.slide-dots a:hover .dot-tip{opacity:1;}
 </style>
 </head>
 <body>
 
 <div id="scroll-progress"></div>
+
+<!-- Slide dots -->
+<nav class="slide-dots" id="slide-dots">
+  <a href="#s1" data-s="s1"><span class="dot-tip" data-en="THE PITCH" data-zh="一句话讲明白">THE PITCH</span></a>
+  <a href="#s2" data-s="s2"><span class="dot-tip" data-en="THE PROBLEM" data-zh="钱花了，效果没法追">THE PROBLEM</span></a>
+  <a href="#s3" data-s="s3"><span class="dot-tip" data-en="KEY INSIGHT" data-zh="我们看到了什么">KEY INSIGHT</span></a>
+  <a href="#s4" data-s="s4"><span class="dot-tip" data-en="HOW IT WORKS" data-zh="产品怎么跑起来">HOW IT WORKS</span></a>
+  <a href="#s5" data-s="s5"><span class="dot-tip" data-en="BUSINESS MODEL" data-zh="怎么赚钱">BUSINESS MODEL</span></a>
+  <a href="#s6" data-s="s6"><span class="dot-tip" data-en="DEFENSIBILITY" data-zh="凭什么别人抄不走">DEFENSIBILITY</span></a>
+  <a href="#s7" data-s="s7"><span class="dot-tip" data-en="GO-TO-MARKET" data-zh="第一批用户怎么来">GO-TO-MARKET</span></a>
+  <a href="#s8" data-s="s8"><span class="dot-tip" data-en="RISKS WE OWN" data-zh="我们提前想到的坑">RISKS WE OWN</span></a>
+  <a href="#s9" data-s="s9"><span class="dot-tip" data-en="WHY NOW" data-zh="为什么是现在">WHY NOW</span></a>
+</nav>
 
 <!-- -- Nav -- -->
 <nav>
@@ -878,19 +1035,34 @@ strong{font-weight:600;color:var(--text);}
 
     <div class="moat-grid">
       <div class="moat-card">
+        <span class="moat-icon">&#x1F512;</span>
         <div class="moat-num" data-en="MOAT 1" data-zh="护城河 1">MOAT 1</div>
         <div class="moat-name" data-en="Creator Credit Capital (non-portable)" data-zh="创作者信用资产（带不走）">Creator Credit Capital (non-portable)</div>
         <p class="moat-body" data-en="Every campaign adds to a creator's Push Score — ratings, completion streaks, category expertise. A top-tier creator has months of reputation they can't export. Leaving means starting from zero on a platform where no one knows them." data-zh="每接一单，博主的 Push Score 就多一层——评分、连续完成记录、品类专长。头部博主积累了几个月的信誉，导不出去。换平台？没人认识你，一切从零开始。">Every campaign adds to a creator's Push Score — ratings, completion streaks, category expertise. A top-tier creator has months of reputation they can't export. Leaving means starting from zero on a platform where no one knows them.</p>
+        <div class="moat-strength">
+          <div class="moat-strength-track"><div class="moat-bar" data-width="85"></div></div>
+          <div class="moat-strength-label"><span data-en="Moat Strength" data-zh="护城河强度">Moat Strength</span><span data-en="Very High" data-zh="极高">Very High</span></div>
+        </div>
       </div>
       <div class="moat-card">
+        <span class="moat-icon">&#x1F4CA;</span>
         <div class="moat-num" data-en="MOAT 2" data-zh="护城河 2">MOAT 2</div>
         <div class="moat-name" data-en="Merchant Operations Data (locked in)" data-zh="商家运营数据（锁在平台里）">Merchant Operations Data (locked in)</div>
         <p class="moat-body" data-en="Which creators convert? What ROI per category? When to re-book? Ten campaigns in, the platform knows their business better than they do. Switching means losing their best playbook." data-zh="哪个博主转化高？哪个品类ROI最好？什么时候该复购？跑了十次活动之后，平台比商家自己更懂他们的生意。换平台，就是丢掉最好用的决策手册。">Which creators convert? What ROI per category? When to re-book? Ten campaigns in, the platform knows their business better than they do. Switching means losing their best playbook.</p>
+        <div class="moat-strength">
+          <div class="moat-strength-track"><div class="moat-bar" data-width="75"></div></div>
+          <div class="moat-strength-label"><span data-en="Moat Strength" data-zh="护城河强度">Moat Strength</span><span data-en="High" data-zh="高">High</span></div>
+        </div>
       </div>
       <div class="moat-card">
+        <span class="moat-icon">&#x1F504;</span>
         <div class="moat-num" data-en="MOAT 3" data-zh="护城河 3">MOAT 3</div>
         <div class="moat-name" data-en="Network-Locked Liquidity" data-zh="双边锁定的流动性">Network-Locked Liquidity</div>
         <p class="moat-body" data-en="More creators attract more merchants. More merchants bring better pay, which attracts more creators. Each side makes the other harder to leave — and impossible to rebuild from scratch." data-zh="博主越多，商家越愿意来。商家越多，报酬越好，博主越不想走。两边互相锁定，对手没法从零搭出同样的网络。">More creators attract more merchants. More merchants bring better pay, which attracts more creators. Each side makes the other harder to leave — and impossible to rebuild from scratch.</p>
+        <div class="moat-strength">
+          <div class="moat-strength-track"><div class="moat-bar" data-width="95"></div></div>
+          <div class="moat-strength-label"><span data-en="Moat Strength" data-zh="护城河强度">Moat Strength</span><span data-en="Exponential" data-zh="指数级">Exponential</span></div>
+        </div>
       </div>
     </div>
   </div>
@@ -965,7 +1137,7 @@ strong{font-weight:600;color:var(--text);}
     <div class="risks-grid">
       <div class="risk-card">
         <div class="risk-head">
-          <div class="risk-label" data-en="RISK 1" data-zh="风险 1">RISK 1</div>
+          <div class="risk-label" data-en="RISK 1" data-zh="风险 1">RISK 1</div><span class="risk-severity critical" data-en="CRITICAL" data-zh="致命"><span class="dot"></span>CRITICAL</span>
           <div class="risk-name" data-en="Positioning Collapse" data-zh="定位崩塌">Positioning Collapse</div>
         </div>
         <div class="risk-body">
@@ -974,11 +1146,12 @@ strong{font-weight:600;color:var(--text);}
           <div class="risk-section-label" style="margin-top:12px;" data-en="DEFENSE" data-zh="防御">DEFENSE</div>
           <p class="risk-text" data-en="Brand guide bans the words 'discover' and 'social.' Every touchpoint says merchant ROI + verified outcome. Positioning is enforced in code, not just culture." data-zh="品牌规范禁用“发现”“社交”。每个触点只讲商家ROI和可核验结果。定位写进代码，不靠口头约定。">Brand guide bans the words “discover” and “social.” Every touchpoint says merchant ROI + verified outcome. Positioning is enforced in code, not just culture.</p>
           <span class="defense-badge" data-en="✓ Hardcoded" data-zh="✓ 写死在系统里">✓ Hardcoded</span>
+          <div class="defense-progress"><div class="defense-bar" style="--coverage:90%;" data-en="Defense Coverage: 90%" data-zh="防御覆盖率: 90%"></div></div>
         </div>
       </div>
       <div class="risk-card">
         <div class="risk-head">
-          <div class="risk-label" data-en="RISK 2" data-zh="风险 2">RISK 2</div>
+          <div class="risk-label" data-en="RISK 2" data-zh="风险 2">RISK 2</div><span class="risk-severity high" data-en="HIGH" data-zh="严重"><span class="dot"></span>HIGH</span>
           <div class="risk-name" data-en="Creator Freeloading" data-zh="创作者白嫖">Creator Freeloading</div>
         </div>
         <div class="risk-body">
@@ -987,11 +1160,12 @@ strong{font-weight:600;color:var(--text);}
           <div class="risk-section-label" style="margin-top:12px;" data-en="DEFENSE" data-zh="防御">DEFENSE</div>
           <p class="risk-text" data-en="Free campaigns are capped at 2 per creator. Score decays 15% monthly without activity. Paid tiers require verified delivery history — the system filters, not us." data-zh="每人限2次免费活动。评分每月衰减15%。付费等级要求核验过的交付记录——是系统在筛，不是人。">Free campaigns are capped at 2 per creator. Score decays 15% monthly without activity. Paid tiers require verified delivery history — the system filters, not us.</p>
           <span class="defense-badge" data-en="✓ Automated" data-zh="✓ 自动执行">✓ Automated</span>
+          <div class="defense-progress"><div class="defense-bar" style="--coverage:95%;" data-en="Defense Coverage: 95%" data-zh="防御覆盖率: 95%"></div></div>
         </div>
       </div>
       <div class="risk-card">
         <div class="risk-head">
-          <div class="risk-label" data-en="RISK 3" data-zh="风险 3">RISK 3</div>
+          <div class="risk-label" data-en="RISK 3" data-zh="风险 3">RISK 3</div><span class="risk-severity critical" data-en="CRITICAL" data-zh="致命"><span class="dot"></span>CRITICAL</span>
           <div class="risk-name" data-en="Disintermediation" data-zh="绕开平台">Disintermediation</div>
         </div>
         <div class="risk-body">
@@ -1000,6 +1174,7 @@ strong{font-weight:600;color:var(--text);}
           <div class="risk-section-label" style="margin-top:12px;" data-en="DEFENSE" data-zh="防御">DEFENSE</div>
           <p class="risk-text" data-en="Reputation, tier status, and match priority only exist on-platform. Going private means starting from zero with every new partner. The cost of leaving compounds over time." data-zh="信用、等级、匹配优先权只在平台内有效。私下合作意味着每换一个人都从零开始。离开的代价随时间指数增长。">Reputation, tier status, and match priority only exist on-platform. Going private means starting from zero with every new partner. The cost of leaving compounds over time.</p>
           <span class="defense-badge" data-en="✓ Structural" data-zh="✓ 结构性防御">✓ Structural</span>
+          <div class="defense-progress"><div class="defense-bar" style="--coverage:85%;" data-en="Defense Coverage: 85%" data-zh="防御覆盖率: 85%"></div></div>
         </div>
       </div>
     </div>
@@ -1141,6 +1316,40 @@ strong{font-weight:600;color:var(--text);}
   fades.forEach(function(el) { io.observe(el); });
 })();
 
+// -- Moat strength bar animation --
+(function() {
+  var s6 = document.getElementById('s6');
+  if (!s6) return;
+  var bars = s6.querySelectorAll('.moat-bar');
+  var moatObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        bars.forEach(function(bar) {
+          var w = bar.getAttribute('data-width');
+          setTimeout(function() { bar.style.width = w + '%'; }, 200);
+        });
+        moatObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  moatObs.observe(s6);
+})();
+
+// Pipeline animation for milestone row
+(function() {
+  var row = document.querySelector('.milestone-row');
+  if (!row) return;
+  var pio = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('pipeline-active');
+        pio.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  pio.observe(row);
+})();
+
 // Nav scroll shadow
 (function() {
   const nav = document.querySelector('nav, .topnav');
@@ -1217,7 +1426,172 @@ strong{font-weight:600;color:var(--text);}
     if (mainLangBtn) mobileLangBtn.textContent = mainLangBtn.textContent;
   }
 })();
+
+// Defense bar scroll animation
+(function() {
+  var s8 = document.getElementById('s8');
+  if (!s8) return;
+  var bars = s8.querySelectorAll('.defense-bar');
+  var dio = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        bars.forEach(function(bar, i) {
+          setTimeout(function() { bar.classList.add('animated'); }, 400 + i * 200);
+        });
+        dio.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  dio.observe(s8);
+})();
+
+// Slide indicator + keyboard navigation
+(function() {
+  var sections = Array.prototype.slice.call(document.querySelectorAll('section[id^="s"]'));
+  var badge = document.getElementById('slide-indicator');
+  var total = sections.length;
+  var currentIdx = 0;
+
+  if (!badge || total === 0) return;
+
+  function updateBadge(idx) {
+    currentIdx = idx;
+    var num = idx + 1;
+    badge.textContent = num + ' / ' + total + '  \u00b7  ~8 min read';
+    var section = sections[idx];
+    if (section && section.classList.contains('dark')) {
+      badge.classList.add('dark-mode');
+    } else {
+      badge.classList.remove('dark-mode');
+    }
+  }
+
+  // IntersectionObserver to track current section
+  var slideObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var idx = sections.indexOf(entry.target);
+        if (idx !== -1) updateBadge(idx);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  sections.forEach(function(s) { slideObs.observe(s); });
+
+  // Keyboard navigation
+  document.addEventListener('keydown', function(e) {
+    var tag = (e.target.tagName || '').toLowerCase();
+    if (tag === 'input' || tag === 'textarea' || tag === 'select' || e.target.isContentEditable) return;
+
+    var key = e.key;
+    if (key === 'ArrowDown' || key === 'PageDown') {
+      e.preventDefault();
+      var next = Math.min(currentIdx + 1, total - 1);
+      sections[next].scrollIntoView({ behavior: 'smooth' });
+    } else if (key === 'ArrowUp' || key === 'PageUp') {
+      e.preventDefault();
+      var prev = Math.max(currentIdx - 1, 0);
+      sections[prev].scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+})();
+
+// -- Compare-table data bars --
+(function() {
+  var s5 = document.getElementById('s5');
+  if (!s5) return;
+  var table = s5.querySelector('.compare-table');
+  if (!table) return;
+
+  // Measurability mapping: text-start -> {width, color}
+  var measMap = {
+    'None':   {w:'10%', c:'bar-red'},
+    '无':     {w:'10%', c:'bar-red'},
+    'Low':    {w:'30%', c:'bar-orange'},
+    '低':     {w:'30%', c:'bar-orange'},
+    'Medium': {w:'50%', c:'bar-yellow'},
+    '中':     {w:'50%', c:'bar-yellow'},
+    'High':   {w:'95%', c:'bar-green'},
+    '高':     {w:'95%', c:'bar-green'}
+  };
+
+  // Effort mapping (inverted: lower effort = better = shorter bar)
+  var effMap = {
+    'High':      {w:'90%', c:'bar-red'},
+    '高':        {w:'90%', c:'bar-red'},
+    'Medium':    {w:'50%', c:'bar-yellow'},
+    '中':        {w:'50%', c:'bar-yellow'},
+    'Low':       {w:'25%', c:'bar-green'},
+    '低':        {w:'25%', c:'bar-green'},
+    'Near-zero': {w:'8%',  c:'bar-green', check:true},
+    '几乎为零':  {w:'8%',  c:'bar-green', check:true}
+  };
+
+  function matchMap(text, map) {
+    var keys = Object.keys(map);
+    for (var i = 0; i < keys.length; i++) {
+      if (text.indexOf(keys[i]) !== -1) return map[keys[i]];
+    }
+    return null;
+  }
+
+  var rows = table.querySelectorAll('tbody tr');
+  rows.forEach(function(tr) {
+    var cells = tr.querySelectorAll('td');
+    if (cells.length < 4) return;
+
+    // Measurability = column index 2
+    var measText = cells[2].textContent;
+    var m = matchMap(measText, measMap);
+    if (m) {
+      var bar = document.createElement('span');
+      bar.className = 'data-bar ' + m.c;
+      bar.style.setProperty('--bar-w', m.w);
+      cells[2].appendChild(bar);
+    }
+
+    // Effort = column index 3
+    var effText = cells[3].textContent;
+    var e = matchMap(effText, effMap);
+    if (e) {
+      var bar2 = document.createElement('span');
+      bar2.className = 'data-bar ' + e.c;
+      bar2.style.setProperty('--bar-w', e.w);
+      cells[3].appendChild(bar2);
+      if (e.check) {
+        var chk = document.createElement('span');
+        chk.className = 'data-bar-check';
+        chk.textContent = '\u2713';
+        cells[3].appendChild(chk);
+      }
+    }
+  });
+})();
+
+// Slide dots active tracking
+(function(){
+  var dots=document.querySelectorAll('#slide-dots a');
+  if(!dots.length)return;
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        dots.forEach(function(d){d.classList.remove('active');});
+        var match=document.querySelector('#slide-dots a[data-s="'+e.target.id+'"]');
+        if(match)match.classList.add('active');
+      }
+    });
+  },{rootMargin:'-40% 0px -55% 0px'});
+  for(var i=1;i<=9;i++){var s=document.getElementById('s'+i);if(s)io.observe(s);}
+  // Update tooltips on lang change
+  function updateTips(){
+    var l=document.documentElement.lang||'en';
+    document.querySelectorAll('.dot-tip[data-'+l+']').forEach(function(t){t.textContent=t.getAttribute('data-'+l);});
+  }
+  new MutationObserver(updateTips).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+  updateTips();
+})();
 </script>
 <button id="back-top" aria-label="Back to top">↑</button>
+<div id="slide-indicator">1 / 9 &nbsp;&middot;&nbsp; ~8 min read</div>
 </body>
 </html>
