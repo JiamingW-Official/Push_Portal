@@ -28,10 +28,11 @@
   --bg:#ffffff;
   --bg2:#f8f9fa;
   --radius:12px;
-  --shadow:0 4px 20px rgba(0,0,0,0.08);
+  --shadow:0 4px 24px rgba(0,0,0,0.07);
+  --max-w:1100px;
 }
 html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+body{font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);line-height:1.75;-webkit-font-smoothing:antialiased}
 
 /* NAV */
 nav{
@@ -70,59 +71,62 @@ nav{
 
 /* SCROLL INDICATOR */
 .scroll-indicator{
-  position:absolute;bottom:36px;left:64px;
-  display:flex;flex-direction:column;align-items:flex-start;gap:8px;
+  position:absolute;bottom:44px;left:64px;
+  display:flex;flex-direction:column;align-items:flex-start;gap:10px;
 }
 .scroll-indicator span{
-  font-size:11px;font-weight:500;color:rgba(255,255,255,0.4);
-  letter-spacing:1.5px;text-transform:uppercase;
+  font-size:11px;font-weight:600;color:rgba(255,255,255,0.35);
+  letter-spacing:2px;text-transform:uppercase;
 }
 .scroll-line{
-  width:1px;height:40px;
-  background:linear-gradient(to bottom,rgba(255,255,255,0.5),rgba(255,255,255,0));
-  animation:scrollPulse 2s ease-in-out infinite;
+  width:1px;height:44px;
+  background:linear-gradient(to bottom,rgba(255,255,255,0.45),rgba(255,255,255,0));
+  animation:scrollPulse 2.2s ease-in-out infinite;
 }
-@keyframes scrollPulse{0%,100%{opacity:0.4}50%{opacity:1}}
+@keyframes scrollPulse{0%,100%{opacity:0.35}50%{opacity:0.9}}
 
 /* HERO */
 .hero{
   background:var(--primary);
-  padding:140px 64px 100px;
-  position:relative;min-height:520px;
+  padding:160px 64px 100px;
+  position:relative;min-height:560px;
 }
+.hero-inner{max-width:var(--max-w);margin:0 auto;}
 .hero-badge{
   display:inline-block;
-  font-size:11px;font-weight:700;letter-spacing:2px;
+  font-size:11px;font-weight:700;letter-spacing:2.5px;
   text-transform:uppercase;color:var(--accent-light);
-  margin-bottom:24px;
+  margin-bottom:28px;
 }
 .hero-title{
-  font-size:clamp(3rem,5.5vw,5rem);
+  font-size:clamp(3.2rem,6vw,5.5rem);
   font-weight:900;color:#fff;
-  letter-spacing:-2.5px;line-height:1.05;
-  max-width:900px;margin-bottom:28px;
+  letter-spacing:-2.5px;line-height:1.04;
+  max-width:860px;margin-bottom:0;
 }
 .hero-sub{
-  font-size:18px;font-weight:400;
-  color:rgba(255,255,255,0.55);
-  max-width:680px;line-height:1.8;
+  font-size:19px;font-weight:400;
+  color:rgba(255,255,255,0.52);
+  max-width:640px;line-height:1.8;
+  margin-top:28px;
 }
 
 /* SECTION SHELL */
-section{padding:96px 64px}
+section{padding:120px 64px}
+.section-inner{max-width:var(--max-w);margin:0 auto;}
 .section-label{
   font-size:11px;font-weight:700;letter-spacing:2.5px;
   text-transform:uppercase;color:var(--accent);
-  margin-bottom:16px;
+  margin-bottom:18px;
 }
 .section-title{
-  font-size:clamp(1.8rem,3vw,2.6rem);
+  font-size:clamp(1.9rem,3.2vw,2.8rem);
   font-weight:900;letter-spacing:-1px;
-  color:var(--text);margin-bottom:16px;line-height:1.15;
+  color:var(--text);margin-bottom:18px;line-height:1.13;
 }
 .section-sub{
   font-size:16px;color:var(--text2);
-  max-width:680px;line-height:1.7;margin-bottom:48px;
+  max-width:680px;line-height:1.8;margin-bottom:56px;
 }
 .bg-white{background:var(--bg)}
 .bg-gray{background:var(--bg2)}
@@ -131,85 +135,90 @@ section{padding:96px 64px}
 /* SECTION 1 — PROBLEMS */
 .problems-grid{
   display:grid;grid-template-columns:1fr 1fr;
-  gap:0 60px;margin-top:56px;
+  gap:0 72px;margin-top:64px;
 }
 .problems-col-head{
   font-size:13px;font-weight:700;letter-spacing:1px;
-  text-transform:uppercase;padding-bottom:16px;
+  text-transform:uppercase;padding-bottom:18px;
   border-bottom:2px solid var(--border);margin-bottom:32px;
 }
 .problems-col-head.merchant{color:var(--orange)}
 .problems-col-head.creator{color:var(--accent)}
 .problem-item{
-  margin-bottom:36px;
-  padding:24px;border-radius:var(--radius);
+  margin-bottom:20px;
+  padding:22px 26px;border-radius:var(--radius);
   border:1px solid var(--border);
   background:var(--bg);
-  transition:box-shadow 0.2s;
+  transition:box-shadow 0.2s,border-color 0.2s;
 }
-.problem-item:hover{box-shadow:var(--shadow)}
+.problem-item:hover{box-shadow:var(--shadow);border-color:rgba(79,70,229,0.15)}
 .problem-title{
-  font-size:15px;font-weight:700;color:var(--text);
-  margin-bottom:10px;
+  font-size:17px;font-weight:700;color:var(--text);
+  margin-bottom:10px;line-height:1.4;
 }
 .problem-body{
-  font-size:14px;color:var(--text2);line-height:1.7;
-  margin-bottom:12px;
+  font-size:15px;color:var(--text2);line-height:1.8;
+  margin-bottom:14px;
 }
 .problem-root{
-  font-size:12px;font-weight:600;
-  color:var(--red);padding:8px 12px;
-  background:var(--red-bg);border-radius:6px;
-  line-height:1.5;
+  font-size:11px;font-weight:700;
+  color:var(--red);
+  text-transform:uppercase;letter-spacing:0.5px;
+  background:rgba(220,38,38,0.06);
+  padding:3px 8px;border-radius:4px;
+  display:inline-block;line-height:1.8;
 }
 
 /* SECTION 2 — INSIGHT */
 .insight-quote{
-  font-size:24px;color:var(--text);
-  line-height:1.6;
+  font-size:22px;color:var(--text);
+  line-height:1.7;
   border-left:4px solid var(--accent);
-  padding:28px 36px;
-  margin-bottom:56px;
+  padding:32px 40px;
+  margin-bottom:64px;
   background:var(--bg);
   border-radius:0 var(--radius) var(--radius) 0;
 }
 .compare-grid{
   display:grid;grid-template-columns:1fr 1fr;
-  gap:28px;
+  gap:48px;
 }
 .compare-col{
-  padding:28px;border-radius:var(--radius);
+  padding:32px;border-radius:var(--radius);
   border:1px solid var(--border);
 }
-.compare-col.others{background:var(--red-bg)}
-.compare-col.push{background:var(--green-bg)}
+.compare-col.others{background:var(--red-bg);border-color:rgba(220,38,38,0.15)}
+.compare-col.push{background:var(--green-bg);border-color:rgba(5,150,105,0.15)}
 .compare-col-head{
   font-size:13px;font-weight:700;letter-spacing:0.5px;
-  margin-bottom:20px;padding-bottom:14px;
+  margin-bottom:24px;padding-bottom:16px;
   border-bottom:1px solid var(--border);
 }
 .compare-col.others .compare-col-head{color:var(--red)}
 .compare-col.push .compare-col-head{color:var(--green)}
 .compare-item{
-  display:flex;align-items:flex-start;gap:10px;
+  display:flex;align-items:flex-start;gap:12px;
   font-size:14px;color:var(--text2);
-  margin-bottom:12px;line-height:1.5;
+  padding:12px 0;
+  border-bottom:1px solid var(--border);
+  line-height:1.6;
 }
+.compare-item:last-child{border-bottom:none}
 .compare-item.pos{color:var(--text)}
-.compare-icon{font-size:14px;flex-shrink:0;margin-top:1px}
+.compare-icon{font-size:14px;flex-shrink:0;margin-top:2px}
 
 /* SECTION 3 — WORKFLOW */
 .flow-strip{
   border-radius:var(--radius);
-  padding:24px 28px;margin-bottom:20px;
+  padding:28px 36px;margin-bottom:16px;
 }
 .flow-strip.before{
   background:var(--red-bg);
-  border:1px solid rgba(220,38,38,0.2);
+  border:1px solid rgba(220,38,38,0.18);
 }
 .flow-strip.after{
   background:var(--green-bg);
-  border:1px solid rgba(5,150,105,0.2);
+  border:1px solid rgba(5,150,105,0.18);
 }
 .flow-strip-label{
   font-size:13px;font-weight:700;margin-bottom:12px;
@@ -217,17 +226,17 @@ section{padding:96px 64px}
 .flow-strip.before .flow-strip-label{color:var(--red)}
 .flow-strip.after .flow-strip-label{color:var(--green)}
 .flow-steps{
-  font-size:14px;font-weight:500;color:var(--text);
-  margin-bottom:10px;line-height:1.6;
+  font-size:15px;font-weight:500;color:var(--text);
+  margin-bottom:10px;line-height:1.7;
 }
 .flow-note{
-  font-size:12px;color:var(--text3);font-style:italic;
+  font-size:13px;color:var(--text3);font-style:italic;
 }
 
 /* MILESTONE FLOW */
 .milestone-flow{
   display:flex;align-items:flex-start;
-  gap:0;margin:40px 0;overflow-x:auto;
+  gap:0;margin:48px 0;overflow-x:auto;
   padding-bottom:8px;
 }
 .milestone-step{
@@ -236,39 +245,39 @@ section{padding:96px 64px}
 }
 .milestone-box{
   text-align:center;
-  min-width:110px;
+  min-width:116px;
 }
 .milestone-num{
-  width:40px;height:40px;border-radius:50%;
+  width:42px;height:42px;border-radius:50%;
   background:var(--accent);color:#fff;
-  font-size:14px;font-weight:700;
+  font-size:15px;font-weight:700;
   display:flex;align-items:center;justify-content:center;
-  margin:0 auto 8px;
+  margin:0 auto 10px;
 }
 .milestone-name{
-  font-size:12px;font-weight:700;color:var(--text);
-  margin-bottom:4px;
+  font-size:13px;font-weight:700;color:var(--text);
+  margin-bottom:5px;
 }
 .milestone-note{
-  font-size:10px;color:var(--text3);line-height:1.4;
+  font-size:10px;color:var(--text3);line-height:1.5;
 }
 .milestone-arrow{
   color:var(--accent-light);font-size:18px;
-  margin-top:10px;padding:0 4px;flex-shrink:0;
+  margin-top:12px;padding:0 4px;flex-shrink:0;
 }
 
 /* WORKFLOWS */
 .workflow-grid{
   display:grid;grid-template-columns:1fr 1fr;
-  gap:40px;margin-top:48px;
+  gap:56px;margin-top:56px;
 }
 .workflow-col-head{
   font-size:14px;font-weight:700;letter-spacing:0.5px;
-  color:var(--accent);margin-bottom:24px;
-  padding-bottom:12px;border-bottom:2px solid var(--accent-bg);
+  color:var(--accent);margin-bottom:28px;
+  padding-bottom:14px;border-bottom:2px solid var(--accent-bg);
 }
 .workflow-stage{
-  display:flex;gap:16px;margin-bottom:24px;
+  display:flex;gap:18px;margin-bottom:28px;
   align-items:flex-start;
 }
 .workflow-stage-num{
@@ -284,11 +293,14 @@ section{padding:96px 64px}
   margin-bottom:6px;
 }
 .workflow-stage-desc{
-  font-size:13px;color:var(--text2);line-height:1.6;
+  font-size:13px;color:var(--text2);line-height:1.75;
 }
 
 /* SLA TABLE */
-.sla-table-wrap{margin-top:40px;overflow-x:auto}
+.sla-section-label{
+  margin-top:72px;
+}
+.sla-table-wrap{margin-top:24px;overflow-x:auto}
 .sla-table{
   width:100%;border-collapse:collapse;font-size:14px;
 }
@@ -300,7 +312,7 @@ section{padding:96px 64px}
 }
 .sla-table td{
   padding:14px 16px;border-bottom:1px solid var(--border);
-  vertical-align:top;line-height:1.5;
+  vertical-align:top;line-height:1.6;
 }
 .sla-table tr:last-child td{border-bottom:none}
 .sla-table tr:hover td{background:var(--accent-bg)}
@@ -316,11 +328,40 @@ section{padding:96px 64px}
   font-weight:700;color:var(--accent);
   background:var(--accent-bg);
   border:1px solid rgba(79,70,229,0.15);
-  padding:20px 28px;border-radius:var(--radius);
-  margin-bottom:40px;line-height:1.6;
+  padding:28px 36px;border-radius:var(--radius);
+  margin-bottom:48px;line-height:1.7;
   word-break:break-word;
 }
-.credit-table-wrap{overflow-x:auto;margin-bottom:40px}
+.score-bars{margin-bottom:48px;}
+.score-bar-row{
+  display:flex;align-items:center;gap:16px;
+  padding:14px 0;border-bottom:1px solid var(--border);
+}
+.score-bar-row:last-child{border-bottom:none}
+.score-bar-label{
+  font-size:14px;font-weight:700;color:var(--text);
+  min-width:140px;flex-shrink:0;
+}
+.score-bar-track{
+  flex:1;height:8px;background:var(--border);
+  border-radius:4px;overflow:hidden;
+  min-width:80px;
+}
+.score-bar-fill{
+  height:100%;border-radius:4px;
+  background:var(--accent);
+  transition:width 1s ease;
+}
+.score-bar-pct{
+  font-size:13px;font-weight:700;color:var(--accent);
+  min-width:40px;text-align:right;
+}
+.score-bar-why{
+  font-size:12px;color:var(--text3);
+  min-width:200px;flex-shrink:0;line-height:1.5;
+}
+
+.credit-table-wrap{overflow-x:auto;margin-bottom:48px}
 .credit-table{width:100%;border-collapse:collapse;font-size:14px}
 .credit-table th{
   text-align:left;padding:12px 16px;
@@ -330,7 +371,7 @@ section{padding:96px 64px}
 }
 .credit-table td{
   padding:14px 16px;border-bottom:1px solid var(--border);
-  line-height:1.5;vertical-align:top;
+  line-height:1.6;vertical-align:top;
 }
 .credit-table tr:last-child td{border-bottom:none}
 .credit-table tr:hover td{background:var(--accent-bg)}
@@ -339,133 +380,141 @@ section{padding:96px 64px}
   font-size:12px;font-weight:700;
   background:var(--accent);color:#fff;
 }
-.tier-table-wrap{overflow-x:auto;margin-bottom:32px}
-.tier-table{width:100%;border-collapse:collapse;font-size:14px}
-.tier-table th{
-  text-align:left;padding:12px 16px;
-  font-size:11px;font-weight:700;letter-spacing:1px;
-  text-transform:uppercase;color:var(--text3);
-  background:var(--bg);border-bottom:2px solid var(--border);
-}
-.tier-table td{
-  padding:14px 16px;border-bottom:1px solid var(--border);
-  line-height:1.5;
-}
-.tier-table tr:last-child td{border-bottom:none}
-.tier-new td:first-child{font-weight:700}
-.tier-rising td:first-child{font-weight:700;color:var(--orange)}
-.tier-reliable td:first-child{font-weight:700;color:var(--accent)}
-.tier-elite td:first-child{font-weight:700;color:var(--green)}
 
-.decay-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:16px;margin-bottom:28px;
+/* TIER CARDS */
+.tier-cards{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:16px;margin-bottom:36px;
 }
-.decay-card{
-  padding:18px;border-radius:var(--radius);
-  border:1px solid var(--border);background:var(--bg);
+.tier-card{
+  padding:28px;border-radius:var(--radius);
+  border:1px solid var(--border);
+  background:var(--bg);
 }
-.decay-card-label{
-  font-size:12px;font-weight:700;color:var(--text3);
-  margin-bottom:6px;
+.tier-card-name{
+  font-size:15px;font-weight:700;margin-bottom:6px;
 }
-.decay-card-value{
-  font-size:15px;font-weight:700;color:var(--text);
+.tier-card-score{
+  font-size:36px;font-weight:900;
+  letter-spacing:-2px;line-height:1;
+  margin-bottom:8px;
 }
-.decay-card-value.ok{color:var(--green)}
-.decay-card-value.warn{color:var(--orange)}
-.decay-card-value.bad{color:var(--red)}
-
-.anti-gaming-note{
+.tier-card-campaigns{
+  font-size:12px;color:var(--text3);
+  margin-bottom:12px;
+  font-weight:500;
+}
+.tier-card-perks{
   font-size:13px;color:var(--text2);
+  line-height:1.7;
+}
+.tier-new .tier-card-score{color:var(--text3)}
+.tier-rising .tier-card-score{color:var(--orange)}
+.tier-reliable .tier-card-score{color:var(--accent)}
+.tier-elite .tier-card-score{color:var(--green)}
+.tier-elite{border-color:rgba(5,150,105,0.25);background:var(--green-bg)}
+
+.decay-note{
+  font-size:14px;color:var(--text2);
   background:var(--orange-bg);
   border:1px solid rgba(217,119,6,0.15);
   border-radius:var(--radius);
-  padding:18px 24px;line-height:1.7;
+  padding:20px 28px;line-height:2;
+  margin-bottom:20px;
+}
+.anti-gaming-note{
+  font-size:14px;color:var(--text2);
+  background:var(--accent-bg);
+  border:1px solid rgba(79,70,229,0.12);
+  border-radius:var(--radius);
+  padding:20px 28px;line-height:2;
 }
 
 /* SECTION 5 — PILLARS */
-.pillars-list{margin-top:48px}
+.pillars-list{margin-top:56px}
 .pillar-row{
-  display:flex;gap:40px;align-items:flex-start;
+  display:flex;gap:48px;align-items:flex-start;
   padding:40px 0;border-bottom:1px solid var(--border);
 }
 .pillar-row:last-child{border-bottom:none}
 .pillar-num{
-  font-size:clamp(2.5rem,4vw,3.5rem);font-weight:900;
-  color:var(--accent-light);opacity:0.5;
-  letter-spacing:-2px;flex-shrink:0;line-height:1;
-  width:80px;text-align:right;
+  font-size:72px;font-weight:900;
+  color:rgba(79,70,229,0.07);
+  letter-spacing:-3px;flex-shrink:0;line-height:1;
+  width:100px;text-align:right;
 }
 .pillar-content{flex:1}
 .pillar-name{
-  font-size:22px;font-weight:900;color:var(--text);
-  letter-spacing:-0.5px;margin-bottom:4px;
+  font-size:22px;font-weight:800;color:var(--text);
+  letter-spacing:-0.5px;margin-bottom:6px;line-height:1.2;
 }
 .pillar-sub{
-  font-size:13px;font-weight:600;color:var(--accent);
-  letter-spacing:0.3px;margin-bottom:14px;
-  text-transform:uppercase;font-size:11px;letter-spacing:1.5px;
+  font-size:11px;font-weight:600;color:var(--accent);
+  letter-spacing:2px;margin-bottom:16px;
+  text-transform:uppercase;
 }
 .pillar-body{
-  font-size:15px;color:var(--text2);line-height:1.75;
+  font-size:15px;color:var(--text2);line-height:1.8;
 }
 
 /* SECTION 6 — IS / ISN'T */
 .is-grid{
   display:grid;grid-template-columns:1fr 1fr;
-  gap:32px;margin-bottom:40px;
+  gap:32px;margin-bottom:48px;
 }
 .is-col{
-  padding:28px;border-radius:var(--radius);
+  padding:32px;border-radius:var(--radius);
   border:1px solid var(--border);
 }
 .is-col.yes{background:var(--green-bg);border-color:rgba(5,150,105,0.2)}
 .is-col.no{background:var(--red-bg);border-color:rgba(220,38,38,0.2)}
 .is-col-head{
   font-size:14px;font-weight:700;
-  margin-bottom:20px;padding-bottom:12px;
+  margin-bottom:24px;padding-bottom:14px;
   border-bottom:1px solid var(--border);
 }
 .is-col.yes .is-col-head{color:var(--green)}
 .is-col.no .is-col-head{color:var(--red)}
 .is-item{
-  display:flex;align-items:flex-start;gap:10px;
-  font-size:14px;margin-bottom:12px;line-height:1.5;
+  display:flex;align-items:flex-start;gap:12px;
+  font-size:15px;padding:12px 0;
+  border-bottom:1px solid var(--border);
+  line-height:1.6;
 }
+.is-item:last-child{border-bottom:none}
 .is-item.yes{color:var(--text)}
 .is-item.no{color:var(--text2)}
-.is-icon{flex-shrink:0;font-weight:700}
+.is-icon{flex-shrink:0;font-weight:700;margin-top:1px}
 .strategic-test{
   background:var(--accent-bg);
   border:1px solid rgba(79,70,229,0.15);
   border-radius:var(--radius);
-  padding:28px 32px;
+  padding:32px 40px;
 }
 .strategic-test-label{
   font-size:11px;font-weight:700;letter-spacing:2px;
   text-transform:uppercase;color:var(--accent);
-  margin-bottom:12px;
+  margin-bottom:14px;
 }
 .strategic-test-body{
-  font-size:14px;color:var(--text);line-height:1.75;
+  font-size:15px;color:var(--text);line-height:2;
 }
 
 /* SECTION 7 — THESIS */
 .thesis-close{
-  font-size:24px;font-style:italic;
+  font-size:22px;font-style:italic;
   color:var(--accent-light);
-  line-height:1.6;max-width:800px;
-  margin-bottom:48px;
+  line-height:1.7;max-width:820px;
+  margin-bottom:56px;
 }
 .thesis-list{
-  margin-bottom:52px;
+  margin-bottom:56px;
 }
 .thesis-list li{
-  font-size:16px;color:rgba(255,255,255,0.7);
-  padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.08);
-  display:flex;align-items:center;gap:12px;
-  line-height:1.5;
+  font-size:17px;color:rgba(255,255,255,0.7);
+  padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.08);
+  display:flex;align-items:center;gap:14px;
+  line-height:1.6;
 }
 .thesis-list li::before{
   content:'→';
@@ -476,7 +525,7 @@ section{padding:96px 64px}
 }
 .thesis-btn{
   display:inline-flex;align-items:center;gap:8px;
-  padding:14px 24px;border-radius:var(--radius);
+  padding:14px 26px;border-radius:var(--radius);
   font-size:14px;font-weight:600;text-decoration:none;
   transition:all 0.2s;border:1.5px solid;
 }
@@ -490,21 +539,19 @@ section{padding:96px 64px}
   border-color:rgba(255,255,255,0.2);
 }
 .thesis-btn.secondary:hover{border-color:var(--accent-light);color:#fff}
-
-/* THESIS TITLE */
 .thesis-title{
-  font-size:clamp(1.8rem,3vw,2.6rem);
+  font-size:clamp(1.9rem,3.2vw,2.8rem);
   font-weight:900;letter-spacing:-1px;
-  color:#fff;margin-bottom:16px;line-height:1.15;
+  color:#fff;margin-bottom:20px;line-height:1.13;
 }
 
 /* FOOTER */
 footer{
   background:#0a0a14;
-  padding:64px;color:rgba(255,255,255,0.5);
+  padding:72px 64px;color:rgba(255,255,255,0.5);
 }
 .footer-inner{
-  max-width:1200px;margin:0 auto;
+  max-width:var(--max-w);margin:0 auto;
 }
 .footer-top{
   display:flex;gap:60px;flex-wrap:wrap;
@@ -512,14 +559,13 @@ footer{
   padding-bottom:40px;
   border-bottom:1px solid rgba(255,255,255,0.08);
 }
-.footer-brand{}
 .footer-logo{
   font-size:24px;font-weight:900;color:var(--accent-light);
   letter-spacing:-0.5px;display:block;margin-bottom:10px;
 }
 .footer-tagline{
   font-size:13px;color:rgba(255,255,255,0.35);
-  max-width:220px;line-height:1.6;
+  max-width:220px;line-height:1.7;
 }
 .footer-links{
   display:flex;flex-wrap:wrap;gap:12px;
@@ -535,22 +581,25 @@ footer{
 }
 
 /* FADE IN */
-.fade-in{opacity:0;transition:opacity 0.6s ease}
+.fade-in{opacity:0;transition:opacity 0.65s ease}
 .fade-in.visible{opacity:1}
 
 /* RESPONSIVE */
-@media(max-width:900px){
+@media(max-width:960px){
   nav{padding:0 20px}
   .nav-links{gap:4px}
   .nav-links a{padding:4px 7px;font-size:11px}
   .hero{padding:120px 24px 80px}
-  section{padding:72px 24px}
-  .problems-grid,.compare-grid,.workflow-grid,.is-grid{grid-template-columns:1fr}
-  .pillar-row{flex-direction:column;gap:12px}
-  .pillar-num{text-align:left;width:auto}
-  footer{padding:40px 24px}
+  section{padding:80px 20px}
+  .problems-grid,.compare-grid,.workflow-grid,.is-grid,.tier-cards{grid-template-columns:1fr}
+  .pillar-row{flex-direction:column;gap:8px}
+  .pillar-num{text-align:left;width:auto;font-size:48px}
+  footer{padding:48px 24px}
   .footer-top{flex-direction:column;gap:32px}
   .scroll-indicator{left:24px}
+  .insight-quote{font-size:18px;padding:24px 28px}
+  .score-bar-why{display:none}
+  .strategic-test{padding:24px 28px}
 }
 </style>
 </head>
@@ -575,76 +624,80 @@ footer{
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-badge" data-en="PROJECT INTRODUCTION" data-zh="项目介绍">PROJECT INTRODUCTION</div>
-  <h1 class="hero-title" data-en="Push is infrastructure, not a marketplace." data-zh="Push 是基础设施，不是撮合平台。">Push is infrastructure, not a marketplace.</h1>
-  <p class="hero-sub" data-en="Most platforms help merchants and creators find each other. Push helps them transact reliably, measure results, and repeat. That's a different business — and a more defensible one." data-zh="大多数平台帮助商家和创作者找到对方。Push 帮助他们可靠地交易、衡量结果、然后再次合作。这是一个不同的业务——也是更具防御性的业务。">Most platforms help merchants and creators find each other. Push helps them transact reliably, measure results, and repeat. That's a different business — and a more defensible one.</p>
-  <div class="scroll-indicator">
-    <span data-en="SCROLL" data-zh="滚动">SCROLL</span>
-    <div class="scroll-line"></div>
+  <div class="hero-inner">
+    <div class="hero-badge" data-en="PROJECT INTRODUCTION" data-zh="项目介绍">PROJECT INTRODUCTION</div>
+    <h1 class="hero-title" data-en="Push is infrastructure, not a marketplace." data-zh="Push 是基础设施，不是撮合平台。">Push is infrastructure, not a marketplace.</h1>
+    <p class="hero-sub" data-en="Most platforms help merchants and creators find each other. Push makes the collaboration quantifiable, accountable, and worth doing again. That's a different business entirely." data-zh="大多数平台帮你找到合作对象。Push 让合作可以量化、可以追责、值得一做再做。这是两件完全不同的事。">Most platforms help merchants and creators find each other. Push makes the collaboration quantifiable, accountable, and worth doing again. That's a different business entirely.</p>
+    <div class="scroll-indicator">
+      <span data-en="SCROLL" data-zh="继续阅读">SCROLL</span>
+      <div class="scroll-line"></div>
+    </div>
   </div>
 </div>
 
 <!-- SECTION 1: CORE PROBLEM -->
 <section class="bg-white">
-  <div class="section-label fade-in" data-en="ROOT CAUSE" data-zh="根本原因">ROOT CAUSE</div>
-  <h2 class="section-title fade-in" data-en="The same broken system hurts both sides." data-zh="同一个破碎系统在伤害双方。">The same broken system hurts both sides.</h2>
+  <div class="section-inner">
+    <div class="section-label fade-in" data-en="ROOT CAUSE" data-zh="问题根源">ROOT CAUSE</div>
+    <h2 class="section-title fade-in" data-en="The same broken system hurts both sides." data-zh="同一个破碎的系统，在伤害双方。">The same broken system hurts both sides.</h2>
 
-  <div class="problems-grid">
-    <!-- MERCHANT COLUMN -->
-    <div>
-      <div class="problems-col-head merchant fade-in" data-en="🏪 MERCHANT PROBLEMS" data-zh="🏪 商家问题">🏪 MERCHANT PROBLEMS</div>
+    <div class="problems-grid">
+      <!-- MERCHANT COLUMN -->
+      <div>
+        <div class="problems-col-head merchant fade-in" data-en="🏪 MERCHANT PROBLEMS" data-zh="🏪 商家面临的问题">🏪 MERCHANT PROBLEMS</div>
 
-      <div class="problem-item fade-in">
-        <div class="problem-title" data-en="Follower count is a useless signal" data-zh="粉丝数是无用的信号">Follower count is a useless signal</div>
-        <div class="problem-body" data-en="Merchants evaluate creators by followers, aesthetics, and &quot;vibes.&quot; None of these predict whether a creator will show up, post on time, or actually drive real customers." data-zh="商家通过粉丝数、美感和「感觉」来评估创作者。这些都无法预测创作者是否会准时到场、按时发帖或真正带来客户。">Merchants evaluate creators by followers, aesthetics, and "vibes." None of these predict whether a creator will show up, post on time, or actually drive real customers.</div>
-        <div class="problem-root" data-en="Root cause: there's no standardized creator credit system for local commerce." data-zh="根本原因：本地商业没有标准化的创作者信用体系。">Root cause: there's no standardized creator credit system for local commerce.</div>
+        <div class="problem-item fade-in">
+          <div class="problem-title" data-en="Follower count is a useless signal" data-zh="粉丝数量，不是靠谱的依据">Follower count is a useless signal</div>
+          <div class="problem-body" data-en="Merchants evaluate creators by followers, aesthetics, and &quot;vibes.&quot; None of these predict whether a creator will show up, post on time, or actually drive real customers." data-zh="你用粉丝、照片质感和"感觉"来判断博主。但这些都预测不了：他会不会准时来、会不会真发、发了之后会不会真带客。">Merchants evaluate creators by followers, aesthetics, and "vibes." None of these predict whether a creator will show up, post on time, or actually drive real customers.</div>
+          <div class="problem-root" data-en="Root cause: no creator credit system for local commerce" data-zh="根本原因：没有面向本地商业的创作者信用体系">Root cause: no creator credit system for local commerce</div>
+        </div>
+
+        <div class="problem-item fade-in">
+          <div class="problem-title" data-en="ROI is invisible" data-zh="花了多少钱，换来了什么——不知道">ROI is invisible</div>
+          <div class="problem-body" data-en="After spending $150 on a creator, merchants can't answer: did anyone actually come because of that post? Was the campaign worth it? Who should I work with again?" data-zh="$150 花出去了。有没有新客因此来？有没有人核销了那个优惠？值不值？你问不出答案。">After spending $150 on a creator, merchants can't answer: did anyone actually come because of that post? Was the campaign worth it? Who should I work with again?</div>
+          <div class="problem-root" data-en="Root cause: no attribution layer" data-zh="根本原因：没有归因层">Root cause: no attribution layer</div>
+        </div>
+
+        <div class="problem-item fade-in">
+          <div class="problem-title" data-en="Every collaboration is manual" data-zh="每次合作都从头来一遍">Every collaboration is manual</div>
+          <div class="problem-body" data-en="Outreach, negotiation, content approval, scheduling, reminders, proof tracking, payments — all managed through DMs and spreadsheets. For a cafe owner running their own business, this is unsustainable." data-zh="找人、聊价格、审内容、追截止日期、确认付款——全靠私信搞定。一个店主自己还要经营生意，这套流程根本撑不住。">Outreach, negotiation, content approval, scheduling, reminders, proof tracking, payments — all managed through DMs and spreadsheets. For a cafe owner running their own business, this is unsustainable.</div>
+          <div class="problem-root" data-en="Root cause: creator collaboration treated as ad hoc" data-zh="根本原因：创作者合作被当成临时关系处理">Root cause: creator collaboration treated as ad hoc</div>
+        </div>
+
+        <div class="problem-item fade-in">
+          <div class="problem-title" data-en="No protection when things go wrong" data-zh="给了东西，啥都捞不回来的风险">No protection when things go wrong</div>
+          <div class="problem-body" data-en="Creators take free product and disappear. Content goes up and then gets deleted. No-shows happen with no consequence. There's no escrow, no dispute path, no accountability." data-zh="博主拿了免费产品，之后消失。说好了发的内容不见踪影。发完又删。没有追责，没有记录，没有任何保障。">Creators take free product and disappear. Content goes up and then gets deleted. No-shows happen with no consequence. There's no escrow, no dispute path, no accountability.</div>
+          <div class="problem-root" data-en="Root cause: no consequence-backed trust system" data-zh="根本原因：没有有后果支撑的信任机制">Root cause: no consequence-backed trust system</div>
+        </div>
       </div>
 
-      <div class="problem-item fade-in">
-        <div class="problem-title" data-en="ROI is invisible" data-zh="ROI 是不可见的">ROI is invisible</div>
-        <div class="problem-body" data-en="After spending $150 on a creator, merchants can't answer: did anyone actually come because of that post? Was the campaign worth it? Who should I work with again?" data-zh="花了150美元找创作者后，商家无法回答：有人真的因为那篇帖子来了吗？活动值得吗？我应该再找谁合作？">After spending $150 on a creator, merchants can't answer: did anyone actually come because of that post? Was the campaign worth it? Who should I work with again?</div>
-        <div class="problem-root" data-en="Root cause: no attribution layer exists in informal creator deals." data-zh="根本原因：非正式创作者合作中不存在归因层。">Root cause: no attribution layer exists in informal creator deals.</div>
-      </div>
+      <!-- CREATOR COLUMN -->
+      <div>
+        <div class="problems-col-head creator fade-in" data-en="🎥 CREATOR PROBLEMS" data-zh="🎥 创作者面临的问题">🎥 CREATOR PROBLEMS</div>
 
-      <div class="problem-item fade-in">
-        <div class="problem-title" data-en="Every collaboration is manual" data-zh="每次合作都是手动操作">Every collaboration is manual</div>
-        <div class="problem-body" data-en="Outreach, negotiation, content approval, scheduling, reminders, proof tracking, payments — all managed through DMs and spreadsheets. For a cafe owner running their own business, this is unsustainable." data-zh="外联、谈判、内容审批、排期、提醒、证明追踪、付款——全靠私信和表格手工处理。对于独立经营的咖啡馆老板来说，这是不可持续的。">Outreach, negotiation, content approval, scheduling, reminders, proof tracking, payments — all managed through DMs and spreadsheets. For a cafe owner running their own business, this is unsustainable.</div>
-        <div class="problem-root" data-en="Root cause: creator collaboration is treated as ad hoc relationship management." data-zh="根本原因：创作者合作被当作临时关系管理。">Root cause: creator collaboration is treated as ad hoc relationship management.</div>
-      </div>
+        <div class="problem-item fade-in">
+          <div class="problem-title" data-en="No pricing power" data-zh="没有任何谈价的底气">No pricing power</div>
+          <div class="problem-body" data-en="Rising creators cannot prove their commercial worth. Every merchant offers whatever they feel like, and without a verifiable track record, creators negotiate from zero every single time. The market has no memory." data-zh="你拿不出可以证明商业价值的记录。每个商家爱给多少给多少，你只能接受或者走。市场没有记忆——每次从零开始。">Rising creators cannot prove their commercial worth. Every merchant offers whatever they feel like, and without a verifiable track record, creators negotiate from zero every single time. The market has no memory.</div>
+          <div class="problem-root" data-en="Root cause: no portable, verifiable performance history" data-zh="根本原因：没有可携带的可核验表现记录">Root cause: no portable, verifiable performance history</div>
+        </div>
 
-      <div class="problem-item fade-in">
-        <div class="problem-title" data-en="No protection when things go wrong" data-zh="出问题时毫无保护">No protection when things go wrong</div>
-        <div class="problem-body" data-en="Creators take free product and disappear. Content goes up and then gets deleted. No-shows happen with no consequence. There's no escrow, no dispute path, no accountability." data-zh="创作者拿了免费产品然后消失。内容发了又删。放鸽子没有任何后果。没有托管、没有纠纷途径、没有问责机制。">Creators take free product and disappear. Content goes up and then gets deleted. No-shows happen with no consequence. There's no escrow, no dispute path, no accountability.</div>
-        <div class="problem-root" data-en="Root cause: no consequence-backed trust system." data-zh="根本原因：没有有后果支撑的信任系统。">Root cause: no consequence-backed trust system.</div>
-      </div>
-    </div>
+        <div class="problem-item fade-in">
+          <div class="problem-title" data-en="Trapped in freebie loops" data-zh="一直在用内容换免费体验">Trapped in freebie loops</div>
+          <div class="problem-body" data-en="Most gigs offer free product in exchange for a post. There's no structured path from doing a free shoot for a café to getting paid $50 a campaign to being on retainer with premium brands. Platforms don't distinguish onboarding from growth." data-zh="大多数"合作"就是：你来拍，我给你吃。没有从这里通向真正付费合作的路径。平台不区分入门和成长。">Most gigs offer free product in exchange for a post. There's no structured path from doing a free shoot for a café to getting paid $50 a campaign to being on retainer with premium brands. Platforms don't distinguish onboarding from growth.</div>
+          <div class="problem-root" data-en="Root cause: no career progression framework" data-zh="根本原因：没有通向付费合作的成长路径">Root cause: no career progression framework</div>
+        </div>
 
-    <!-- CREATOR COLUMN -->
-    <div>
-      <div class="problems-col-head creator fade-in" data-en="🎥 CREATOR PROBLEMS" data-zh="🎥 创作者问题">🎥 CREATOR PROBLEMS</div>
+        <div class="problem-item fade-in">
+          <div class="problem-title" data-en="Income is unpredictable" data-zh="这个月有，下个月不知道">Income is unpredictable</div>
+          <div class="problem-body" data-en="Random DMs, inconsistent payments, vague requirements that change after the work is done. Creators have no pipeline, no recurring relationships, no predictable income. Every month starts from scratch." data-zh="靠私信碰运气。报价高低全凭对方心情。没有稳定的机会池，没有可以预期的收入节奏。">Random DMs, inconsistent payments, vague requirements that change after the work is done. Creators have no pipeline, no recurring relationships, no predictable income. Every month starts from scratch.</div>
+          <div class="problem-root" data-en="Root cause: no pipeline infrastructure for creators" data-zh="根本原因：市场没有为创作者提供稳定的机会基础">Root cause: no pipeline infrastructure for creators</div>
+        </div>
 
-      <div class="problem-item fade-in">
-        <div class="problem-title" data-en="No pricing power" data-zh="没有定价权">No pricing power</div>
-        <div class="problem-body" data-en="Rising creators cannot prove their commercial worth. Every merchant offers whatever they feel like, and without a verifiable track record, creators negotiate from zero every single time. The market has no memory." data-zh="新兴创作者无法证明自己的商业价值。每个商家随意开价，没有可核验的历史记录，创作者每次都从零开始谈判。市场没有记忆。">Rising creators cannot prove their commercial worth. Every merchant offers whatever they feel like, and without a verifiable track record, creators negotiate from zero every single time. The market has no memory.</div>
-        <div class="problem-root" data-en="Root cause: no portable, verifiable creator performance history exists." data-zh="根本原因：不存在可携带的可核验创作者表现历史。">Root cause: no portable, verifiable creator performance history exists.</div>
-      </div>
-
-      <div class="problem-item fade-in">
-        <div class="problem-title" data-en="Trapped in freebie loops" data-zh="困在免费循环中">Trapped in freebie loops</div>
-        <div class="problem-body" data-en="Most gigs offer free product in exchange for a post. There's no structured path from doing a free shoot for a café to getting paid $50 a campaign to being on retainer with premium brands. Platforms don't distinguish onboarding from growth." data-zh="大多数合作提供免费产品换帖子。从为咖啡馆免费拍摄，到每次活动收费50美元，再到与高端品牌长期合作——没有结构化路径。平台不区分入门和成长。">Most gigs offer free product in exchange for a post. There's no structured path from doing a free shoot for a café to getting paid $50 a campaign to being on retainer with premium brands. Platforms don't distinguish onboarding from growth.</div>
-        <div class="problem-root" data-en="Root cause: no career progression framework in creator-merchant commerce." data-zh="根本原因：创作者-商家商业中没有职业发展框架。">Root cause: no career progression framework in creator-merchant commerce.</div>
-      </div>
-
-      <div class="problem-item fade-in">
-        <div class="problem-title" data-en="Income is unpredictable" data-zh="收入不可预测">Income is unpredictable</div>
-        <div class="problem-body" data-en="Random DMs, inconsistent payments, vague requirements that change after the work is done. Creators have no pipeline, no recurring relationships, no predictable income. Every month starts from scratch." data-zh="随机私信、不一致的付款、工作完成后突然改变的要求。创作者没有管道、没有固定关系、没有可预测的收入。每个月都从零开始。">Random DMs, inconsistent payments, vague requirements that change after the work is done. Creators have no pipeline, no recurring relationships, no predictable income. Every month starts from scratch.</div>
-        <div class="problem-root" data-en="Root cause: the market has no pipeline infrastructure for creators." data-zh="根本原因：市场没有为创作者提供管道基础设施。">Root cause: the market has no pipeline infrastructure for creators.</div>
-      </div>
-
-      <div class="problem-item fade-in">
-        <div class="problem-title" data-en="No accountability on the merchant side" data-zh="商家侧毫无问责">No accountability on the merchant side</div>
-        <div class="problem-body" data-en="Merchants can reject work arbitrarily, change requirements mid-campaign, or simply never respond. Creators have no recourse. The power imbalance is structural." data-zh="商家可以任意拒绝工作、在活动中途更改要求，或者干脆从不回复。创作者没有任何申诉途径。权力失衡是结构性的。">Merchants can reject work arbitrarily, change requirements mid-campaign, or simply never respond. Creators have no recourse. The power imbalance is structural.</div>
-        <div class="problem-root" data-en="Root cause: no bilateral accountability layer exists in informal creator deals." data-zh="根本原因：非正式创作者合作中不存在双向问责层。">Root cause: no bilateral accountability layer exists in informal creator deals.</div>
+        <div class="problem-item fade-in">
+          <div class="problem-title" data-en="No accountability on the merchant side" data-zh="做完了，商家可能不认">No accountability on the merchant side</div>
+          <div class="problem-body" data-en="Merchants can reject work arbitrarily, change requirements mid-campaign, or simply never respond. Creators have no recourse. The power imbalance is structural." data-zh="完成之后要求突然变了。商家玩消失。说不满意拖着不付款。创作者没有任何申诉渠道。">Merchants can reject work arbitrarily, change requirements mid-campaign, or simply never respond. Creators have no recourse. The power imbalance is structural.</div>
+          <div class="problem-root" data-en="Root cause: no bilateral accountability layer" data-zh="根本原因：没有约束商家的问责机制">Root cause: no bilateral accountability layer</div>
+        </div>
       </div>
     </div>
   </div>
@@ -652,56 +705,58 @@ footer{
 
 <!-- SECTION 2: THE INSIGHT -->
 <section class="bg-gray">
-  <div class="section-label fade-in" data-en="CORE INSIGHT" data-zh="核心洞察">CORE INSIGHT</div>
+  <div class="section-inner">
+    <div class="section-label fade-in" data-en="CORE INSIGHT" data-zh="核心洞察">CORE INSIGHT</div>
 
-  <blockquote class="insight-quote fade-in" data-en="&quot;Creators are not media inventory. They are unstructured customer acquisition channels. The real opportunity is not to 'help creators collaborate with merchants' — it's to standardize, verify, rank, and route creator-driven demand.&quot;" data-zh="&quot;创作者不是媒体库存，而是非结构化的客户获取渠道。真正的机会不是「帮助创作者与商家合作」——而是将创作者驱动的需求标准化、核验化、排名化、路由化。&quot;">"Creators are not media inventory. They are unstructured customer acquisition channels. The real opportunity is not to 'help creators collaborate with merchants' — it's to standardize, verify, rank, and route creator-driven demand."</blockquote>
+    <blockquote class="insight-quote fade-in" data-en="&quot;Creators are not media inventory. They are unstructured customer acquisition channels. The real opportunity is not to 'help creators collaborate with merchants' — it's to standardize, verify, rank, and route creator-driven demand.&quot;" data-zh="创作者不是媒体库存，而是非结构化的客户获取渠道。真正的机会不是"帮创作者和商家搭上线"——而是把这种需求标准化、可核验、可排名、可路由。">"Creators are not media inventory. They are unstructured customer acquisition channels. The real opportunity is not to 'help creators collaborate with merchants' — it's to standardize, verify, rank, and route creator-driven demand."</blockquote>
 
-  <div class="compare-grid">
-    <div class="compare-col others fade-in">
-      <div class="compare-col-head" data-en="What everyone else does" data-zh="其他人在做什么">What everyone else does</div>
-      <div class="compare-item">
-        <span class="compare-icon">✗</span>
-        <span data-en="Match merchants with creators" data-zh="撮合商家与创作者">Match merchants with creators</span>
+    <div class="compare-grid">
+      <div class="compare-col others fade-in">
+        <div class="compare-col-head" data-en="What everyone else does" data-zh="其他平台在做什么">What everyone else does</div>
+        <div class="compare-item">
+          <span class="compare-icon">✗</span>
+          <span data-en="Match merchants with creators" data-zh="帮商家找到博主">Match merchants with creators</span>
+        </div>
+        <div class="compare-item">
+          <span class="compare-icon">✗</span>
+          <span data-en="Help with brand deals" data-zh="促成品牌合作">Help with brand deals</span>
+        </div>
+        <div class="compare-item">
+          <span class="compare-icon">✗</span>
+          <span data-en="Discovery / exposure" data-zh="提供曝光和发现功能">Discovery / exposure</span>
+        </div>
+        <div class="compare-item">
+          <span class="compare-icon">✗</span>
+          <span data-en="Points for free experiences" data-zh="积分换免费体验">Points for free experiences</span>
+        </div>
+        <div class="compare-item">
+          <span class="compare-icon">✗</span>
+          <span data-en="Creator social networks" data-zh="创作者社交社区">Creator social networks</span>
+        </div>
       </div>
-      <div class="compare-item">
-        <span class="compare-icon">✗</span>
-        <span data-en="Help with brand deals" data-zh="协助品牌合作">Help with brand deals</span>
-      </div>
-      <div class="compare-item">
-        <span class="compare-icon">✗</span>
-        <span data-en="Discovery / exposure" data-zh="发现 / 曝光">Discovery / exposure</span>
-      </div>
-      <div class="compare-item">
-        <span class="compare-icon">✗</span>
-        <span data-en="Coupon platforms" data-zh="优惠券平台">Coupon platforms</span>
-      </div>
-      <div class="compare-item">
-        <span class="compare-icon">✗</span>
-        <span data-en="Creator social networks" data-zh="创作者社交网络">Creator social networks</span>
-      </div>
-    </div>
 
-    <div class="compare-col push fade-in">
-      <div class="compare-col-head" data-en="What Push does" data-zh="Push 在做什么">What Push does</div>
-      <div class="compare-item pos">
-        <span class="compare-icon">✓</span>
-        <span data-en="Structure every campaign with goals and verification" data-zh="为每个活动设定目标并进行核验">Structure every campaign with goals and verification</span>
-      </div>
-      <div class="compare-item pos">
-        <span class="compare-icon">✓</span>
-        <span data-en="Score creators by commercial performance" data-zh="按商业表现为创作者评分">Score creators by commercial performance</span>
-      </div>
-      <div class="compare-item pos">
-        <span class="compare-icon">✓</span>
-        <span data-en="Verify outcomes and attribution" data-zh="核验结果与归因">Verify outcomes and attribution</span>
-      </div>
-      <div class="compare-item pos">
-        <span class="compare-icon">✓</span>
-        <span data-en="Create repeatable operating workflows" data-zh="创建可重复的操作工作流">Create repeatable operating workflows</span>
-      </div>
-      <div class="compare-item pos">
-        <span class="compare-icon">✓</span>
-        <span data-en="Build non-portable credit capital" data-zh="构建不可转移的信用资本">Build non-portable credit capital</span>
+      <div class="compare-col push fade-in">
+        <div class="compare-col-head" data-en="What Push does" data-zh="Push 在做什么">What Push does</div>
+        <div class="compare-item pos">
+          <span class="compare-icon">✓</span>
+          <span data-en="Structure every campaign with goals and verification" data-zh="把每次合作结构化，有目标有核实">Structure every campaign with goals and verification</span>
+        </div>
+        <div class="compare-item pos">
+          <span class="compare-icon">✓</span>
+          <span data-en="Score creators by commercial performance" data-zh="按商业表现为创作者评分">Score creators by commercial performance</span>
+        </div>
+        <div class="compare-item pos">
+          <span class="compare-icon">✓</span>
+          <span data-en="Track outcomes and build attribution" data-zh="追踪结果，建立归因">Track outcomes and build attribution</span>
+        </div>
+        <div class="compare-item pos">
+          <span class="compare-icon">✓</span>
+          <span data-en="Create repeatable operating workflows" data-zh="创造可重复的运营工作流">Create repeatable operating workflows</span>
+        </div>
+        <div class="compare-item pos">
+          <span class="compare-icon">✓</span>
+          <span data-en="Build non-portable credit capital" data-zh="构建不可迁移的信用资本">Build non-portable credit capital</span>
+        </div>
       </div>
     </div>
   </div>
@@ -709,402 +764,367 @@ footer{
 
 <!-- SECTION 3: THE WORKFLOW -->
 <section class="bg-white">
-  <div class="section-label fade-in" data-en="HOW IT WORKS" data-zh="如何运作">HOW IT WORKS</div>
-  <h2 class="section-title fade-in" data-en="From merchant goal to data-driven repeat campaign." data-zh="从商家目标到数据驱动的复购活动。">From merchant goal to data-driven repeat campaign.</h2>
-  <p class="section-sub fade-in" data-en="7 milestone states. Built-in SLAs. Zero ambiguity." data-zh="7个里程碑状态。内置SLA。零歧义。">7 milestone states. Built-in SLAs. Zero ambiguity.</p>
+  <div class="section-inner">
+    <div class="section-label fade-in" data-en="HOW IT WORKS" data-zh="运作方式">HOW IT WORKS</div>
+    <h2 class="section-title fade-in" data-en="From merchant goal to data-driven repeat campaign." data-zh="从商家目标到有数据的复购活动。">From merchant goal to data-driven repeat campaign.</h2>
+    <p class="section-sub fade-in" data-en="7 milestones. Built-in SLAs. Zero ambiguity." data-zh="7个里程碑。内置时效规则。零歧义。">7 milestones. Built-in SLAs. Zero ambiguity.</p>
 
-  <!-- BEFORE / AFTER -->
-  <div class="flow-strip before fade-in">
-    <div class="flow-strip-label" data-en="❌ Basic marketplace flow" data-zh="❌ 基础撮合流程">❌ Basic marketplace flow</div>
-    <div class="flow-steps" data-en="Merchant posts → Creator applies → Merchant accepts → Content happens → Payment maybe" data-zh="商家发布 → 创作者申请 → 商家接受 → 内容产出 → 可能付款">Merchant posts → Creator applies → Merchant accepts → Content happens → Payment maybe</div>
-    <div class="flow-note" data-en="No structure. No verification. No data. No repeats." data-zh="无结构。无核验。无数据。无复购。">No structure. No verification. No data. No repeats.</div>
-  </div>
+    <!-- BEFORE / AFTER -->
+    <div class="flow-strip before fade-in">
+      <div class="flow-strip-label" data-en="❌ Without Push" data-zh="❌ 没有 Push 的世界">❌ Without Push</div>
+      <div class="flow-steps" data-en="Merchant posts → Creator applies → Not sure they'll show → Not sure they'll post → Not sure they'll get paid → No data, no next time" data-zh="商家发帖 → 博主申请 → 不一定来 → 不一定发 → 不一定收到钱 → 没有数据，没有下次">Merchant posts → Creator applies → Not sure they'll show → Not sure they'll post → Not sure they'll get paid → No data, no next time</div>
+      <div class="flow-note" data-en="No structure. No record. No repeats." data-zh="没有结构，没有记录，没有复购。">No structure. No record. No repeats.</div>
+    </div>
 
-  <div class="flow-strip after fade-in">
-    <div class="flow-strip-label" data-en="✅ Push 20x flow" data-zh="✅ Push 20倍流程">✅ Push 20x flow</div>
-    <div class="flow-steps" data-en="Merchant selects goal → Campaign auto-structures → Creators ranked by credit score → Matched → 7-state tracking → Verified proof → 24hr settlement → Data feeds repeat" data-zh="商家选择目标 → 活动自动结构化 → 按信用评分排序的创作者 → 匹配 → 7状态追踪 → 已核验证明 → 24小时结算 → 数据反哺复购">Merchant selects goal → Campaign auto-structures → Creators ranked by credit score → Matched → 7-state tracking → Verified proof → 24hr settlement → Data feeds repeat</div>
-    <div class="flow-note" data-en="Every step creates data. Data creates better decisions." data-zh="每一步都创造数据。数据创造更好的决策。">Every step creates data. Data creates better decisions.</div>
-  </div>
+    <div class="flow-strip after fade-in">
+      <div class="flow-strip-label" data-en="✅ Push flow" data-zh="✅ Push 的方式">✅ Push flow</div>
+      <div class="flow-steps" data-en="Merchant sets goal → Campaign auto-structures → Creators ranked by score → 7-step tracking → Verified proof → 24hr settlement → Data compounds, next campaign is smarter" data-zh="商家选定目标 → 自动生成方案 → 按评分匹配博主 → 全程7步追踪 → 完成后核实 → 24小时结款 → 数据沉淀，下次更准">Merchant sets goal → Campaign auto-structures → Creators ranked by score → 7-step tracking → Verified proof → 24hr settlement → Data compounds, next campaign is smarter</div>
+      <div class="flow-note" data-en="Every step creates data. Data makes the next campaign better." data-zh="每一步都产生数据。数据让下次更好。">Every step creates data. Data makes the next campaign better.</div>
+    </div>
 
-  <!-- 7 MILESTONE STATES -->
-  <div class="section-label fade-in" style="margin-top:56px" data-en="THE 7 MILESTONE STATES" data-zh="7个里程碑状态">THE 7 MILESTONE STATES</div>
-  <div class="milestone-flow fade-in">
-    <div class="milestone-step">
-      <div class="milestone-box">
-        <div class="milestone-num">①</div>
-        <div class="milestone-name" data-en="Accepted" data-zh="已接受">Accepted</div>
-        <div class="milestone-note" data-en="12hr SLA" data-zh="12小时SLA">12hr SLA</div>
-      </div>
-    </div>
-    <div class="milestone-arrow">→</div>
-    <div class="milestone-step">
-      <div class="milestone-box">
-        <div class="milestone-num">②</div>
-        <div class="milestone-name" data-en="Scheduled" data-zh="已排期">Scheduled</div>
-        <div class="milestone-note" data-en="Schedule locked" data-zh="排期锁定">Schedule locked</div>
-      </div>
-    </div>
-    <div class="milestone-arrow">→</div>
-    <div class="milestone-step">
-      <div class="milestone-box">
-        <div class="milestone-num">③</div>
-        <div class="milestone-name" data-en="Visited" data-zh="已到访">Visited</div>
-        <div class="milestone-note" data-en="Check-in proof required" data-zh="需要签到证明">Check-in proof required</div>
-      </div>
-    </div>
-    <div class="milestone-arrow">→</div>
-    <div class="milestone-step">
-      <div class="milestone-box">
-        <div class="milestone-num">④</div>
-        <div class="milestone-name" data-en="Proof Submitted" data-zh="已提交证明">Proof Submitted</div>
-        <div class="milestone-note" data-en="24hr submission window" data-zh="24小时提交窗口">24hr submission window</div>
-      </div>
-    </div>
-    <div class="milestone-arrow">→</div>
-    <div class="milestone-step">
-      <div class="milestone-box">
-        <div class="milestone-num">⑤</div>
-        <div class="milestone-name" data-en="Content Published" data-zh="内容已发布">Content Published</div>
-        <div class="milestone-note" data-en="Content goes live" data-zh="内容上线">Content goes live</div>
-      </div>
-    </div>
-    <div class="milestone-arrow">→</div>
-    <div class="milestone-step">
-      <div class="milestone-box">
-        <div class="milestone-num">⑥</div>
-        <div class="milestone-name" data-en="Verified" data-zh="已核验">Verified</div>
-        <div class="milestone-note" data-en="Platform confirms" data-zh="平台确认">Platform confirms</div>
-      </div>
-    </div>
-    <div class="milestone-arrow">→</div>
-    <div class="milestone-step">
-      <div class="milestone-box">
-        <div class="milestone-num">⑦</div>
-        <div class="milestone-name" data-en="Settled" data-zh="已结算">Settled</div>
-        <div class="milestone-note" data-en="Payout within 24hrs" data-zh="24小时内打款">Payout within 24hrs</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MERCHANT + CREATOR WORKFLOWS -->
-  <div class="workflow-grid">
-    <!-- MERCHANT -->
-    <div>
-      <div class="workflow-col-head fade-in" data-en="🏪 Merchant Workflow" data-zh="🏪 商家工作流">🏪 Merchant Workflow</div>
-
-      <div class="workflow-stage fade-in">
-        <div class="workflow-stage-num">1</div>
-        <div class="workflow-stage-body">
-          <div class="workflow-stage-title" data-en="Onboarding" data-zh="入驻">Onboarding</div>
-          <div class="workflow-stage-desc" data-en="Captures business hours, fulfillment capacity, average order value, demand windows, preferred creator categories." data-zh="采集营业时间、履约能力、平均订单价值、需求窗口、偏好的创作者类别。">Captures business hours, fulfillment capacity, average order value, demand windows, preferred creator categories.</div>
+    <!-- 7 MILESTONE STATES -->
+    <div class="section-label fade-in" style="margin-top:64px" data-en="THE 7 MILESTONES" data-zh="7个里程碑">THE 7 MILESTONES</div>
+    <div class="milestone-flow fade-in">
+      <div class="milestone-step">
+        <div class="milestone-box">
+          <div class="milestone-num">①</div>
+          <div class="milestone-name" data-en="Accepted" data-zh="接受合作">Accepted</div>
+          <div class="milestone-note" data-en="12hr SLA" data-zh="12小时SLA">12hr SLA</div>
         </div>
       </div>
-
-      <div class="workflow-stage fade-in">
-        <div class="workflow-stage-num">2</div>
-        <div class="workflow-stage-body">
-          <div class="workflow-stage-title" data-en="Goal Selection" data-zh="目标选择">Goal Selection</div>
-          <div class="workflow-stage-desc" data-en="Drive new visits / increase weekday traffic / launch a new item / fill an event / generate local awareness." data-zh="吸引新访客 / 提升工作日流量 / 上新品 / 填满活动名额 / 提升本地知名度。">Drive new visits / increase weekday traffic / launch a new item / fill an event / generate local awareness.</div>
+      <div class="milestone-arrow">→</div>
+      <div class="milestone-step">
+        <div class="milestone-box">
+          <div class="milestone-num">②</div>
+          <div class="milestone-name" data-en="Scheduled" data-zh="确认排期">Scheduled</div>
+          <div class="milestone-note" data-en="Schedule locked" data-zh="排期锁定">Schedule locked</div>
         </div>
       </div>
-
-      <div class="workflow-stage fade-in">
-        <div class="workflow-stage-num">3</div>
-        <div class="workflow-stage-body">
-          <div class="workflow-stage-title" data-en="Campaign Structuring" data-zh="活动结构化">Campaign Structuring</div>
-          <div class="workflow-stage-desc" data-en="Offer, payout, slots, dates, creator requirements, verification method. Defaults pre-filled based on goal." data-zh="优惠、报酬、名额、日期、创作者要求、核验方式。根据目标预填默认值。">Offer, payout, slots, dates, creator requirements, verification method. Defaults pre-filled based on goal.</div>
+      <div class="milestone-arrow">→</div>
+      <div class="milestone-step">
+        <div class="milestone-box">
+          <div class="milestone-num">③</div>
+          <div class="milestone-name" data-en="Visited" data-zh="到店履约">Visited</div>
+          <div class="milestone-note" data-en="Check-in proof required" data-zh="需到店证明">Check-in proof required</div>
         </div>
       </div>
-
-      <div class="workflow-stage fade-in">
-        <div class="workflow-stage-num">4</div>
-        <div class="workflow-stage-body">
-          <div class="workflow-stage-title" data-en="Candidate Routing" data-zh="候选人路由">Candidate Routing</div>
-          <div class="workflow-stage-desc" data-en="Creators ranked by fulfillment history, local fit, category match, redemption efficiency, reliability." data-zh="按履约历史、本地匹配度、类别匹配、兑换效率、可靠性对创作者排序。">Creators ranked by fulfillment history, local fit, category match, redemption efficiency, reliability.</div>
+      <div class="milestone-arrow">→</div>
+      <div class="milestone-step">
+        <div class="milestone-box">
+          <div class="milestone-num">④</div>
+          <div class="milestone-name" data-en="Proof Submitted" data-zh="提交证明">Proof Submitted</div>
+          <div class="milestone-note" data-en="24hr submission window" data-zh="24小时窗口">24hr submission window</div>
         </div>
       </div>
-
-      <div class="workflow-stage fade-in">
-        <div class="workflow-stage-num">5</div>
-        <div class="workflow-stage-body">
-          <div class="workflow-stage-title" data-en="Campaign Execution" data-zh="活动执行">Campaign Execution</div>
-          <div class="workflow-stage-desc" data-en="Checklist-based proof flow, milestone visibility, deadline alerts." data-zh="基于清单的证明流程、里程碑可见性、截止日期提醒。">Checklist-based proof flow, milestone visibility, deadline alerts.</div>
+      <div class="milestone-arrow">→</div>
+      <div class="milestone-step">
+        <div class="milestone-box">
+          <div class="milestone-num">⑤</div>
+          <div class="milestone-name" data-en="Content Published" data-zh="内容发布">Content Published</div>
+          <div class="milestone-note" data-en="Content goes live" data-zh="内容上线">Content goes live</div>
         </div>
       </div>
-
-      <div class="workflow-stage fade-in">
-        <div class="workflow-stage-num">6</div>
-        <div class="workflow-stage-body">
-          <div class="workflow-stage-title" data-en="Review &amp; Repeat" data-zh="复盘与复购">Review &amp; Repeat</div>
-          <div class="workflow-stage-desc" data-en="Creator-level result summary, repeat recommendation, next campaign seed. &quot;Campaign completion is the seed of the next campaign.&quot;" data-zh="创作者层级结果摘要、复购推荐、下次活动种子。「活动完成即下次活动的种子。」">Creator-level result summary, repeat recommendation, next campaign seed. "Campaign completion is the seed of the next campaign."</div>
+      <div class="milestone-arrow">→</div>
+      <div class="milestone-step">
+        <div class="milestone-box">
+          <div class="milestone-num">⑥</div>
+          <div class="milestone-name" data-en="Verified" data-zh="核实通过">Verified</div>
+          <div class="milestone-note" data-en="Platform confirms" data-zh="平台确认">Platform confirms</div>
+        </div>
+      </div>
+      <div class="milestone-arrow">→</div>
+      <div class="milestone-step">
+        <div class="milestone-box">
+          <div class="milestone-num">⑦</div>
+          <div class="milestone-name" data-en="Settled" data-zh="完成结款">Settled</div>
+          <div class="milestone-note" data-en="Payout within 24hrs" data-zh="24小时内打款">Payout within 24hrs</div>
         </div>
       </div>
     </div>
 
-    <!-- CREATOR -->
-    <div>
-      <div class="workflow-col-head fade-in" data-en="🎥 Creator Workflow" data-zh="🎥 创作者工作流">🎥 Creator Workflow</div>
+    <!-- MERCHANT + CREATOR WORKFLOWS -->
+    <div class="workflow-grid">
+      <!-- MERCHANT -->
+      <div>
+        <div class="workflow-col-head fade-in" data-en="🏪 Merchant Workflow" data-zh="🏪 商家侧流程">🏪 Merchant Workflow</div>
 
-      <div class="workflow-stage fade-in">
-        <div class="workflow-stage-num">1</div>
-        <div class="workflow-stage-body">
-          <div class="workflow-stage-title" data-en="Onboarding" data-zh="入驻">Onboarding</div>
-          <div class="workflow-stage-desc" data-en="Platform handles, content categories, geography, transport radius, schedule constraints." data-zh="平台账号、内容类别、地理位置、出行半径、时间约束。">Platform handles, content categories, geography, transport radius, schedule constraints.</div>
+        <div class="workflow-stage fade-in">
+          <div class="workflow-stage-num">1</div>
+          <div class="workflow-stage-body">
+            <div class="workflow-stage-title" data-en="Onboarding" data-zh="商家注册">Onboarding</div>
+            <div class="workflow-stage-desc" data-en="Captures business hours, fulfillment capacity, average order value, demand windows, preferred creator categories." data-zh="填写营业时间、接待容量、客单价、需求窗口、偏好博主品类。">Captures business hours, fulfillment capacity, average order value, demand windows, preferred creator categories.</div>
+          </div>
+        </div>
+
+        <div class="workflow-stage fade-in">
+          <div class="workflow-stage-num">2</div>
+          <div class="workflow-stage-body">
+            <div class="workflow-stage-title" data-en="Goal Selection" data-zh="选定目标">Goal Selection</div>
+            <div class="workflow-stage-desc" data-en="Drive new visits / increase weekday traffic / launch a new item / event preview / fill slow periods / local awareness with redemption." data-zh="吸引新客 / 提升工作日客流 / 发布新品 / 活动预热 / 填充冷场时段 / 本地曝光带核销。">Drive new visits / increase weekday traffic / launch a new item / event preview / fill slow periods / local awareness with redemption.</div>
+          </div>
+        </div>
+
+        <div class="workflow-stage fade-in">
+          <div class="workflow-stage-num">3</div>
+          <div class="workflow-stage-body">
+            <div class="workflow-stage-title" data-en="Campaign Structuring" data-zh="方案配置">Campaign Structuring</div>
+            <div class="workflow-stage-desc" data-en="Payout, slots, date range, creator requirements, verification method, standby toggle. Defaults pre-filled based on goal." data-zh="报价、名额、时间范围、博主要求、核实方式、候补是否开启。默认根据目标预填充。">Payout, slots, date range, creator requirements, verification method, standby toggle. Defaults pre-filled based on goal.</div>
+          </div>
+        </div>
+
+        <div class="workflow-stage fade-in">
+          <div class="workflow-stage-num">4</div>
+          <div class="workflow-stage-body">
+            <div class="workflow-stage-title" data-en="Candidate Routing" data-zh="候选匹配">Candidate Routing</div>
+            <div class="workflow-stage-desc" data-en="Creators ranked by fulfillment history, local fit, category match, redemption efficiency, reliability." data-zh="按履约历史、本地适配度、品类匹配、核销效率、可靠性排名推荐候选人。">Creators ranked by fulfillment history, local fit, category match, redemption efficiency, reliability.</div>
+          </div>
+        </div>
+
+        <div class="workflow-stage fade-in">
+          <div class="workflow-stage-num">5</div>
+          <div class="workflow-stage-body">
+            <div class="workflow-stage-title" data-en="Campaign Execution" data-zh="执行合作">Campaign Execution</div>
+            <div class="workflow-stage-desc" data-en="Checklist-based proof flow, milestone visibility, deadline alerts." data-zh="任务清单格式交付要求，截止日期可见，证明流程清晰。">Checklist-based proof flow, milestone visibility, deadline alerts.</div>
+          </div>
+        </div>
+
+        <div class="workflow-stage fade-in">
+          <div class="workflow-stage-num">6</div>
+          <div class="workflow-stage-body">
+            <div class="workflow-stage-title" data-en="Review &amp; Repeat" data-zh="复盘与复购">Review &amp; Repeat</div>
+            <div class="workflow-stage-desc" data-en="Creator-level result summary, repeat recommendation, next campaign suggestion." data-zh="按博主显示结果摘要，推荐复购对象，给出下次活动建议。">Creator-level result summary, repeat recommendation, next campaign suggestion.</div>
+          </div>
         </div>
       </div>
 
-      <div class="workflow-stage fade-in">
-        <div class="workflow-stage-num">2</div>
-        <div class="workflow-stage-body">
-          <div class="workflow-stage-title" data-en="Opportunity Discovery" data-zh="机会发现">Opportunity Discovery</div>
-          <div class="workflow-stage-desc" data-en="Live map + ranked feed answers: &quot;What can I do now? What pays best near me? What closes soon? What am I one tier away from unlocking?&quot;" data-zh="实时地图 + 排名信息流回答：「我现在能做什么？附近哪个最划算？哪个即将截止？我距离解锁下一层还差多少？」">Live map + ranked feed answers: "What can I do now? What pays best near me? What closes soon? What am I one tier away from unlocking?"</div>
-        </div>
-      </div>
+      <!-- CREATOR -->
+      <div>
+        <div class="workflow-col-head fade-in" data-en="🎥 Creator Workflow" data-zh="🎥 创作者侧流程">🎥 Creator Workflow</div>
 
-      <div class="workflow-stage fade-in">
-        <div class="workflow-stage-num">3</div>
-        <div class="workflow-stage-body">
-          <div class="workflow-stage-title" data-en="Application or Standby" data-zh="申请或候补">Application or Standby</div>
-          <div class="workflow-stage-desc" data-en="Apply normally, or enter standby (notified instantly when slots open)." data-zh="正常申请，或进入候补（名额开放时即时通知）。">Apply normally, or enter standby (notified instantly when slots open).</div>
+        <div class="workflow-stage fade-in">
+          <div class="workflow-stage-num">1</div>
+          <div class="workflow-stage-body">
+            <div class="workflow-stage-title" data-en="Onboarding" data-zh="创作者入驻">Onboarding</div>
+            <div class="workflow-stage-desc" data-en="Platform handles, content categories, geography, transport radius, preferred collaboration types." data-zh="填写平台账号、内容品类、地理位置、出行半径、偏好合作类型。">Platform handles, content categories, geography, transport radius, preferred collaboration types.</div>
+          </div>
         </div>
-      </div>
 
-      <div class="workflow-stage fade-in">
-        <div class="workflow-stage-num">4</div>
-        <div class="workflow-stage-body">
-          <div class="workflow-stage-title" data-en="Fulfillment" data-zh="履约">Fulfillment</div>
-          <div class="workflow-stage-desc" data-en="Checklist format, deadline visibility, proof examples, auto-reminders." data-zh="清单格式、截止日期可见性、证明示例、自动提醒。">Checklist format, deadline visibility, proof examples, auto-reminders.</div>
+        <div class="workflow-stage fade-in">
+          <div class="workflow-stage-num">2</div>
+          <div class="workflow-stage-body">
+            <div class="workflow-stage-title" data-en="Opportunity Discovery" data-zh="发现机会">Opportunity Discovery</div>
+            <div class="workflow-stage-desc" data-en="Live map + ranked feed answers: What can I do now? What pays best near me? What closes soon? What am I one tier away from unlocking?" data-zh="实时地图和机会流回答：现在能接什么？附近最高报酬是什么？快截止了哪些？再升一级能解锁什么？">Live map + ranked feed answers: What can I do now? What pays best near me? What closes soon? What am I one tier away from unlocking?</div>
+          </div>
         </div>
-      </div>
 
-      <div class="workflow-stage fade-in">
-        <div class="workflow-stage-num">5</div>
-        <div class="workflow-stage-body">
-          <div class="workflow-stage-title" data-en="Settlement &amp; Progression" data-zh="结算与晋升">Settlement &amp; Progression</div>
-          <div class="workflow-stage-desc" data-en="Payout initiated, score updates, tier progress updates, future campaign access may change." data-zh="付款启动、评分更新、层级进度更新，未来活动权限可能改变。">Payout initiated, score updates, tier progress updates, future campaign access may change.</div>
+        <div class="workflow-stage fade-in">
+          <div class="workflow-stage-num">3</div>
+          <div class="workflow-stage-body">
+            <div class="workflow-stage-title" data-en="Application or Standby" data-zh="申请或候补">Application or Standby</div>
+            <div class="workflow-stage-desc" data-en="Apply normally, or enter standby pool (notified instantly when slots open)." data-zh="正常申请，或进入候补池（有空缺实时通知）。">Apply normally, or enter standby pool (notified instantly when slots open).</div>
+          </div>
+        </div>
+
+        <div class="workflow-stage fade-in">
+          <div class="workflow-stage-num">4</div>
+          <div class="workflow-stage-body">
+            <div class="workflow-stage-title" data-en="Fulfillment" data-zh="完成履约">Fulfillment</div>
+            <div class="workflow-stage-desc" data-en="Checklist format, deadline visibility, proof examples, auto-reminders." data-zh="任务清单格式，截止时间可见，示例证明，自动提醒。">Checklist format, deadline visibility, proof examples, auto-reminders.</div>
+          </div>
+        </div>
+
+        <div class="workflow-stage fade-in">
+          <div class="workflow-stage-num">5</div>
+          <div class="workflow-stage-body">
+            <div class="workflow-stage-title" data-en="Settlement &amp; Growth" data-zh="结款与成长">Settlement &amp; Growth</div>
+            <div class="workflow-stage-desc" data-en="Payout initiated, score updates, tier progress updates, accessible campaigns may change." data-zh="打款发起，评分更新，等级进度更新，可接合作机会随之变化。">Payout initiated, score updates, tier progress updates, accessible campaigns may change.</div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- SLA TABLE -->
-  <div class="section-label fade-in" style="margin-top:64px" data-en="SERVICE LEVEL AGREEMENTS" data-zh="服务等级协议">SERVICE LEVEL AGREEMENTS</div>
-  <h3 class="section-title fade-in" style="font-size:1.4rem" data-en="Service Level Agreements — built in, not negotiated." data-zh="服务等级协议——内置，不是谈判。">Service Level Agreements — built in, not negotiated.</h3>
-  <div class="sla-table-wrap fade-in">
-    <table class="sla-table">
-      <thead>
-        <tr>
-          <th data-en="EVENT" data-zh="事件">EVENT</th>
-          <th data-en="SLA" data-zh="SLA">SLA</th>
-          <th data-en="IF MISSED" data-zh="超时处理">IF MISSED</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td data-en="Campaign acceptance after match" data-zh="匹配后接受活动">Campaign acceptance after match</td>
-          <td><span class="sla-sla">12 hours</span></td>
-          <td class="sla-miss" data-en="Slot opens to next candidate" data-zh="名额开放给下一候选人">Slot opens to next candidate</td>
-        </tr>
-        <tr>
-          <td data-en="Visit after acceptance" data-zh="接受后到访">Visit after acceptance</td>
-          <td><span class="sla-sla">3–5 days</span></td>
-          <td class="sla-miss" data-en="Warning at 50% elapsed; auto-cancel at +24h" data-zh="50%时限时发出警告；超时24h后自动取消">Warning at 50% elapsed; auto-cancel at +24h</td>
-        </tr>
-        <tr>
-          <td data-en="Proof submission after visit" data-zh="到访后提交证明">Proof submission after visit</td>
-          <td><span class="sla-sla">24 hours</span></td>
-          <td class="sla-miss" data-en="Reminder; score impact warning" data-zh="提醒；分数影响警告">Reminder; score impact warning</td>
-        </tr>
-        <tr>
-          <td data-en="Merchant proof confirmation" data-zh="商家确认证明">Merchant proof confirmation</td>
-          <td><span class="sla-sla">24 hours</span></td>
-          <td class="sla-miss" data-en="Auto-approved if meets criteria" data-zh="符合条件则自动批准">Auto-approved if meets criteria</td>
-        </tr>
-        <tr>
-          <td data-en="Creator payout after verification" data-zh="核验后创作者打款">Creator payout after verification</td>
-          <td><span class="sla-sla">24 hours</span></td>
-          <td class="sla-miss" data-en="Auto-processed if no fraud flags" data-zh="无欺诈标记则自动处理">Auto-processed if no fraud flags</td>
-        </tr>
-        <tr>
-          <td data-en="Dispute acknowledgment" data-zh="争议确认">Dispute acknowledgment</td>
-          <td><span class="sla-sla">4 hours</span></td>
-          <td class="sla-miss" data-en="Auto-escalated to priority queue" data-zh="自动升级至优先队列">Auto-escalated to priority queue</td>
-        </tr>
-        <tr>
-          <td data-en="Dispute resolution" data-zh="争议解决">Dispute resolution</td>
-          <td><span class="sla-sla">48 hours</span></td>
-          <td class="sla-miss" data-en="Senior review + both parties notified" data-zh="高级审核 + 双方通知">Senior review + both parties notified</td>
-        </tr>
-      </tbody>
-    </table>
+    <!-- SLA TABLE -->
+    <div class="section-label fade-in sla-section-label" data-en="SERVICE LEVEL AGREEMENTS" data-zh="时效规则">SERVICE LEVEL AGREEMENTS</div>
+    <h3 class="section-title fade-in" style="font-size:1.5rem;margin-bottom:8px" data-en="SLAs — built in, not negotiated." data-zh="时效规则——写进系统，不靠谈判。">SLAs — built in, not negotiated.</h3>
+    <div class="sla-table-wrap fade-in">
+      <table class="sla-table">
+        <thead>
+          <tr>
+            <th data-en="EVENT" data-zh="事件">EVENT</th>
+            <th data-en="SLA" data-zh="时限">SLA</th>
+            <th data-en="IF MISSED" data-zh="超时处理">IF MISSED</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-en="Campaign acceptance after match" data-zh="匹配后接受">Campaign acceptance after match</td>
+            <td><span class="sla-sla">12 hrs</span></td>
+            <td class="sla-miss" data-en="Slot opens to next candidate automatically" data-zh="超时自动转给下一候选人">Slot opens to next candidate automatically</td>
+          </tr>
+          <tr>
+            <td data-en="Visit after acceptance" data-zh="接受后完成">Visit after acceptance</td>
+            <td><span class="sla-sla">3–5 days</span></td>
+            <td class="sla-miss" data-en="Reminder at 50% elapsed; auto-cancel at +24h" data-zh="进度过半提醒；超时+24h自动取消">Reminder at 50% elapsed; auto-cancel at +24h</td>
+          </tr>
+          <tr>
+            <td data-en="Proof submission after visit" data-zh="完成后提交证明">Proof submission after visit</td>
+            <td><span class="sla-sla">24 hrs</span></td>
+            <td class="sla-miss" data-en="Reminder; score impact" data-zh="提醒；影响评分">Reminder; score impact</td>
+          </tr>
+          <tr>
+            <td data-en="Merchant proof confirmation" data-zh="商家确认证明">Merchant proof confirmation</td>
+            <td><span class="sla-sla">24 hrs</span></td>
+            <td class="sla-miss" data-en="Auto-approved if meets criteria" data-zh="符合标准自动通过">Auto-approved if meets criteria</td>
+          </tr>
+          <tr>
+            <td data-en="Creator payout after verification" data-zh="核实后打款">Creator payout after verification</td>
+            <td><span class="sla-sla">24 hrs</span></td>
+            <td class="sla-miss" data-en="Auto-processed if no fraud flags" data-zh="无风险标记自动处理">Auto-processed if no fraud flags</td>
+          </tr>
+          <tr>
+            <td data-en="Dispute acknowledgment" data-zh="纠纷响应">Dispute acknowledgment</td>
+            <td><span class="sla-sla">4 hrs</span></td>
+            <td class="sla-miss" data-en="Auto-escalated to priority queue" data-zh="自动升级优先队列">Auto-escalated to priority queue</td>
+          </tr>
+          <tr>
+            <td data-en="Dispute resolution" data-zh="纠纷解决">Dispute resolution</td>
+            <td><span class="sla-sla">48 hrs</span></td>
+            <td class="sla-miss" data-en="Senior review + both parties notified" data-zh="升级高级审核，通知双方">Senior review + both parties notified</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
 
 <!-- SECTION 4: CREATOR CREDIT -->
 <section class="bg-gray">
-  <div class="section-label fade-in" data-en="CREATOR CREDIT" data-zh="创作者信用">CREATOR CREDIT</div>
-  <h2 class="section-title fade-in" data-en="Push Score — performance, not popularity." data-zh="Push Score——表现，而非人气。">Push Score — performance, not popularity.</h2>
+  <div class="section-inner">
+    <div class="section-label fade-in" data-en="CREATOR CREDIT" data-zh="信用体系">CREATOR CREDIT</div>
+    <h2 class="section-title fade-in" data-en="Push Score — performance, not popularity." data-zh="Push Score：表现，不是人气。">Push Score — performance, not popularity.</h2>
+    <p class="section-sub fade-in" data-en="Updated in real time after every campaign. 5 dimensions, weighted by commercial impact." data-zh="每次合作实时更新评分。5个维度，综合计算。">Updated in real time after every campaign. 5 dimensions, weighted by commercial impact.</p>
 
-  <div class="score-formula fade-in">
-    Push Score = (Completion × 0.30) + (Reliability × 0.20) + (Quality × 0.25) + (Satisfaction × 0.15) + (Engagement × 0.10)
-  </div>
-
-  <div class="credit-table-wrap fade-in">
-    <table class="credit-table">
-      <thead>
-        <tr>
-          <th data-en="DIMENSION" data-zh="维度">DIMENSION</th>
-          <th data-en="WEIGHT" data-zh="权重">WEIGHT</th>
-          <th data-en="WHAT IT MEASURES" data-zh="衡量内容">WHAT IT MEASURES</th>
-          <th data-en="WHY" data-zh="原因">WHY</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="font-weight:700" data-en="Completion Rate" data-zh="完成率">Completion Rate</td>
-          <td><span class="weight-badge">30%</span></td>
-          <td data-en="Campaigns completed / accepted" data-zh="已完成活动 / 已接受活动">Campaigns completed / accepted</td>
-          <td data-en="Non-completion is worthless to merchants" data-zh="未完成对商家毫无价值">Non-completion is worthless to merchants</td>
-        </tr>
-        <tr>
-          <td style="font-weight:700" data-en="Content Quality" data-zh="内容质量">Content Quality</td>
-          <td><span class="weight-badge">25%</span></td>
-          <td data-en="Merchant rating of content (1–5 stars)" data-zh="商家对内容的评分（1–5星）">Merchant rating of content (1–5 stars)</td>
-          <td data-en="Content that doesn't convert doesn't count" data-zh="不能转化的内容不算数">Content that doesn't convert doesn't count</td>
-        </tr>
-        <tr>
-          <td style="font-weight:700" data-en="Reliability" data-zh="可靠性">Reliability</td>
-          <td><span class="weight-badge">20%</span></td>
-          <td data-en="On-time submissions, no-show rate" data-zh="准时提交率、爽约率">On-time submissions, no-show rate</td>
-          <td data-en="Punctuality is a commercial signal" data-zh="守时是商业信号">Punctuality is a commercial signal</td>
-        </tr>
-        <tr>
-          <td style="font-weight:700" data-en="Merchant Satisfaction" data-zh="商家满意度">Merchant Satisfaction</td>
-          <td><span class="weight-badge">15%</span></td>
-          <td data-en="&quot;Would you rebook this creator?&quot; (1–5)" data-zh="「您会再次预订这位创作者吗？」（1–5）">"Would you rebook this creator?" (1–5)</td>
-          <td data-en="Repeat intent is the strongest trust signal" data-zh="复购意向是最强的信任信号">Repeat intent is the strongest trust signal</td>
-        </tr>
-        <tr>
-          <td style="font-weight:700" data-en="Engagement Proxy" data-zh="互动量代理">Engagement Proxy</td>
-          <td><span class="weight-badge">10%</span></td>
-          <td data-en="Average post engagement rate" data-zh="帖子平均互动率">Average post engagement rate</td>
-          <td data-en="Directional only; hardest to fake but least tied to ROI" data-zh="仅作方向参考；最难造假但与ROI关联最弱">Directional only; hardest to fake but least tied to ROI</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="section-label fade-in" style="margin-bottom:16px" data-en="CREATOR TIERS" data-zh="创作者层级">CREATOR TIERS</div>
-  <div class="tier-table-wrap fade-in">
-    <table class="tier-table">
-      <thead>
-        <tr>
-          <th data-en="TIER" data-zh="层级">TIER</th>
-          <th data-en="SCORE" data-zh="评分">SCORE</th>
-          <th data-en="CAMPAIGNS" data-zh="活动数">CAMPAIGNS</th>
-          <th data-en="WHAT UNLOCKS" data-zh="解锁权益">WHAT UNLOCKS</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="tier-new">
-          <td data-en="New 🆕" data-zh="新手 🆕">New 🆕</td>
-          <td data-en="N/A" data-zh="无">N/A</td>
-          <td>0</td>
-          <td data-en="Basic campaigns, max 2 active" data-zh="基础活动，最多2个进行中">Basic campaigns, max 2 active</td>
-        </tr>
-        <tr class="tier-rising">
-          <td data-en="Rising ⭐" data-zh="新星 ⭐">Rising ⭐</td>
-          <td>50+</td>
-          <td>3+</td>
-          <td data-en="All standard campaigns, standby eligible" data-zh="所有标准活动，可加入候补">All standard campaigns, standby eligible</td>
-        </tr>
-        <tr class="tier-reliable">
-          <td data-en="Reliable ⭐⭐" data-zh="可靠 ⭐⭐">Reliable ⭐⭐</td>
-          <td>70+</td>
-          <td>8+</td>
-          <td data-en="Priority matching, premium campaigns, higher payout tier" data-zh="优先匹配、高级活动、更高报酬层级">Priority matching, premium campaigns, higher payout tier</td>
-        </tr>
-        <tr class="tier-elite">
-          <td data-en="Elite ⭐⭐⭐" data-zh="精英 ⭐⭐⭐">Elite ⭐⭐⭐</td>
-          <td>85+</td>
-          <td>20+</td>
-          <td data-en="Top-tier campaigns, highest payouts, featured profile, early access" data-zh="顶级活动、最高报酬、精选主页、提前访问">Top-tier campaigns, highest payouts, featured profile, early access</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="section-label fade-in" style="margin-bottom:16px" data-en="SCORE DECAY" data-zh="评分衰减">SCORE DECAY</div>
-  <div class="decay-grid fade-in">
-    <div class="decay-card">
-      <div class="decay-card-label" data-en="Active (1+ campaign/30 days)" data-zh="活跃（每30天1+活动）">Active (1+ campaign/30 days)</div>
-      <div class="decay-card-value ok" data-en="No decay" data-zh="不衰减">No decay</div>
+    <div class="score-formula fade-in">
+      Push Score = (完成率 × 0.30) + (可靠性 × 0.20) + (内容质量 × 0.25) + (商家满意度 × 0.15) + (互动数据 × 0.10)
     </div>
-    <div class="decay-card">
-      <div class="decay-card-label" data-en="30–60 days inactive" data-zh="30–60天不活跃">30–60 days inactive</div>
-      <div class="decay-card-value warn" data-en="−2 points/month" data-zh="每月−2分">−2 points/month</div>
-    </div>
-    <div class="decay-card">
-      <div class="decay-card-label" data-en="60–90 days inactive" data-zh="60–90天不活跃">60–90 days inactive</div>
-      <div class="decay-card-value bad" data-en="−5 points/month" data-zh="每月−5分">−5 points/month</div>
-    </div>
-    <div class="decay-card">
-      <div class="decay-card-label" data-en="90+ days" data-zh="90天以上">90+ days</div>
-      <div class="decay-card-value bad" data-en="Frozen, marked inactive" data-zh="冻结，标记为不活跃">Frozen, marked inactive</div>
-    </div>
-  </div>
 
-  <div class="anti-gaming-note fade-in" data-en="⚡ Anti-gaming: Score is resistant to gaming — engagement is only 10% (not worth buying likes), same-merchant pairing gets flagged after 3 consecutive campaigns, difficulty distribution is tracked." data-zh="⚡ 防刷分：评分抵制刷分——互动量仅占10%（刷赞无意义），同一商家配对超过3次连续活动会被标记，任务难度分布会被追踪。">⚡ Anti-gaming: Score is resistant to gaming — engagement is only 10% (not worth buying likes), same-merchant pairing gets flagged after 3 consecutive campaigns, difficulty distribution is tracked.</div>
+    <div class="score-bars fade-in">
+      <div class="score-bar-row">
+        <div class="score-bar-label" data-en="Completion Rate" data-zh="完成率">Completion Rate</div>
+        <div class="score-bar-track"><div class="score-bar-fill" style="width:30%"></div></div>
+        <div class="score-bar-pct">30%</div>
+        <div class="score-bar-why" data-en="Non-completion is worthless to merchants" data-zh="没完成对商家毫无价值，这是最基本的信号">Non-completion is worthless to merchants</div>
+      </div>
+      <div class="score-bar-row">
+        <div class="score-bar-label" data-en="Content Quality" data-zh="内容质量">Content Quality</div>
+        <div class="score-bar-track"><div class="score-bar-fill" style="width:25%"></div></div>
+        <div class="score-bar-pct">25%</div>
+        <div class="score-bar-why" data-en="Poor content doesn't convert — directly affects merchant satisfaction" data-zh="差内容不转化，直接影响商家满意度">Poor content doesn't convert — directly affects merchant satisfaction</div>
+      </div>
+      <div class="score-bar-row">
+        <div class="score-bar-label" data-en="Reliability" data-zh="可靠性">Reliability</div>
+        <div class="score-bar-track"><div class="score-bar-fill" style="width:20%"></div></div>
+        <div class="score-bar-pct">20%</div>
+        <div class="score-bar-why" data-en="Punctuality is a commercial signal, not a minor detail" data-zh="守时是商业信号，不是小事">Punctuality is a commercial signal, not a minor detail</div>
+      </div>
+      <div class="score-bar-row">
+        <div class="score-bar-label" data-en="Merchant Satisfaction" data-zh="商家满意度">Merchant Satisfaction</div>
+        <div class="score-bar-track"><div class="score-bar-fill" style="width:15%"></div></div>
+        <div class="score-bar-pct">15%</div>
+        <div class="score-bar-why" data-en="Repeat intent is the strongest trust signal" data-zh="复购意愿是最强的信任指标">Repeat intent is the strongest trust signal</div>
+      </div>
+      <div class="score-bar-row">
+        <div class="score-bar-label" data-en="Engagement Proxy" data-zh="互动数据">Engagement Proxy</div>
+        <div class="score-bar-track"><div class="score-bar-fill" style="width:10%"></div></div>
+        <div class="score-bar-pct">10%</div>
+        <div class="score-bar-why" data-en="Directional only — hardest to fake but weakest link to merchant ROI" data-zh="方向性参考；最难造假，但与商家ROI关系最弱">Directional only — hardest to fake but weakest link to merchant ROI</div>
+      </div>
+    </div>
+
+    <div class="section-label fade-in" style="margin-bottom:20px" data-en="CREATOR TIERS" data-zh="创作者等级">CREATOR TIERS</div>
+    <div class="tier-cards fade-in">
+      <div class="tier-card tier-new">
+        <div class="tier-card-name" data-en="New 🆕" data-zh="新人 🆕">New 🆕</div>
+        <div class="tier-card-score">—</div>
+        <div class="tier-card-campaigns" data-en="0 campaigns completed" data-zh="0次完成">0 campaigns completed</div>
+        <div class="tier-card-perks" data-en="Basic campaigns, max 2 active at once" data-zh="基础合作，最多同时接2单">Basic campaigns, max 2 active at once</div>
+      </div>
+      <div class="tier-card tier-rising">
+        <div class="tier-card-name" data-en="Rising ⭐" data-zh="上升中 ⭐">Rising ⭐</div>
+        <div class="tier-card-score">50+</div>
+        <div class="tier-card-campaigns" data-en="3+ campaigns completed" data-zh="完成3次以上">3+ campaigns completed</div>
+        <div class="tier-card-perks" data-en="All standard campaigns, standby eligible" data-zh="全部标准合作，可进候补池">All standard campaigns, standby eligible</div>
+      </div>
+      <div class="tier-card tier-reliable">
+        <div class="tier-card-name" data-en="Reliable ⭐⭐" data-zh="稳定可靠 ⭐⭐">Reliable ⭐⭐</div>
+        <div class="tier-card-score">70+</div>
+        <div class="tier-card-campaigns" data-en="8+ campaigns completed" data-zh="完成8次以上">8+ campaigns completed</div>
+        <div class="tier-card-perks" data-en="Priority matching, premium campaigns, higher payouts" data-zh="优先匹配，高级合作，更高报酬">Priority matching, premium campaigns, higher payouts</div>
+      </div>
+      <div class="tier-card tier-elite">
+        <div class="tier-card-name" data-en="Elite ⭐⭐⭐" data-zh="顶级认证 ⭐⭐⭐">Elite ⭐⭐⭐</div>
+        <div class="tier-card-score">85+</div>
+        <div class="tier-card-campaigns" data-en="20+ campaigns completed" data-zh="完成20次以上">20+ campaigns completed</div>
+        <div class="tier-card-perks" data-en="Top campaigns, highest payouts, featured profile, early access" data-zh="最优合作，最高报酬，主页推荐，提前解锁">Top campaigns, highest payouts, featured profile, early access</div>
+      </div>
+    </div>
+
+    <div class="decay-note fade-in" data-en="Score decay: After 30 days inactive, −2 pts/month. After 60 days, −5 pts/month. Staying in tier requires consistent engagement." data-zh="不活跃则评分衰减：30天后每月−2分，60天后每月−5分。创作者需要持续参与才能保住等级。">Score decay: After 30 days inactive, −2 pts/month. After 60 days, −5 pts/month. Staying in tier requires consistent engagement.</div>
+
+    <div class="anti-gaming-note fade-in" data-en="⚡ Anti-gaming: Engagement is only 10% — buying likes moves the needle almost nothing. Same-merchant pairing flagged after 3 consecutive campaigns. Difficulty distribution is tracked." data-zh="⚡ 评分抵制刷分：互动数据仅占10%，刷赞意义不大。同一商家连续配对超过3次会被标记。任务难度分布会被追踪。">⚡ Anti-gaming: Engagement is only 10% — buying likes moves the needle almost nothing. Same-merchant pairing flagged after 3 consecutive campaigns. Difficulty distribution is tracked.</div>
+  </div>
 </section>
 
 <!-- SECTION 5: THE 5 PILLARS -->
 <section class="bg-white">
-  <div class="section-label fade-in" data-en="STRATEGIC ARCHITECTURE" data-zh="战略架构">STRATEGIC ARCHITECTURE</div>
-  <h2 class="section-title fade-in" data-en="Five systems. One infrastructure." data-zh="五个系统。一个基础设施。">Five systems. One infrastructure.</h2>
+  <div class="section-inner">
+    <div class="section-label fade-in" data-en="STRATEGIC ARCHITECTURE" data-zh="战略架构">STRATEGIC ARCHITECTURE</div>
+    <h2 class="section-title fade-in" data-en="Five systems. One infrastructure." data-zh="五个系统，一套基础设施。">Five systems. One infrastructure.</h2>
 
-  <div class="pillars-list">
-    <div class="pillar-row fade-in">
-      <div class="pillar-num">01</div>
-      <div class="pillar-content">
-        <div class="pillar-name" data-en="Offer OS" data-zh="Offer OS">Offer OS</div>
-        <div class="pillar-sub" data-en="For merchants — goal to structured campaign" data-zh="为商家——目标转化为结构化活动">For merchants — goal to structured campaign</div>
-        <div class="pillar-body" data-en="Merchants choose a business objective (drive weekday traffic, launch a new item, fill an event, increase first-time visits). The system converts it into a complete campaign framework: offer, payout, creator requirements, verification method, standby settings. No more blank-slate campaign creation." data-zh="商家选择一个业务目标（提升工作日流量、上新品、填满活动名额、增加首次到访）。系统将其转化为完整的活动框架：优惠、报酬、创作者要求、核验方式、候补设置。不再需要从空白页面开始创建活动。">Merchants choose a business objective (drive weekday traffic, launch a new item, fill an event, increase first-time visits). The system converts it into a complete campaign framework: offer, payout, creator requirements, verification method, standby settings. No more blank-slate campaign creation.</div>
+    <div class="pillars-list">
+      <div class="pillar-row fade-in">
+        <div class="pillar-num">01</div>
+        <div class="pillar-content">
+          <div class="pillar-name" data-en="Campaign OS" data-zh="活动操作系统">Campaign OS</div>
+          <div class="pillar-sub" data-en="Merchant-side — goal to structured campaign" data-zh="商家侧">Merchant-side — goal to structured campaign</div>
+          <div class="pillar-body" data-en="Merchants pick a goal. The system generates a complete campaign brief. No blank-slate creation — choose 'boost weekday traffic' or 'launch new item' and the payout, creator requirements, and verification method are all pre-filled. Bad briefs no longer happen because someone didn't know what to write." data-zh="商家选目标，系统生成完整方案。不用从头写需求——选"提升工作日客流"或"新品发布"，报价、博主要求、核实方式全部预填充。不会因为不知道怎么写brief而做出差的活动。">Merchants pick a goal. The system generates a complete campaign brief. No blank-slate creation — choose 'boost weekday traffic' or 'launch new item' and the payout, creator requirements, and verification method are all pre-filled. Bad briefs no longer happen because someone didn't know what to write.</div>
+        </div>
       </div>
-    </div>
 
-    <div class="pillar-row fade-in">
-      <div class="pillar-num">02</div>
-      <div class="pillar-content">
-        <div class="pillar-name" data-en="Creator Credit" data-zh="创作者信用">Creator Credit</div>
-        <div class="pillar-sub" data-en="For creators and merchants — performance history as currency" data-zh="为创作者和商家——表现历史即货币">For creators and merchants — performance history as currency</div>
-        <div class="pillar-body" data-en="Creators build a performance track record through every campaign: completion rate, reliability, quality ratings, merchant satisfaction, engagement. Higher scores unlock better campaigns, higher payouts, and priority matching. Scores decay with inactivity — maintaining standing requires consistent performance." data-zh="创作者通过每次活动积累表现记录：完成率、可靠性、质量评分、商家满意度、互动量。更高的评分解锁更好的活动、更高的报酬和优先匹配。评分随不活跃而衰减——保持地位需要持续的表现。">Creators build a performance track record through every campaign: completion rate, reliability, quality ratings, merchant satisfaction, engagement. Higher scores unlock better campaigns, higher payouts, and priority matching. Scores decay with inactivity — maintaining standing requires consistent performance.</div>
+      <div class="pillar-row fade-in">
+        <div class="pillar-num">02</div>
+        <div class="pillar-content">
+          <div class="pillar-name" data-en="Creator Credit" data-zh="创作者信用">Creator Credit</div>
+          <div class="pillar-sub" data-en="For merchants and creators — performance history as currency" data-zh="商家与创作者">For merchants and creators — performance history as currency</div>
+          <div class="pillar-body" data-en="Every campaign updates the score. Completion rate, reliability, content quality, merchant satisfaction — high scorers unlock better campaigns and higher payouts. Scores decay over time — long inactivity costs you points. Performance, not followers." data-zh="每次合作更新评分。完成率、可靠性、内容质量、商家满意度——评分高的博主能解锁更好的合作机会和更高报酬。评分随时间衰减——长期不活跃会掉分。不是粉丝，是表现。">Every campaign updates the score. Completion rate, reliability, content quality, merchant satisfaction — high scorers unlock better campaigns and higher payouts. Scores decay over time — long inactivity costs you points. Performance, not followers.</div>
+        </div>
       </div>
-    </div>
 
-    <div class="pillar-row fade-in">
-      <div class="pillar-num">03</div>
-      <div class="pillar-content">
-        <div class="pillar-name" data-en="Attribution" data-zh="归因">Attribution</div>
-        <div class="pillar-sub" data-en="For everyone — did the campaign actually work?" data-zh="为所有人——活动真的有效吗？">For everyone — did the campaign actually work?</div>
-        <div class="pillar-body" data-en="5 verification layers: (1) fulfillment evidence (timestamps, merchant acknowledgement), (2) content verification (live URLs, persistence checks), (3) engagement context (views, saves — directional only), (4) merchant-side action (redemptions, bookings, offer claims), (5) repeat signal (merchant rebooking, creator invited to premium campaigns). Each layer adds confidence. Confidence determines what you can claim." data-zh="5个核验层：(1)履约证据（时间戳、商家确认），(2)内容核验（实时URL、持久性检查），(3)互动背景（浏览、收藏——仅作方向参考），(4)商家端行动（兑换、预订、优惠领取），(5)复购信号（商家复约、创作者受邀参与高级活动）。每一层都增加置信度。置信度决定你能主张什么。">5 verification layers: (1) fulfillment evidence (timestamps, merchant acknowledgement), (2) content verification (live URLs, persistence checks), (3) engagement context (views, saves — directional only), (4) merchant-side action (redemptions, bookings, offer claims), (5) repeat signal (merchant rebooking, creator invited to premium campaigns). Each layer adds confidence. Confidence determines what you can claim.</div>
+      <div class="pillar-row fade-in">
+        <div class="pillar-num">03</div>
+        <div class="pillar-content">
+          <div class="pillar-name" data-en="Attribution" data-zh="效果归因">Attribution</div>
+          <div class="pillar-sub" data-en="Platform-wide — did the campaign actually work?" data-zh="全局">Platform-wide — did the campaign actually work?</div>
+          <div class="pillar-body" data-en="5 verification layers: ① visit proof (timestamp, merchant confirmation) ② content live (URL, screenshot, persistence check) ③ engagement data (directional only) ④ merchant-side action (redemptions, bookings, visit tags) ⑤ repeat signal (merchant rebooking, creator invited to premium campaign). Each layer adds confidence." data-zh="5层核实：① 到访证明（时间戳、商家确认）② 内容上线（链接、截图、持久性检查）③ 互动数据（方向性参考）④ 商家侧行为（核销、预约、到访标记）⑤ 复购信号（商家复购、博主被邀进更高级合作）。每层都增加置信度。">5 verification layers: ① visit proof (timestamp, merchant confirmation) ② content live (URL, screenshot, persistence check) ③ engagement data (directional only) ④ merchant-side action (redemptions, bookings, visit tags) ⑤ repeat signal (merchant rebooking, creator invited to premium campaign). Each layer adds confidence.</div>
+        </div>
       </div>
-    </div>
 
-    <div class="pillar-row fade-in">
-      <div class="pillar-num">04</div>
-      <div class="pillar-content">
-        <div class="pillar-name" data-en="Demand Surface" data-zh="需求界面">Demand Surface</div>
-        <div class="pillar-sub" data-en="The live map — real-time opportunities" data-zh="实时地图——实时机会">The live map — real-time opportunities</div>
-        <div class="pillar-body" data-en="Creators see exactly what's available: distance, payout, slots remaining, deadline, tier required, offer details. Not a discovery map — a commercial interface. Every node answers: can I take this now? The standby system adds urgency: limited slots close fast." data-zh="创作者能精确看到可用机会：距离、报酬、剩余名额、截止日期、所需层级、优惠详情。不是发现地图——而是商业界面。每个节点回答：我现在能接这个吗？候补系统增加紧迫感：有限名额快速关闭。">Creators see exactly what's available: distance, payout, slots remaining, deadline, tier required, offer details. Not a discovery map — a commercial interface. Every node answers: can I take this now? The standby system adds urgency: limited slots close fast.</div>
+      <div class="pillar-row fade-in">
+        <div class="pillar-num">04</div>
+        <div class="pillar-content">
+          <div class="pillar-name" data-en="Demand Surface" data-zh="需求界面">Demand Surface</div>
+          <div class="pillar-sub" data-en="The live map — real-time opportunities" data-zh="实时地图">The live map — real-time opportunities</div>
+          <div class="pillar-body" data-en="Creators see a commercial feed, not an explore page: distance, payout, slots remaining, deadline, tier required, is this worth taking right now. Every node drives action. Not browsing — deciding." data-zh="创作者看到的不是探索页，而是商业机会流：距离多远、报酬多少、剩多少名额、几时截止、需要什么等级、这单值不值得现在去接。驱动行动，不只是浏览。">Creators see a commercial feed, not an explore page: distance, payout, slots remaining, deadline, tier required, is this worth taking right now. Every node drives action. Not browsing — deciding.</div>
+        </div>
       </div>
-    </div>
 
-    <div class="pillar-row fade-in">
-      <div class="pillar-num">05</div>
-      <div class="pillar-content">
-        <div class="pillar-name" data-en="Liquidity Layer" data-zh="流动性层">Liquidity Layer</div>
-        <div class="pillar-sub" data-en="Standby system — fill rate stays high" data-zh="候补系统——保持高填充率">Standby system — fill rate stays high</div>
-        <div class="pillar-body" data-en="When a creator accepts and then cancels, or a campaign goes unfilled, the standby pool activates. Standby-eligible creators (Rising tier and above) get real-time alerts. Merchants get filled slots. Creators get access to opportunities they might have missed. The mechanism keeps supply-demand liquid even at small scale." data-zh="当创作者接受后又取消，或活动名额未填满时，候补池激活。符合候补资格的创作者（新星层级及以上）会收到实时提醒。商家获得填满的名额。创作者获得可能错过的机会。该机制即使在小规模下也能保持供需流动性。">When a creator accepts and then cancels, or a campaign goes unfilled, the standby pool activates. Standby-eligible creators (Rising tier and above) get real-time alerts. Merchants get filled slots. Creators get access to opportunities they might have missed. The mechanism keeps supply-demand liquid even at small scale.</div>
+      <div class="pillar-row fade-in">
+        <div class="pillar-num">05</div>
+        <div class="pillar-content">
+          <div class="pillar-name" data-en="Liquidity Layer" data-zh="流动性机制">Liquidity Layer</div>
+          <div class="pillar-sub" data-en="Standby system — fill rate stays high" data-zh="候补系统">Standby system — fill rate stays high</div>
+          <div class="pillar-body" data-en="When a slot opens unexpectedly, standby-pool creators are notified immediately. Merchants don't scramble to fill. Creators don't refresh waiting. If you suddenly have free time, you can still land a good campaign." data-zh="有名额意外空缺时，候补池中的创作者立即收到通知。商家不用担心填不满。创作者不用守着刷新。临时有空，也能接到好单。">When a slot opens unexpectedly, standby-pool creators are notified immediately. Merchants don't scramble to fill. Creators don't refresh waiting. If you suddenly have free time, you can still land a good campaign.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -1112,83 +1132,87 @@ footer{
 
 <!-- SECTION 6: WHAT PUSH IS AND ISN'T -->
 <section class="bg-gray">
-  <div class="section-label fade-in" data-en="STRATEGIC POSITION" data-zh="战略定位">STRATEGIC POSITION</div>
-  <h2 class="section-title fade-in" data-en="Not everything. Just the right thing." data-zh="不是什么都做，只做正确的事。">Not everything. Just the right thing.</h2>
+  <div class="section-inner">
+    <div class="section-label fade-in" data-en="STRATEGIC POSITION" data-zh="战略定位">STRATEGIC POSITION</div>
+    <h2 class="section-title fade-in" data-en="Clear edges make for a sharp focus." data-zh="做清楚边界，才做得专。">Clear edges make for a sharp focus.</h2>
 
-  <div class="is-grid">
-    <div class="is-col yes fade-in">
-      <div class="is-col-head" data-en="✓ PUSH IS" data-zh="✓ PUSH 是">✓ PUSH IS</div>
-      <div class="is-item yes">
-        <span class="is-icon" style="color:var(--green)">✓</span>
-        <span data-en="A transaction system" data-zh="一个交易系统">A transaction system</span>
+    <div class="is-grid">
+      <div class="is-col yes fade-in">
+        <div class="is-col-head" data-en="✓ PUSH IS" data-zh="✓ PUSH 是">✓ PUSH IS</div>
+        <div class="is-item yes">
+          <span class="is-icon" style="color:var(--green)">✓</span>
+          <span data-en="A transaction system" data-zh="一套交易系统">A transaction system</span>
+        </div>
+        <div class="is-item yes">
+          <span class="is-icon" style="color:var(--green)">✓</span>
+          <span data-en="A trust system" data-zh="一套信任机制">A trust system</span>
+        </div>
+        <div class="is-item yes">
+          <span class="is-icon" style="color:var(--green)">✓</span>
+          <span data-en="A creator credit system" data-zh="一套创作者信用体系">A creator credit system</span>
+        </div>
+        <div class="is-item yes">
+          <span class="is-icon" style="color:var(--green)">✓</span>
+          <span data-en="A local demand orchestration system" data-zh="一个本地需求调度系统">A local demand orchestration system</span>
+        </div>
+        <div class="is-item yes">
+          <span class="is-icon" style="color:var(--green)">✓</span>
+          <span data-en="Operating infrastructure between merchants and creators" data-zh="商家与创作者之间的运营基础设施">Operating infrastructure between merchants and creators</span>
+        </div>
       </div>
-      <div class="is-item yes">
-        <span class="is-icon" style="color:var(--green)">✓</span>
-        <span data-en="A trust system" data-zh="一个信任系统">A trust system</span>
-      </div>
-      <div class="is-item yes">
-        <span class="is-icon" style="color:var(--green)">✓</span>
-        <span data-en="A creator credit system" data-zh="一个创作者信用系统">A creator credit system</span>
-      </div>
-      <div class="is-item yes">
-        <span class="is-icon" style="color:var(--green)">✓</span>
-        <span data-en="A local demand orchestration system" data-zh="一个本地需求编排系统">A local demand orchestration system</span>
-      </div>
-      <div class="is-item yes">
-        <span class="is-icon" style="color:var(--green)">✓</span>
-        <span data-en="An infrastructure layer between merchants and creators" data-zh="商家与创作者之间的基础设施层">An infrastructure layer between merchants and creators</span>
+
+      <div class="is-col no fade-in">
+        <div class="is-col-head" data-en="✗ PUSH IS NOT" data-zh="✗ PUSH 不是">✗ PUSH IS NOT</div>
+        <div class="is-item no">
+          <span class="is-icon" style="color:var(--red)">✗</span>
+          <span data-en="A generic influencer marketplace" data-zh="通用网红撮合平台">A generic influencer marketplace</span>
+        </div>
+        <div class="is-item no">
+          <span class="is-icon" style="color:var(--red)">✗</span>
+          <span data-en="A local discovery or explore app" data-zh="本地探索/发现应用">A local discovery or explore app</span>
+        </div>
+        <div class="is-item no">
+          <span class="is-icon" style="color:var(--red)">✗</span>
+          <span data-en="A content community or social network" data-zh="内容社区或社交网络">A content community or social network</span>
+        </div>
+        <div class="is-item no">
+          <span class="is-icon" style="color:var(--red)">✗</span>
+          <span data-en="A rewards or loyalty app" data-zh="打卡奖励或积分应用">A rewards or loyalty app</span>
+        </div>
+        <div class="is-item no">
+          <span class="is-icon" style="color:var(--red)">✗</span>
+          <span data-en="A free sample giveaway platform" data-zh="免费体验分发平台">A free sample giveaway platform</span>
+        </div>
       </div>
     </div>
 
-    <div class="is-col no fade-in">
-      <div class="is-col-head" data-en="✗ PUSH IS NOT" data-zh="✗ PUSH 不是">✗ PUSH IS NOT</div>
-      <div class="is-item no">
-        <span class="is-icon" style="color:var(--red)">✗</span>
-        <span data-en="A generic influencer marketplace" data-zh="一个通用网红撮合平台">A generic influencer marketplace</span>
-      </div>
-      <div class="is-item no">
-        <span class="is-icon" style="color:var(--red)">✗</span>
-        <span data-en="A local discovery or explore app" data-zh="一个本地发现或探索应用">A local discovery or explore app</span>
-      </div>
-      <div class="is-item no">
-        <span class="is-icon" style="color:var(--red)">✗</span>
-        <span data-en="A content community or social network" data-zh="一个内容社区或社交网络">A content community or social network</span>
-      </div>
-      <div class="is-item no">
-        <span class="is-icon" style="color:var(--red)">✗</span>
-        <span data-en="A reward or loyalty app" data-zh="一个奖励或会员应用">A reward or loyalty app</span>
-      </div>
-      <div class="is-item no">
-        <span class="is-icon" style="color:var(--red)">✗</span>
-        <span data-en="A sample giveaway platform" data-zh="一个样品赠送平台">A sample giveaway platform</span>
-      </div>
+    <div class="strategic-test fade-in">
+      <div class="strategic-test-label" data-en="STRATEGIC FILTER" data-zh="功能决策标准">STRATEGIC FILTER</div>
+      <div class="strategic-test-body" data-en="Every feature decision must positively answer at least one: ① Does it make merchant ROI clearer? ② Does it improve creator earning power or quality filtering? ③ Does it deepen platform defensibility? ④ Does it reduce fraud or lower repeat campaign cost? ⑤ Does it keep future transactions on-platform?" data-zh="每个功能决策都必须正面回答至少一个：① 有没有让商家的ROI更清晰？② 有没有提升创作者的赚钱能力或质量筛选？③ 有没有加深平台的防御性？④ 有没有减少欺诈或降低复购成本？⑤ 有没有让未来的合作更倾向留在平台内？">Every feature decision must positively answer at least one: ① Does it make merchant ROI clearer? ② Does it improve creator earning power or quality filtering? ③ Does it deepen platform defensibility? ④ Does it reduce fraud or lower repeat campaign cost? ⑤ Does it keep future transactions on-platform?</div>
     </div>
-  </div>
-
-  <div class="strategic-test fade-in">
-    <div class="strategic-test-label" data-en="STRATEGIC FILTER" data-zh="战略过滤器">STRATEGIC FILTER</div>
-    <div class="strategic-test-body" data-en="Every feature decision must positively answer at least one: (1) Does it improve merchant ROI clarity? (2) Does it improve creator earning power or quality sorting? (3) Does it deepen platform defensibility? (4) Does it reduce fraud or repeat campaign cost? (5) Does it keep future transactions on-platform?" data-zh="每个功能决策都必须正面回答至少一个：(1)是否提升商家ROI清晰度？(2)是否提升创作者赚钱能力或质量排序？(3)是否加深平台防御性？(4)是否减少欺诈或复购活动成本？(5)是否让未来交易留在平台内？">Every feature decision must positively answer at least one: (1) Does it improve merchant ROI clarity? (2) Does it improve creator earning power or quality sorting? (3) Does it deepen platform defensibility? (4) Does it reduce fraud or repeat campaign cost? (5) Does it keep future transactions on-platform?</div>
   </div>
 </section>
 
 <!-- SECTION 7: THE THESIS -->
 <section class="bg-dark">
-  <div class="section-label fade-in" style="color:var(--accent-light)" data-en="COMPANY THESIS" data-zh="公司论点">COMPANY THESIS</div>
-  <h2 class="thesis-title fade-in" data-en="The end state is a new market layer." data-zh="终态是一个新的市场层。">The end state is a new market layer.</h2>
+  <div class="section-inner">
+    <div class="section-label fade-in" style="color:var(--accent-light)" data-en="COMPANY THESIS" data-zh="公司论点">COMPANY THESIS</div>
+    <h2 class="thesis-title fade-in" data-en="The end state is a new market layer." data-zh="终态是一个新的市场层级。">The end state is a new market layer.</h2>
 
-  <ul class="thesis-list fade-in">
-    <li data-en="Standardizes local creator acquisition" data-zh="标准化本地创作者获取">Standardizes local creator acquisition</li>
-    <li data-en="Ranks creators by commercial performance" data-zh="按商业表现为创作者排名">Ranks creators by commercial performance</li>
-    <li data-en="Routes merchants toward better outcomes" data-zh="将商家引向更好的结果">Routes merchants toward better outcomes</li>
-    <li data-en="Compounds proprietary creator performance data" data-zh="积累专有的创作者表现数据">Compounds proprietary creator performance data</li>
-    <li data-en="Creates lock-in through access, trust, and workflow" data-zh="通过访问权、信任和工作流创造锁定效应">Creates lock-in through access, trust, and workflow</li>
-  </ul>
+    <ul class="thesis-list fade-in">
+      <li data-en="Standardizes local creator acquisition" data-zh="本地创作者获客标准化">Standardizes local creator acquisition</li>
+      <li data-en="Ranks creators by commercial performance" data-zh="创作者按商业表现排名">Ranks creators by commercial performance</li>
+      <li data-en="Routes merchants toward better outcomes" data-zh="商家被引导向更好的结果">Routes merchants toward better outcomes</li>
+      <li data-en="Compounds proprietary creator performance data" data-zh="积累专有创作者表现数据">Compounds proprietary creator performance data</li>
+      <li data-en="Creates lock-in through access, trust, and workflow" data-zh="通过权限、信任和工作流形成锁定">Creates lock-in through access, trust, and workflow</li>
+    </ul>
 
-  <p class="thesis-close fade-in" data-en="&quot;Push lets local businesses buy customer acquisition from rising creators through verified fulfillment and conversion history. That's the business.&quot;" data-zh="&quot;Push 让本地商家通过已核验的履约和转化历史，从新兴创作者那里购买客户获取服务。这就是这个业务的本质。&quot;">"Push lets local businesses buy customer acquisition from rising creators through verified fulfillment and conversion history. That's the business."</p>
+    <p class="thesis-close fade-in" data-en="&quot;Push lets local businesses buy customer acquisition from rising creators through verified fulfillment and conversion history. That's the business.&quot;" data-zh="Push 让本地商家通过已核验的履约记录和转化历史，从上升中的创作者那里购买客户获取能力。这就是这个业务的本质。">"Push lets local businesses buy customer acquisition from rising creators through verified fulfillment and conversion history. That's the business."</p>
 
-  <div class="thesis-btns fade-in">
-    <a href="risk-defense.html" class="thesis-btn primary" data-en="→ Full Risk &amp; Defense Analysis" data-zh="→ 完整风险与防御分析">→ Full Risk &amp; Defense Analysis</a>
-    <a href="retention-defense.html" class="thesis-btn secondary" data-en="→ Creator Retention Design" data-zh="→ 创作者留存设计">→ Creator Retention Design</a>
+    <div class="thesis-btns fade-in">
+      <a href="risk-defense.html" class="thesis-btn primary" data-en="→ Full Risk &amp; Defense Analysis" data-zh="→ 查看完整风险分析">→ Full Risk &amp; Defense Analysis</a>
+      <a href="retention-defense.html" class="thesis-btn secondary" data-en="→ Creator Retention Design" data-zh="→ 了解创作者留存设计">→ Creator Retention Design</a>
+    </div>
   </div>
 </section>
 
@@ -1196,9 +1220,9 @@ footer{
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
-      <div class="footer-brand">
+      <div>
         <span class="footer-logo">PUSH</span>
-        <div class="footer-tagline" data-en="Infrastructure for local creator-merchant commerce." data-zh="本地创作者-商家商业的基础设施。">Infrastructure for local creator-merchant commerce.</div>
+        <div class="footer-tagline" data-en="Infrastructure for local creator-merchant commerce." data-zh="本地创作者-商家合作的运营基础设施。">Infrastructure for local creator-merchant commerce.</div>
       </div>
       <div class="footer-links">
         <a href="index.html" data-en="Overview" data-zh="概览">Overview</a>
