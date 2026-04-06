@@ -37,7 +37,7 @@
 
 *{margin:0;padding:0;box-sizing:border-box;}
 
-html{scroll-behavior:smooth;-webkit-overflow-scrolling:touch;scroll-snap-type:y mandatory;}
+html{scroll-behavior:smooth;-webkit-overflow-scrolling:touch;}
 
 body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.75;overflow-x:hidden;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;word-break:break-word;}
 
@@ -75,8 +75,8 @@ nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
 section{
   min-height:auto;
   display:flex;flex-direction:column;justify-content:center;
-  padding:64px 0;
-  scroll-snap-align:start;
+  padding:80px 0;
+  position:relative;
 }
 .container{max-width:1000px;margin:0 auto;padding:0 40px;width:100%;}
 
@@ -87,7 +87,9 @@ section{
 }
 .slide-num{
   font-family:monospace;font-size:11px;color:var(--text3);
+  background:rgba(128,128,128,0.08);padding:4px 10px;border-radius:20px;
 }
+.dark .slide-num{background:rgba(255,255,255,0.06);}
 .slide-label{
   font-size:13px;font-weight:600;letter-spacing:0.5px;text-transform:none;
 }
@@ -98,8 +100,47 @@ section{
 .dark p, .dark li{color:rgba(255,255,255,.9);}
 
 /* fade-in on scroll */
-.fade{opacity:0;transition:opacity .6s ease;will-change:opacity;}
-.fade.visible{opacity:1;will-change:auto;}
+.fade{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;will-change:opacity,transform;}
+.fade.visible{opacity:1;transform:translateY(0);will-change:auto;}
+
+/* staggered card animations */
+.fade .feature-card,
+.fade .moat-card,
+.fade .phase-card,
+.fade .timing-card,
+.fade .risk-card,
+.fade .story-col,
+.fade .rev-layer{
+  opacity:0;transform:translateY(20px);
+  transition:opacity .5s ease,transform .5s ease;
+}
+.fade.visible .feature-card,
+.fade.visible .moat-card,
+.fade.visible .phase-card,
+.fade.visible .timing-card,
+.fade.visible .risk-card,
+.fade.visible .story-col,
+.fade.visible .rev-layer{opacity:1;transform:translateY(0);}
+.fade.visible > *:nth-child(2) .feature-card:nth-child(1),
+.fade.visible .story-col:nth-child(1),
+.fade.visible .moat-card:nth-child(1),
+.fade.visible .phase-card:nth-child(1),
+.fade.visible .timing-card:nth-child(1),
+.fade.visible .risk-card:nth-child(1),
+.fade.visible .rev-layer:nth-child(1){transition-delay:0s;}
+.fade.visible > *:nth-child(2) .feature-card:nth-child(2),
+.fade.visible .story-col:nth-child(2),
+.fade.visible .moat-card:nth-child(2),
+.fade.visible .phase-card:nth-child(2),
+.fade.visible .timing-card:nth-child(2),
+.fade.visible .risk-card:nth-child(2),
+.fade.visible .rev-layer:nth-child(2){transition-delay:.12s;}
+.fade.visible > *:nth-child(2) .feature-card:nth-child(3),
+.fade.visible .moat-card:nth-child(3),
+.fade.visible .phase-card:nth-child(3),
+.fade.visible .timing-card:nth-child(3),
+.fade.visible .risk-card:nth-child(3),
+.fade.visible .rev-layer:nth-child(3){transition-delay:.24s;}
 
 /* -- Slide 1 -- */
 #s1{background:#0f0f1a;}
@@ -162,9 +203,10 @@ section{
   font-family:monospace;
 }
 .s2-quote{
-  font-size:22px;font-style:italic;color:var(--text);
-  padding:20px 24px;background:var(--bg2);border-radius:var(--radius);
+  font-size:20px;font-style:italic;color:var(--text);
+  padding:24px 28px 24px 32px;background:var(--bg2);border-radius:var(--radius);
   max-width:860px;line-height:1.55;
+  border-left:4px solid var(--accent);position:relative;
 }
 
 /* -- Slide 3 -- */
@@ -185,9 +227,10 @@ section{
 .s3-col.others .s3-items li::before{content:'✗';position:absolute;left:0;color:var(--text3);font-size:11px;top:2px;}
 .s3-col.push .s3-items li::before{content:'✓';position:absolute;left:0;color:rgba(255,255,255,.6);font-size:11px;top:2px;}
 .s3-pullquote{
-  font-size:16px;color:var(--accent);
-  padding:20px 24px;
-  background:var(--bg2);border-radius:var(--radius);border:1px solid var(--border);
+  font-size:16px;font-weight:600;color:var(--accent);
+  padding:24px 28px 24px 32px;
+  background:var(--accent-bg);border-radius:var(--radius);border:none;
+  border-left:4px solid var(--accent);
   max-width:860px;line-height:1.65;
 }
 
@@ -206,7 +249,10 @@ section{
   color:rgba(255,255,255,.9);
   padding:8px 16px;border-radius:30px;
   display:flex;align-items:center;gap:8px;
+  transition:background .3s,border-color .3s,transform .2s;
 }
+.milestone-pill:hover{background:rgba(79,70,229,.2);border-color:rgba(79,70,229,.4);transform:scale(1.04);}
+.milestone-pill:last-child{background:rgba(79,70,229,.15);border-color:rgba(79,70,229,.3);color:var(--accent-light);}
 .milestone-pill:not(:last-child)::after{
   content:'→';color:rgba(255,255,255,.25);font-size:11px;
   margin-left:4px;
@@ -347,19 +393,20 @@ section{
   border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);
   transition:border-color 0.2s,box-shadow 0.2s;
 }
-.risk-card:hover{border-color:var(--accent-light);}
+.risk-card:hover{border-color:var(--accent-light);box-shadow:0 4px 16px rgba(0,0,0,0.06);}
 .risk-head{
   background:var(--red-bg);padding:18px 20px;
+  border-bottom:2px solid rgba(220,38,38,0.12);
 }
 .risk-label{font-size:13px;font-weight:600;letter-spacing:0.5px;text-transform:none;color:var(--red);margin-bottom:4px;}
 .risk-name{font-size:15px;font-weight:700;color:var(--text);line-height:1.3;}
 .risk-body{padding:18px 20px;display:flex;flex-direction:column;gap:10px;}
-.risk-section-label{font-size:13px;font-weight:600;letter-spacing:0.5px;text-transform:none;color:var(--text3);}
-.risk-text{font-size:13px;color:var(--text2);line-height:1.55;}
+.risk-section-label{font-size:12px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(--text3);margin-bottom:2px;}
+.risk-text{font-size:13px;color:var(--text2);line-height:1.6;}
 .defense-badge{
-  font-size:11px;font-weight:600;color:var(--green);
-  background:var(--green-bg);padding:4px 10px;border-radius:20px;
-  display:inline-block;margin-top:6px;
+  font-size:11px;font-weight:700;color:var(--green);
+  background:var(--green-bg);padding:5px 12px;border-radius:20px;
+  display:inline-block;margin-top:8px;letter-spacing:0.3px;
 }
 .s8-note{
   font-size:14px;color:var(--text3);padding:16px 20px;
@@ -387,21 +434,24 @@ section{
 .timing-body{font-size:15px;color:var(--text2);line-height:1.6;}
 .s9-closer{
   text-align:center;margin-bottom:44px;
+  padding:48px 24px;
+  background:linear-gradient(135deg,rgba(79,70,229,0.04) 0%,rgba(79,70,229,0.01) 100%);
+  border-radius:16px;border:1px solid rgba(79,70,229,0.1);
 }
 .s9-closer-text{
-  font-size:clamp(1.3rem,3vw,2rem);font-weight:800;
-  color:var(--text);letter-spacing:-0.03em;line-height:1.2;
-  margin-bottom:8px;
+  font-size:clamp(1.4rem,3.5vw,2.2rem);font-weight:800;
+  color:var(--text);letter-spacing:-0.03em;line-height:1.35;
+  margin-bottom:8px;max-width:700px;margin-left:auto;margin-right:auto;
 }
-.s9-closer-accent{color:var(--accent);}
+.s9-closer-accent{color:var(--accent);font-weight:900;}
 .s9-links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
 .s9-links a{
   font-size:14px;font-weight:600;color:var(--accent);
-  text-decoration:none;padding:10px 20px;
+  text-decoration:none;padding:12px 24px;
   border:2px solid var(--accent);border-radius:8px;
-  transition:background .15s,color .15s;
+  transition:background .2s,color .2s,transform .2s,box-shadow .2s;
 }
-.s9-links a:hover{background:var(--accent);color:#fff;}
+.s9-links a:hover{background:var(--accent);color:#fff;transform:translateY(-2px);box-shadow:0 4px 16px rgba(79,70,229,0.2);}
 
 /* -- Footer -- */
 footer{
@@ -427,19 +477,24 @@ footer{
   }
   .rev-layer{grid-template-columns:1fr;}
   .nav-links{display:none;}
-  .s1-title{font-size:2.5rem;}
-  .s1-sub{font-size:1.8rem;}
+  .s1-title{font-size:clamp(1.8rem,7vw,2.5rem);}
+  .s1-sub{font-size:clamp(1.2rem,4.5vw,1.6rem);line-height:1.35;}
   .s2-title,.s3-title,.s4-title,.s5-title,.s6-title,.s7-title,.s8-title,.s9-title{
-    font-size:28px;
+    font-size:clamp(22px,6vw,28px);
   }
-  .s3-title{font-size:28px;}
   .container{padding:0 20px;}
-  section{padding:80px 0 40px;}
+  section{padding:64px 0 48px;}
+  .compare-table{font-size:12px;}
+  .compare-table th,.compare-table td{padding:10px 8px;}
+  .s9-closer{padding:32px 16px;}
 }
 @media(max-width:600px){
   .milestone-row{gap:6px;}
   .milestone-pill{font-size:11px;padding:6px 11px;}
-  .s9-closer-text{font-size:1.2rem;}
+  .s9-closer-text{font-size:1.15rem;}
+  .s2-quote{font-size:16px;padding:18px 20px 18px 24px;}
+  .compare-table{font-size:11px;}
+  .compare-table th,.compare-table td{padding:8px 6px;word-break:keep-all;}
 }
 
 /* -- Nav scroll shadow -- */
@@ -548,14 +603,8 @@ strong{font-weight:600;color:var(--text);}
   transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,0.08);
 }
 
-@media(max-width:900px){
-  body{font-size:15px;}
-  .s1-title{font-size:28px;}
-  .s2-title,.s3-title,.s4-title,.s5-title,.s6-title,.s7-title,.s8-title,.s9-title{font-size:28px;}
-  section{padding:48px 0;}
-}
 @media(max-width:768px){
-  footer{padding:32px 0 24px;}
+  footer{padding:32px 20px 24px;}
 }
 </style>
 </head>
@@ -998,14 +1047,24 @@ strong{font-weight:600;color:var(--text);}
 </section>
 
 <!-- -- Next Reading -- -->
-<div style="max-width:800px; margin:40px auto; padding:24px; background:var(--bg2, #f8f9fa); border:1px solid var(--border, #e5e7eb); border-radius:12px;">
-  <h3 style="font-size:16px; font-weight:700; margin-bottom:12px;" data-en="Go Deeper" data-zh="深入了解" class="bilingual-text">Go Deeper</h3>
-  <a href="project-intro.html" style="display:block; padding:16px; background:#fff; border:1px solid var(--border, #e5e7eb); border-radius:8px; text-decoration:none; transition:background 0.2s,border-color 0.2s,box-shadow 0.2s; max-width:400px;" onmouseover="this.style.borderColor='var(--accent-light)';this.style.boxShadow='0 2px 12px rgba(79,70,229,0.06)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
-    <div style="font-size:13px; color:var(--text3, #9ca3af);" data-en="Up Next →" data-zh="接下来 →" class="bilingual-text">Up Next →</div>
-    <div style="font-size:15px; font-weight:600; color:var(--text, #111827);" data-en="See exactly how the product works" data-zh="看看产品到底怎么运转" class="bilingual-text">See exactly how the product works</div>
-    <div style="font-size:13px; color:var(--accent, #4f46e5); margin-top:4px;" data-en="Project Introduction →" data-zh="项目介绍 →" class="bilingual-text">Project Introduction →</div>
-  </a>
+<div style="max-width:800px; margin:48px auto; padding:28px 32px; background:var(--bg2, #f8f9fa); border:1px solid var(--border, #e5e7eb); border-radius:12px;">
+  <h3 style="font-size:14px; font-weight:700; margin-bottom:16px; color:var(--text3); letter-spacing:0.5px;" data-en="GO DEEPER" data-zh="深入了解" class="bilingual-text">GO DEEPER</h3>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+    <a href="project-intro.html" style="display:block; padding:20px; background:#fff; border:1px solid var(--border, #e5e7eb); border-radius:8px; text-decoration:none; transition:border-color 0.2s,box-shadow 0.2s,transform 0.2s;" onmouseover="this.style.borderColor='var(--accent-light)';this.style.boxShadow='0 4px 16px rgba(79,70,229,0.08)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none';this.style.transform='none'">
+      <div style="font-size:12px; color:var(--text3, #9ca3af); margin-bottom:4px;" data-en="Up Next →" data-zh="接下来 →" class="bilingual-text">Up Next →</div>
+      <div style="font-size:15px; font-weight:700; color:var(--text, #111827); margin-bottom:2px;" data-en="Product Deep Dive" data-zh="产品详解" class="bilingual-text">Product Deep Dive</div>
+      <div style="font-size:13px; color:var(--accent, #4f46e5);" data-en="Project Introduction →" data-zh="项目介绍 →" class="bilingual-text">Project Introduction →</div>
+    </a>
+    <a href="push-strategy-core.html" style="display:block; padding:20px; background:#fff; border:1px solid var(--border, #e5e7eb); border-radius:8px; text-decoration:none; transition:border-color 0.2s,box-shadow 0.2s,transform 0.2s;" onmouseover="this.style.borderColor='var(--accent-light)';this.style.boxShadow='0 4px 16px rgba(79,70,229,0.08)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none';this.style.transform='none'">
+      <div style="font-size:12px; color:var(--text3, #9ca3af); margin-bottom:4px;" data-en="Also →" data-zh="同时 →" class="bilingual-text">Also →</div>
+      <div style="font-size:15px; font-weight:700; color:var(--text, #111827); margin-bottom:2px;" data-en="Full Strategy" data-zh="完整策略" class="bilingual-text">Full Strategy</div>
+      <div style="font-size:13px; color:var(--accent, #4f46e5);" data-en="Strategy Core →" data-zh="战略核心 →" class="bilingual-text">Strategy Core →</div>
+    </a>
+  </div>
 </div>
+
+<!-- Back to top -->
+<button id="back-top" aria-label="Back to top">↑</button>
 
 <!-- -- Footer -- -->
 <footer>
