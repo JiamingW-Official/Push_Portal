@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Push — Investor Q&A: 15 hard questions investors will ask, and our answers.">
+<meta property="og:title" content="PUSH — Investor Q&A">
+<meta property="og:description" content="The hard questions investors ask about Push — and our answers.">
+<meta property="og:type" content="website">
+<title>PUSH — Investor Q&A</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" as="style">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script>(function(){if(localStorage.getItem("push-lang")==="zh")document.documentElement.style.opacity="0";})()</script>
+<style>
+:root {
+  --accent: #4f46e5;
+  --accent-light: #818cf8;
+  --accent-dark: #3730a3;
+  --accent-bg: rgba(79,70,229,0.06);
+  --primary: #0f0f1a;
+  --green: #059669;
+  --green-bg: rgba(5,150,105,0.08);
+  --orange: #d97706;
+  --orange-bg: rgba(217,119,6,0.08);
+  --red: #dc2626;
+  --red-bg: rgba(220,38,38,0.08);
+  --text: #111827;
+  --text2: #4b5563;
+  --text3: #9ca3af;
+  --border: #e5e7eb;
+  --bg: #ffffff;
+  --bg2: #f8f9fa;
+  --radius: 8px;
+  --shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+/* — Scroll progress bar — */
+.scroll-progress{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:300;width:0;transition:none;pointer-events:none;}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.75;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;word-break:break-word;}
+html[lang="zh"] body{line-height:2.0;letter-spacing:0.01em;}
+html[lang="zh"] .hero h1{line-height:1.25;}
+html[lang="zh"] .section-title{line-height:1.5;}
+strong{font-weight:600;color:var(--text);}
+.hero strong{color:inherit;}
+p{max-width:680px;}
+a{color:var(--accent);text-decoration:none;transition:color 0.15s;}
+a:hover{color:var(--accent-light);}
+.nav-logo,.nav-logo:hover{color:var(--accent);}
+.footer-link:hover{color:#fff;}
+
+/* — Nav — */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;
+  background:#ffffff;
+  border-bottom:1px solid var(--border);transition:box-shadow 0.2s;
+}
+nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
+.nav-logo{
+  font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;
+  margin-right:8px;flex-shrink:0;text-decoration:none;
+}
+.nav-links{display:flex;gap:6px;flex-wrap:wrap;flex:1;}
+.nav-links a{
+  font-size:12px;font-weight:500;color:var(--text2);
+  padding:6px 12px;border-radius:8px;transition:color 0.15s,background-color 0.15s;white-space:nowrap;text-decoration:none;
+}
+.nav-links a:hover{color:var(--accent);}
+.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);position:relative;}
+.nav-links a.active::after{content:'';position:absolute;bottom:0;left:12px;right:12px;height:2px;background:var(--accent);border-radius:1px;}
+#lang-btn{
+  flex-shrink:0;background:var(--accent);color:#fff;font-weight:700;font-size:13px;
+  padding:7px 18px;border-radius:8px;border:none;cursor:pointer;transition:background 0.15s;
+}
+#lang-btn:hover{background:var(--accent-dark);}
+
+.nav-burger{display:none;flex-direction:column;gap:5px;padding:8px;background:none;border:none;cursor:pointer;}
+.nav-burger span{width:20px;height:2px;background:var(--text);border-radius:1px;transition:0.2s;}
+.nav-mobile-panel{display:none;position:fixed;top:60px;left:0;right:0;background:#fff;border-bottom:2px solid var(--accent);z-index:199;padding:16px 24px;flex-direction:column;gap:8px;}
+.nav-mobile-panel a{font-size:14px;font-weight:500;color:var(--text2);padding:8px 0;text-decoration:none;}
+.nav-mobile-panel a.active{color:var(--accent);font-weight:700;}
+.mobile-lang-row{display:flex;align-items:center;gap:12px;margin-top:8px;padding-top:12px;border-top:1px solid var(--border);}
+.mobile-lang-label{font-size:13px;color:var(--text3);}
+
+/* — Fade-in — */
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.45s ease,transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94);will-change:opacity,transform;animation:fadeInFallback 0s 4s forwards;}
+.fade-in.visible,.visible .fade-in{opacity:1;transform:none;animation:none;}
+@keyframes fadeInFallback{to{opacity:1;transform:translateY(0);}}
+
+/* — Hero — */
+.hero{
+  background:#0f0f1a;
+  padding:140px 64px 80px;
+  text-align:center;position:relative;overflow:hidden;
+}
+.hero-inner{max-width:1000px;width:100%;margin:0 auto;}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(79,70,229,0.18);border:1px solid rgba(79,70,229,0.45);
+  color:var(--accent-light);font-size:13px;font-weight:600;letter-spacing:0.5px;
+  padding:8px 20px;border-radius:100px;margin-bottom:28px;position:relative;z-index:1;
+}
+.hero h1{
+  font-size:clamp(3rem,5.5vw,4.5rem);font-weight:800;letter-spacing:-2.5px;
+  color:#fff;line-height:1.1;margin:0 auto 0;max-width:800px;position:relative;z-index:1;
+}
+.hero h1 span{color:var(--accent-light);}
+.hero-sub{
+  font-size:16px;color:rgba(255,255,255,0.55);
+  line-height:1.65;margin-top:24px;max-width:560px;position:relative;z-index:1;margin-left:auto;margin-right:auto;
+}
+
+/* — Section wrappers — */
+.sw-white{background:var(--bg);}
+.sw-gray{background:var(--bg);border-top:1px solid var(--border);}
+.sw-gray + .sw-white{border-top:1px solid var(--border);}
+.sw-white + .sw-white{border-top:1px solid var(--border);}
+
+.section{padding:80px 64px;max-width:1000px;margin:0 auto;}
+
+/* — Category section labels — */
+.category-divider{
+  padding:0;margin:0 0 28px;
+  display:flex;align-items:center;gap:10px;
+}
+.category-label{
+  font-size:13px;font-weight:600;letter-spacing:0.5px;text-transform:none;
+  color:var(--accent);
+  display:flex;align-items:center;gap:10px;
+}
+.category-label::before{
+  content:'';display:block;
+  width:20px;height:2px;background:var(--accent);flex-shrink:0;
+}
+
+/* — Q&A Cards — */
+.qa-grid{display:flex;flex-direction:column;gap:16px;}
+.qa-card{
+  padding:32px;border-radius:var(--radius);background:#fff;
+  border:1px solid var(--border);
+  transition:border-color 0.2s,box-shadow 0.2s;
+  position:relative;
+}
+.qa-card:hover{border-color:var(--accent);box-shadow:0 4px 20px rgba(79,70,229,0.08);}
+.qa-card-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:12px;}
+.qa-num{
+  font-size:11px;font-weight:800;letter-spacing:0.5px;color:#fff;
+  background:var(--accent);padding:4px 12px;border-radius:100px;
+  display:inline-flex;align-items:center;flex-shrink:0;margin-top:2px;
+}
+.qa-question{font-size:17px;font-weight:800;color:var(--text);line-height:1.4;}
+.qa-concern{
+  font-size:13px;color:var(--text3);font-style:italic;
+  margin-bottom:16px;padding-left:2px;
+  border-left:2px solid var(--border);padding-left:14px;
+}
+.qa-answer{font-size:14px;color:var(--text2);line-height:1.85;max-width:none;}
+.qa-answer strong{color:var(--text);font-weight:700;}
+.qa-punchline{
+  margin-top:16px;padding:12px 20px;border-radius:var(--radius);
+  background:var(--accent-bg);border:1px solid rgba(79,70,229,0.12);
+  font-size:13px;font-weight:700;color:var(--accent);
+  display:flex;align-items:center;gap:8px;
+}
+.qa-punchline::before{
+  content:'';display:block;width:3px;height:16px;background:var(--accent);border-radius:2px;flex-shrink:0;
+}
+
+/* — Featured card (Q15) — */
+.qa-card-featured{
+  border:2px solid var(--accent);background:var(--accent-bg);
+  position:relative;overflow:hidden;
+}
+.qa-card-featured::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-light));
+}
+.qa-card-featured .qa-num{background:var(--primary);}
+.qa-card-featured .qa-question{font-size:20px;}
+.qa-card-featured .qa-answer{font-size:15px;}
+
+/* — Back to top — */
+#back-top{
+  position:fixed;bottom:32px;right:32px;z-index:500;
+  width:44px;height:44px;border-radius:50%;
+  background:var(--primary);color:#fff;border:none;
+  font-size:18px;font-weight:700;cursor:pointer;
+  opacity:0;pointer-events:none;
+  transition:opacity 0.2s,transform 0.2s;
+  box-shadow:0 4px 16px rgba(0,0,0,0.2);
+}
+#back-top.visible{opacity:1;pointer-events:auto;}
+#back-top:hover{background:var(--accent);transform:translateY(-2px);}
+
+/* — Footer — */
+footer{background:#0f0f1a;padding:48px 64px 32px;border-top:1px solid var(--border);font-size:13px;color:var(--text3);}
+.footer-inner{
+  max-width:1000px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 2fr 1fr;gap:32px;align-items:start;
+}
+.footer-brand .f-logo{font-size:24px;font-weight:900;color:var(--accent);letter-spacing:2px;margin-bottom:8px;}
+.footer-brand .f-tagline{font-size:13px;color:rgba(255,255,255,0.4);}
+.footer-links{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
+.footer-link{color:rgba(255,255,255,0.4);font-size:13px;text-decoration:none;transition:color 0.15s;}
+.footer-link:hover{color:#fff;}
+.footer-copy{text-align:right;font-size:12px;color:rgba(255,255,255,0.3);line-height:1.8;}
+
+/* — Responsive — */
+@media(max-width:768px){
+  .nav-links{display:none !important;}
+  .nav-burger{display:flex !important;}
+  .hero{padding:120px 20px 64px;}
+  .hero h1{font-size:clamp(2rem,7vw,3rem);letter-spacing:-1.5px;line-height:1.2;}
+  html[lang="zh"] .hero h1{line-height:1.35;}
+  .section{padding:48px 20px;}
+  .qa-card{padding:24px 20px;}
+  .qa-card-header{gap:12px;}
+  .qa-question{font-size:15px;}
+  .qa-card-featured .qa-question{font-size:17px;}
+  .qa-card-featured .qa-answer{font-size:14px;}
+  .footer-inner{grid-template-columns:1fr;text-align:center;}
+  .footer-links{justify-content:center;}
+  .footer-copy{text-align:center;}
+  #back-top{bottom:20px;right:16px;width:40px;height:40px;font-size:16px;}
+}
+</style>
+</head>
+<body>
+<div class="scroll-progress" id="scroll-progress"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">PUSH</a>
+  <div class="nav-links">
+    <a href="index.html" data-en="Overview" data-zh="首页">Overview</a>
+    <a href="project-intro.html" data-en="Product" data-zh="产品介绍">Product</a>
+    <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
+    <a href="investor-qa.html" class="active" data-en="Investor Q&amp;A" data-zh="投资人问答">Investor Q&amp;A</a>
+    <a href="challenges.html" data-en="Challenges" data-zh="挑战分析">Challenges</a>
+    <a href="risk-defense.html" data-en="Defense" data-zh="风险防御">Defense</a>
+    <a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a>
+    <a href="push-strategy-core.html" data-en="Strategy" data-zh="战略核心">Strategy</a>
+  </div>
+  <button id="lang-btn" onclick="toggleLang()">中 / EN</button>
+  <button class="nav-burger" id="nav-burger" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile-panel" id="nav-mobile-panel">
+  <a href="index.html" data-en="Overview" data-zh="首页">Overview</a>
+  <a href="project-intro.html" data-en="Product" data-zh="产品介绍">Product</a>
+  <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
+  <a href="investor-qa.html" class="active" data-en="Investor Q&amp;A" data-zh="投资人问答">Investor Q&amp;A</a>
+  <a href="challenges.html" data-en="Challenges" data-zh="挑战分析">Challenges</a>
+  <a href="risk-defense.html" data-en="Defense" data-zh="风险防御">Defense</a>
+  <a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a>
+  <a href="push-strategy-core.html" data-en="Strategy" data-zh="战略核心">Strategy</a>
+  <div class="mobile-lang-row">
+    <span class="mobile-lang-label" data-en="Language" data-zh="语言">Language</span>
+    <button id="lang-btn-mobile" onclick="toggleLang()" style="background:var(--accent);color:#fff;border:none;padding:6px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">中 / EN</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge" data-en="Investor Deep Dive" data-zh="投资人灵魂拷问">Investor Deep Dive</div>
+    <h1>
+      <span data-en="15 Hard Questions." data-zh="15 个刁钻问题。">15 Hard Questions.</span><br>
+      <span data-en="Direct Answers." data-zh="正面硬答。">Direct Answers.</span>
+    </h1>
+    <p class="hero-sub" data-en="The questions every investor asks about Push — from business model to moat to risk. No dodging." data-zh="投资人必问的问题——商业模式、护城河、风险，一个不躲。">The questions every investor asks about Push — from business model to moat to risk. No dodging.</p>
+  </div>
+</section>
+
+<!-- I. CORE QUESTIONS -->
+<div class="sw-white">
+<div class="section">
+  <div class="category-divider fade-in">
+    <div class="category-label" data-en="I. Core Questions — They Will Ask These First" data-zh="一、核心问题——上来就会问">I. Core Questions — They Will Ask These First</div>
+  </div>
+
+  <div class="qa-grid">
+  <!-- Q1 -->
+  <div class="qa-card fade-in">
+    <div class="qa-card-header">
+      <div class="qa-num">Q1</div>
+      <div class="qa-question" data-en="Why won't this become another generic marketplace?" data-zh="凭什么你不会变成又一个烂大街的 marketplace？">Why won't this become another generic marketplace?</div>
+    </div>
+    <div class="qa-concern" data-en="Investors worry: all two-sided platforms end up with low quality + price wars + no differentiation." data-zh="投资人担心：双边平台的宿命就是质量下滑、价格战、同质化。">Investors worry: all two-sided platforms end up with low quality + price wars + no differentiation.</div>
+    <div class="qa-answer" data-en="Push is not an open marketplace — it is a <strong>performance-gated system</strong>. Creators must earn their way into higher tiers through verified execution. Merchants don't post freely — they run structured campaigns. High-value opportunities are allocated by tier, not listed openly. We control <strong>who gets access to high-quality demand</strong>." data-zh="Push 不是开放市场——是一套<strong>靠表现说话的准入系统</strong>。博主想升级？拿执行结果换。商家不能随便发帖，只能跑结构化活动。好机会按层级分配，不公开放出来抢。我们掌控的是<strong>谁有资格接触优质需求</strong>。">Push is not an open marketplace — it is a <strong>performance-gated system</strong>. Creators must earn their way into higher tiers through verified execution. Merchants don't post freely — they run structured campaigns. High-value opportunities are allocated by tier, not listed openly. We control <strong>who gets access to high-quality demand</strong>.</div>
+    <div class="qa-punchline" data-en="We're building market structure, not a trading platform." data-zh="我们造的是市场规则，不是撮合工具。">We're building market structure, not a trading platform.</div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="qa-card fade-in">
+    <div class="qa-card-header">
+      <div class="qa-num">Q2</div>
+      <div class="qa-question" data-en="Why won't merchants bypass you?" data-zh="商家为什么不绕开你？">Why won't merchants bypass you?</div>
+    </div>
+    <div class="qa-concern" data-en="Investors worry: merchants and creators will just work together directly." data-zh="投资人担心：商家和博主认识了就直接私聊了。">Investors worry: merchants and creators will just work together directly.</div>
+    <div class="qa-answer" data-en="If Push only introduced creators, it would be bypassed. We prevent this with three layers:<br><br><strong>1. Credit system (non-portable)</strong> — Creator performance only accumulates on-platform. Leave = lose your history.<br><strong>2. Workflow advantage</strong> — Campaign templates, creator management, one-click repeat. Faster inside than outside.<br><strong>3. Opportunity control (most important)</strong> — Better creators, better campaigns, higher tier access. Off-platform = one-time deal. On-platform = continuously better opportunities." data-zh="如果 Push 只是牵线搭桥，那肯定被绕。我们三层锁死：<br><br><strong>1. 信用不可带走</strong>——博主的履约记录只在平台上有。走了就是白纸一张。<br><strong>2. 效率碾压</strong>——活动模板、博主管理、一键复购，平台内操作比私聊快几倍。<br><strong>3. 机会分配权（最狠的）</strong>——好博主、好活动、高级权限，全在平台里。出去单干 = 一锤子买卖。留下来 = 越做越好的机会。">If Push only introduced creators, it would be bypassed. We prevent this with three layers:<br><br><strong>1. Credit system (non-portable)</strong> — Creator performance only accumulates on-platform. Leave = lose your history.<br><strong>2. Workflow advantage</strong> — Campaign templates, creator management, one-click repeat. Faster inside than outside.<br><strong>3. Opportunity control (most important)</strong> — Better creators, better campaigns, higher tier access. Off-platform = one-time deal. On-platform = continuously better opportunities.</div>
+    <div class="qa-punchline" data-en="We don't just enable transactions — we control future opportunities." data-zh="我们不只是撮合交易——我们握着未来的机会。">We don't just enable transactions — we control future opportunities.</div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="qa-card fade-in">
+    <div class="qa-card-header">
+      <div class="qa-num">Q3</div>
+      <div class="qa-question" data-en="How do you solve cold start?" data-zh="冷启动怎么破？">How do you solve cold start?</div>
+    </div>
+    <div class="qa-concern" data-en="Investors worry: two-sided markets are the hardest to bootstrap." data-zh="投资人担心：双边平台是最难从零起步的。">Investors worry: two-sided markets are the hardest to bootstrap.</div>
+    <div class="qa-answer" data-en="We don't start as a marketplace. We start as a <strong>controlled environment</strong>.<br><br>One neighborhood (SoHo). One vertical (cafes). Hand-picked creators (not open registration). Founder-led merchant onboarding. The goal is not scale — it's <strong>density</strong>. 10 merchants, 50 creators, 12 weeks, $1,500 budget. Prove the unit before building the machine." data-zh="我们不从 marketplace 起步，而是从<strong>可控的小环境</strong>开始。<br><br>一个街区（SoHo）。一个品类（咖啡馆）。博主手选，不开放注册。创始人亲自谈商家。目标不是规模——是<strong>密度</strong>。10 家店、50 个博主、12 周、$1,500 预算。先把最小单元跑通，再复制。">We don't start as a marketplace. We start as a <strong>controlled environment</strong>.<br><br>One neighborhood (SoHo). One vertical (cafes). Hand-picked creators (not open registration). Founder-led merchant onboarding. The goal is not scale — it's <strong>density</strong>. 10 merchants, 50 creators, 12 weeks, $1,500 budget. Prove the unit before building the machine.</div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="qa-card fade-in">
+    <div class="qa-card-header">
+      <div class="qa-num">Q4</div>
+      <div class="qa-question" data-en="How do you ensure creator quality?" data-zh="博主质量怎么保证？">How do you ensure creator quality?</div>
+    </div>
+    <div class="qa-concern" data-en="Investors worry: bad supply will destroy the platform." data-zh="投资人担心：烂博主一多，平台就废了。">Investors worry: bad supply will destroy the platform.</div>
+    <div class="qa-answer" data-en="Quality is enforced through <strong>structure, not moderation</strong>.<br><br>We use: tier progression, completion rate tracking, merchant feedback, and dispute tracking. Creators are ranked by execution ability, not follower count. Underperformers get demoted, lose campaign access, and eventually get removed. Quality is 25% of the scoring formula — bad content drops you fast." data-zh="质量靠<strong>机制管，不靠人审</strong>。<br><br>我们有：tier 晋升、完成率追踪、商家评价、争议记录。博主排名看执行力，不看粉丝量。做得差就降级，丢活动权限，最后直接淘汰。质量权重占 25%——烂一次掉一截。">Quality is enforced through <strong>structure, not moderation</strong>.<br><br>We use: tier progression, completion rate tracking, merchant feedback, and dispute tracking. Creators are ranked by execution ability, not follower count. Underperformers get demoted, lose campaign access, and eventually get removed. Quality is 25% of the scoring formula — bad content drops you fast.</div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="qa-card fade-in">
+    <div class="qa-card-header">
+      <div class="qa-num">Q5</div>
+      <div class="qa-question" data-en="How do you handle attribution?" data-zh="效果归因怎么做？">How do you handle attribution?</div>
+    </div>
+    <div class="qa-concern" data-en="Investors worry: &ldquo;How do you prove a creator actually brought customers?&rdquo;" data-zh="投资人担心：「怎么证明顾客是博主带来的？」">Investors worry: &ldquo;How do you prove a creator actually brought customers?&rdquo;</div>
+    <div class="qa-answer" data-en="We don't claim perfect attribution. We <strong>improve decision confidence</strong>.<br><br>We combine: visit proof, content proof, merchant confirmation, redemption signals, and repeat behavior. It's not 100% precise — but it's far more reliable than the current method (DM + guessing). What merchants actually care about is one question: <strong>&ldquo;Should I do this again?&rdquo;</strong>" data-zh="我们不吹 100% 归因。我们做的是<strong>让商家敢做决定</strong>。<br><br>我们叠加：到店打卡、内容凭证、商家确认、核销数据、复购行为。不是绝对精确——但比现在私信+猜靠谱太多。商家真正在乎的就一件事：<strong>「下次还做不做？」</strong>">We don't claim perfect attribution. We <strong>improve decision confidence</strong>.<br><br>We combine: visit proof, content proof, merchant confirmation, redemption signals, and repeat behavior. It's not 100% precise — but it's far more reliable than the current method (DM + guessing). What merchants actually care about is one question: <strong>&ldquo;Should I do this again?&rdquo;</strong></div>
+  </div>
+  </div>
+</div>
+</div>
+
+<!-- II. BUSINESS MODEL -->
+<div class="sw-gray">
+<div class="section">
+  <div class="category-divider fade-in">
+    <div class="category-label" data-en="II. Business Model" data-zh="二、商业模式">II. Business Model</div>
+  </div>
+
+  <div class="qa-grid">
+  <!-- Q6 -->
+  <div class="qa-card fade-in">
+    <div class="qa-card-header">
+      <div class="qa-num">Q6</div>
+      <div class="qa-question" data-en="How do you make money?" data-zh="靠什么赚钱？">How do you make money?</div>
+    </div>
+    <div class="qa-answer" data-en="Three revenue layers, all aligned with outcomes:<br><br><strong>1. Merchant subscription</strong> — $79/month for platform access<br><strong>2. Campaign fee</strong> — $29-39 per additional campaign<br><strong>3. Performance-based take</strong> — 15% on verified completions<br><br>We only make money when the system delivers results." data-zh="三层收入，每一层都跟效果绑定：<br><br><strong>1. 商家订阅</strong>——$79/月，平台使用费<br><strong>2. 活动费</strong>——额外活动 $29-39/次<br><strong>3. 效果抽佣</strong>——核销完成后抽 15%<br><br>有效果才有收入，利益完全对齐。">Three revenue layers, all aligned with outcomes:<br><br><strong>1. Merchant subscription</strong> — $79/month for platform access<br><strong>2. Campaign fee</strong> — $29-39 per additional campaign<br><strong>3. Performance-based take</strong> — 15% on verified completions<br><br>We only make money when the system delivers results.</div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="qa-card fade-in">
+    <div class="qa-card-header">
+      <div class="qa-num">Q7</div>
+      <div class="qa-question" data-en="Does unit economics work?" data-zh="单位经济算得过来吗？">Does unit economics work?</div>
+    </div>
+    <div class="qa-answer" data-en="A typical campaign:<br><br>Merchant pays ~<strong>$200-300</strong><br>Creator payout ~<strong>$120-180</strong><br>Platform takes ~<strong>$40-60</strong><br><br>Margin comes from campaign fees + take rate. But the real leverage is <strong>merchant repeat</strong> — acquisition cost is front-loaded, but repeat campaigns have near-zero marginal cost." data-zh="算一笔典型的账：<br><br>商家花 ~<strong>$200-300</strong><br>博主拿 ~<strong>$120-180</strong><br>平台赚 ~<strong>$40-60</strong><br><br>利润来自活动费+抽佣。但真正的杠杆是<strong>商家复购</strong>——获客成本一次性的，复购活动的边际成本几乎为零。">A typical campaign:<br><br>Merchant pays ~<strong>$200-300</strong><br>Creator payout ~<strong>$120-180</strong><br>Platform takes ~<strong>$40-60</strong><br><br>Margin comes from campaign fees + take rate. But the real leverage is <strong>merchant repeat</strong> — acquisition cost is front-loaded, but repeat campaigns have near-zero marginal cost.</div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="qa-card fade-in">
+    <div class="qa-card-header">
+      <div class="qa-num">Q8</div>
+      <div class="qa-question" data-en="How do you define PMF?" data-zh="PMF 怎么定义？">How do you define PMF?</div>
+    </div>
+    <div class="qa-answer" data-en="<strong>When merchants run campaigns repeatedly without being pushed.</strong><br><br>Key signals: repeat rate, time between campaigns, creator re-selection. If they come back on their own — it works." data-zh="<strong>商家不用催，自己反复来跑活动。</strong><br><br>核心看三个指标：复购率、两次活动间隔、博主复选率。自己回来的商家，就是最好的 PMF 证明。"><strong>When merchants run campaigns repeatedly without being pushed.</strong><br><br>Key signals: repeat rate, time between campaigns, creator re-selection. If they come back on their own — it works.</div>
+    <div class="qa-punchline" data-en="If they come back on their own, it works." data-zh="商家自己回来，就是最好的答案。">If they come back on their own, it works.</div>
+  </div>
+  </div>
+</div>
+</div>
+
+<!-- III. GROWTH & COMPETITION -->
+<div class="sw-white">
+<div class="section">
+  <div class="category-divider fade-in">
+    <div class="category-label" data-en="III. Growth &amp; Competition" data-zh="三、增长与竞争格局">III. Growth &amp; Competition</div>
+  </div>
+
+  <div class="qa-grid">
+  <!-- Q9 -->
+  <div class="qa-card fade-in">
+    <div class="qa-card-header">
+      <div class="qa-num">Q9</div>
+      <div class="qa-question" data-en="Why now?" data-zh="为什么是现在？">Why now?</div>
+    </div>
+    <div class="qa-answer" data-en="Three converging forces:<br><br><strong>1.</strong> Creator supply has exploded — critical mass reached in 2024<br><strong>2.</strong> Brands are shifting from impressions to conversion<br><strong>3.</strong> Local spending is high-frequency, underserved by existing tools<br><br>Supply and demand both exist. The infrastructure between them doesn't." data-zh="三股趋势同时到位：<br><br><strong>1.</strong> 博主供给井喷——2024 年达到临界规模<br><strong>2.</strong> 商家从买曝光转向要转化<br><strong>3.</strong> 本地消费高频刚需，但工具严重缺位<br><br>供需两端都到了。中间的基础设施还是空白。">Three converging forces:<br><br><strong>1.</strong> Creator supply has exploded — critical mass reached in 2024<br><strong>2.</strong> Brands are shifting from impressions to conversion<br><strong>3.</strong> Local spending is high-frequency, underserved by existing tools<br><br>Supply and demand both exist. The infrastructure between them doesn't.</div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="qa-card fade-in">
+    <div class="qa-card-header">
+      <div class="qa-num">Q10</div>
+      <div class="qa-question" data-en="Who are your competitors?" data-zh="你的竞品是谁？">Who are your competitors?</div>
+    </div>
+    <div class="qa-answer" data-en="Not direct platform competitors — alternatives:<br><br>DM creators directly. Hire agencies. Run TikTok/Yelp ads.<br><br>The difference: <strong>they help you find creators. We help you operate them.</strong>" data-zh="没有直接竞品，但有替代方案：<br><br>自己私信博主。找 MCN。投 TikTok/Yelp 广告。<br><br>本质区别：<strong>别人帮你找人，我们帮你把人用起来。</strong>">Not direct platform competitors — alternatives:<br><br>DM creators directly. Hire agencies. Run TikTok/Yelp ads.<br><br>The difference: <strong>they help you find creators. We help you operate them.</strong></div>
+  </div>
+
+  <!-- Q11 -->
+  <div class="qa-card fade-in">
+    <div class="qa-card-header">
+      <div class="qa-num">Q11</div>
+      <div class="qa-question" data-en="Why won't big platforms do this?" data-zh="大平台为什么不自己做？">Why won't big platforms do this?</div>
+    </div>
+    <div class="qa-answer" data-en="Because this is <strong>operationally heavy and locally fragmented</strong>.<br><br>Every city is different. Merchants are small and scattered. Creator behavior is complex. Big platforms do distribution. We do the <strong>execution layer</strong> — the messy, local, high-touch work that doesn't scale the way big platforms want to scale." data-zh="因为这活<strong>又重又碎</strong>。<br><br>每个城市情况不一样。商家小、分散。博主行为难标准化。大平台擅长分发流量，我们做的是<strong>执行层</strong>——苦活脏活本地活，大平台看不上这种扩张方式。">Because this is <strong>operationally heavy and locally fragmented</strong>.<br><br>Every city is different. Merchants are small and scattered. Creator behavior is complex. Big platforms do distribution. We do the <strong>execution layer</strong> — the messy, local, high-touch work that doesn't scale the way big platforms want to scale.</div>
+  </div>
+  </div>
+</div>
+</div>
+
+<!-- IV. MOAT & DEFENSE -->
+<div class="sw-gray">
+<div class="section">
+  <div class="category-divider fade-in">
+    <div class="category-label" data-en="IV. Moat &amp; Defense" data-zh="四、护城河">IV. Moat &amp; Defense</div>
+  </div>
+
+  <div class="qa-grid">
+  <!-- Q12 -->
+  <div class="qa-card fade-in">
+    <div class="qa-card-header">
+      <div class="qa-num">Q12</div>
+      <div class="qa-question" data-en="What is your moat?" data-zh="护城河在哪？">What is your moat?</div>
+    </div>
+    <div class="qa-answer" data-en="The moat is the <strong>performance data layer</strong>.<br><br>We accumulate: creator reliability scores, campaign effectiveness data, category insights. The more campaigns run, the better the matching, the harder to replicate. It compounds — and it can't be copied by launching a competing app." data-zh="护城河是<strong>跑出来的执行数据</strong>。<br><br>我们沉淀：博主靠谱指数、活动效果数据、品类经验。活动跑得越多，匹配越精准，后来者越难追。这是复利型壁垒——抄个 app 容易，抄数据没门。">The moat is the <strong>performance data layer</strong>.<br><br>We accumulate: creator reliability scores, campaign effectiveness data, category insights. The more campaigns run, the better the matching, the harder to replicate. It compounds — and it can't be copied by launching a competing app.</div>
+  </div>
+
+  <!-- Q13 -->
+  <div class="qa-card fade-in">
+    <div class="qa-card-header">
+      <div class="qa-num">Q13</div>
+      <div class="qa-question" data-en="Why won't it devolve into a low-quality market?" data-zh="为什么不会劣币驱逐良币？">Why won't it devolve into a low-quality market?</div>
+    </div>
+    <div class="qa-answer" data-en="Because access is <strong>gated, not open</strong>.<br><br>Tier controls who gets what campaigns. Campaign structure prevents race-to-bottom pricing. Opportunity allocation is layered. This is not a free market — it's a <strong>curated system</strong>." data-zh="因为准入<strong>有门槛，不是敞开大门</strong>。<br><br>Tier 决定谁能接哪些活动。活动结构从源头杜绝价格战。机会按层级分配。这不是自由市场——是<strong>筛选机器</strong>。">Because access is <strong>gated, not open</strong>.<br><br>Tier controls who gets what campaigns. Campaign structure prevents race-to-bottom pricing. Opportunity allocation is layered. This is not a free market — it's a <strong>curated system</strong>.</div>
+  </div>
+  </div>
+</div>
+</div>
+
+<!-- V. RISKS -->
+<div class="sw-white">
+<div class="section">
+  <div class="category-divider fade-in">
+    <div class="category-label" data-en="V. Risks — We Say It First" data-zh="五、风险——我们先摊牌">V. Risks — We Say It First</div>
+  </div>
+
+  <div class="qa-grid">
+  <!-- Q14 -->
+  <div class="qa-card fade-in">
+    <div class="qa-card-header">
+      <div class="qa-num">Q14</div>
+      <div class="qa-question" data-en="What is the biggest risk?" data-zh="最大的风险是什么？">What is the biggest risk?</div>
+    </div>
+    <div class="qa-answer" data-en="Four risks we actively manage:<br><br><strong>1. Cold start density</strong> — solved by hyper-local launch (one neighborhood)<br><strong>2. Creator quality</strong> — solved by tiered scoring + demotion<br><strong>3. Attribution trust</strong> — solved by 5-layer verification<br><strong>4. Disintermediation</strong> — solved by credit + workflow + opportunity control<br><br>We don't eliminate risk. We <strong>structure our way through it</strong>." data-zh="四个我们盯着的风险，以及怎么破：<br><br><strong>1. 冷启动密度不够</strong>——死磕一个街区，先打穿<br><strong>2. 博主质量失控</strong>——分层评分+末位淘汰<br><strong>3. 归因不可信</strong>——5 层交叉验证<br><strong>4. 被绕过</strong>——信用+效率+机会，三重锁定<br><br>我们不假装没有风险。我们<strong>用结构穿过去</strong>。">Four risks we actively manage:<br><br><strong>1. Cold start density</strong> — solved by hyper-local launch (one neighborhood)<br><strong>2. Creator quality</strong> — solved by tiered scoring + demotion<br><strong>3. Attribution trust</strong> — solved by 5-layer verification<br><strong>4. Disintermediation</strong> — solved by credit + workflow + opportunity control<br><br>We don't eliminate risk. We <strong>structure our way through it</strong>.</div>
+  </div>
+  </div>
+</div>
+</div>
+
+<!-- VI. THE ULTIMATE QUESTION -->
+<div class="sw-gray">
+<div class="section">
+  <div class="category-divider fade-in">
+    <div class="category-label" data-en="VI. The Ultimate Question" data-zh="六、灵魂一问">VI. The Ultimate Question</div>
+  </div>
+
+  <div class="qa-grid">
+  <!-- Q15 -->
+  <div class="qa-card qa-card-featured fade-in">
+    <div class="qa-card-header">
+      <div class="qa-num">Q15</div>
+      <div class="qa-question" data-en="What are you actually building?" data-zh="你到底在做什么？">What are you actually building?</div>
+    </div>
+    <div class="qa-answer" data-en="<strong>Push is building the infrastructure layer that turns creators into a reliable, repeatable acquisition channel for local businesses.</strong><br><br>This is not a marketplace.<br>This is not influencer marketing.<br><br>This is the system that makes creator-driven demand <strong>measurable, repeatable, and scalable</strong>." data-zh="<strong>Push 在建一层基础设施，让博主成为本地商家稳定、可复用的获客通道。</strong><br><br>不是交易平台。<br>不是网红营销。<br><br>是让博主带来的生意变得<strong>可衡量、可复制、可放大</strong>的操作系统。"><strong>Push is building the infrastructure layer that turns creators into a reliable, repeatable acquisition channel for local businesses.</strong><br><br>This is not a marketplace.<br>This is not influencer marketing.<br><br>This is the system that makes creator-driven demand <strong>measurable, repeatable, and scalable</strong>.</div>
+  </div>
+  </div>
+</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="f-logo">PUSH</div>
+      <div class="f-tagline" data-en="PUSH — Structured campaigns. Verified results." data-zh="PUSH — 结构化投放，效果可验证。">PUSH — Structured campaigns. Verified results.</div>
+    </div>
+    <div class="footer-links">
+      <a href="index.html" class="footer-link" data-en="Overview" data-zh="首页">Overview</a>
+      <a href="project-intro.html" class="footer-link" data-en="Product" data-zh="产品介绍">Product</a>
+      <a href="pitch-deck.html" class="footer-link" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
+      <a href="challenges.html" class="footer-link" data-en="Challenges" data-zh="挑战分析">Challenges</a>
+      <a href="risk-defense.html" class="footer-link" data-en="Risk &amp; Defense" data-zh="风险防御">Risk &amp; Defense</a>
+      <a href="push-strategy-core.html" class="footer-link" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
+    </div>
+    <div class="footer-copy" data-en="&copy; 2025 Push. All rights reserved." data-zh="&copy; 2025 Push. 版权所有。">&copy; 2025 Push. All rights reserved.</div>
+  </div>
+</footer>
+
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+<script>
+let currentLang = localStorage.getItem('push-lang') || 'en';
+
+function applyLang(lang) {
+  document.body.style.opacity = '0.8';
+  setTimeout(() => {
+    document.querySelectorAll('[data-en]').forEach(el => {
+      el.innerHTML = lang === 'zh' ? (el.dataset.zh || el.dataset.en) : el.dataset.en;
+    });
+    const btn = document.getElementById('lang-btn');
+    if (btn) btn.textContent = lang === 'zh' ? 'EN / 中' : '中 / EN';
+    const mobileBtn = document.getElementById('lang-btn-mobile');
+    if (mobileBtn) mobileBtn.textContent = lang === 'zh' ? 'EN / 中' : '中 / EN';
+    currentLang = lang;
+    localStorage.setItem('push-lang', lang);
+    document.documentElement.setAttribute('lang', lang);
+    document.body.style.opacity = '1';
+  }, 75);
+}
+
+function toggleLang() {
+  applyLang(currentLang === 'zh' ? 'en' : 'zh');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  applyLang(currentLang);
+  document.documentElement.style.opacity = '1';
+  document.documentElement.setAttribute('lang', currentLang);
+});
+
+/* SCROLL PROGRESS + NAV SHADOW + BACK TO TOP */
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  const p = h > 0 ? (window.scrollY / h) * 100 : 0;
+  document.getElementById('scroll-progress').style.width = p + '%';
+  document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 10);
+  const btn = document.getElementById('back-top');
+  if (btn) btn.classList.toggle('visible', window.scrollY > 400);
+});
+
+/* FADE IN */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.01, rootMargin: '0px 0px 60px 0px' });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+/* MOBILE NAV */
+const burger = document.getElementById('nav-burger');
+const mobilePanel = document.getElementById('nav-mobile-panel');
+if (burger && mobilePanel) {
+  burger.addEventListener('click', () => {
+    const open = mobilePanel.style.display === 'flex';
+    mobilePanel.style.display = open ? 'none' : 'flex';
+    burger.setAttribute('aria-expanded', !open);
+  });
+}
+</script>
+</body>
+</html>
