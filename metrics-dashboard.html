@@ -42,7 +42,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 a { text-decoration: none; color: inherit; }
 
 /* Scroll progress bar */
-.scroll-progress{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:9999;width:0;transition:width 0.1s linear;pointer-events:none;}
+.scroll-progress{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:300;width:0;transition:width 0.1s linear;pointer-events:none;}
 
 /* Nav */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;background:#ffffff;border-bottom:1px solid var(--border);transition:box-shadow 0.2s;}
@@ -119,7 +119,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 
 .section-label {
   font-size: 13px; font-weight: 600;
-  letter-spacing: 0.5px; text-transform: uppercase;
+  letter-spacing: 0.5px;
   color: var(--accent); margin-bottom: 10px;
 }
 .section-label-light { color: var(--accent-light); }
@@ -159,7 +159,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 }
 .north-star-label {
   font-size: 13px; font-weight: 600; letter-spacing: 0.5px;
-  text-transform: uppercase; color: var(--accent-light);
+  color: var(--accent-light);
   margin-bottom: 12px;
 }
 .north-star-quote {
@@ -214,7 +214,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 .metrics-col { display: flex; flex-direction: column; }
 .metrics-col-header {
   padding: 16px 22px; font-size: 13px; font-weight: 600;
-  letter-spacing: 0.5px; text-transform: uppercase;
+  letter-spacing: 0.5px;
   border-bottom: 1px solid var(--border);
   border-right: 1px solid var(--border);
   display: flex; align-items: center; gap: 8px;
@@ -253,7 +253,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 .metrics-box-header {
   padding: 16px 24px; border-bottom: 1px solid var(--border);
   font-size: 13px; font-weight: 600; letter-spacing: 0.5px;
-  text-transform: uppercase; display: flex; align-items: center; gap: 8px;
+  display: flex; align-items: center; gap: 8px;
 }
 .mh-campaign { color: var(--accent); background: var(--accent-bg); }
 .mh-liquidity { color: var(--green); background: var(--green-bg); }
@@ -346,7 +346,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 .dc-ops { background: rgba(220,38,38,0.08); color: var(--red); }
 .dc-gtm { background: rgba(217,119,6,0.08); color: var(--orange); }
 .dc-title { font-size: 28px; font-weight: 800; color: var(--text); margin-bottom: 6px; font-variant-numeric: tabular-nums; }
-.dc-subtitle { font-size: 13px; font-weight: 600; color: var(--text3); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px; }
+.dc-subtitle { font-size: 13px; font-weight: 600; color: var(--text3); margin-bottom: 16px; letter-spacing: 0.5px; }
 .dc-items { list-style: none; display: flex; flex-direction: column; gap: 6px; }
 .dc-items li {
   font-size: 14px; color: var(--text2);
@@ -404,7 +404,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 
 /* Footer */
 .footer {
-  background: #07071a; padding: 48px 32px 28px;
+  background: #0f0f1a; padding: 48px 64px 32px;
   border-top: 1px solid rgba(255,255,255,0.06);
 }
 .footer-inner { max-width: 1000px; margin: 0 auto; }
