@@ -58,7 +58,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
   transition:background 0.2s;flex-shrink:0;letter-spacing:0.3px;
 }
 .lang-btn:hover{background:var(--accent-dark);}
-.nav-mobile-right{display:none;gap:8px;align-items:center;}
 
 /* HERO */
 .hero{
@@ -80,7 +79,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 .hero-title span{color:var(--accent-light);}
 .hero-subtitle{
   color:rgba(255,255,255,0.6);font-size:16px;font-weight:400;line-height:1.65;
-  max-width:680px;position:relative;z-index:1;margin:0 auto;
+  max-width:560px;position:relative;z-index:1;margin:0 auto;
 }
 
 /* QUICK NAV */
@@ -119,24 +118,24 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 }
 
 /* SECTION CHROME */
-.section{padding:80px 24px;contain:layout style paint;border-top:1px solid var(--border);}
+.section{padding:64px 24px;contain:layout style paint;border-top:1px solid var(--border);}
 .section-inner{max-width:1000px;margin:0 auto;}
 
 .cat-label{
   display:inline-flex;align-items:center;gap:8px;
-  font-size:13px;font-weight:600;letter-spacing:0.5px;text-transform:none;
+  font-size:12px;font-weight:600;letter-spacing:0.5px;text-transform:none;
   color:var(--accent);margin-bottom:12px;
 }
 .cat-label.dark-label{color:var(--accent-light);}
 .cat-icon{font-size:16px;}
 .section-title{
-  font-size:36px;font-weight:900;letter-spacing:-1px;
+  font-size:36px;font-weight:900;letter-spacing:-0.5px;
   color:var(--primary);line-height:1.4;margin-bottom:8px;
 }
 .section-title-white{color:var(--primary);}
 .section-sub{
   font-size:16px;font-weight:400;color:var(--text2);
-  max-width:680px;line-height:1.65;margin-bottom:64px;
+  max-width:640px;line-height:1.65;margin-bottom:64px;
 }
 .section-sub-white{color:var(--text2);}
 .section-header{margin-bottom:56px;}
@@ -150,11 +149,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 .risk-card{
   background:#fff;border:1px solid var(--border);border-radius:8px;
   overflow:hidden;display:flex;flex-direction:column;
-  transition:border-color 0.2s,box-shadow 0.2s;cursor:default;
+  transition:border-color 0.2s,box-shadow 0.2s,transform 0.25s;cursor:default;
 }
-.risk-card:hover{box-shadow:0 2px 12px rgba(0,0,0,0.08);border-color:var(--red);}
+.risk-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,0.08);border-color:var(--red);}
 .risk-card.on-dark{background:#fff;border-color:var(--border);}
-.risk-card.on-dark:hover{box-shadow:0 2px 12px rgba(0,0,0,0.08);border-color:var(--red);}
+.risk-card.on-dark:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,0.08);border-color:var(--red);}
 
 /* Card: top risk section */
 .rc-top{padding:24px 24px 20px;}
@@ -168,7 +167,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 .rc-desc{font-size:14px;color:var(--text2);line-height:1.65;margin-bottom:14px;}
 .rc-bullets{list-style:none;display:flex;flex-direction:column;gap:6px;}
 .rc-bullets li{
-  font-size:13px;color:var(--text2);line-height:1.5;
+  font-size:13px;color:var(--text2);line-height:1.6;
   padding-left:18px;position:relative;
 }
 .rc-bullets li::before{
@@ -281,7 +280,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 
 /* FOOTER */
 footer{
-  background:#080810;padding:40px 24px 32px;
+  background:#080810;padding:48px 64px 32px;
   border-top:1px solid rgba(255,255,255,0.06);
 }
 .footer-inner{max-width:1000px;margin:0 auto;}
@@ -306,15 +305,15 @@ footer{
 /* MOBILE */
 @media(max-width:640px){
   .nav-links{display:none;}
-  .nav-mobile-right{display:flex;}
   .risk-grid-3,.risk-grid-2,.system-grid,.closing-layers{grid-template-columns:1fr;}
   .risk-grid-1{max-width:100%;}
-  .section{padding:72px 20px;}
+  .section{padding:48px 20px;}
   .section-title{font-size:28px;}
   .hero{padding:88px 20px 44px;}
   .hero-title{font-size:28px;letter-spacing:-0.5px;}
   .closing-box{padding:32px 24px;}
   .footer-top{flex-direction:column;}
+  footer{padding:32px 20px;}
 }
 @media(max-width:900px){
   .risk-grid-3{grid-template-columns:repeat(2,1fr);}
@@ -344,7 +343,7 @@ footer{
 /* TEXT LAYOUT OPTIMIZATIONS */
 body.lang-zh{line-height:2.0;letter-spacing:0.01em;}
 html[lang="zh"] body{line-height:2.0;letter-spacing:0.01em;}
-p,.rc-desc,.hero-subtitle,.section-sub,.rc-defense-title,.sys-text,.layer-desc,.closing-final{max-width:680px;}
+p,.rc-desc,.hero-subtitle,.section-sub,.rc-defense-title,.sys-text,.layer-desc,.closing-final{max-width:640px;}
 .rc-top,.rc-bottom{padding:20px 24px;}
 .sys-card{padding:24px 24px;}
 .layer-card{padding:20px 24px;}
@@ -377,9 +376,6 @@ strong{font-weight:600;color:var(--text);}
     <a href="push-strategy-core.html" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
   </div>
   <button class="lang-btn" id="langBtn" onclick="toggleLang()">中 / EN</button>
-  <div class="nav-mobile-right">
-    <button class="lang-btn" onclick="toggleLang()">中 / EN</button>
-  </div>
   <button class="nav-burger" id="nav-burger" aria-label="打开菜单" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
@@ -444,7 +440,7 @@ strong{font-weight:600;color:var(--text);}
       <div class="risk-card fade-in">
         <div class="rc-top">
           <div class="rc-badge" data-en="RISK 01" data-zh="风险 01">RISK 01</div>
-          <div class="rc-title" data-en="Positioning Collapse" data-zh="定位不清，项目被理解成普通达人平台">Positioning Collapse</div>
+          <div class="rc-title" data-en="Positioning Collapse" data-zh="定位不清，被当成又一个网红平台">Positioning Collapse</div>
           <div class="rc-desc" data-en="If Push is perceived as &ldquo;a local influencer booking platform&rdquo; or &ldquo;an explore/map app,&rdquo; it immediately falls into a red ocean." data-zh="如果 Push 被理解成「本地网红接单平台」或「带地图的探店 App」，它会立刻掉进红海。">If Push is perceived as &ldquo;a local influencer booking platform&rdquo; or &ldquo;an explore/map app,&rdquo; it immediately falls into a red ocean.</div>
           <ul class="rc-bullets">
             <li data-en="Merchants see you as just a matching tool" data-zh="商家觉得你只是撮合">Merchants see you as just a matching tool</li>
@@ -473,7 +469,7 @@ strong{font-weight:600;color:var(--text);}
       <div class="risk-card fade-in" style="transition-delay:0.1s">
         <div class="rc-top">
           <div class="rc-badge" data-en="RISK 02" data-zh="风险 02">RISK 02</div>
-          <div class="rc-title" data-en="Overly Wide Cold Start" data-zh="切口过大，导致冷启动失败">Overly Wide Cold Start</div>
+          <div class="rc-title" data-en="Overly Wide Cold Start" data-zh="一上来铺太大，冷启动跑不起来">Overly Wide Cold Start</div>
           <div class="rc-desc" data-en="Starting with all of NYC, all verticals, all creator categories creates extreme sparsity." data-zh="如果一上来做整个 NYC、全部本地生活、所有 creator 类别，平台会极度稀疏。">Starting with all of NYC, all verticals, all creator categories creates extreme sparsity.</div>
           <ul class="rc-bullets">
             <li data-en="Map is empty — campaigns aren't concentrated" data-zh="地图打开没密度，活动不够集中">Map is empty — campaigns aren't concentrated</li>
@@ -502,7 +498,7 @@ strong{font-weight:600;color:var(--text);}
       <div class="risk-card fade-in" style="transition-delay:0.2s">
         <div class="rc-top">
           <div class="rc-badge" data-en="RISK 03" data-zh="风险 03">RISK 03</div>
-          <div class="rc-title" data-en="Product Drift" data-zh="产品漂移，功能越来越多但赚钱的道理越来越弱">Product Drift</div>
+          <div class="rc-title" data-en="Product Drift" data-zh="功能越做越多，但核心商业逻辑越来越弱">Product Drift</div>
           <div class="rc-desc" data-en="Teams get distracted by social features, feeds, profiles, points systems, and &ldquo;platform-looking&rdquo; decoration that doesn't move the business." data-zh="团队很容易被社区功能、社交 feed、漂亮 profile、花哨积分体系等「看起来很平台」的装饰功能吸走。">Teams get distracted by social features, feeds, profiles, points systems, and &ldquo;platform-looking&rdquo; decoration that doesn't move the business.</div>
           <ul class="rc-bullets">
             <li data-en="Project looks full but core merchant ROI is underdeveloped" data-zh="项目功能很满，但最核心的商家 ROI 反而没做好">Project looks full but core merchant ROI is underdeveloped</li>
@@ -662,7 +658,7 @@ strong{font-weight:600;color:var(--text);}
       <div class="risk-card fade-in" style="transition-delay:0.1s">
         <div class="rc-top">
           <div class="rc-badge" data-en="RISK 08" data-zh="风险 08">RISK 08</div>
-          <div class="rc-title" data-en="Merchant Tries Once, Never Returns" data-zh="Merchant 只试一次，不复购">Merchant Tries Once, Never Returns</div>
+          <div class="rc-title" data-en="Merchant Tries Once, Never Returns" data-zh="商家试一次就不来了">Merchant Tries Once, Never Returns</div>
           <div class="rc-desc" data-en="Merchants might try once out of curiosity, but if they don't return, the platform has no healthy economics." data-zh="商家可能第一次觉得新鲜，但如果第二次不来，平台就没有健康经济性。">Merchants might try once out of curiosity, but if they don't return, the platform has no healthy economics.</div>
           <ul class="rc-bullets">
             <li data-en="High CAC, low LTV — platform looks busy but bleeds money" data-zh="高 CAC，低 LTV。平台看起来活跃，但实际在亏损">High CAC, low LTV — platform looks busy but bleeds money</li>
@@ -694,7 +690,7 @@ strong{font-weight:600;color:var(--text);}
   <div class="section-inner">
     <div class="section-header fade-in">
       <div class="cat-label"><span class="cat-icon">🔐</span><span data-en="IV. Anti-Bypass Risks" data-zh="四、反绕平台风险">IV. Anti-Bypass Risks</span></div>
-      <h2 class="section-title" data-en="Risks That Make Push Just a Dating App" data-zh="会让 Push 沦为「介绍所」的风险">Risks That Make Push Just a Dating App</h2>
+      <h2 class="section-title" data-en="Risks That Make Push Just a Dating App" data-zh="一旦变成介绍所就完了">Risks That Make Push Just a Dating App</h2>
       <p class="section-sub" data-en="Once they've met through the platform, why keep using it?" data-zh="一旦通过平台认识了对方，为什么还要继续用它？">Once they've met through the platform, why keep using it?</p>
     </div>
     <div class="risk-grid-2">
@@ -730,7 +726,7 @@ strong{font-weight:600;color:var(--text);}
       <div class="risk-card fade-in" style="transition-delay:0.1s">
         <div class="rc-top">
           <div class="rc-badge" data-en="RISK 10" data-zh="风险 10">RISK 10</div>
-          <div class="rc-title" data-en="Off-Platform Deals Don't Affect Credit" data-zh="私下合作不影响平台信用，导致平台被空心化">Off-Platform Deals Don't Affect Credit</div>
+          <div class="rc-title" data-en="Off-Platform Deals Don't Affect Credit" data-zh="在外面干活不掉分，平台信用就成了摆设">Off-Platform Deals Don't Affect Credit</div>
           <div class="rc-desc" data-en="If creators leave the platform to work privately and their tier/passport/ranking remain unaffected, the platform slowly hollows out into an empty entry point." data-zh="如果 Creator 离开平台私下接单，平台内 Tier、Passport、Ranking 都不受影响，那平台就会慢慢沦为空壳入口。">If creators leave the platform to work privately and their tier/passport/ranking remain unaffected, the platform slowly hollows out into an empty entry point.</div>
           <ul class="rc-bullets">
             <li data-en="Platform credit system becomes meaningless" data-zh="平台的信用系统失去意义">Platform credit system becomes meaningless</li>
@@ -824,7 +820,7 @@ strong{font-weight:600;color:var(--text);}
       <div class="risk-card fade-in" style="transition-delay:0.2s">
         <div class="rc-top">
           <div class="rc-badge" data-en="RISK 13" data-zh="风险 13">RISK 13</div>
-          <div class="rc-title" data-en="Fraud vs. Incompetence" data-zh="Fraud 和误判混在一起">Fraud vs. Incompetence</div>
+          <div class="rc-title" data-en="Fraud vs. Incompetence" data-zh="分不清是作弊还是搞不清楚规则">Fraud vs. Incompetence</div>
           <div class="rc-desc" data-en="The platform can easily conflate &ldquo;poor execution,&rdquo; &ldquo;immature behavior,&rdquo; and &ldquo;misunderstanding requirements&rdquo; with &ldquo;intentional fraud.&rdquo;" data-zh="平台很容易把「执行差」「不成熟」「误解要求」和「恶意欺诈」混为一谈。">The platform can easily conflate &ldquo;poor execution,&rdquo; &ldquo;immature behavior,&rdquo; and &ldquo;misunderstanding requirements&rdquo; with &ldquo;intentional fraud.&rdquo;</div>
           <ul class="rc-bullets">
             <li data-en="One-size-fits-all punishment damages legitimate users" data-zh="如果一刀切处罚，会伤害正常用户">One-size-fits-all punishment damages legitimate users</li>
@@ -921,7 +917,7 @@ strong{font-weight:600;color:var(--text);}
   <div class="section-inner">
     <div class="section-header fade-in">
       <div class="cat-label"><span class="cat-icon">🏆</span><span data-en="VII. Competition Risks" data-zh="七、竞争风险">VII. Competition Risks</span></div>
-      <h2 class="section-title" data-en="Risks From Well-Funded Attackers" data-zh="来自资金充裕竞争者的风险">Risks From Well-Funded Attackers</h2>
+      <h2 class="section-title" data-en="Risks From Well-Funded Attackers" data-zh="有钱的大公司来抄怎么办">Risks From Well-Funded Attackers</h2>
     </div>
     <div class="risk-grid-1 fade-in">
 
@@ -963,8 +959,8 @@ strong{font-weight:600;color:var(--text);}
   <div class="system-inner">
     <div class="section-header fade-in" style="text-align:center;max-width:760px;margin:0 auto 0;">
       <div class="cat-label dark-label" style="justify-content:center;"><span data-en="Complete Defense Architecture" data-zh="怎么防">Complete Defense Architecture</span></div>
-      <h2 class="section-title" style="color:#fff;" data-en="The Complete Retention &amp; Anti-Bypass System" data-zh="完整留存与反绕过系统">The Complete Retention &amp; Anti-Bypass System</h2>
-      <p class="section-sub" style="color:rgba(255,255,255,0.55);margin:0 auto 0;max-width:620px;" data-en="Not just principles — a structural defense built into the platform architecture itself." data-zh="内嵌在平台架构里的具体做法。">Not just principles — a structural defense built into the platform architecture itself.</p>
+      <h2 class="section-title" style="color:#fff;" data-en="The Complete Retention &amp; Anti-Bypass System" data-zh="整套留存和反绕过机制">The Complete Retention &amp; Anti-Bypass System</h2>
+      <p class="section-sub" style="color:rgba(255,255,255,0.55);margin:0 auto 0;max-width:620px;" data-en="Not just principles — a structural defense built into the platform architecture itself." data-zh="不是写条款吓人，是从产品结构上让人走不了。">Not just principles — a structural defense built into the platform architecture itself.</p>
     </div>
     <div class="system-grid fade-in">
 
@@ -1087,7 +1083,7 @@ strong{font-weight:600;color:var(--text);}
     <div class="footer-top">
       <div class="footer-brand">
         <div class="footer-logo">PUSH</div>
-        <div class="footer-tagline" data-en="Local Creator Performance Infrastructure" data-zh="本地 Creator 效果基础设施">Local Creator Performance Infrastructure</div>
+        <div class="footer-tagline" data-en="Local Creator Performance Infrastructure" data-zh="本地创作者效果平台">Local Creator Performance Infrastructure</div>
       </div>
       <div class="footer-links">
         <a href="index.html" class="footer-pill" data-en="Overview" data-zh="首页">Dashboard</a>
@@ -1125,9 +1121,6 @@ function applyLang(lang) {
     });
     const btn = document.getElementById('langBtn');
     if (btn) btn.textContent = lang === 'zh' ? 'EN / 中' : '中 / EN';
-    document.querySelectorAll('.nav-mobile-right .lang-btn').forEach(b => {
-      b.textContent = lang === 'zh' ? 'EN / 中' : '中 / EN';
-    });
     const mobileBtn = document.getElementById('lang-btn-mobile');
     if (mobileBtn) mobileBtn.textContent = lang === 'zh' ? 'EN / 中' : '中 / EN';
     currentLang = lang;

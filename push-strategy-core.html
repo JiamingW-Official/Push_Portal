@@ -97,7 +97,7 @@
     .hero {
       background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 40%, #0f3460 70%, #1a0a3e 100%);
       display: flex; align-items: flex-end;
-      padding: 140px 64px 80px;
+      padding: 120px 64px 80px;
       position: relative; overflow: hidden;
       contain: layout style paint;
     }
@@ -127,7 +127,7 @@
     .hero-sub {
       font-size: 16px;
       color: rgba(255,255,255,0.62);
-      max-width: 600px;
+      max-width: 560px;
       line-height: 1.65; font-weight: 400;
       margin-bottom: 40px;
     }
@@ -161,9 +161,9 @@
     }
 
     /* SHARED UTILITIES */
-    .section-wrap { padding: 80px 64px; background: #fff; contain: layout style paint; }
+    .section-wrap { padding: 64px 64px; background: #fff; contain: layout style paint; }
     .section-wrap-gray { padding: 64px 64px; background: var(--bg2); contain: layout style paint; }
-    .section-wrap-dark { padding: 80px 64px; background: var(--primary); contain: layout style paint; }
+    .section-wrap-dark { padding: 64px 64px; background: var(--primary); contain: layout style paint; }
     .inner { max-width: 1000px; margin: 0 auto; }
     .inner-md { max-width: 1000px; margin: 0 auto; }
 
@@ -204,23 +204,23 @@
     .section-title {
       font-size: 36px;
       font-weight: 900; color: var(--primary);
-      line-height: 1.4; letter-spacing: -1px;
+      line-height: 1.4; letter-spacing: -0.5px;
       margin-bottom: 8px;
     }
     .section-title-light {
       font-size: 36px;
       font-weight: 900; color: #fff;
-      line-height: 1.4; letter-spacing: -1px;
+      line-height: 1.4; letter-spacing: -0.5px;
       margin-bottom: 8px;
     }
     .section-sub {
       font-size: 16px; color: var(--text2);
-      max-width: 680px; line-height: 1.65;
+      max-width: 640px; line-height: 1.65;
       margin-bottom: 48px; font-weight: 400;
     }
     .section-sub-light {
       font-size: 16px; color: rgba(255,255,255,0.6);
-      max-width: 680px; line-height: 1.65;
+      max-width: 640px; line-height: 1.65;
       margin-bottom: 48px; font-weight: 400;
     }
 
@@ -251,9 +251,9 @@
       border: 1px solid var(--border);
       border-left: 3px solid transparent;
       border-radius: var(--radius);
-      padding: 36px 32px;
+      padding: 28px;
       position: relative; overflow: hidden;
-      transition: box-shadow 0.2s, border-color 0.2s, border-left-color 0.2s, padding-left 0.2s;
+      transition: transform 0.15s, box-shadow 0.15s, border-color 0.2s, border-left-color 0.2s, padding-left 0.2s;
       box-shadow: var(--shadow);
     }
     .fatal-card:hover {
@@ -296,10 +296,10 @@
     .danger-card {
       background: #fff;
       border-radius: var(--radius);
-      padding: 36px 28px;
+      padding: 28px;
       position: relative; overflow: hidden;
       border: 1px solid var(--border);
-      transition: box-shadow 0.2s, border-color 0.2s;
+      transition: transform 0.15s, box-shadow 0.15s, border-color 0.2s;
       box-shadow: var(--shadow);
     }
     .danger-card:hover {
@@ -340,10 +340,10 @@
     .pillar-card {
       background: #fff;
       border-radius: var(--radius);
-      padding: 36px 30px 32px;
+      padding: 28px;
       position: relative; overflow: hidden;
       border: 1px solid var(--border);
-      transition: box-shadow 0.2s, border-color 0.2s;
+      transition: transform 0.15s, box-shadow 0.15s, border-color 0.2s;
       box-shadow: var(--shadow);
       counter-increment: pillar;
     }
@@ -638,14 +638,24 @@
       border-radius: var(--radius);
       padding: 32px 40px;
       font-size: 1.08rem; font-weight: 600;
-      color: #fff; line-height: 1.65; text-align: center;
+      color: rgba(255,255,255,0.9); line-height: 1.65; text-align: center;
     }
     .bp-verdict em { font-style: normal; color: var(--accent-light); font-weight: 700; }
+
+    /* -- Design polish: dark section text contrast -- */
+    .section-wrap-dark p,.section-wrap-dark li{color:rgba(255,255,255,0.9);}
+    .section-wrap-dark strong{color:rgba(255,255,255,0.95);}
+
+    /* -- Design polish: body text max-width -- */
+    p{max-width:640px;}
+
+    /* -- Design polish: card hover -- */
+    .fatal-card:hover,.danger-card:hover,.pillar-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,0.08);}
 
     /* FOOTER */
     footer {
       background: #090910;
-      padding: 48px 32px 32px;
+      padding: 48px 32px 28px;
     }
 
     .footer-inner { max-width: 1200px; margin: 0 auto; }
@@ -711,7 +721,8 @@
     @media (max-width: 768px) {
       nav { padding: 0 16px; }
       .nav-links { display: none; }
-      .section-wrap, .section-wrap-gray, .section-wrap-dark { padding: 56px 20px; }
+      .section-wrap, .section-wrap-gray, .section-wrap-dark { padding: 48px 20px; }
+      footer { padding: 32px 20px 24px; }
       .danger-grid, .pillar-grid, .fatal-grid { grid-template-columns: 1fr; }
       .moat-timeline { grid-template-columns: 1fr; }
       .bp-q { padding: 24px 20px; flex-direction: column; gap: 12px; }
@@ -959,7 +970,7 @@
       <!-- Pillar 2 -->
       <div class="pillar-card pillar-green fade-in fd2">
         <span class="pillar-icon">📊</span>
-        <div class="pillar-title" data-en="Merchant Operations Intelligence" data-zh="商家运营智能">Merchant Operations Intelligence</div>
+        <div class="pillar-title" data-en="Merchant Operations Intelligence" data-zh="商家的运营数据">Merchant Operations Intelligence</div>
         <div class="pillar-title-zh" data-en="商家运营智能" data-zh="平台锁定的数据">商家运营智能</div>
         <div class="pillar-body" data-en="Campaign analytics, creator performance comparison, ROI benchmarks, automated re-booking, dispute protection, continuous supply — all <strong>locked to the platform</strong>. PUSH is their creator marketing operations center. Leaving means losing all of it." data-zh="活动分析、创作者对比、ROI基准、自动化复购、争议保护、持续供给——全部<strong>锁定在平台内</strong>。PUSH 后台就是商家的创作者营销运营中心。离开就是失去这一切。">Campaign analytics, creator performance comparison, ROI benchmarks, automated re-booking, dispute protection, continuous supply — all <strong>locked to the platform</strong>. PUSH is their creator marketing operations center. Leaving means losing all of it.</div>
         <span class="pillar-tag" data-en="Platform-locked data" data-zh="平台锁定数据">Platform-locked data</span>
@@ -968,7 +979,7 @@
       <!-- Pillar 3 -->
       <div class="pillar-card pillar-orange fade-in fd3">
         <span class="pillar-icon">🔒</span>
-        <div class="pillar-title" data-en="Network-Locked Liquidity" data-zh="网络锁定的流动性">Network-Locked Liquidity</div>
+        <div class="pillar-title" data-en="Network-Locked Liquidity" data-zh="平台内才有的流动性">Network-Locked Liquidity</div>
         <div class="pillar-title-zh" data-en="网络锁定的流动性" data-zh="只在 PUSH 内部存在">网络锁定的流动性</div>
         <div class="pillar-body" data-en="The pool of verified, scored, tier-ranked local creators <strong>only exists inside PUSH</strong>. The pool of verified, performing local merchants only exists inside PUSH. Neither side can recreate this off-platform." data-zh="经过核验、有评分、有层级的本地创作者池，只存在于 PUSH 内部。经过核验、有表现记录的本地商家池，也只在 PUSH 内。双方都无法在平台外重建这个网络。">The pool of verified, scored, tier-ranked local creators <strong>only exists inside PUSH</strong>. The pool of verified, performing local merchants only exists inside PUSH. Neither side can recreate this off-platform.</div>
         <span class="pillar-tag" data-en="Only inside PUSH" data-zh="只在 PUSH 内部">Only inside PUSH</span>
@@ -1128,10 +1139,10 @@
   <div class="inner">
 
     <div class="fade-in">
-      <div class="section-label-light" data-en="Investor Readiness" data-zh="投资者准备">Investor Readiness</div>
+      <div class="section-label-light" data-en="Investor Readiness" data-zh="投资人必问">Investor Readiness</div>
       <div class="section-divider-white"></div>
-      <h2 class="section-title-light" data-en="Retention &amp; Disintermediation Defense" data-zh="留存与反脱媒防御——必须写的章节">Retention &amp; Disintermediation Defense</h2>
-      <p class="section-sub-light" data-en="The chapter every serious investor will ask about. Answer these three questions strongly, and the project becomes fundable." data-zh="每个认真的投资者都会问这三个问题。">The chapter every serious investor will ask about. Answer these three questions strongly, and the project becomes fundable.</p>
+      <h2 class="section-title-light" data-en="Retention &amp; Disintermediation Defense" data-zh="留存和反绕平台——投资人一定会问的三个问题">Retention &amp; Disintermediation Defense</h2>
+      <p class="section-sub-light" data-en="The chapter every serious investor will ask about. Answer these three questions strongly, and the project becomes fundable." data-zh="认真的投资人一定会问这三个。答好了才有戏。">The chapter every serious investor will ask about. Answer these three questions strongly, and the project becomes fundable.</p>
     </div>
 
     <div class="bp-questions">
@@ -1140,7 +1151,7 @@
         <div class="bp-q-num-circle">1</div>
         <div class="bp-q-content">
           <div class="bp-q-label" data-en="Question 01" data-zh="问题 01">Question 01</div>
-          <div class="bp-q-text" data-en="What non-transferable assets do creators accumulate?" data-zh="创作者在 PUSH 上积累了哪些不可转移的资产？离开会失去什么？">What non-transferable assets do creators accumulate?</div>
+          <div class="bp-q-text" data-en="What non-transferable assets do creators accumulate?" data-zh="创作者在 PUSH 上攒了什么带不走的东西？走了会丢什么？">What non-transferable assets do creators accumulate?</div>
           <div class="bp-q-answer" data-en="<strong>Answer:</strong> <strong>Passport</strong> scores, <strong>Tier</strong> benefits, earnings history, geo-credit, merchant ratings — none portable. A creator who leaves PUSH loses their entire professional identity on the platform." data-zh="<strong>回答：</strong><strong>Passport</strong> 分数、<strong>等级</strong>福利、收益历史、地理信用、商家评分——全不可携带。离开 PUSH 的 Creator 会失去他们在平台上的整个职业身份。"><strong>Answer:</strong> <strong>Passport</strong> scores, <strong>Tier</strong> benefits, earnings history, geo-credit, merchant ratings — none portable. A creator who leaves PUSH loses their entire professional identity on the platform.</div>
           <a href="retention-defense.html" class="bp-q-link" data-en="See Creator Retention Architecture →" data-zh="查看 Creator 留存架构 →">See Creator Retention Architecture →</a>
         </div>
@@ -1150,7 +1161,7 @@
         <div class="bp-q-num-circle">2</div>
         <div class="bp-q-content">
           <div class="bp-q-label" data-en="Question 02" data-zh="问题 02">Question 02</div>
-          <div class="bp-q-text" data-en="What continuous value do merchants get that private deals can never provide?" data-zh="商家从 PUSH 获得了哪些私下合作永远无法提供的持续价值？">What continuous value do merchants get that private deals can never provide?</div>
+          <div class="bp-q-text" data-en="What continuous value do merchants get that private deals can never provide?" data-zh="PUSH 给商家的东西，私下合作永远给不了什么？">What continuous value do merchants get that private deals can never provide?</div>
           <div class="bp-q-answer" data-en="<strong>Answer:</strong> Ongoing supply, data intelligence, automated workflows, dispute protection, quality-rated creator pool. A private deal provides none of this infrastructure — only a one-time transaction." data-zh="<strong>回答：</strong>持续供给、数据智能、自动化工作流、争议保护、有质量评级的 creator 池。私下合作提供不了这些基础设施——只是一次性交易。"><strong>Answer:</strong> Ongoing supply, data intelligence, automated workflows, dispute protection, quality-rated creator pool. A private deal provides none of this infrastructure — only a one-time transaction.</div>
           <a href="platform-value.html" class="bp-q-link" data-en="See Anti-Disintermediation Defense →" data-zh="查看反绕平台机制 →">See Anti-Disintermediation Defense →</a>
         </div>
@@ -1160,7 +1171,7 @@
         <div class="bp-q-num-circle">3</div>
         <div class="bp-q-content">
           <div class="bp-q-label" data-en="Question 03" data-zh="问题 03">Question 03</div>
-          <div class="bp-q-text" data-en="Why is on-platform re-booking better in every dimension?" data-zh="为什么平台内复购在每个维度上都更好？">Why is on-platform re-booking better in every dimension?</div>
+          <div class="bp-q-text" data-en="Why is on-platform re-booking better in every dimension?" data-zh="为什么走平台复购比私下合作每个方面都划算？">Why is on-platform re-booking better in every dimension?</div>
           <div class="bp-q-answer" data-en="<strong>Answer:</strong> Faster, cheaper, safer, auto-settled, proof-verified, credit-building — vs. DMs, cash transfers, disputes, no records. The platform is not just easier; it is structurally superior in every measurable way." data-zh="<strong>回答：</strong>更快、更便宜、更安全、自动结算、证明核验、信用积累——对比 DM、现金转账、纠纷、无记录。平台不只是方便一点——速度、成本、信任都比私下合作强。"><strong>Answer:</strong> Faster, cheaper, safer, auto-settled, proof-verified, credit-building — vs. DMs, cash transfers, disputes, no records. The platform is not just easier; it is structurally superior in every measurable way.</div>
         </div>
       </div>
@@ -1177,12 +1188,12 @@
   <div style="display:flex; gap:16px; flex-wrap:wrap;">
     <a href="prospects.html" style="flex:1; min-width:200px; padding:16px; background:#fff; border:1px solid var(--border, #e5e7eb); border-radius:8px; text-decoration:none;">
       <div style="font-size:13px; color:var(--text3, #9ca3af);" data-en="Forward" data-zh="向前看" class="bilingual-text">Forward</div>
-      <div style="font-size:15px; font-weight:600; color:var(--text, #111827);" data-en="See the long-term vision and where Push is headed" data-zh="看长期愿景和 Push 的未来方向" class="bilingual-text">See the long-term vision and where Push is headed</div>
+      <div style="font-size:15px; font-weight:600; color:var(--text, #111827);" data-en="See the long-term vision and where Push is headed" data-zh="看 Push 长期要做成什么样" class="bilingual-text">See the long-term vision and where Push is headed</div>
       <div style="font-size:13px; color:var(--accent, #4f46e5); margin-top:4px;" data-en="Future Prospects →" data-zh="未来愿景 →" class="bilingual-text">Future Prospects →</div>
     </a>
     <a href="index.html" style="flex:1; min-width:200px; padding:16px; background:#fff; border:1px solid var(--border, #e5e7eb); border-radius:8px; text-decoration:none;">
       <div style="font-size:13px; color:var(--text3, #9ca3af);" data-en="Back to start" data-zh="回到起点" class="bilingual-text">Back to start</div>
-      <div style="font-size:15px; font-weight:600; color:var(--text, #111827);" data-en="Return to the full overview dashboard" data-zh="回到全景概览首页" class="bilingual-text">Return to the full overview dashboard</div>
+      <div style="font-size:15px; font-weight:600; color:var(--text, #111827);" data-en="Return to the full overview dashboard" data-zh="回首页看全局" class="bilingual-text">Return to the full overview dashboard</div>
       <div style="font-size:13px; color:var(--accent, #4f46e5); margin-top:4px;" data-en="Dashboard →" data-zh="首页 →" class="bilingual-text">Dashboard →</div>
     </a>
   </div>

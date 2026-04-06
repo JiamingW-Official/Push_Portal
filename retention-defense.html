@@ -45,7 +45,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 #scroll-progress{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:300;width:0;transition:width 0.1s linear;pointer-events:none;}
 
 /* NAV */
-nav{position:fixed;top:2px;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;background:#ffffff;border-bottom:1px solid var(--border);transition:box-shadow 0.2s;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;background:#ffffff;border-bottom:1px solid var(--border);transition:box-shadow 0.2s;}
 nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
 .nav-logo{font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;margin-right:8px;flex-shrink:0;text-decoration:none;}
 .nav-links{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
@@ -59,7 +59,6 @@ nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
   transition:background 0.2s;flex-shrink:0;letter-spacing:0.3px;
 }
 .lang-btn:hover{background:var(--accent-dark);}
-.nav-mobile-right{display:none;gap:8px;align-items:center;}
 
 /* HERO */
 .hero{
@@ -81,29 +80,29 @@ nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
 }
 .hero-title span{color:var(--accent);}
 .hero-subtitle-box{
-  max-width:680px;
+  max-width:560px;
   color:var(--text2);font-size:16px;font-weight:400;line-height:1.65;
   margin-top:16px;
 }
 
 /* SHARED SECTION */
-.section{padding:80px 64px;background:#fff;border-top:1px solid var(--border);}
+.section{padding:64px 64px;background:#fff;border-top:1px solid var(--border);}
 .section-inner{max-width:1000px;margin:0 auto;}
 .section-bg2{background:var(--bg2);}
 
 .section-label{
-  font-size:13px;font-weight:600;letter-spacing:0.5px;
+  font-size:12px;font-weight:600;letter-spacing:0.5px;
   color:var(--accent);margin-bottom:12px;
 }
 
 .section-title{
-  font-size:36px;font-weight:900;letter-spacing:-1px;
+  font-size:36px;font-weight:900;letter-spacing:-0.5px;
   color:var(--text);line-height:1.4;margin-bottom:8px;
 }
 .section-title-white{color:#fff;}
 .section-sub{
   font-size:16px;font-weight:400;color:var(--text2);
-  max-width:680px;line-height:1.65;
+  max-width:640px;line-height:1.65;
 }
 .section-sub-white{color:rgba(255,255,255,0.55);}
 
@@ -124,10 +123,11 @@ nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
   border-radius:var(--radius);
   padding:24px 28px;display:flex;gap:20px;align-items:flex-start;
   cursor:default;
-  transition:box-shadow 0.25s ease,border-color 0.2s ease;
+  transition:box-shadow 0.25s ease,border-color 0.2s ease,transform 0.25s ease;
 }
 .cause-card:hover{
-  box-shadow:0 2px 12px rgba(0,0,0,0.08);
+  transform:translateY(-2px);
+  box-shadow:0 4px 16px rgba(0,0,0,0.08);
   border-color:rgba(220,38,38,0.3);
 }
 .cause-num{
@@ -323,7 +323,7 @@ nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
 
 /* FOOTER */
 .footer{
-  background:#0d0d1a;padding:40px 24px 28px;
+  background:#0d0d1a;padding:48px 64px 28px;
 }
 .footer-inner{max-width:1000px;margin:0 auto;}
 .footer-top{
@@ -368,10 +368,10 @@ nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
 }
 @media(max-width:640px){
   .nav-links{display:none;}
-  .nav-mobile-right{display:flex;}
   .hero{padding:100px 24px 60px;}
   .hero-title{font-size:28px;letter-spacing:-0.5px;}
-  .section{padding:56px 24px;}
+  .section{padding:48px 24px;}
+  .footer{padding:32px 20px;}
 }
 
 /* Back to top button */
@@ -409,7 +409,7 @@ nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
 /* Chinese line-height */
 html[lang*="zh"] body{line-height:2.0;letter-spacing:0.01em;}
 /* Paragraph max-width */
-.cause-body,.mech-desc,.layer-body,.mistake-body,.section-sub,.hero-subtitle-box,.quote-text{max-width:680px;}
+.cause-body,.mech-desc,.layer-body,.mistake-body,.section-sub,.hero-subtitle-box,.quote-text{max-width:640px;}
 /* Card text padding */
 .cause-card,.mech-body,.mistake-card,.fw-step{padding:20px 24px;}
 .cause-card{padding:24px 28px;}
@@ -448,9 +448,6 @@ strong{font-weight:600;color:var(--text);}
     <a href="push-strategy-core.html" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
   </div>
   <button class="lang-btn" id="langBtn" onclick="toggleLang()">中 / EN</button>
-  <div class="nav-mobile-right">
-    <button class="lang-btn" onclick="toggleLang()">中 / EN</button>
-  </div>
   <button class="nav-burger" id="nav-burger" aria-label="打开菜单" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
@@ -474,7 +471,7 @@ strong{font-weight:600;color:var(--text);}
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-badge" data-en="Existential Risk" data-zh="生死存亡级风险">Existential Risk</div>
+    <div class="hero-badge" data-en="Existential Risk" data-zh="这关过不去就没戏">Existential Risk</div>
 
     <h1 class="hero-title">
       <span data-en="Creator Retention" data-zh="创作者留存">Creator Retention</span><br>
@@ -508,7 +505,7 @@ strong{font-weight:600;color:var(--text);}
 
       <div class="section-left-wrap fade-in">
         <div class="section-label" data-en="Root Causes" data-zh="根本原因">Root Causes</div>
-        <h2 class="section-title" data-en="Why Creators Leave" data-zh="创作者为什么会流失：3个根本原因">Why Creators Leave</h2>
+        <h2 class="section-title" data-en="Why Creators Leave" data-zh="创作者为什么走：3个根本原因">Why Creators Leave</h2>
         <p class="section-sub" data-en="Most creator churn isn't random. It's predictable, driven by three structural perception failures that compound over time. If we don't address these by design, the platform will hemorrhage its best creators." data-zh="大多数 Creator 流失都不是偶然的。背后有三个固定原因，时间越长越严重。如果产品设计上不正面处理这些问题，平台会持续把最好的 Creator 推走。">Most creator churn isn't random. It's predictable, driven by three structural perception failures that compound over time. If we don't address these by design, the platform will hemorrhage its best creators.</p>
       </div>
 
@@ -516,7 +513,7 @@ strong{font-weight:600;color:var(--text);}
         <div class="cause-card fade-in" style="transition-delay:0.1s;">
           <div class="cause-num">01</div>
           <div>
-            <div class="cause-title" data-en="Coupon App Perception" data-zh="平台看起来像免费体验 App">Coupon App Perception</div>
+            <div class="cause-title" data-en="Coupon App Perception" data-zh="觉得这就是个白嫖 App">Coupon App Perception</div>
             <div class="cause-body" data-en="Creators perceive PUSH as a one-time free sample source, not a professional ecosystem. If the platform doesn't signal career seriousness, they won't invest serious time in it." data-zh="如果首次体验是"注册领免费东西"，创作者会把 Push 归类为优惠券 App。用完就走，跟平台没有关系。产品还没上线，定位已经崩了。">Creators perceive PUSH as a one-time free sample source, not a professional ecosystem. If the platform doesn't signal career seriousness, they won't invest serious time in it.</div>
           </div>
         </div>
@@ -647,7 +644,7 @@ strong{font-weight:600;color:var(--text);}
       <div class="mech-card fade-in" style="transition-delay:0.1s;">
         <div class="mech-body">
           <span class="mech-icon">⭐</span>
-          <div class="mech-title" data-en="High-Tier Value Must Be Extremely Real" data-zh="高 Tier 价值极度真实">High-Tier Value Must Be Extremely Real</div>
+          <div class="mech-title" data-en="High-Tier Value Must Be Extremely Real" data-zh="高等级的好处必须是看得见摸得着的">High-Tier Value Must Be Extremely Real</div>
           <p class="mech-desc" data-en="Tier status must come with concrete, verifiable advantages that creators can feel every single time they log in — not just vague prestige." data-zh="等级必须对应看得见、用得上的好处，每次用平台都能感受到差距——不是挂个头衔好看。">Tier status must come with concrete, verifiable advantages that creators can feel every single time they log in — not just vague prestige.</p>
           <ul class="benefit-list">
             <li data-en="Paid gigs and recurring brand deals" data-zh="付费工作与品牌长期合作">Paid gigs and recurring brand deals</li>
@@ -663,7 +660,7 @@ strong{font-weight:600;color:var(--text);}
       <div class="mech-card fade-in" style="transition-delay:0.15s;">
         <div class="mech-body">
           <span class="mech-icon">🔑</span>
-          <div class="mech-title" data-en="History Becomes a Scarce Pass" data-zh="历史变稀缺通行证">History Becomes a Scarce Pass</div>
+          <div class="mech-title" data-en="History Becomes a Scarce Pass" data-zh="干活记录变成稀缺通行证">History Becomes a Scarce Pass</div>
           <p class="mech-desc" data-en="&lt;strong&gt;90-day completion rate&lt;/strong&gt;, merchant ratings, dispute-free record, and geo-category credit build into a platform passport that grants access to top-tier campaigns. This cannot be faked, purchased, or built elsewhere in months." data-zh="&lt;strong&gt;90天完成记录&lt;/strong&gt;、商家评分、无纠纷历史、地区品类口碑——这些攒在一起变成你的平台通行证，可以接到更好的单子。没法造假，没法花钱买，换个平台从头来。"><strong>90-day completion rate</strong>, merchant ratings, dispute-free record, and geo-category credit build into a platform passport that grants access to top-tier campaigns. This cannot be faked, purchased, or built elsewhere in months.</p>
           <div class="mech-highlight" data-en="Months of history → irreplaceable asset → real switching cost" data-zh="数月历史 → 别处没法复制的积累 → 真实切换成本">Months of history → irreplaceable asset → real switching cost</div>
         </div>
@@ -768,7 +765,7 @@ strong{font-weight:600;color:var(--text);}
 
       <div class="mistake-card fade-in" style="transition-delay:0.2s;">
         <div class="mistake-badge" data-en="Mistake 04" data-zh="错误 04">Mistake 04</div>
-        <div class="mistake-title" data-en="Adding Friction Without Benefit" data-zh="平台只增加摩擦">Adding Friction Without Benefit</div>
+        <div class="mistake-title" data-en="Adding Friction Without Benefit" data-zh="只加规矩不给好处">Adding Friction Without Benefit</div>
         <p class="mistake-body" data-en="Verification requirements, strict policies, and compliance rules that aren't matched by commensurate earnings and access feel punitive, not professional. Every friction point must be justified by a visible, concrete reward." data-zh="如果平台要求多、审核严，但赚到的钱跟在其他地方差不多，Creator 就会觉得这里在刁难人。每一个麻烦都要有对应的好处，不然就是在赶人走。">Verification requirements, strict policies, and compliance rules that aren't matched by commensurate earnings and access feel punitive, not professional. Every friction point must be justified by a visible, concrete reward.</p>
       </div>
     </div>
@@ -791,7 +788,7 @@ strong{font-weight:600;color:var(--text);}
     <div class="footer-top">
       <div>
         <div class="footer-brand-logo">PUSH</div>
-        <div class="footer-tagline" data-en="Local Creator Performance Infrastructure" data-zh="本地 Creator 效果基础设施">Local Creator Performance Infrastructure</div>
+        <div class="footer-tagline" data-en="Local Creator Performance Infrastructure" data-zh="本地创作者效果平台">Local Creator Performance Infrastructure</div>
       </div>
       <div class="footer-links">
         <a href="index.html" class="footer-link" data-en="Overview" data-zh="首页">Dashboard</a>
@@ -832,9 +829,6 @@ function applyLang(lang) {
     });
     const btn = document.getElementById('langBtn');
     if (btn) btn.textContent = lang === 'zh' ? 'EN / 中' : '中 / EN';
-    document.querySelectorAll('.nav-mobile-right .lang-btn').forEach(b => {
-      b.textContent = lang === 'zh' ? 'EN / 中' : '中 / EN';
-    });
     const mobileBtn = document.getElementById('lang-btn-mobile');
     if (mobileBtn) mobileBtn.textContent = lang === 'zh' ? 'EN / 中' : '中 / EN';
     document.body.style.opacity = '1';

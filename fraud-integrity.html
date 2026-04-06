@@ -94,12 +94,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 }
 .hero-title{
   font-size:36px;font-weight:800;color:var(--text);
-  letter-spacing:-1px;line-height:1.15;
+  letter-spacing:-0.5px;line-height:1.15;
   margin-bottom:8px;
 }
 .hero-subtitle{
   font-size:16px;font-weight:400;color:var(--text2);
-  max-width:640px;line-height:1.65;margin-bottom:14px;
+  max-width:560px;line-height:1.65;margin-bottom:14px;
 }
 .hero-principle{
   font-size:14px;font-weight:600;color:var(--accent);
@@ -109,7 +109,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 }
 
 /* SECTIONS */
-.section{padding:72px 40px;border-top:1px solid var(--border);}
+.section{padding:64px 40px;border-top:1px solid var(--border);}
 .section-inner{max-width:1000px;margin:0 auto;}
 .section-bg2{background:#fff;}
 .section-white{background:#fff;}
@@ -121,7 +121,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 }
 .section-title{
   font-size:36px;font-weight:800;color:var(--text);
-  letter-spacing:-1px;line-height:1.2;margin-bottom:8px;
+  letter-spacing:-0.5px;line-height:1.2;margin-bottom:8px;
 }
 .section-sub{
   font-size:16px;color:var(--text2);max-width:640px;line-height:1.65;margin-bottom:40px;
@@ -192,12 +192,12 @@ blockquote.principle p+p{margin-top:12px;}
 /*DATA TABLE */
 .data-table{width:100%;border-collapse:collapse;font-size:13px;}
 .data-table th{
-  background:var(--bg2);font-weight:700;text-align:left;
-  padding:10px 14px;font-size:11px;text-transform:uppercase;
+  background:#f8f9fa;font-weight:600;text-align:left;
+  padding:12px 16px;font-size:11px;text-transform:uppercase;
   letter-spacing:1px;border-bottom:2px solid var(--border);
   font-family:'JetBrains Mono',monospace;color:var(--text2);
 }
-.data-table td{padding:12px 14px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top;}
+.data-table td{padding:12px 16px;border-bottom:1px solid #e5e7eb;color:var(--text2);vertical-align:top;}
 .data-table tr:hover td{background:var(--bg2);}
 .data-table td:first-child{font-weight:700;color:var(--text);}
 .table-wrap{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
@@ -232,7 +232,7 @@ blockquote.principle p+p{margin-top:12px;}
 .warn-desc{font-size:13px;color:var(--text2);line-height:1.6;}
 
 /*FRAUD VS MISTAKE SPLIT */
-.split-cols{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.split-cols{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
 .split-col{border-radius:var(--radius);overflow:hidden;}
 .split-col-head{
   padding:14px 20px;font-size:13px;font-weight:600;letter-spacing:0.5px;text-transform:none;
@@ -343,13 +343,18 @@ blockquote.principle-white{
 .merchant-issues .item-row:hover{border-bottom-color:rgba(220,38,38,0.25);background:rgba(220,38,38,0.02);}
 
 /* TEXT LAYOUT OPTIMIZATIONS */
-p,.item-desc,.check-desc,.signal-text,.philosophy-body{max-width:680px;}
+p,.item-desc,.check-desc,.signal-text,.philosophy-body{max-width:640px;}
 .section-sub,.hero-subtitle,.hero-sub{max-width:640px;}
 .section-title,h2{margin-bottom:16px;}
 li{margin-bottom:6px;line-height:1.7;}
 strong{font-weight:600;color:var(--text);}
-.section-dark strong,.section-dark .item-title{color:inherit;}
+.section-dark strong,.section-dark .item-title{color:rgba(255,255,255,0.95);}
+.section-dark p,.section-dark li{color:rgba(255,255,255,0.9);}
 .item-row,.check-item,.signal-item,.dash-item,.card,.metric-item,.metrics-card{padding:20px 24px;}
+code,pre{font-size:13px;}
+
+/* -- Design polish: card hover -- */
+.warn-strip,.split-col,.dash-item{transition:transform 0.15s,box-shadow 0.15s;}
 
 /* Chinese mode */
 html[lang="zh"] body{line-height:2.0;letter-spacing:0.01em;}
@@ -362,6 +367,9 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
   .section{padding:48px 20px;}
   .signal-grid{gap:0;}
   .dash-grid{gap:12px;}
+}
+@media(max-width:768px){
+  footer{padding:32px 20px 24px;}
 }
 </style>
 </head>
@@ -454,7 +462,7 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
         <div class="item-num">02</div>
         <div>
           <div class="item-sub" data-en="MERCHANT-SIDE" data-zh="商户端">MERCHANT-SIDE</div>
-          <div class="item-title"><span class="severity-dot severity-high"></span><span data-en="Fake Merchant-Side Validation" data-zh="商户虚假验证">Fake Merchant-Side Validation</span></div>
+          <div class="item-title"><span class="severity-dot severity-high"></span><span data-en="Fake Merchant-Side Validation" data-zh="商户配合造假">Fake Merchant-Side Validation</span></div>
           <div class="item-desc" data-en="Merchant confirms weak or false completion for convenience or collusive reasons — approving work that does not meet campaign standards, reducing accountability and diluting platform quality." data-zh="商户出于省事或勾结目的，让不合格的内容蒙混过关——批准不达标的工作，让问责机制失效，整体平台质量下滑。">Merchant confirms weak or false completion for convenience or collusive reasons — approving work that does not meet campaign standards, reducing accountability and diluting platform quality.</div>
           <div class="detection-method" data-en="Detection: <strong>Approval pattern analysis</strong> against platform norms, <strong>merchant-creator pair monitoring</strong>, approval rate deviation alerts." data-zh="检测方式：<strong>审批模式分析</strong>（对比平台正常水平）、<strong>商户-创作者配对监控</strong>、审批率偏差预警。">Detection: <strong>Approval pattern analysis</strong> against platform norms, <strong>merchant-creator pair monitoring</strong>, approval rate deviation alerts.</div>
         </div>
@@ -472,7 +480,7 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
         <div class="item-num">04</div>
         <div>
           <div class="item-sub" data-en="METRIC-SIDE" data-zh="指标端">METRIC-SIDE</div>
-          <div class="item-title"><span class="severity-dot severity-med"></span><span data-en="Engagement Inflation" data-zh="互动数据虚增">Engagement Inflation</span></div>
+          <div class="item-title"><span class="severity-dot severity-med"></span><span data-en="Engagement Inflation" data-zh="刷互动数据">Engagement Inflation</span></div>
           <div class="item-desc" data-en="Creators present high vanity metrics — follower counts, likes, reach — with little true campaign value. Purchased followers, fake interactions, or inflated reach claims misrepresent actual influence." data-zh="粉丝数、点赞数好看，但全是刷的，对活动没用。">Creators present high vanity metrics — follower counts, likes, reach — with little true campaign value. Purchased followers, fake interactions, or inflated reach claims misrepresent actual influence.</div>
           <div class="detection-method" data-en="Detection: <strong>Engagement-to-follower ratio</strong> benchmarking, historical metric trend analysis, <strong>audience authenticity scoring</strong>." data-zh="检测方式：<strong>互动-粉丝比</strong>基准对标、历史指标趋势分析、<strong>受众真实性评分</strong>。">Detection: <strong>Engagement-to-follower ratio</strong> benchmarking, historical metric trend analysis, <strong>audience authenticity scoring</strong>.</div>
         </div>
@@ -533,21 +541,21 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
       <div class="check-item">
         <div class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
         <div>
-          <div class="check-label" data-en="Selective Verification Depth" data-zh="选择性验证深度">Selective Verification Depth</div>
+          <div class="check-label" data-en="Selective Verification Depth" data-zh="风险高的多查，正常的少管">Selective Verification Depth</div>
           <div class="check-desc" data-en="Verification intensity is calibrated to <b>campaign payout size</b> and <b>creator risk score</b> — not applied uniformly. High-payout or flagged campaigns receive deeper review." data-zh="验证力度按<b>活动金额</b>和<b>创作者风险分</b>打分来定——不是所有人一套标准。金额高或已被标记的活动审查更严。">Verification intensity is calibrated to <b>campaign payout size</b> and <b>creator risk score</b> — not applied uniformly. High-payout or flagged campaigns receive deeper review.</div>
         </div>
       </div>
       <div class="check-item">
         <div class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
         <div>
-          <div class="check-label" data-en="Creator Credit Impact" data-zh="创作者信用影响">Creator Credit Impact</div>
+          <div class="check-label" data-en="Creator Credit Impact" data-zh="作弊会掉信用分">Creator Credit Impact</div>
           <div class="check-desc" data-en="Integrity status affects <b>campaign access</b>, <b>payout timing</b>, and <b>tier eligibility</b> — making a clean record economically valuable and fraud economically costly." data-zh="诚信状态直接影响<b>能接什么活动</b>、<b>什么时候到账</b>、<b>能不能升级</b>——保持干净记录有实实在在的经济好处，作弊有代价。">Integrity status affects <b>campaign access</b>, <b>payout timing</b>, and <b>tier eligibility</b> — making a clean record economically valuable and fraud economically costly.</div>
         </div>
       </div>
       <div class="check-item">
         <div class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
         <div>
-          <div class="check-label" data-en="Merchant Accountability" data-zh="商户问责制">Merchant Accountability</div>
+          <div class="check-label" data-en="Merchant Accountability" data-zh="商户也要守规矩">Merchant Accountability</div>
           <div class="check-desc" data-en="Merchant validation is tracked and weighted. Approval patterns that diverge significantly from platform norms surface as merchant integrity signals — creating feedback both ways." data-zh="商户的审批行为会被记录和加权。如果审批模式明显偏离平台正常水平，会被标记为商户诚信问题——双向都有约束。">Merchant validation is tracked and weighted. Approval patterns that diverge significantly from platform norms surface as merchant integrity signals — creating feedback both ways.</div>
         </div>
       </div>
@@ -561,7 +569,7 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
       <div class="check-item">
         <div class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>
         <div>
-          <div class="check-label" data-en="Anomaly-Triggered Review, Not Universal Manual Review" data-zh="异常触发审查，而非全面人工审查">Anomaly-Triggered Review, Not Universal Manual Review</div>
+          <div class="check-label" data-en="Anomaly-Triggered Review, Not Universal Manual Review" data-zh="有问题才查，不是每单都查">Anomaly-Triggered Review, Not Universal Manual Review</div>
           <div class="check-desc" data-en="Manual review is expensive and creates friction for everyone. Reviews are triggered by <b>anomaly scores</b>, not by default — preserving platform efficiency and user experience." data-zh="人工审查费时费力，对所有人都是负担。审查只在<b>异常分数</b>触发时启动，不是默认就审——保住平台效率和用户体验。">Manual review is expensive and creates friction for everyone. Reviews are triggered by <b>anomaly scores</b>, not by default — preserving platform efficiency and user experience.</div>
         </div>
       </div>
@@ -588,7 +596,7 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
           <tr>
             <td><span class="badge-tier badge-tier-passive" data-en="PASSIVE" data-zh="被动">PASSIVE</span></td>
             <td data-en="Low-risk campaigns, trusted creators, no anomaly signals detected" data-zh="低风险活动、可信创作者、未检测到异常信号">Low-risk campaigns, trusted creators, no anomaly signals detected</td>
-            <td data-en="Automated processing proceeds. No additional friction. Standard proof submission accepted." data-zh="自动处理继续进行。无额外摩擦。接受标准证明提交。">Automated processing proceeds. No additional friction. Standard proof submission accepted.</td>
+            <td data-en="Automated processing proceeds. No additional friction. Standard proof submission accepted." data-zh="照常自动跑。不加额外步骤。按标准流程收证明。">Automated processing proceeds. No additional friction. Standard proof submission accepted.</td>
           </tr>
           <tr>
             <td><span class="badge-tier badge-tier-triggered" data-en="TRIGGERED" data-zh="触发">TRIGGERED</span></td>
@@ -667,20 +675,20 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
 <section class="section section-bg2">
   <div class="section-inner fade-in">
     <div class="section-label" data-en="MERCHANT CONTROLS" data-zh="商户管控">MERCHANT CONTROLS</div>
-    <h2 class="section-title" data-en="Merchant Integrity Controls" data-zh="商户诚信管控">Merchant Integrity Controls</h2>
+    <h2 class="section-title" data-en="Merchant Integrity Controls" data-zh="管住商户不耍赖">Merchant Integrity Controls</h2>
     <p class="section-sub" data-en="Merchants are participants in the integrity system, not just victims of fraud. Merchant behavior affects the entire creator supply and campaign ecosystem." data-zh="商户是诚信系统的一部分，不只是受害者。商户的行为方式直接影响整个创作者供给和活动生态。">Merchants are participants in the integrity system, not just victims of fraud. Merchant behavior affects the entire creator supply and campaign ecosystem.</p>
     <div class="item-list merchant-issues">
       <div class="item-row">
         <div class="item-num">→</div>
         <div>
-          <div class="item-title" data-en="Bait-and-Switch Demands" data-zh="诱导欺骗要求">Bait-and-Switch Demands</div>
+          <div class="item-title" data-en="Bait-and-Switch Demands" data-zh="说一套做一套">Bait-and-Switch Demands</div>
           <div class="item-desc" data-en="Merchant changes deliverable expectations after creator accepts — adding requirements, changing content standards, or demanding revisions outside campaign scope. Tracked as merchant integrity violation." data-zh="创作者接单后，商户临时改条件——加要求、改内容标准、要求活动范围之外的修改。这类行为会被记录为商户诚信违规。">Merchant changes deliverable expectations after creator accepts — adding requirements, changing content standards, or demanding revisions outside campaign scope. Tracked as merchant integrity violation.</div>
         </div>
       </div>
       <div class="item-row">
         <div class="item-num">→</div>
         <div>
-          <div class="item-title" data-en="Unfair Rejections" data-zh="不公平拒绝">Unfair Rejections</div>
+          <div class="item-title" data-en="Unfair Rejections" data-zh="无理拒收成果">Unfair Rejections</div>
           <div class="item-desc" data-en="Merchant rejects valid work without clear justification. Rejection rate monitored relative to platform norms. Systematic unfair rejection creates platform-level creator churn." data-zh="商户无正当理由拒绝合格的内容。拒绝率会和平台正常水平对比监控。如果系统性乱拒，会导致创作者大量离开平台。">Merchant rejects valid work without clear justification. Rejection rate monitored relative to platform norms. Systematic unfair rejection creates platform-level creator churn.</div>
         </div>
       </div>
@@ -694,7 +702,7 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
       <div class="item-row">
         <div class="item-num">→</div>
         <div>
-          <div class="item-title" data-en="Manipulating Proof Standards Post-Acceptance" data-zh="接了活动以后又改验收标准">Manipulating Proof Standards Post-Acceptance</div>
+          <div class="item-title" data-en="Manipulating Proof Standards Post-Acceptance" data-zh="接单后偷改验收标准">Manipulating Proof Standards Post-Acceptance</div>
           <div class="item-desc" data-en="Retroactively raising proof bar after campaign launched to avoid paying creators — a deliberate integrity violation with direct economic impact on creators." data-zh="活动发布之后偷偷提高验证标准，想赖掉对创作者的付款——这是故意的诚信问题，直接影响创作者收益。">Retroactively raising proof bar after campaign launched to avoid paying creators — a deliberate integrity violation with direct economic impact on creators.</div>
         </div>
       </div>
@@ -764,7 +772,7 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
 </div>
 
 <!-- FOOTER -->
-<footer style="background:var(--primary);padding:36px 40px 28px;border-top:1px solid rgba(255,255,255,0.06);">
+<footer style="background:var(--primary);padding:48px 40px 28px;border-top:1px solid rgba(255,255,255,0.06);">
   <div style="max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
     <div style="font-size:18px;font-weight:900;color:var(--accent);letter-spacing:1px;">PUSH</div>
     <div style="font-size:11px;color:rgba(255,255,255,0.2);" data-en="PUSH Platform — Internal Strategy Documentation" data-zh="PUSH 平台 — 内部战略文档">PUSH Platform — Internal Strategy Documentation</div>

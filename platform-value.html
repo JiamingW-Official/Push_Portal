@@ -46,7 +46,7 @@ a{text-decoration:none;color:inherit}
 #scroll-progress{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:300;width:0;transition:none;pointer-events:none;}
 
 /* NAV */
-nav{position:fixed;top:2px;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;background:#ffffff;border-bottom:1px solid var(--border);transition:box-shadow 0.2s;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;background:#ffffff;border-bottom:1px solid var(--border);transition:box-shadow 0.2s;}
 nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
 .nav-logo{font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;margin-right:8px;flex-shrink:0;text-decoration:none;}
 .nav-links{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
@@ -95,15 +95,15 @@ nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
 .hero-sub{
   font-size:16px;font-weight:400;
   color:var(--text2);line-height:1.65;
-  max-width:680px;margin-top:16px;
+  max-width:560px;margin-top:16px;
 }
 
 /* SECTIONS */
-section{padding:80px 64px;background:#fff;border-top:1px solid var(--border);contain:layout style paint;}
+section{padding:64px 64px;background:#fff;border-top:1px solid var(--border);contain:layout style paint;}
 .container{max-width:1000px;margin:0 auto}
 
 .section-tag{
-  font-size:13px;font-weight:600;letter-spacing:0.5px;
+  font-size:12px;font-weight:600;letter-spacing:0.5px;
   color:var(--accent);margin-bottom:12px;
 }
 .section-tag.green{color:var(--green)}
@@ -114,13 +114,13 @@ section{padding:80px 64px;background:#fff;border-top:1px solid var(--border);con
 .section-title{
   position:relative;z-index:1;
   font-size:36px;
-  font-weight:900;letter-spacing:-1px;line-height:1.4;
+  font-weight:900;letter-spacing:-0.5px;line-height:1.4;
   color:var(--text);margin-bottom:8px;
 }
 .section-title.white{color:#fff}
 .section-sub{
   font-size:16px;font-weight:400;
-  color:var(--text2);max-width:680px;line-height:1.65;
+  color:var(--text2);max-width:640px;line-height:1.65;
 }
 .section-sub.white{color:rgba(255,255,255,0.55)}
 
@@ -159,9 +159,10 @@ section{padding:80px 64px;background:#fff;border-top:1px solid var(--border);con
 .bypass-card{
   background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);
   padding:28px 22px;
-  transition:box-shadow 0.25s ease,border-color 0.25s ease;cursor:default;
+  transition:box-shadow 0.25s ease,border-color 0.25s ease,transform 0.25s ease;cursor:default;
 }
 .bypass-card:hover{
+  transform:translateY(-2px);
   box-shadow:0 4px 16px rgba(0,0,0,0.08);
   border-color:rgba(79,70,229,0.2);
 }
@@ -196,11 +197,12 @@ section{padding:80px 64px;background:#fff;border-top:1px solid var(--border);con
   padding:36px;
   border:1.5px solid var(--border);
   border-top:3px solid transparent;
-  transition:box-shadow 0.25s ease,border-color 0.25s ease,border-top-color 0.25s ease;cursor:default;
+  transition:box-shadow 0.25s ease,border-color 0.25s ease,border-top-color 0.25s ease,transform 0.25s ease;cursor:default;
   position:relative;overflow:hidden;
   contain:layout style paint;
 }
 .value-card:hover{
+  transform:translateY(-2px);
   box-shadow:0 4px 20px rgba(79,70,229,0.12);
   border-color:rgba(79,70,229,0.2);
   border-top-color:var(--accent);
@@ -361,10 +363,11 @@ section{padding:80px 64px;background:#fff;border-top:1px solid var(--border);con
 .lose-card{
   background:#fff;border-radius:var(--radius);
   padding:36px;border:1.5px solid var(--border);
-  transition:box-shadow 0.25s ease,border-color 0.25s ease;
+  transition:box-shadow 0.25s ease,border-color 0.25s ease,transform 0.25s ease;
   contain:layout style paint;
 }
 .lose-card:hover{
+  transform:translateY(-2px);
   box-shadow:0 4px 16px rgba(0,0,0,0.1);
   border-color:rgba(79,70,229,0.2);
 }
@@ -414,7 +417,7 @@ section + section{border-top:1px solid var(--border);}
 
 /* FOOTER (minimal) */
 .footer{
-  background:#07071a;padding:36px 24px 28px;
+  background:#07071a;padding:48px 64px 28px;
   border-top:1px solid rgba(255,255,255,0.06);
 }
 .footer-inner{max-width:1000px;margin:0 auto}
@@ -444,13 +447,14 @@ section + section{border-top:1px solid var(--border);}
 .visible .fade-in{opacity:1;transform:none;}
 
 @media(max-width:640px){
-  section{padding:72px 24px}
+  section{padding:48px 24px}
   .hero{padding:100px 24px 60px;}
   .hero h1{font-size:28px;letter-spacing:-0.5px;}
   .callout-box{padding:28px 24px}
   .callout-box-quote{font-size:16px}
   .mech-strip{flex-direction:column;gap:16px}
   .flywheel-col{padding:0!important}
+  .footer{padding:32px 20px;}
 }
 
 /* Back to top button */
@@ -557,7 +561,7 @@ strong{font-weight:600;color:var(--text);}
 <!-- HERO -->
 <section class="hero">
   <div class="hero-content">
-    <div class="hero-badge" data-en="Second Existential Risk" data-zh="第二大生死存亡级风险">Second Existential Risk</div>
+    <div class="hero-badge" data-en="Second Existential Risk" data-zh="第二个必须解决的问题">Second Existential Risk</div>
     <h1>
       <span data-en="Anti-Disintermediation" data-zh="为什么商家不会跳过平台">Anti-Disintermediation</span><br>
       <span style="color:var(--text);" data-en="Defense" data-zh="防御方案">Defense</span>
@@ -740,9 +744,9 @@ strong{font-weight:600;color:var(--text);}
 <section class="s4">
   <div class="container">
     <div class="section-header fade-in">
-      <div class="section-tag green" data-en="Rational Design" data-zh="让留在平台上变成最划算的选择">Rational Design</div>
-      <h2 class="section-title" data-en="How We Make Staying On-Platform The Rational Choice" data-zh="怎么让走平台成为更划算的选择">How We Make Staying On-Platform The Rational Choice</h2>
-      <p class="section-sub" data-en="Five mechanisms that make the platform path obviously superior." data-zh="五个让走平台明显更合算的设计。">Five mechanisms that make the platform path obviously superior.</p>
+      <div class="section-tag green" data-en="Rational Design" data-zh="让走平台比私下更划算">Rational Design</div>
+      <h2 class="section-title" data-en="How We Make Staying On-Platform The Rational Choice" data-zh="五个设计，让走平台明显更合算">How We Make Staying On-Platform The Rational Choice</h2>
+      <p class="section-sub" data-en="Five mechanisms that make the platform path obviously superior." data-zh="不是靠封杀私联，是靠让平台本身更好用。">Five mechanisms that make the platform path obviously superior.</p>
     </div>
 
     <div class="mech-list">
@@ -795,7 +799,7 @@ strong{font-weight:600;color:var(--text);}
   <div class="container">
     <div class="section-header fade-in">
       <div class="section-tag" data-en="Compounding System" data-zh="正向循环">Compounding System</div>
-      <h2 class="section-title" data-en="The Retention & Anti-Bypass Flywheel" data-zh="用得越多越离不开">The Retention &amp; Anti-Bypass Flywheel</h2>
+      <h2 class="section-title" data-en="The Retention & Anti-Bypass Flywheel" data-zh="越用越离不开的循环">The Retention &amp; Anti-Bypass Flywheel</h2>
       <p class="section-sub" data-en="Every transaction strengthens the loop — making escape more costly each time." data-zh="每笔交易都在强化这个循环——每走一圈，离开的代价越高。">Every transaction strengthens the loop — making escape more costly each time.</p>
     </div>
 
@@ -938,7 +942,7 @@ strong{font-weight:600;color:var(--text);}
   <h3 style="font-size:16px; font-weight:700; margin-bottom:12px;" data-en="Continue Reading" data-zh="继续阅读" class="bilingual-text">Continue Reading</h3>
   <a href="push-strategy-core.html" style="display:block; padding:16px; background:#fff; border:1px solid var(--border, #e5e7eb); border-radius:8px; text-decoration:none; transition:box-shadow 0.2s; max-width:400px;">
     <div style="font-size:13px; color:var(--text3, #9ca3af);" data-en="Next →" data-zh="下一步 →" class="bilingual-text">Next →</div>
-    <div style="font-size:15px; font-weight:600; color:var(--text, #111827);" data-en="See the core strategic thesis — why Push becomes a value settlement layer" data-zh="看核心战略思路——Push 怎么成为双方都离不开的地方" class="bilingual-text">See the core strategic thesis — why Push becomes a value settlement layer</div>
+    <div style="font-size:15px; font-weight:600; color:var(--text, #111827);" data-en="See the core strategic thesis — why Push becomes a value settlement layer" data-zh="看核心战略——Push 怎么变成离不开的东西" class="bilingual-text">See the core strategic thesis — why Push becomes a value settlement layer</div>
     <div style="font-size:13px; color:var(--accent, #4f46e5); margin-top:4px;" data-en="Strategy Core →" data-zh="战略核心 →" class="bilingual-text">Strategy Core →</div>
   </a>
 </div>
@@ -949,7 +953,7 @@ strong{font-weight:600;color:var(--text);}
     <div class="footer-top">
       <div class="footer-brand">
         <div class="footer-logo">PUSH</div>
-        <div class="footer-tagline" data-en="Creator commerce infrastructure for the modern era." data-zh="本地 Creator 效果基础设施">Creator commerce infrastructure for the modern era.</div>
+        <div class="footer-tagline" data-en="Creator commerce infrastructure for the modern era." data-zh="本地创作者效果平台">Creator commerce infrastructure for the modern era.</div>
       </div>
       <div class="footer-links">
         <a href="index.html" class="footer-link" data-en="Overview" data-zh="首页">Dashboard</a>

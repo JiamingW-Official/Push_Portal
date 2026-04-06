@@ -94,7 +94,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 }
 .hero-title{
   font-size:clamp(24px,5vw,36px);font-weight:800;
-  letter-spacing:-1px;line-height:1.3;color:var(--text);
+  letter-spacing:-0.5px;line-height:1.3;color:var(--text);
   max-width:700px;margin-bottom:8px;
 }
 .hero-sub{
@@ -104,6 +104,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 }
 
 .section{padding:64px 40px;background:#ffffff;border-top:1px solid var(--border);}
+
 .section-inner{max-width:1000px;margin:0 auto;}
 .section-bg2{background:#ffffff;}
 .section-dark{background:var(--primary);border-top:none;}
@@ -113,7 +114,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
   color:var(--accent);margin-bottom:10px;
 }
 .section-title{
-  font-size:36px;font-weight:800;letter-spacing:-1px;
+  font-size:36px;font-weight:800;letter-spacing:-0.5px;
   color:var(--primary);line-height:1.4;margin-bottom:8px;
 }
 .section-title-white{color:#fff;}
@@ -203,13 +204,13 @@ blockquote.principle cite{
   font-size:13px;margin-top:8px;border-radius:8px;
 }
 .data-table th{
-  background:var(--bg2);
-  font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  background:#f8f9fa;
+  font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
   color:var(--text2);padding:12px 16px;
   border-bottom:2px solid var(--border);text-align:left;
 }
 .data-table td{
-  padding:14px 16px;border-bottom:1px solid var(--border);
+  padding:12px 16px;border-bottom:1px solid #e5e7eb;
   color:var(--text2);line-height:1.55;vertical-align:top;
 }
 .data-table tr:last-child td{border-bottom:none;}
@@ -354,7 +355,7 @@ blockquote.principle cite{
 
 footer{
   background:var(--primary);color:rgba(255,255,255,0.5);
-  padding:40px 40px 32px;
+  padding:48px 40px 32px;
 }
 .footer-inner{max-width:1000px;margin:0 auto;}
 .footer-logo{
@@ -376,6 +377,17 @@ footer{
 }
 .footer-links a:hover{color:#fff;}
 .footer-copy{font-size:12px;color:rgba(255,255,255,0.2);}
+
+/* -- Design polish: dark section text -- */
+.section-dark p,.section-dark li{color:rgba(255,255,255,0.9);}
+.section-dark strong{color:rgba(255,255,255,0.95);}
+
+/* -- Design polish: card hover on campaign cells -- */
+.campaign-cell{transition:transform 0.15s,box-shadow 0.15s,background 0.2s;}
+.campaign-cell:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,0.08);}
+
+/* -- Design polish: body p max-width -- */
+p{max-width:640px;}
 
 /* ── SCROLL PROGRESS BAR ────────────────────── */
 #scroll-progress{
@@ -443,8 +455,9 @@ footer{
 /* ── DATA EXAMPLE INLINE ────────────────────── */
 code.data-ex{
   font-family:'IBM Plex Mono',monospace;font-size:13px;
-  background:var(--bg2);padding:2px 6px;border-radius:4px;
+  background:var(--bg2);padding:3px 8px;border-radius:4px;
 }
+code,pre{font-size:13px;}
 
 /* ── BOLD KEY TERMS ─────────────────────────── */
 .kterm{font-weight:700;}
@@ -478,6 +491,8 @@ strong { font-weight: 600; color: var(--text); }
 @media (max-width: 768px) {
   body { font-size: 15px; }
   .hero-title, .section-title { font-size: 28px; }
+  .section{padding:48px 20px;}
+  footer{padding:32px 20px 24px;}
 }
 </style>
 </head>
@@ -563,7 +578,7 @@ strong { font-weight: 600; color: var(--text); }
         </div>
         <div class="attr-q">
           <span class="attr-q-num">03</span>
-          <span class="attr-q-text" data-en="Did the campaign create meaningful merchant-side action?" data-zh="这次活动有没有在商家那边带来实际反应？">Did the campaign create meaningful merchant-side action?</span>
+          <span class="attr-q-text" data-en="Did the campaign create meaningful merchant-side action?" data-zh="商家那边有没有真的看到效果？">Did the campaign create meaningful merchant-side action?</span>
         </div>
         <div class="attr-q">
           <span class="attr-q-num">04</span>
@@ -741,11 +756,11 @@ strong { font-weight: 600; color: var(--text); }
       </div>
       <div class="campaign-cell">
         <div class="campaign-type" data-en="PRODUCT LAUNCH" data-zh="新品发布">PRODUCT LAUNCH</div>
-        <div class="campaign-title" data-en="New Product Awareness Wave" data-zh="新品曝光与引爆">New Product Awareness Wave</div>
+        <div class="campaign-title" data-en="New Product Awareness Wave" data-zh="新品集中推广">New Product Awareness Wave</div>
         <ul class="campaign-list">
           <li data-en="Content publication evidence" data-zh="内容已发布的证明">Content publication evidence</li>
           <li data-en="First-wave claims or redemptions" data-zh="首批优惠领取或兑换记录">First-wave claims or redemptions</li>
-          <li data-en="Merchant-side awareness signal" data-zh="商家端的知名度提升信号">Merchant-side awareness signal</li>
+          <li data-en="Merchant-side awareness signal" data-zh="商家那边是否感受到热度">Merchant-side awareness signal</li>
           <li data-en="Repeat demand in short window" data-zh="短时间内是否出现复购需求">Repeat demand in short window</li>
         </ul>
       </div>
@@ -778,12 +793,12 @@ strong { font-weight: 600; color: var(--text); }
       </div>
       <div class="failure-row">
         <span class="failure-label" data-en="MODE B" data-zh="模式 B">MODE B</span>
-        <span class="failure-title" data-en="Overclaiming Causality" data-zh="过度夸大因果关系">Overclaiming Causality</span>
+        <span class="failure-title" data-en="Overclaiming Causality" data-zh="效果往自己头上揽">Overclaiming Causality</span>
         <span class="failure-desc" data-en="Implying direct causality when only directional evidence exists. When actual outcomes disappoint, the credibility damage is disproportionate to any short-term gain." data-zh="只有方向性参考时就断言是直接因果。一旦实际结果不达预期，公信力损失远超短期收益。">Implying direct causality when only directional evidence exists. When actual outcomes disappoint, the credibility damage is disproportionate to any short-term gain.</span>
       </div>
       <div class="failure-row">
         <span class="failure-label" data-en="MODE C" data-zh="模式 C">MODE C</span>
-        <span class="failure-title" data-en="One-Size-Fits-All Measurement" data-zh="用同一套指标衡量所有活动">One-Size-Fits-All Measurement</span>
+        <span class="failure-title" data-en="One-Size-Fits-All Measurement" data-zh="所有活动都用同一把尺子量">One-Size-Fits-All Measurement</span>
         <span class="failure-desc" data-en="Different merchant goals require different proof logic. Applying the same metrics to a product sampling campaign and an off-peak traffic campaign produces misleading results for both." data-zh="不同活动的目的不一样，要看的指标也不一样。拿同一套数据去衡量试用活动和淡季引流活动，两边都会得出误导性的结论。">Different merchant goals require different proof logic. Applying the same metrics to a product sampling campaign and an off-peak traffic campaign produces misleading results for both.</span>
       </div>
       <div class="failure-row">
@@ -799,8 +814,8 @@ strong { font-weight: 600; color: var(--text); }
 <section class="section section-bg2">
   <div class="section-inner">
     <div class="fade-in">
-      <div class="section-label" data-en="Design Implications" data-zh="对产品设计的影响">Design Implications</div>
-      <h2 class="section-title" data-en="How Attribution Shapes the Platform" data-zh="归因怎么影响产品设计">How Attribution Shapes the Platform</h2>
+      <div class="section-label" data-en="Design Implications" data-zh="归因怎么影响产品">Design Implications</div>
+      <h2 class="section-title" data-en="How Attribution Shapes the Platform" data-zh="归因决定产品怎么做">How Attribution Shapes the Platform</h2>
       <p class="section-sub" data-en="Attribution is not a post-campaign reporting feature. It is a <b>design constraint</b> that shapes how campaigns are created, how creators are briefed, and what the dashboard shows." data-zh="归因不是活动做完再加的报告功能。它是一个前置的<b>设计约束</b>，决定了活动怎么创建、创作者的任务怎么说清楚、仪表板显示什么内容。">Attribution is not a post-campaign reporting feature. It is a <b>design constraint</b> that shapes how campaigns are created, how creators are briefed, and what the dashboard shows.</p>
     </div>
     <ul class="checklist fade-in">
@@ -818,7 +833,7 @@ strong { font-weight: 600; color: var(--text); }
 <section class="section">
   <div class="section-inner">
     <div class="fade-in">
-      <div class="section-label" data-en="Reporting Design" data-zh="报告展示设计">Reporting Design</div>
+      <div class="section-label" data-en="Reporting Design" data-zh="给谁看什么">Reporting Design</div>
       <h2 class="section-title" data-en="What Each Side Sees" data-zh="商家和创作者各看到什么">What Each Side Sees</h2>
       <p class="section-sub" data-en="Good reporting is not neutral. It converts attribution signals into decision support — for merchants to repeat, and for creators to improve." data-zh="好的报告不只是把数据摆出来。它要把核验信号转化成可以指导行动的信息——帮商家决定要不要继续，帮创作者知道下次怎么做得更好。">Good reporting is not neutral. It converts attribution signals into decision support — for merchants to repeat, and for creators to improve.</p>
     </div>
@@ -855,7 +870,7 @@ strong { font-weight: 600; color: var(--text); }
   <div class="section-inner">
     <div class="fade-in">
       <div class="section-label" data-en="Final Standard" data-zh="最终标准" style="color:var(--accent-light);">Final Standard</div>
-      <h2 class="section-title section-title-white" data-en="The Attribution Standard" data-zh="归因的判断标准">The Attribution Standard</h2>
+      <h2 class="section-title section-title-white" data-en="The Attribution Standard" data-zh="归因做得好不好，看这个">The Attribution Standard</h2>
       <p class="section-sub section-sub-white" data-en="Attribution quality is the foundation of trust. Trust enables repeat behavior. Repeat behavior generates sustainable economics." data-zh="归因做得好，商家才信得过。信得过，才愿意再来。愿意再来，才有可持续的收入。">Attribution quality is the foundation of trust. Trust enables repeat behavior. Repeat behavior generates sustainable economics.</p>
       <blockquote class="principle principle-dark" style="margin-top:32px;">
         <span data-en="Attribution that increases trust, supports repeat buying decisions, improves creator sorting, resists manipulation, and stays honest about confidence limits. This makes Push more credible than informal creator commerce — and more valuable to every party in the transaction." data-zh="好的归因要能增加信任、支持复购决策、帮助筛出好的创作者、抵抗数据作弊，同时对结论的可信程度说实话。做到这些，Push 就比私下找人合作更可信，对交易各方也都更有价值。">Attribution that increases trust, supports repeat buying decisions, improves creator sorting, resists manipulation, and stays honest about confidence limits. This makes Push more credible than informal creator commerce — and more valuable to every party in the transaction.</span>

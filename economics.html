@@ -95,7 +95,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 }
 .hero-title{
   font-size:clamp(24px,5vw,36px);font-weight:800;
-  letter-spacing:-1px;line-height:1.3;color:var(--text);
+  letter-spacing:-0.5px;line-height:1.3;color:var(--text);
   max-width:700px;margin-bottom:8px;
 }
 .hero-sub{
@@ -114,7 +114,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
   color:var(--accent);margin-bottom:10px;
 }
 .section-title{
-  font-size:36px;font-weight:800;letter-spacing:-1px;
+  font-size:36px;font-weight:800;letter-spacing:-0.5px;
   color:var(--primary);line-height:1.4;margin-bottom:8px;
 }
 .section-title-white{color:#fff;}
@@ -161,7 +161,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 }
 
 /* ── COST STRUCTURE ───────────────────────────── */
-.cost-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;}
+.cost-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
 @media(max-width:640px){.cost-grid{grid-template-columns:1fr;}}
 .cost-col{}
 .cost-col-label{
@@ -288,7 +288,7 @@ blockquote.principle cite{
 .win-item-text{font-size:13px;color:var(--text2);line-height:1.55;}
 
 /* ── LOGIC BOX (merchant / creator logic) ─────── */
-.logic-split{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:36px;}
+.logic-split{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:36px;}
 @media(max-width:640px){.logic-split{grid-template-columns:1fr;}}
 .logic-box{border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:border-color 0.2s,box-shadow 0.2s;}
 .logic-box:hover{border-color:var(--accent);box-shadow:0 2px 12px rgba(79,70,229,0.08);}
@@ -352,7 +352,7 @@ blockquote.principle cite{
 /* ── FOOTER ── */
 footer{
   background:var(--primary);color:rgba(255,255,255,0.5);
-  padding:40px 40px 32px;
+  padding:48px 40px 32px;
 }
 .footer-inner{max-width:1000px;margin:0 auto;}
 .footer-logo{
@@ -384,10 +384,20 @@ html[lang="zh"] body { line-height: 2.0; letter-spacing: 0.01em; }
 li { margin-bottom: 6px; line-height: 1.7; }
 strong { font-weight: 600; color: var(--text); }
 .section-dark strong { color: rgba(255,255,255,.95); }
+.section-dark p,.section-dark li{color:rgba(255,255,255,0.9);}
 .section-sub { max-width: 640px; }
+p{max-width:640px;}
+code,pre{font-size:13px;}
+
+/* -- Design polish: card hover -- */
+.logic-box,.win-item,.phase-col{transition:transform 0.15s,box-shadow 0.15s,background 0.2s,border-color 0.2s;}
+.logic-box:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,0.08);}
+
 @media (max-width: 768px) {
   body { font-size: 15px; }
   .hero-title, .section-title { font-size: 28px; }
+  .section{padding:48px 20px;}
+  footer{padding:32px 20px 24px;}
 }
 </style>
 </head>
@@ -478,7 +488,7 @@ strong { font-weight: 600; color: var(--text); }
         <div class="win-item-text" data-en="Verified proof of performance. Enables premium pricing and repeat buying decisions." data-zh="有核验依据的效果证明。让收更高的费用有底气，也让商家的复购决策更有依据。">Verified proof of performance. Enables premium pricing and repeat buying decisions.</div>
       </div>
       <div class="win-item">
-        <div class="win-item-label" data-en="Contribution Margin Quality" data-zh="边际贡献质量">Contribution Margin Quality</div>
+        <div class="win-item-label" data-en="Contribution Margin Quality" data-zh="每笔生意赚不赚">Contribution Margin Quality</div>
         <div class="win-item-text" data-en="Revenue that covers variable cost cleanly. The metric that determines if the business is real." data-zh="收入扣掉可变成本后还有剩。这个数字决定这门生意到底是不是真的能跑起来。">Revenue that covers variable cost cleanly. The metric that determines if the business is real.</div>
       </div>
       <div class="win-item">
@@ -575,7 +585,7 @@ strong { font-weight: 600; color: var(--text); }
   <div class="section-inner">
     <div class="fade-in">
       <div class="section-label" data-en="Cost Structure" data-zh="成本结构">Cost Structure</div>
-      <h2 class="section-title" data-en="Variable vs. Fixed Costs" data-zh="哪些成本随量走，哪些是固定的">Variable vs. Fixed Costs</h2>
+      <h2 class="section-title" data-en="Variable vs. Fixed Costs" data-zh="哪些钱跟单量走，哪些是固定开支">Variable vs. Fixed Costs</h2>
       <p class="section-sub" data-en="Understanding which costs scale with activity and which are structural determines what margin improvement requires." data-zh="搞清楚哪些成本跟活动量挂钩、哪些是固定开支，才能知道要改善利润率需要动哪里。">Understanding which costs scale with activity and which are structural determines what margin improvement requires.</p>
     </div>
 
@@ -605,7 +615,7 @@ strong { font-weight: 600; color: var(--text); }
     </div>
 
     <div style="margin-top:48px;" class="fade-in">
-      <div class="section-label" data-en="What Good Unit Economics Looks Like" data-zh="单笔经济账跑好是什么状态">What Good Unit Economics Looks Like</div>
+      <div class="section-label" data-en="What Good Unit Economics Looks Like" data-zh="经济账跑通了是什么样">What Good Unit Economics Looks Like</div>
       <div class="cost-grid" style="margin-top:16px;">
         <ul class="clean-list fixed">
           <li data-en="Fast campaign fill time" data-zh="活动很快就能找到合适的创作者">Fast campaign fill time</li>
@@ -627,7 +637,7 @@ strong { font-weight: 600; color: var(--text); }
 <section class="section section-bg2">
   <div class="section-inner">
     <div class="fade-in">
-      <div class="section-label" data-en="Stakeholder Economics" data-zh="商家和创作者的算账逻辑">Stakeholder Economics</div>
+      <div class="section-label" data-en="Stakeholder Economics" data-zh="双方怎么算这笔账">Stakeholder Economics</div>
       <h2 class="section-title" data-en="Why They Stay" data-zh="他们为什么留下来">Why They Stay</h2>
       <p class="section-sub" data-en="Sustainable economics require both sides to perceive compounding value over time." data-zh="能持续的生意，要求商家和创作者双方都能感受到：用得越久、越值得继续用。">Sustainable economics require both sides to perceive compounding value over time.</p>
     </div>
@@ -665,8 +675,8 @@ strong { font-weight: 600; color: var(--text); }
 <section class="section">
   <div class="section-inner">
     <div class="fade-in">
-      <div class="section-label" data-en="Diagnostic Framework" data-zh="诊断用的核心问题">Diagnostic Framework</div>
-      <h2 class="section-title" data-en="7 Contribution Margin Questions" data-zh="7 个判断单笔经济是否健康的问题">7 Contribution Margin Questions</h2>
+      <div class="section-label" data-en="Diagnostic Framework" data-zh="7个自检问题">Diagnostic Framework</div>
+      <h2 class="section-title" data-en="7 Contribution Margin Questions" data-zh="7 个问题，看经济账跑没跑通">7 Contribution Margin Questions</h2>
       <p class="section-sub" data-en="The questions that reveal whether <strong>unit economics</strong> are improving or deteriorating. Ask these before and after every significant operational change." data-zh="这几个问题能帮你看清<strong>单笔经济账</strong>是在变好还是变差。每次做重大运营调整前后都应该问一遍。">The questions that reveal whether <strong>unit economics</strong> are improving or deteriorating. Ask these before and after every significant operational change.</p>
     </div>
     <ol class="q-list fade-in">
@@ -706,17 +716,17 @@ strong { font-weight: 600; color: var(--text); }
     <div class="trap-rows fade-in">
       <div class="trap-row">
         <span class="trap-label" data-en="TRAP A" data-zh="陷阱 A">TRAP A</span>
-        <span class="trap-title" data-en="High Gross Activity, Low Net Value" data-zh="活动量大、实际价值低">High Gross Activity, Low Net Value</span>
+        <span class="trap-title" data-en="High Gross Activity, Low Net Value" data-zh="看着热闹但不赚钱">High Gross Activity, Low Net Value</span>
         <span class="trap-desc" data-en="Many signups and campaigns created, but low merchant repeat and heavy manual support. Volume without retention and quality signals a broken model." data-zh="注册多、活动创建多，但商家复购率低、人工支持压力大。量没有留存和质量支撑，说明底层逻辑有问题。">Many signups and campaigns created, but low merchant repeat and heavy manual support. Volume without retention and quality signals a broken model.</span>
       </div>
       <div class="trap-row">
         <span class="trap-label" data-en="TRAP B" data-zh="陷阱 B">TRAP B</span>
-        <span class="trap-title" data-en="Premium Revenue Without Real Utility" data-zh="没有实际好处就收会员费">Premium Revenue Without Real Utility</span>
+        <span class="trap-title" data-en="Premium Revenue Without Real Utility" data-zh="好处没到位就先收钱">Premium Revenue Without Real Utility</span>
         <span class="trap-desc" data-en="Charging creators before proving that premium access actually improves their outcomes. Short-term revenue, long-term trust erosion and churn." data-zh="还没证明付费会员真的能让创作者赚更多，就开始收费。短期多了点收入，长期信任跌了、流失率上来了。">Charging creators before proving that premium access actually improves their outcomes. Short-term revenue, long-term trust erosion and churn.</span>
       </div>
       <div class="trap-row">
         <span class="trap-label" data-en="TRAP C" data-zh="陷阱 C">TRAP C</span>
-        <span class="trap-title" data-en="Weak Attribution, Aggressive Pricing" data-zh="归因没做好就按效果收费">Weak Attribution, Aggressive Pricing</span>
+        <span class="trap-title" data-en="Weak Attribution, Aggressive Pricing" data-zh="效果说不清楚就敢收费">Weak Attribution, Aggressive Pricing</span>
         <span class="trap-desc" data-en="Taking performance fees before the system can reliably verify performance. Creates merchant distrust and attribution disputes that undermine repeat behavior." data-zh="系统还没能力可靠核验效果，就开始按绩效收费。结果是商家不信任、产生争议，不愿意继续合作。">Taking performance fees before the system can reliably verify performance. Creates merchant distrust and attribution disputes that undermine repeat behavior.</span>
       </div>
       <div class="trap-row">
@@ -739,7 +749,7 @@ strong { font-weight: 600; color: var(--text); }
     <div class="phase-grid fade-in">
       <div class="phase-col">
         <div class="phase-num" data-en="PHASE 01" data-zh="阶段 01">PHASE 01</div>
-        <div class="phase-title" data-en="Foundation: Transaction &amp; Trust" data-zh="打基础：让交易跑稳">Foundation: Transaction &amp; Trust</div>
+        <div class="phase-title" data-en="Foundation: Transaction &amp; Trust" data-zh="打基础：先让每笔交易跑通">Foundation: Transaction &amp; Trust</div>
         <ul class="phase-items">
           <li data-en="Transaction completion reliability" data-zh="交易能稳定完成">Transaction completion reliability</li>
           <li data-en="Merchant repeat behavior" data-zh="商家愿意再来">Merchant repeat behavior</li>
@@ -749,7 +759,7 @@ strong { font-weight: 600; color: var(--text); }
       </div>
       <div class="phase-col">
         <div class="phase-num" data-en="PHASE 02" data-zh="阶段 02">PHASE 02</div>
-        <div class="phase-title" data-en="Efficiency: Fees &amp; Quality" data-zh="提效：把费用和质量做好">Efficiency: Fees &amp; Quality</div>
+        <div class="phase-title" data-en="Efficiency: Fees &amp; Quality" data-zh="提效：收费和质量两手抓">Efficiency: Fees &amp; Quality</div>
         <ul class="phase-items">
           <li data-en="Campaign fee consistency" data-zh="活动收费稳定可预期">Campaign fee consistency</li>
           <li data-en="Creator quality differentiation" data-zh="创作者质量能区分出差异">Creator quality differentiation</li>
@@ -759,7 +769,7 @@ strong { font-weight: 600; color: var(--text); }
       </div>
       <div class="phase-col">
         <div class="phase-num" data-en="PHASE 03" data-zh="阶段 03">PHASE 03</div>
-        <div class="phase-title" data-en="Scale: Premium &amp; Expansion" data-zh="规模化：开放高级功能和扩张">Scale: Premium &amp; Expansion</div>
+        <div class="phase-title" data-en="Scale: Premium &amp; Expansion" data-zh="放量：开高级功能、往外扩">Scale: Premium &amp; Expansion</div>
         <ul class="phase-items">
           <li data-en="Better take-rate logic" data-zh="优化抽成比例和触发条件">Better take-rate logic</li>
           <li data-en="Premium tier economics" data-zh="付费高级会员的收费逻辑">Premium tier economics</li>
@@ -776,7 +786,7 @@ strong { font-weight: 600; color: var(--text); }
   <div class="section-inner">
     <div class="fade-in">
       <div class="section-label" data-en="Final Standard" data-zh="最终标准" style="color:var(--accent-light);">Final Standard</div>
-      <h2 class="section-title section-title-white" data-en="The Compounding Logic" data-zh="越做越划算的逻辑">The Compounding Logic</h2>
+      <h2 class="section-title section-title-white" data-en="The Compounding Logic" data-zh="越转越省钱">The Compounding Logic</h2>
       <p class="section-sub section-sub-white" data-en="If unit economics are working, each cycle of usage should make the next cycle cheaper and more reliable." data-zh="如果单笔经济账跑通了，每做一轮就应该让下一轮成本更低、跑得更稳。">If unit economics are working, each cycle of usage should make the next cycle cheaper and more reliable.</p>
       <blockquote class="principle principle-dark" style="margin-top:32px;">
         <span data-en="Every repeated merchant becomes cheaper to serve. Every high-quality creator becomes more valuable to route. Every clean campaign improves future matching and margin quality." data-zh="每一个回头的商家，服务成本越来越低。每一个优质创作者，匹配价值越来越高。每一次顺利的活动，都让下次的匹配和利润变得更好。">Every repeated merchant becomes cheaper to serve. Every high-quality creator becomes more valuable to route. Every clean campaign improves future matching and margin quality.</span>

@@ -50,7 +50,7 @@ a:hover { color: var(--accent-light); text-decoration: none; }
 
 /* NAV */
 nav{
-  position:fixed;top:2px;left:0;right:0;z-index:200;
+  position:fixed;top:0;left:0;right:0;z-index:200;
   height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;
   background:#ffffff;
   border-bottom:1px solid var(--border);transition:box-shadow 0.2s;
@@ -82,7 +82,7 @@ nav{
   letter-spacing: -1px; line-height: 1.4;
   margin-bottom: 8px;
 }
-.hero p { color: var(--text2); font-size: 16px; line-height: 1.65; max-width: 700px; margin: 0 auto; }
+.hero p { color: var(--text2); font-size: 16px; line-height: 1.65; max-width: 560px; margin: 0 auto; }
 
 /* SEVERITY LEGEND */
 .legend {
@@ -105,13 +105,13 @@ nav{
 
 /* SECTION */
 .section {
-  padding: 80px 24px; max-width: 1000px; margin: 0 auto;
+  padding: 64px 24px; max-width: 1000px; margin: 0 auto;
   contain: layout style paint;
   border-top: 1px solid var(--border);
 }
 .section-label {
   display: inline-flex; align-items: center; gap: 10px;
-  font-size: 13px; font-weight: 600; margin-bottom: 24px;
+  font-size: 12px; font-weight: 600; margin-bottom: 24px;
   letter-spacing: 0.5px;
   text-transform: none;
 }
@@ -132,10 +132,11 @@ nav{
   border-radius: 8px;
   padding: 0;
   overflow: hidden;
-  transition: box-shadow 0.25s, border-color 0.2s;
+  transition: box-shadow 0.25s, border-color 0.2s, transform 0.25s;
 }
 .challenge-card:hover {
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
   border-color: var(--accent-light);
 }
 
@@ -239,7 +240,7 @@ nav{
 
 /* FOOTER */
 .footer {
-  text-align: center; padding: 24px 24px; color: var(--text3); font-size: 12px;
+  text-align: center; padding: 32px 20px; color: var(--text3); font-size: 12px;
   border-top: 1px solid var(--border); margin-top: 40px; background: #fff;
 }
 
@@ -282,12 +283,13 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
   .nav-links{display:none !important;}
   .nav-burger{display:flex !important;}
   #lang-btn{font-size:12px;padding:6px 12px;}
+  .section{padding:48px 20px;}
 }
 
 /* TEXT LAYOUT OPTIMIZATIONS */
 body.lang-zh{line-height:2.0;letter-spacing:0.01em;}
 html[lang="zh"] body{line-height:2.0;letter-spacing:0.01em;}
-p,.desc-text,.hero p{max-width:680px;}
+p,.desc-text,.hero p{max-width:640px;}
 .challenge-card .bilingual,.challenge-card .card-header{padding:20px 24px;}
 .challenge-card .bilingual{padding:20px 24px 20px;}
 .challenge-card .severity-bar-wrap{padding:12px 24px 0;}
@@ -359,7 +361,7 @@ strong{font-weight:600;color:var(--text);}
 
 <!-- CROSS-LINK -->
 <div style="max-width:800px; margin:0 auto 32px; padding:12px 20px; background:var(--accent-bg, rgba(79,70,229,0.06)); border:1px solid var(--border, #e5e7eb); border-radius:8px; font-size:14px; color:var(--text2); text-align:center;">
-  <span data-en="This page explains why each challenge is structurally difficult. For our specific defense strategies, see " data-zh="每个挑战为什么在结构上很难解决？具体防御策略请看 " class="bilingual-text">This page explains why each challenge is structurally difficult. For our specific defense strategies, see </span>
+  <span data-en="This page explains why each challenge is structurally difficult. For our specific defense strategies, see " data-zh="每个挑战到底难在哪？具体怎么防请看 " class="bilingual-text">This page explains why each challenge is structurally difficult. For our specific defense strategies, see </span>
   <a href="risk-defense.html" style="font-weight:600;" data-en="Risk Defense →" data-zh="风险防御 →" class="bilingual-text">Risk Defense →</a>
 </div>
 
@@ -461,7 +463,7 @@ strong{font-weight:600;color:var(--text);}
     <div class="challenge-card">
       <div class="card-header">
         <div class="card-num critical">4</div>
-        <div class="card-title critical" data-en="Creator Quality Retention" data-zh="创作者质量留存">Creator Quality Retention</div>
+        <div class="card-title critical" data-en="Creator Quality Retention" data-zh="好的创作者留不住">Creator Quality Retention</div>
       </div>
       <div class="severity-bar-wrap">
         <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span class="sev-pill" style="background:var(--red-bg);color:var(--red);">80%</span></div>
@@ -574,7 +576,7 @@ strong{font-weight:600;color:var(--text);}
     <div class="challenge-card">
       <div class="card-header">
         <div class="card-num high">8</div>
-        <div class="card-title high" data-en="Weak Wedge Selection" data-zh="切入点选择不当">Weak Wedge Selection</div>
+        <div class="card-title high" data-en="Weak Wedge Selection" data-zh="切入品类选错了">Weak Wedge Selection</div>
       </div>
       <div class="severity-bar-wrap">
         <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span class="sev-pill" style="background:var(--orange-bg);color:var(--orange);">70%</span></div>
@@ -600,7 +602,7 @@ strong{font-weight:600;color:var(--text);}
     <div class="challenge-card">
       <div class="card-header">
         <div class="card-num high">9</div>
-        <div class="card-title high" data-en="Supply Opportunism" data-zh="供给端投机">Supply Opportunism</div>
+        <div class="card-title high" data-en="Supply Opportunism" data-zh="创作者薅完就走">Supply Opportunism</div>
       </div>
       <div class="severity-bar-wrap">
         <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span class="sev-pill" style="background:var(--orange-bg);color:var(--orange);">60%</span></div>
@@ -627,7 +629,7 @@ strong{font-weight:600;color:var(--text);}
 
 <!-- OPERATIONAL -->
 <div class="section">
-  <div class="section-label medium" data-en="Operational Challenges" data-zh="日常注意的挑战">Operational Challenges</div>
+  <div class="section-label medium" data-en="Operational Challenges" data-zh="日常要盯的事">Operational Challenges</div>
 
   <div class="card-grid">
 
@@ -635,7 +637,7 @@ strong{font-weight:600;color:var(--text);}
     <div class="challenge-card">
       <div class="card-header">
         <div class="card-num medium">10</div>
-        <div class="card-title medium" data-en="Approval Bottlenecks" data-zh="审批与结算瓶颈">Approval Bottlenecks</div>
+        <div class="card-title medium" data-en="Approval Bottlenecks" data-zh="审批和结算卡住">Approval Bottlenecks</div>
       </div>
       <div class="severity-bar-wrap">
         <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span class="sev-pill" style="background:var(--accent-bg);color:var(--accent);">55%</span></div>
@@ -661,7 +663,7 @@ strong{font-weight:600;color:var(--text);}
     <div class="challenge-card">
       <div class="card-header">
         <div class="card-num medium">11</div>
-        <div class="card-title medium" data-en="Scaling Manual Operations" data-zh="手动运营扩展">Scaling Manual Operations</div>
+        <div class="card-title medium" data-en="Scaling Manual Operations" data-zh="靠人撑运营，规模上不去">Scaling Manual Operations</div>
       </div>
       <div class="severity-bar-wrap">
         <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span class="sev-pill" style="background:var(--accent-bg);color:var(--accent);">50%</span></div>
@@ -687,7 +689,7 @@ strong{font-weight:600;color:var(--text);}
     <div class="challenge-card">
       <div class="card-header">
         <div class="card-num medium">12</div>
-        <div class="card-title medium" data-en="Quality vs Growth" data-zh="质量与增长的平衡">Quality vs Growth</div>
+        <div class="card-title medium" data-en="Quality vs Growth" data-zh="要质量还是要速度">Quality vs Growth</div>
       </div>
       <div class="severity-bar-wrap">
         <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span class="sev-pill" style="background:var(--accent-bg);color:var(--accent);">50%</span></div>

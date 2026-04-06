@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -79,7 +79,7 @@ nav{
   font-size: 36px; font-weight: 800; margin-bottom: 8px;
   color: var(--text); letter-spacing: -1px; line-height: 1.4;
 }
-.hero p { color: var(--text2); font-size: 16px; line-height: 1.65; max-width: 600px; }
+.hero p { color: var(--text2); font-size: 16px; line-height: 1.65; max-width: 560px; }
 
 /* SECTION */
 .section { padding: 64px 24px; max-width: 1000px; margin: 0 auto; background: var(--bg); border-top: 1px solid var(--border); }
@@ -100,7 +100,7 @@ nav{
 }
 .phase-label {
   display: inline-flex; align-items: center; gap: 8px;
-  font-size: 14px; font-weight: 700;
+  font-size: 12px; font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: none;
   margin-bottom: 6px;
@@ -115,7 +115,7 @@ nav{
   flex-shrink: 0;
 }
 .phase-title {
-  font-size: 20px; font-weight: 700; letter-spacing: -0.02em;
+  font-size: 20px; font-weight: 700; letter-spacing: -0.5px;
   color: var(--text);
 }
 
@@ -131,9 +131,10 @@ nav{
   padding: 28px;
   border: 1px solid var(--border);
   border-left: 3px solid var(--border);
-  transition: box-shadow 0.2s, border-color 0.2s;
+  transition: box-shadow 0.2s, border-color 0.2s, transform 0.25s;
 }
 .lang-card:hover {
+  transform: translateY(-2px);
   box-shadow: 0 4px 16px rgba(0,0,0,0.08);
   border-left-color: var(--accent);
 }
@@ -251,7 +252,7 @@ nav{
 
 /* FOOTER */
 .footer {
-  text-align: center; padding: 24px 24px; color: var(--text3); font-size: 12px;
+  text-align: center; padding: 32px 20px; color: var(--text3); font-size: 12px;
   border-top: 1px solid var(--border);
   max-width: 1000px; margin: 0 auto;
 }
@@ -292,6 +293,7 @@ body.lang-zh .end-state-grid { grid-template-columns: 1fr; }
   .nav-links{display:none !important;}
   .nav-burger{display:flex !important;}
   #lang-btn{font-size:12px;padding:6px 12px;}
+  .section{padding:48px 20px;}
 }
 body.lang-en .analogy .zh { display: none; }
 body.lang-zh .analogy .en { display: none; }
@@ -301,7 +303,7 @@ body.lang-zh .analogy .en { display: none; }
 body.lang-zh{line-height:2.0;letter-spacing:0.01em;}
 html[lang="zh"] body, html[lang="zh-CN"] body{line-height:2.0;letter-spacing:0.01em;}
 /* Paragraph max-width */
-.hero p,.end-card p,.analogy .en,.analogy .zh{max-width:680px;}
+.hero p,.end-card p,.analogy .en,.analogy .zh{max-width:640px;}
 /* Card text padding */
 .lang-card,.end-card,.metric-badge{padding:20px 24px;}
 .lang-card{padding:28px;}
@@ -363,7 +365,7 @@ strong{font-weight:600;color:var(--text);}
 
 <!-- HERO -->
 <div class="hero">
-  <h1 data-en="Future Prospects &amp; Vision" data-zh="未来愿景与规划">Future Prospects &amp; Vision</h1>
+  <h1 data-en="Future Prospects &amp; Vision" data-zh="接下来怎么走">Future Prospects &amp; Vision</h1>
   <p data-en="From one neighborhood to the infrastructure layer for local creator-driven demand across America." data-zh="从一个社区开始，做成帮本地商家用创作者拉客的系统。">From one neighborhood to the infrastructure layer for local creator-driven demand across America.</p>
 </div>
 
@@ -372,7 +374,7 @@ strong{font-weight:600;color:var(--text);}
 <div class="phase phase-short">
   <div class="phase-header">
     <div class="phase-label" data-en="Phase 1" data-zh="第一阶段">Phase 1</div>
-    <div class="phase-title" data-en="Short-term Vision (6 Months)" data-zh="短期愿景 (6个月)">Short-term Vision (6 Months)</div>
+    <div class="phase-title" data-en="Short-term Vision (6 Months)" data-zh="短期目标（6个月）">Short-term Vision (6 Months)</div>
   </div>
 
   <div class="bilingual-row">
@@ -443,7 +445,7 @@ strong{font-weight:600;color:var(--text);}
 <div class="phase phase-medium">
   <div class="phase-header">
     <div class="phase-label" data-en="Phase 2" data-zh="第二阶段">Phase 2</div>
-    <div class="phase-title" data-en="Medium-term Vision (1-2 Years)" data-zh="中期愿景 (1-2年)">Medium-term Vision (1-2 Years)</div>
+    <div class="phase-title" data-en="Medium-term Vision (1-2 Years)" data-zh="中期目标（1-2年）">Medium-term Vision (1-2 Years)</div>
   </div>
 
   <div class="bilingual-row">
@@ -514,7 +516,7 @@ strong{font-weight:600;color:var(--text);}
 <div class="phase phase-long">
   <div class="phase-header">
     <div class="phase-label" data-en="Phase 3" data-zh="第三阶段">Phase 3</div>
-    <div class="phase-title" data-en="Long-term Vision (3-5 Years)" data-zh="长期愿景 (3-5年)">Long-term Vision (3-5 Years)</div>
+    <div class="phase-title" data-en="Long-term Vision (3-5 Years)" data-zh="长期目标（3-5年）">Long-term Vision (3-5 Years)</div>
   </div>
 
   <div class="bilingual-row">
@@ -586,7 +588,7 @@ strong{font-weight:600;color:var(--text);}
 <!-- THE END STATE -->
 <div class="end-state">
   <div class="end-state-inner">
-    <h2 data-en="The End State" data-zh="终极愿景">The End State</h2>
+    <h2 data-en="The End State" data-zh="最终形态">The End State</h2>
 
     <div class="end-state-grid">
       <div class="end-card">
@@ -627,12 +629,12 @@ strong{font-weight:600;color:var(--text);}
   <h3 style="font-size:16px; font-weight:700; margin-bottom:12px;" data-en="Continue Reading" data-zh="继续阅读" class="bilingual-text">Continue Reading</h3>
   <a href="pitch-deck.html" style="display:block; padding:16px; background:#fff; border:1px solid var(--border, #e5e7eb); border-radius:8px; text-decoration:none; max-width:400px; margin-bottom:12px; transition:box-shadow 0.2s;" onmouseover="this.style.boxShadow='0 2px 12px rgba(0,0,0,0.08)'" onmouseout="this.style.boxShadow='none'">
     <div style="font-size:13px; color:var(--text3, #9ca3af);" data-en="Next" data-zh="下一步" class="bilingual-text">Next</div>
-    <div style="font-size:15px; font-weight:600; color:var(--text, #111827);" data-en="Want to see how we'll execute the launch?" data-zh="想看看我们如何执行启动计划？" class="bilingual-text">Want to see how we'll execute the launch?</div>
+    <div style="font-size:15px; font-weight:600; color:var(--text, #111827);" data-en="Want to see how we'll execute the launch?" data-zh="想看我们怎么启动？" class="bilingual-text">Want to see how we'll execute the launch?</div>
     <div style="font-size:13px; color:var(--accent, #4f46e5); margin-top:4px;" data-en="Pitch Deck" data-zh="路演材料" class="bilingual-text">Pitch Deck</div>
   </a>
   <a href="project-intro.html" style="display:block; padding:16px; background:#fff; border:1px solid var(--border, #e5e7eb); border-radius:8px; text-decoration:none; max-width:400px; transition:box-shadow 0.2s;" onmouseover="this.style.boxShadow='0 2px 12px rgba(0,0,0,0.08)'" onmouseout="this.style.boxShadow='none'">
     <div style="font-size:13px; color:var(--text3, #9ca3af);" data-en="Also" data-zh="另外" class="bilingual-text">Also</div>
-    <div style="font-size:15px; font-weight:600; color:var(--text, #111827);" data-en="See the full product design" data-zh="查看完整的产品设计" class="bilingual-text">See the full product design</div>
+    <div style="font-size:15px; font-weight:600; color:var(--text, #111827);" data-en="See the full product design" data-zh="看完整产品设计" class="bilingual-text">See the full product design</div>
     <div style="font-size:13px; color:var(--accent, #4f46e5); margin-top:4px;" data-en="Project Introduction" data-zh="项目介绍" class="bilingual-text">Project Introduction</div>
   </a>
 </div>

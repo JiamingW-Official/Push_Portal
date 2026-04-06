@@ -93,7 +93,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 .hero-title {
   font-size: 36px;
   font-weight: 800; color: #fff;
-  letter-spacing: -1px; line-height: 1.12;
+  letter-spacing: -0.5px; line-height: 1.12;
   margin-bottom: 8px;
 }
 .hero-title-zh {
@@ -105,15 +105,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 .hero-sub {
   font-size: 16px; font-weight: 400;
   color: rgba(255,255,255,0.55); line-height: 1.65;
-  max-width: 680px; margin-bottom: 6px;
+  max-width: 560px; margin-bottom: 6px;
 }
 .hero-sub-zh {
-  font-size: 14px; color: rgba(255,255,255,0.35);
-  line-height: 1.65; max-width: 620px;
+  font-size: 14px; color: rgba(255,255,255,0.45);
+  line-height: 1.65; max-width: 560px;
 }
 
 /* Shared section */
-.section { padding: 72px 40px; background: #fff; border-top: 1px solid var(--border); }
+.section { padding: 64px 40px; background: #fff; border-top: 1px solid var(--border); }
 .section-gray { background: #fff; }
 .section-white { background: #fff; }
 .section-dark { background: var(--primary); border-top: none; }
@@ -132,13 +132,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 .section-title {
   font-size: 36px;
   font-weight: 800; color: var(--primary);
-  letter-spacing: -1px; line-height: 1.2;
+  letter-spacing: -0.5px; line-height: 1.2;
   margin-bottom: 8px;
 }
 .section-title-white { color: #fff; }
 .section-sub {
   font-size: 16px; color: var(--text2);
-  line-height: 1.65; max-width: 680px; margin-bottom: 48px;
+  line-height: 1.65; max-width: 640px; margin-bottom: 48px;
 }
 .section-sub-white { color: rgba(255,255,255,0.55); }
 
@@ -238,7 +238,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 .metrics-col-item:hover { background: var(--bg2); }
 
 /* 2-col layout */
-.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
 .metrics-box {
   background: #fff; border: 1px solid var(--border);
   border-top: 3px solid transparent;
@@ -322,13 +322,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 
 /* Dashboard structure */
 .dashboard-2x2 {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
 }
 .dashboard-card {
   background: #fff; border: 1px solid var(--border);
   border-top: 3px solid transparent;
-  border-radius: var(--radius); padding: 28px 32px;
-  transition: box-shadow 0.2s, border-color 0.2s;
+  border-radius: var(--radius); padding: 28px;
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.2s;
   cursor: default;
   contain: layout style paint;
 }
@@ -406,7 +406,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 
 /* Footer */
 .footer {
-  background: #07071a; padding: 40px 32px 28px;
+  background: #07071a; padding: 48px 32px 28px;
   border-top: 1px solid rgba(255,255,255,0.06);
 }
 .footer-inner { max-width: 1000px; margin: 0 auto; }
@@ -431,13 +431,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 .footer-copy { font-size: 12px; color: rgba(255,255,255,0.18); text-align: center; }
 
 /* TEXT LAYOUT OPTIMIZATIONS */
-p,.item-desc,.check-desc,.signal-text,.philosophy-body{max-width:680px;}
+p,.item-desc,.check-desc,.signal-text,.philosophy-body{max-width:640px;}
 .section-sub,.hero-subtitle,.hero-sub{max-width:640px;}
 .section-title,h2{margin-bottom:16px;}
 li{margin-bottom:6px;line-height:1.7;}
 strong{font-weight:600;color:var(--text);}
-.hero strong,.section-dark strong{color:inherit;}
+.hero strong,.section-dark strong{color:rgba(255,255,255,0.95);}
+.section-dark p,.section-dark li,.hero p{color:rgba(255,255,255,0.9);}
 .item-row,.check-item,.signal-item,.dash-item,.card,.metric-item,.metrics-card,.metrics-5q-item,.dashboard-2x2-item,.metrics-col-item{padding:20px 24px;}
+code,pre{font-size:13px;}
+
+/* -- Design polish: card hover -- */
+.dashboard-card:hover,.trap-strip:hover,.decision-rule:hover,.metrics-box:hover,.metrics-3col:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,0.08);}
 
 /* Chinese mode */
 html[lang="zh"] body{line-height:2.0;letter-spacing:0.01em;}
@@ -464,6 +469,7 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
   .section { padding: 48px 20px; }
   .hero { padding: 96px 20px 40px; }
   .footer-top { flex-direction: column; }
+  .footer { padding: 32px 20px 24px; }
 }
 /* Mobile hamburger */
 .nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;flex-shrink:0;margin-left:4px;}
@@ -559,7 +565,7 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
 <section class="section section-gray">
   <div class="container">
     <div class="fade-in">
-      <div class="section-label" data-en="METRIC PHILOSOPHY" data-zh="用数据说什么">METRIC PHILOSOPHY</div>
+      <div class="section-label" data-en="METRIC PHILOSOPHY" data-zh="数据观">METRIC PHILOSOPHY</div>
       <h2 class="section-title" data-en="What We Optimize For" data-zh="我们在优化什么">What We Optimize For</h2>
       <p class="philosophy-body" data-en="Optimize for trust, repeatability, creator quality, merchant quality, clean transactions, and defensible data accumulation. Metrics must answer: Is the marketplace healthy? Is the workflow working? Is retention real? Is the wedge correct? Is the platform getting stronger?" data-zh="重点盯：复购率、创作者完成率、商家满意度、交易纠纷率。数字必须能回答这几个问题：商家有没有在赚钱？流程跑不跑得通？留存是不是真的？切入品类选对了吗？数据比上个月好还是差？">Optimize for trust, repeatability, creator quality, merchant quality, clean transactions, and defensible data accumulation. Metrics must answer: Is the marketplace healthy? Is the workflow working? Is retention real? Is the wedge correct? Is the platform getting stronger?</p>
     </div>
@@ -676,7 +682,7 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
   <div class="container">
     <div class="fade-in" style="margin-bottom: 36px;">
       <div class="section-label" data-en="OPERATIONAL METRICS" data-zh="运营数据">OPERATIONAL METRICS</div>
-      <h2 class="section-title" data-en="Campaign &amp; Marketplace Liquidity" data-zh="活动流转和市场供需">Campaign &amp; Marketplace Liquidity</h2>
+      <h2 class="section-title" data-en="Campaign &amp; Marketplace Liquidity" data-zh="活动跑得顺不顺">Campaign &amp; Marketplace Liquidity</h2>
       <p class="section-sub" data-en="Campaign health and supply-demand balance across the marketplace." data-zh="活动跑得顺不顺、供需有没有失衡。">Campaign health and supply-demand balance across the marketplace.</p>
     </div>
     <div class="two-col fade-in">
@@ -718,8 +724,8 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
 <section class="section section-gray">
   <div class="container">
     <div class="fade-in" style="margin-bottom: 36px;">
-      <div class="section-label section-label-red" data-en="TRUST &amp; ECONOMICS" data-zh="诚信与财务">TRUST &amp; ECONOMICS</div>
-      <h2 class="section-title" data-en="Integrity &amp; Economic Health" data-zh="诚信风控和钱赚没赚到">Integrity &amp; Economic Health</h2>
+      <div class="section-label section-label-red" data-en="TRUST &amp; ECONOMICS" data-zh="风控和钱">TRUST &amp; ECONOMICS</div>
+      <h2 class="section-title" data-en="Integrity &amp; Economic Health" data-zh="平台干净不干净、钱赚没赚到">Integrity &amp; Economic Health</h2>
       <p class="section-sub" data-en="Platform integrity signals and unit economics — the financial foundation of a scalable marketplace." data-zh="平台诚信的风险信号，以及单位经济——能不能规模化的财务基础。">Platform integrity signals and unit economics — the financial foundation of a scalable marketplace.</p>
     </div>
     <div class="two-col fade-in">
@@ -762,7 +768,7 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
 <section class="section section-white">
   <div class="container">
     <div class="fade-in" style="margin-bottom: 40px;">
-      <div class="section-label" data-en="DECISION RULES" data-zh="数据决策规则">DECISION RULES</div>
+      <div class="section-label" data-en="DECISION RULES" data-zh="读数字的方法">DECISION RULES</div>
       <h2 class="section-title" data-en="Four Rules for Reading the Data" data-zh="读数字的四条规则">Four Rules for Reading the Data</h2>
       <p class="section-sub" data-en="When signals conflict, these rules clarify where the real problem lives. Don't treat symptoms — treat root causes." data-zh="信号打架的时候，这几条规则帮你找到真正的问题在哪。不要打补丁，要找根因。">When signals conflict, these rules clarify where the real problem lives. Don't treat symptoms — treat root causes.</p>
     </div>
@@ -825,8 +831,8 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
 <section class="section section-gray">
   <div class="container">
     <div class="fade-in" style="margin-bottom: 40px;">
-      <div class="section-label section-label-orange" data-en="DASHBOARD STRUCTURE" data-zh="数据看板结构">DASHBOARD STRUCTURE</div>
-      <h2 class="section-title" data-en="Four Dashboard Layers" data-zh="四个数据看板">Four Dashboard Layers</h2>
+      <div class="section-label section-label-orange" data-en="DASHBOARD STRUCTURE" data-zh="看板怎么分">DASHBOARD STRUCTURE</div>
+      <h2 class="section-title" data-en="Four Dashboard Layers" data-zh="四块看板，各看各的">Four Dashboard Layers</h2>
       <p class="section-sub" data-en="Different audiences need different views. Each dashboard is optimized for a specific decision-making context." data-zh="不同角色需要看不同的东西。每个看板针对特定的决策场景。">Different audiences need different views. Each dashboard is optimized for a specific decision-making context.</p>
     </div>
 
@@ -899,7 +905,7 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
         <div class="trap-icon" data-en="A" data-zh="A">A</div>
         <div>
           <div class="trap-badge" data-en="TRAP A" data-zh="陷阱 A">TRAP A</div>
-          <div class="trap-title" data-en="Celebrating Signups" data-zh="把注册量当成绩">Celebrating Signups</div>
+          <div class="trap-title" data-en="Celebrating Signups" data-zh="注册量多就高兴">Celebrating Signups</div>
           <p class="trap-body" data-en="Signups without completion or repeat are weak. A surge in creator or merchant registrations that doesn't convert to completed campaigns and repeat usage is a vanity metric — it reveals nothing about platform health." data-zh="没有完成和复投的注册量是空的。创作者或商家注册量暴涨，但转化不成实际完成和复投，就是装门面的数字——完成率和复购率没涨，注册量再高也没用。">Signups without completion or repeat are weak. A surge in creator or merchant registrations that doesn't convert to completed campaigns and repeat usage is a vanity metric — it reveals nothing about platform health.</p>
         </div>
       </div>
@@ -926,7 +932,7 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
         <div class="trap-icon" data-en="D" data-zh="D">D</div>
         <div>
           <div class="trap-badge" data-en="TRAP D" data-zh="陷阱 D">TRAP D</div>
-          <div class="trap-title" data-en="Mistaking Repeat for Quality" data-zh="复投不等于商家满意">Mistaking Repeat for Quality</div>
+          <div class="trap-title" data-en="Mistaking Repeat for Quality" data-zh="回来不代表满意">Mistaking Repeat for Quality</div>
           <p class="trap-body" data-en="Repeat matters only if economics remain healthy and trust remains high. A merchant who repeats because they have no better option — not because the platform delivered real value — is not a retention win. Monitor repeat rate alongside contribution margin and dispute rate together." data-zh="复投有意义，前提是利润没有下滑、纠纷没有上升。商家因为没有更好选择而留下来——不是因为平台真的帮他赚到了——这不算留存。要把复投率和贡献利润率、纠纷率放在一起看。">Repeat matters only if economics remain healthy and trust remains high. A merchant who repeats because they have no better option — not because the platform delivered real value — is not a retention win. Monitor repeat rate alongside contribution margin and dispute rate together.</p>
         </div>
       </div>
@@ -939,7 +945,7 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
   <div class="container">
     <div class="fade-in" style="text-align:center; margin-bottom: 48px;">
       <div class="section-label section-label-light" data-en="THE FINAL STANDARD" data-zh="最终标准">THE FINAL STANDARD</div>
-      <h2 class="section-title section-title-white" data-en="What Good Dashboards Do" data-zh="看板的作用：一眼看出哪里有问题">What Good Dashboards Do</h2>
+      <h2 class="section-title section-title-white" data-en="What Good Dashboards Do" data-zh="好看板：一眼看出哪里不对">What Good Dashboards Do</h2>
       <p class="section-sub section-sub-white" style="margin: 0 auto;" data-en="The purpose of measurement is not to describe the company — it is to discipline it." data-zh="数字摆在这，好就是好，差就是差。">The purpose of measurement is not to describe the company — it is to discipline it.</p>
     </div>
     <div class="final-blockquote fade-in">
@@ -954,7 +960,7 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
   <h3 style="font-size:16px; font-weight:700; margin-bottom:12px;" data-en="Continue Reading" data-zh="继续阅读" class="bilingual-text">Continue Reading</h3>
   <a href="attribution.html" style="display:block; padding:16px; background:#fff; border:1px solid var(--border, #e5e7eb); border-radius:8px; text-decoration:none; transition:all 0.2s; max-width:400px;">
     <div style="font-size:13px; color:var(--text3, #9ca3af);" data-en="Next →" data-zh="下一步 →" class="bilingual-text">Next →</div>
-    <div style="font-size:15px; font-weight:600; color:var(--text, #111827);" data-en="See how we measure attribution" data-zh="了解我们如何衡量归因" class="bilingual-text">See how we measure attribution</div>
+    <div style="font-size:15px; font-weight:600; color:var(--text, #111827);" data-en="See how we measure attribution" data-zh="看我们怎么做归因" class="bilingual-text">See how we measure attribution</div>
     <div style="font-size:13px; color:var(--accent, #4f46e5); margin-top:4px;" data-en="Attribution Framework →" data-zh="归因做法 →" class="bilingual-text">Attribution Framework →</div>
   </a>
 </div>
@@ -965,7 +971,7 @@ html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
     <div class="footer-top">
       <div>
         <div class="footer-logo">PUSH</div>
-        <div class="footer-tagline" data-en="Local Creator Performance Infrastructure" data-zh="本地 Creator 效果基础设施">Local Creator Performance Infrastructure</div>
+        <div class="footer-tagline" data-en="Local Creator Performance Infrastructure" data-zh="本地创作者效果平台">Local Creator Performance Infrastructure</div>
       </div>
       <div class="footer-links">
         <a href="index.html" class="footer-link" data-en="Overview" data-zh="首页">Dashboard</a>

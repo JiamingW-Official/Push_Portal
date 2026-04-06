@@ -44,7 +44,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 html[lang="zh"] body, body.zh-active{line-height:2.0;letter-spacing:0.01em;}
 strong{font-weight:600;color:var(--text);}
 .hero strong{color:inherit;}
-p{max-width:680px;}
+p{max-width:640px;}
 ul,ol{padding-left:20px;}
 li{margin-bottom:6px;line-height:1.7;}
 h1,h2,h3,h4,h5,h6{letter-spacing:-0.02em;}
@@ -80,7 +80,7 @@ nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
 /* — Hero — */
 .hero{
   background:var(--primary);
-  padding:160px 64px 100px;
+  padding:120px 64px 80px;
   position:relative;
 }
 .hero-inner{max-width:var(--max-w);margin:0 auto;}
@@ -99,18 +99,18 @@ nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
 .hero-sub{
   font-size:19px;font-weight:400;
   color:rgba(255,255,255,0.52);
-  max-width:640px;line-height:1.8;
+  max-width:560px;line-height:1.8;
   margin-top:28px;
 }
 
 /* — Section Shell — */
-section{padding:120px 64px;contain:layout style paint;border-top:1px solid var(--border);}
+section{padding:64px 64px;contain:layout style paint;border-top:1px solid var(--border);}
 section:first-of-type{border-top:none;}
 section.bg-dark{border-top-color:rgba(255,255,255,0.08);}
 .section-inner{max-width:var(--max-w);margin:0 auto;}
-.section{padding:120px 64px;max-width:1000px;margin:0 auto;contain:layout style paint;}
+.section{padding:64px 64px;max-width:1000px;margin:0 auto;contain:layout style paint;}
 .section-label{
-  font-size:13px;font-weight:600;letter-spacing:0.5px;text-transform:none;
+  font-size:12px;font-weight:600;letter-spacing:0.5px;text-transform:none;
   color:var(--accent);margin-bottom:18px;
   display:flex;align-items:center;gap:10px;
 }
@@ -120,7 +120,7 @@ section.bg-dark{border-top-color:rgba(255,255,255,0.08);}
 }
 .section-title{
   font-size:36px;
-  font-weight:900;letter-spacing:-1px;
+  font-weight:900;letter-spacing:-0.5px;
   color:var(--text);margin-bottom:16px;line-height:1.4;
 }
 .section-sub{
@@ -149,10 +149,10 @@ section.bg-dark{border-top-color:rgba(255,255,255,0.08);}
   border-radius:8px;border:1px solid var(--border);
   background:var(--bg);position:relative;
   counter-increment:problem-counter;
-  transition:box-shadow 0.2s,border-color 0.2s;
+  transition:box-shadow 0.2s,border-color 0.2s,transform 0.25s;
 }
 .problem-item:hover{
-  box-shadow:0 2px 12px rgba(0,0,0,0.08);border-color:var(--accent-light);
+  transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,0.08);border-color:var(--accent-light);
 }
 .problem-item::before{
   content:'0' counter(problem-counter);
@@ -197,6 +197,10 @@ section.bg-dark{border-top-color:rgba(255,255,255,0.08);}
 .compare-col{
   padding:32px;border-radius:8px;
   border:1px solid var(--border);
+  transition:box-shadow 0.25s,transform 0.25s;
+}
+.compare-col:hover{
+  transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,0.08);
 }
 .compare-col.others{background:var(--red-bg);border-color:rgba(220,38,38,0.15)}
 .compare-col.push{background:var(--green-bg);border-color:rgba(5,150,105,0.15)}
@@ -585,7 +589,7 @@ section.bg-dark{border-top-color:rgba(255,255,255,0.08);}
 /* — Footer — */
 footer{
   background:#0a0a14;
-  padding:40px 64px;border-top:1px solid var(--border);font-size:13px;color:var(--text3);
+  padding:48px 64px;border-top:1px solid var(--border);font-size:13px;color:var(--text3);
 }
 .footer-inner{
   max-width:var(--max-w);margin:0 auto;
@@ -646,11 +650,11 @@ footer{
   .nav-links{gap:4px}
   .nav-links a{padding:4px 7px;font-size:11px}
   .hero{padding:120px 24px 80px}
-  section{padding:80px 20px}
+  section{padding:48px 20px}
   .problems-grid,.compare-grid,.workflow-grid,.is-grid,.tier-cards{grid-template-columns:1fr}
   .pillar-row{flex-direction:column;gap:8px}
   .pillar-num{text-align:left;width:auto;font-size:48px}
-  footer{padding:48px 24px}
+  footer{padding:32px 20px}
   .footer-top{flex-direction:column;gap:32px}
   .insight-quote{font-size:18px;padding:24px 28px}
   .score-bar-why{display:none}
@@ -768,13 +772,13 @@ blockquote{font-size:17px;font-weight:500;color:var(--text);border-left:3px soli
         <div class="problem-item fade-in" data-delay="0.16s">
           <div class="problem-title" data-en="Every collaboration is manual" data-zh="每次合作都从头来一遍">Every collaboration is manual</div>
           <div class="problem-body" data-en="Outreach, negotiation, content approval, scheduling, reminders, proof tracking, payments — all managed through DMs and spreadsheets. For a cafe owner running their own business, this is unsustainable." data-zh="找人、聊价格、审内容、追截止日期、确认付款——全靠私信搞定。一个店主自己还要经营生意，这套流程根本撑不住。">Outreach, negotiation, content approval, scheduling, reminders, proof tracking, payments — all managed through DMs and spreadsheets. For a cafe owner running their own business, this is unsustainable.</div>
-          <div class="problem-root" data-en="Root cause: creator collaboration treated as ad hoc" data-zh="根本原因：创作者合作被当成临时关系处理">Root cause: creator collaboration treated as ad hoc</div>
+          <div class="problem-root" data-en="Root cause: creator collaboration treated as ad hoc" data-zh="根本原因：每次合作都当一次性买卖">Root cause: creator collaboration treated as ad hoc</div>
         </div>
 
         <div class="problem-item fade-in" data-delay="0.24s">
           <div class="problem-title" data-en="No protection when things go wrong" data-zh="给了东西，啥都捞不回来的风险">No protection when things go wrong</div>
           <div class="problem-body" data-en="Creators take free product and disappear. Content goes up and then gets deleted. No-shows happen with no consequence. There's no escrow, no dispute path, no accountability." data-zh="博主拿了免费产品，之后消失。说好了发的内容不见踪影。发完又删。没有追责，没有记录，没有任何保障。">Creators take free product and disappear. Content goes up and then gets deleted. No-shows happen with no consequence. There's no escrow, no dispute path, no accountability.</div>
-          <div class="problem-root" data-en="Root cause: no consequence-backed trust system" data-zh="根本原因：没有有后果支撑的信任机制">Root cause: no consequence-backed trust system</div>
+          <div class="problem-root" data-en="Root cause: no consequence-backed trust system" data-zh="根本原因：出了事没人兜底">Root cause: no consequence-backed trust system</div>
         </div>
       </div>
 
@@ -785,25 +789,25 @@ blockquote{font-size:17px;font-weight:500;color:var(--text);border-left:3px soli
         <div class="problem-item fade-in" data-delay="0s">
           <div class="problem-title" data-en="No pricing power" data-zh="没有任何谈价的底气">No pricing power</div>
           <div class="problem-body" data-en="Rising creators cannot prove their commercial worth. Every merchant offers whatever they feel like, and without a verifiable track record, creators negotiate from zero every single time. The market has no memory." data-zh="你拿不出可以证明商业价值的记录。每个商家爱给多少给多少，你只能接受或者走。市场没有记忆——每次从零开始。">Rising creators cannot prove their commercial worth. Every merchant offers whatever they feel like, and without a verifiable track record, creators negotiate from zero every single time. The market has no memory.</div>
-          <div class="problem-root" data-en="Root cause: no portable, verifiable performance history" data-zh="根本原因：没有可携带的可核验表现记录">Root cause: no portable, verifiable performance history</div>
+          <div class="problem-root" data-en="Root cause: no portable, verifiable performance history" data-zh="根本原因：做了多少活、效果好不好，没有地方能证明">Root cause: no portable, verifiable performance history</div>
         </div>
 
         <div class="problem-item fade-in" data-delay="0.08s">
           <div class="problem-title" data-en="Trapped in freebie loops" data-zh="一直在用内容换免费体验">Trapped in freebie loops</div>
           <div class="problem-body" data-en="Most gigs offer free product in exchange for a post. There's no structured path from doing a free shoot for a café to getting paid <strong style='font-weight:600'>$50</strong> a campaign to being on retainer with premium brands. Platforms don't distinguish onboarding from growth." data-zh="大多数"合作"就是：你来拍，我给你吃。没有从这里通向真正付费合作的路径。平台不区分入门和成长。">Most gigs offer free product in exchange for a post. There's no structured path from doing a free shoot for a café to getting paid $50 a campaign to being on retainer with premium brands. Platforms don't distinguish onboarding from growth.</div>
-          <div class="problem-root" data-en="Root cause: no career progression framework" data-zh="根本原因：没有通向付费合作的成长路径">Root cause: no career progression framework</div>
+          <div class="problem-root" data-en="Root cause: no career progression framework" data-zh="根本原因：从免费体验到正式收费，中间没有路">Root cause: no career progression framework</div>
         </div>
 
         <div class="problem-item fade-in" data-delay="0.16s">
           <div class="problem-title" data-en="Income is unpredictable" data-zh="这个月有，下个月不知道">Income is unpredictable</div>
           <div class="problem-body" data-en="Random DMs, inconsistent payments, vague requirements that change after the work is done. Creators have no pipeline, no recurring relationships, no predictable income. Every month starts from scratch." data-zh="靠私信碰运气。报价高低全凭对方心情。没有稳定的机会池，没有可以预期的收入节奏。">Random DMs, inconsistent payments, vague requirements that change after the work is done. Creators have no pipeline, no recurring relationships, no predictable income. Every month starts from scratch.</div>
-          <div class="problem-root" data-en="Root cause: no pipeline infrastructure for creators" data-zh="根本原因：市场没有为创作者提供稳定的机会基础">Root cause: no pipeline infrastructure for creators</div>
+          <div class="problem-root" data-en="Root cause: no pipeline infrastructure for creators" data-zh="根本原因：没有稳定接单的渠道">Root cause: no pipeline infrastructure for creators</div>
         </div>
 
         <div class="problem-item fade-in" data-delay="0.24s">
           <div class="problem-title" data-en="No accountability on the merchant side" data-zh="做完了，商家可能不认">No accountability on the merchant side</div>
           <div class="problem-body" data-en="Merchants can reject work arbitrarily, change requirements mid-campaign, or simply never respond. Creators have no recourse. The power imbalance is structural." data-zh="完成之后要求突然变了。商家玩消失。说不满意拖着不付款。创作者没有任何申诉渠道。">Merchants can reject work arbitrarily, change requirements mid-campaign, or simply never respond. Creators have no recourse. The power imbalance is structural.</div>
-          <div class="problem-root" data-en="Root cause: no bilateral accountability layer" data-zh="根本原因：没有约束商家的问责机制">Root cause: no bilateral accountability layer</div>
+          <div class="problem-root" data-en="Root cause: no bilateral accountability layer" data-zh="根本原因：商家没人管，创作者吃了亏没处说">Root cause: no bilateral accountability layer</div>
         </div>
       </div>
     </div>
@@ -830,7 +834,7 @@ blockquote{font-size:17px;font-weight:500;color:var(--text);border-left:3px soli
         </div>
         <div class="compare-item">
           <span class="compare-icon">✗</span>
-          <span data-en="Discovery / exposure" data-zh="提供曝光和发现功能">Discovery / exposure</span>
+          <span data-en="Discovery / exposure" data-zh="给曝光、帮发现">Discovery / exposure</span>
         </div>
         <div class="compare-item">
           <span class="compare-icon">✗</span>
@@ -858,11 +862,11 @@ blockquote{font-size:17px;font-weight:500;color:var(--text);border-left:3px soli
         </div>
         <div class="compare-item pos">
           <span class="compare-icon">✓</span>
-          <span data-en="Create repeatable operating workflows" data-zh="创造可重复的运营工作流">Create repeatable operating workflows</span>
+          <span data-en="Create repeatable operating workflows" data-zh="把合作变成可复用的流程">Create repeatable operating workflows</span>
         </div>
         <div class="compare-item pos">
           <span class="compare-icon">✓</span>
-          <span data-en="Build non-portable credit capital" data-zh="构建不可迁移的信用记录">Build non-portable credit capital</span>
+          <span data-en="Build non-portable credit capital" data-zh="帮创作者攒带不走的信用">Build non-portable credit capital</span>
         </div>
       </div>
     </div>
@@ -873,7 +877,7 @@ blockquote{font-size:17px;font-weight:500;color:var(--text);border-left:3px soli
 <section class="bg-white">
   <div class="section-inner">
     <div class="section-label fade-in" data-en="HOW IT WORKS" data-zh="运作方式">HOW IT WORKS</div>
-    <h2 class="section-title fade-in" data-en="From merchant goal to <strong>data-driven</strong> repeat campaign." data-zh="从商家目标到<strong>有数据的</strong>复购活动。">From merchant goal to <strong>data-driven</strong> repeat campaign.</h2>
+    <h2 class="section-title fade-in" data-en="From merchant goal to <strong>data-driven</strong> repeat campaign." data-zh="从商家想要什么，到<strong>有数据支撑的</strong>下一次合作。">From merchant goal to <strong>data-driven</strong> repeat campaign.</h2>
     <p class="section-sub fade-in" data-en="7 milestones. Built-in SLAs. Zero ambiguity." data-zh="7个里程碑。内置时效规则。零歧义。">7 milestones. Built-in SLAs. Zero ambiguity.</p>
 
     <!-- BEFORE / AFTER -->
@@ -983,7 +987,7 @@ blockquote{font-size:17px;font-weight:500;color:var(--text);border-left:3px soli
           <div class="workflow-stage-num">4</div>
           <div class="workflow-stage-body">
             <div class="workflow-stage-title" data-en="Candidate Routing" data-zh="候选匹配">Candidate Routing</div>
-            <div class="workflow-stage-desc" data-en="Creators ranked by fulfillment history, local fit, category match, redemption efficiency, reliability." data-zh="按履约历史、本地适配度、品类匹配、核销效率、可靠性排名推荐候选人。">Creators ranked by fulfillment history, local fit, category match, redemption efficiency, reliability.</div>
+            <div class="workflow-stage-desc" data-en="Creators ranked by fulfillment history, local fit, category match, redemption efficiency, reliability." data-zh="按干活记录、离得近不近、品类合不合、核销效率、靠不靠谱排名推荐。">Creators ranked by fulfillment history, local fit, category match, redemption efficiency, reliability.</div>
           </div>
         </div>
 
@@ -1303,7 +1307,7 @@ blockquote{font-size:17px;font-weight:500;color:var(--text);border-left:3px soli
     </div>
 
     <div class="strategic-test fade-in">
-      <div class="strategic-test-label" data-en="STRATEGIC FILTER" data-zh="功能决策标准">STRATEGIC FILTER</div>
+      <div class="strategic-test-label" data-en="STRATEGIC FILTER" data-zh="做不做这个功能？">STRATEGIC FILTER</div>
       <div class="strategic-test-body" data-en="Every feature decision must positively answer at least one: ① Does it make merchant ROI clearer? ② Does it improve creator earning power or quality filtering? ③ Does it deepen platform defensibility? ④ Does it reduce fraud or lower repeat campaign cost? ⑤ Does it keep future transactions on-platform?" data-zh="每个功能决策都必须正面回答至少一个：① 有没有让商家的ROI更清晰？② 有没有提升创作者的赚钱能力或质量筛选？③ 有没有加深平台的防御性？④ 有没有减少欺诈或降低复购成本？⑤ 有没有让未来的合作更倾向留在平台内？">Every feature decision must positively answer at least one: ① Does it make merchant ROI clearer? ② Does it improve creator earning power or quality filtering? ③ Does it deepen platform defensibility? ④ Does it reduce fraud or lower repeat campaign cost? ⑤ Does it keep future transactions on-platform?</div>
     </div>
   </div>
@@ -1312,15 +1316,15 @@ blockquote{font-size:17px;font-weight:500;color:var(--text);border-left:3px soli
 <!-- SECTION 7: THE THESIS -->
 <section class="bg-dark">
   <div class="section-inner">
-    <div class="section-label fade-in" style="color:var(--accent-light)" data-en="COMPANY THESIS" data-zh="公司论点">COMPANY THESIS</div>
-    <h2 class="thesis-title fade-in" data-en="The end state is a new market layer." data-zh="终态是一个新的市场层级。">The end state is a new market layer.</h2>
+    <div class="section-label fade-in" style="color:var(--accent-light)" data-en="COMPANY THESIS" data-zh="我们要做的事">COMPANY THESIS</div>
+    <h2 class="thesis-title fade-in" data-en="The end state is a new market layer." data-zh="最终要做成一个新的市场层。">The end state is a new market layer.</h2>
 
     <ul class="thesis-list fade-in">
       <li data-en="Standardizes local creator acquisition" data-zh="把本地博主获客这件事标准化，做成可重复的流程">Standardizes local creator acquisition</li>
       <li data-en="Ranks creators by commercial performance" data-zh="创作者按干活的结果排名">Ranks creators by commercial performance</li>
       <li data-en="Routes merchants toward better outcomes" data-zh="让商家每次找到更合适的博主，越用越准">Routes merchants toward better outcomes</li>
-      <li data-en="Compounds proprietary creator performance data" data-zh="积累专有创作者表现数据">Compounds proprietary creator performance data</li>
-      <li data-en="Creates lock-in through access, trust, and workflow" data-zh="通过权限、信任和工作流形成锁定">Creates lock-in through access, trust, and workflow</li>
+      <li data-en="Compounds proprietary creator performance data" data-zh="攒下别人没有的创作者表现数据">Compounds proprietary creator performance data</li>
+      <li data-en="Creates lock-in through access, trust, and workflow" data-zh="用权限、信任和流程让双方越来越离不开">Creates lock-in through access, trust, and workflow</li>
     </ul>
 
     <p class="thesis-close fade-in" data-en="&quot;Push lets local businesses buy customer acquisition from rising creators through verified fulfillment and conversion history. That's the business.&quot;" data-zh="Push 让本地商家通过已核验的履约记录和转化历史，从上升中的创作者那里购买客户获取能力。这就是这个业务的本质。">"Push lets local businesses buy customer acquisition from rising creators through verified fulfillment and conversion history. That's the business."</p>
