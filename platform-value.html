@@ -10,7 +10,9 @@
 <title>PUSH — Platform Value & Anti-Disintermediation</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+<link rel="prefetch" href="push-strategy-core.html">
 <style>
 :root {
   --accent: #4f46e5;
@@ -39,14 +41,14 @@
 
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:var(--text);font-size:15px;line-height:1.85;}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:var(--text);font-size:15px;line-height:1.85;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;word-break:break-word;font-feature-settings:'cv02','cv03','cv04','cv11';}
 a{text-decoration:none;color:inherit}
 
 /* ===== NAV ===== */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;background:rgba(255,255,255,0.95);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:box-shadow 0.2s;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;background:#fffffffa;border-bottom:1px solid var(--border);transition:box-shadow 0.2s;}
 .nav-logo{font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;margin-right:8px;flex-shrink:0;text-decoration:none;}
 .nav-links{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
-.nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:all 0.15s;white-space:nowrap;text-decoration:none;}
+.nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:color 0.15s,background 0.15s;white-space:nowrap;text-decoration:none;}
 .nav-links a:hover{color:var(--accent);background:var(--accent-bg);}
 .nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);}
 .nav-right{margin-left:16px;flex-shrink:0}
@@ -149,7 +151,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 }
 
 /* ===== SECTIONS ===== */
-section{padding:120px 64px;}
+section{padding:120px 64px;contain:layout style paint;}
 .container{max-width:1100px;margin:0 auto}
 
 .section-tag{
@@ -224,7 +226,7 @@ section{padding:120px 64px;}
 .bypass-card{
   background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);
   padding:28px 22px;
-  transition:all 0.25s ease;cursor:default;
+  transition:transform 0.25s ease,box-shadow 0.25s ease,border-color 0.25s ease;cursor:default;
 }
 .bypass-card:hover{
   transform:translateY(-6px);
@@ -260,8 +262,9 @@ section{padding:120px 64px;}
 .value-card{
   background:#fff;border-radius:var(--radius);
   padding:36px;
-  transition:all 0.25s ease;cursor:default;
+  transition:transform 0.25s ease,box-shadow 0.25s ease;cursor:default;
   position:relative;overflow:hidden;
+  contain:layout style paint;
 }
 .value-card::before{
   content:'';position:absolute;top:0;left:0;right:0;height:4px;
@@ -280,7 +283,7 @@ section{padding:120px 64px;}
   color:rgba(79,70,229,0.1);
   line-height:1;margin-bottom:8px;letter-spacing:-2px;
 }
-.value-title{font-size:22px;font-weight:800;color:var(--text);margin-bottom:4px;letter-spacing:-0.5px}
+.value-title{font-size:22px;font-weight:800;color:var(--text);margin-bottom:4px;letter-spacing:-0.02em}
 .value-sub{font-size:13px;font-weight:600;color:var(--accent);margin-bottom:16px}
 .value-bullets{list-style:none;margin-bottom:20px}
 .value-bullets li{
@@ -313,7 +316,8 @@ section{padding:120px 64px;}
   background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);
   padding:28px 32px;
   border-left:4px solid transparent;
-  transition:all 0.25s ease;cursor:default;
+  transition:background 0.25s ease,border-left-color 0.25s ease,box-shadow 0.25s ease;cursor:default;
+  contain:layout style paint;
 }
 .mech-strip:hover{
   background:#f9fffe;
@@ -438,7 +442,8 @@ section{padding:120px 64px;}
 .lose-card{
   background:#fff;border-radius:var(--radius);
   padding:36px;
-  transition:all 0.25s ease;
+  transition:transform 0.25s ease,box-shadow 0.25s ease;
+  contain:layout style paint;
 }
 .lose-card.accent-card{border-top:4px solid var(--accent)}
 .lose-card.green-card{border-top:4px solid var(--green)}
@@ -499,7 +504,7 @@ section{padding:120px 64px;}
   background:rgba(255,255,255,0.05);
   border:1px solid rgba(255,255,255,0.08);
   font-size:12px;font-weight:600;color:rgba(255,255,255,0.55);
-  transition:all 0.18s;
+  transition:background 0.18s,border-color 0.18s,color 0.18s;
 }
 .footer-link:hover{background:var(--accent-bg);border-color:var(--accent);color:var(--accent)}
 .footer-link.current{background:var(--accent-bg);border-color:var(--accent);color:var(--accent)}
@@ -510,8 +515,9 @@ section{padding:120px 64px;}
 }
 
 /* ===== SCROLL ANIMATION ===== */
-.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.55s ease,transform 0.55s ease;}
-.fade-in.visible{opacity:1;transform:translateY(0);animation:none}
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.55s ease,transform 0.55s ease;will-change:opacity,transform;}
+.fade-in.visible{opacity:1;transform:translateY(0);animation:none;will-change:auto;}
+.visible .fade-in{opacity:1;transform:none;}
 @keyframes fadeInFallback{to{opacity:1;transform:translateY(0)}}
 
 @media(max-width:640px){
@@ -552,8 +558,7 @@ nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
 #back-top.visible { opacity: 1; pointer-events: auto; }
 #back-top:hover { background: #4f46e5; transform: translateY(-2px); }
 
-/* Fade-in with slide */
-.fade-in.visible { opacity: 1; transform: translateY(0); animation: none; }
+/* Fade-in with slide — defined above in SCROLL ANIMATION block */
 
 /* Value cards hover */
 .value-card {
@@ -583,7 +588,7 @@ nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
 
 /* Flywheel steps hover */
 .flywheel-step {
-  transition: all 0.15s; cursor: default;
+  transition: transform 0.15s, box-shadow 0.15s; cursor: default;
 }
 .flywheel-step:hover {
   transform: scale(1.04);
@@ -604,7 +609,7 @@ nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
 .nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
 .nav-burger.open span:nth-child(2){opacity:0;}
 .nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-.nav-mobile-panel{display:none;position:fixed;top:60px;left:0;right:0;background:rgba(255,255,255,0.98);border-bottom:1px solid var(--border,#e5e7eb);padding:12px 16px 20px;flex-direction:column;gap:2px;z-index:999;box-shadow:0 8px 32px rgba(0,0,0,0.12);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);}
+.nav-mobile-panel{display:none;position:fixed;top:60px;left:0;right:0;background:#fffffffa;border-bottom:1px solid var(--border,#e5e7eb);padding:12px 16px 20px;flex-direction:column;gap:2px;z-index:999;box-shadow:0 8px 32px rgba(0,0,0,0.12);}
 .nav-mobile-panel.open{display:flex;}
 .nav-mobile-panel a{padding:12px 16px;border-radius:8px;font-size:15px;font-weight:500;color:var(--text,#111827);text-decoration:none;transition:background 0.15s,color 0.15s;}
 .nav-mobile-panel a:hover{background:var(--bg2,#f8f9fa);}
@@ -1065,7 +1070,7 @@ nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
 <!-- F1: Next Reading block -->
 <div style="max-width:800px; margin:40px auto; padding:24px; background:var(--bg2, #f8f9fa); border:1px solid var(--border, #e5e7eb); border-radius:12px;">
   <h3 style="font-size:16px; font-weight:700; margin-bottom:12px;" data-en="Continue Reading" data-zh="继续阅读" class="bilingual-text">Continue Reading</h3>
-  <a href="push-strategy-core.html" style="display:block; padding:16px; background:#fff; border:1px solid var(--border, #e5e7eb); border-radius:8px; text-decoration:none; transition:all 0.2s; max-width:400px;">
+  <a href="push-strategy-core.html" style="display:block; padding:16px; background:#fff; border:1px solid var(--border, #e5e7eb); border-radius:8px; text-decoration:none; transition:box-shadow 0.2s,border-color 0.2s; max-width:400px;">
     <div style="font-size:13px; color:var(--text3, #9ca3af);" data-en="Next →" data-zh="下一步 →" class="bilingual-text">Next →</div>
     <div style="font-size:15px; font-weight:600; color:var(--text, #111827);" data-en="See the core strategic thesis — why Push becomes a value settlement layer" data-zh="看核心战略思路——Push 怎么成为双方都离不开的地方" class="bilingual-text">See the core strategic thesis — why Push becomes a value settlement layer</div>
     <div style="font-size:13px; color:var(--accent, #4f46e5); margin-top:4px;" data-en="Strategy Core →" data-zh="战略核心 →" class="bilingual-text">Strategy Core →</div>
@@ -1146,7 +1151,7 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.01, rootMargin: '0px 0px 60px 0px' });
 
-document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+document.querySelectorAll('section').forEach(el => observer.observe(el));
 
 // Nav scroll shadow
 (function() {
@@ -1163,7 +1168,7 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
   }
 })();
 
-// Staggered fade-in
+// Staggered fade-in (individual elements with delay)
 (function() {
   const obs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
@@ -1174,7 +1179,7 @@ document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
       }
     });
   }, { threshold: 0.01, rootMargin: '0px 0px 60px 0px' });
-  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+  document.querySelectorAll('section .fade-in').forEach(el => obs.observe(el));
 })();
 
 // Mobile navigation

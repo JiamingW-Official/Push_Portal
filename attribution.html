@@ -9,7 +9,9 @@
 <title>PUSH — Attribution & Verification Framework</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="prefetch" href="project-intro.html">
 <style>
 :root {
   --accent: #4f46e5;
@@ -34,13 +36,13 @@
 
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:var(--text);font-size:15px;line-height:1.85;overflow-x:hidden;}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:var(--text);font-size:15px;line-height:1.85;overflow-x:hidden;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;word-break:break-word;font-feature-settings:'cv02','cv03','cv04','cv11';}
 
 /* ── NAV ─────────────────────────────────────── */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;background:rgba(255,255,255,0.95);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:box-shadow 0.2s;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;background:#fffffffa;border-bottom:1px solid var(--border);transition:box-shadow 0.2s;contain:layout style paint;}
 .nav-logo{font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;margin-right:8px;flex-shrink:0;text-decoration:none;}
 .nav-links{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
-.nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:all 0.15s;white-space:nowrap;text-decoration:none;}
+.nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:color 0.15s,background 0.15s;white-space:nowrap;text-decoration:none;}
 .nav-links a:hover{color:var(--accent);background:var(--accent-bg);}
 .nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);}
 .nav-right{display:flex;align-items:center;gap:10px;flex-shrink:0;}
@@ -66,9 +68,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 .nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
 .nav-burger.open span:nth-child(2){opacity:0;}
 .nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-.nav-mobile-panel{display:none;position:fixed;top:60px;left:0;right:0;background:rgba(255,255,255,0.98);border-bottom:1px solid var(--border,#e5e7eb);padding:12px 16px 20px;flex-direction:column;gap:2px;z-index:999;box-shadow:0 8px 32px rgba(0,0,0,0.12);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);}
+.nav-mobile-panel{display:none;position:fixed;top:60px;left:0;right:0;background:#fffffffa;border-bottom:1px solid var(--border,#e5e7eb);padding:12px 16px 20px;flex-direction:column;gap:2px;z-index:999;box-shadow:0 8px 32px rgba(0,0,0,0.12);}
 .nav-mobile-panel.open{display:flex;}
-.nav-mobile-panel a{padding:12px 16px;border-radius:8px;font-size:15px;font-weight:500;color:var(--text,#111827);text-decoration:none;transition:background 0.15s,color 0.15s;}
+.nav-mobile-panel a{padding:12px 16px;border-radius:8px;font-size:15px;font-weight:500;color:var(--text,#111827);text-decoration:none;transition:background 0.15s,color 0.15s;contain:layout style;}
 .nav-mobile-panel a:hover{background:var(--bg2,#f8f9fa);}
 .nav-mobile-panel a.active{color:var(--accent,#4f46e5);background:var(--accent-bg,rgba(79,70,229,0.06));font-weight:700;}
 .nav-mobile-panel .mobile-lang-row{display:flex;align-items:center;padding:12px 16px 4px;gap:12px;border-top:1px solid var(--border,#e5e7eb);margin-top:8px;}
@@ -120,7 +122,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
   color:var(--accent);margin-bottom:10px;
 }
 .section-title{
-  font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;letter-spacing:-1px;
+  font-size:clamp(1.6rem,3vw,2.2rem);font-weight:900;letter-spacing:-0.02em;
   color:var(--primary);line-height:1.1;margin-bottom:12px;
 }
 .section-title-white{color:#fff;}
@@ -178,6 +180,7 @@ blockquote.principle cite{
   padding:28px 0;border-bottom:1px solid var(--border);
   position:relative;
   transition:background 0.15s;
+  contain:layout style;
 }
 .item-row:first-child{border-top:1px solid var(--border);}
 .item-row::before{
@@ -368,9 +371,10 @@ blockquote.principle cite{
 }
 
 /* ── SCROLL FADE ─────────────────────────────── */
-.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.55s ease,transform 0.55s ease;animation:fadeInFallback 0s 4s forwards;}
-.fade-in.visible{opacity:1;transform:translateY(0);animation:none;}
-@keyframes fadeInFallback{to{opacity:1;transform:translateY(0);}}
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.55s ease,transform 0.55s ease;animation:fadeInFallback 0s 4s forwards;will-change:opacity,transform;}
+.fade-in.visible{opacity:1;transform:none;animation:none;will-change:auto;}
+.visible .fade-in{opacity:1;transform:none;}
+@keyframes fadeInFallback{to{opacity:1;transform:none;}}
 
 /* ── FOOTER ──────────────────────────────────── */
 footer{
@@ -847,13 +851,17 @@ footer{
 
 // ── SCROLL FADE IN ────────────────────────────
 (function() {
-  const els = document.querySelectorAll('.fade-in');
+  const sections = document.querySelectorAll('section');
   const obs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+        obs.unobserve(e.target);
+      }
     });
   }, { threshold: 0.01, rootMargin: '0px 0px 60px 0px' });
-  els.forEach(el => obs.observe(el));
+  sections.forEach(s => obs.observe(s));
+  window.addEventListener('scroll', function(){}, {passive:true});
 })();
 
 // Mobile navigation

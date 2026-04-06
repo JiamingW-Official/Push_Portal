@@ -10,7 +10,9 @@
 <title>PUSH - Future Prospects / 未来愿景</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="prefetch" href="pitch-deck.html">
 <style>
 :root {
   --accent: #4f46e5;
@@ -36,7 +38,7 @@
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.85;}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.85;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;word-break:break-word;font-feature-settings:'cv02','cv03','cv04','cv11';}
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
@@ -44,12 +46,12 @@ a:hover { text-decoration: underline; }
 nav{
   position:fixed;top:0;left:0;right:0;z-index:200;
   height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;
-  background:rgba(255,255,255,0.95);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+  background:#fffffffa;
   border-bottom:1px solid var(--border);transition:box-shadow 0.2s;
 }
 .nav-logo{font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;margin-right:8px;flex-shrink:0;text-decoration:none;}
 .nav-links{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
-.nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:all 0.15s;white-space:nowrap;text-decoration:none;}
+.nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:color 0.15s,background 0.15s;white-space:nowrap;text-decoration:none;}
 .nav-links a:hover{color:var(--accent);background:var(--accent-bg);}
 .nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);}
 #lang-btn {
@@ -76,7 +78,7 @@ nav{
 .hero p { color: var(--text2); font-size: 18px; max-width: 700px; margin: 0 auto; }
 
 /* SECTION */
-.section { padding: 80px 24px; max-width: 1200px; margin: 0 auto; }
+.section { padding: 80px 24px; max-width: 1200px; margin: 0 auto; contain: layout style paint; }
 
 /* TIMELINE */
 .timeline {
@@ -131,7 +133,7 @@ nav{
   margin-bottom: 8px;
 }
 .phase-title {
-  font-size: 22px; font-weight: 800;
+  font-size: 22px; font-weight: 800; letter-spacing: -0.02em;
 }
 
 /* BILINGUAL CARDS */
@@ -166,7 +168,7 @@ nav{
   padding: 12px 0;
   border-bottom: 1px solid var(--border);
   display: flex; align-items: flex-start; gap: 12px;
-  font-size: 15px; color: var(--text2);
+  font-size: 15px; color: var(--text2); line-height: 1.75;
 }
 .item-list li:last-child { border-bottom: none; }
 .item-icon {
@@ -292,8 +294,9 @@ nav{
 .phase:nth-child(3) { animation-delay: 0.3s; }
 
 /* SCROLL ANIMATIONS */
-.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.55s ease,transform 0.55s ease;}
-.fade-in.visible { opacity: 1; transform: translateY(0); }
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.55s ease,transform 0.55s ease;will-change:opacity,transform;}
+.visible .fade-in{opacity:1;transform:none;}
+.fade-in.visible{opacity:1;transform:none;}
 @keyframes fadeInFallback { to { opacity: 1; transform: translateY(0); } }
 
 /* LANG VISIBILITY */
@@ -311,7 +314,7 @@ body.lang-zh .end-state-grid { grid-template-columns: 1fr; }
 .nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
 .nav-burger.open span:nth-child(2){opacity:0;}
 .nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-.nav-mobile-panel{display:none;position:fixed;top:60px;left:0;right:0;background:rgba(255,255,255,0.98);border-bottom:1px solid var(--border,#e5e7eb);padding:12px 16px 20px;flex-direction:column;gap:2px;z-index:999;box-shadow:0 8px 32px rgba(0,0,0,0.12);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);}
+.nav-mobile-panel{display:none;position:fixed;top:60px;left:0;right:0;background:#fffffffa;border-bottom:1px solid var(--border,#e5e7eb);padding:12px 16px 20px;flex-direction:column;gap:2px;z-index:999;box-shadow:0 8px 32px rgba(0,0,0,0.12);}
 .nav-mobile-panel.open{display:flex;}
 .nav-mobile-panel a{padding:12px 16px;border-radius:8px;font-size:15px;font-weight:500;color:var(--text,#111827);text-decoration:none;transition:background 0.15s,color 0.15s;}
 .nav-mobile-panel a:hover{background:var(--bg2,#f8f9fa);}
@@ -631,12 +634,12 @@ body.lang-zh .analogy .en { display: none; }
 <!-- ── NEXT READING ── -->
 <div style="max-width:800px; margin:40px auto; padding:24px; background:var(--bg2, #f8f9fa); border:1px solid var(--border, #e5e7eb); border-radius:12px;">
   <h3 style="font-size:16px; font-weight:700; margin-bottom:12px;" data-en="Continue Reading" data-zh="继续阅读" class="bilingual-text">Continue Reading</h3>
-  <a href="pitch-deck.html" style="display:block; padding:16px; background:#fff; border:1px solid var(--border, #e5e7eb); border-radius:8px; text-decoration:none; transition:all 0.2s; max-width:400px; margin-bottom:12px;">
+  <a href="pitch-deck.html" style="display:block; padding:16px; background:#fff; border:1px solid var(--border, #e5e7eb); border-radius:8px; text-decoration:none; transition:transform 0.2s,box-shadow 0.2s; max-width:400px; margin-bottom:12px;">
     <div style="font-size:13px; color:var(--text3, #9ca3af);" data-en="Next →" data-zh="下一步 →" class="bilingual-text">Next →</div>
     <div style="font-size:15px; font-weight:600; color:var(--text, #111827);" data-en="Want to see how we'll execute the launch?" data-zh="想看看我们如何执行启动计划？" class="bilingual-text">Want to see how we'll execute the launch?</div>
     <div style="font-size:13px; color:var(--accent, #4f46e5); margin-top:4px;" data-en="Pitch Deck →" data-zh="路演材料 →" class="bilingual-text">Pitch Deck →</div>
   </a>
-  <a href="project-intro.html" style="display:block; padding:16px; background:#fff; border:1px solid var(--border, #e5e7eb); border-radius:8px; text-decoration:none; transition:all 0.2s; max-width:400px;">
+  <a href="project-intro.html" style="display:block; padding:16px; background:#fff; border:1px solid var(--border, #e5e7eb); border-radius:8px; text-decoration:none; transition:transform 0.2s,box-shadow 0.2s; max-width:400px;">
     <div style="font-size:13px; color:var(--text3, #9ca3af);" data-en="Also →" data-zh="另外 →" class="bilingual-text">Also →</div>
     <div style="font-size:15px; font-weight:600; color:var(--text, #111827);" data-en="See the full product design" data-zh="查看完整的产品设计" class="bilingual-text">See the full product design</div>
     <div style="font-size:13px; color:var(--accent, #4f46e5); margin-top:4px;" data-en="Project Introduction →" data-zh="项目介绍 →" class="bilingual-text">Project Introduction →</div>
@@ -658,10 +661,11 @@ body.lang-zh .analogy .en { display: none; }
 const fadeObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
 }, { threshold: 0.01, rootMargin: '0px 0px 60px 0px' });
-document.querySelectorAll('.section, .phase, .metric-card').forEach(el => {
+document.querySelectorAll('.section').forEach(el => {
   el.classList.add('fade-in');
   fadeObserver.observe(el);
 });
+window.addEventListener('scroll', () => {}, { passive: true });
 </script>
 
 <script>
