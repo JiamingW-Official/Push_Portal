@@ -66,16 +66,11 @@
     .nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);}
     .nav-links a.active::after{content:'';position:absolute;bottom:0;left:12px;right:12px;height:2px;background:var(--accent);border-radius:1px;}
 
-    .nav-right { margin-left: auto; flex-shrink: 0; }
-    #lang-toggle {
-      background: var(--accent); color: #fff;
-      border: none; padding: 7px 16px;
-      border-radius: 8px; font-family: 'Inter', sans-serif;
-      font-size: 13px; font-weight: 700;
-      cursor: pointer; transition: background 0.2s;
-      white-space: nowrap; letter-spacing: 0.3px;
+    #lang-btn{
+      flex-shrink:0;background:var(--accent);color:#fff;font-weight:700;font-size:13px;
+      padding:7px 18px;border-radius:8px;border:none;cursor:pointer;transition:background 0.15s;
     }
-    #lang-toggle:hover { background: var(--accent-dark); }
+    #lang-btn:hover{background:var(--accent-dark);}
 
     /* DOC STRIP */
     .doc-strip {
@@ -816,9 +811,7 @@
     <a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
     <a href="push-strategy-core.html" class="active" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
   </div>
-  <div class="nav-right">
-    <button id="lang-toggle">中 / EN</button>
-  </div>
+  <button id="lang-btn">中 / EN</button>
   <button class="nav-burger" id="nav-burger" aria-label="打开菜单" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
@@ -1240,7 +1233,7 @@
       const val = lang === 'zh' ? el.getAttribute('data-zh') : el.getAttribute('data-en');
       if (val !== null) el.innerHTML = val;
     });
-    const btn = document.getElementById('lang-toggle');
+    const btn = document.getElementById('lang-btn');
     if (btn) btn.textContent = lang === 'en' ? '中 / EN' : 'EN / 中';
     const mobileBtn = document.getElementById('lang-btn-mobile');
     if (mobileBtn) mobileBtn.textContent = lang === 'en' ? '中 / EN' : 'EN / 中';
@@ -1257,7 +1250,7 @@
     }, 120);
   }
 
-  document.getElementById('lang-toggle').addEventListener('click', toggleLang);
+  document.getElementById('lang-btn').addEventListener('click', toggleLang);
   applyLang(getLang());
   /* lang-reveal */document.documentElement.style.opacity='1';
 
@@ -1331,11 +1324,11 @@
     const mobileLangBtn = document.getElementById('lang-btn-mobile');
     if (mobileLangBtn) {
       mobileLangBtn.addEventListener('click', () => {
-        const mainLangBtn = document.getElementById('lang-toggle');
+        const mainLangBtn = document.getElementById('lang-btn');
         if (mainLangBtn) mainLangBtn.click();
         setTimeout(() => { if (mainLangBtn) mobileLangBtn.textContent = mainLangBtn.textContent; }, 200);
       });
-      const mainLangBtn = document.getElementById('lang-toggle');
+      const mainLangBtn = document.getElementById('lang-btn');
       if (mainLangBtn) mobileLangBtn.textContent = mainLangBtn.textContent;
     }
   })();

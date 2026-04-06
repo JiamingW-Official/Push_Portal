@@ -54,14 +54,11 @@ nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
 .nav-links a:hover{color:var(--accent);background:var(--accent-bg);}
 .nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);}
 .nav-links a.active::after{content:'';position:absolute;bottom:0;left:12px;right:12px;height:2px;background:var(--accent);border-radius:2px;}
-.nav-right{margin-left:auto;flex-shrink:0}
-.lang-btn{
-  background:var(--accent);color:#fff;
-  padding:7px 18px;border-radius:8px;
-  font-size:13px;font-weight:700;letter-spacing:0.5px;
-  border:none;cursor:pointer;transition:background 0.18s;
+#lang-btn{
+  flex-shrink:0;background:var(--accent);color:#fff;font-weight:700;font-size:13px;
+  padding:7px 18px;border-radius:8px;border:none;cursor:pointer;transition:background 0.15s;
 }
-.lang-btn:hover{background:var(--accent-dark)}
+#lang-btn:hover{background:var(--accent-dark);}
 
 @media(max-width:768px){
   .nav-links{display:none !important}
@@ -534,9 +531,7 @@ strong{font-weight:600;color:var(--text);}
     <a href="platform-value.html" class="active" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
     <a href="push-strategy-core.html" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
   </div>
-  <div class="nav-right">
-    <button class="lang-btn" id="langBtn">中 / EN</button>
-  </div>
+  <button id="lang-btn">中 / EN</button>
   <button class="nav-burger" id="nav-burger" aria-label="打开菜单" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
@@ -979,7 +974,7 @@ strong{font-weight:600;color:var(--text);}
 <script>
 // LANGUAGE SYSTEM
 const ELEMENTS = document.querySelectorAll('[data-en]');
-const BTN = document.getElementById('langBtn');
+const BTN = document.getElementById('lang-btn');
 let lang = localStorage.getItem('push-lang') || 'en';
 
 function applyLang() {
@@ -1075,11 +1070,11 @@ document.querySelectorAll('section').forEach(el => observer.observe(el));
   const mobileLangBtn = document.getElementById('lang-btn-mobile');
   if (mobileLangBtn) {
     mobileLangBtn.addEventListener('click', () => {
-      const mainLangBtn = document.getElementById('langBtn');
+      const mainLangBtn = document.getElementById('lang-btn');
       if (mainLangBtn) mainLangBtn.click();
       setTimeout(() => { if (mainLangBtn) mobileLangBtn.textContent = mainLangBtn.textContent; }, 200);
     });
-    const mainLangBtn = document.getElementById('langBtn');
+    const mainLangBtn = document.getElementById('lang-btn');
     if (mainLangBtn) mobileLangBtn.textContent = mainLangBtn.textContent;
   }
 })();
