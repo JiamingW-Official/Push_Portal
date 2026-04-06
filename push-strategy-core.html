@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PUSH — Strategy Core: Value Settlement Layer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --accent: #4f46e5;
+      --accent-light: #818cf8;
+      --accent-dark: #3730a3;
+      --accent-bg: rgba(79,70,229,0.06);
+      --accent-glow: rgba(79,70,229,0.18);
+      --primary: #0f0f1a;
+      --green: #059669;
+      --green-bg: rgba(5,150,105,0.08);
+      --orange: #d97706;
+      --red: #dc2626;
+      --red-bg: rgba(220,38,38,0.08);
+      --text: #111827;
+      --text2: #4b5563;
+      --text3: #9ca3af;
+      --border: #e5e7eb;
+      --bg2: #f8f9fa;
+      --radius: 14px;
+      --shadow: 0 4px 20px rgba(0,0,0,0.08);
+      --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #fff;
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ═══════════════════════════════════════
+       NAV
+    ═══════════════════════════════════════ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(255,255,255,0.94);
+      -webkit-backdrop-filter: blur(18px);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+      height: 60px;
+      display: flex; align-items: center;
+      padding: 0 28px;
+      gap: 0;
+    }
+
+    .nav-logo {
+      font-size: 22px; font-weight: 900;
+      color: var(--accent); letter-spacing: 2px;
+      text-decoration: none; flex-shrink: 0;
+      margin-right: 20px;
+      transition: opacity 0.2s;
+    }
+    .nav-logo:hover { opacity: 0.8; }
+
+    .nav-links {
+      display: flex; align-items: center;
+      gap: 2px; flex: 1; flex-wrap: wrap;
+    }
+    .nav-links a {
+      text-decoration: none; color: var(--text2);
+      font-size: 13px; font-weight: 500;
+      padding: 5px 11px; border-radius: 8px;
+      transition: all 0.2s; white-space: nowrap;
+    }
+    .nav-links a:hover { color: var(--accent); background: var(--accent-bg); }
+    .nav-links a.active {
+      color: var(--accent); background: var(--accent-bg);
+      font-weight: 700;
+    }
+
+    .nav-right { margin-left: auto; flex-shrink: 0; }
+    #lang-toggle {
+      background: var(--accent); color: #fff;
+      border: none; padding: 7px 16px;
+      border-radius: 8px; font-family: 'Inter', sans-serif;
+      font-size: 13px; font-weight: 700;
+      cursor: pointer; transition: all 0.2s;
+      white-space: nowrap; letter-spacing: 0.3px;
+    }
+    #lang-toggle:hover { background: var(--accent-dark); transform: translateY(-1px); }
+
+    /* ═══════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════ */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 40%, #0f3460 70%, #1a0a3e 100%);
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 120px 32px 90px;
+      position: relative; overflow: hidden;
+    }
+
+    /* animated glow pulses */
+    .hero-glow {
+      position: absolute; inset: 0; pointer-events: none;
+    }
+    .hero-glow::before {
+      content: '';
+      position: absolute;
+      top: 20%; left: 15%;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(79,70,229,0.22) 0%, transparent 65%);
+      border-radius: 50%;
+      animation: glowPulse 8s ease-in-out infinite;
+    }
+    .hero-glow::after {
+      content: '';
+      position: absolute;
+      bottom: 15%; right: 10%;
+      width: 480px; height: 480px;
+      background: radial-gradient(circle, rgba(129,140,248,0.15) 0%, transparent 65%);
+      border-radius: 50%;
+      animation: glowPulse 8s ease-in-out infinite 4s;
+    }
+    @keyframes glowPulse {
+      0%, 100% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.18); opacity: 1; }
+    }
+
+    /* grid texture */
+    .hero-grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(129,140,248,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(129,140,248,0.07) 1px, transparent 1px);
+      background-size: 56px 56px;
+    }
+
+    .hero-content {
+      position: relative; z-index: 1;
+      max-width: 980px; width: 100%;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(79,70,229,0.18);
+      border: 1px solid rgba(129,140,248,0.38);
+      color: var(--accent-light);
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 3px; text-transform: uppercase;
+      padding: 9px 22px; border-radius: 100px;
+      margin-bottom: 36px;
+    }
+    .hero-badge-dot {
+      width: 7px; height: 7px;
+      background: var(--accent-light);
+      border-radius: 50%;
+      animation: dotPulse 2s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    @keyframes dotPulse {
+      0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(129,140,248,0.6); }
+      50% { opacity: 0.7; transform: scale(1.3); box-shadow: 0 0 0 6px rgba(129,140,248,0); }
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 5.5vw, 5rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.08;
+      letter-spacing: -2px;
+      margin-bottom: 30px;
+    }
+    .hero-title .line-accent { color: var(--accent-light); }
+    .hero-title .line-accent2 { color: #c4b5fd; }
+
+    .hero-sub {
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      color: rgba(255,255,255,0.62);
+      max-width: 740px; margin: 0 auto 50px;
+      line-height: 1.75; font-weight: 400;
+    }
+
+    .hero-ctas {
+      display: flex; align-items: center; justify-content: center;
+      gap: 16px; flex-wrap: wrap; margin-bottom: 60px;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      text-decoration: none;
+      font-size: 14px; font-weight: 600;
+      padding: 12px 24px; border-radius: 10px;
+      transition: all 0.25s;
+    }
+    .hero-cta-primary {
+      background: var(--accent); color: #fff;
+      box-shadow: 0 4px 24px rgba(79,70,229,0.38);
+    }
+    .hero-cta-primary:hover {
+      background: #5b52f0; transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(79,70,229,0.5);
+    }
+    .hero-cta-secondary {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.85);
+    }
+    .hero-cta-secondary:hover {
+      background: rgba(255,255,255,0.14); transform: translateY(-2px);
+    }
+
+    .hero-scroll {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      color: rgba(255,255,255,0.35); font-size: 11px;
+      letter-spacing: 2px; text-transform: uppercase;
+      animation: scrollBounce 2.5s ease-in-out infinite;
+    }
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateY(0); opacity: 0.35; }
+      50% { transform: translateY(8px); opacity: 0.65; }
+    }
+    .hero-scroll svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; }
+
+    /* ═══════════════════════════════════════
+       SHARED UTILITIES
+    ═══════════════════════════════════════ */
+    .section-wrap { padding: 104px 32px; }
+    .section-wrap-gray { padding: 104px 32px; background: var(--bg2); }
+    .section-wrap-dark { padding: 104px 32px; background: var(--primary); }
+    .inner { max-width: 1200px; margin: 0 auto; }
+    .inner-md { max-width: 960px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 14px;
+    }
+    .section-label-light {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: var(--accent-light); margin-bottom: 14px;
+    }
+
+    .section-divider {
+      width: 52px; height: 4px; border-radius: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-light));
+      margin-bottom: 28px;
+    }
+    .section-divider-white {
+      width: 52px; height: 4px; border-radius: 2px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.7), rgba(255,255,255,0.25));
+      margin-bottom: 28px;
+    }
+
+    .section-title {
+      font-size: clamp(1.9rem, 3.5vw, 2.9rem);
+      font-weight: 900; color: var(--primary);
+      line-height: 1.12; letter-spacing: -1.5px;
+      margin-bottom: 18px;
+    }
+    .section-title-light {
+      font-size: clamp(1.9rem, 3.5vw, 2.9rem);
+      font-weight: 900; color: #fff;
+      line-height: 1.12; letter-spacing: -1.5px;
+      margin-bottom: 18px;
+    }
+    .section-sub {
+      font-size: 1.08rem; color: var(--text2);
+      max-width: 680px; line-height: 1.72;
+      margin-bottom: 56px; font-weight: 400;
+    }
+    .section-sub-light {
+      font-size: 1.08rem; color: rgba(255,255,255,0.6);
+      max-width: 680px; line-height: 1.72;
+      margin-bottom: 56px; font-weight: 400;
+    }
+
+    /* ── FADE IN ── */
+    .fade-in {
+      opacity: 0; transform: translateY(32px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .fd1 { transition-delay: 0.1s; }
+    .fd2 { transition-delay: 0.2s; }
+    .fd3 { transition-delay: 0.3s; }
+    .fd4 { transition-delay: 0.4s; }
+    .fd5 { transition-delay: 0.5s; }
+
+    /* ═══════════════════════════════════════
+       SECTION 1 — FATAL QUESTIONS
+    ═══════════════════════════════════════ */
+    .fatal-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 24px; margin-bottom: 36px;
+    }
+
+    .fatal-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px 36px;
+      position: relative; overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+      box-shadow: var(--shadow);
+    }
+    .fatal-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 36px rgba(79,70,229,0.12);
+    }
+
+    .fatal-q-badge {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px;
+      background: var(--accent); color: #fff;
+      border-radius: 50%; font-size: 13px; font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    .fatal-q-num-bg {
+      position: absolute; bottom: -10px; right: -8px;
+      font-size: 120px; font-weight: 900;
+      color: var(--accent); opacity: 0.06;
+      line-height: 1; pointer-events: none;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    .fatal-q-text {
+      font-size: 1.18rem; font-weight: 700;
+      color: var(--text); line-height: 1.45;
+      position: relative; z-index: 1;
+    }
+
+    .fatal-verdict {
+      background: var(--red-bg);
+      border: 1px solid rgba(220,38,38,0.2);
+      border-left: 4px solid var(--red);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      font-size: 1.05rem; font-weight: 600;
+      color: #991b1b; line-height: 1.65;
+    }
+
+    /* ═══════════════════════════════════════
+       SECTION 2 — MATCHING TOOL TRAP
+    ═══════════════════════════════════════ */
+    .danger-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .danger-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 40px 32px;
+      position: relative; overflow: hidden;
+      border: 1px solid var(--border);
+      transition: transform 0.25s, box-shadow 0.25s;
+      box-shadow: var(--shadow);
+    }
+    .danger-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 4px; background: var(--red);
+    }
+    .danger-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 48px rgba(220,38,38,0.13);
+    }
+
+    .danger-num-badge {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px;
+      background: var(--red-bg);
+      border: 1px solid rgba(220,38,38,0.25);
+      color: var(--red); border-radius: 50%;
+      font-size: 13px; font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .danger-icon {
+      font-size: 32px; margin-bottom: 16px; display: block;
+    }
+
+    .danger-title {
+      font-size: 1.15rem; font-weight: 800;
+      color: var(--red); margin-bottom: 12px;
+    }
+
+    .danger-body {
+      font-size: 0.93rem; color: var(--text2);
+      line-height: 1.68;
+    }
+
+    /* ═══════════════════════════════════════
+       SECTION 3 — VALUE SETTLEMENT LAYER (dark)
+    ═══════════════════════════════════════ */
+    .pillar-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .pillar-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 40px 34px 36px;
+      position: relative; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.12);
+      transition: transform 0.25s, box-shadow 0.25s;
+      box-shadow: var(--shadow);
+    }
+
+    .pillar-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 5px;
+    }
+    .pillar-card.pillar-indigo::before {
+      background: linear-gradient(90deg, #4f46e5, #818cf8);
+    }
+    .pillar-card.pillar-green::before {
+      background: linear-gradient(90deg, #059669, #34d399);
+    }
+    .pillar-card.pillar-orange::before {
+      background: linear-gradient(90deg, #d97706, #fbbf24);
+    }
+
+    .pillar-card:hover {
+      transform: translateY(-8px);
+    }
+    .pillar-card.pillar-indigo:hover {
+      box-shadow: 0 20px 56px rgba(79,70,229,0.22);
+    }
+    .pillar-card.pillar-green:hover {
+      box-shadow: 0 20px 56px rgba(5,150,105,0.22);
+    }
+    .pillar-card.pillar-orange:hover {
+      box-shadow: 0 20px 56px rgba(217,119,6,0.22);
+    }
+
+    .pillar-icon {
+      font-size: 38px; display: block; margin-bottom: 18px;
+    }
+
+    .pillar-title {
+      font-size: 1.22rem; font-weight: 800;
+      color: var(--text); margin-bottom: 6px;
+    }
+
+    .pillar-title-zh {
+      font-size: 0.82rem; font-weight: 600;
+      margin-bottom: 18px;
+    }
+    .pillar-card.pillar-indigo .pillar-title-zh { color: var(--accent); }
+    .pillar-card.pillar-green .pillar-title-zh { color: var(--green); }
+    .pillar-card.pillar-orange .pillar-title-zh { color: var(--orange); }
+
+    .pillar-body {
+      font-size: 0.92rem; color: var(--text2);
+      line-height: 1.7; margin-bottom: 22px;
+    }
+    .pillar-body strong { color: var(--text); font-weight: 700; }
+
+    .pillar-tag {
+      display: inline-block;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+      padding: 5px 12px; border-radius: 100px;
+    }
+    .pillar-card.pillar-indigo .pillar-tag {
+      background: var(--accent-bg); color: var(--accent);
+    }
+    .pillar-card.pillar-green .pillar-tag {
+      background: var(--green-bg); color: var(--green);
+    }
+    .pillar-card.pillar-orange .pillar-tag {
+      background: rgba(217,119,6,0.08); color: var(--orange);
+    }
+
+    /* ═══════════════════════════════════════
+       SECTION 4 — FLYWHEEL (gray)
+    ═══════════════════════════════════════ */
+    .flywheel-layout {
+      display: grid;
+      grid-template-columns: 1fr 200px 1fr;
+      gap: 28px; align-items: start;
+    }
+
+    .flywheel-col-header {
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+      margin-bottom: 16px; padding-bottom: 12px;
+      border-bottom: 2px solid;
+    }
+    .col-creator .flywheel-col-header { color: #7c3aed; border-color: #7c3aed; }
+    .col-merchant .flywheel-col-header { color: var(--green); border-color: var(--green); }
+
+    .flywheel-loop {
+      background: #fff; border-radius: var(--radius);
+      padding: 28px 24px; box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    .flywheel-step {
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 14px; border-radius: 8px;
+      font-size: 0.88rem; font-weight: 600;
+      margin-bottom: 4px;
+      transition: all 0.25s; cursor: default;
+    }
+    .flywheel-step:hover { transform: scale(1.03); }
+
+    .col-creator .flywheel-step {
+      background: rgba(124,58,237,0.06);
+      color: #5b21b6;
+    }
+    .col-creator .flywheel-step:hover { background: rgba(124,58,237,0.12); }
+    .col-merchant .flywheel-step {
+      background: var(--green-bg);
+      color: #065f46;
+    }
+    .col-merchant .flywheel-step:hover { background: rgba(5,150,105,0.15); }
+
+    .flywheel-arrow {
+      text-align: center; font-size: 14px;
+      color: var(--text3); padding: 2px 0;
+      opacity: 0.6;
+    }
+
+    .flywheel-return {
+      text-align: center; font-size: 18px;
+      padding: 6px 0; font-weight: 700;
+    }
+    .col-creator .flywheel-return { color: #7c3aed; }
+    .col-merchant .flywheel-return { color: var(--green); }
+
+    /* center hub */
+    .flywheel-hub-col {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 12px; padding-top: 32px;
+    }
+
+    .flywheel-hub {
+      width: 150px; height: 150px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 16px;
+      animation: hubPulse 4s ease-in-out infinite;
+    }
+    @keyframes hubPulse {
+      0%, 100% { box-shadow: 0 0 0 0 var(--accent-glow), 0 0 0 0 rgba(79,70,229,0.1); }
+      50% { box-shadow: 0 0 0 16px var(--accent-glow), 0 0 0 32px rgba(79,70,229,0.05); }
+    }
+
+    .hub-push {
+      font-size: 24px; font-weight: 900;
+      color: #fff; letter-spacing: 2px;
+      line-height: 1;
+    }
+    .hub-sub {
+      font-size: 10px; font-weight: 600;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.3; margin-top: 6px;
+    }
+
+    .platform-loop-strip {
+      margin-top: 32px;
+      background: linear-gradient(135deg, rgba(217,119,6,0.08), rgba(251,191,36,0.06));
+      border: 1px solid rgba(217,119,6,0.2);
+      border-radius: var(--radius);
+      padding: 24px 32px;
+    }
+    .platform-loop-label {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 12px;
+    }
+    .platform-loop-steps {
+      display: flex; align-items: center;
+      gap: 8px; flex-wrap: wrap;
+    }
+    .platform-step {
+      background: rgba(217,119,6,0.1); color: #92400e;
+      font-size: 12px; font-weight: 600;
+      padding: 6px 14px; border-radius: 100px;
+      white-space: nowrap;
+    }
+    .platform-step-arrow {
+      color: var(--orange); font-size: 14px; font-weight: 700;
+      opacity: 0.7;
+    }
+
+    /* ═══════════════════════════════════════
+       SECTION 5 — COMPOUNDING MOAT (white)
+    ═══════════════════════════════════════ */
+    .moat-timeline {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      position: relative; gap: 0;
+    }
+
+    .moat-connector {
+      position: absolute; top: 30px;
+      left: calc(12.5% + 8px); right: calc(12.5% + 8px);
+      height: 3px;
+      background: linear-gradient(90deg, #93c5fd, var(--accent), var(--accent-dark), #1e1b4b);
+      z-index: 0;
+    }
+
+    .moat-card {
+      position: relative; z-index: 1;
+      padding: 0 12px 0;
+      text-align: center;
+      cursor: default;
+      transition: transform 0.25s;
+    }
+    .moat-card:hover { transform: translateY(-4px); }
+    .moat-card:hover .moat-inner { box-shadow: 0 12px 36px rgba(79,70,229,0.14); }
+
+    .moat-dot {
+      width: 20px; height: 20px;
+      border-radius: 50%; margin: 0 auto 20px;
+      border: 3px solid;
+      background: #fff; position: relative; z-index: 2;
+    }
+    .moat-card:nth-child(1) .moat-dot { border-color: #93c5fd; background: #eff6ff; }
+    .moat-card:nth-child(2) .moat-dot { border-color: var(--accent-light); }
+    .moat-card:nth-child(3) .moat-dot { border-color: var(--accent); }
+    .moat-card:nth-child(4) .moat-dot { border-color: var(--accent-dark); background: var(--accent-dark); }
+
+    .moat-inner {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px 20px;
+      transition: box-shadow 0.25s; box-shadow: var(--shadow);
+    }
+
+    .moat-period {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .moat-card:nth-child(1) .moat-period { color: #60a5fa; }
+    .moat-card:nth-child(2) .moat-period { color: var(--accent-light); }
+    .moat-card:nth-child(3) .moat-period { color: var(--accent); }
+    .moat-card:nth-child(4) .moat-period { color: var(--accent-dark); }
+
+    .moat-phase-icon { font-size: 28px; margin-bottom: 8px; }
+
+    .moat-title {
+      font-size: 1rem; font-weight: 800;
+      color: var(--primary); margin-bottom: 4px;
+    }
+    .moat-title-zh {
+      font-size: 0.78rem; font-weight: 600;
+      color: var(--accent); margin-bottom: 12px;
+    }
+    .moat-body {
+      font-size: 0.84rem; color: var(--text2);
+      line-height: 1.62;
+    }
+
+    /* ═══════════════════════════════════════
+       SECTION 6 — BUSINESS PLAN (dark)
+    ═══════════════════════════════════════ */
+    .bp-questions {
+      display: flex; flex-direction: column;
+      gap: 20px; margin-bottom: 36px;
+    }
+
+    .bp-q {
+      background: #fff; border-radius: var(--radius);
+      padding: 34px 40px;
+      display: flex; align-items: flex-start; gap: 24px;
+      transition: all 0.25s; cursor: default;
+      border-left: 4px solid transparent;
+      box-shadow: var(--shadow);
+    }
+    .bp-q:hover {
+      border-left-color: var(--accent);
+      transform: translateX(4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .bp-q-num-circle {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(217,119,6,0.1);
+      border: 2px solid rgba(217,119,6,0.25);
+      color: var(--orange);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .bp-q-content { flex: 1; }
+
+    .bp-q-label {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--accent-light); margin-bottom: 8px;
+    }
+
+    .bp-q-text {
+      font-size: 1.1rem; font-weight: 800;
+      color: var(--primary); line-height: 1.4; margin-bottom: 12px;
+    }
+
+    .bp-q-answer {
+      font-size: 0.93rem; color: var(--text2);
+      line-height: 1.65; margin-bottom: 14px;
+    }
+    .bp-q-answer strong { color: var(--text); font-weight: 700; }
+
+    .bp-q-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 600; color: var(--accent);
+      text-decoration: none; transition: gap 0.2s;
+    }
+    .bp-q-link:hover { gap: 10px; }
+
+    .bp-verdict {
+      background: rgba(79,70,229,0.1);
+      border: 1px solid rgba(129,140,248,0.3);
+      border-radius: var(--radius);
+      padding: 32px 40px;
+      font-size: 1.08rem; font-weight: 600;
+      color: #fff; line-height: 1.65; text-align: center;
+    }
+    .bp-verdict em { font-style: normal; color: var(--accent-light); font-weight: 700; }
+
+    /* ═══════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════ */
+    footer {
+      background: #090910;
+      padding: 72px 32px 40px;
+    }
+
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+
+    .footer-logo {
+      font-size: 28px; font-weight: 900;
+      color: var(--accent); letter-spacing: 2px;
+      margin-bottom: 12px; display: block;
+      text-decoration: none;
+    }
+
+    .footer-tagline {
+      font-size: 1rem; font-weight: 600;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 44px;
+    }
+    .footer-tagline em {
+      font-style: normal; color: var(--accent-light);
+    }
+
+    .footer-links {
+      display: flex; flex-wrap: wrap;
+      gap: 10px; margin-bottom: 48px;
+    }
+    .footer-links a {
+      text-decoration: none;
+      color: rgba(255,255,255,0.45);
+      font-size: 13px; font-weight: 500;
+      padding: 6px 14px; border-radius: 100px;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.2s;
+    }
+    .footer-links a:hover {
+      color: #fff;
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.22);
+    }
+    .footer-links a.active-link {
+      color: var(--accent-light);
+      border-color: rgba(129,140,248,0.35);
+      background: rgba(79,70,229,0.1);
+    }
+
+    .footer-copy {
+      font-size: 12px; color: rgba(255,255,255,0.2);
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding-top: 24px;
+    }
+
+    .flywheel-return { margin-top: 8px; }
+    .platform-loop-mt { margin-top: 32px; }
+
+    /* ═══════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .pillar-grid { grid-template-columns: 1fr 1fr; }
+      .moat-timeline { grid-template-columns: 1fr 1fr; gap: 20px; }
+      .moat-connector { display: none; }
+      .moat-dot { margin-bottom: 16px; }
+      .flywheel-layout { grid-template-columns: 1fr; }
+      .flywheel-hub-col { padding-top: 0; flex-direction: row; order: -1; justify-content: center; }
+      .flywheel-hub { width: 120px; height: 120px; }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 16px; }
+      .nav-links { display: none; }
+      .section-wrap, .section-wrap-gray, .section-wrap-dark { padding: 72px 20px; }
+      .danger-grid, .pillar-grid, .fatal-grid { grid-template-columns: 1fr; }
+      .moat-timeline { grid-template-columns: 1fr; }
+      .bp-q { padding: 24px 20px; flex-direction: column; gap: 12px; }
+      .hero { padding: 100px 20px 72px; }
+      .hero-title { letter-spacing: -1px; }
+      .platform-loop-steps { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════ NAV ══════════════════════ -->
+<nav>
+  <a href="index.html" class="nav-logo">PUSH</a>
+  <div class="nav-links">
+    <a href="index.html" data-en="Dashboard" data-zh="仪表盘">Dashboard</a>
+    <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
+    <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演方案">Pitch Deck</a>
+    <a href="prospects.html" data-en="Prospects" data-zh="未来愿景">Prospects</a>
+    <a href="challenges.html" data-en="Challenges" data-zh="挑战">Challenges</a>
+    <a href="risk-defense.html" data-en="Risk &amp; Defense" data-zh="风险防御">Risk &amp; Defense</a>
+    <a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a>
+    <a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
+    <a href="push-strategy-core.html" class="active" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
+  </div>
+  <div class="nav-right">
+    <button id="lang-toggle">中 / EN</button>
+  </div>
+</nav>
+
+<!-- ══════════════════════ HERO ══════════════════════ -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      <span data-en="THE CORE THESIS" data-zh="核心命题">THE CORE THESIS</span>
+    </div>
+
+    <h1 class="hero-title">
+      <span data-en="Push is not<br><span class='line-accent'>a matching tool.</span><br>Push is<br><span class='line-accent2'>a value settlement layer.</span>" data-zh="Push 不是撮合工具，<br><span class='line-accent'>而是价值结算层。</span>">Push is not<br><span class="line-accent">a matching tool.</span><br>Push is<br><span class="line-accent2">a value settlement layer.</span></span>
+    </h1>
+
+    <p class="hero-sub" data-en="Matching tools have no moat. No long-term value. No high valuation. This page explains why Push is fundamentally different — and why it must be." data-zh="撮合工具没有护城河，没有长期价值，没有高估值。这一页解释 Push 为什么本质上不同——以及为什么必须如此。">Matching tools have no moat. No long-term value. No high valuation. This page explains why Push is fundamentally different — and why it must be.</p>
+
+    <div class="hero-ctas">
+      <a href="retention-defense.html" class="hero-cta hero-cta-primary" data-en="→ Creator Retention Architecture" data-zh="→ Creator 留存架构">→ Creator Retention Architecture</a>
+      <a href="platform-value.html" class="hero-cta hero-cta-secondary" data-en="→ Anti-Disintermediation Defense" data-zh="→ 反绕平台机制">→ Anti-Disintermediation Defense</a>
+    </div>
+
+    <div class="hero-scroll">
+      <span data-en="SCROLL TO EXPLORE" data-zh="向下滚动探索">SCROLL TO EXPLORE</span>
+      <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════ SECTION 1: FATAL QUESTIONS ══════════════════════ -->
+<div class="section-wrap">
+  <div class="inner-md">
+
+    <div class="fade-in">
+      <div class="section-label" data-en="THE CORE THESIS" data-zh="核心命题">THE CORE THESIS</div>
+      <div class="section-divider"></div>
+      <h2 class="section-title" data-en="Two Questions That Determine Everything" data-zh="决定一切的两个问题">Two Questions That Determine Everything</h2>
+      <p class="section-sub" data-en="Before anything else, any investor, advisor, or serious operator will ask these two questions. If you can't answer them with conviction, the rest doesn't matter." data-zh="在一切之前，任何投资者、顾问或认真的运营者都会问这两个问题。如果你无法有把握地回答，其余的都不重要。">Before anything else, any investor, advisor, or serious operator will ask these two questions. If you can't answer them with conviction, the rest doesn't matter.</p>
+    </div>
+
+    <div class="fatal-grid">
+      <div class="fatal-card fade-in fd1">
+        <div class="fatal-q-badge">Q1</div>
+        <div class="fatal-q-num-bg">01</div>
+        <div class="fatal-q-text" data-en="Why do creators stay long-term, instead of grabbing free samples and leaving?" data-zh="Creator 为什么长期留在平台，而不是薅完 sample 就走？">Why do creators stay long-term, instead of grabbing free samples and leaving?</div>
+      </div>
+      <div class="fatal-card fade-in fd2">
+        <div class="fatal-q-badge">Q2</div>
+        <div class="fatal-q-num-bg">02</div>
+        <div class="fatal-q-text" data-en="Why don't merchants bypass the platform and deal directly with creators?" data-zh="商家为什么不绕过平台，直接私下跟 creator 合作？">Why don't merchants bypass the platform and deal directly with creators?</div>
+      </div>
+    </div>
+
+    <div class="fatal-verdict fade-in fd3">
+      <span data-en="If you cannot answer both questions convincingly, Push is just a tool. Tools get replaced. Tools get commoditized. Tools die." data-zh="如果这两个问题回答不了，Push 只是一个工具。工具会被替代，会被商品化，会消亡。">If you cannot answer both questions convincingly, Push is just a tool. Tools get replaced. Tools get commoditized. Tools die.</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════ SECTION 2: MATCHING TOOL TRAP ══════════════════════ -->
+<div class="section-wrap-gray">
+  <div class="inner">
+
+    <div class="fade-in">
+      <div class="section-label" data-en="THE DANGER" data-zh="危险">THE DANGER</div>
+      <div class="section-divider"></div>
+      <h2 class="section-title" data-en="If Push is Just a Matching Tool" data-zh="如果 Push 只是一个撮合工具">If Push is Just a Matching Tool</h2>
+      <p class="section-sub" data-en="Three reasons why matching tools always fail." data-zh="撮合工具必然失败的三个原因。">Three reasons why matching tools always fail.</p>
+    </div>
+
+    <div class="danger-grid">
+      <div class="danger-card fade-in fd1">
+        <div class="danger-num-badge">01</div>
+        <div class="danger-icon">🔓</div>
+        <div class="danger-title" data-en="Zero Switching Cost" data-zh="零切换成本">Zero Switching Cost</div>
+        <div class="danger-body" data-en="If everything a creator does on the platform can be replicated elsewhere — or abandoned without loss — they will leave the moment a better offer comes. No lock-in means no loyalty. No loyalty means no business." data-zh="如果 Creator 在平台上做的一切都可以在其他地方复制，或者不付出代价就能离开，他们会在有更好机会时立刻走人。没有锁定意味着没有忠诚度，没有忠诚度意味着没有业务。">If everything a creator does on the platform can be replicated elsewhere — or abandoned without loss — they will leave the moment a better offer comes. No lock-in means no loyalty. No loyalty means no business.</div>
+      </div>
+      <div class="danger-card fade-in fd2">
+        <div class="danger-num-badge">02</div>
+        <div class="danger-icon">📊</div>
+        <div class="danger-title" data-en="No Network Effect" data-zh="无网络效应">No Network Effect</div>
+        <div class="danger-body" data-en="A simple matching tool gets better for no one as it grows. More users = more noise, not more value. Without compounding data and reputation layers, scale delivers diminishing returns — not defensibility." data-zh="简单的撮合工具随着增长对任何人都不会变得更好。更多用户 = 更多噪音，而不是更多价值。没有复利数据和声誉层，规模带来的是递减回报——而不是防御性。">A simple matching tool gets better for no one as it grows. More users = more noise, not more value. Without compounding data and reputation layers, scale delivers diminishing returns — not defensibility.</div>
+      </div>
+      <div class="danger-card fade-in fd3">
+        <div class="danger-num-badge">03</div>
+        <div class="danger-icon">💸</div>
+        <div class="danger-title" data-en="Commoditization Death" data-zh="商品化死亡">Commoditization Death</div>
+        <div class="danger-body" data-en="Any well-funded competitor can clone a matching interface in 3 months. Without structural lock-in, you get undercut on price and replaced. This is the graveyard of every gig platform that never built a moat." data-zh="任何有资金的竞争者都能在 3 个月内复制一个撮合界面。没有结构性锁定，会被克隆并被价格战击败。这是每一个从未建立护城河的零工平台的坟墓。">Any well-funded competitor can clone a matching interface in 3 months. Without structural lock-in, you get undercut on price and replaced. This is the graveyard of every gig platform that never built a moat.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════ SECTION 3: VALUE SETTLEMENT LAYER (dark) ══════════════════════ -->
+<div class="section-wrap-dark">
+  <div class="inner">
+
+    <div class="fade-in">
+      <div class="section-label-light" data-en="THE CORE THESIS" data-zh="核心命题">THE CORE THESIS</div>
+      <div class="section-divider-white"></div>
+      <h2 class="section-title-light" data-en="What Makes PUSH a Value Settlement Layer" data-zh="什么让 PUSH 成为价值结算层">What Makes PUSH a Value Settlement Layer</h2>
+      <p class="section-sub-light" data-en="A value settlement layer is where both sides book their earned value — and where leaving means losing that value." data-zh="价值结算层是双方在此结算自己赚到的价值的地方——而离开意味着失去这些价值。">A value settlement layer is where both sides book their earned value — and where leaving means losing that value.</p>
+    </div>
+
+    <div class="pillar-grid">
+
+      <!-- Pillar 1 -->
+      <div class="pillar-card pillar-indigo fade-in fd1">
+        <span class="pillar-icon">📜</span>
+        <div class="pillar-title" data-en="Creator Credit Capital" data-zh="Creator 信用资本">Creator Credit Capital</div>
+        <div class="pillar-title-zh" data-en="Creator 信用资本" data-zh="Creator Credit Capital">Creator 信用资本</div>
+        <div class="pillar-body" data-en="Fulfillment history, merchant ratings, geo-credit, category expertise, reliability score, dispute-free record — all <strong>non-portable</strong>. A creator's PUSH profile is their professional track record. Leaving PUSH means starting from zero." data-zh="履约历史、商家评分、地理信用、品类专长、可靠性评分、无纠纷记录——全部<strong>不可迁移</strong>。PUSH 档案就是他们的职业履历。离开 PUSH 意味着在其他地方从零开始。">Fulfillment history, merchant ratings, geo-credit, category expertise, reliability score, dispute-free record — all <strong>non-portable</strong>. A creator's PUSH profile is their professional track record. Leaving PUSH means starting from zero.</div>
+        <span class="pillar-tag" data-en="Non-portable assets" data-zh="不可迁移资产">Non-portable assets</span>
+      </div>
+
+      <!-- Pillar 2 -->
+      <div class="pillar-card pillar-green fade-in fd2">
+        <span class="pillar-icon">📊</span>
+        <div class="pillar-title" data-en="Merchant Operations Intelligence" data-zh="商家运营智能">Merchant Operations Intelligence</div>
+        <div class="pillar-title-zh" data-en="商家运营智能" data-zh="Merchant Operations Intelligence">商家运营智能</div>
+        <div class="pillar-body" data-en="Campaign analytics, creator performance comparison, ROI benchmarks, automated re-booking, dispute protection, continuous supply — all <strong>locked to the platform</strong>. PUSH is their creator marketing operations center. Leaving means losing all of it." data-zh="活动分析、Creator 对比、ROI 基准、自动复购、争议保护、持续供给——全部<strong>锁定在平台内</strong>。PUSH 后台就是他们的 creator 营销运营中心。离开 PUSH 意味着失去这一切。">Campaign analytics, creator performance comparison, ROI benchmarks, automated re-booking, dispute protection, continuous supply — all <strong>locked to the platform</strong>. PUSH is their creator marketing operations center. Leaving means losing all of it.</div>
+        <span class="pillar-tag" data-en="Platform-locked data" data-zh="平台锁定数据">Platform-locked data</span>
+      </div>
+
+      <!-- Pillar 3 -->
+      <div class="pillar-card pillar-orange fade-in fd3">
+        <span class="pillar-icon">🔒</span>
+        <div class="pillar-title" data-en="Network-Locked Liquidity" data-zh="网络锁定的流动性">Network-Locked Liquidity</div>
+        <div class="pillar-title-zh" data-en="网络锁定的流动性" data-zh="Network-Locked Liquidity">网络锁定的流动性</div>
+        <div class="pillar-body" data-en="The pool of verified, scored, tier-ranked local creators <strong>only exists inside PUSH</strong>. The pool of verified, performing local merchants only exists inside PUSH. Neither side can recreate this off-platform." data-zh="经过验证、有评分、有层级的本地 Creator 池<strong>只存在于 PUSH 内部</strong>。经过验证、有表现记录的本地商家池也只存在于 PUSH 内部。双方都无法在平台外重建这一切。">The pool of verified, scored, tier-ranked local creators <strong>only exists inside PUSH</strong>. The pool of verified, performing local merchants only exists inside PUSH. Neither side can recreate this off-platform.</div>
+        <span class="pillar-tag" data-en="Only inside PUSH" data-zh="只在 PUSH 内部">Only inside PUSH</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ SECTION 4: FLYWHEEL ══════════════════════ -->
+<div class="section-wrap-gray">
+  <div class="inner">
+
+    <div class="fade-in">
+      <div class="section-label" data-en="THE FLYWHEEL" data-zh="飞轮">THE FLYWHEEL</div>
+      <div class="section-divider"></div>
+      <h2 class="section-title" data-en="The Complete Retention &amp; Anti-Bypass Flywheel" data-zh="完整留存与反绕平台飞轮">The Complete Retention &amp; Anti-Bypass Flywheel</h2>
+      <p class="section-sub" data-en="When this flywheel works, every revolution makes it harder for both sides to leave." data-zh="当飞轮运转时，每一圈都让双方更难离开。">When this flywheel works, every revolution makes it harder for both sides to leave.</p>
+    </div>
+
+    <div class="flywheel-layout fade-in fd1">
+
+      <!-- Creator Column -->
+      <div class="col-creator">
+        <div class="flywheel-col-header" data-en="Creator Side" data-zh="Creator 端">Creator Side</div>
+        <div class="flywheel-loop">
+          <div class="flywheel-step" data-en="Complete Campaigns" data-zh="完成活动">Complete Campaigns</div>
+          <div class="flywheel-arrow">↓</div>
+          <div class="flywheel-step" data-en="Passport Updated" data-zh="Passport 更新">Passport Updated</div>
+          <div class="flywheel-arrow">↓</div>
+          <div class="flywheel-step" data-en="Tier Up" data-zh="等级提升">Tier Up</div>
+          <div class="flywheel-arrow">↓</div>
+          <div class="flywheel-step" data-en="Better Campaigns" data-zh="更好的活动">Better Campaigns</div>
+          <div class="flywheel-arrow">↓</div>
+          <div class="flywheel-step" data-en="Earn More" data-zh="赚得更多">Earn More</div>
+          <div class="flywheel-arrow">↓</div>
+          <div class="flywheel-step" data-en="Stay on Platform" data-zh="留在平台">Stay on Platform</div>
+          <div class="flywheel-return">↺</div>
+        </div>
+      </div>
+
+      <!-- Center Hub -->
+      <div class="flywheel-hub-col">
+        <div class="flywheel-hub">
+          <div class="hub-push">PUSH</div>
+          <div class="hub-sub" data-en="becomes irreplaceable" data-zh="成为不可替代">becomes irreplaceable</div>
+        </div>
+      </div>
+
+      <!-- Merchant Column -->
+      <div class="col-merchant">
+        <div class="flywheel-col-header" data-en="Merchant Side" data-zh="商家端">Merchant Side</div>
+        <div class="flywheel-loop">
+          <div class="flywheel-step" data-en="Post Campaign" data-zh="发布活动">Post Campaign</div>
+          <div class="flywheel-arrow">↓</div>
+          <div class="flywheel-step" data-en="Find Reliable Creators" data-zh="找到可靠 Creator">Find Reliable Creators</div>
+          <div class="flywheel-arrow">↓</div>
+          <div class="flywheel-step" data-en="Data Review" data-zh="复盘数据">Data Review</div>
+          <div class="flywheel-arrow">↓</div>
+          <div class="flywheel-step" data-en="One-Click Re-book" data-zh="一键复购">One-Click Re-book</div>
+          <div class="flywheel-arrow">↓</div>
+          <div class="flywheel-step" data-en="Stable ROI" data-zh="稳定 ROI">Stable ROI</div>
+          <div class="flywheel-arrow">↓</div>
+          <div class="flywheel-step" data-en="Stay on Platform" data-zh="留在平台">Stay on Platform</div>
+          <div class="flywheel-return">↺</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Platform Loop Strip -->
+    <div class="platform-loop-strip platform-loop-mt fade-in fd2">
+      <div class="platform-loop-label" data-en="PLATFORM LOOP" data-zh="平台循环">PLATFORM LOOP</div>
+      <div class="platform-loop-steps">
+        <span class="platform-step" data-en="More Transactions" data-zh="更多交易">More Transactions</span>
+        <span class="platform-step-arrow">→</span>
+        <span class="platform-step" data-en="Better Dataset" data-zh="更强数据集">Better Dataset</span>
+        <span class="platform-step-arrow">→</span>
+        <span class="platform-step" data-en="Smarter Matching" data-zh="更好匹配">Smarter Matching</span>
+        <span class="platform-step-arrow">→</span>
+        <span class="platform-step" data-en="Stronger Passport" data-zh="更强 Passport">Stronger Passport</span>
+        <span class="platform-step-arrow">→</span>
+        <span class="platform-step" data-en="Higher Retention" data-zh="更高留存">Higher Retention</span>
+        <span class="platform-step-arrow">→</span>
+        <span class="platform-step" data-en="Network Effects" data-zh="网络效应">Network Effects</span>
+        <span class="platform-step-arrow">↺</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════ SECTION 5: COMPOUNDING MOAT ══════════════════════ -->
+<div class="section-wrap">
+  <div class="inner">
+
+    <div class="fade-in">
+      <div class="section-label" data-en="THE MOAT" data-zh="护城河">THE MOAT</div>
+      <div class="section-divider"></div>
+      <h2 class="section-title" data-en="How PUSH's Moat Compounds Over Time" data-zh="PUSH 护城河如何随时间复利">How PUSH's Moat Compounds Over Time</h2>
+      <p class="section-sub" data-en="The platform is not a moat from day one. The moat builds as data, credit, and trust compound." data-zh="平台第一天还没有护城河。护城河随着数据、信用和信任的复利而建立。">The platform is not a moat from day one. The moat builds as data, credit, and trust compound.</p>
+    </div>
+
+    <div class="moat-timeline fade-in fd1">
+      <div class="moat-connector"></div>
+
+      <div class="moat-card">
+        <div class="moat-dot"></div>
+        <div class="moat-inner">
+          <div class="moat-period" data-en="MONTH 1–3" data-zh="第 1–3 月">MONTH 1–3</div>
+          <div class="moat-phase-icon">❄️</div>
+          <div class="moat-title" data-en="Cold Start" data-zh="冷启动">Cold Start</div>
+          <div class="moat-title-zh" data-en="冷启动" data-zh="Cold Start">冷启动</div>
+          <div class="moat-body" data-en="Matching tool phase. No real moat yet. Critical to establish quality habits now — the foundation for everything after." data-zh="撮合工具阶段。尚无真正的护城河。现在必须建立质量习惯——为之后的一切奠定基础。">Matching tool phase. No real moat yet. Critical to establish quality habits now — the foundation for everything after.</div>
+        </div>
+      </div>
+
+      <div class="moat-card">
+        <div class="moat-dot"></div>
+        <div class="moat-inner">
+          <div class="moat-period" data-en="MONTH 4–9" data-zh="第 4–9 月">MONTH 4–9</div>
+          <div class="moat-phase-icon">📈</div>
+          <div class="moat-title" data-en="Credit Building" data-zh="信用积累">Credit Building</div>
+          <div class="moat-title-zh" data-en="信用积累" data-zh="Credit Building">信用积累</div>
+          <div class="moat-body" data-en="Creators start accumulating meaningful Passport data. Merchants begin seeing ROI patterns. First signs of switching cost emerge." data-zh="Creator 开始积累有意义的 Passport 数据。商家开始看到 ROI 规律。切换成本初现。">Creators start accumulating meaningful Passport data. Merchants begin seeing ROI patterns. First signs of switching cost emerge.</div>
+        </div>
+      </div>
+
+      <div class="moat-card">
+        <div class="moat-dot"></div>
+        <div class="moat-inner">
+          <div class="moat-period" data-en="MONTH 10–18" data-zh="第 10–18 月">MONTH 10–18</div>
+          <div class="moat-phase-icon">🏰</div>
+          <div class="moat-title" data-en="Moat Emerging" data-zh="护城河成形">Moat Emerging</div>
+          <div class="moat-title-zh" data-en="护城河成形" data-zh="Moat Emerging">护城河成形</div>
+          <div class="moat-body" data-en="High-tier creators cannot easily replicate their PUSH standing elsewhere. Merchants dependent on campaign analytics and re-booking flows. Real retention achieved." data-zh="高 Tier Creator 无法轻易在其他地方复制他们的 PUSH 地位。商家依赖活动分析和复购流程。真正的留存达成。">High-tier creators cannot easily replicate their PUSH standing elsewhere. Merchants dependent on campaign analytics and re-booking flows. Real retention achieved.</div>
+        </div>
+      </div>
+
+      <div class="moat-card">
+        <div class="moat-dot"></div>
+        <div class="moat-inner">
+          <div class="moat-period" data-en="MONTH 19+" data-zh="第 19 月+">MONTH 19+</div>
+          <div class="moat-phase-icon">✨</div>
+          <div class="moat-title" data-en="Network Effect" data-zh="网络效应">Network Effect</div>
+          <div class="moat-title-zh" data-en="网络效应" data-zh="Network Effect">网络效应</div>
+          <div class="moat-body" data-en="The best creators only take PUSH campaigns. The best merchants only use PUSH. New entrants face an established quality gap they cannot easily bridge." data-zh="最好的 Creator 只接 PUSH 的活动。最好的商家只用 PUSH。新进入者面对已建立的质量差距，很难追赶。">The best creators only take PUSH campaigns. The best merchants only use PUSH. New entrants face an established quality gap they cannot easily bridge.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ SECTION 6: BUSINESS PLAN (dark) ══════════════════════ -->
+<div class="section-wrap-dark">
+  <div class="inner">
+
+    <div class="fade-in">
+      <div class="section-label-light" data-en="INVESTOR READINESS" data-zh="投资者准备">INVESTOR READINESS</div>
+      <div class="section-divider-white"></div>
+      <h2 class="section-title-light" data-en="Retention &amp; Disintermediation Defense" data-zh="留存与反脱媒防御">Retention &amp; Disintermediation Defense</h2>
+      <p class="section-sub-light" data-en="The chapter every serious investor will ask about. Answer these three questions strongly, and the project becomes fundable." data-zh="每个认真的投资者都会问这个问题。如果这三个问题回答得强，项目就有了融资价值。">The chapter every serious investor will ask about. Answer these three questions strongly, and the project becomes fundable.</p>
+    </div>
+
+    <div class="bp-questions">
+
+      <div class="bp-q fade-in fd1">
+        <div class="bp-q-num-circle">1</div>
+        <div class="bp-q-content">
+          <div class="bp-q-label" data-en="QUESTION 01" data-zh="问题 01">QUESTION 01</div>
+          <div class="bp-q-text" data-en="What non-transferable assets do creators accumulate?" data-zh="Creator 在 PUSH 上积累了哪些不可转移的资产？">What non-transferable assets do creators accumulate?</div>
+          <div class="bp-q-answer" data-en="<strong>Answer:</strong> Passport scores, tier benefits, earnings history, geo-credit, merchant ratings — none portable. A creator who leaves PUSH loses their entire professional identity on the platform." data-zh="<strong>回答：</strong>Passport 分数、等级福利、收益历史、地理信用、商家评分——全不可携带。离开 PUSH 的 Creator 会失去他们在平台上的整个职业身份。"><strong>Answer:</strong> Passport scores, tier benefits, earnings history, geo-credit, merchant ratings — none portable. A creator who leaves PUSH loses their entire professional identity on the platform.</div>
+          <a href="retention-defense.html" class="bp-q-link" data-en="See Creator Retention Architecture →" data-zh="查看 Creator 留存架构 →">See Creator Retention Architecture →</a>
+        </div>
+      </div>
+
+      <div class="bp-q fade-in fd2">
+        <div class="bp-q-num-circle">2</div>
+        <div class="bp-q-content">
+          <div class="bp-q-label" data-en="QUESTION 02" data-zh="问题 02">QUESTION 02</div>
+          <div class="bp-q-text" data-en="What continuous value do merchants get that private deals can never provide?" data-zh="商家从 PUSH 获得了哪些私下合作永远无法提供的持续价值？">What continuous value do merchants get that private deals can never provide?</div>
+          <div class="bp-q-answer" data-en="<strong>Answer:</strong> Ongoing supply, data intelligence, automated workflows, dispute protection, quality-rated creator pool. A private deal provides none of this infrastructure — only a one-time transaction." data-zh="<strong>回答：</strong>持续供给、数据智能、自动化工作流、争议保护、有质量评级的 creator 池。私下合作提供不了这些基础设施——只是一次性交易。"><strong>Answer:</strong> Ongoing supply, data intelligence, automated workflows, dispute protection, quality-rated creator pool. A private deal provides none of this infrastructure — only a one-time transaction.</div>
+          <a href="platform-value.html" class="bp-q-link" data-en="See Anti-Disintermediation Defense →" data-zh="查看反绕平台机制 →">See Anti-Disintermediation Defense →</a>
+        </div>
+      </div>
+
+      <div class="bp-q fade-in fd3">
+        <div class="bp-q-num-circle">3</div>
+        <div class="bp-q-content">
+          <div class="bp-q-label" data-en="QUESTION 03" data-zh="问题 03">QUESTION 03</div>
+          <div class="bp-q-text" data-en="Why is on-platform re-booking better in every dimension?" data-zh="为什么平台内复购在每个维度上都更好？">Why is on-platform re-booking better in every dimension?</div>
+          <div class="bp-q-answer" data-en="<strong>Answer:</strong> Faster, cheaper, safer, auto-settled, proof-verified, credit-building — vs. DMs, cash transfers, disputes, no records. The platform is not just easier; it is structurally superior in every measurable way." data-zh="<strong>回答：</strong>更快、更便宜、更安全、自动结算、证明核验、信用积累——对比 DM、现金转账、纠纷、无记录。平台不只是更便捷；在每个可量化的维度上都具有结构性优势。"><strong>Answer:</strong> Faster, cheaper, safer, auto-settled, proof-verified, credit-building — vs. DMs, cash transfers, disputes, no records. The platform is not just easier; it is structurally superior in every measurable way.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="bp-verdict fade-in fd4" data-en="If answered <em>weakly</em>, the project appears fragile. If answered <em>strongly</em>, the project becomes fundable." data-zh="如果这三个问题回答得<em>弱</em>，整个项目会显得脆弱。如果回答得<em>强</em>，项目就有了融资价值。">If answered <em>weakly</em>, the project appears fragile. If answered <em>strongly</em>, the project becomes fundable.</div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════ FOOTER ══════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <a href="index.html" class="footer-logo">PUSH</a>
+    <div class="footer-tagline" data-en="From Transaction Entry Point to <em>Value Settlement Layer</em>" data-zh="从交易入口到<em>价值结算层</em>">From Transaction Entry Point to <em>Value Settlement Layer</em></div>
+    <div class="footer-links">
+      <a href="index.html" data-en="Dashboard" data-zh="仪表盘">Dashboard</a>
+      <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
+      <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演方案">Pitch Deck</a>
+      <a href="prospects.html" data-en="Prospects" data-zh="未来愿景">Prospects</a>
+      <a href="challenges.html" data-en="Challenges" data-zh="挑战">Challenges</a>
+      <a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a>
+      <a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
+      <a href="push-strategy-core.html" class="active-link" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
+    </div>
+    <div class="footer-copy" data-en="© 2025 PUSH Platform. Local Creator Performance Infrastructure." data-zh="© 2025 PUSH 平台。本地 Creator 表现基础设施。">© 2025 PUSH Platform. Local Creator Performance Infrastructure.</div>
+  </div>
+</footer>
+
+<script>
+  /* ══════════════════════════════════════
+     LANGUAGE SYSTEM
+  ══════════════════════════════════════ */
+  const LANG_KEY = 'push-lang';
+
+  function getLang() {
+    return localStorage.getItem(LANG_KEY) || 'en';
+  }
+
+  function applyLang(lang) {
+    document.querySelectorAll('[data-en]').forEach(el => {
+      const val = lang === 'zh' ? el.getAttribute('data-zh') : el.getAttribute('data-en');
+      if (val !== null) el.innerHTML = val;
+    });
+    const btn = document.getElementById('lang-toggle');
+    if (btn) btn.textContent = lang === 'en' ? '中 / EN' : 'EN / 中';
+    document.documentElement.lang = lang === 'zh' ? 'zh' : 'en';
+  }
+
+  function toggleLang() {
+    const next = getLang() === 'en' ? 'zh' : 'en';
+    localStorage.setItem(LANG_KEY, next);
+    document.body.style.opacity = '0.85';
+    setTimeout(() => {
+      applyLang(next);
+      document.body.style.opacity = '1';
+    }, 120);
+  }
+
+  document.getElementById('lang-toggle').addEventListener('click', toggleLang);
+  applyLang(getLang());
+
+  /* ══════════════════════════════════════
+     SCROLL FADE-IN
+  ══════════════════════════════════════ */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  /* smooth opacity transition */
+  document.body.style.transition = 'opacity 0.12s ease';
+</script>
+</body>
+</html>

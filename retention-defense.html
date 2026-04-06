@@ -3,604 +3,890 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PUSH - Creator Retention & Anti-Freeloading Defense</title>
+<title>PUSH — Creator Retention Defense</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
-  /* Backgrounds */
-  --bg: #ffffff;
-  --bg2: #f8f9fa;
-  --bg3: #f1f3f5;
-  --bg4: #e9ecef;
-
-  /* Primary */
-  --primary: #1a1a2e;
-  --primary-light: #2d2d5e;
-
-  /* Accent */
   --accent: #4f46e5;
   --accent-light: #818cf8;
-  --accent-bg: rgba(79, 70, 229, 0.06);
-  --accent2: #4f46e5;
-
-  /* Semantic */
+  --accent-dark: #3730a3;
+  --accent-bg: rgba(79,70,229,0.06);
+  --accent-glow: rgba(79,70,229,0.18);
+  --primary: #0f0f1a;
   --green: #059669;
-  --green-bg: rgba(5, 150, 105, 0.08);
+  --green-bg: rgba(5,150,105,0.08);
+  --green-glow: rgba(5,150,105,0.2);
   --orange: #d97706;
-  --orange-bg: rgba(217, 119, 6, 0.08);
+  --orange-bg: rgba(217,119,6,0.08);
   --red: #dc2626;
-  --red-bg: rgba(220, 38, 38, 0.08);
-  --pink: #db2777;
-  --blue: #2563eb;
-
-  /* Text */
+  --red-bg: rgba(220,38,38,0.08);
+  --red-glow: rgba(220,38,38,0.2);
   --text: #111827;
   --text2: #4b5563;
   --text3: #9ca3af;
-
-  /* Borders */
   --border: #e5e7eb;
-  --border-hover: #d1d5db;
-
-  --radius: 12px;
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-  --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
-  background: var(--bg); color: var(--text); line-height: 1.7;
-}
-a { color: var(--accent); text-decoration: none; }
-a:hover { text-decoration: underline; }
-
-/* NAV */
-.topnav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: #fff;
-  border-bottom: 1px solid var(--border);
-  display: flex; align-items: center; padding: 0 24px; height: 60px; gap: 8px;
-}
-.topnav .logo { font-weight: 800; font-size: 22px; color: var(--primary); letter-spacing: 2px; margin-right: 32px; }
-.topnav .navlinks { display: flex; gap: 4px; flex-wrap: wrap; flex: 1; }
-.topnav .navlinks a {
-  padding: 6px 14px; border-radius: 8px; font-size: 13px; font-weight: 500;
-  color: var(--text2); transition: all 0.2s;
-}
-.topnav .navlinks a:hover, .topnav .navlinks a.active { background: var(--bg3); color: var(--text); text-decoration: none; }
-.lang-btn {
-  padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 700;
-  background: var(--bg3); border: 1px solid var(--border);
-  color: var(--accent); cursor: pointer; transition: all 0.2s; white-space: nowrap;
-  letter-spacing: 1px;
-}
-.lang-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
-
-/* SECTIONS */
-.section { padding: 80px 24px 40px; max-width: 1200px; margin: 0 auto; }
-.section-title {
-  font-size: 32px; font-weight: 800; margin-bottom: 8px;
-  color: var(--text);
-}
-.section-sub { color: var(--text2); font-size: 15px; margin-bottom: 32px; }
-
-/* CARDS */
-.grid { display: grid; gap: 20px; }
-.grid-2 { grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); }
-.grid-3 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
-.grid-4 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-.card {
-  background: #fff; border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 24px; transition: all 0.3s;
-}
-.card:hover { border-color: var(--border-hover); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
-.card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-.card-icon {
-  width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
-  font-size: 20px; flex-shrink: 0;
-}
-.card-title { font-size: 16px; font-weight: 700; color: var(--text); }
-.card-desc { color: var(--text2); font-size: 14px; line-height: 1.7; }
-
-/* TAGS */
-.tag {
-  display: inline-block; padding: 3px 10px; border-radius: 6px; font-size: 11px; font-weight: 600;
-  margin: 2px 4px 2px 0;
-}
-.tag-purple { background: var(--accent-bg); color: var(--accent); }
-.tag-green { background: var(--green-bg); color: var(--green); }
-.tag-orange { background: var(--orange-bg); color: var(--orange); }
-.tag-red { background: var(--red-bg); color: var(--red); }
-.tag-blue { background: rgba(37, 99, 235, 0.08); color: var(--blue); }
-.tag-pink { background: rgba(219, 39, 119, 0.08); color: var(--pink); }
-
-/* HERO */
-.hero {
-  padding: 120px 24px 60px;
-  text-align: center;
-  background: var(--bg2);
-  border-bottom: 1px solid var(--border);
-  position: relative;
-}
-.hero::after {
-  content: '';
-  position: absolute; bottom: 0; left: 10%; right: 10%; height: 1px;
-  background: transparent;
-}
-.hero-badge {
-  display: inline-block; padding: 6px 20px; border-radius: 20px; font-size: 12px;
-  font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px;
-  background: var(--red-bg); border: 1px solid rgba(220, 38, 38, 0.2); color: var(--red);
-}
-.hero h1 {
-  font-size: 48px; font-weight: 900; line-height: 1.15; margin-bottom: 16px;
-  color: var(--text);
-}
-.hero-sub {
-  font-size: 18px; color: var(--text2); max-width: 700px; margin: 0 auto;
-  line-height: 1.8;
+  --bg2: #f8f9fa;
+  --radius: 14px;
+  --shadow: 0 4px 20px rgba(0,0,0,0.08);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
 }
 
-/* LAYER DIAGRAM */
-.layer-stack { display: flex; flex-direction: column; gap: 0; max-width: 800px; margin: 0 auto; }
-.layer-bar {
-  padding: 20px 28px; border: 1px solid var(--border);
-  transition: all 0.3s; cursor: default; position: relative;
-}
-.layer-bar:first-child { border-radius: var(--radius) var(--radius) 0 0; }
-.layer-bar:last-child { border-radius: 0 0 var(--radius) var(--radius); }
-.layer-bar:hover { transform: scale(1.02); z-index: 2; box-shadow: var(--shadow); }
-.layer-num { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
-.layer-title { font-size: 18px; font-weight: 800; color: var(--text); margin-bottom: 6px; }
-.layer-desc { font-size: 13px; color: var(--text2); line-height: 1.6; }
-.layer-strength { display: inline-block; padding: 2px 10px; border-radius: 4px; font-size: 10px; font-weight: 700; margin-top: 8px; }
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--text);line-height:1.6;overflow-x:hidden;}
 
-/* FLYWHEEL */
-.flywheel-wrap { display: flex; justify-content: center; padding: 40px 0; }
-.flywheel {
-  display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px;
-  max-width: 900px;
+/* ═══════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:60px;background:rgba(255,255,255,0.92);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  display:flex;align-items:center;padding:0 24px;gap:16px;
 }
-.flywheel-step {
-  background: #fff; border: 1px solid var(--border); border-radius: 12px;
-  padding: 14px 20px; font-size: 14px; font-weight: 600; text-align: center;
-  min-width: 160px; transition: all 0.3s; color: var(--text);
+.nav-logo{
+  font-size:22px;font-weight:900;color:var(--accent);
+  text-decoration:none;letter-spacing:-0.5px;flex-shrink:0;
 }
-.flywheel-step:hover { border-color: var(--accent); background: var(--bg2); box-shadow: var(--shadow); }
-.flywheel-arrow { color: var(--accent); font-size: 22px; font-weight: 800; }
+.nav-links{
+  display:flex;align-items:center;gap:4px;flex:1;justify-content:center;
+}
+.nav-links a{
+  font-size:13px;font-weight:500;color:var(--text2);
+  text-decoration:none;padding:5px 11px;border-radius:8px;
+  transition:color 0.2s,background 0.2s;white-space:nowrap;
+}
+.nav-links a:hover{color:var(--accent);background:var(--accent-bg);}
+.nav-links a.active{
+  color:var(--accent);background:var(--accent-bg);font-weight:700;
+}
+.lang-btn{
+  background:var(--accent);color:#fff;border:none;cursor:pointer;
+  font-size:12px;font-weight:700;padding:7px 14px;border-radius:8px;
+  transition:background 0.2s;flex-shrink:0;letter-spacing:0.3px;
+}
+.lang-btn:hover{background:var(--accent-dark);}
+.nav-mobile-right{display:none;gap:8px;align-items:center;}
 
-/* WARNING CARD */
-.warning-card {
-  background: #fff; border: 1px solid rgba(220, 38, 38, 0.15);
-  border-radius: var(--radius); padding: 24px; transition: all 0.3s;
+/* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
+.hero{
+  min-height:100vh;
+  background:linear-gradient(135deg,#0f0f1a 0%,#1a1a2e 50%,#0f3460 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:100px 24px 80px;
+  position:relative;overflow:hidden;
 }
-.warning-card:hover { border-color: var(--red); transform: translateY(-2px); box-shadow: var(--shadow); }
-.warning-num {
-  width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center;
-  background: var(--red-bg); color: var(--red); font-size: 14px; font-weight: 800;
-  flex-shrink: 0;
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+}
+.hero-glow{
+  position:absolute;top:20%;left:50%;transform:translateX(-50%);
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle, rgba(79,70,229,0.15) 0%, transparent 70%);
+  pointer-events:none;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(220,38,38,0.15);border:1px solid rgba(220,38,38,0.4);
+  color:#fca5a5;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  padding:8px 20px;border-radius:100px;margin-bottom:36px;position:relative;z-index:1;
+}
+.hero-badge::before{
+  content:'';width:8px;height:8px;border-radius:50%;
+  background:#dc2626;animation:pulse-red 1.5s ease-in-out infinite;flex-shrink:0;
+}
+@keyframes pulse-red{
+  0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,0.7);}
+  50%{box-shadow:0 0 0 8px rgba(220,38,38,0);}
+}
+.hero-title{
+  font-size:clamp(2.5rem,5vw,4.5rem);font-weight:900;
+  letter-spacing:-2px;line-height:1.05;color:#fff;
+  max-width:900px;margin-bottom:28px;position:relative;z-index:1;
+}
+.hero-title span{color:var(--accent-light);}
+.hero-subtitle-box{
+  background:rgba(220,38,38,0.1);border:1px solid rgba(220,38,38,0.25);
+  border-radius:12px;padding:18px 32px;max-width:680px;
+  color:#fca5a5;font-size:16px;font-weight:400;line-height:1.7;
+  position:relative;z-index:1;margin-bottom:60px;
+}
+.hero-scroll{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  color:rgba(255,255,255,0.35);font-size:11px;font-weight:500;letter-spacing:1px;text-transform:uppercase;
+  animation:bounce 2s ease-in-out infinite;
+}
+.hero-scroll svg{opacity:0.5;}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(6px);}}
+
+/* ═══════════════════════════════════════════
+   SHARED SECTION CHROME
+═══════════════════════════════════════════ */
+.section{padding:100px 24px;}
+.section-inner{max-width:1100px;margin:0 auto;}
+.section-bg2{background:var(--bg2);}
+.section-dark{background:var(--primary);}
+
+.section-label{
+  font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:12px;
+}
+.section-title{
+  font-size:42px;font-weight:900;letter-spacing:-1.5px;
+  color:var(--primary);line-height:1.1;margin-bottom:16px;
+}
+.section-title-white{color:#fff;}
+.section-sub{
+  font-size:17px;font-weight:400;color:var(--text2);
+  max-width:680px;line-height:1.7;
+}
+.section-sub-white{color:rgba(255,255,255,0.55);}
+
+.section-layout-split{
+  display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;
 }
 
-/* LIST ITEMS */
-.detail-list { list-style: none; padding: 0; margin: 12px 0 0; }
-.detail-list li {
-  padding: 6px 0 6px 20px; position: relative; font-size: 13px; color: var(--text2); line-height: 1.6;
+/* decorative number */
+.deco-number{
+  position:absolute;top:-30px;left:-10px;
+  font-size:120px;font-weight:900;color:#e5e7eb;
+  line-height:1;z-index:0;pointer-events:none;letter-spacing:-6px;
+  user-select:none;
 }
-.detail-list li::before {
-  content: ''; position: absolute; left: 4px; top: 14px;
-  width: 6px; height: 6px; border-radius: 50%;
+.section-left-wrap{position:relative;padding-top:60px;}
+
+/* ═══════════════════════════════════════════
+   SCROLL FADE IN
+═══════════════════════════════════════════ */
+.fade-in{
+  opacity:0;transform:translateY(24px);
+  transition:opacity 0.6s ease,transform 0.6s ease;
 }
-.detail-list.green li::before { background: var(--green); }
-.detail-list.purple li::before { background: var(--accent); }
-.detail-list.orange li::before { background: var(--orange); }
-.detail-list.red li::before { background: var(--red); }
-.detail-list.blue li::before { background: var(--blue); }
+.fade-in.visible{opacity:1;transform:translateY(0);}
 
-/* LOSS TABLE */
-.loss-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 16px; }
-.loss-item {
-  background: var(--red-bg); border: 1px solid rgba(220, 38, 38, 0.12);
-  border-radius: 10px; padding: 14px; text-align: center; font-size: 13px; font-weight: 600;
-  color: var(--red); transition: all 0.3s;
+/* ═══════════════════════════════════════════
+   SECTION 1 — WHY CREATORS LEAVE
+═══════════════════════════════════════════ */
+.cause-cards{display:flex;flex-direction:column;gap:20px;}
+.cause-card{
+  background:#fff;border:1px solid var(--border);
+  border-left:4px solid var(--red);border-radius:var(--radius);
+  padding:24px 28px;display:flex;gap:20px;align-items:flex-start;
+  cursor:default;
+  transition:transform 0.25s ease,box-shadow 0.25s ease;
 }
-.loss-item:hover { border-color: var(--red); background: rgba(220, 38, 38, 0.12); }
-
-/* FOOTER */
-.footer {
-  padding: 40px 24px; text-align: center; border-top: 1px solid var(--border);
-  margin-top: 40px;
+.cause-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 36px var(--red-glow),var(--shadow-lg);
 }
-.footer-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 16px; }
-.footer-links a { font-size: 13px; color: var(--text2); transition: color 0.2s; }
-.footer-links a:hover { color: var(--accent); text-decoration: none; }
+.cause-num{
+  min-width:36px;height:36px;border-radius:50%;
+  background:var(--red);color:#fff;
+  font-size:13px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.cause-title{font-size:18px;font-weight:800;color:var(--text);margin-bottom:6px;}
+.cause-body{font-size:14px;color:var(--text2);line-height:1.7;}
 
-/* SCROLL ANIMATIONS */
-.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
-.fade-in.visible { opacity: 1; transform: translateY(0); }
+/* ═══════════════════════════════════════════
+   SECTION 2 — FOUR LAYERS
+═══════════════════════════════════════════ */
+.pyramid-label{
+  text-align:center;
+  font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--text3);margin-bottom:32px;
+}
+.pyramid-wrap{
+  max-width:820px;margin:0 auto;
+  display:flex;flex-direction:column;gap:12px;
+}
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .topnav { padding: 0 12px; gap: 4px; }
-  .topnav .navlinks a { padding: 4px 8px; font-size: 11px; }
-  .topnav .logo { margin-right: 12px; font-size: 18px; }
-  .hero h1 { font-size: 32px; }
-  .hero-sub { font-size: 15px; }
-  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
-  .section { padding: 60px 16px 32px; }
-  .section-title { font-size: 24px; }
-  .flywheel { flex-direction: column; }
-  .flywheel-arrow { transform: rotate(90deg); }
-  .layer-bar { padding: 16px 20px; }
+/* Layer bars — DOM order: L4 top, L1 bottom */
+.layer-bar{
+  border-radius:14px;padding:24px 32px;
+  cursor:default;transition:transform 0.25s ease,box-shadow 0.25s ease;
+  position:relative;
+}
+.layer-bar:hover{transform:translateX(6px);box-shadow:var(--shadow-lg);}
+
+/* Layer 4 — full width, indigo gradient, most prominent */
+.layer-4{
+  background:linear-gradient(135deg,#3730a3 0%,#4f46e5 60%,#6d28d9 100%);
+  width:100%;
+}
+/* Layer 3 — dark navy, slightly narrower visually via padding trick on small screens */
+.layer-3{
+  background:linear-gradient(135deg,#1e3a5f 0%,#1a3a6b 60%,#1e3a8a 100%);
+  width:92%;align-self:center;
+}
+/* Layer 2 — white/light, accent border, medium */
+.layer-2{
+  background:#fff;border:2px solid var(--accent);
+  width:78%;align-self:center;
+}
+/* Layer 1 — dashed, gray, narrowest */
+.layer-1{
+  background:#f8f9fa;border:2px dashed #d1d5db;
+  width:64%;align-self:center;
+}
+
+.layer-badge{
+  font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  margin-bottom:10px;display:inline-block;padding:4px 10px;border-radius:6px;
+}
+.layer-4 .layer-badge{background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);}
+.layer-3 .layer-badge{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.8);}
+.layer-2 .layer-badge{background:var(--accent-bg);color:var(--accent);}
+.layer-1 .layer-badge{background:var(--red-bg);color:var(--red);}
+
+.layer-top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:12px;}
+.layer-title{font-size:22px;font-weight:800;line-height:1.2;}
+.layer-4 .layer-title,.layer-3 .layer-title{color:#fff;}
+.layer-2 .layer-title{color:var(--text);}
+.layer-1 .layer-title{color:var(--text2);}
+
+.power-pill{
+  font-size:11px;font-weight:700;padding:5px 14px;border-radius:100px;
+  letter-spacing:0.5px;white-space:nowrap;
+}
+.pill-green{background:var(--green-bg);color:var(--green);border:1px solid rgba(5,150,105,0.2);}
+.pill-accent{background:var(--accent-bg);color:var(--accent);border:1px solid rgba(79,70,229,0.2);}
+.pill-orange{background:var(--orange-bg);color:var(--orange);border:1px solid rgba(217,119,6,0.2);}
+.pill-red{background:var(--red-bg);color:var(--red);border:1px solid rgba(220,38,38,0.2);}
+
+.layer-body{font-size:14px;line-height:1.7;}
+.layer-4 .layer-body,.layer-3 .layer-body{color:rgba(255,255,255,0.72);}
+.layer-2 .layer-body{color:var(--text2);}
+.layer-1 .layer-body{color:var(--text3);}
+
+.asset-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+.asset-tag{
+  font-size:11px;font-weight:700;letter-spacing:0.5px;
+  padding:4px 12px;border-radius:8px;
+  background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.8);
+}
+
+.layer-arrow{
+  text-align:center;color:var(--text3);font-size:20px;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  font-size:11px;font-weight:600;letter-spacing:1px;color:var(--text3);text-transform:uppercase;
+}
+.arrow-up{font-size:20px;color:var(--accent-light);}
+
+/* ═══════════════════════════════════════════
+   SECTION 3 — ANTI-FREELOADING
+═══════════════════════════════════════════ */
+.mech-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:24px;
+}
+.mech-card{
+  background:#fff;border:1px solid var(--border);
+  border-radius:var(--radius);overflow:hidden;
+  transition:transform 0.25s ease,box-shadow 0.25s ease;
+  cursor:default;
+}
+.mech-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 20px 48px rgba(0,0,0,0.12);
+}
+.mech-top-bar{height:5px;}
+.cyan-bar{background:linear-gradient(90deg,#0891b2,#06b6d4);}
+.purple-bar{background:linear-gradient(90deg,#7c3aed,#8b5cf6);}
+.green-bar{background:linear-gradient(90deg,#059669,#10b981);}
+.red-bar{background:linear-gradient(90deg,#dc2626,#ef4444);}
+
+.mech-body{padding:28px;}
+.mech-icon{font-size:32px;margin-bottom:14px;display:block;}
+.mech-title{font-size:20px;font-weight:800;color:var(--text);margin-bottom:10px;}
+.mech-desc{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:16px;}
+
+.mech-highlight{
+  background:var(--accent-bg);border:1px solid rgba(79,70,229,0.15);
+  border-radius:10px;padding:12px 16px;
+  font-size:13px;font-weight:600;color:var(--accent);
+}
+
+.benefit-list{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.benefit-list li{
+  font-size:13px;color:var(--text2);display:flex;align-items:center;gap:8px;
+}
+.benefit-list li::before{content:'→';color:var(--accent);font-weight:700;}
+
+.loss-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:4px;
+}
+.loss-item{
+  background:var(--red-bg);border:1px solid rgba(220,38,38,0.15);
+  border-radius:8px;padding:8px 10px;
+  font-size:12px;font-weight:700;color:var(--red);
+  text-align:center;line-height:1.3;
+}
+
+/* ═══════════════════════════════════════════
+   SECTION 4 — FLYWHEEL (dark)
+═══════════════════════════════════════════ */
+.flywheel-wrap{
+  display:flex;flex-wrap:wrap;align-items:center;
+  justify-content:center;gap:0;margin:48px 0;
+}
+.fw-step{
+  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
+  border-radius:12px;padding:18px 22px;text-align:center;
+  min-width:140px;max-width:160px;
+  transition:transform 0.25s ease,box-shadow 0.25s ease,border-color 0.25s ease;
+  cursor:default;
+  position:relative;
+}
+.fw-step:hover{
+  transform:scale(1.05);
+  border-color:var(--accent-light);
+  box-shadow:0 0 24px var(--accent-glow);
+}
+.fw-icon{font-size:24px;margin-bottom:8px;display:block;}
+.fw-text{font-size:12px;font-weight:600;color:rgba(255,255,255,0.85);line-height:1.4;}
+.fw-arrow{
+  color:var(--accent-light);font-size:22px;padding:0 4px;
+  flex-shrink:0;
+}
+.fw-loop{
+  background:linear-gradient(135deg,var(--accent),#6d28d9);
+  border-radius:50%;width:48px;height:48px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;flex-shrink:0;
+  box-shadow:0 0 24px var(--accent-glow);
+  margin:0 4px;
+}
+
+.flywheel-quote{
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);
+  border-radius:16px;padding:40px 48px;max-width:860px;margin:0 auto;
+  position:relative;
+}
+.flywheel-quote::before{
+  content:'\201C';
+  font-size:100px;font-weight:900;color:rgba(79,70,229,0.2);
+  position:absolute;top:-20px;left:24px;line-height:1;
+}
+.quote-text{
+  font-size:17px;line-height:1.8;color:rgba(255,255,255,0.8);
+  font-style:italic;margin-bottom:20px;position:relative;z-index:1;
+}
+.quote-text-zh{
+  font-size:15px;line-height:1.8;color:rgba(255,255,255,0.5);
+  position:relative;z-index:1;
+  border-top:1px solid rgba(255,255,255,0.08);
+  padding-top:16px;margin-top:16px;
+}
+
+/* ═══════════════════════════════════════════
+   SECTION 5 — CRITICAL MISTAKES
+═══════════════════════════════════════════ */
+.mistakes-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:24px;
+}
+.mistake-card{
+  background:#fff;border:1px solid var(--border);
+  border-radius:var(--radius);padding:28px 32px;
+  border-left:4px solid var(--red);
+  transition:transform 0.25s ease,box-shadow 0.25s ease;
+  cursor:default;
+}
+.mistake-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 16px 48px var(--red-glow),var(--shadow);
+}
+.mistake-badge{
+  font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--red);background:var(--red-bg);
+  padding:4px 10px;border-radius:6px;
+  display:inline-block;margin-bottom:14px;
+}
+.mistake-title{font-size:20px;font-weight:800;color:var(--text);margin-bottom:10px;}
+.mistake-body{font-size:14px;color:var(--text2);line-height:1.7;}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+.footer{
+  background:#0d0d1a;padding:60px 24px 36px;
+}
+.footer-inner{max-width:1100px;margin:0 auto;}
+.footer-top{
+  display:flex;align-items:flex-start;justify-content:space-between;
+  gap:40px;flex-wrap:wrap;padding-bottom:40px;
+  border-bottom:1px solid rgba(255,255,255,0.07);
+  margin-bottom:36px;
+}
+.footer-brand-logo{
+  font-size:26px;font-weight:900;color:var(--accent-light);
+  letter-spacing:-0.5px;margin-bottom:8px;
+}
+.footer-tagline{font-size:13px;color:rgba(255,255,255,0.35);max-width:240px;line-height:1.5;}
+.footer-links{display:flex;flex-wrap:wrap;gap:10px;}
+.footer-link{
+  font-size:12px;font-weight:500;color:rgba(255,255,255,0.5);
+  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);
+  padding:7px 16px;border-radius:100px;text-decoration:none;
+  transition:color 0.2s,background 0.2s,border-color 0.2s;
+}
+.footer-link:hover{
+  color:#fff;background:rgba(79,70,229,0.2);border-color:rgba(79,70,229,0.3);
+}
+.footer-link.active{
+  color:var(--accent-light);border-color:rgba(79,70,229,0.3);
+  background:rgba(79,70,229,0.1);
+}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.2);text-align:center;}
+
+/* ═══════════════════════════════════════════
+   MOBILE
+═══════════════════════════════════════════ */
+@media(max-width:768px){
+  .section-layout-split{grid-template-columns:1fr;gap:40px;}
+  .mech-grid{grid-template-columns:1fr;}
+  .mistakes-grid{grid-template-columns:1fr;}
+  .section-title{font-size:32px;}
+  .layer-3,.layer-2,.layer-1{width:100%;}
+  .flywheel-wrap{flex-direction:column;align-items:center;}
+  .fw-arrow{transform:rotate(90deg);}
+  .flywheel-quote{padding:28px 24px;}
+  .footer-top{flex-direction:column;}
+  .loss-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:640px){
+  .nav-links{display:none;}
+  .nav-mobile-right{display:flex;}
+  .hero-title{font-size:clamp(2rem,7vw,3rem);letter-spacing:-1px;}
+  .hero-subtitle-box{padding:16px 20px;font-size:14px;}
+  .deco-number{font-size:80px;}
+  .section{padding:72px 20px;}
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="topnav">
-  <a href="index.html" class="logo" style="text-decoration:none; color:var(--primary);">PUSH</a>
-  <div class="navlinks">
-    <a href="index.html" data-en="Dashboard" data-zh="仪表盘">Dashboard</a>
+<!-- ═══════════════════════════════════════════
+     NAV
+═══════════════════════════════════════════ -->
+<nav>
+  <a href="index.html" class="nav-logo">PUSH</a>
+  <div class="nav-links">
+    <a href="index.html" data-en="Dashboard" data-zh="主页">Dashboard</a>
     <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
-    <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演方案">Pitch Deck</a>
-    <a href="prospects.html" data-en="Prospects" data-zh="未来愿景">Prospects</a>
+    <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="融资材料">Pitch Deck</a>
+    <a href="prospects.html" data-en="Prospects" data-zh="前景">Prospects</a>
     <a href="challenges.html" data-en="Challenges" data-zh="挑战">Challenges</a>
-    <a href="retention-defense.html" class="active" data-en="Retention" data-zh="留存机制">Retention</a>
+    <a href="risk-defense.html" data-en="Risk &amp; Defense" data-zh="风险防御">Risk &amp; Defense</a>
+    <a href="retention-defense.html" class="active" data-en="Retention" data-zh="留存防御">Retention</a>
     <a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
+    <a href="push-strategy-core.html" data-en="Strategy Core" data-zh="策略核心">Strategy Core</a>
   </div>
-  <button class="lang-btn" id="lang-toggle">ZH / EN</button>
+  <button class="lang-btn" id="langBtn" onclick="toggleLang()">中 / EN</button>
+  <div class="nav-mobile-right">
+    <button class="lang-btn" onclick="toggleLang()">中 / EN</button>
+  </div>
 </nav>
 
-<!-- HERO -->
-<div class="hero">
+<!-- ═══════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+
   <div class="hero-badge" data-en="EXISTENTIAL RISK" data-zh="生死存亡级风险">EXISTENTIAL RISK</div>
-  <h1 data-en="Creator Retention &amp; Anti-Freeloading Defense" data-zh="Creator 留存与反薅羊毛防御机制">Creator Retention &amp; Anti-Freeloading Defense</h1>
-  <p class="hero-sub" data-en="If creators grab free samples and leave, Push has no supply. If there is no supply, there is no marketplace. This is the single most dangerous failure mode for the entire business." data-zh="如果 Creator 薅完免费样品就走，Push 就没有供给侧。没有供给侧，就没有市场。这是整个业务中最致命的失败模式。">If creators grab free samples and leave, Push has no supply. If there is no supply, there is no marketplace. This is the single most dangerous failure mode for the entire business.</p>
-</div>
 
-<!-- SECTION 1: THE PROBLEM -->
-<div class="section" id="problem">
-  <h2 class="section-title fade-in" data-en="The Problem: Why Creators Leave" data-zh="问题诊断：Creator 为什么流失">The Problem: Why Creators Leave</h2>
-  <p class="section-sub fade-in" data-en="Three structural reasons cause creators to churn after initial onboarding. None of them are about the product being bad -- they are about the platform failing to feel like a career tool." data-zh="三个结构性原因导致 Creator 在初始注册后流失。没有一个是因为产品不好——而是平台没有让人感觉是一个职业工具。">Three structural reasons cause creators to churn after initial onboarding. None of them are about the product being bad -- they are about the platform failing to feel like a career tool.</p>
+  <h1 class="hero-title">
+    <span data-en="Creator Retention" data-zh="Creator 留存">Creator Retention</span><br>
+    <span style="color:#fff;" data-en="& Anti-Freeloading" data-zh="与反薅羊毛">&amp; Anti-Freeloading</span><br>
+    <span data-en="Defense" data-zh="防御体系">Defense</span>
+  </h1>
 
-  <div class="grid grid-3 fade-in">
-    <!-- Reason 1 -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-icon" style="background:var(--red-bg);">
-          <span style="font-size:22px;">&#127915;</span>
-        </div>
-        <div>
-          <div class="card-title" data-en="Looks Like a Coupon App" data-zh="平台像薅羊毛工具">Looks Like a Coupon App</div>
-          <span class="tag tag-red" data-en="Perception" data-zh="认知问题">Perception</span>
-        </div>
-      </div>
-      <div class="card-desc" data-en="If the first experience is 'sign up, get free food,' creators mentally categorize Push as a coupon app. They use it until free stuff runs out, then leave. The positioning is broken before the product even launches." data-zh="如果首次体验是「注册就拿免费食物」，Creator 会把 Push 归类为优惠券 App。免费的用完就走人。产品还没上线，定位就已经崩了。">If the first experience is 'sign up, get free food,' creators mentally categorize Push as a coupon app. They use it until free stuff runs out, then leave. The positioning is broken before the product even launches.</div>
-    </div>
-
-    <!-- Reason 2 -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-icon" style="background:var(--orange-bg);">
-          <span style="font-size:22px;">&#128065;</span>
-        </div>
-        <div>
-          <div class="card-title" data-en="No Visible Long-Term Benefit" data-zh="看不到长期收益">No Visible Long-Term Benefit</div>
-          <span class="tag tag-orange" data-en="Motivation" data-zh="动力问题">Motivation</span>
-        </div>
-      </div>
-      <div class="card-desc" data-en="Creators cannot see how staying on the platform makes their future better. There is no visible trajectory from 'free samples' to 'real income.' Without a clear growth path, rational creators leave to find direct brand deals." data-zh="Creator 看不到留在平台上会怎样让未来更好。从「免费样品」到「真实收入」的路径不清晰。没有清晰的成长路径，理性的 Creator 会离开去找直接品牌合作。">Creators cannot see how staying on the platform makes their future better. There is no visible trajectory from 'free samples' to 'real income.' Without a clear growth path, rational creators leave to find direct brand deals.</div>
-    </div>
-
-    <!-- Reason 3 -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-icon" style="background:var(--accent-bg);">
-          <span style="font-size:22px;">&#128200;</span>
-        </div>
-        <div>
-          <div class="card-title" data-en="No Accumulation Effect" data-zh="没有累积效应">No Accumulation Effect</div>
-          <span class="tag tag-purple" data-en="Structural" data-zh="结构问题">Structural</span>
-        </div>
-      </div>
-      <div class="card-desc" data-en="Nothing a creator does on Push builds up over time. No reputation, no history, no score, no credit. Every campaign is a fresh start. If platform activity does not compound, there is zero switching cost -- leaving costs nothing." data-zh="Creator 在 Push 上做的事情不会随时间积累。没有声誉、没有历史、没有评分、没有信用。每次活动都是重新开始。如果平台活动不能复利，那切换成本为零——离开没有任何代价。">Nothing a creator does on Push builds up over time. No reputation, no history, no score, no credit. Every campaign is a fresh start. If platform activity does not compound, there is zero switching cost -- leaving costs nothing.</div>
-    </div>
-  </div>
-</div>
-
-<!-- SECTION 2: FOUR LAYERS OF RETENTION -->
-<div class="section" id="layers">
-  <h2 class="section-title fade-in" data-en="The Four Layers of Retention" data-zh="留存的四层结构">The Four Layers of Retention</h2>
-  <p class="section-sub fade-in" data-en="Retention is not one mechanism. It is a stack of four layers, each stronger than the last. The bottom is necessary but weak. The top is what makes creators stay for years." data-zh="留存不是一种机制，而是由四层组成的结构，每层比上一层更强。底层必要但弱。顶层才是让 Creator 长期留存的关键。">Retention is not one mechanism. It is a stack of four layers, each stronger than the last. The bottom is necessary but weak. The top is what makes creators stay for years.</p>
-
-  <div class="layer-stack fade-in">
-    <!-- Layer 4 (top = strongest) -->
-    <div class="layer-bar" style="background: var(--green-bg);">
-      <div class="layer-num" style="color:var(--green);" data-en="Layer 4 -- Strongest" data-zh="第四层 -- 最强">Layer 4 -- Strongest</div>
-      <div class="layer-title" data-en="Earning Efficiency" data-zh="收入效率">Earning Efficiency</div>
-      <div class="layer-desc" data-en="Creators earn more money, faster, and more reliably on Push than anywhere else. Higher-tier creators get priority matching, lower platform fees, guaranteed minimums, and faster payouts. The platform becomes the highest-ROI use of their time." data-zh="Creator 在 Push 上赚得更多、更快、更稳定。高 tier Creator 获得优先匹配、更低平台费、保底收入、更快提现。平台成为他们时间的最高 ROI 用途。">Creators earn more money, faster, and more reliably on Push than anywhere else. Higher-tier creators get priority matching, lower platform fees, guaranteed minimums, and faster payouts. The platform becomes the highest-ROI use of their time.</div>
-      <span class="layer-strength" style="background:var(--green-bg); color:var(--green);" data-en="Retention power: Very High" data-zh="留存力：极高">Retention power: Very High</span>
-    </div>
-
-    <!-- Layer 3 -->
-    <div class="layer-bar" style="background: var(--accent-bg);">
-      <div class="layer-num" style="color:var(--accent);" data-en="Layer 3 -- The Key" data-zh="第三层 -- 核心关键">Layer 3 -- The Key</div>
-      <div class="layer-title" data-en="Sunk Cost Assets (Platform-Internal Credit Capital)" data-zh="沉没资产（平台内信用资本）">Sunk Cost Assets (Platform-Internal Credit Capital)</div>
-      <div class="layer-desc" data-en="The creator builds up platform-specific assets that cannot be exported. This is the single most important retention layer. If a creator leaves, they lose all of it." data-zh="Creator 在平台内积累的专属资产，无法导出。这是最关键的留存层。一旦离开，全部归零。">The creator builds up platform-specific assets that cannot be exported. This is the single most important retention layer. If a creator leaves, they lose all of it.</div>
-      <ul class="detail-list purple" style="margin-top:12px;">
-        <li data-en="Fulfillment history and completion rate" data-zh="履约历史和完成率">Fulfillment history and completion rate</li>
-        <li data-en="Merchant ratings and rebook score" data-zh="商家评分和复购分">Merchant ratings and rebook score</li>
-        <li data-en="Redemption and conversion performance" data-zh="核销和转化表现">Redemption and conversion performance</li>
-        <li data-en="Geo-credit (local neighborhood authority)" data-zh="地理信用（本地社区权威度）">Geo-credit (local neighborhood authority)</li>
-        <li data-en="Category credit (cuisine/vertical expertise)" data-zh="品类信用（菜系/垂类专业度）">Category credit (cuisine/vertical expertise)</li>
-        <li data-en="Repeat booking score" data-zh="复订分数">Repeat booking score</li>
-        <li data-en="Response speed and reliability score" data-zh="响应速度和可靠性评分">Response speed and reliability score</li>
-        <li data-en="Dispute-free history" data-zh="无纠纷历史记录">Dispute-free history</li>
-      </ul>
-      <span class="layer-strength" style="background:var(--accent-bg); color:var(--accent);" data-en="Retention power: Critical" data-zh="留存力：决定性">Retention power: Critical</span>
-    </div>
-
-    <!-- Layer 2 -->
-    <div class="layer-bar" style="background: var(--orange-bg);">
-      <div class="layer-num" style="color:var(--orange);" data-en="Layer 2 -- Growth Driver" data-zh="第二层 -- 成长驱动">Layer 2 -- Growth Driver</div>
-      <div class="layer-title" data-en="Growth Feeling" data-zh="成长感">Growth Feeling</div>
-      <div class="layer-desc" data-en="Tier upgrades unlock real earning power. Creators can see themselves leveling up: New to Rising to Reliable to Elite. Each tier is visibly better. The next tier is always in sight." data-zh="Tier 升级解锁真实的赚钱能力。Creator 看得到自己在升级：新手 > 上升 > 可靠 > 精英。每一级都明显更好。下一级始终在视野范围内。">Tier upgrades unlock real earning power. Creators can see themselves leveling up: New to Rising to Reliable to Elite. Each tier is visibly better. The next tier is always in sight.</div>
-      <span class="layer-strength" style="background:var(--orange-bg); color:var(--orange);" data-en="Retention power: Moderate" data-zh="留存力：中等">Retention power: Moderate</span>
-    </div>
-
-    <!-- Layer 1 (bottom = weakest) -->
-    <div class="layer-bar" style="background: var(--red-bg);">
-      <div class="layer-num" style="color:var(--red);" data-en="Layer 1 -- Foundation" data-zh="第一层 -- 基础">Layer 1 -- Foundation</div>
-      <div class="layer-title" data-en="Instant Incentives" data-zh="即时激励">Instant Incentives</div>
-      <div class="layer-desc" data-en="Free samples, sign-up bonuses, first-campaign rewards. Necessary for onboarding, but the weakest retention layer. If this is all you have, creators leave immediately after the incentive is consumed." data-zh="免费样品、注册奖励、首次活动奖励。入门必需品，但是最弱的留存层。如果只有这一层，Creator 用完激励就会立刻离开。">Free samples, sign-up bonuses, first-campaign rewards. Necessary for onboarding, but the weakest retention layer. If this is all you have, creators leave immediately after the incentive is consumed.</div>
-      <span class="layer-strength" style="background:var(--red-bg); color:var(--red);" data-en="Retention power: Weak" data-zh="留存力：弱">Retention power: Weak</span>
-    </div>
-  </div>
-</div>
-
-<!-- SECTION 3: ANTI-FREELOADING MECHANISMS -->
-<div class="section" id="anti-freeloading">
-  <h2 class="section-title fade-in" data-en="Anti-Freeloading Mechanisms" data-zh="反薅羊毛机制">Anti-Freeloading Mechanisms</h2>
-  <p class="section-sub fade-in" data-en="Four interlocking mechanisms that prevent creators from treating Push as a free sample dispenser." data-zh="四个环环相扣的机制，防止 Creator 把 Push 当成免费样品机。">Four interlocking mechanisms that prevent creators from treating Push as a free sample dispenser.</p>
-
-  <div class="grid grid-2 fade-in">
-    <!-- Mechanism 1 -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-icon" style="background:var(--green-bg);">
-          <span style="font-size:22px;">&#127915;</span>
-        </div>
-        <div>
-          <div class="card-title" data-en="1. Sample Campaigns = Limited Entry Tickets" data-zh="1. 样品活动 = 限次入门票">1. Sample Campaigns = Limited Entry Tickets</div>
-          <span class="tag tag-green" data-en="Gate" data-zh="门控">Gate</span>
-        </div>
-      </div>
-      <div class="card-desc" data-en="New creators get a limited number of pure-sample campaigns (not unlimited). These are entry tickets, not the destination. To unlock more campaigns, creators must hit quality thresholds on their initial ones." data-zh="新 Creator 只能获得有限次数的纯样品活动（不是无限的）。这些是入门票，不是终点。要解锁更多活动，Creator 必须在初始活动中达到质量门槛。">New creators get a limited number of pure-sample campaigns (not unlimited). These are entry tickets, not the destination. To unlock more campaigns, creators must hit quality thresholds on their initial ones.</div>
-      <ul class="detail-list green">
-        <li data-en="Max 3 sample-only campaigns for new creators" data-zh="新 Creator 最多 3 次纯样品活动">Max 3 sample-only campaigns for new creators</li>
-        <li data-en="Must complete on time with proof to count" data-zh="必须按时完成并提交证明才计数">Must complete on time with proof to count</li>
-        <li data-en="Minimum merchant rating of 3.5 to unlock next tier" data-zh="商家评分需达到 3.5 才能解锁下一级">Minimum merchant rating of 3.5 to unlock next tier</li>
-        <li data-en="No-shows or late submissions burn entry tickets permanently" data-zh="缺席或迟交将永久消耗入门票">No-shows or late submissions burn entry tickets permanently</li>
-      </ul>
-    </div>
-
-    <!-- Mechanism 2 -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-icon" style="background:var(--orange-bg);">
-          <span style="font-size:22px;">&#11088;</span>
-        </div>
-        <div>
-          <div class="card-title" data-en="2. High-Tier Value Must Be Extremely Real" data-zh="2. 高 Tier 价值极度真实">2. High-Tier Value Must Be Extremely Real</div>
-          <span class="tag tag-orange" data-en="Pull" data-zh="拉力">Pull</span>
-        </div>
-      </div>
-      <div class="card-desc" data-en="The gap between Tier 1 and Tier 3+ must be enormous and obviously valuable. This is what makes creators aspire to climb instead of leaving." data-zh="Tier 1 和 Tier 3+ 之间的差距必须巨大且显而易见。这是让 Creator 想要往上爬而不是离开的关键。">The gap between Tier 1 and Tier 3+ must be enormous and obviously valuable. This is what makes creators aspire to climb instead of leaving.</div>
-      <ul class="detail-list orange">
-        <li data-en="Paid gigs (not just free samples)" data-zh="付费任务（不只是免费样品）">Paid gigs (not just free samples)</li>
-        <li data-en="Recurring deals with proven merchants" data-zh="与优质商家的长期合作">Recurring deals with proven merchants</li>
-        <li data-en="Premium campaign pool access" data-zh="高级活动池权限">Premium campaign pool access</li>
-        <li data-en="Priority standby for high-demand campaigns" data-zh="热门活动优先候补">Priority standby for high-demand campaigns</li>
-        <li data-en="Guaranteed minimum payouts" data-zh="保底收入">Guaranteed minimum payouts</li>
-        <li data-en="Faster payouts (3 days vs 14 days)" data-zh="更快提现（3天 vs 14天）">Faster payouts (3 days vs 14 days)</li>
-        <li data-en="Lower platform commission" data-zh="更低平台抽成">Lower platform commission</li>
-      </ul>
-    </div>
-
-    <!-- Mechanism 3 -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-icon" style="background:var(--accent-bg);">
-          <span style="font-size:22px;">&#128272;</span>
-        </div>
-        <div>
-          <div class="card-title" data-en="3. History Becomes a Scarce Pass" data-zh="3. 历史变稀缺通行证">3. History Becomes a Scarce Pass</div>
-          <span class="tag tag-purple" data-en="Lock-in" data-zh="锁定">Lock-in</span>
-        </div>
-      </div>
-      <div class="card-desc" data-en="Platform history data becomes the key that unlocks high-value opportunities. This cannot be faked, purchased, or built anywhere else. It takes months to accumulate." data-zh="平台历史数据成为解锁高价值机会的钥匙。无法伪造、购买、也无法在其他地方建立。需要数月时间积累。">Platform history data becomes the key that unlocks high-value opportunities. This cannot be faked, purchased, or built anywhere else. It takes months to accumulate.</div>
-      <ul class="detail-list purple">
-        <li data-en="90-day completion rate (rolling window)" data-zh="90天完成率（滚动窗口）">90-day completion rate (rolling window)</li>
-        <li data-en="Merchant satisfaction scores" data-zh="商家满意度评分">Merchant satisfaction scores</li>
-        <li data-en="Dispute rate (lower = better access)" data-zh="纠纷率（越低权限越高）">Dispute rate (lower = better access)</li>
-        <li data-en="Category performance (proven verticals)" data-zh="品类表现（已验证的垂类）">Category performance (proven verticals)</li>
-        <li data-en="Local activity density (neighborhood expertise)" data-zh="本地活动密度（社区专长度）">Local activity density (neighborhood expertise)</li>
-      </ul>
-    </div>
-
-    <!-- Mechanism 4 -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-icon" style="background:var(--red-bg);">
-          <span style="font-size:22px;">&#9888;&#65039;</span>
-        </div>
-        <div>
-          <div class="card-title" data-en="4. Loss Aversion Design" data-zh="4. 损失厌恶设计">4. Loss Aversion Design</div>
-          <span class="tag tag-red" data-en="Stick" data-zh="粘性">Stick</span>
-        </div>
-      </div>
-      <div class="card-desc" data-en="People are 2x more motivated by fear of losing something than by gaining something equivalent. Design around what creators will LOSE if they stop being active." data-zh="人们对损失的恐惧是获得等价东西的 2 倍。围绕 Creator 停止活跃后会失去什么来设计。">People are 2x more motivated by fear of losing something than by gaining something equivalent. Design around what creators will LOSE if they stop being active.</div>
-
-      <p style="font-size:13px; font-weight:700; color:var(--red); margin:16px 0 8px;" data-en="What inactive creators LOSE:" data-zh="不活跃的 Creator 会失去：">What inactive creators LOSE:</p>
-      <div class="loss-grid">
-        <div class="loss-item" data-en="Tier Level" data-zh="Tier 等级">Tier Level</div>
-        <div class="loss-item" data-en="Priority Access" data-zh="优先权限">Priority Access</div>
-        <div class="loss-item" data-en="Fee Discounts" data-zh="费率折扣">Fee Discounts</div>
-        <div class="loss-item" data-en="Premium Queue" data-zh="高级队列">Premium Queue</div>
-        <div class="loss-item" data-en="Streak Bonus" data-zh="连续奖励">Streak Bonus</div>
-        <div class="loss-item" data-en="Monthly Credits" data-zh="月度积分">Monthly Credits</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- SECTION 4: FLYWHEEL -->
-<div class="section" id="flywheel">
-  <h2 class="section-title fade-in" data-en="The Creator Retention Flywheel" data-zh="Creator 留存飞轮">The Creator Retention Flywheel</h2>
-  <p class="section-sub fade-in" data-en="Each step feeds into the next. Once a creator enters the loop, every action strengthens their reason to stay." data-zh="每一步都为下一步提供动力。一旦 Creator 进入循环，每个行为都会加强留下来的理由。">Each step feeds into the next. Once a creator enters the loop, every action strengthens their reason to stay.</p>
-
-  <div class="flywheel-wrap fade-in">
-    <div class="flywheel">
-      <div class="flywheel-step" style="border-color:var(--green);">
-        <div style="font-size:20px; margin-bottom:4px;">&#9989;</div>
-        <span data-en="Complete Campaigns" data-zh="完成活动">Complete Campaigns</span>
-      </div>
-      <div class="flywheel-arrow">&rarr;</div>
-      <div class="flywheel-step" style="border-color:var(--accent);">
-        <div style="font-size:20px; margin-bottom:4px;">&#128196;</div>
-        <span data-en="Build Passport" data-zh="积累履历">Build Passport</span>
-      </div>
-      <div class="flywheel-arrow">&rarr;</div>
-      <div class="flywheel-step" style="border-color:var(--orange);">
-        <div style="font-size:20px; margin-bottom:4px;">&#128200;</div>
-        <span data-en="Tier Up" data-zh="升 Tier">Tier Up</span>
-      </div>
-      <div class="flywheel-arrow">&rarr;</div>
-      <div class="flywheel-step" style="border-color:var(--pink);">
-        <div style="font-size:20px; margin-bottom:4px;">&#127775;</div>
-        <span data-en="Access Higher-Value Campaigns" data-zh="解锁高价值活动">Access Higher-Value Campaigns</span>
-      </div>
-      <div class="flywheel-arrow">&rarr;</div>
-      <div class="flywheel-step" style="border-color:var(--blue);">
-        <div style="font-size:20px; margin-bottom:4px;">&#128176;</div>
-        <span data-en="Earn More" data-zh="赚得更多">Earn More</span>
-      </div>
-      <div class="flywheel-arrow">&rarr;</div>
-      <div class="flywheel-step" style="border-color:var(--green);">
-        <div style="font-size:20px; margin-bottom:4px;">&#128170;</div>
-        <span data-en="Stay on Platform" data-zh="留在平台">Stay on Platform</span>
-      </div>
-      <div class="flywheel-arrow" data-en="&#8635; Repeat" data-zh="&#8635; 循环">&#8635; Repeat</div>
-    </div>
+  <div class="hero-subtitle-box">
+    <span data-en="If creators churn after free samples or fail to build long-term commitment to the platform, the entire marketplace collapses. This is the most important strategic problem PUSH must solve — before launch." data-zh="如果 Creator 在获得免费样品后流失，或无法对平台建立长期承诺，整个市场将会崩溃。这是 PUSH 在上线前必须解决的最重要的战略问题。">If creators churn after free samples or fail to build long-term commitment to the platform, the entire marketplace collapses. This is the most important strategic problem PUSH must solve — before launch.</span>
   </div>
 
-  <!-- Flywheel explanation card -->
-  <div class="card fade-in" style="max-width:800px; margin:24px auto 0; border-color:var(--green);">
-    <div class="card-title" style="color:var(--green); margin-bottom:12px;" data-en="Why the Flywheel Works" data-zh="飞轮为什么有效">Why the Flywheel Works</div>
-    <div class="card-desc" data-en="Each revolution of the flywheel makes the next revolution easier. A creator with 20 completed campaigns, a 95% completion rate, 4.7 merchant rating, and Reliable tier status has built something that took months. They cannot replicate it on any competing platform. They will not throw it away over a slightly better one-time offer elsewhere." data-zh="飞轮的每一圈都让下一圈更容易。一个完成了 20 次活动、95% 完成率、4.7 商家评分、可靠级 Tier 的 Creator，已经积累了数月的成果。他们无法在任何竞争平台上复制这些。他们不会因为别处稍好一点的一次性优惠就把这些全部丢掉。">Each revolution of the flywheel makes the next revolution easier. A creator with 20 completed campaigns, a 95% completion rate, 4.7 merchant rating, and Reliable tier status has built something that took months. They cannot replicate it on any competing platform. They will not throw it away over a slightly better one-time offer elsewhere.</div>
+  <div class="hero-scroll">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 10l5 5 5-5"/></svg>
+    <span data-en="SCROLL TO EXPLORE" data-zh="向下滚动">SCROLL TO EXPLORE</span>
   </div>
-</div>
+</section>
 
-<!-- SECTION 5: CRITICAL MISTAKES -->
-<div class="section" id="mistakes">
-  <h2 class="section-title fade-in" data-en="Critical Mistakes to Avoid" data-zh="绝不能犯的错">Critical Mistakes to Avoid</h2>
-  <p class="section-sub fade-in" data-en="These four mistakes have killed retention strategies at other creator platforms. Push must avoid every single one." data-zh="这四个错误已经在其他 Creator 平台上毁掉了留存策略。Push 必须全部避免。">These four mistakes have killed retention strategies at other creator platforms. Push must avoid every single one.</p>
+<!-- ═══════════════════════════════════════════
+     SECTION 1 — WHY CREATORS LEAVE
+═══════════════════════════════════════════ -->
+<section class="section" style="background:#fff;">
+  <div class="section-inner">
+    <div class="section-layout-split">
 
-  <div class="grid grid-2 fade-in">
-    <!-- Mistake 1 -->
-    <div class="warning-card">
-      <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
-        <div class="warning-num">1</div>
-        <div class="card-title" style="color:var(--red);" data-en="Treating Perks as Retention" data-zh="把福利当留存">Treating Perks as Retention</div>
+      <div class="section-left-wrap fade-in">
+        <div class="deco-number">01</div>
+        <div class="section-label" data-en="ROOT CAUSES" data-zh="根本原因">ROOT CAUSES</div>
+        <h2 class="section-title" data-en="Why Creators Leave" data-zh="Creator 为什么离开">Why Creators Leave</h2>
+        <p class="section-sub" data-en="Most creator churn isn't random. It's predictable, driven by three structural perception failures that compound over time. If we don't address these by design, the platform will hemorrhage its best creators." data-zh="大多数 Creator 流失并非随机——它是可预测的，由三种结构性认知失误驱动，随着时间推移会不断加剧。如果不在设计层面解决这些问题，平台将不断流失最优质的 Creator。">Most creator churn isn't random. It's predictable, driven by three structural perception failures that compound over time. If we don't address these by design, the platform will hemorrhage its best creators.</p>
       </div>
-      <div class="card-desc" data-en="Free swag, birthday messages, 'creator appreciation week' -- none of this is retention. Retention is structural. Perks are decorative. If your retention plan is 'be nice to creators,' you will lose them to whoever pays more." data-zh="免费周边、生日祝福、「Creator 感恩周」——这些都不是留存。留存是结构性的，福利是装饰性的。如果你的留存方案是「对 Creator 好一点」，你会输给出价更高的竞争者。">Free swag, birthday messages, 'creator appreciation week' -- none of this is retention. Retention is structural. Perks are decorative. If your retention plan is 'be nice to creators,' you will lose them to whoever pays more.</div>
-    </div>
 
-    <!-- Mistake 2 -->
-    <div class="warning-card">
-      <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
-        <div class="warning-num">2</div>
-        <div class="card-title" style="color:var(--red);" data-en="Making Tiers Too Easy to Game" data-zh="Tier 太容易刷">Making Tiers Too Easy to Game</div>
+      <div class="cause-cards">
+        <div class="cause-card fade-in" style="transition-delay:0.1s;">
+          <div class="cause-num">01</div>
+          <div>
+            <div class="cause-title" data-en="Coupon App Perception" data-zh="平台看起来像薅羊毛工具">Coupon App Perception</div>
+            <div class="cause-body" data-en="Creators perceive PUSH as a one-time free sample source, not a professional ecosystem. If the platform doesn't signal career seriousness, they won't invest serious time in it." data-zh="Creator 把 PUSH 视为一次性免费样品来源，而非专业生态系统。如果平台无法传递职业认真度，他们就不会在上面投入认真的时间。">Creators perceive PUSH as a one-time free sample source, not a professional ecosystem. If the platform doesn't signal career seriousness, they won't invest serious time in it.</div>
+          </div>
+        </div>
+        <div class="cause-card fade-in" style="transition-delay:0.2s;">
+          <div class="cause-num">02</div>
+          <div>
+            <div class="cause-title" data-en="No Visible Long-Term Benefit" data-zh="看不到长期收益">No Visible Long-Term Benefit</div>
+            <div class="cause-body" data-en="Creators who can't see a concrete path to better earnings, higher tiers, or exclusive campaigns will default to platforms that show them a clear upside trajectory." data-zh="看不到更高收入、更高 Tier 或独家活动的明确路径的 Creator，会转向那些给他们清晰上升轨迹的平台。">Creators who can't see a concrete path to better earnings, higher tiers, or exclusive campaigns will default to platforms that show them a clear upside trajectory.</div>
+          </div>
+        </div>
+        <div class="cause-card fade-in" style="transition-delay:0.3s;">
+          <div class="cause-num">03</div>
+          <div>
+            <div class="cause-title" data-en="Zero Accumulation Effect" data-zh="没有累积效应">Zero Accumulation Effect</div>
+            <div class="cause-body" data-en="If a creator's reputation, history, and ratings on PUSH don't compound into tangible advantages, there's no switching cost. No switching cost means no loyalty — only availability." data-zh="如果 Creator 在 PUSH 上的声誉、历史和评分不能形成实质优势，就没有切换成本。没有切换成本意味着没有忠诚度——只有可用性。">If a creator's reputation, history, and ratings on PUSH don't compound into tangible advantages, there's no switching cost. No switching cost means no loyalty — only availability.</div>
+          </div>
+        </div>
       </div>
-      <div class="card-desc" data-en="If creators can reach top tier by completing 5 easy campaigns with friendly merchants, the tier is meaningless. Tier must require genuine performance across multiple dimensions: completion rate, merchant satisfaction, content quality, reliability." data-zh="如果 Creator 只需完成 5 个简单活动就能达到顶级，Tier 就毫无意义。Tier 必须要求在多个维度上有真实表现：完成率、商家满意度、内容质量、可靠性。">If creators can reach top tier by completing 5 easy campaigns with friendly merchants, the tier is meaningless. Tier must require genuine performance across multiple dimensions: completion rate, merchant satisfaction, content quality, reliability.</div>
-    </div>
 
-    <!-- Mistake 3 -->
-    <div class="warning-card">
-      <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
-        <div class="warning-num">3</div>
-        <div class="card-title" style="color:var(--red);" data-en="Creator Platform Assets Too Weak" data-zh="平台资产太弱">Creator Platform Assets Too Weak</div>
-      </div>
-      <div class="card-desc" data-en="If the only thing a creator 'owns' on the platform is a profile photo and a follower count, there is nothing to lose by leaving. Platform assets must be rich: fulfillment history, merchant scores, category credit, geo-authority, reliability rating." data-zh="如果 Creator 在平台上「拥有」的只有头像和粉丝数，离开就没什么可失去的。平台资产必须丰富：履约历史、商家评分、品类信用、地理权威度、可靠性评级。">If the only thing a creator 'owns' on the platform is a profile photo and a follower count, there is nothing to lose by leaving. Platform assets must be rich: fulfillment history, merchant scores, category credit, geo-authority, reliability rating.</div>
-    </div>
-
-    <!-- Mistake 4 -->
-    <div class="warning-card">
-      <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;">
-        <div class="warning-num">4</div>
-        <div class="card-title" style="color:var(--red);" data-en="Adding Friction Without Benefit" data-zh="平台只增加摩擦">Adding Friction Without Benefit</div>
-      </div>
-      <div class="card-desc" data-en="Every rule, requirement, or process that does not directly increase creator earning power or reputation is pure friction. Creators tolerate friction only when the payoff is obvious. 'Upload proof within 48 hours' is fine if tier progression depends on it. 'Fill out a 20-field form' for no visible reward will kill onboarding." data-zh="每一条不能直接增加 Creator 赚钱能力或声誉的规则、要求或流程都是纯粹的摩擦。Creator 只有在回报明显时才会容忍摩擦。「48小时内上传证明」如果关系到 Tier 晋升就可以。「填写20个字段的表单」但没有可见奖励，会直接杀死注册流程。">Every rule, requirement, or process that does not directly increase creator earning power or reputation is pure friction. Creators tolerate friction only when the payoff is obvious. 'Upload proof within 48 hours' is fine if tier progression depends on it. 'Fill out a 20-field form' for no visible reward will kill onboarding.</div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- FOOTER -->
-<div class="footer">
-  <div class="footer-links">
-    <a href="index.html" data-en="Dashboard" data-zh="仪表盘">Dashboard</a>
-    <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
-    <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演方案">Pitch Deck</a>
-    <a href="prospects.html" data-en="Prospects" data-zh="未来愿景">Prospects</a>
-    <a href="challenges.html" data-en="Challenges" data-zh="挑战">Challenges</a>
-    <a href="retention-defense.html" style="color:var(--accent);" data-en="Retention Defense" data-zh="留存防御">Retention Defense</a>
-    <a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
+<!-- ═══════════════════════════════════════════
+     SECTION 2 — FOUR RETENTION LAYERS
+═══════════════════════════════════════════ -->
+<section class="section section-bg2">
+  <div class="section-inner">
+    <div class="fade-in" style="text-align:center;margin-bottom:56px;">
+      <div class="section-label" data-en="RETENTION ARCHITECTURE" data-zh="留存架构">RETENTION ARCHITECTURE</div>
+      <h2 class="section-title" data-en="The Four Layers of Retention" data-zh="留存的四个层次">The Four Layers of Retention</h2>
+      <p class="section-sub" style="margin:0 auto;" data-en="From weakest foundation to the most powerful lock-in. Real retention lives in the top two layers." data-zh="从最弱的基础到最强的锁定。真正的留存存在于顶部两层。">From weakest foundation to the most powerful lock-in. Real retention lives in the top two layers.</p>
+    </div>
+
+    <div class="pyramid-label" data-en="↑ STRONGEST RETENTION AT TOP · WEAKEST AT BOTTOM ↓" data-zh="↑ 顶部留存力最强 · 底部最弱 ↓">↑ STRONGEST RETENTION AT TOP · WEAKEST AT BOTTOM ↓</div>
+
+    <div class="pyramid-wrap">
+
+      <!-- Layer 4 — TOP / STRONGEST -->
+      <div class="layer-bar layer-4 fade-in">
+        <div class="layer-badge" data-en="LAYER 4 — STRONGEST" data-zh="第四层 — 最强">LAYER 4 — STRONGEST</div>
+        <div class="layer-top">
+          <div class="layer-title" data-en="Earning Efficiency" data-zh="收入效率">Earning Efficiency</div>
+          <span class="power-pill pill-green" data-en="Retention: Very High" data-zh="留存力：极高">Retention: Very High</span>
+        </div>
+        <div class="layer-body" data-en="Creators earn more, faster, and more reliably on PUSH. High-tier creators get priority matching, lower platform fees, and 3-day payouts. PUSH becomes the highest ROI use of their time — and that's the strongest retention force that exists." data-zh="Creator 在 PUSH 上赚得更多、更快、更稳定。高 Tier Creator 获得优先匹配、更低平台抽成、3 天提现。PUSH 成为他们时间回报率最高的平台——这是留存力最强的驱动力。">Creators earn more, faster, and more reliably on PUSH. High-tier creators get priority matching, lower platform fees, and 3-day payouts. PUSH becomes the highest ROI use of their time — and that's the strongest retention force that exists.</div>
+      </div>
+
+      <div class="layer-arrow fade-in">
+        <span class="arrow-up">▲</span>
+        <span data-en="STRONGER ABOVE" data-zh="往上更强">STRONGER ABOVE</span>
+        <span class="arrow-up">▲</span>
+      </div>
+
+      <!-- Layer 3 -->
+      <div class="layer-bar layer-3 fade-in">
+        <div class="layer-badge" data-en="LAYER 3 — CRITICAL" data-zh="第三层 — 决定性">LAYER 3 — CRITICAL</div>
+        <div class="layer-top">
+          <div class="layer-title" data-en="Platform-Internal Credit Capital" data-zh="平台内信用资本">Platform-Internal Credit Capital</div>
+          <span class="power-pill pill-accent" data-en="Retention: Critical" data-zh="留存力：决定性">Retention: Critical</span>
+        </div>
+        <div class="layer-body" data-en="Non-exportable assets that took months to build. The instant a creator leaves PUSH, they lose everything — permanently. This is the most structural form of switching cost.">Non-exportable assets that took months to build. The instant a creator leaves PUSH, they lose everything — permanently. This is the most structural form of switching cost.</div>
+        <div class="asset-tags" style="margin-top:14px;">
+          <span class="asset-tag" data-en="Fulfillment History" data-zh="履约历史">Fulfillment History</span>
+          <span class="asset-tag" data-en="Merchant Ratings" data-zh="商家评分">Merchant Ratings</span>
+          <span class="asset-tag" data-en="Geo-Credit" data-zh="地域信用">Geo-Credit</span>
+          <span class="asset-tag" data-en="Category Credit" data-zh="类目信用">Category Credit</span>
+          <span class="asset-tag" data-en="Response Score" data-zh="响应评分">Response Score</span>
+          <span class="asset-tag" data-en="Dispute-Free Record" data-zh="无纠纷记录">Dispute-Free Record</span>
+        </div>
+      </div>
+
+      <div class="layer-arrow fade-in">
+        <span class="arrow-up">▲</span>
+        <span data-en="STRONGER ABOVE" data-zh="往上更强">STRONGER ABOVE</span>
+        <span class="arrow-up">▲</span>
+      </div>
+
+      <!-- Layer 2 -->
+      <div class="layer-bar layer-2 fade-in">
+        <div class="layer-badge" data-en="LAYER 2 — MODERATE" data-zh="第二层 — 中等">LAYER 2 — MODERATE</div>
+        <div class="layer-top">
+          <div class="layer-title" data-en="Growth Feeling" data-zh="成长感">Growth Feeling</div>
+          <span class="power-pill pill-orange" data-en="Retention: Moderate" data-zh="留存力：中等">Retention: Moderate</span>
+        </div>
+        <div class="layer-body" data-en="New → Rising → Reliable → Elite. Each tier is visibly different — better campaigns, higher earning potential, exclusive access. Creators feel progression, not stagnation. Visible status creates emotional investment." data-zh="新手 → 成长中 → 可靠 → 精英。每个 Tier 有明显区别——更好的活动、更高收入潜力、独家访问权限。Creator 感受到进步而非停滞，可见的状态产生情感投入。">New → Rising → Reliable → Elite. Each tier is visibly different — better campaigns, higher earning potential, exclusive access. Creators feel progression, not stagnation. Visible status creates emotional investment.</div>
+      </div>
+
+      <div class="layer-arrow fade-in">
+        <span class="arrow-up">▲</span>
+        <span data-en="STRONGER ABOVE" data-zh="往上更强">STRONGER ABOVE</span>
+        <span class="arrow-up">▲</span>
+      </div>
+
+      <!-- Layer 1 — BOTTOM / WEAKEST -->
+      <div class="layer-bar layer-1 fade-in">
+        <div class="layer-badge" data-en="LAYER 1 — WEAKEST" data-zh="第一层 — 最弱">LAYER 1 — WEAKEST</div>
+        <div class="layer-top">
+          <div class="layer-title" data-en="Instant Incentives" data-zh="即时激励">Instant Incentives</div>
+          <span class="power-pill pill-red" data-en="Retention: Weak" data-zh="留存力：弱">Retention: Weak</span>
+        </div>
+        <div class="layer-body" data-en="Free samples and sign-up bonuses attract creators initially but do not retain them. Necessary to start the funnel — but dangerously insufficient on their own. Relying on this layer alone = guaranteed churn." data-zh="免费样品和注册奖励最初会吸引 Creator，但无法留住他们。启动漏斗必需——但单独依赖极其危险。仅依靠这一层 = 注定流失。">Free samples and sign-up bonuses attract creators initially but do not retain them. Necessary to start the funnel — but dangerously insufficient on their own. Relying on this layer alone = guaranteed churn.</div>
+      </div>
+
+    </div>
   </div>
-  <p style="font-size:12px; color:var(--text3);" data-en="PUSH -- Local Creator Performance Infrastructure" data-zh="PUSH -- 本地 Creator 效果基础设施">PUSH -- Local Creator Performance Infrastructure</p>
-</div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 3 — ANTI-FREELOADING
+═══════════════════════════════════════════ -->
+<section class="section" style="background:#fff;">
+  <div class="section-inner">
+    <div class="fade-in" style="margin-bottom:56px;">
+      <div class="section-label" data-en="SYSTEM DESIGN" data-zh="系统设计">SYSTEM DESIGN</div>
+      <h2 class="section-title" data-en="Four Anti-Freeloading Mechanisms" data-zh="四大反薅羊毛机制">Four Anti-Freeloading Mechanisms</h2>
+      <p class="section-sub" data-en="Structural design decisions — not policies — that make one-time extraction impossible and long-term commitment naturally rewarding." data-zh="结构性设计决策——而非规则——让一次性套利变得不可能，让长期承诺自然而然地获得回报。">Structural design decisions — not policies — that make one-time extraction impossible and long-term commitment naturally rewarding.</p>
+    </div>
+
+    <div class="mech-grid">
+
+      <div class="mech-card fade-in" style="transition-delay:0.05s;">
+        <div class="mech-top-bar cyan-bar"></div>
+        <div class="mech-body">
+          <span class="mech-icon">🎫</span>
+          <div class="mech-title" data-en="Sample Campaigns = Entry Tickets" data-zh="样品活动 = 入门票">Sample Campaigns = Entry Tickets</div>
+          <p class="mech-desc" data-en="New creators get maximum 3 sample campaign slots. Each one requires hitting quality thresholds to unlock the next. No-shows or failures burn tickets permanently — and burn them publicly." data-zh="新 Creator 最多获得 3 个样品活动名额。每次都需要达到质量门槛才能解锁下一次。不出现或失败会永久消耗名额——并且公开记录。">New creators get maximum 3 sample campaign slots. Each one requires hitting quality thresholds to unlock the next. No-shows or failures burn tickets permanently — and burn them publicly.</p>
+          <div class="mech-highlight" data-en="3 max → quality gate → unlock more access" data-zh="最多 3 次 → 质量门槛 → 解锁更多权限">3 max → quality gate → unlock more access</div>
+        </div>
+      </div>
+
+      <div class="mech-card fade-in" style="transition-delay:0.1s;">
+        <div class="mech-top-bar purple-bar"></div>
+        <div class="mech-body">
+          <span class="mech-icon">⭐</span>
+          <div class="mech-title" data-en="High-Tier Value Must Be Extremely Real" data-zh="高 Tier 价值极度真实">High-Tier Value Must Be Extremely Real</div>
+          <p class="mech-desc" data-en="Tier status must come with concrete, verifiable advantages that creators can feel every single time they log in — not just vague prestige." data-zh="Tier 状态必须带来具体、可核实的优势，让 Creator 每次登录都能感受到——而不仅仅是模糊的声望。">Tier status must come with concrete, verifiable advantages that creators can feel every single time they log in — not just vague prestige.</p>
+          <ul class="benefit-list">
+            <li data-en="Paid gigs and recurring brand deals" data-zh="付费工作与品牌长期合作">Paid gigs and recurring brand deals</li>
+            <li data-en="Priority campaign matching queue" data-zh="优先活动匹配队列">Priority campaign matching queue</li>
+            <li data-en="Premium campaigns unavailable to lower tiers" data-zh="低 Tier 无法访问的高级活动">Premium campaigns unavailable to lower tiers</li>
+            <li data-en="Faster payouts (3-day vs 7-day)" data-zh="更快提现（3天 vs 7天）">Faster payouts (3-day vs 7-day)</li>
+            <li data-en="Lower platform commission fees" data-zh="更低平台抽成费率">Lower platform commission fees</li>
+            <li data-en="Dedicated account support access" data-zh="专属客户支持服务">Dedicated account support access</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mech-card fade-in" style="transition-delay:0.15s;">
+        <div class="mech-top-bar green-bar"></div>
+        <div class="mech-body">
+          <span class="mech-icon">🔑</span>
+          <div class="mech-title" data-en="History Becomes a Scarce Pass" data-zh="历史变稀缺通行证">History Becomes a Scarce Pass</div>
+          <p class="mech-desc" data-en="90-day completion rate, merchant ratings, dispute-free record, and geo-category credit build into a platform passport that grants access to top-tier campaigns. This cannot be faked, purchased, or built elsewhere in months." data-zh="90天完成率、商家评分、无纠纷记录和地域类目信用积累成一个平台通行证，授予对顶级活动的访问权限。这无法伪造、购买，也无法在数月内在其他平台建立。">90-day completion rate, merchant ratings, dispute-free record, and geo-category credit build into a platform passport that grants access to top-tier campaigns. This cannot be faked, purchased, or built elsewhere in months.</p>
+          <div class="mech-highlight" data-en="Months of history → irreplaceable asset → real switching cost" data-zh="数月历史 → 不可替代资产 → 真实切换成本">Months of history → irreplaceable asset → real switching cost</div>
+        </div>
+      </div>
+
+      <div class="mech-card fade-in" style="transition-delay:0.2s;">
+        <div class="mech-top-bar red-bar"></div>
+        <div class="mech-body">
+          <span class="mech-icon">⚠️</span>
+          <div class="mech-title" data-en="Loss Aversion Design" data-zh="损失厌恶设计">Loss Aversion Design</div>
+          <p class="mech-desc" data-en="People fear loss 2× more than equivalent gain. Design what creators actively LOSE when they go inactive — make the loss concrete, visible, and emotionally salient." data-zh="人们对损失的恐惧是等值收益的 2 倍。设计 Creator 不活跃时会主动失去什么——让损失具体、可见且情感显著。">People fear loss 2× more than equivalent gain. Design what creators actively LOSE when they go inactive — make the loss concrete, visible, and emotionally salient.</p>
+          <div class="loss-grid">
+            <div class="loss-item" data-en="Tier Level" data-zh="Tier 等级">Tier Level</div>
+            <div class="loss-item" data-en="Priority Access" data-zh="优先权限">Priority Access</div>
+            <div class="loss-item" data-en="Fee Discounts" data-zh="费率折扣">Fee Discounts</div>
+            <div class="loss-item" data-en="Premium Queue" data-zh="高级队列">Premium Queue</div>
+            <div class="loss-item" data-en="Streak Bonus" data-zh="连续奖励">Streak Bonus</div>
+            <div class="loss-item" data-en="Monthly Credits" data-zh="月度积分">Monthly Credits</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 4 — FLYWHEEL (dark)
+═══════════════════════════════════════════ -->
+<section class="section section-dark">
+  <div class="section-inner">
+    <div class="fade-in" style="text-align:center;margin-bottom:56px;">
+      <div class="section-label" style="color:var(--accent-light);" data-en="COMPOUNDING SYSTEM" data-zh="复利系统">COMPOUNDING SYSTEM</div>
+      <h2 class="section-title section-title-white" data-en="The Creator Retention Flywheel" data-zh="Creator 留存飞轮">The Creator Retention Flywheel</h2>
+      <p class="section-sub section-sub-white" style="margin:0 auto;" data-en="Each completed campaign makes the next one more valuable. The flywheel accelerates over time, making PUSH increasingly hard to leave." data-zh="每次完成的活动都让下一次更有价值。飞轮随时间加速，使 PUSH 越来越难以离开。">Each completed campaign makes the next one more valuable. The flywheel accelerates over time, making PUSH increasingly hard to leave.</p>
+    </div>
+
+    <div class="flywheel-wrap fade-in">
+      <div class="fw-step">
+        <span class="fw-icon">📋</span>
+        <div class="fw-text" data-en="Complete Campaigns" data-zh="完成活动">Complete Campaigns</div>
+      </div>
+      <div class="fw-arrow">→</div>
+      <div class="fw-step">
+        <span class="fw-icon">🏆</span>
+        <div class="fw-text" data-en="Build Passport" data-zh="积累履历">Build Passport</div>
+      </div>
+      <div class="fw-arrow">→</div>
+      <div class="fw-step">
+        <span class="fw-icon">⬆️</span>
+        <div class="fw-text" data-en="Tier Up" data-zh="升 Tier">Tier Up</div>
+      </div>
+      <div class="fw-arrow">→</div>
+      <div class="fw-step">
+        <span class="fw-icon">🎯</span>
+        <div class="fw-text" data-en="Higher-Value Campaigns" data-zh="高价值活动">Higher-Value Campaigns</div>
+      </div>
+      <div class="fw-arrow">→</div>
+      <div class="fw-step">
+        <span class="fw-icon">💰</span>
+        <div class="fw-text" data-en="Earn More" data-zh="赚得更多">Earn More</div>
+      </div>
+      <div class="fw-arrow">→</div>
+      <div class="fw-step">
+        <span class="fw-icon">🔒</span>
+        <div class="fw-text" data-en="Stay on Platform" data-zh="留在平台">Stay on Platform</div>
+      </div>
+      <div class="fw-arrow">→</div>
+      <div class="fw-loop">↺</div>
+    </div>
+
+    <div class="flywheel-quote fade-in">
+      <p class="quote-text" data-en='"A creator with 20 completed campaigns, 95% completion rate, and Reliable tier status has built something that took months. They cannot replicate this anywhere else. They will not throw it away for a slightly better one-time offer."' data-zh='"一个完成了 20 次活动、95% 完成率、可靠级 Tier 的 Creator，已经积累了数月的成果。他们无法在其他平台复制这些。他们不会因为稍好一点的一次性优惠就把这些丢掉。"'>"A creator with 20 completed campaigns, 95% completion rate, and Reliable tier status has built something that took months. They cannot replicate this anywhere else. They will not throw it away for a slightly better one-time offer."</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 5 — CRITICAL MISTAKES
+═══════════════════════════════════════════ -->
+<section class="section" style="background:#fff;">
+  <div class="section-inner">
+    <div class="fade-in" style="margin-bottom:56px;">
+      <div class="section-label" style="color:var(--red);" data-en="FAILURE MODES" data-zh="失败模式">FAILURE MODES</div>
+      <h2 class="section-title" data-en="Mistakes That Will Destroy Retention" data-zh="会毁掉留存的错误">Mistakes That Will Destroy Retention</h2>
+      <p class="section-sub" data-en="These aren't edge cases. They're the default failure modes of every creator marketplace that didn't think deeply enough about the retention architecture." data-zh="这些不是边缘情况。它们是每个没有深入思考留存架构的 Creator 市场的默认失败模式。">These aren't edge cases. They're the default failure modes of every creator marketplace that didn't think deeply enough about the retention architecture.</p>
+    </div>
+
+    <div class="mistakes-grid">
+      <div class="mistake-card fade-in" style="transition-delay:0.05s;">
+        <div class="mistake-badge" data-en="MISTAKE 01" data-zh="错误 01">MISTAKE 01</div>
+        <div class="mistake-title" data-en="Treating Perks as Retention" data-zh="把福利当留存">Treating Perks as Retention</div>
+        <p class="mistake-body" data-en="Discounts, badges, and referral credits feel like retention strategy but they're not. Perks are instantly copyable by any competitor. Real retention requires structural switching costs — assets the creator cannot take with them." data-zh="折扣、徽章和推荐积分感觉像是留存策略，但实际上不是。福利可以被任何竞争对手立即复制。真正的留存需要结构性切换成本——Creator 无法带走的资产。">Discounts, badges, and referral credits feel like retention strategy but they're not. Perks are instantly copyable by any competitor. Real retention requires structural switching costs — assets the creator cannot take with them.</p>
+      </div>
+
+      <div class="mistake-card fade-in" style="transition-delay:0.1s;">
+        <div class="mistake-badge" data-en="MISTAKE 02" data-zh="错误 02">MISTAKE 02</div>
+        <div class="mistake-title" data-en="Making Tiers Too Easy to Game" data-zh="Tier 太容易刷">Making Tiers Too Easy to Game</div>
+        <p class="mistake-body" data-en="If creators can reach Elite tier in 2 weeks with low-quality completions, the tier system loses all credibility. Tiers must be hard to achieve, meaningful when reached, and visibly worth protecting once earned." data-zh="如果 Creator 能在 2 周内以低质量完成度达到精英 Tier，Tier 系统将失去所有可信度。Tier 必须难以达到、达到后有意义，且一旦获得就明显值得保护。">If creators can reach Elite tier in 2 weeks with low-quality completions, the tier system loses all credibility. Tiers must be hard to achieve, meaningful when reached, and visibly worth protecting once earned.</p>
+      </div>
+
+      <div class="mistake-card fade-in" style="transition-delay:0.15s;">
+        <div class="mistake-badge" data-en="MISTAKE 03" data-zh="错误 03">MISTAKE 03</div>
+        <div class="mistake-title" data-en="Creator Platform Assets Too Weak" data-zh="平台资产太弱">Creator Platform Assets Too Weak</div>
+        <p class="mistake-body" data-en="If a creator's history and ratings on PUSH don't unlock dramatically better opportunities, there's no reason to stay. The platform passport must be a meaningful key — not a participation trophy." data-zh="如果 Creator 在 PUSH 上的历史和评分不能解锁明显更好的机会，就没有理由留下来。平台通行证必须是一把有意义的钥匙——而不是参与奖杯。">If a creator's history and ratings on PUSH don't unlock dramatically better opportunities, there's no reason to stay. The platform passport must be a meaningful key — not a participation trophy.</p>
+      </div>
+
+      <div class="mistake-card fade-in" style="transition-delay:0.2s;">
+        <div class="mistake-badge" data-en="MISTAKE 04" data-zh="错误 04">MISTAKE 04</div>
+        <div class="mistake-title" data-en="Adding Friction Without Benefit" data-zh="平台只增加摩擦">Adding Friction Without Benefit</div>
+        <p class="mistake-body" data-en="Verification requirements, strict policies, and compliance rules that aren't matched by commensurate earnings and access feel punitive, not professional. Every friction point must be justified by a visible, concrete reward." data-zh="验证要求、严格政策和合规规则如果没有与之相匹配的收入和访问权限，会让人感觉惩罚性而非专业性。每个摩擦点都必须通过可见、具体的奖励来证明其合理性。">Verification requirements, strict policies, and compliance rules that aren't matched by commensurate earnings and access feel punitive, not professional. Every friction point must be justified by a visible, concrete reward.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-logo">PUSH</div>
+        <div class="footer-tagline" data-en="Local Creator Performance Infrastructure" data-zh="本地 Creator 效果基础设施">Local Creator Performance Infrastructure</div>
+      </div>
+      <div class="footer-links">
+        <a href="index.html" class="footer-link" data-en="Dashboard" data-zh="主页">Dashboard</a>
+        <a href="project-intro.html" class="footer-link" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
+        <a href="pitch-deck.html" class="footer-link" data-en="Pitch Deck" data-zh="融资材料">Pitch Deck</a>
+        <a href="prospects.html" class="footer-link" data-en="Prospects" data-zh="前景">Prospects</a>
+        <a href="challenges.html" class="footer-link" data-en="Challenges" data-zh="挑战">Challenges</a>
+        <a href="retention-defense.html" class="footer-link active" data-en="Retention" data-zh="留存防御">Retention</a>
+        <a href="platform-value.html" class="footer-link" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
+        <a href="push-strategy-core.html" class="footer-link" data-en="Strategy Core" data-zh="策略核心">Strategy Core</a>
+      </div>
+    </div>
+    <div class="footer-copy">© 2025 PUSH Platform. All rights reserved.</div>
+  </div>
+</footer>
 
 <script>
-// LANGUAGE TOGGLE
-(function() {
-  const btn = document.getElementById('lang-toggle');
-  let lang = localStorage.getItem('push-lang') || 'en';
+/* ═══════════════════════════════════════════
+   LANGUAGE SYSTEM
+═══════════════════════════════════════════ */
+let currentLang = localStorage.getItem('push-lang') || 'en';
 
-  function applyLang(l) {
-    lang = l;
-    localStorage.setItem('push-lang', l);
-    btn.textContent = l === 'en' ? 'ZH / EN' : 'EN / ZH';
+function applyLang(lang) {
+  document.body.style.opacity = '0.7';
+  document.body.style.transition = 'opacity 0.2s';
+  setTimeout(() => {
     document.querySelectorAll('[data-en]').forEach(el => {
-      el.innerHTML = el.getAttribute('data-' + l);
+      el.innerHTML = lang === 'zh' ? (el.dataset.zh || el.dataset.en) : el.dataset.en;
     });
-    document.documentElement.lang = l === 'en' ? 'en' : 'zh';
-  }
+    const btn = document.getElementById('langBtn');
+    if (btn) btn.textContent = lang === 'zh' ? 'EN / 中' : '中 / EN';
+    document.querySelectorAll('.nav-mobile-right .lang-btn').forEach(b => {
+      b.textContent = lang === 'zh' ? 'EN / 中' : '中 / EN';
+    });
+    document.body.style.opacity = '1';
+  }, 150);
+}
 
-  btn.addEventListener('click', () => {
-    applyLang(lang === 'en' ? 'zh' : 'en');
+function toggleLang() {
+  currentLang = currentLang === 'en' ? 'zh' : 'en';
+  localStorage.setItem('push-lang', currentLang);
+  applyLang(currentLang);
+}
+
+/* ═══════════════════════════════════════════
+   SCROLL FADE IN
+═══════════════════════════════════════════ */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
   });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
-  // Apply saved preference on load
-  if (lang !== 'en') {
-    applyLang(lang);
-  }
-})();
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-// SCROLL ANIMATIONS
-(function() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.1 });
+/* ═══════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  applyLang(currentLang);
+});
 
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-})();
+// Apply immediately too
+applyLang(currentLang);
 </script>
 </body>
 </html>

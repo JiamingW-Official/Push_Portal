@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PUSH — Risk & Defense</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --accent: #4f46e5;
+  --accent-light: #818cf8;
+  --accent-dark: #3730a3;
+  --accent-bg: rgba(79,70,229,0.06);
+  --accent-glow: rgba(79,70,229,0.18);
+  --primary: #0f0f1a;
+  --green: #059669;
+  --green-bg: rgba(5,150,105,0.08);
+  --green-glow: rgba(5,150,105,0.18);
+  --orange: #d97706;
+  --orange-bg: rgba(217,119,6,0.08);
+  --orange-glow: rgba(217,119,6,0.18);
+  --red: #dc2626;
+  --red-bg: rgba(220,38,38,0.08);
+  --red-glow: rgba(220,38,38,0.16);
+  --text: #111827;
+  --text2: #4b5563;
+  --text3: #9ca3af;
+  --border: #e5e7eb;
+  --bg2: #f8f9fa;
+  --radius: 14px;
+  --shadow: 0 4px 20px rgba(0,0,0,0.08);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--text);line-height:1.6;overflow-x:hidden;}
+
+/* ═══════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:60px;background:rgba(255,255,255,0.92);
+  border-bottom:1px solid var(--border);
+  -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+  display:flex;align-items:center;padding:0 24px;gap:16px;
+}
+.nav-logo{
+  font-size:22px;font-weight:900;color:var(--accent);
+  text-decoration:none;letter-spacing:-0.5px;flex-shrink:0;
+}
+.nav-links{
+  display:flex;align-items:center;gap:4px;flex:1;justify-content:center;
+}
+.nav-links a{
+  font-size:13px;font-weight:500;color:var(--text2);
+  text-decoration:none;padding:5px 11px;border-radius:8px;
+  transition:color 0.2s,background 0.2s;white-space:nowrap;
+}
+.nav-links a:hover{color:var(--accent);background:var(--accent-bg);}
+.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;}
+.lang-btn{
+  background:var(--accent);color:#fff;border:none;cursor:pointer;
+  font-size:12px;font-weight:700;padding:7px 18px;border-radius:8px;
+  transition:background 0.2s;flex-shrink:0;letter-spacing:0.3px;
+}
+.lang-btn:hover{background:var(--accent-dark);}
+.nav-mobile-right{display:none;gap:8px;align-items:center;}
+
+/* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
+.hero{
+  min-height:100vh;
+  background:linear-gradient(135deg,#0f0f1a 0%,#1a1a2e 40%,#1c0a3e 70%,#0f0f1a 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:100px 24px 80px;position:relative;overflow:hidden;
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(79,70,229,0.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(79,70,229,0.05) 1px,transparent 1px);
+  background-size:60px 60px;
+  -webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 40%,transparent 100%);
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 40%,transparent 100%);
+}
+.hero-glow{
+  position:absolute;top:20%;left:50%;transform:translateX(-50%);
+  width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(79,70,229,0.12) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(217,119,6,0.18);border:1px solid rgba(217,119,6,0.45);
+  color:#fbbf24;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  padding:8px 20px;border-radius:100px;margin-bottom:36px;position:relative;z-index:1;
+}
+.hero-badge::before{
+  content:'';width:8px;height:8px;border-radius:50%;
+  background:#f59e0b;animation:pulse-orange 1.5s ease-in-out infinite;flex-shrink:0;
+}
+@keyframes pulse-orange{
+  0%,100%{box-shadow:0 0 0 0 rgba(245,158,11,0.7);}
+  50%{box-shadow:0 0 0 8px rgba(245,158,11,0);}
+}
+.hero-title{
+  font-size:clamp(2.5rem,5vw,4.5rem);font-weight:900;
+  letter-spacing:-2px;line-height:1.05;color:#fff;
+  max-width:900px;margin-bottom:28px;position:relative;z-index:1;
+}
+.hero-title span{color:var(--accent-light);}
+.hero-subtitle{
+  color:rgba(255,255,255,0.6);font-size:17px;font-weight:400;line-height:1.7;
+  max-width:680px;position:relative;z-index:1;margin-bottom:64px;
+}
+.hero-scroll{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  color:rgba(255,255,255,0.35);font-size:11px;font-weight:500;letter-spacing:1px;text-transform:uppercase;
+  animation:bounce 2s ease-in-out infinite;
+}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(6px);}}
+
+/* ═══════════════════════════════════════════
+   QUICK NAV
+═══════════════════════════════════════════ */
+.quick-nav{
+  background:#fff;border-bottom:1px solid var(--border);
+  padding:16px 24px;position:sticky;top:60px;z-index:900;
+}
+.quick-nav-inner{
+  max-width:1100px;margin:0 auto;
+  display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.quick-nav-inner::-webkit-scrollbar{display:none;}
+.qpill{
+  display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
+  padding:7px 16px;border-radius:100px;border:1px solid var(--border);
+  font-size:13px;font-weight:600;color:var(--text2);
+  text-decoration:none;transition:all 0.2s;flex-shrink:0;
+}
+.qpill:hover,.qpill.qactive{
+  background:var(--accent);border-color:var(--accent);color:#fff;
+}
+.qpill .qcount{
+  background:rgba(255,255,255,0.25);border-radius:20px;
+  padding:1px 7px;font-size:11px;font-weight:700;
+}
+.qpill:not(:hover):not(.qactive) .qcount{
+  background:var(--accent-bg);color:var(--accent);
+}
+
+/* ═══════════════════════════════════════════
+   SECTION CHROME
+═══════════════════════════════════════════ */
+.section{padding:100px 24px;}
+.section-inner{max-width:1100px;margin:0 auto;}
+.section-bg2{background:var(--bg2);}
+.section-dark{background:var(--primary);}
+
+.cat-label{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:12px;
+}
+.cat-label.dark-label{color:var(--accent-light);}
+.cat-icon{font-size:16px;}
+.section-title{
+  font-size:clamp(28px,4vw,42px);font-weight:900;letter-spacing:-1.5px;
+  color:var(--primary);line-height:1.1;margin-bottom:16px;
+}
+.section-title-white{color:#fff;}
+.section-sub{
+  font-size:17px;font-weight:400;color:var(--text2);
+  max-width:680px;line-height:1.7;margin-bottom:64px;
+}
+.section-sub-white{color:rgba(255,255,255,0.55);}
+.section-header{margin-bottom:56px;}
+
+/* ═══════════════════════════════════════════
+   RISK CARD GRID
+═══════════════════════════════════════════ */
+.risk-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+.risk-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;}
+.risk-grid-1{display:grid;grid-template-columns:1fr;gap:28px;max-width:860px;}
+
+/* ═══════════════════════════════════════════
+   RISK CARD
+═══════════════════════════════════════════ */
+.risk-card{
+  background:#fff;border:1px solid var(--border);border-radius:var(--radius);
+  overflow:hidden;display:flex;flex-direction:column;
+  transition:transform 0.25s ease,box-shadow 0.25s ease;cursor:default;
+}
+.risk-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px var(--red-glow),var(--shadow-lg);}
+.risk-card.on-dark{background:rgba(255,255,255,0.97);border-color:rgba(255,255,255,0.15);}
+.risk-card.on-dark:hover{box-shadow:0 16px 48px rgba(0,0,0,0.4);}
+
+/* Card: top risk section */
+.rc-top{padding:24px 24px 20px;}
+.rc-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--red-bg);color:var(--red);
+  font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+  padding:4px 10px;border-radius:6px;margin-bottom:14px;
+}
+.rc-title{font-size:19px;font-weight:800;color:var(--text);line-height:1.25;margin-bottom:10px;}
+.rc-desc{font-size:14px;color:var(--text2);line-height:1.65;margin-bottom:14px;}
+.rc-bullets{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.rc-bullets li{
+  font-size:13px;color:var(--text2);line-height:1.5;
+  padding-left:18px;position:relative;
+}
+.rc-bullets li::before{
+  content:'';position:absolute;left:4px;top:8px;
+  width:6px;height:6px;border-radius:50%;background:var(--red);flex-shrink:0;
+}
+
+/* Card: divider */
+.rc-divider{
+  display:flex;align-items:center;gap:0;margin:0;
+}
+.rc-divider-line{flex:1;height:1px;background:var(--border);}
+.rc-divider-pill{
+  display:flex;align-items:center;gap:6px;
+  background:var(--green);color:#fff;
+  font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+  padding:5px 14px;border-radius:100px;margin:0 12px;white-space:nowrap;
+  flex-shrink:0;
+}
+.rc-divider-arrow{
+  font-size:14px;color:var(--green);margin-right:4px;
+}
+
+/* Card: bottom defense section */
+.rc-bottom{
+  padding:20px 24px 24px;background:var(--green-bg);
+  border-top:1px solid rgba(5,150,105,0.12);
+  flex:1;display:flex;flex-direction:column;gap:10px;
+  transition:background 0.25s;
+}
+.risk-card:hover .rc-bottom{background:rgba(5,150,105,0.13);}
+.rc-defense-title{
+  font-size:15px;font-weight:700;color:var(--green);line-height:1.45;
+}
+.rc-defense-bullets{list-style:none;display:flex;flex-direction:column;gap:6px;margin-top:4px;}
+.rc-defense-bullets li{
+  font-size:13px;color:var(--text2);line-height:1.5;
+  padding-left:18px;position:relative;
+}
+.rc-defense-bullets li::before{
+  content:'';position:absolute;left:4px;top:8px;
+  width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;
+}
+.rc-insight{
+  margin-top:10px;background:rgba(5,150,105,0.1);border-left:3px solid var(--green);
+  border-radius:8px;padding:12px 14px;
+  font-size:13px;font-weight:600;color:var(--green);line-height:1.55;font-style:italic;
+}
+
+/* ═══════════════════════════════════════════
+   SYSTEM SECTION (DARK)
+═══════════════════════════════════════════ */
+.system-section{background:var(--primary);padding:100px 24px;}
+.system-inner{max-width:1100px;margin:0 auto;}
+.system-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px;}
+.sys-card{
+  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
+  border-radius:var(--radius);padding:32px 28px;
+}
+.sys-card-title{font-size:17px;font-weight:800;color:#fff;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.1);}
+.sys-card-title.accent-color{color:var(--accent-light);}
+.sys-card-title.green-color{color:#34d399;}
+.sys-card-title.orange-color{color:#fbbf24;}
+.sys-point{
+  display:flex;gap:12px;margin-bottom:16px;align-items:flex-start;
+}
+.sys-point:last-child{margin-bottom:0;}
+.sys-num{
+  min-width:24px;height:24px;border-radius:50%;
+  font-size:11px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;
+}
+.sys-num.accent{background:rgba(79,70,229,0.25);color:var(--accent-light);}
+.sys-num.green{background:rgba(5,150,105,0.25);color:#34d399;}
+.sys-num.orange{background:rgba(217,119,6,0.25);color:#fbbf24;}
+.sys-text{font-size:13px;color:rgba(255,255,255,0.7);line-height:1.6;}
+.sys-text strong{color:rgba(255,255,255,0.95);font-weight:700;}
+
+/* ═══════════════════════════════════════════
+   CLOSING SECTION
+═══════════════════════════════════════════ */
+.closing-box{
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);
+  border-radius:var(--radius);padding:48px;text-align:center;
+  margin-bottom:48px;
+}
+.closing-quote{
+  font-size:clamp(18px,2.5vw,26px);font-weight:800;color:#fff;
+  line-height:1.45;letter-spacing:-0.5px;max-width:800px;margin:0 auto;
+}
+.closing-quote span{color:var(--accent-light);}
+.closing-layers{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.layer-card{
+  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
+  border-radius:var(--radius);padding:24px;text-align:center;
+}
+.layer-num{
+  font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--accent-light);margin-bottom:10px;
+}
+.layer-title{font-size:18px;font-weight:800;color:#fff;margin-bottom:6px;}
+.layer-desc{font-size:13px;color:rgba(255,255,255,0.55);line-height:1.6;}
+.closing-final{
+  text-align:center;margin-top:40px;
+  font-size:16px;font-weight:600;color:rgba(255,255,255,0.55);line-height:1.7;
+}
+.closing-final span{color:rgba(255,255,255,0.9);}
+
+/* ═══════════════════════════════════════════
+   SCROLL FADE
+═══════════════════════════════════════════ */
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+footer{
+  background:#080810;padding:56px 24px 40px;
+  border-top:1px solid rgba(255,255,255,0.06);
+}
+.footer-inner{max-width:1100px;margin:0 auto;}
+.footer-top{display:flex;align-items:flex-start;justify-content:space-between;gap:40px;margin-bottom:40px;flex-wrap:wrap;}
+.footer-brand{}
+.footer-logo{font-size:24px;font-weight:900;color:var(--accent);letter-spacing:-0.5px;margin-bottom:8px;}
+.footer-tagline{font-size:14px;color:rgba(255,255,255,0.4);font-weight:500;}
+.footer-links{display:flex;flex-wrap:wrap;gap:8px;}
+.footer-pill{
+  display:inline-block;padding:6px 14px;border-radius:100px;
+  border:1px solid rgba(255,255,255,0.1);
+  font-size:12px;font-weight:600;color:rgba(255,255,255,0.5);
+  text-decoration:none;transition:all 0.2s;
+}
+.footer-pill:hover{border-color:var(--accent);color:var(--accent-light);}
+.footer-pill.current{border-color:var(--accent);color:var(--accent-light);background:rgba(79,70,229,0.12);}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,0.06);padding-top:24px;
+  font-size:12px;color:rgba(255,255,255,0.25);
+}
+
+/* ═══════════════════════════════════════════
+   MOBILE
+═══════════════════════════════════════════ */
+@media(max-width:640px){
+  .nav-links{display:none;}
+  .nav-mobile-right{display:flex;}
+  .risk-grid-3,.risk-grid-2,.system-grid,.closing-layers{grid-template-columns:1fr;}
+  .risk-grid-1{max-width:100%;}
+  .section{padding:72px 20px;}
+  .section-title{font-size:28px;}
+  .hero-title{letter-spacing:-1px;}
+  .closing-box{padding:32px 24px;}
+  .footer-top{flex-direction:column;}
+}
+@media(max-width:900px){
+  .risk-grid-3{grid-template-columns:repeat(2,1fr);}
+  .system-grid{grid-template-columns:1fr;}
+}
+@media(max-width:640px){
+  .risk-grid-3{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
+<nav>
+  <a href="index.html" class="nav-logo">PUSH</a>
+  <div class="nav-links">
+    <a href="index.html" data-en="Dashboard" data-zh="仪表盘">Dashboard</a>
+    <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
+    <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演方案">Pitch Deck</a>
+    <a href="prospects.html" data-en="Prospects" data-zh="未来愿景">Prospects</a>
+    <a href="challenges.html" data-en="Challenges" data-zh="挑战">Challenges</a>
+    <a href="risk-defense.html" class="active" data-en="Risk &amp; Defense" data-zh="风险防御">Risk &amp; Defense</a>
+    <a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a>
+    <a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
+    <a href="push-strategy-core.html" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
+  </div>
+  <button class="lang-btn" id="langBtn" onclick="toggleLang()">中 / EN</button>
+  <div class="nav-mobile-right">
+    <button class="lang-btn" onclick="toggleLang()">中 / EN</button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-badge" data-en="RISK REGISTER" data-zh="风险清单">RISK REGISTER</div>
+  <h1 class="hero-title" data-en="Push's 16 Risks — And How We Win" data-zh="Push 的 16 个风险与应对方式">Push's 16 Risks — And How We Win</h1>
+  <p class="hero-subtitle" data-en="Every serious platform has existential risks. What separates winners from failures is whether you've seen them coming — and built the defenses before they hit." data-zh="每个认真的平台都有生死攸关的风险。胜者和败者的区别，是你是否提前看见了它们——并在它们击中你之前建好了防线。">Every serious platform has existential risks. What separates winners from failures is whether you've seen them coming — and built the defenses before they hit.</p>
+  <div class="hero-scroll">
+    <span data-en="scroll" data-zh="滚动">scroll</span>
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M4 9l4 4 4-4" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ QUICK NAV ═══════════════════════════════ -->
+<div class="quick-nav">
+  <div class="quick-nav-inner">
+    <a href="#strategic" class="qpill"><span data-en="Strategic" data-zh="战略层">Strategic</span><span class="qcount">3</span></a>
+    <a href="#coldstart" class="qpill"><span data-en="Cold Start" data-zh="冷启动">Cold Start</span><span class="qcount">3</span></a>
+    <a href="#retention" class="qpill"><span data-en="Retention" data-zh="留存">Retention</span><span class="qcount">2</span></a>
+    <a href="#antibypass" class="qpill"><span data-en="Anti-Bypass" data-zh="反绕过">Anti-Bypass</span><span class="qcount">2</span></a>
+    <a href="#trust" class="qpill"><span data-en="Trust &amp; Fraud" data-zh="信任与欺诈">Trust &amp; Fraud</span><span class="qcount">3</span></a>
+    <a href="#operations" class="qpill"><span data-en="Operations" data-zh="运营">Operations</span><span class="qcount">2</span></a>
+    <a href="#competition" class="qpill"><span data-en="Competition" data-zh="竞争">Competition</span><span class="qcount">1</span></a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ SECTION 1: STRATEGIC ═══════════════════════════════ -->
+<section class="section" id="strategic">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <div class="cat-label"><span class="cat-icon">🎯</span><span data-en="I. Strategic Risks" data-zh="一、战略层风险">I. Strategic Risks</span></div>
+      <h2 class="section-title" data-en="Risks That Break the Business Model" data-zh="会击垮商业模式的风险">Risks That Break the Business Model</h2>
+    </div>
+    <div class="risk-grid-3">
+
+      <!-- RISK 01 -->
+      <div class="risk-card fade-in">
+        <div class="rc-top">
+          <div class="rc-badge" data-en="RISK 01" data-zh="风险 01">RISK 01</div>
+          <div class="rc-title" data-en="Positioning Collapse" data-zh="定位不清，项目被理解成普通达人平台">Positioning Collapse</div>
+          <div class="rc-desc" data-en="If Push is perceived as &ldquo;a local influencer booking platform&rdquo; or &ldquo;an explore/map app,&rdquo; it immediately falls into a red ocean." data-zh="如果 Push 被理解成「本地网红接单平台」或「带地图的探店 App」，它会立刻掉进红海。">If Push is perceived as &ldquo;a local influencer booking platform&rdquo; or &ldquo;an explore/map app,&rdquo; it immediately falls into a red ocean.</div>
+          <ul class="rc-bullets">
+            <li data-en="Merchants see you as just a matching tool" data-zh="商家觉得你只是撮合">Merchants see you as just a matching tool</li>
+            <li data-en="Creators see you as a freebie app" data-zh="Creator 觉得你只是发福利">Creators see you as a freebie app</li>
+            <li data-en="Investors see no moat" data-zh="投资人觉得没有护城河">Investors see no moat</li>
+            <li data-en="Product team loses direction" data-zh="团队做功能时容易跑偏">Product team loses direction</li>
+          </ul>
+        </div>
+        <div class="rc-divider">
+          <div class="rc-divider-line"></div>
+          <div class="rc-divider-pill"><span class="rc-divider-arrow">↓</span><span data-en="DEFENSE" data-zh="应对方式">DEFENSE</span></div>
+          <div class="rc-divider-line"></div>
+        </div>
+        <div class="rc-bottom">
+          <div class="rc-defense-title" data-en="&ldquo;Push is not a content platform. Push is local creator-driven acquisition infrastructure.&rdquo;" data-zh="&ldquo;Push 不是内容平台，而是本地 creator-driven acquisition infrastructure。&rdquo;">&ldquo;Push is not a content platform. Push is local creator-driven acquisition infrastructure.&rdquo;</div>
+          <ul class="rc-defense-bullets">
+            <li data-en="All messaging centers on: merchant ROI, creator credit, structured campaigns, verification, repeatability" data-zh="所有对外表达围绕：商家 ROI、creator 信用、结构化活动、验证、可重复性">All messaging centers on: merchant ROI, creator credit, structured campaigns, verification, repeatability</li>
+            <li data-en="Never position as: &ldquo;discover,&rdquo; &ldquo;种草,&rdquo; &ldquo;creator community&rdquo;" data-zh="永远不要包装成「发现」「种草」「达人社群」">Never position as: &ldquo;discover,&rdquo; &ldquo;种草,&rdquo; &ldquo;creator community&rdquo;</li>
+            <li data-en="Instead: local acquisition system, creator credit market, merchant operating layer" data-zh="要包装成：本地获客系统、creator 信用市场、商家运营层">Instead: local acquisition system, creator credit market, merchant operating layer</li>
+          </ul>
+          <div class="rc-insight" data-en="&ldquo;Every feature decision must reinforce the infrastructure identity, not the content platform identity.&rdquo;" data-zh="&ldquo;每个功能决策都必须强化基础设施身份，而不是内容平台身份。&rdquo;">&ldquo;Every feature decision must reinforce the infrastructure identity, not the content platform identity.&rdquo;</div>
+        </div>
+      </div>
+
+      <!-- RISK 02 -->
+      <div class="risk-card fade-in" style="transition-delay:0.1s">
+        <div class="rc-top">
+          <div class="rc-badge" data-en="RISK 02" data-zh="风险 02">RISK 02</div>
+          <div class="rc-title" data-en="Overly Wide Cold Start" data-zh="切口过大，导致冷启动失败">Overly Wide Cold Start</div>
+          <div class="rc-desc" data-en="Starting with all of NYC, all verticals, all creator categories creates extreme sparsity." data-zh="如果一上来做整个 NYC、全部本地生活、所有 creator 类别，平台会极度稀疏。">Starting with all of NYC, all verticals, all creator categories creates extreme sparsity.</div>
+          <ul class="rc-bullets">
+            <li data-en="Map is empty — campaigns aren't concentrated" data-zh="地图打开没密度，活动不够集中">Map is empty — campaigns aren't concentrated</li>
+            <li data-en="Creators see no opportunities" data-zh="Creator 看不到机会">Creators see no opportunities</li>
+            <li data-en="Merchants see no fill speed" data-zh="商家看不到填充速度">Merchants see no fill speed</li>
+            <li data-en="Zero local network effects" data-zh="没有任何局部网络效应">Zero local network effects</li>
+          </ul>
+        </div>
+        <div class="rc-divider">
+          <div class="rc-divider-line"></div>
+          <div class="rc-divider-pill"><span class="rc-divider-arrow">↓</span><span data-en="DEFENSE" data-zh="应对方式">DEFENSE</span></div>
+          <div class="rc-divider-line"></div>
+        </div>
+        <div class="rc-bottom">
+          <div class="rc-defense-title" data-en="&ldquo;Hyper-narrow entry. One neighborhood. 1–2 verticals. Strong density first.&rdquo;" data-zh="&ldquo;超窄切口。一个街区。1–2 个垂直领域。先做高密度。&rdquo;">&ldquo;Hyper-narrow entry. One neighborhood. 1–2 verticals. Strong density first.&rdquo;</div>
+          <ul class="rc-defense-bullets">
+            <li data-en="Start: SoHo / LES — café, dessert, beauty" data-zh="先从：SoHo / LES 的咖啡、甜点、美妆">Start: SoHo / LES — café, dessert, beauty</li>
+            <li data-en="Or: Williamsburg — food, local scene, events" data-zh="或：Williamsburg 的餐饮、本地场景、活动">Or: Williamsburg — food, local scene, events</li>
+            <li data-en="High-density local market first, then replicate — NOT a big tent first" data-zh="先做高密度局部市场，再复制——而不是先做大盘子">High-density local market first, then replicate — NOT a big tent first</li>
+          </ul>
+          <div class="rc-insight" data-en="&ldquo;A dense local market of 10 merchants and 30 creators beats a sparse market of 100 merchants and 1000 creators.&rdquo;" data-zh="&ldquo;10 个商家和 30 个 Creator 的高密度局部市场，胜过 100 个商家和 1000 个 Creator 的稀疏市场。&rdquo;">&ldquo;A dense local market of 10 merchants and 30 creators beats a sparse market of 100 merchants and 1000 creators.&rdquo;</div>
+        </div>
+      </div>
+
+      <!-- RISK 03 -->
+      <div class="risk-card fade-in" style="transition-delay:0.2s">
+        <div class="rc-top">
+          <div class="rc-badge" data-en="RISK 03" data-zh="风险 03">RISK 03</div>
+          <div class="rc-title" data-en="Product Drift" data-zh="产品漂移，功能越来越多但商业逻辑越来越弱">Product Drift</div>
+          <div class="rc-desc" data-en="Teams get distracted by social features, feeds, profiles, points systems, and &ldquo;platform-looking&rdquo; decoration that doesn't move the business." data-zh="团队很容易被社区功能、社交 feed、漂亮 profile、花哨积分体系等「看起来很平台」的装饰功能吸走。">Teams get distracted by social features, feeds, profiles, points systems, and &ldquo;platform-looking&rdquo; decoration that doesn't move the business.</div>
+          <ul class="rc-bullets">
+            <li data-en="Project looks full but core merchant ROI is underdeveloped" data-zh="项目功能很满，但最核心的商家 ROI 反而没做好">Project looks full but core merchant ROI is underdeveloped</li>
+            <li data-en="Creator retention remains structurally weak" data-zh="Creator 留存结构性薄弱">Creator retention remains structurally weak</li>
+          </ul>
+        </div>
+        <div class="rc-divider">
+          <div class="rc-divider-line"></div>
+          <div class="rc-divider-pill"><span class="rc-divider-arrow">↓</span><span data-en="DEFENSE" data-zh="应对方式">DEFENSE</span></div>
+          <div class="rc-divider-line"></div>
+        </div>
+        <div class="rc-bottom">
+          <div class="rc-defense-title" data-en="&ldquo;Every feature must pass: does it improve merchant repeat, creator progression, attribution confidence, or platform defensibility?&rdquo;" data-zh="&ldquo;每个功能必须经过过滤：它是否提升了商家复购、creator 晋升、归因置信度，或平台防御性？&rdquo;">&ldquo;Every feature must pass: does it improve merchant repeat, creator progression, attribution confidence, or platform defensibility?&rdquo;</div>
+          <ul class="rc-defense-bullets">
+            <li data-en="If the answer is no: defer" data-zh="如果答案是否定的：暂缓">If the answer is no: defer</li>
+            <li data-en="Priority: merchant repeat → creator progression → attribution → workflow → anti-disintermediation" data-zh="优先顺序：商家复购→creator 晋升→归因→工作流效率→反绕平台">Priority: merchant repeat → creator progression → attribution → workflow → anti-disintermediation</li>
+          </ul>
+          <div class="rc-insight" data-en="&ldquo;Simplicity that converts beats complexity that impresses.&rdquo;" data-zh="&ldquo;能转化的简单，胜过能留下印象的复杂。&rdquo;">&ldquo;Simplicity that converts beats complexity that impresses.&rdquo;</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ SECTION 2: COLD START ═══════════════════════════════ -->
+<section class="section section-bg2" id="coldstart">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <div class="cat-label"><span class="cat-icon">🚀</span><span data-en="II. Cold Start &amp; Market Risks" data-zh="二、市场与冷启动风险">II. Cold Start &amp; Market Risks</span></div>
+      <h2 class="section-title" data-en="Risks That Stall the Launch" data-zh="会拖垮冷启动的风险">Risks That Stall the Launch</h2>
+    </div>
+    <div class="risk-grid-3">
+
+      <!-- RISK 04 -->
+      <div class="risk-card fade-in">
+        <div class="rc-top">
+          <div class="rc-badge" data-en="RISK 04" data-zh="风险 04">RISK 04</div>
+          <div class="rc-title" data-en="Merchants Won't Try" data-zh="商家不愿意试">Merchants Won't Try</div>
+          <div class="rc-desc" data-en="Local merchants may believe creator marketing is untrustworthy, too complicated, ineffective from past experience, or not worth the platform fee." data-zh="本地商家可能会觉得 creator 营销不可信、太麻烦、以前试过没效果、不想额外付平台费。">Local merchants may believe creator marketing is untrustworthy, too complicated, ineffective from past experience, or not worth the platform fee.</div>
+          <ul class="rc-bullets">
+            <li data-en="Zero merchant-side traction" data-zh="商家端零牵引力">Zero merchant-side traction</li>
+            <li data-en="No campaigns = no creators" data-zh="没有活动 = 没有 Creator">No campaigns = no creators</li>
+          </ul>
+        </div>
+        <div class="rc-divider">
+          <div class="rc-divider-line"></div>
+          <div class="rc-divider-pill"><span class="rc-divider-arrow">↓</span><span data-en="DEFENSE" data-zh="应对方式">DEFENSE</span></div>
+          <div class="rc-divider-line"></div>
+        </div>
+        <div class="rc-bottom">
+          <div class="rc-defense-title" data-en="&ldquo;Don't sell 'exposure.' Sell a structured customer acquisition experiment.&rdquo;" data-zh="&ldquo;不要卖「曝光」，要卖「结构化获客实验」。&rdquo;">&ldquo;Don't sell 'exposure.' Sell a structured customer acquisition experiment.&rdquo;</div>
+          <ul class="rc-defense-bullets">
+            <li data-en="Founder-led onboarding for first 10 merchants" data-zh="前 10 个商家由创始人亲自 onboarding">Founder-led onboarding for first 10 merchants</li>
+            <li data-en="Help merchant define clear campaign goal" data-zh="帮商家定义清晰的活动目标">Help merchant define clear campaign goal</li>
+            <li data-en="Template-based campaigns to minimize setup cost" data-zh="模板化活动，降低配置成本">Template-based campaigns to minimize setup cost</li>
+            <li data-en="First success experience is the product" data-zh="第一次成功体验就是产品">First success experience is the product</li>
+          </ul>
+          <div class="rc-insight" data-en="&ldquo;The goal is not 'sign them up.' The goal is 'get them their first win.'&rdquo;" data-zh="&ldquo;目标不是「让他们注册」，而是「帮他们跑通第一次」。&rdquo;">&ldquo;The goal is not 'sign them up.' The goal is 'get them their first win.'&rdquo;</div>
+        </div>
+      </div>
+
+      <!-- RISK 05 -->
+      <div class="risk-card fade-in" style="transition-delay:0.1s">
+        <div class="rc-top">
+          <div class="rc-badge" data-en="RISK 05" data-zh="风险 05">RISK 05</div>
+          <div class="rc-title" data-en="Poor Creator Supply Quality" data-zh="Creator 供给质量差">Poor Creator Supply Quality</div>
+          <div class="rc-desc" data-en="If early creators are mostly sample-hunters, unreliable, unwilling to complete proof requirements, or poor fits for local execution, merchants lose trust fast." data-zh="如果早期 Creator 大多是只想薅样品的、不稳定的、不愿意执行证明要求的、不适合本地行动的，商家很快就会失去信任。">If early creators are mostly sample-hunters, unreliable, unwilling to complete proof requirements, or poor fits for local execution, merchants lose trust fast.</div>
+          <ul class="rc-bullets">
+            <li data-en="Merchant trust collapses after 2–3 bad experiences" data-zh="商家经历 2–3 次差体验后，信任崩塌">Merchant trust collapses after 2–3 bad experiences</li>
+            <li data-en="Quality creators leave for better-curated platforms" data-zh="优质 Creator 流向管理更严格的平台">Quality creators leave for better-curated platforms</li>
+          </ul>
+        </div>
+        <div class="rc-divider">
+          <div class="rc-divider-line"></div>
+          <div class="rc-divider-pill"><span class="rc-divider-arrow">↓</span><span data-en="DEFENSE" data-zh="应对方式">DEFENSE</span></div>
+          <div class="rc-divider-line"></div>
+        </div>
+        <div class="rc-bottom">
+          <div class="rc-defense-title" data-en="&ldquo;Don't open-source the supply. Curate it. Few but reliable over many but inconsistent.&rdquo;" data-zh="&ldquo;不要开放式泛招。要精选。少而可靠，胜过多而不稳定。&rdquo;">&ldquo;Don't open-source the supply. Curate it. Few but reliable over many but inconsistent.&rdquo;</div>
+          <ul class="rc-defense-bullets">
+            <li data-en="Screen for: local relevance, responsiveness, mobility, structure-following, consistency, category fit" data-zh="筛选时看：本地相关性、响应速度、行动能力、执行结构的意愿、稳定性、品类契合">Screen for: local relevance, responsiveness, mobility, structure-following, consistency, category fit</li>
+            <li data-en="Early Push: fewer, more reliable creators is better" data-zh="Push 早期：越少、越可靠的 Creator 越好">Early Push: fewer, more reliable creators is better</li>
+          </ul>
+          <div class="rc-insight" data-en="&ldquo;20 reliable creators who execute well beat 200 unreliable creators who ghost campaigns.&rdquo;" data-zh="&ldquo;20 个执行稳定的 Creator，胜过 200 个接了单又放鸽子的 Creator。&rdquo;">&ldquo;20 reliable creators who execute well beat 200 unreliable creators who ghost campaigns.&rdquo;</div>
+        </div>
+      </div>
+
+      <!-- RISK 06 -->
+      <div class="risk-card fade-in" style="transition-delay:0.2s">
+        <div class="rc-top">
+          <div class="rc-badge" data-en="RISK 06" data-zh="风险 06">RISK 06</div>
+          <div class="rc-title" data-en="Map Is Pretty But Useless" data-zh="地图好看但没用">Map Is Pretty But Useless</div>
+          <div class="rc-desc" data-en="The live map easily becomes a display layer, not a transaction layer. Users open it, browse around, and leave without taking action." data-zh="实时地图很容易变成展示层，而不是交易层。用户打开看看，没有实质行为。">The live map easily becomes a display layer, not a transaction layer. Users open it, browse around, and leave without taking action.</div>
+          <ul class="rc-bullets">
+            <li data-en="Map becomes a novelty feature, not a conversion driver" data-zh="地图变成噱头，而不是转化引擎">Map becomes a novelty feature, not a conversion driver</li>
+            <li data-en="Zero urgency signals = zero action" data-zh="零紧迫感信号 = 零行动">Zero urgency signals = zero action</li>
+          </ul>
+        </div>
+        <div class="rc-divider">
+          <div class="rc-divider-line"></div>
+          <div class="rc-divider-pill"><span class="rc-divider-arrow">↓</span><span data-en="DEFENSE" data-zh="应对方式">DEFENSE</span></div>
+          <div class="rc-divider-line"></div>
+        </div>
+        <div class="rc-bottom">
+          <div class="rc-defense-title" data-en="&ldquo;Every map node must answer: can I book now, slots remaining, distance, expiry, eligibility, worth immediate action?&rdquo;" data-zh="&ldquo;每个地图节点都要回答：现在能接吗、还剩几个名额、离我多远、截止时间、我够资格吗、值不值得立刻行动？&rdquo;">&ldquo;Every map node must answer: can I book now, slots remaining, distance, expiry, eligibility, worth immediate action?&rdquo;</div>
+          <ul class="rc-defense-bullets">
+            <li data-en="Map drives: application, standby, urgency, fill rate — NOT content browsing" data-zh="地图应该驱动：申请、候补、紧迫感、填充率——不是内容浏览">Map drives: application, standby, urgency, fill rate — NOT content browsing</li>
+            <li data-en="Every visible campaign is actionable, not just informational" data-zh="每个可见的活动都是可操作的，而不仅仅是展示性的">Every visible campaign is actionable, not just informational</li>
+          </ul>
+          <div class="rc-insight" data-en="&ldquo;If users open the map and just look, the map has failed. It should make them tap.&rdquo;" data-zh="&ldquo;如果用户打开地图只是看看，地图就失败了。它应该让他们点击行动。&rdquo;">&ldquo;If users open the map and just look, the map has failed. It should make them tap.&rdquo;</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ SECTION 3: RETENTION ═══════════════════════════════ -->
+<section class="section" id="retention">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <div class="cat-label"><span class="cat-icon">🔄</span><span data-en="III. Retention Risks" data-zh="三、留存风险">III. Retention Risks</span></div>
+      <h2 class="section-title" data-en="Risks That Hollow Out the Platform" data-zh="会掏空平台的风险">Risks That Hollow Out the Platform</h2>
+    </div>
+    <div class="risk-grid-2">
+
+      <!-- RISK 07 -->
+      <div class="risk-card fade-in">
+        <div class="rc-top">
+          <div class="rc-badge" data-en="RISK 07" data-zh="风险 07">RISK 07</div>
+          <div class="rc-title" data-en="Creator Freeloading &amp; Churn" data-zh="Creator 薅羊毛后流失">Creator Freeloading &amp; Churn</div>
+          <div class="rc-desc" data-en="If low-tier creators find the platform's primary value is free coffee, free experiences, or small samples, they'll treat Push as a coupon app — not a career ladder." data-zh="如果低层 Creator 发现平台提供的主要价值只是免费咖啡、免费体验、小样，他们会把 Push 当成优惠券 App，而不是职业阶梯。">If low-tier creators find the platform's primary value is free coffee, free experiences, or small samples, they'll treat Push as a coupon app — not a career ladder.</div>
+          <ul class="rc-bullets">
+            <li data-en="Platform supply churns constantly" data-zh="平台供给持续流失">Platform supply churns constantly</li>
+            <li data-en="Merchants never get reliable creators" data-zh="商家永远得不到可靠的 Creator">Merchants never get reliable creators</li>
+          </ul>
+        </div>
+        <div class="rc-divider">
+          <div class="rc-divider-line"></div>
+          <div class="rc-divider-pill"><span class="rc-divider-arrow">↓</span><span data-en="DEFENSE" data-zh="应对方式">DEFENSE</span></div>
+          <div class="rc-divider-line"></div>
+        </div>
+        <div class="rc-bottom">
+          <div class="rc-defense-title" data-en="&ldquo;Low tier = onboarding zone, not a permanent comfort zone. Pure freebie campaigns must be capped.&rdquo;" data-zh="&ldquo;低层级 = onboarding 区，不是长期舒适区。纯免费活动必须设上限。&rdquo;">&ldquo;Low tier = onboarding zone, not a permanent comfort zone. Pure freebie campaigns must be capped.&rdquo;</div>
+          <ul class="rc-defense-bullets">
+            <li data-en="Cap pure freebie campaigns for new creators" data-zh="限制新 Creator 的纯免费活动数量">Cap pure freebie campaigns for new creators</li>
+            <li data-en="Make higher tier value obviously and significantly stronger" data-zh="让更高 Tier 的价值明显且显著更强">Make higher tier value obviously and significantly stronger</li>
+            <li data-en="Every completion builds real credit — not just badges" data-zh="每次完成都积累真实信用——而不只是徽章">Every completion builds real credit — not just badges</li>
+            <li data-en="Growth path = income growth path, not badge system" data-zh="成长路径 = 收入增长路径，而不是徽章系统">Growth path = income growth path, not badge system</li>
+          </ul>
+          <div class="rc-insight" data-en="&ldquo;Low tier is a trial ground, not a destination.&rdquo;" data-zh="&ldquo;低层级是试炼场，不是终点。&rdquo;">&ldquo;Low tier is a trial ground, not a destination.&rdquo;</div>
+        </div>
+      </div>
+
+      <!-- RISK 08 -->
+      <div class="risk-card fade-in" style="transition-delay:0.1s">
+        <div class="rc-top">
+          <div class="rc-badge" data-en="RISK 08" data-zh="风险 08">RISK 08</div>
+          <div class="rc-title" data-en="Merchant Tries Once, Never Returns" data-zh="Merchant 只试一次，不复购">Merchant Tries Once, Never Returns</div>
+          <div class="rc-desc" data-en="Merchants might try once out of curiosity, but if they don't return, the platform has no healthy economics." data-zh="商家可能第一次觉得新鲜，但如果第二次不来，平台就没有健康经济性。">Merchants might try once out of curiosity, but if they don't return, the platform has no healthy economics.</div>
+          <ul class="rc-bullets">
+            <li data-en="High CAC, low LTV — platform looks busy but bleeds money" data-zh="高 CAC，低 LTV。平台看起来活跃，但实际在亏损">High CAC, low LTV — platform looks busy but bleeds money</li>
+            <li data-en="No repeat = no data compounding = no moat" data-zh="没有复购 = 没有数据复利 = 没有护城河">No repeat = no data compounding = no moat</li>
+          </ul>
+        </div>
+        <div class="rc-divider">
+          <div class="rc-divider-line"></div>
+          <div class="rc-divider-pill"><span class="rc-divider-arrow">↓</span><span data-en="DEFENSE" data-zh="应对方式">DEFENSE</span></div>
+          <div class="rc-divider-line"></div>
+        </div>
+        <div class="rc-bottom">
+          <div class="rc-defense-title" data-en="&ldquo;After a campaign completes, the system must automatically suggest the next step — not wait for the merchant to figure it out.&rdquo;" data-zh="&ldquo;活动完成后，系统必须自动给出下一步建议——而不是等商家自己想。&rdquo;">&ldquo;After a campaign completes, the system must automatically suggest the next step — not wait for the merchant to figure it out.&rdquo;</div>
+          <ul class="rc-defense-bullets">
+            <li data-en="Auto-suggest: which creator to re-book, which template performed better" data-zh="自动建议：哪个 Creator 值得复用、哪种模板表现更好">Auto-suggest: which creator to re-book, which template performed better</li>
+            <li data-en="When to run again, what goal to set next, whether to activate standby fill" data-zh="什么时候再跑一次、下一步该拉什么目标、是否启用候补填充">When to run again, what goal to set next, whether to activate standby fill</li>
+            <li data-en="Push doesn't just complete transactions — it drives the next transaction" data-zh="Push 不只是完成交易，而要推动下一次交易">Push doesn't just complete transactions — it drives the next transaction</li>
+          </ul>
+          <div class="rc-insight" data-en="&ldquo;The post-campaign experience is as important as the campaign itself.&rdquo;" data-zh="&ldquo;活动结束后的体验，和活动本身一样重要。&rdquo;">&ldquo;The post-campaign experience is as important as the campaign itself.&rdquo;</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ SECTION 4: ANTI-BYPASS (DARK) ═══════════════════════════════ -->
+<section class="section section-dark" id="antibypass">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <div class="cat-label dark-label"><span class="cat-icon">🔐</span><span data-en="IV. Anti-Bypass Risks" data-zh="四、反绕平台风险">IV. Anti-Bypass Risks</span></div>
+      <h2 class="section-title section-title-white" data-en="Risks That Make Push Just a Dating App" data-zh="会让 Push 沦为「介绍所」的风险">Risks That Make Push Just a Dating App</h2>
+      <p class="section-sub section-sub-white" data-en="Once they've met through the platform, why keep using it?" data-zh="一旦通过平台认识了对方，为什么还要继续用它？">Once they've met through the platform, why keep using it?</p>
+    </div>
+    <div class="risk-grid-2">
+
+      <!-- RISK 09 -->
+      <div class="risk-card on-dark fade-in">
+        <div class="rc-top">
+          <div class="rc-badge" data-en="RISK 09" data-zh="风险 09">RISK 09</div>
+          <div class="rc-title" data-en="Merchants &amp; Creators Go Private" data-zh="商家和 Creator 私下合作">Merchants &amp; Creators Go Private</div>
+          <div class="rc-desc" data-en="This is the most realistic risk. Once a merchant and creator know each other, they can easily bypass the platform — especially if the platform only provided the introduction." data-zh="这是最现实的风险。一旦商家和 Creator 认识了，他们完全可能绕开平台——尤其是当平台只做了介绍。">This is the most realistic risk. Once a merchant and creator know each other, they can easily bypass the platform — especially if the platform only provided the introduction.</div>
+          <ul class="rc-bullets">
+            <li data-en="Platform loses transaction revenue and data" data-zh="平台失去交易收入和数据">Platform loses transaction revenue and data</li>
+            <li data-en="Credit systems become empty shells" data-zh="信用系统变成空壳">Credit systems become empty shells</li>
+            <li data-en="Platform loses its reason to exist" data-zh="平台失去存在的理由">Platform loses its reason to exist</li>
+          </ul>
+        </div>
+        <div class="rc-divider">
+          <div class="rc-divider-line"></div>
+          <div class="rc-divider-pill"><span class="rc-divider-arrow">↓</span><span data-en="DEFENSE" data-zh="应对方式">DEFENSE</span></div>
+          <div class="rc-divider-line"></div>
+        </div>
+        <div class="rc-bottom">
+          <div class="rc-defense-title" data-en="&ldquo;Don't try to ban it with terms of service. Make the platform continuously more valuable for the 2nd, 3rd, 10th collaboration.&rdquo;" data-zh="&ldquo;不要试图靠条款禁止。让平台在第 2 次、第 3 次、第 10 次合作时持续更有价值。&rdquo;">&ldquo;Don't try to ban it with terms of service. Make the platform continuously more valuable for the 2nd, 3rd, 10th collaboration.&rdquo;</div>
+          <ul class="rc-defense-bullets">
+            <li data-en="For merchants: supply continuity, repeat automation, creator comparison, ROI dashboard, standby refill, dispute protection" data-zh="对商家：持续供给、复购自动化、Creator 对比、ROI 后台、候补填充、争议保护">For merchants: supply continuity, repeat automation, creator comparison, ROI dashboard, standby refill, dispute protection</li>
+            <li data-en="For creators: credit accumulation, tier progression, priority access, better campaign pool, fast payout, future earning unlocks" data-zh="对 Creator：信用积累、Tier 晋升、优先权限、更好的活动池、快速提现、未来收益解锁">For creators: credit accumulation, tier progression, priority access, better campaign pool, fast payout, future earning unlocks</li>
+          </ul>
+          <div class="rc-insight" data-en="&ldquo;Platform cannot be only an introduction layer. It must be a value compounding layer.&rdquo;" data-zh="&ldquo;平台不能只是 introduction layer，必须是 value compounding layer。&rdquo;">&ldquo;Platform cannot be only an introduction layer. It must be a value compounding layer.&rdquo;</div>
+        </div>
+      </div>
+
+      <!-- RISK 10 -->
+      <div class="risk-card on-dark fade-in" style="transition-delay:0.1s">
+        <div class="rc-top">
+          <div class="rc-badge" data-en="RISK 10" data-zh="风险 10">RISK 10</div>
+          <div class="rc-title" data-en="Off-Platform Deals Don't Affect Credit" data-zh="私下合作不影响平台信用，导致平台被空心化">Off-Platform Deals Don't Affect Credit</div>
+          <div class="rc-desc" data-en="If creators leave the platform to work privately and their tier/passport/ranking remain unaffected, the platform slowly hollows out into an empty entry point." data-zh="如果 Creator 离开平台私下接单，平台内 Tier、Passport、Ranking 都不受影响，那平台就会慢慢沦为空壳入口。">If creators leave the platform to work privately and their tier/passport/ranking remain unaffected, the platform slowly hollows out into an empty entry point.</div>
+          <ul class="rc-bullets">
+            <li data-en="Platform credit system becomes meaningless" data-zh="平台的信用系统失去意义">Platform credit system becomes meaningless</li>
+            <li data-en="No cost to going off-platform" data-zh="离开平台没有代价">No cost to going off-platform</li>
+          </ul>
+        </div>
+        <div class="rc-divider">
+          <div class="rc-divider-line"></div>
+          <div class="rc-divider-pill"><span class="rc-divider-arrow">↓</span><span data-en="DEFENSE" data-zh="应对方式">DEFENSE</span></div>
+          <div class="rc-divider-line"></div>
+        </div>
+        <div class="rc-bottom">
+          <div class="rc-defense-title" data-en="&ldquo;Platform credit must be tied to platform transactions. Only on-platform activity builds on-platform assets.&rdquo;" data-zh="&ldquo;平台信用必须跟平台内交易绑定。只有平台内的活动才能积累平台内的资产。&rdquo;">&ldquo;Platform credit must be tied to platform transactions. Only on-platform activity builds on-platform assets.&rdquo;</div>
+          <ul class="rc-defense-bullets">
+            <li data-en="Only platform-verified campaigns count toward credit" data-zh="只有平台内核验的活动才计入信用">Only platform-verified campaigns count toward credit</li>
+            <li data-en="Only platform settlements unlock premium benefits" data-zh="只有平台内结算才解锁高级权益">Only platform settlements unlock premium benefits</li>
+            <li data-en="Only platform-internal repeat increases reputation scores" data-zh="只有平台内复购才增强信誉分">Only platform-internal repeat increases reputation scores</li>
+          </ul>
+          <div class="rc-insight" data-en="&ldquo;If leaving the platform costs nothing, leaving will always be tempting. Make it cost something real.&rdquo;" data-zh="&ldquo;如果离开平台没有代价，离开就永远是诱惑。让离开有真实的代价。&rdquo;">&ldquo;If leaving the platform costs nothing, leaving will always be tempting. Make it cost something real.&rdquo;</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ SECTION 5: TRUST & FRAUD ═══════════════════════════════ -->
+<section class="section" id="trust">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <div class="cat-label"><span class="cat-icon">🛡️</span><span data-en="V. Trust &amp; Fraud Risks" data-zh="五、风控与信任风险">V. Trust &amp; Fraud Risks</span></div>
+      <h2 class="section-title" data-en="Risks That Destroy Credibility" data-zh="会摧毁可信度的风险">Risks That Destroy Credibility</h2>
+    </div>
+    <div class="risk-grid-3">
+
+      <!-- RISK 11 -->
+      <div class="risk-card fade-in">
+        <div class="rc-top">
+          <div class="rc-badge" data-en="RISK 11" data-zh="风险 11">RISK 11</div>
+          <div class="rc-title" data-en="Creator Fraud" data-zh="Creator 作假">Creator Fraud</div>
+          <div class="rc-desc" data-en="Creators may fake store visits, create fake content, post low-quality content and delete it, inflate engagement, or generate fake redemptions." data-zh="Creator 可能假装到店、假发内容、发低质量内容后删掉、刷互动、自己或朋友 fake 核销。">Creators may fake store visits, create fake content, post low-quality content and delete it, inflate engagement, or generate fake redemptions.</div>
+          <ul class="rc-bullets">
+            <li data-en="Merchant trust collapses after verified fakes" data-zh="核实作假后商家信任崩塌">Merchant trust collapses after verified fakes</li>
+            <li data-en="Platform integrity undermined" data-zh="平台完整性受损">Platform integrity undermined</li>
+          </ul>
+        </div>
+        <div class="rc-divider">
+          <div class="rc-divider-line"></div>
+          <div class="rc-divider-pill"><span class="rc-divider-arrow">↓</span><span data-en="DEFENSE" data-zh="应对方式">DEFENSE</span></div>
+          <div class="rc-divider-line"></div>
+        </div>
+        <div class="rc-bottom">
+          <div class="rc-defense-title" data-en="&ldquo;Multi-layer verification, not just a screenshot.&rdquo;" data-zh="&ldquo;多层验证，而不是只看一张截图。&rdquo;">&ldquo;Multi-layer verification, not just a screenshot.&rdquo;</div>
+          <ul class="rc-defense-bullets">
+            <li data-en="Timestamped proof submission" data-zh="带时间戳的证明提交">Timestamped proof submission</li>
+            <li data-en="Content link persistence checks" data-zh="内容链接持久性检查">Content link persistence checks</li>
+            <li data-en="Merchant acknowledgment required" data-zh="需要商家确认">Merchant acknowledgment required</li>
+            <li data-en="Suspicious behavior flagging + delayed settlement on anomaly" data-zh="可疑行为标记 + 发现异常时延迟结算">Suspicious behavior flagging + delayed settlement on anomaly</li>
+          </ul>
+          <div class="rc-insight" data-en="&ldquo;Credit should be based on completion, reliability, and merchant satisfaction — not views.&rdquo;" data-zh="&ldquo;信用应该基于完成率、可靠性和商家满意度——而不是浏览量。&rdquo;">&ldquo;Credit should be based on completion, reliability, and merchant satisfaction — not views.&rdquo;</div>
+        </div>
+      </div>
+
+      <!-- RISK 12 -->
+      <div class="risk-card fade-in" style="transition-delay:0.1s">
+        <div class="rc-top">
+          <div class="rc-badge" data-en="RISK 12" data-zh="风险 12">RISK 12</div>
+          <div class="rc-title" data-en="Merchant Bad Faith" data-zh="Merchant 作恶">Merchant Bad Faith</div>
+          <div class="rc-desc" data-en="Merchants may add requirements at the last minute, refuse to confirm proof, delay payment, bait-and-switch, constantly request revisions, or try to take creators off-platform." data-zh="商家也可能临时加要求、拒绝确认证明、无故拖延结算、bait-and-switch、一直改内容、私下压价带走 Creator。">Merchants may add requirements at the last minute, refuse to confirm proof, delay payment, bait-and-switch, constantly request revisions, or try to take creators off-platform.</div>
+          <ul class="rc-bullets">
+            <li data-en="Creators stop applying to untrusted merchants" data-zh="Creator 停止申请不可信的商家">Creators stop applying to untrusted merchants</li>
+            <li data-en="Quality creator supply migrates away" data-zh="优质 Creator 供给流失">Quality creator supply migrates away</li>
+          </ul>
+        </div>
+        <div class="rc-divider">
+          <div class="rc-divider-line"></div>
+          <div class="rc-divider-pill"><span class="rc-divider-arrow">↓</span><span data-en="DEFENSE" data-zh="应对方式">DEFENSE</span></div>
+          <div class="rc-divider-line"></div>
+        </div>
+        <div class="rc-bottom">
+          <div class="rc-defense-title" data-en="&ldquo;Merchants must also have a platform reputation system with real consequences.&rdquo;" data-zh="&ldquo;商家也要有平台内信誉系统，且有真实后果。&rdquo;">&ldquo;Merchants must also have a platform reputation system with real consequences.&rdquo;</div>
+          <ul class="rc-defense-bullets">
+            <li data-en="Record: approval speed, payout behavior, creator complaints, requirement stability, dispute history" data-zh="记录：审批速度、付款行为、Creator 投诉、需求稳定性、纠纷历史">Record: approval speed, payout behavior, creator complaints, requirement stability, dispute history</li>
+            <li data-en="Bad merchant reputation → fewer quality creators willing to work with them" data-zh="差信誉商家 → 更少优质 Creator 愿意合作">Bad merchant reputation → fewer quality creators willing to work with them</li>
+          </ul>
+          <div class="rc-insight" data-en="&ldquo;Creator supply quality depends on merchant behavior quality. Both sides must have skin in the game.&rdquo;" data-zh="&ldquo;Creator 供给质量取决于商家行为质量。双方都必须有代价。&rdquo;">&ldquo;Creator supply quality depends on merchant behavior quality. Both sides must have skin in the game.&rdquo;</div>
+        </div>
+      </div>
+
+      <!-- RISK 13 -->
+      <div class="risk-card fade-in" style="transition-delay:0.2s">
+        <div class="rc-top">
+          <div class="rc-badge" data-en="RISK 13" data-zh="风险 13">RISK 13</div>
+          <div class="rc-title" data-en="Fraud vs. Incompetence" data-zh="Fraud 和误判混在一起">Fraud vs. Incompetence</div>
+          <div class="rc-desc" data-en="The platform can easily conflate &ldquo;poor execution,&rdquo; &ldquo;immature behavior,&rdquo; and &ldquo;misunderstanding requirements&rdquo; with &ldquo;intentional fraud.&rdquo;" data-zh="平台很容易把「执行差」「不成熟」「误解要求」和「恶意欺诈」混为一谈。">The platform can easily conflate &ldquo;poor execution,&rdquo; &ldquo;immature behavior,&rdquo; and &ldquo;misunderstanding requirements&rdquo; with &ldquo;intentional fraud.&rdquo;</div>
+          <ul class="rc-bullets">
+            <li data-en="One-size-fits-all punishment damages legitimate users" data-zh="如果一刀切处罚，会伤害正常用户">One-size-fits-all punishment damages legitimate users</li>
+            <li data-en="Over-enforcement kills early supply" data-zh="过度执法会扼杀早期供给">Over-enforcement kills early supply</li>
+          </ul>
+        </div>
+        <div class="rc-divider">
+          <div class="rc-divider-line"></div>
+          <div class="rc-divider-pill"><span class="rc-divider-arrow">↓</span><span data-en="DEFENSE" data-zh="应对方式">DEFENSE</span></div>
+          <div class="rc-divider-line"></div>
+        </div>
+        <div class="rc-bottom">
+          <div class="rc-defense-title" data-en="&ldquo;Tiered response: educate mistakes, limit access for patterns, remove deliberate fraudsters.&rdquo;" data-zh="&ldquo;分层处理：教育错误、限制重复低质量、移除恶意欺诈。&rdquo;">&ldquo;Tiered response: educate mistakes, limit access for patterns, remove deliberate fraudsters.&rdquo;</div>
+          <ul class="rc-defense-bullets">
+            <li data-en="Mistake: remind / educate / light score deduction" data-zh="错误：提醒/教育/轻微扣分">Mistake: remind / educate / light score deduction</li>
+            <li data-en="Repeated low quality: restrict access / tier demotion" data-zh="重复低质量：限制权限/降 Tier">Repeated low quality: restrict access / tier demotion</li>
+            <li data-en="Intentional fraud: freeze settlement / suspension / removal" data-zh="恶意欺诈：冻结结算/暂停/移除">Intentional fraud: freeze settlement / suspension / removal</li>
+          </ul>
+          <div class="rc-insight" data-en="&ldquo;Protect integrity while preserving the creators who are worth developing.&rdquo;" data-zh="&ldquo;保护平台完整性的同时，保留值得培养的 Creator。&rdquo;">&ldquo;Protect integrity while preserving the creators who are worth developing.&rdquo;</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ SECTION 6: OPERATIONS ═══════════════════════════════ -->
+<section class="section section-bg2" id="operations">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <div class="cat-label"><span class="cat-icon">⚙️</span><span data-en="VI. Operations Risks" data-zh="六、运营风险">VI. Operations Risks</span></div>
+      <h2 class="section-title" data-en="Risks That Kill Margins" data-zh="会杀死利润率的风险">Risks That Kill Margins</h2>
+    </div>
+    <div class="risk-grid-2">
+
+      <!-- RISK 14 -->
+      <div class="risk-card fade-in">
+        <div class="rc-top">
+          <div class="rc-badge" data-en="RISK 14" data-zh="风险 14">RISK 14</div>
+          <div class="rc-title" data-en="Platform Operations Too Heavy" data-zh="平台运营负担太重">Platform Operations Too Heavy</div>
+          <div class="rc-desc" data-en="If every campaign requires heavy manual effort — proof review, creator follow-ups, merchant verification, payout coordination, dispute handling — the platform will look active but have terrible margins." data-zh="如果每个活动都需要大量人工处理——证明审核、催促 Creator、审核商家、协调结算、处理纠纷——平台看起来活跃，但毛利很差。">If every campaign requires heavy manual effort — proof review, creator follow-ups, merchant verification, payout coordination, dispute handling — the platform will look active but have terrible margins.</div>
+          <ul class="rc-bullets">
+            <li data-en="Ops scales linearly with transactions — unsustainable" data-zh="运营随交易线性增长——不可持续">Ops scales linearly with transactions — unsustainable</li>
+            <li data-en="Team burns out; quality drops" data-zh="团队精力耗尽；质量下降">Team burns out; quality drops</li>
+          </ul>
+        </div>
+        <div class="rc-divider">
+          <div class="rc-divider-line"></div>
+          <div class="rc-divider-pill"><span class="rc-divider-arrow">↓</span><span data-en="DEFENSE" data-zh="应对方式">DEFENSE</span></div>
+          <div class="rc-divider-line"></div>
+        </div>
+        <div class="rc-bottom">
+          <div class="rc-defense-title" data-en="&ldquo;Exception-based ops from day one. Only intervene on overdue, suspicious, or flagged cases.&rdquo;" data-zh="&ldquo;从第一天就采用异常驱动的运营模式。只处理逾期、可疑或被标记的案例。&rdquo;">&ldquo;Exception-based ops from day one. Only intervene on overdue, suspicious, or flagged cases.&rdquo;</div>
+          <ul class="rc-defense-bullets">
+            <li data-en="Manual focus only: overdue proof, suspicious campaigns, approval bottlenecks, payout delays, repeat complaints" data-zh="人工关注重点：逾期证明、可疑活动、审批瓶颈、结算延迟、重复投诉">Manual focus only: overdue proof, suspicious campaigns, approval bottlenecks, payout delays, repeat complaints</li>
+            <li data-en="Everything else: automated reminders, templates, standardized flows" data-zh="其余：自动提醒、模板、标准化流程">Everything else: automated reminders, templates, standardized flows</li>
+          </ul>
+          <div class="rc-insight" data-en="&ldquo;Your ops should scale sub-linearly as the platform grows. If it scales linearly, you have a structural problem.&rdquo;" data-zh="&ldquo;运营应该随平台增长亚线性扩展。如果线性增长，你有结构性问题。&rdquo;">&ldquo;Your ops should scale sub-linearly as the platform grows. If it scales linearly, you have a structural problem.&rdquo;</div>
+        </div>
+      </div>
+
+      <!-- RISK 15 -->
+      <div class="risk-card fade-in" style="transition-delay:0.1s">
+        <div class="rc-top">
+          <div class="rc-badge" data-en="RISK 15" data-zh="风险 15">RISK 15</div>
+          <div class="rc-title" data-en="Slow Settlements Destroy Creator Trust" data-zh="结算慢，Creator 信任崩掉">Slow Settlements Destroy Creator Trust</div>
+          <div class="rc-desc" data-en="Creators are highly sensitive to: how fast payment arrives, how clear the rules are, whether settlements become disputes." data-zh="Creator 对平台最敏感的点之一就是：钱到账快不快、规则清不清楚、结算时会不会扯皮。">Creators are highly sensitive to: how fast payment arrives, how clear the rules are, whether settlements become disputes.</div>
+          <ul class="rc-bullets">
+            <li data-en="Slow or opaque settlements → creator churn spike" data-zh="结算慢或不透明 → Creator 流失激增">Slow or opaque settlements → creator churn spike</li>
+            <li data-en="Word spreads fast in creator communities" data-zh="负面口碑在 Creator 社群里传播很快">Word spreads fast in creator communities</li>
+          </ul>
+        </div>
+        <div class="rc-divider">
+          <div class="rc-divider-line"></div>
+          <div class="rc-divider-pill"><span class="rc-divider-arrow">↓</span><span data-en="DEFENSE" data-zh="应对方式">DEFENSE</span></div>
+          <div class="rc-divider-line"></div>
+        </div>
+        <div class="rc-bottom">
+          <div class="rc-defense-title" data-en="&ldquo;Publish explicit settlement rules and stick to them without exception.&rdquo;" data-zh="&ldquo;公布明确的结算规则，且无例外地遵守它们。&rdquo;">&ldquo;Publish explicit settlement rules and stick to them without exception.&rdquo;</div>
+          <ul class="rc-defense-bullets">
+            <li data-en="Clear rules for: when eligible, when on hold, merchant confirmation window, auto-advance timing, anomaly triggers" data-zh="明确规则：何时可结算、何时 hold 住、商家确认窗口、自动推进时间、异常触发条件">Clear rules for: when eligible, when on hold, merchant confirmation window, auto-advance timing, anomaly triggers</li>
+            <li data-en="Better-tier creators get faster settlement as a real, tangible benefit" data-zh="高 Tier Creator 获得更快结算作为真实权益">Better-tier creators get faster settlement as a real, tangible benefit</li>
+          </ul>
+          <div class="rc-insight" data-en="&ldquo;If creators feel 'the platform is slow to pay and unpredictable,' retention collapses. Speed and clarity are the product.&rdquo;" data-zh="&ldquo;如果 Creator 觉得「平台结算慢且不可预测」，留存就会崩。速度和清晰度就是产品本身。&rdquo;">&ldquo;If creators feel 'the platform is slow to pay and unpredictable,' retention collapses. Speed and clarity are the product.&rdquo;</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ SECTION 7: COMPETITION ═══════════════════════════════ -->
+<section class="section" id="competition">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <div class="cat-label"><span class="cat-icon">🏆</span><span data-en="VII. Competition Risks" data-zh="七、竞争风险">VII. Competition Risks</span></div>
+      <h2 class="section-title" data-en="Risks From Well-Funded Attackers" data-zh="来自资金充裕竞争者的风险">Risks From Well-Funded Attackers</h2>
+    </div>
+    <div class="risk-grid-1 fade-in">
+
+      <!-- RISK 16 -->
+      <div class="risk-card" style="max-width:100%">
+        <div class="rc-top">
+          <div class="rc-badge" data-en="RISK 16" data-zh="风险 16">RISK 16</div>
+          <div class="rc-title" data-en="Getting Swallowed by TikTok / Yelp / Xiaohongshu" data-zh="被 TikTok / Yelp / 小红书式产品吞掉">Getting Swallowed by TikTok / Yelp / Xiaohongshu</div>
+          <div class="rc-desc" data-en="Large platforms may add: a local creator tab, a merchant collaboration portal, or lightweight ad placement — and flood the market with their existing user base." data-zh="大平台可能会做：本地 Creator tab、商家合作入口、轻量投放功能——并用已有用户基础淹没市场。">Large platforms may add: a local creator tab, a merchant collaboration portal, or lightweight ad placement — and flood the market with their existing user base.</div>
+          <ul class="rc-bullets">
+            <li data-en="Merchants switch to the platform they already use for other things" data-zh="商家切换到他们本来就用的平台">Merchants switch to the platform they already use for other things</li>
+            <li data-en="Creators follow the audience — wherever there are more views" data-zh="Creator 跟着流量走——哪里有更多浏览量就去哪里">Creators follow the audience — wherever there are more views</li>
+            <li data-en="Push gets squeezed into a niche before it can establish network effects" data-zh="Push 在建立网络效应之前被挤压成细分市场">Push gets squeezed into a niche before it can establish network effects</li>
+          </ul>
+        </div>
+        <div class="rc-divider">
+          <div class="rc-divider-line"></div>
+          <div class="rc-divider-pill"><span class="rc-divider-arrow">↓</span><span data-en="DEFENSE" data-zh="应对方式">DEFENSE</span></div>
+          <div class="rc-divider-line"></div>
+        </div>
+        <div class="rc-bottom">
+          <div class="rc-defense-title" data-en="&ldquo;Don't compete with large platforms on content distribution. Own what they're least willing to build deeply.&rdquo;" data-zh="&ldquo;不要和大平台在「内容分发」上竞争。守住它们最不愿意深做的层。&rdquo;">&ldquo;Don't compete with large platforms on content distribution. Own what they're least willing to build deeply.&rdquo;</div>
+          <ul class="rc-defense-bullets">
+            <li data-en="Defend: local merchant workflow systems" data-zh="守住：本地商家工作流系统">Defend: local merchant workflow systems</li>
+            <li data-en="Defend: creator credit and passport (non-portable, accumulated over time)" data-zh="守住：Creator 信用与 Passport（不可迁移，长期积累）">Defend: creator credit and passport (non-portable, accumulated over time)</li>
+            <li data-en="Defend: verification depth, repeat campaign operations, standby liquidity" data-zh="守住：验证深度、复购活动运营、候补流动性">Defend: verification depth, repeat campaign operations, standby liquidity</li>
+            <li data-en="Defend: anti-disintermediation logic built into every transaction" data-zh="守住：内嵌在每笔交易中的反绕平台逻辑">Defend: anti-disintermediation logic built into every transaction</li>
+          </ul>
+          <div class="rc-insight" data-en="&ldquo;Big platforms can clone surface features in 3 months. They will not build a complex local transaction and credit system. That gap is where Push lives.&rdquo;" data-zh="&ldquo;大平台可以在 3 个月内复制表层功能。但他们不会构建复杂的本地交易与信用系统。那个空隙，就是 Push 的生存空间。&rdquo;">&ldquo;Big platforms can clone surface features in 3 months. They will not build a complex local transaction and credit system. That gap is where Push lives.&rdquo;</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ SECTION 8: COMPLETE SYSTEM (DARK) ═══════════════════════════════ -->
+<section class="system-section">
+  <div class="system-inner">
+    <div class="section-header fade-in" style="text-align:center;max-width:760px;margin:0 auto 0;">
+      <div class="cat-label dark-label" style="justify-content:center;"><span data-en="Complete Defense Architecture" data-zh="完整防御架构">Complete Defense Architecture</span></div>
+      <h2 class="section-title section-title-white" data-en="The Complete Retention &amp; Anti-Bypass System" data-zh="完整留存与反绕过系统">The Complete Retention &amp; Anti-Bypass System</h2>
+      <p class="section-sub section-sub-white" style="margin:0 auto 0;max-width:620px;" data-en="Not just principles — a structural defense built into the platform architecture itself." data-zh="不只是原则——是内嵌在平台架构本身中的结构性防御。">Not just principles — a structural defense built into the platform architecture itself.</p>
+    </div>
+    <div class="system-grid fade-in">
+
+      <!-- Column A: Creator Retention -->
+      <div class="sys-card">
+        <div class="sys-card-title accent-color" data-en="Creator Retention" data-zh="Creator 留存">Creator Retention</div>
+        <div class="sys-point">
+          <div class="sys-num accent">1</div>
+          <div class="sys-text" data-en="<strong>Low tier = screening zone, not free zone.</strong> Cap pure freebie campaigns. The entry level is a trial, not a destination." data-zh="<strong>低层级 = 筛选区，不是免费区。</strong>限制纯 freebie 活动。入门级是试炼，不是终点。"><strong>Low tier = screening zone, not free zone.</strong> Cap pure freebie campaigns. The entry level is a trial, not a destination.</div>
+        </div>
+        <div class="sys-point">
+          <div class="sys-num accent">2</div>
+          <div class="sys-text" data-en="<strong>Tier must bind to real economic value:</strong> higher payout, lower fees, faster settlement, premium pool. &ldquo;Higher tier = higher earning power, not prettier badge.&rdquo;" data-zh="<strong>Tier 必须绑定真实经济价值：</strong>更高报酬、更低费用、更快结算、高级活动池。「更高 Tier = 更强赚钱能力，不是更好看的徽章。」"><strong>Tier must bind to real economic value:</strong> higher payout, lower fees, faster settlement, premium pool. &ldquo;Higher tier = higher earning power, not prettier badge.&rdquo;</div>
+        </div>
+        <div class="sys-point">
+          <div class="sys-num accent">3</div>
+          <div class="sys-text" data-en="<strong>Creator Passport = non-portable career assets.</strong> Completion history, merchant ratings, category fit, location fit — none replaceable by an Instagram profile." data-zh="<strong>Creator Passport = 不可迁移的职业资产。</strong>完成历史、商家评分、品类契合、位置契合——无法用 Instagram 档案替代。"><strong>Creator Passport = non-portable career assets.</strong> Completion history, merchant ratings, category fit, location fit — none replaceable by an Instagram profile.</div>
+        </div>
+        <div class="sys-point">
+          <div class="sys-num accent">4</div>
+          <div class="sys-text" data-en="<strong>Streak + decay mechanics.</strong> Long inactivity drops priority. Consistent quality gets queue priority. Activity must be maintained." data-zh="<strong>Streak + 衰减机制。</strong>长期不活跃降低优先级。持续高质量获得队列优先权。活跃度必须维持。"><strong>Streak + decay mechanics.</strong> Long inactivity drops priority. Consistent quality gets queue priority. Activity must be maintained.</div>
+        </div>
+        <div class="sys-point">
+          <div class="sys-num accent">5</div>
+          <div class="sys-text" data-en="<strong>Reward = future money, not points.</strong> Better campaigns, earlier access, premium exposure, guaranteed minimums." data-zh="<strong>奖励 = 未来的钱，不是积分。</strong>更好的活动、更早的权限、高级曝光、保底机会。"><strong>Reward = future money, not points.</strong> Better campaigns, earlier access, premium exposure, guaranteed minimums.</div>
+        </div>
+      </div>
+
+      <!-- Column B: Merchant Retention -->
+      <div class="sys-card">
+        <div class="sys-card-title green-color" data-en="Merchant Retention" data-zh="Merchant 留存">Merchant Retention</div>
+        <div class="sys-point">
+          <div class="sys-num green">1</div>
+          <div class="sys-text" data-en="<strong>Repeat campaign must be one-click.</strong> Duplicate → invite same creator → change schedule → keep proof rules → run. Must be easier than DMing privately." data-zh="<strong>复购活动必须一键完成。</strong>复制→邀请同一 Creator→更改时间→保留证明规则→执行。必须比私信更省力。"><strong>Repeat campaign must be one-click.</strong> Duplicate → invite same creator → change schedule → keep proof rules → run. Must be easier than DMing privately.</div>
+        </div>
+        <div class="sys-point">
+          <div class="sys-num green">2</div>
+          <div class="sys-text" data-en="<strong>Merchants accumulate their own platform reputation:</strong> pays on time, clear requirements, creator satisfaction, repeat quality. Good merchants attract better creators." data-zh="<strong>商家积累自己的平台信誉：</strong>按时付款、需求清晰、Creator 满意度、复购质量。好商家吸引更好的 Creator。"><strong>Merchants accumulate their own platform reputation:</strong> pays on time, clear requirements, creator satisfaction, repeat quality. Good merchants attract better creators.</div>
+        </div>
+        <div class="sys-point">
+          <div class="sys-num green">3</div>
+          <div class="sys-text" data-en="<strong>Full creator intelligence only on-platform:</strong> comparison dashboard, repeat performance ranking, standby fill pool, trusted recommendations." data-zh="<strong>完整的 Creator 智能只在平台上可获得：</strong>对比后台、复购表现排名、候补填充池、可信推荐。"><strong>Full creator intelligence only on-platform:</strong> comparison dashboard, repeat performance ranking, standby fill pool, trusted recommendations.</div>
+        </div>
+        <div class="sys-point">
+          <div class="sys-num green">4</div>
+          <div class="sys-text" data-en="<strong>Experience improves with each campaign:</strong> 1st = experiment, 2nd = familiar, 3rd = smooth, 4th = dependent. Design for the curve." data-zh="<strong>每次活动的体验都在提升：</strong>第1次=试验，第2次=熟悉，第3次=顺手，第4次=依赖。为这条曲线设计。"><strong>Experience improves with each campaign:</strong> 1st = experiment, 2nd = familiar, 3rd = smooth, 4th = dependent. Design for the curve.</div>
+        </div>
+      </div>
+
+      <!-- Column C: Anti-Bypass -->
+      <div class="sys-card">
+        <div class="sys-card-title orange-color" data-en="Anti-Bypass" data-zh="反绕过">Anti-Bypass</div>
+        <div class="sys-point">
+          <div class="sys-num orange">1</div>
+          <div class="sys-text" data-en="<strong>Only platform transactions build platform credit.</strong> No on-platform activity = no advancement. Period." data-zh="<strong>只有平台内交易才能积累平台信用。</strong>没有平台内活动 = 没有晋升。没有例外。"><strong>Only platform transactions build platform credit.</strong> No on-platform activity = no advancement. Period.</div>
+        </div>
+        <div class="sys-point">
+          <div class="sys-num orange">2</div>
+          <div class="sys-text" data-en="<strong>Platform controls the future opportunity flow:</strong> new merchant access, premium campaign pool, standby queue, top creator access." data-zh="<strong>平台控制「未来机会流」：</strong>新商家权限、高级活动池、候补队列、顶级 Creator 访问权。"><strong>Platform controls the future opportunity flow:</strong> new merchant access, premium campaign pool, standby queue, top creator access.</div>
+        </div>
+        <div class="sys-point">
+          <div class="sys-num orange">3</div>
+          <div class="sys-text" data-en="<strong>Platform settlement must be clearly faster, safer, clearer</strong> than private deals. Frictionless = no reason to go off-platform." data-zh="<strong>平台内结算必须明显比私下合作更快、更安全、更清晰。</strong>零摩擦 = 没有理由离开平台。"><strong>Platform settlement must be clearly faster, safer, clearer</strong> than private deals. Frictionless = no reason to go off-platform.</div>
+        </div>
+        <div class="sys-point">
+          <div class="sys-num orange">4</div>
+          <div class="sys-text" data-en="<strong>High-tier benefits only unlock via platform transactions:</strong> lower fees, faster payouts, recurring pool, account-level support. Private deals don't inherit these." data-zh="<strong>高 Tier 权益只能通过平台交易解锁：</strong>更低费用、更快提现、循环活动池、账户级别支持。私下合作不继承这些。"><strong>High-tier benefits only unlock via platform transactions:</strong> lower fees, faster payouts, recurring pool, account-level support. Private deals don't inherit these.</div>
+        </div>
+        <div class="sys-point">
+          <div class="sys-num orange">5</div>
+          <div class="sys-text" data-en="<strong>Light rules, not heavy bans.</strong> Make staying on-platform more profitable and convenient — not just less restricted." data-zh="<strong>轻度规则，不重度封杀。</strong>让留在平台更赚钱、更方便——而不只是限制更少。"><strong>Light rules, not heavy bans.</strong> Make staying on-platform more profitable and convenient — not just less restricted.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Closing box -->
+    <div class="closing-box fade-in" style="margin-top:80px;">
+      <p class="closing-quote" data-en="&ldquo;Push's biggest risk is not failing to build the product. It's building a platform that only <span>introduces people to each other.</span>&rdquo;" data-zh="&ldquo;Push 最大的风险，不是产品做不出来，而是做成一个只负责<span>「介绍双方认识」</span>的平台。&rdquo;">&ldquo;Push's biggest risk is not failing to build the product. It's building a platform that only <span>introduces people to each other.</span>&rdquo;</p>
+    </div>
+
+    <div class="closing-layers fade-in">
+      <div class="layer-card">
+        <div class="layer-num" data-en="LAYER 01" data-zh="第一层">LAYER 01</div>
+        <div class="layer-title" data-en="Transaction Layer" data-zh="交易层">Transaction Layer</div>
+        <div class="layer-desc" data-en="Complete the collaboration" data-zh="完成合作">Complete the collaboration</div>
+      </div>
+      <div class="layer-card">
+        <div class="layer-num" data-en="LAYER 02" data-zh="第二层">LAYER 02</div>
+        <div class="layer-title" data-en="Credit Layer" data-zh="信用层">Credit Layer</div>
+        <div class="layer-desc" data-en="Accumulate non-portable assets" data-zh="积累不能带走的资产">Accumulate non-portable assets</div>
+      </div>
+      <div class="layer-card">
+        <div class="layer-num" data-en="LAYER 03" data-zh="第三层">LAYER 03</div>
+        <div class="layer-title" data-en="Opportunity Layer" data-zh="机会层">Opportunity Layer</div>
+        <div class="layer-desc" data-en="Continuously control future high-quality opportunity flow" data-zh="持续控制未来高质量机会流">Continuously control future high-quality opportunity flow</div>
+      </div>
+    </div>
+
+    <div class="closing-final fade-in">
+      <span data-en="Only when all three layers hold does <span>retention and anti-bypass become real</span>." data-zh="只要这三层成立，<span>留存和反绕过就会真正有效</span>。">Only when all three layers hold does <span>retention and anti-bypass become real</span>.</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">PUSH</div>
+        <div class="footer-tagline" data-en="Local Creator Performance Infrastructure" data-zh="本地 Creator 效果基础设施">Local Creator Performance Infrastructure</div>
+      </div>
+      <div class="footer-links">
+        <a href="index.html" class="footer-pill" data-en="Dashboard" data-zh="仪表盘">Dashboard</a>
+        <a href="project-intro.html" class="footer-pill" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
+        <a href="pitch-deck.html" class="footer-pill" data-en="Pitch Deck" data-zh="路演方案">Pitch Deck</a>
+        <a href="prospects.html" class="footer-pill" data-en="Prospects" data-zh="未来愿景">Prospects</a>
+        <a href="challenges.html" class="footer-pill" data-en="Challenges" data-zh="挑战">Challenges</a>
+        <a href="risk-defense.html" class="footer-pill current" data-en="Risk &amp; Defense" data-zh="风险防御">Risk &amp; Defense</a>
+        <a href="retention-defense.html" class="footer-pill" data-en="Retention" data-zh="留存机制">Retention</a>
+        <a href="platform-value.html" class="footer-pill" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
+        <a href="push-strategy-core.html" class="footer-pill" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-en="© 2025 PUSH Platform. All rights reserved." data-zh="© 2025 PUSH 平台。保留所有权利。">© 2025 PUSH Platform. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ─── LANGUAGE SYSTEM ─── */
+let currentLang = localStorage.getItem('push-lang') || 'en';
+
+function applyLang(lang) {
+  document.body.style.opacity = '0.8';
+  setTimeout(() => {
+    document.querySelectorAll('[data-en]').forEach(el => {
+      el.innerHTML = lang === 'zh' ? el.dataset.zh : el.dataset.en;
+    });
+    const btn = document.getElementById('langBtn');
+    if (btn) btn.textContent = lang === 'zh' ? 'EN / 中' : '中 / EN';
+    document.querySelectorAll('.nav-mobile-right .lang-btn').forEach(b => {
+      b.textContent = lang === 'zh' ? 'EN / 中' : '中 / EN';
+    });
+    currentLang = lang;
+    localStorage.setItem('push-lang', lang);
+    document.body.style.opacity = '1';
+  }, 75);
+}
+
+function toggleLang() {
+  applyLang(currentLang === 'zh' ? 'en' : 'zh');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  applyLang(currentLang);
+});
+
+/* ─── SCROLL FADE IN ─── */
+const fadeEls = document.querySelectorAll('.fade-in');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08 });
+
+fadeEls.forEach(el => observer.observe(el));
+
+/* ─── QUICK NAV ACTIVE ─── */
+const sections = document.querySelectorAll('section[id]');
+const qpills = document.querySelectorAll('.qpill');
+
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      qpills.forEach(pill => {
+        const href = pill.getAttribute('href');
+        pill.classList.toggle('qactive', href === '#' + id);
+      });
+    }
+  });
+}, { threshold: 0.25, rootMargin: '-60px 0px -40% 0px' });
+
+sections.forEach(s => sectionObserver.observe(s));
+</script>
+</body>
+</html>
