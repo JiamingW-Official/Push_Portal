@@ -41,6 +41,9 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
+/* SCROLL PROGRESS BAR */
+#scroll-progress{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:300;width:0;transition:width 0.1s linear;pointer-events:none;}
+
 /* NAV */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:200;
@@ -52,7 +55,8 @@ nav{
 .nav-links{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
 .nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:color 0.15s,background 0.15s;white-space:nowrap;text-decoration:none;}
 .nav-links a:hover{color:var(--accent);background:var(--accent-bg);}
-.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);}
+.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);position:relative;}
+.nav-links a.active::after{content:'';position:absolute;bottom:0;left:12px;right:12px;height:2px;background:var(--accent);border-radius:2px;}
 #lang-btn {
   background: var(--accent); color: #fff; border: none;
   padding: 7px 16px; border-radius: 8px; font-size: 12px; font-weight: 700;
@@ -79,25 +83,38 @@ nav{
 /* SECTION */
 .section { padding: 64px 24px; max-width: 1000px; margin: 0 auto; background: var(--bg); border-top: 1px solid var(--border); }
 
-/* PHASE BLOCK */
+/* PHASE BLOCK — timeline left border */
 .phase {
   position: relative;
   margin-bottom: 64px;
+  padding-left: 24px;
+  border-left: 2px solid var(--border);
 }
 .phase:last-child { margin-bottom: 0; }
+.phase-short { border-left-color: var(--accent); }
+.phase-medium { border-left-color: var(--green); }
+.phase-long { border-left-color: var(--orange); }
 .phase-header {
   margin-bottom: 28px;
 }
 .phase-label {
-  display: inline-block;
-  font-size: 13px; font-weight: 600;
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 14px; font-weight: 700;
   letter-spacing: 0.5px;
   text-transform: none;
   margin-bottom: 6px;
   color: var(--text2);
 }
+.phase-label::before {
+  content: '';
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
 .phase-title {
-  font-size: 22px; font-weight: 800; letter-spacing: -0.02em;
+  font-size: 20px; font-weight: 700; letter-spacing: -0.02em;
   color: var(--text);
 }
 
@@ -112,11 +129,15 @@ nav{
   border-radius: 8px;
   padding: 28px;
   border: 1px solid var(--border);
-  transition: box-shadow 0.2s;
+  border-left: 3px solid var(--border);
+  transition: box-shadow 0.2s, border-color 0.2s;
 }
 .lang-card:hover {
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  border-left-color: var(--accent);
 }
+.phase-medium .lang-card:hover { border-left-color: var(--green); }
+.phase-long .lang-card:hover { border-left-color: var(--orange); }
 .lang-label {
   font-size: 13px; font-weight: 600; letter-spacing: 0.5px; text-transform: none;
   margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
@@ -135,8 +156,12 @@ nav{
   display: flex; align-items: center; justify-content: center;
   font-size: 14px; flex-shrink: 0; margin-top: 2px;
   background: var(--bg2);
+  transition: transform 0.2s;
 }
-.item-list li strong { color: var(--text); }
+.item-list li:hover .item-icon {
+  transform: scale(1.05);
+}
+.item-list li strong { color: var(--text); font-weight: 700; }
 
 /* METRICS ROW */
 .metrics-row {
@@ -151,6 +176,11 @@ nav{
   padding: 16px;
   text-align: center;
   border: 1px solid var(--border);
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.metric-badge:hover {
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  border-color: var(--accent-light);
 }
 .metric-badge .num {
   font-size: 24px; font-weight: 800;
@@ -184,13 +214,19 @@ nav{
   border-radius: 8px;
   padding: 28px;
   border: 1px solid var(--border);
+  border-left: 3px solid var(--border);
   text-align: left;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.end-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  border-left-color: var(--accent);
 }
 .end-card h3 {
   font-size: 17px; font-weight: 700; margin-bottom: 10px; color: var(--text);
 }
 .end-card p {
-  font-size: 15px; color: var(--text2); line-height: 1.75;
+  font-size: 17px; color: var(--text2); line-height: 1.75; font-weight: 400;
 }
 .analogy {
   margin-top: 40px;
@@ -204,22 +240,27 @@ nav{
 .analogy .zh { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
 .analogy .en { font-size: 16px; color: var(--text2); line-height: 1.65; }
 
-/* Phase accent colors - subtle label only */
+/* Phase accent colors */
 .phase-short .phase-label { color: var(--accent); }
 .phase-medium .phase-label { color: var(--green); }
 .phase-long .phase-label { color: var(--orange); }
+.phase-short .phase-label::before { background: var(--accent); }
+.phase-medium .phase-label::before { background: var(--green); }
+.phase-long .phase-label::before { background: var(--orange); }
 
 /* FOOTER */
 .footer {
-  text-align: center; padding: 40px 24px; color: var(--text3); font-size: 13px;
+  text-align: center; padding: 24px 24px; color: var(--text3); font-size: 12px;
   border-top: 1px solid var(--border);
+  max-width: 1000px; margin: 0 auto;
 }
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
   .bilingual-row, .end-state-grid { grid-template-columns: 1fr; }
   .hero h1 { font-size: 28px; }
-  .phase-title { font-size: 18px; }
+  .phase-title { font-size: 17px; }
+  .phase { padding-left: 16px; }
   .metrics-row { grid-template-columns: 1fr 1fr; }
 }
 
@@ -256,6 +297,9 @@ body.lang-zh .analogy .en { display: none; }
 </style>
 </head>
 <body>
+
+<!-- SCROLL PROGRESS -->
+<div id="scroll-progress"></div>
 
 <!-- NAV -->
 <nav>
@@ -645,6 +689,16 @@ body.lang-zh .analogy .en { display: none; }
     const mainLangBtn = document.getElementById('lang-btn');
     if (mainLangBtn) mobileLangBtn.textContent = mainLangBtn.textContent;
   }
+})();
+
+// Scroll progress bar
+(function() {
+  const bar = document.getElementById('scroll-progress');
+  if (!bar) return;
+  window.addEventListener('scroll', function() {
+    const docH = document.documentElement.scrollHeight - window.innerHeight;
+    if (docH > 0) bar.style.width = (window.scrollY / docH * 100) + '%';
+  }, { passive: true });
 })();
 </script>
 </body>

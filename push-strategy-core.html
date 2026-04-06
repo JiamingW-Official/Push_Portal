@@ -53,13 +53,17 @@
       word-break: break-word;
     }
 
+    /* SCROLL PROGRESS BAR */
+    #scroll-progress{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:9999;width:0;transition:width 0.1s linear;pointer-events:none;}
+
     /* NAV */
     nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;background:#ffffff;border-bottom:1px solid var(--border);transition:box-shadow 0.2s;}
     .nav-logo{font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;margin-right:8px;flex-shrink:0;text-decoration:none;}
     .nav-links{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
-    .nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:color 0.15s,background 0.15s;white-space:nowrap;text-decoration:none;}
+    .nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:color 0.15s,background 0.15s;white-space:nowrap;text-decoration:none;position:relative;}
     .nav-links a:hover{color:var(--accent);background:var(--accent-bg);}
     .nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);}
+    .nav-links a.active::after{content:'';position:absolute;bottom:0;left:12px;right:12px;height:2px;background:var(--accent);border-radius:1px;}
 
     .nav-right { margin-left: auto; flex-shrink: 0; }
     #lang-toggle {
@@ -157,7 +161,7 @@
 
     /* SHARED UTILITIES */
     .section-wrap { padding: 80px 64px; background: #fff; contain: layout style paint; }
-    .section-wrap-gray { padding: 80px 64px; background: var(--bg2); contain: layout style paint; }
+    .section-wrap-gray { padding: 64px 64px; background: var(--bg2); contain: layout style paint; }
     .section-wrap-dark { padding: 80px 64px; background: var(--primary); contain: layout style paint; }
     .inner { max-width: 1000px; margin: 0 auto; }
     .inner-md { max-width: 1000px; margin: 0 auto; }
@@ -244,14 +248,18 @@
     .fatal-card {
       background: #fff;
       border: 1px solid var(--border);
+      border-left: 3px solid transparent;
       border-radius: var(--radius);
       padding: 36px 32px;
       position: relative; overflow: hidden;
-      transition: box-shadow 0.25s;
+      transition: box-shadow 0.2s, border-color 0.2s, border-left-color 0.2s, padding-left 0.2s;
       box-shadow: var(--shadow);
     }
     .fatal-card:hover {
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      border-left: 3px solid var(--accent);
+      padding-left: 29px;
+      border-color: var(--accent);
+      box-shadow: 0 4px 20px rgba(79,70,229,0.12);
     }
 
     .fatal-q-badge {
@@ -263,13 +271,14 @@
     }
 
     .fatal-q-text {
-      font-size: 1.1rem; font-weight: 700;
+      font-size: 18px; font-weight: 600;
+      font-style: italic;
       color: var(--text); line-height: 1.45;
       position: relative; z-index: 1;
     }
 
     .fatal-verdict {
-      background: var(--red-bg);
+      background: var(--bg2);
       border: 1px solid rgba(220,38,38,0.2);
       border-radius: var(--radius);
       padding: 28px 32px;
@@ -289,11 +298,12 @@
       padding: 36px 28px;
       position: relative; overflow: hidden;
       border: 1px solid var(--border);
-      transition: box-shadow 0.25s;
+      transition: box-shadow 0.2s, border-color 0.2s;
       box-shadow: var(--shadow);
     }
     .danger-card:hover {
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      border-color: rgba(220,38,38,0.4);
+      box-shadow: 0 4px 20px rgba(220,38,38,0.1);
     }
 
     .danger-num-badge {
@@ -332,12 +342,23 @@
       padding: 36px 30px 32px;
       position: relative; overflow: hidden;
       border: 1px solid var(--border);
-      transition: box-shadow 0.25s;
+      transition: box-shadow 0.2s, border-color 0.2s;
       box-shadow: var(--shadow);
+      counter-increment: pillar;
+    }
+    .pillar-grid { counter-reset: pillar; }
+
+    .pillar-card::before {
+      content: counter(pillar);
+      position: absolute; top: 16px; right: 20px;
+      font-size: 48px; font-weight: 900;
+      color: rgba(0,0,0,0.04); line-height: 1;
+      pointer-events: none;
     }
 
     .pillar-card:hover {
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      border-color: var(--accent-light);
+      box-shadow: 0 4px 20px rgba(79,70,229,0.1);
     }
 
     .pillar-icon {
@@ -525,8 +546,9 @@
     .moat-inner {
       background: #fff; border: 1px solid var(--border);
       border-radius: var(--radius); padding: 28px 20px;
-      transition: box-shadow 0.25s; box-shadow: var(--shadow);
+      transition: box-shadow 0.2s, border-color 0.2s; box-shadow: var(--shadow);
     }
+    .moat-card:hover .moat-inner { border-color: var(--accent-light); }
 
     .moat-period {
       font-size: 10px; font-weight: 700;
@@ -563,12 +585,13 @@
       background: #fff; border-radius: var(--radius);
       padding: 32px 36px;
       display: flex; align-items: flex-start; gap: 24px;
-      transition: box-shadow 0.25s; cursor: default;
+      transition: box-shadow 0.2s, border-color 0.2s; cursor: default;
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
     }
     .bp-q:hover {
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      border-color: var(--accent-light);
+      box-shadow: 0 4px 20px rgba(79,70,229,0.1);
     }
 
     .bp-q-num-circle {
@@ -590,12 +613,13 @@
     }
 
     .bp-q-text {
-      font-size: 1.1rem; font-weight: 800;
-      color: var(--primary); line-height: 1.4; margin-bottom: 12px;
+      font-size: 18px; font-weight: 600;
+      font-style: italic;
+      color: var(--text); line-height: 1.4; margin-bottom: 12px;
     }
 
     .bp-q-answer {
-      font-size: 0.93rem; color: var(--text2);
+      font-size: 15px; font-weight: 400; color: var(--text2);
       line-height: 1.65; margin-bottom: 14px;
     }
     .bp-q-answer strong { color: var(--text); font-weight: 700; }
@@ -608,7 +632,7 @@
     .bp-q-link:hover { gap: 10px; }
 
     .bp-verdict {
-      background: rgba(79,70,229,0.1);
+      background: rgba(248,249,250,0.08);
       border: 1px solid rgba(129,140,248,0.3);
       border-radius: var(--radius);
       padding: 32px 40px;
@@ -620,7 +644,7 @@
     /* FOOTER */
     footer {
       background: #090910;
-      padding: 72px 32px 40px;
+      padding: 48px 32px 32px;
     }
 
     .footer-inner { max-width: 1200px; margin: 0 auto; }
@@ -635,7 +659,7 @@
     .footer-tagline {
       font-size: 1rem; font-weight: 600;
       color: rgba(255,255,255,0.45);
-      margin-bottom: 44px;
+      margin-bottom: 32px;
     }
     .footer-tagline em {
       font-style: normal; color: var(--accent-light);
@@ -643,7 +667,7 @@
 
     .footer-links {
       display: flex; flex-wrap: wrap;
-      gap: 10px; margin-bottom: 48px;
+      gap: 10px; margin-bottom: 32px;
     }
     .footer-links a {
       text-decoration: none;
@@ -742,6 +766,7 @@
   </style>
 </head>
 <body>
+<div id="scroll-progress"></div>
 
 <!-- NAV -->
 <nav>
@@ -814,15 +839,15 @@
 </section>
 
 <div style="max-width:1000px; margin:0 auto; padding:16px 64px;">
-  <div style="font-size:13px; color:var(--text3); line-height:1.6;">
-    <span data-en="Reading path:" data-zh="阅读路径：" class="bilingual-text">Reading path:</span>
-    <a href="index.html" style="text-decoration:none; color:var(--text2);" data-en="The Problem" data-zh="问题" class="bilingual-text">The Problem</a>
-    <span style="color:var(--text3);"> &gt; </span>
-    <a href="project-intro.html" style="text-decoration:none; color:var(--text2);" data-en="The Solution" data-zh="方案" class="bilingual-text">The Solution</a>
-    <span style="color:var(--text3);"> &gt; </span>
-    <a href="risk-defense.html" style="text-decoration:none; color:var(--text2);" data-en="The Defense" data-zh="防御" class="bilingual-text">The Defense</a>
-    <span style="color:var(--text3);"> &gt; </span>
-    <span style="font-weight:600; color:var(--accent);" data-en="The Endgame" data-zh="终局" class="bilingual-text">The Endgame</span>
+  <div style="font-size:13px; color:var(--text3); line-height:1.6; display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+    <span data-en="Reading path:" data-zh="阅读路径：" class="bilingual-text" style="opacity:0.6;">Reading path:</span>
+    <a href="index.html" style="text-decoration:none; color:var(--text3); opacity:0.5; transition:opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.5'" data-en="The Problem" data-zh="问题" class="bilingual-text">The Problem</a>
+    <span style="color:var(--text3); opacity:0.3;"> &gt; </span>
+    <a href="project-intro.html" style="text-decoration:none; color:var(--text3); opacity:0.5; transition:opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.5'" data-en="The Solution" data-zh="方案" class="bilingual-text">The Solution</a>
+    <span style="color:var(--text3); opacity:0.3;"> &gt; </span>
+    <a href="risk-defense.html" style="text-decoration:none; color:var(--text3); opacity:0.5; transition:opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.5'" data-en="The Defense" data-zh="防御" class="bilingual-text">The Defense</a>
+    <span style="color:var(--text3); opacity:0.3;"> &gt; </span>
+    <span style="font-weight:700; color:var(--accent); background:var(--accent-bg); padding:2px 10px; border-radius:100px; font-size:12px;" data-en="The Endgame" data-zh="终局" class="bilingual-text">The Endgame</span>
   </div>
 </div>
 
@@ -1049,7 +1074,7 @@
           <div class="moat-phase-icon">📈</div>
           <div class="moat-title" data-en="Credit Building" data-zh="信用积累">Credit Building</div>
           <div class="moat-title-zh" data-en="信用积累" data-zh="Credit Building">信用积累</div>
-          <div class="moat-body" data-en="Creators start accumulating meaningful Passport data. Merchants begin seeing ROI patterns. First signs of switching cost emerge." data-zh="创作者在 Passport 里攒够了干活记录。商家开始看到 ROI 规律。切换成本初现。">Creators start accumulating meaningful Passport data. Merchants begin seeing ROI patterns. First signs of switching cost emerge.</div>
+          <div class="moat-body" data-en="Creators start accumulating meaningful <strong>Passport</strong> data. Merchants begin seeing ROI patterns. First signs of switching cost emerge." data-zh="创作者在 <strong>Passport</strong> 里攒够了干活记录。商家开始看到 ROI 规律。切换成本初现。">Creators start accumulating meaningful <strong>Passport</strong> data. Merchants begin seeing ROI patterns. First signs of switching cost emerge.</div>
         </div>
       </div>
 
@@ -1097,7 +1122,7 @@
         <div class="bp-q-content">
           <div class="bp-q-label" data-en="Question 01" data-zh="问题 01">Question 01</div>
           <div class="bp-q-text" data-en="What non-transferable assets do creators accumulate?" data-zh="创作者在 PUSH 上积累了哪些不可转移的资产？离开会失去什么？">What non-transferable assets do creators accumulate?</div>
-          <div class="bp-q-answer" data-en="<strong>Answer:</strong> Passport scores, tier benefits, earnings history, geo-credit, merchant ratings — none portable. A creator who leaves PUSH loses their entire professional identity on the platform." data-zh="<strong>回答：</strong>Passport 分数、等级福利、收益历史、地理信用、商家评分——全不可携带。离开 PUSH 的 Creator 会失去他们在平台上的整个职业身份。"><strong>Answer:</strong> Passport scores, tier benefits, earnings history, geo-credit, merchant ratings — none portable. A creator who leaves PUSH loses their entire professional identity on the platform.</div>
+          <div class="bp-q-answer" data-en="<strong>Answer:</strong> <strong>Passport</strong> scores, <strong>Tier</strong> benefits, earnings history, geo-credit, merchant ratings — none portable. A creator who leaves PUSH loses their entire professional identity on the platform." data-zh="<strong>回答：</strong><strong>Passport</strong> 分数、<strong>等级</strong>福利、收益历史、地理信用、商家评分——全不可携带。离开 PUSH 的 Creator 会失去他们在平台上的整个职业身份。"><strong>Answer:</strong> <strong>Passport</strong> scores, <strong>Tier</strong> benefits, earnings history, geo-credit, merchant ratings — none portable. A creator who leaves PUSH loses their entire professional identity on the platform.</div>
           <a href="retention-defense.html" class="bp-q-link" data-en="See Creator Retention Architecture →" data-zh="查看 Creator 留存架构 →">See Creator Retention Architecture →</a>
         </div>
       </div>
@@ -1165,12 +1190,6 @@
       <a href="metrics-dashboard.html" data-en="Metrics" data-zh="指标看板">Metrics</a>
     </div>
     <div class="footer-copy" data-en="© 2026 Push" data-zh="© 2026 Push">© 2026 Push</div>
-    <div style="margin-top:16px; font-size:13px;">
-      <span data-en="You might also want: " data-zh="你可能还想看：" class="bilingual-text">You might also want: </span>
-      <a href="prospects.html" data-en="🔮 Future Prospects" data-zh="🔮 未来愿景" class="bilingual-text">🔮 Future Prospects</a> ·
-      <a href="pitch-deck.html" data-en="📊 Pitch Deck" data-zh="📊 路演材料" class="bilingual-text">📊 Pitch Deck</a> ·
-      <a href="index.html" data-en="🏠 Dashboard" data-zh="🏠 首页" class="bilingual-text">🏠 Dashboard</a>
-    </div>
   </div>
 </footer>
 
@@ -1226,6 +1245,17 @@
   (function() {
     const nav = document.querySelector('nav, .topnav');
     if (nav) window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
+  })();
+
+  // Scroll progress bar
+  (function() {
+    const bar = document.getElementById('scroll-progress');
+    if (bar) {
+      window.addEventListener('scroll', () => {
+        const h = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = h > 0 ? (window.scrollY / h * 100) + '%' : '0%';
+      }, { passive: true });
+    }
   })();
 
   // Back to top

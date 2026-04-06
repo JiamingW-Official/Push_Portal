@@ -43,7 +43,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 .nav-links{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
 .nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:color 0.15s,background 0.15s;white-space:nowrap;text-decoration:none;}
 .nav-links a:hover{color:var(--accent);background:var(--accent-bg);}
-.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);}
+.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);position:relative;}
+.nav-links a.active::after{content:'';position:absolute;bottom:0;left:12px;right:12px;height:2px;background:var(--accent);border-radius:1px;}
 .nav-right{display:flex;align-items:center;gap:10px;flex-shrink:0;}
 .nav-hub{
   font-size:11px;font-weight:600;color:var(--text3);
@@ -125,7 +126,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 .item-rows{display:flex;flex-direction:column;}
 .item-row{
   display:grid;grid-template-columns:40px 1fr;gap:0;
-  padding:24px 0;border-bottom:1px solid var(--border);
+  padding:24px 0;padding-left:0;border-bottom:1px solid var(--border);
+  border-left:3px solid transparent;
   contain:layout style;
 }
 .item-row:first-child{border-top:1px solid var(--border);}
@@ -140,8 +142,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 .item-body{padding:0 20px 0 0;}
 .item-title{font-size:17px;font-weight:700;color:var(--primary);margin-bottom:4px;}
 .item-sub{
-  font-size:13px;font-weight:600;letter-spacing:0.5px;text-transform:none;
+  font-size:11px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;
   color:var(--accent);margin-bottom:10px;
+  display:inline-block;padding:2px 8px;background:var(--accent-bg);border-radius:4px;
 }
 .item-desc{font-size:14px;color:var(--text2);line-height:1.65;margin-bottom:10px;}
 .item-list{
@@ -286,7 +289,8 @@ blockquote.principle cite{
 /* ── LOGIC BOX (merchant / creator logic) ─────── */
 .logic-split{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:36px;}
 @media(max-width:640px){.logic-split{grid-template-columns:1fr;}}
-.logic-box{}
+.logic-box{border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:border-color 0.2s,box-shadow 0.2s;}
+.logic-box:hover{border-color:var(--accent);box-shadow:0 2px 12px rgba(79,70,229,0.08);}
 .logic-box-title{
   font-size:15px;font-weight:700;color:var(--primary);
   margin-bottom:4px;
@@ -310,6 +314,36 @@ blockquote.principle cite{
   top:10px;
 }
 
+/* ── SCROLL PROGRESS BAR ── */
+.scroll-progress{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:300;width:0%;transition:width 0.05s linear;pointer-events:none;}
+
+/* ── MICRO-INTERACTIONS ── */
+.item-row{transition:background 0.2s,border-color 0.2s,box-shadow 0.2s;}
+.item-row:hover{background:rgba(79,70,229,0.02);box-shadow:0 1px 4px rgba(0,0,0,0.04);}
+.item-row:nth-child(1):hover{border-left-color:var(--accent);}
+.item-row:nth-child(2):hover{border-left-color:var(--green);}
+.item-row:nth-child(3):hover{border-left-color:var(--orange);}
+.item-row:nth-child(4):hover{border-left-color:#8b5cf6;}
+.item-row:nth-child(5):hover{border-left-color:var(--text3);}
+
+.win-item{transition:background 0.2s,box-shadow 0.2s;}
+.win-item:hover{background:var(--accent-bg);box-shadow:inset 0 0 0 1px rgba(79,70,229,0.12);}
+.win-item-label{font-variant-numeric:tabular-nums;}
+
+.phase-col{transition:background 0.2s,box-shadow 0.2s;}
+.phase-col:hover{background:var(--accent-bg) !important;}
+
+.logic-box{transition:box-shadow 0.2s,border-color 0.2s;}
+
+/* ── TRAP DANGER STYLING ── */
+.trap-rows{border-color:rgba(220,38,38,0.15);background:rgba(220,38,38,0.04);}
+.trap-row{background:rgba(220,38,38,0.02);transition:background 0.2s;}
+.trap-row:hover{background:rgba(220,38,38,0.06);}
+
+/* ── BOLD KEY TERMS ── */
+.key-metric{font-weight:700;color:var(--text);}
+.dollar-amount{font-weight:700;color:var(--text);font-variant-numeric:tabular-nums;}
+
 .fade-in{opacity:0;transition:opacity 0.4s ease;will-change:opacity;animation:fadeInFallback 0s 4s forwards;}
 .fade-in.visible,.visible .fade-in{opacity:1;will-change:auto;animation:none;}
 @keyframes fadeInFallback{to{opacity:1;}}
@@ -317,7 +351,7 @@ blockquote.principle cite{
 /* ── FOOTER ── */
 footer{
   background:var(--primary);color:rgba(255,255,255,0.5);
-  padding:60px 40px;
+  padding:40px 40px 32px;
 }
 .footer-inner{max-width:1000px;margin:0 auto;}
 .footer-logo{
@@ -326,11 +360,11 @@ footer{
 }
 .footer-tagline{
   font-size:13px;color:rgba(255,255,255,0.35);
-  margin-bottom:36px;
+  margin-bottom:24px;
 }
 .footer-links{
   display:flex;flex-wrap:wrap;gap:6px 0;
-  list-style:none;padding:0;margin:0 0 36px;
+  list-style:none;padding:0;margin:0 0 24px;
 }
 .footer-links li{margin-right:24px;}
 .footer-links a{
@@ -342,6 +376,7 @@ footer{
 </style>
 </head>
 <body>
+<div class="scroll-progress" id="scroll-progress"></div>
 
 <!-- ── NAV ─────────────────────────────────────── -->
 <nav>
@@ -405,7 +440,7 @@ footer{
       <h2 class="section-title" data-en="What Push Optimizes For" data-zh="Push 真正要优化什么">What Push Optimizes For</h2>
       <p class="section-sub" data-en="Not signups, campaigns created, map opens, or profile views. The north star is high-quality, repeatable, margin-positive demand routing." data-zh="不是注册量、创建了多少个活动、地图打开次数或主页浏览量。真正的目标是：把高质量、可重复、能赚钱的需求对接做到位。">Not signups, campaigns created, map opens, or profile views. The north star is high-quality, repeatable, margin-positive demand routing.</p>
       <blockquote class="principle">
-        <span data-en="Win by: merchant repeat rate, creator completion quality, transaction reliability, high-confidence attribution, and repeatable contribution margin." data-zh="怎么算赢：商家愿意继续来、创作者完成质量高、交易靠得住、归因有依据、每多做一单，能多赚一点。">Win by: merchant repeat rate, creator completion quality, transaction reliability, high-confidence attribution, and repeatable contribution margin.</span>
+        <span data-en="Win by: <strong>merchant repeat rate</strong>, <strong>creator completion quality</strong>, <strong>transaction reliability</strong>, <strong>high-confidence attribution</strong>, and repeatable <strong>contribution margin</strong>." data-zh="怎么算赢：<strong>商家复购率</strong>、<strong>创作者完成质量</strong>、<strong>交易可靠性</strong>、<strong>归因有依据</strong>、每多做一单，能多赚一点（<strong>边际贡献</strong>）。">Win by: <strong>merchant repeat rate</strong>, <strong>creator completion quality</strong>, <strong>transaction reliability</strong>, <strong>high-confidence attribution</strong>, and repeatable <strong>contribution margin</strong>.</span>
       </blockquote>
     </div>
 
@@ -616,7 +651,7 @@ footer{
     <div class="fade-in">
       <div class="section-label" data-en="Diagnostic Framework" data-zh="诊断用的核心问题">Diagnostic Framework</div>
       <h2 class="section-title" data-en="7 Contribution Margin Questions" data-zh="7 个判断单笔经济是否健康的问题">7 Contribution Margin Questions</h2>
-      <p class="section-sub" data-en="The questions that reveal whether unit economics are improving or deteriorating. Ask these before and after every significant operational change." data-zh="这几个问题能帮你看清单笔的经济账是在变好还是变差。每次做重大运营调整前后都应该问一遍。">The questions that reveal whether unit economics are improving or deteriorating. Ask these before and after every significant operational change.</p>
+      <p class="section-sub" data-en="The questions that reveal whether <strong>unit economics</strong> are improving or deteriorating. Ask these before and after every significant operational change." data-zh="这几个问题能帮你看清<strong>单笔经济账</strong>是在变好还是变差。每次做重大运营调整前后都应该问一遍。">The questions that reveal whether <strong>unit economics</strong> are improving or deteriorating. Ask these before and after every significant operational change.</p>
     </div>
     <ol class="q-list fade-in">
       <li>
@@ -738,7 +773,7 @@ footer{
 <!-- ── NEXT READING ── -->
 <div style="max-width:800px; margin:40px auto; padding:24px; background:var(--bg2, #f8f9fa); border:1px solid var(--border, #e5e7eb); border-radius:12px;">
   <h3 style="font-size:16px; font-weight:700; margin-bottom:12px;" data-en="Continue Reading" data-zh="继续阅读" class="bilingual-text">Continue Reading</h3>
-  <a href="push-strategy-core.html" style="display:block; padding:16px; background:#fff; border:1px solid var(--border, #e5e7eb); border-radius:8px; text-decoration:none; transition:box-shadow 0.2s,border-color 0.2s; max-width:400px;">
+  <a href="push-strategy-core.html" style="display:block; padding:16px; background:#fff; border:1px solid var(--border, #e5e7eb); border-radius:8px; text-decoration:none; transition:box-shadow 0.2s,border-color 0.2s; max-width:400px;" onmouseover="this.style.borderColor='var(--accent)';this.style.boxShadow='0 2px 12px rgba(79,70,229,0.08)'" onmouseout="this.style.borderColor='';this.style.boxShadow=''">
     <div style="font-size:13px; color:var(--text3, #9ca3af);" data-en="Next →" data-zh="下一篇 →" class="bilingual-text">Next →</div>
     <div style="font-size:15px; font-weight:600; color:var(--text, #111827);" data-en="See the full strategic thesis" data-zh="看完整的战略思路" class="bilingual-text">See the full strategic thesis</div>
     <div style="font-size:13px; color:var(--accent, #4f46e5); margin-top:4px;" data-en="Strategy Core →" data-zh="战略核心 →" class="bilingual-text">Strategy Core →</div>
@@ -848,6 +883,18 @@ footer{
     const mainLangBtn = document.getElementById('lang-btn');
     if (mainLangBtn) mobileLangBtn.textContent = mainLangBtn.textContent;
   }
+})();
+
+// ── SCROLL PROGRESS BAR ─────────────────────
+(function() {
+  const bar = document.getElementById('scroll-progress');
+  if (!bar) return;
+  function update() {
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = h > 0 ? (window.scrollY / h * 100) + '%' : '0%';
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
 })();
 </script>
 </body>

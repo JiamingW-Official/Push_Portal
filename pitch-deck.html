@@ -36,7 +36,7 @@
 
 *{margin:0;padding:0;box-sizing:border-box;}
 
-html{scroll-behavior:smooth;-webkit-overflow-scrolling:touch;}
+html{scroll-behavior:smooth;-webkit-overflow-scrolling:touch;scroll-snap-type:y mandatory;}
 
 body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.75;overflow-x:hidden;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;word-break:break-word;}
 
@@ -58,7 +58,8 @@ nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
   padding:6px 12px;border-radius:8px;transition:color 0.15s,background 0.15s;white-space:nowrap;text-decoration:none;
 }
 .nav-links a:hover{color:var(--accent);background:var(--accent-bg);}
-.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);}
+.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);position:relative;}
+.nav-links a.active::after{content:'';position:absolute;bottom:0;left:12px;right:12px;height:2px;background:var(--accent);border-radius:2px;}
 #lang-btn{
   flex-shrink:0;
   background:var(--accent);color:#fff;border:none;cursor:pointer;
@@ -67,11 +68,19 @@ nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
 }
 #lang-btn:hover{background:var(--accent-dark);}
 
+/* -- Scroll progress bar -- */
+#scroll-progress{
+  position:fixed;top:0;left:0;height:2px;width:0%;
+  background:var(--accent);z-index:300;
+  transition:width 0.1s linear;pointer-events:none;
+}
+
 /* -- Sections -- */
 section{
   min-height:100vh;
   display:flex;flex-direction:column;justify-content:center;
   padding:100px 0 60px;
+  scroll-snap-align:start;
 }
 .container{max-width:1000px;margin:0 auto;padding:0 40px;width:100%;}
 
@@ -130,7 +139,9 @@ section{
 .story-col{
   background:var(--bg2);border-radius:var(--radius);
   padding:28px;border:1px solid var(--border);
+  transition:border-color 0.2s,box-shadow 0.2s;
 }
+.story-col:hover{border-color:var(--accent-light);box-shadow:0 2px 12px rgba(79,70,229,0.06);}
 .story-col-title{
   font-size:13px;font-weight:600;letter-spacing:0.5px;text-transform:none;
   color:var(--text2);margin-bottom:6px;
@@ -210,7 +221,9 @@ section{
   border:1px solid rgba(255,255,255,.1);
   border-radius:var(--radius);
   padding:28px;
+  transition:border-color 0.2s,box-shadow 0.2s;
 }
+.feature-card:hover{border-color:var(--accent-light);box-shadow:0 4px 16px rgba(79,70,229,0.12);}
 .feature-icon{font-size:28px;margin-bottom:12px;}
 .feature-name{
   font-size:16px;font-weight:700;color:#fff;margin-bottom:10px;
@@ -232,7 +245,9 @@ section{
   border:1px solid var(--border);border-radius:var(--radius);
   padding:24px 28px;
   display:grid;grid-template-columns:200px 1fr;gap:24px;align-items:start;
+  transition:border-color 0.2s,box-shadow 0.2s;
 }
+.rev-layer:hover{border-color:var(--accent-light);box-shadow:0 2px 12px rgba(79,70,229,0.06);}
 .rev-layer-num{
   font-size:13px;font-weight:600;letter-spacing:0.5px;text-transform:none;
   color:var(--text3);margin-bottom:4px;
@@ -253,8 +268,10 @@ section{
 .compare-table td{padding:12px 14px;border-bottom:1px solid var(--border);color:var(--text2);}
 .compare-table tr:last-child td{border-bottom:none;}
 .compare-table tr.highlight td{
-  background:var(--accent-bg);color:var(--accent);font-weight:600;
+  background:var(--accent-bg);color:var(--accent);font-weight:700;
+  border-bottom:2px solid rgba(79,70,229,0.2);
 }
+.compare-table tr.highlight td:first-child{color:var(--accent);font-weight:800;}
 .compare-table td:first-child{color:var(--text);font-weight:500;}
 
 .projection-row{
@@ -280,7 +297,9 @@ section{
 .moat-card{
   background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);
   padding:28px;
+  transition:border-color 0.2s,box-shadow 0.2s;
 }
+.moat-card:hover{border-color:var(--accent-light);box-shadow:0 2px 12px rgba(79,70,229,0.06);}
 .moat-num{
   font-size:13px;font-weight:600;letter-spacing:0.5px;text-transform:none;
   color:var(--accent);margin-bottom:8px;
@@ -298,7 +317,9 @@ section{
   border:1px solid rgba(255,255,255,.1);
   border-radius:var(--radius);
   padding:24px;
+  transition:border-color 0.2s,box-shadow 0.2s;
 }
+.phase-card:hover{border-color:var(--accent-light);box-shadow:0 4px 16px rgba(79,70,229,0.12);}
 .phase-tag{
   font-size:13px;font-weight:600;letter-spacing:0.5px;text-transform:none;
   color:var(--accent-light);margin-bottom:6px;
@@ -328,7 +349,9 @@ section{
 .risks-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:36px;margin-bottom:32px;}
 .risk-card{
   border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);
+  transition:border-color 0.2s,box-shadow 0.2s;
 }
+.risk-card:hover{border-color:var(--accent-light);}
 .risk-head{
   background:var(--red-bg);padding:18px 20px;
 }
@@ -358,7 +381,9 @@ section{
 .timing-card{
   background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);
   padding:24px;
+  transition:border-color 0.2s,box-shadow 0.2s;
 }
+.timing-card:hover{border-color:var(--accent-light);box-shadow:0 2px 12px rgba(79,70,229,0.06);}
 .timing-num{
   font-size:13px;font-weight:600;letter-spacing:0.5px;text-transform:none;
   color:var(--accent);margin-bottom:8px;
@@ -456,19 +481,11 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
 .fade-in.visible { opacity: 1; transform: translateY(0); animation: none; will-change: auto; }
 @keyframes fadeInFallback { to { opacity: 1; transform: translateY(0); } }
 
-/* -- Feature card hover -- */
-.slide-feature, .feature-card {
+/* -- Feature card hover (handled inline above) -- */
+.slide-feature {
   transition: box-shadow 0.2s;
 }
-.slide-feature:hover, .feature-card:hover {
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-}
-
-/* -- Risk card hover -- */
-.risk-card {
-  transition: box-shadow 0.2s;
-}
-.risk-card:hover {
+.slide-feature:hover {
   box-shadow: 0 2px 12px rgba(0,0,0,0.08);
 }
 
@@ -479,11 +496,7 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
   color: var(--accent);
 }
 
-/* -- Revenue layer hover -- */
-.revenue-layer {
-  transition: background 0.15s;
-}
-.revenue-layer:hover { background: rgba(79,70,229,0.03); }
+/* -- Revenue layer hover (handled inline on .rev-layer above) -- */
 /* -- Mobile hamburger -- */
 .nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;flex-shrink:0;margin-left:4px;}
 .nav-burger span{display:block;width:22px;height:2px;background:var(--text,#111827);border-radius:2px;transition:transform 0.2s,opacity 0.2s;}
@@ -505,6 +518,8 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
 </style>
 </head>
 <body>
+
+<div id="scroll-progress"></div>
 
 <!-- -- Nav -- -->
 <nav>
@@ -552,9 +567,9 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
     <div class="s1-sub" data-en="Local creator performance infrastructure." data-zh="让本地创作者合作可量化、可追责、值得反复做。">Local creator performance infrastructure.</div>
     <p class="s1-desc" data-en="We structure, verify, and repeat local creator campaigns — giving merchants measurable ROI and creators a real career path." data-zh="我们给本地创作者合作立规矩：有目标、有核实、值得反复做。商家拿到看得见的ROI，创作者走上真正的职业路。">We structure, verify, and repeat local creator campaigns — giving merchants measurable ROI and creators a real career path.</p>
     <div class="s1-stats">
-      <span class="stat-pill" data-en="$0 → $99/mo" data-zh="$0 起步 → ¥99/月">$0 → $99/mo</span>
-      <span class="stat-pill" data-en="4 creator tiers" data-zh="4个创作者等级">4 creator tiers</span>
-      <span class="stat-pill" data-en="7 milestone states" data-zh="7步追踪流程">7 milestone states</span>
+      <span class="stat-pill" data-en="<strong>$0</strong> → <strong>$99/mo</strong>" data-zh="<strong>$0</strong> 起步 → <strong>¥99/月</strong>"><strong>$0</strong> → <strong>$99/mo</strong></span>
+      <span class="stat-pill" data-en="<strong>4</strong> creator tiers" data-zh="<strong>4</strong>个创作者等级"><strong>4</strong> creator tiers</span>
+      <span class="stat-pill" data-en="<strong>7</strong> milestone states" data-zh="<strong>7</strong>步追踪流程"><strong>7</strong> milestone states</span>
     </div>
   </div>
 </section>
@@ -581,7 +596,7 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
           <li data-en="No way to know if a single new customer came from it" data-zh="不知道有没有一个新客户因此来过">No way to know if a single new customer came from it</li>
           <li data-en="Definitely won't know who to work with next time" data-zh="下次找谁还是不知道">Definitely won't know who to work with next time</li>
         </ul>
-        <div class="bottom-line" data-en="$150 spent. Zero data. Zero repeatability." data-zh="$150 就这么没了。零数据，零复购。">$150 spent. Zero data. Zero repeatability.</div>
+        <div class="bottom-line" data-en="<strong>$150</strong> spent. Zero data. Zero repeatability." data-zh="<strong>$150</strong> 就这么没了。零数据，零复购。"><strong>$150</strong> spent. Zero data. Zero repeatability.</div>
       </div>
       <!-- Creator -->
       <div class="story-col">
@@ -691,7 +706,7 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
         <div>
           <div class="rev-layer-num" data-en="LAYER 1" data-zh="第一层">LAYER 1</div>
           <div class="rev-layer-name" data-en="Merchant Subscription" data-zh="商家订阅">Merchant Subscription</div>
-          <div class="rev-layer-price" data-en="$0 free (wk 1–8) → $99/mo Basic → $199/mo Pro" data-zh="免费(第1-8周) → 基础版99美元/月 → 专业版199美元/月">$0 free (wk 1–8) → $99/mo Basic → $199/mo Pro</div>
+          <div class="rev-layer-price" data-en="<strong>$0</strong> free (wk 1–8) → <strong>$99/mo</strong> Basic → <strong>$199/mo</strong> Pro" data-zh="免费(第1-8周) → 基础版<strong>99美元/月</strong> → 专业版<strong>199美元/月</strong>"><strong>$0</strong> free (wk 1–8) → <strong>$99/mo</strong> Basic → <strong>$199/mo</strong> Pro</div>
         </div>
         <p class="rev-layer-body" data-en="Stability layer. Subscription removes the per-campaign decision. Merchants who subscribe run more campaigns with less friction." data-zh="订了就省掉每次的来回——不用每次算值不值。订阅的商家跑的活动更多，花的精力更少。">Stability layer. Subscription removes the per-campaign decision. Merchants who subscribe run more campaigns with less friction.</p>
       </div>
@@ -699,7 +714,7 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
         <div>
           <div class="rev-layer-num" data-en="LAYER 2" data-zh="第二层">LAYER 2</div>
           <div class="rev-layer-name" data-en="Campaign Service Fees" data-zh="活动服务费">Campaign Service Fees</div>
-          <div class="rev-layer-price" data-en="$39/campaign (Basic overage) · $29/campaign (Pro overage)" data-zh="39美元/次（基础版超额）· 29美元/次（专业版超额）">$39/campaign (Basic overage) · $29/campaign (Pro overage)</div>
+          <div class="rev-layer-price" data-en="<strong>$39</strong>/campaign (Basic overage) · <strong>$29</strong>/campaign (Pro overage)" data-zh="<strong>39美元</strong>/次（基础版超额）· <strong>29美元</strong>/次（专业版超额）"><strong>$39</strong>/campaign (Basic overage) · <strong>$29</strong>/campaign (Pro overage)</div>
         </div>
         <p class="rev-layer-body" data-en="Operational monetization tied to merchant action. Revenue grows as campaign volume grows." data-zh="商家活动跑多少，我们就收多少。活动量大，收入自然跟着涨。">Operational monetization tied to merchant action. Revenue grows as campaign volume grows.</p>
       </div>
@@ -725,25 +740,25 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
       <tbody>
         <tr>
           <td data-en="DM a creator directly" data-zh="直接私信创作者">DM a creator directly</td>
-          <td data-en="$50–200/post" data-zh="50–200美元/帖">$50–200/post</td>
+          <td data-en="<strong>$50–200</strong>/post" data-zh="<strong>50–200美元</strong>/帖"><strong>$50–200</strong>/post</td>
           <td data-en="None" data-zh="无">None</td>
           <td data-en="High" data-zh="高">High</td>
         </tr>
         <tr>
           <td data-en="Local marketing agency" data-zh="本地营销代理">Local marketing agency</td>
-          <td data-en="$500–2000/mo" data-zh="500–2000美元/月">$500–2000/mo</td>
+          <td data-en="<strong>$500–2000</strong>/mo" data-zh="<strong>500–2000美元</strong>/月"><strong>$500–2000</strong>/mo</td>
           <td data-en="Low–Med" data-zh="低–中">Low–Med</td>
           <td data-en="Low" data-zh="低">Low</td>
         </tr>
         <tr>
           <td data-en="Instagram / FB Ads" data-zh="Instagram/Facebook广告">Instagram / FB Ads</td>
-          <td data-en="$200–1000/mo" data-zh="200–1000美元/月">$200–1000/mo</td>
+          <td data-en="<strong>$200–1000</strong>/mo" data-zh="<strong>200–1000美元</strong>/月"><strong>$200–1000</strong>/mo</td>
           <td data-en="Medium" data-zh="中">Medium</td>
           <td data-en="Medium" data-zh="中">Medium</td>
         </tr>
         <tr class="highlight">
           <td data-en="Push Basic" data-zh="Push 基础版">Push Basic</td>
-          <td data-en="$99/mo" data-zh="99美元/月">$99/mo</td>
+          <td data-en="<strong>$99/mo</strong>" data-zh="<strong>99美元/月</strong>"><strong>$99/mo</strong></td>
           <td data-en="Med–High" data-zh="中–高">Med–High</td>
           <td data-en="Very Low" data-zh="极低">Very Low</td>
         </tr>
@@ -752,11 +767,11 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
 
     <div class="projection-row">
       <span class="proj-label" data-en="Revenue:" data-zh="营收:">Revenue:</span>
-      <span class="proj-item" data-en="Wk 9: $198" data-zh="第9周: $198">Wk 9: $198</span>
-      <span class="proj-item" data-en="Wk 10: $297" data-zh="第10周: $297">Wk 10: $297</span>
-      <span class="proj-item" data-en="Wk 11: $396" data-zh="第11周: $396">Wk 11: $396</span>
-      <span class="proj-item" data-en="Wk 12: $495" data-zh="第12周: $495">Wk 12: $495</span>
-      <span class="proj-break" data-en="Break-even: ~15 merchants @ Month 4–5" data-zh="盈亏平衡：约15个商家 @ 第4-5月">Break-even: ~15 merchants @ Month 4–5</span>
+      <span class="proj-item" data-en="Wk 9: <strong>$198</strong>" data-zh="第9周: <strong>$198</strong>">Wk 9: <strong>$198</strong></span>
+      <span class="proj-item" data-en="Wk 10: <strong>$297</strong>" data-zh="第10周: <strong>$297</strong>">Wk 10: <strong>$297</strong></span>
+      <span class="proj-item" data-en="Wk 11: <strong>$396</strong>" data-zh="第11周: <strong>$396</strong>">Wk 11: <strong>$396</strong></span>
+      <span class="proj-item" data-en="Wk 12: <strong>$495</strong>" data-zh="第12周: <strong>$495</strong>">Wk 12: <strong>$495</strong></span>
+      <span class="proj-break" data-en="Break-even: <strong>~15 merchants</strong> @ Month 4–5" data-zh="盈亏平衡：<strong>约15个商家</strong> @ 第4-5月">Break-even: <strong>~15 merchants</strong> @ Month 4–5</span>
     </div>
   </div>
 </section>
@@ -836,11 +851,11 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
     <div style="margin-bottom:20px;">
       <div style="font-size:13px;font-weight:600;letter-spacing:0.5px;color:rgba(255,255,255,.3);margin-bottom:12px;" data-en="Success targets at week 12" data-zh="第12周成功目标">Success targets at week 12</div>
       <div class="targets-row">
-        <span class="target-chip" data-en="40%+ merchant repeat rate" data-zh="商家复购率 40%以上">40%+ merchant repeat rate</span>
-        <span class="target-chip" data-en="85%+ campaign completion" data-zh="活动完成率 85%以上">85%+ campaign completion</span>
-        <span class="target-chip" data-en="&lt;48hr avg time-to-fill" data-zh="平均匹配时间 48小时内">&lt;48hr avg time-to-fill</span>
-        <span class="target-chip" data-en="30%+ willingness to pay" data-zh="付费意愿 30%以上">30%+ willingness to pay</span>
-        <span class="target-chip" data-en="25+ campaigns completed" data-zh="累计活动 25次以上">25+ campaigns completed</span>
+        <span class="target-chip" data-en="<strong>40%+</strong> merchant repeat rate" data-zh="商家复购率 <strong>40%以上</strong>"><strong>40%+</strong> merchant repeat rate</span>
+        <span class="target-chip" data-en="<strong>85%+</strong> campaign completion" data-zh="活动完成率 <strong>85%以上</strong>"><strong>85%+</strong> campaign completion</span>
+        <span class="target-chip" data-en="<strong>&lt;48hr</strong> avg time-to-fill" data-zh="平均匹配时间 <strong>48小时内</strong>"><strong>&lt;48hr</strong> avg time-to-fill</span>
+        <span class="target-chip" data-en="<strong>30%+</strong> willingness to pay" data-zh="付费意愿 <strong>30%以上</strong>"><strong>30%+</strong> willingness to pay</span>
+        <span class="target-chip" data-en="<strong>25+</strong> campaigns completed" data-zh="累计活动 <strong>25次以上</strong>"><strong>25+</strong> campaigns completed</span>
       </div>
     </div>
 
@@ -855,7 +870,7 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
       <span class="slide-num">08</span>
       <span class="slide-label" data-en="RISKS WE'VE IDENTIFIED" data-zh="我们想到的风险">RISKS WE'VE IDENTIFIED</span>
     </div>
-    <h2 class="s8-title" data-en="16 risks. We've built defenses for all of them." data-zh="16个风险，我们都想到了，都做了应对。">16 risks. We've built defenses for all of them.</h2>
+    <h2 class="s8-title" data-en="<strong>16</strong> risks. We've built defenses for all of them." data-zh="<strong>16</strong>个风险，我们都想到了，都做了应对。"><strong>16</strong> risks. We've built defenses for all of them.</h2>
 
     <div class="risks-grid">
       <div class="risk-card">
@@ -944,7 +959,7 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
 <!-- -- Next Reading -- -->
 <div style="max-width:800px; margin:40px auto; padding:24px; background:var(--bg2, #f8f9fa); border:1px solid var(--border, #e5e7eb); border-radius:12px;">
   <h3 style="font-size:16px; font-weight:700; margin-bottom:12px;" data-en="Continue Reading" data-zh="继续阅读" class="bilingual-text">Continue Reading</h3>
-  <a href="project-intro.html" style="display:block; padding:16px; background:#fff; border:1px solid var(--border, #e5e7eb); border-radius:8px; text-decoration:none; transition:background 0.2s,border-color 0.2s,box-shadow 0.2s; max-width:400px;">
+  <a href="project-intro.html" style="display:block; padding:16px; background:#fff; border:1px solid var(--border, #e5e7eb); border-radius:8px; text-decoration:none; transition:background 0.2s,border-color 0.2s,box-shadow 0.2s; max-width:400px;" onmouseover="this.style.borderColor='var(--accent-light)';this.style.boxShadow='0 2px 12px rgba(79,70,229,0.06)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
     <div style="font-size:13px; color:var(--text3, #9ca3af);" data-en="Next →" data-zh="下一步 →" class="bilingual-text">Next →</div>
     <div style="font-size:15px; font-weight:600; color:var(--text, #111827);" data-en="Want the full product details?" data-zh="想了解完整的产品细节？" class="bilingual-text">Want the full product details?</div>
     <div style="font-size:13px; color:var(--accent, #4f46e5); margin-top:4px;" data-en="Project Introduction →" data-zh="项目介绍 →" class="bilingual-text">Project Introduction →</div>
@@ -1051,6 +1066,17 @@ nav.scrolled, .topnav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
     });
   }, { threshold: 0.01, rootMargin: '0px 0px 60px 0px' });
   document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+})();
+
+// Scroll progress bar
+(function() {
+  const bar = document.getElementById('scroll-progress');
+  if (bar) {
+    window.addEventListener('scroll', function() {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+    }, { passive: true });
+  }
 })();
 
 // Mobile navigation

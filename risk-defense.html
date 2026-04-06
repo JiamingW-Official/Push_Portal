@@ -36,6 +36,9 @@
   --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
 }
 
+/* SCROLL PROGRESS BAR */
+.scroll-progress{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:9999;width:0;transition:none;pointer-events:none;}
+
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:var(--text);font-size:15px;line-height:1.75;overflow-x:hidden;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;word-break:break-word;}
@@ -46,7 +49,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 .nav-links{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
 .nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:color 0.15s,background 0.15s;white-space:nowrap;text-decoration:none;}
 .nav-links a:hover{color:var(--accent);background:var(--accent-bg);}
-.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);}
+.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);position:relative;}
+.nav-links a.active::after{content:'';position:absolute;bottom:2px;left:12px;right:12px;height:2px;background:var(--accent);border-radius:1px;}
 .lang-btn{
   background:var(--accent);color:#fff;border:none;cursor:pointer;
   font-size:12px;font-weight:700;padding:7px 18px;border-radius:8px;
@@ -58,14 +62,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 /* HERO */
 .hero{
   background:var(--primary);
-  text-align:center;padding:120px 64px 80px;position:relative;overflow:hidden;
+  text-align:center;padding:100px 64px 56px;position:relative;overflow:hidden;
 }
 .hero-badge{
   display:inline-flex;align-items:center;gap:8px;
   background:rgba(217,119,6,0.18);border:1px solid rgba(217,119,6,0.45);
   color:#fbbf24;font-size:13px;font-weight:600;letter-spacing:0.5px;
   text-transform:none;
-  padding:8px 20px;border-radius:100px;margin-bottom:36px;position:relative;z-index:1;
+  padding:8px 20px;border-radius:100px;margin-bottom:24px;position:relative;z-index:1;
 }
 .hero-title{
   font-size:36px;font-weight:900;
@@ -93,14 +97,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
   display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
   padding:4px 0;border:none;border-bottom:2px solid transparent;
   font-size:14px;font-weight:500;color:var(--text3);
-  text-decoration:none;transition:color 0.2s,border-color 0.2s;flex-shrink:0;
-  border-radius:0;background:none;
+  text-decoration:none;transition:color 0.15s,border-color 0.15s;flex-shrink:0;
+  border-radius:0;background:none;position:relative;
 }
 .qpill:hover{
-  color:var(--text2);
+  color:var(--text2);border-bottom-color:var(--border);
 }
 .qpill.qactive{
   color:var(--text);border-bottom:2px solid var(--accent);
+}
+.qpill.qactive::after{
+  content:'';position:absolute;bottom:-2px;left:0;right:0;
+  height:2px;background:var(--accent);border-radius:1px;
 }
 .qpill .qcount{
   font-size:12px;font-weight:600;color:var(--text3);
@@ -133,19 +141,19 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 .section-header{margin-bottom:56px;}
 
 /* RISK CARD GRID */
-.risk-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
-.risk-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;}
-.risk-grid-1{display:grid;grid-template-columns:1fr;gap:28px;max-width:860px;}
+.risk-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.risk-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+.risk-grid-1{display:grid;grid-template-columns:1fr;gap:24px;max-width:860px;}
 
 /* RISK CARD */
 .risk-card{
   background:#fff;border:1px solid var(--border);border-radius:8px;
   overflow:hidden;display:flex;flex-direction:column;
-  transition:box-shadow 0.25s ease;cursor:default;
+  transition:border-color 0.2s,box-shadow 0.2s;cursor:default;
 }
-.risk-card:hover{box-shadow:0 2px 12px rgba(0,0,0,0.08);}
+.risk-card:hover{box-shadow:0 2px 12px rgba(0,0,0,0.08);border-color:var(--red);}
 .risk-card.on-dark{background:#fff;border-color:var(--border);}
-.risk-card.on-dark:hover{box-shadow:0 2px 12px rgba(0,0,0,0.08);}
+.risk-card.on-dark:hover{box-shadow:0 2px 12px rgba(0,0,0,0.08);border-color:var(--red);}
 
 /* Card: top risk section */
 .rc-top{padding:24px 24px 20px;}
@@ -155,7 +163,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
   font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
   padding:4px 10px;border-radius:6px;margin-bottom:14px;
 }
-.rc-title{font-size:19px;font-weight:800;color:var(--text);line-height:1.25;margin-bottom:10px;letter-spacing:-0.02em;}
+.rc-title{font-size:16px;font-weight:700;color:var(--text);line-height:1.3;margin-bottom:10px;letter-spacing:-0.02em;}
 .rc-desc{font-size:14px;color:var(--text2);line-height:1.65;margin-bottom:14px;}
 .rc-bullets{list-style:none;display:flex;flex-direction:column;gap:6px;}
 .rc-bullets li{
@@ -185,9 +193,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 
 /* Card: bottom defense section */
 .rc-bottom{
-  padding:20px 24px 24px;background:var(--green-bg);
+  padding:20px 24px 24px;background:rgba(5,150,105,0.06);
   border-top:1px solid rgba(5,150,105,0.12);
   flex:1;display:flex;flex-direction:column;gap:10px;
+  border-radius:0 0 8px 8px;margin:0;
 }
 .rc-defense-title{
   font-size:15px;font-weight:700;color:var(--green);line-height:1.45;
@@ -201,6 +210,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
   content:'';position:absolute;left:4px;top:8px;
   width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;
 }
+.rc-defense-bullets li strong{color:var(--text);font-weight:600;}
 .rc-insight{
   margin-top:10px;background:rgba(5,150,105,0.1);
   border-radius:8px;padding:12px 14px;
@@ -270,11 +280,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 
 /* FOOTER */
 footer{
-  background:#080810;padding:56px 24px 40px;
+  background:#080810;padding:40px 24px 32px;
   border-top:1px solid rgba(255,255,255,0.06);
 }
 .footer-inner{max-width:1000px;margin:0 auto;}
-.footer-top{display:flex;align-items:flex-start;justify-content:space-between;gap:40px;margin-bottom:40px;flex-wrap:wrap;}
+.footer-top{display:flex;align-items:flex-start;justify-content:space-between;gap:32px;margin-bottom:28px;flex-wrap:wrap;}
 .footer-brand{}
 .footer-logo{font-size:24px;font-weight:900;color:var(--accent);letter-spacing:-0.5px;margin-bottom:8px;}
 .footer-tagline{font-size:14px;color:rgba(255,255,255,0.4);font-weight:500;}
@@ -300,7 +310,7 @@ footer{
   .risk-grid-1{max-width:100%;}
   .section{padding:72px 20px;}
   .section-title{font-size:28px;}
-  .hero{padding:100px 20px 60px;}
+  .hero{padding:88px 20px 44px;}
   .hero-title{font-size:28px;letter-spacing:-0.5px;}
   .closing-box{padding:32px 24px;}
   .footer-top{flex-direction:column;}
@@ -332,6 +342,7 @@ footer{
 </style>
 </head>
 <body>
+<div class="scroll-progress" id="scrollProgress"></div>
 
 <nav>
   <a href="index.html" class="nav-logo">PUSH</a>
@@ -1171,10 +1182,32 @@ sections.forEach(s => sectionObserver.observe(s));
   });
 })();
 
-/* NAV SHADOW ON SCROLL */
+/* BOLD KEY TERMS IN DEFENSE BULLETS */
+document.querySelectorAll('.rc-defense-bullets li').forEach(li => {
+  ['en','zh'].forEach(lang => {
+    const attr = 'data-' + lang;
+    const val = li.getAttribute(attr);
+    if (!val) return;
+    const colon = val.indexOf(':');
+    if (colon > 0 && colon < 50) {
+      li.setAttribute(attr, '<strong>' + val.slice(0, colon) + '</strong>' + val.slice(colon));
+    }
+  });
+  const html = li.innerHTML;
+  const colon = html.indexOf(':');
+  if (colon > 0 && colon < 50 && !html.startsWith('<strong>')) {
+    li.innerHTML = '<strong>' + html.slice(0, colon) + '</strong>' + html.slice(colon);
+  }
+});
+
+/* NAV SHADOW ON SCROLL + SCROLL PROGRESS */
 const navEl = document.querySelector('nav');
+const scrollBar = document.getElementById('scrollProgress');
 window.addEventListener('scroll', () => {
   navEl.style.boxShadow = window.scrollY > 8 ? '0 2px 16px rgba(0,0,0,0.08)' : '';
+  const docH = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = docH > 0 ? (window.scrollY / docH) * 100 : 0;
+  scrollBar.style.width = pct + '%';
 }, {passive: true});
 </script>
 </body>

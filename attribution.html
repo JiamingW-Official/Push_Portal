@@ -353,7 +353,7 @@ blockquote.principle cite{
 
 footer{
   background:var(--primary);color:rgba(255,255,255,0.5);
-  padding:60px 40px;
+  padding:40px 40px 32px;
 }
 .footer-inner{max-width:1000px;margin:0 auto;}
 .footer-logo{
@@ -362,11 +362,11 @@ footer{
 }
 .footer-tagline{
   font-size:13px;color:rgba(255,255,255,0.35);
-  margin-bottom:36px;
+  margin-bottom:24px;
 }
 .footer-links{
   display:flex;flex-wrap:wrap;gap:6px 0;
-  list-style:none;padding:0;margin:0 0 36px;
+  list-style:none;padding:0;margin:0 0 24px;
 }
 .footer-links li{margin-right:24px;}
 .footer-links a{
@@ -375,9 +375,97 @@ footer{
 }
 .footer-links a:hover{color:#fff;}
 .footer-copy{font-size:12px;color:rgba(255,255,255,0.2);}
+
+/* ── SCROLL PROGRESS BAR ────────────────────── */
+#scroll-progress{
+  position:fixed;top:0;left:0;height:2px;width:0%;
+  background:var(--accent);z-index:300;
+  transition:width 0.05s linear;pointer-events:none;
+}
+
+/* ── NAV ACTIVE ::after ─────────────────────── */
+.nav-links a{position:relative;}
+.nav-links a.active::after{
+  content:'';position:absolute;bottom:-1px;left:8px;right:8px;
+  height:2px;background:var(--accent);border-radius:2px 2px 0 0;
+}
+
+/* ── LAYER / ITEM-ROW HOVER ─────────────────── */
+.item-row{
+  border-left:3px solid transparent;
+  transition:border-color 0.2s,box-shadow 0.2s,background 0.2s;
+}
+.item-row:hover{
+  background:var(--bg2) !important;
+  border-left-color:var(--accent);
+  box-shadow:0 2px 8px rgba(79,70,229,0.06);
+}
+
+/* ── CAMPAIGN CELL HOVER ────────────────────── */
+.campaign-cell{
+  transition:border-color 0.2s,box-shadow 0.2s,background 0.2s;
+}
+.campaign-cell:hover{
+  background:var(--bg2);
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);
+}
+
+/* ── FAILURE ROW HOVER ──────────────────────── */
+.failure-row{
+  transition:border-color 0.2s,box-shadow 0.2s,background 0.2s;
+  border-left:3px solid transparent;
+}
+.failure-row:hover{
+  background:var(--bg2) !important;
+  border-left-color:var(--orange);
+  box-shadow:0 2px 8px rgba(217,119,6,0.06);
+}
+
+/* ── CONFIDENCE PILLS ───────────────────────── */
+.conf-pill{
+  display:inline-flex;align-items:center;gap:5px;
+  font-weight:700;font-size:12px;letter-spacing:0.5px;
+  padding:3px 10px 3px 8px;border-radius:20px;
+  font-variant-numeric:tabular-nums;
+}
+.conf-pill::before{
+  content:'';display:inline-block;width:6px;height:6px;border-radius:50%;
+  flex-shrink:0;
+}
+.conf-pill-low{color:var(--red);background:var(--red-bg);}
+.conf-pill-low::before{background:var(--red);}
+.conf-pill-med{color:var(--orange);background:var(--orange-bg);}
+.conf-pill-med::before{background:var(--orange);}
+.conf-pill-high{color:var(--green);background:var(--green-bg);}
+.conf-pill-high::before{background:var(--green);}
+
+/* ── DATA EXAMPLE INLINE ────────────────────── */
+code.data-ex{
+  font-family:'IBM Plex Mono',monospace;font-size:13px;
+  background:var(--bg2);padding:2px 6px;border-radius:4px;
+}
+
+/* ── BOLD KEY TERMS ─────────────────────────── */
+.kterm{font-weight:700;}
+
+/* ── LAYER DEPTH INDICATORS ─────────────────── */
+.item-rows .item-row:nth-child(1){border-left-color:transparent;}
+.item-rows .item-row:nth-child(1):hover{border-left-color:var(--accent);}
+.item-rows .item-row:nth-child(2){margin-left:4px;}
+.item-rows .item-row:nth-child(3){margin-left:8px;}
+.item-rows .item-row:nth-child(4){margin-left:12px;}
+.item-rows .item-row:nth-child(5){margin-left:16px;}
+@media(max-width:640px){
+  .item-rows .item-row:nth-child(n){margin-left:0;}
+}
+
+/* ── ATTR QUESTION HOVER ────────────────────── */
+.attr-q{transition:background 0.2s;}
+.attr-q:hover{background:var(--bg2);}
 </style>
 </head>
 <body>
+<div id="scroll-progress"></div>
 
 <!-- ── NAV ─────────────────────────────────────── -->
 <nav>
@@ -439,7 +527,7 @@ footer{
     <div class="fade-in">
       <div class="section-label" data-en="Core Philosophy" data-zh="核心理念">Core Philosophy</div>
       <h2 class="section-title" data-en="Not Perfect. Credible." data-zh="不求完美，求可信">Not Perfect. Credible.</h2>
-      <p class="section-sub" data-en="Push does not need perfect attribution on day one. The objective is to make results more structured, trustworthy, and decision-useful than today's alternatives." data-zh="Push 不需要从第一天就做到完美归因。目标是：结果要有依据、能说清楚、能帮商家决定下次要不要再做。">Push does not need perfect attribution on day one. The objective is to make results more structured, trustworthy, and decision-useful than today's alternatives.</p>
+      <p class="section-sub" data-en="Push does not need perfect attribution on day one. The objective is to make results more <b>structured</b>, <b>trustworthy</b>, and <b>decision-useful</b> than today's alternatives." data-zh="Push 不需要从第一天就做到完美归因。目标是：结果要<b>有依据</b>、<b>能说清楚</b>、能帮商家<b>决定下次要不要再做</b>。">Push does not need perfect attribution on day one. The objective is to make results more <b>structured</b>, <b>trustworthy</b>, and <b>decision-useful</b> than today's alternatives.</p>
       <blockquote class="principle">
         <span data-en="The bar is not scientific certainty. The bar is: more structured, more trustworthy, and more decision-useful than what merchants and creators have today." data-zh="不需要实验室级别的证据。要求是：比商家和创作者现在能拿到的东西更靠谱、更能帮做决定。">The bar is not scientific certainty. The bar is: more structured, more trustworthy, and more decision-useful than what merchants and creators have today.</span>
       </blockquote>
@@ -487,7 +575,7 @@ footer{
         <div class="item-body">
           <div class="item-title" data-en="Fulfillment Verification" data-zh="履约核验">Fulfillment Verification</div>
           <div class="item-sub" data-en="DID THE CREATOR SHOW UP?" data-zh="创作者有没有到场？">DID THE CREATOR SHOW UP?</div>
-          <p class="item-desc" data-en="Confirms the creator's physical or digital presence and execution. The baseline without which no other layer is credible." data-zh="确认创作者真的去了、真的干了。没这步，后面白搭。">Confirms the creator's physical or digital presence and execution. The baseline without which no other layer is credible.</p>
+          <p class="item-desc" data-en="Confirms the creator's physical or digital <b>presence</b> and <b>execution</b>. The baseline without which no other layer is credible." data-zh="确认创作者真的去了、真的干了。没这步，后面白搭。">Confirms the creator's physical or digital <b>presence</b> and <b>execution</b>. The baseline without which no other layer is credible.</p>
           <ul class="item-list">
             <li data-en="Visit proof" data-zh="到访证明">Visit proof</li>
             <li data-en="Timestamped upload" data-zh="带时间戳的上传记录">Timestamped upload</li>
@@ -503,7 +591,7 @@ footer{
         <div class="item-body">
           <div class="item-title" data-en="Content Verification" data-zh="内容核验">Content Verification</div>
           <div class="item-sub" data-en="DID THE CONTENT GO LIVE?" data-zh="内容有没有真的发出去？">DID THE CONTENT GO LIVE?</div>
-          <p class="item-desc" data-en="Confirms the content was actually published and remained accessible. Prevents submission of draft content as completed work." data-zh="确认内容是否真正发布、是否还能访问到。防止创作者把草稿当完成稿交付。">Confirms the content was actually published and remained accessible. Prevents submission of draft content as completed work.</p>
+          <p class="item-desc" data-en="Confirms the content was actually <b>published</b> and remained <b>accessible</b>. Prevents submission of draft content as completed work." data-zh="确认内容是否真正<b>发布</b>、是否还能<b>访问</b>到。防止创作者把草稿当完成稿交付。">Confirms the content was actually <b>published</b> and remained <b>accessible</b>. Prevents submission of draft content as completed work.</p>
           <ul class="item-list">
             <li data-en="Live URL check" data-zh="链接是否可访问">Live URL check</li>
             <li data-en="Screenshot evidence" data-zh="发布截图">Screenshot evidence</li>
@@ -518,7 +606,7 @@ footer{
         <div class="item-body">
           <div class="item-title" data-en="Engagement Context" data-zh="互动数据">Engagement Context</div>
           <div class="item-sub" data-en="DIRECTIONAL ONLY — NOT PRIMARY" data-zh="仅供参考">DIRECTIONAL ONLY — NOT PRIMARY</div>
-          <p class="item-desc" data-en="Useful for trending analysis and creator comparison, but weak as primary commercial evidence. Easy to inflate, hard to correlate with merchant outcomes." data-zh="可以用来看趋势、横向比较创作者，但单独作为商业结果的证明太弱。数字容易刷，跟商家实际收益很难对上。">Useful for trending analysis and creator comparison, but weak as primary commercial evidence. Easy to inflate, hard to correlate with merchant outcomes.</p>
+          <p class="item-desc" data-en="Useful for trending analysis and creator comparison, but weak as primary commercial evidence. <b>Engagement data</b> is easy to inflate, hard to correlate with merchant outcomes." data-zh="可以用来看趋势、横向比较创作者，但单独作为商业结果的证明太弱。<b>互动数据</b>容易刷，跟商家实际收益很难对上。">Useful for trending analysis and creator comparison, but weak as primary commercial evidence. <b>Engagement data</b> is easy to inflate, hard to correlate with merchant outcomes.</p>
           <ul class="item-list">
             <li data-en="Views" data-zh="浏览量">Views</li>
             <li data-en="Clicks" data-zh="点击量">Clicks</li>
@@ -534,7 +622,7 @@ footer{
         <div class="item-body">
           <div class="item-title" data-en="Merchant-Side Action" data-zh="商家端的实际反应">Merchant-Side Action</div>
           <div class="item-sub" data-en="DID SOMETHING HAPPEN AT THE MERCHANT?" data-zh="商家那边有没有真的发生什么？">DID SOMETHING HAPPEN AT THE MERCHANT?</div>
-          <p class="item-desc" data-en="The most commercially meaningful layer. Confirms the campaign moved beyond content publication into actual business outcomes. Requires merchant-side infrastructure." data-zh="商业意义最强的一层。证明这次活动不只是发了内容，而是真的带动了商家的业务。需要商家侧有相应的数据采集手段。">The most commercially meaningful layer. Confirms the campaign moved beyond content publication into actual business outcomes. Requires merchant-side infrastructure.</p>
+          <p class="item-desc" data-en="The most commercially meaningful layer. Confirms the campaign moved beyond content publication into actual <b>business outcomes</b>. Requires <b>merchant-side infrastructure</b>." data-zh="商业意义最强的一层。证明这次活动不只是发了内容，而是真的带动了商家的<b>实际业务</b>。需要<b>商家侧数据采集</b>手段。">The most commercially meaningful layer. Confirms the campaign moved beyond content publication into actual <b>business outcomes</b>. Requires <b>merchant-side infrastructure</b>.</p>
           <ul class="item-list">
             <li data-en="Redemptions" data-zh="兑换">Redemptions</li>
             <li data-en="Bookings" data-zh="预订">Bookings</li>
@@ -550,7 +638,7 @@ footer{
         <div class="item-body">
           <div class="item-title" data-en="Repeat Signal" data-zh="复购信号">Repeat Signal</div>
           <div class="item-sub" data-en="THE STRONGEST LONG-TERM SIGNAL" data-zh="最有说服力的长期信号">THE STRONGEST LONG-TERM SIGNAL</div>
-          <p class="item-desc" data-en="Behavioral evidence that the campaign produced value worth repeating. Self-reinforcing: repeat behavior makes future attribution easier and more confident." data-zh="商家或创作者主动再来，是最直接的价值证明。而且这个信号会形成正循环：复购行为越多，后续的归因就越容易做、也越准。">Behavioral evidence that the campaign produced value worth repeating. Self-reinforcing: repeat behavior makes future attribution easier and more confident.</p>
+          <p class="item-desc" data-en="Behavioral evidence that the campaign produced value worth repeating. <b>Self-reinforcing</b>: repeat behavior makes future attribution easier and more confident." data-zh="商家或创作者主动再来，是最直接的价值证明。而且这个信号会形成<b>正循环</b>：复购行为越多，后续的归因就越容易做、也越准。">Behavioral evidence that the campaign produced value worth repeating. <b>Self-reinforcing</b>: repeat behavior makes future attribution easier and more confident.</p>
           <ul class="item-list">
             <li data-en="Merchant repeat booking of creator" data-zh="商家再次预约同一创作者">Merchant repeat booking of creator</li>
             <li data-en="Creator invited to higher-value campaign" data-zh="创作者被邀参与更高价值的活动">Creator invited to higher-value campaign</li>
@@ -569,7 +657,7 @@ footer{
     <div class="fade-in">
       <div class="section-label" data-en="Confidence System" data-zh="可信程度">Confidence System</div>
       <h2 class="section-title" data-en="3 Confidence Levels" data-zh="3 个置信度级别">3 Confidence Levels</h2>
-      <p class="section-sub" data-en="Every campaign result is assigned a confidence level based on available verification signals. Confidence level determines what decisions the result can support." data-zh="每次活动结果都会根据已有的核验信号评定一个置信度级别。级别决定了这份结果能用来支撑哪些决策。">Every campaign result is assigned a confidence level based on available verification signals. Confidence level determines what decisions the result can support.</p>
+      <p class="section-sub" data-en="Every campaign result is assigned a <b>confidence level</b> based on available verification signals. Confidence level determines what decisions the result can support." data-zh="每次活动结果都会根据已有的核验信号评定一个<b>置信度级别</b>。级别决定了这份结果能用来支撑哪些决策。">Every campaign result is assigned a <b>confidence level</b> based on available verification signals. Confidence level determines what decisions the result can support.</p>
     </div>
     <table class="data-table fade-in">
       <thead>
@@ -582,19 +670,19 @@ footer{
       </thead>
       <tbody>
         <tr>
-          <td><span class="conf-label conf-low" data-en="LOW" data-zh="低">LOW</span></td>
+          <td><span class="conf-pill conf-pill-low" data-en="LOW" data-zh="低">LOW</span></td>
           <td data-en="Content posted, light engagement data, no redemption evidence" data-zh="内容已发布、有轻量互动数据、没有兑换记录">Content posted, light engagement data, no redemption evidence</td>
           <td data-en="Creator activity tracking, directional comparison" data-zh="追踪创作者活跃度、做横向对比参考">Creator activity tracking, directional comparison</td>
           <td data-en="Performance fee justification, repeat booking decisions" data-zh="收取绩效费用、决定是否复购">Performance fee justification, repeat booking decisions</td>
         </tr>
         <tr>
-          <td><span class="conf-label conf-med" data-en="MEDIUM" data-zh="中">MEDIUM</span></td>
+          <td><span class="conf-pill conf-pill-med" data-en="MEDIUM" data-zh="中">MEDIUM</span></td>
           <td data-en="Content posted, visit confirmed, claim or intent signal, limited merchant-side action" data-zh="内容已发布、到访已确认、有优惠领取或意向信号、商家端有少量行为记录">Content posted, visit confirmed, claim or intent signal, limited merchant-side action</td>
           <td data-en="Merchant reporting, general ROI narrative, creator ranking signals" data-zh="给商家的汇报材料、大致的 ROI 说明、创作者排名参考">Merchant reporting, general ROI narrative, creator ranking signals</td>
           <td data-en="High-confidence performance take rates, judicial dispute resolution" data-zh="收高置信度绩效费、解决有争议的纠纷">High-confidence performance take rates, judicial dispute resolution</td>
         </tr>
         <tr>
-          <td><span class="conf-label conf-high" data-en="HIGH" data-zh="高">HIGH</span></td>
+          <td><span class="conf-pill conf-pill-high" data-en="HIGH" data-zh="高">HIGH</span></td>
           <td data-en="Content posted, fulfillment confirmed, merchant-side redemption or booking evidence, legible campaign outcome" data-zh="内容已发布、履约已确认、有商家端兑换或预约记录、活动结果清晰可查">Content posted, fulfillment confirmed, merchant-side redemption or booking evidence, legible campaign outcome</td>
           <td data-en="Performance-based pricing, repeat booking decisions, premium tier qualification, financial product eligibility" data-zh="按绩效定价、决定复购、开放高级权限资格、金融产品申请">Performance-based pricing, repeat booking decisions, premium tier qualification, financial product eligibility</td>
           <td data-en="N/A — highest available confidence" data-zh="不适用——这是最高级别">N/A — highest available confidence</td>
@@ -696,7 +784,7 @@ footer{
     <div class="fade-in">
       <div class="section-label" data-en="Design Implications" data-zh="对产品设计的影响">Design Implications</div>
       <h2 class="section-title" data-en="How Attribution Shapes the Platform" data-zh="归因怎么影响产品设计">How Attribution Shapes the Platform</h2>
-      <p class="section-sub" data-en="Attribution is not a post-campaign reporting feature. It is a design constraint that shapes how campaigns are created, how creators are briefed, and what the dashboard shows." data-zh="归因不是活动做完再加的报告功能。它是一个前置的设计约束，决定了活动怎么创建、创作者的任务怎么说清楚、仪表板显示什么内容。">Attribution is not a post-campaign reporting feature. It is a design constraint that shapes how campaigns are created, how creators are briefed, and what the dashboard shows.</p>
+      <p class="section-sub" data-en="Attribution is not a post-campaign reporting feature. It is a <b>design constraint</b> that shapes how campaigns are created, how creators are briefed, and what the dashboard shows." data-zh="归因不是活动做完再加的报告功能。它是一个前置的<b>设计约束</b>，决定了活动怎么创建、创作者的任务怎么说清楚、仪表板显示什么内容。">Attribution is not a post-campaign reporting feature. It is a <b>design constraint</b> that shapes how campaigns are created, how creators are briefed, and what the dashboard shows.</p>
     </div>
     <ul class="checklist fade-in">
       <li data-en="Define verification method at campaign creation — not retrospectively" data-zh="建活动时就定好核验方式，而不是事后补救">Define verification method at campaign creation — not retrospectively</li>
@@ -872,6 +960,19 @@ footer{
     const mainLangBtn = document.getElementById('lang-btn');
     if (mainLangBtn) mobileLangBtn.textContent = mainLangBtn.textContent;
   }
+})();
+
+// ── SCROLL PROGRESS BAR + NAV SHADOW ────────
+(function() {
+  const bar = document.getElementById('scroll-progress');
+  const nav = document.querySelector('nav');
+  function update() {
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    if (bar) bar.style.width = h > 0 ? (window.scrollY / h * 100) + '%' : '0%';
+    if (nav) nav.style.boxShadow = window.scrollY > 10 ? '0 1px 8px rgba(0,0,0,0.06)' : 'none';
+  }
+  window.addEventListener('scroll', update, {passive:true});
+  update();
 })();
 </script>
 </body>

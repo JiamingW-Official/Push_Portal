@@ -44,7 +44,15 @@ html{scroll-behavior:smooth;}
 body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.75;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;word-break:break-word;}
 body[lang="zh"], body.zh-active{line-height:2;}
 body.zh-active{letter-spacing:0.02em;}
-a{color:var(--accent);text-decoration:none;}
+a{color:var(--accent);text-decoration:none;transition:color 0.15s;}
+a:hover{color:var(--accent-light);}
+.hero-cta,.hero-cta:hover{color:#fff;}
+.hero-cta:hover{opacity:0.7;}
+.nav-logo,.nav-logo:hover{color:var(--accent);}
+.footer-link:hover{color:#fff;}
+
+/* — Scroll progress bar — */
+.scroll-progress{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:300;width:0;transition:none;pointer-events:none;}
 
 /* — Nav — */
 nav{
@@ -64,7 +72,8 @@ nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
   padding:6px 12px;border-radius:8px;transition:color 0.15s,background-color 0.15s;white-space:nowrap;text-decoration:none;
 }
 .nav-links a:hover{color:var(--accent);}
-.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);}
+.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);position:relative;}
+.nav-links a.active::after{content:'';position:absolute;bottom:0;left:12px;right:12px;height:2px;background:var(--accent);border-radius:1px;}
 #lang-btn{
   flex-shrink:0;background:var(--accent);color:#fff;font-weight:700;font-size:13px;
   padding:7px 18px;border-radius:8px;border:none;cursor:pointer;transition:background 0.15s;
@@ -105,7 +114,7 @@ nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
   font-size:14px;font-weight:600;color:#fff;text-decoration:none;
   transition:opacity 0.15s;
 }
-.hero-cta:hover{opacity:0.7;text-decoration:underline;}
+.hero-cta:hover{opacity:0.7;}
 
 /* — Section wrappers — */
 .sw-white{background:var(--bg);}
@@ -247,7 +256,7 @@ nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
 /* — S5: Differentiators — */
 .diff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;}
 .diff-card{border-radius:8px;padding:32px;border:1px solid var(--border);background:#fff;display:flex;flex-direction:column;gap:12px;transition:border-color 0.2s,box-shadow 0.2s;}
-.diff-card:hover{border-color:var(--accent);box-shadow:0 2px 12px rgba(0,0,0,0.08);}
+.diff-card:hover{border-color:var(--accent-light);box-shadow:0 2px 12px rgba(0,0,0,0.08);}
 .diff-icon{font-size:32px;}
 .diff-title{font-size:17px;font-weight:800;color:var(--text);}
 .diff-body{font-size:14px;color:var(--text2);line-height:1.75;flex:1;}
@@ -261,7 +270,7 @@ nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
   display:flex;flex-direction:column;gap:10px;
   transition:border-color 0.2s,box-shadow 0.2s;text-decoration:none;background:#fff;
 }
-.nav-card:hover{border-color:var(--accent);box-shadow:0 2px 12px rgba(0,0,0,0.08);}
+.nav-card:hover{border-color:var(--accent-light);box-shadow:0 2px 12px rgba(0,0,0,0.08);}
 .nav-card:hover .nav-card-title{color:var(--accent);}
 .nav-card-icon{font-size:36px;}
 .nav-card-title{font-size:16px;font-weight:700;color:var(--text);transition:color 0.2s;}
@@ -350,7 +359,7 @@ nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
 .inner-tab-content.active{display:block;}
 
 /* — Footer — */
-footer{background:#0f0f1a;padding:56px 24px;}
+footer{background:#0f0f1a;padding:40px 64px;border-top:1px solid var(--border);font-size:13px;color:var(--text3);}
 .footer-inner{
   max-width:1000px;margin:0 auto;
   display:grid;grid-template-columns:1fr 2fr 1fr;gap:32px;align-items:start;
@@ -361,6 +370,21 @@ footer{background:#0f0f1a;padding:56px 24px;}
 .footer-link{color:rgba(255,255,255,0.4);font-size:13px;text-decoration:none;transition:color 0.15s;}
 .footer-link:hover{color:#fff;}
 .footer-copy{text-align:right;font-size:12px;color:rgba(255,255,255,0.3);line-height:1.8;}
+
+/* — Card paragraph spacing — */
+.audience-card p:last-child,.diff-card p:last-child,.nav-card p:last-child,
+.audience-body:last-child,.diff-body:last-child,.nav-card-desc:last-child{margin-bottom:8px;}
+
+/* — Emoji icon sizing in cards — */
+.diff-icon,.nav-card-icon,.flow5-icon{font-size:20px;}
+
+/* — CTA link hover — */
+.audience-link,.diff-link,.sla-link,.doc-mini-link{transition:color 0.15s;}
+.audience-link:hover,.diff-link:hover{color:var(--accent-light);}
+
+/* — Reading rhythm — alternating section padding — */
+.sw-white + .sw-gray .section{padding:64px 64px;}
+.sw-gray + .sw-white .section{padding:80px 64px;}
 
 /* — Responsive — */
 @media(max-width:768px){
@@ -389,6 +413,9 @@ footer{background:#0f0f1a;padding:56px 24px;}
 </head>
 <body>
 
+<!-- Scroll progress bar -->
+<div class="scroll-progress" id="scroll-progress"></div>
+
 <!-- NAV -->
 <nav>
   <a href="index.html" class="nav-logo">PUSH</a>
@@ -411,8 +438,8 @@ footer{background:#0f0f1a;padding:56px 24px;}
   <div class="hero-inner">
     <div class="hero-label fade-in" data-en="THE MISSING LAYER IN LOCAL CREATOR MARKETING" data-zh="本地创作者营销，一直没人把流程跑通">THE MISSING LAYER IN LOCAL CREATOR MARKETING</div>
     <h1 class="fade-in">
-      <span data-en="You paid $150 for a creator post. Did it work? You'll never know." data-zh="你花了 $150 找了个博主发帖。有用吗？你永远不知道。">You paid $150 for a creator post. Did it work? You'll never know.</span>
-      <span class="accent-line" data-en="Push makes every campaign verifiable, trackable, and repeatable." data-zh="Push 让每次合作有数据、能验证、值得再做。">Push makes every campaign verifiable, trackable, and repeatable.</span>
+      <span data-en="You paid <strong>$150</strong> for a creator post. Did it work? You'll never know." data-zh="你花了 <strong>$150</strong> 找了个博主发帖。有用吗？你永远不知道。">You paid <strong>$150</strong> for a creator post. Did it work? You'll never know.</span>
+      <span class="accent-line" data-en="Push makes every campaign <strong>verifiable, trackable, and repeatable</strong>." data-zh="Push 让每次合作<strong>有数据</strong>、能验证、值得再做。">Push makes every campaign <strong>verifiable, trackable, and repeatable</strong>.</span>
     </h1>
     <p class="hero-sub fade-in" data-en="Push isn't about finding creators — it's about making every collaboration produce data, so the next one is faster, smarter, and more valuable." data-zh="Push 不帮你找博主。Push 让每次合作都留下记录，下次找谁、怎么合作、值不值得，都有数可查。">Push isn't about finding creators — it's about making every collaboration produce data, so the next one is faster, smarter, and more valuable.</p>
     <div class="hero-ctas fade-in">
@@ -426,7 +453,7 @@ footer{background:#0f0f1a;padding:56px 24px;}
 <div class="sw-white">
   <div class="section">
     <div class="section-label fade-in" data-en="WHAT IS PUSH" data-zh="一句话说清楚">WHAT IS PUSH</div>
-    <h2 class="section-title fade-in" data-en="Merchants say what they want. Push handles the rest — finding creators, scheduling, tracking, verifying, and paying." data-zh="商家提需求，Push 自动匹配人、排活动、盯进度、验结果、走付款。">Merchants say what they want. Push handles the rest — finding creators, scheduling, tracking, verifying, and paying.</h2>
+    <h2 class="section-title fade-in" data-en="Merchants say what they want. Push <strong>handles the rest</strong> — finding creators, scheduling, tracking, verifying, and paying." data-zh="商家提需求，Push <strong>自动匹配人</strong>、排���动、盯进度、验结果、走付款。">Merchants say what they want. Push <strong>handles the rest</strong> — finding creators, scheduling, tracking, verifying, and paying.</h2>
 
     <!-- 5-Step Flow -->
     <div class="flow5 fade-in">
@@ -492,7 +519,7 @@ footer{background:#0f0f1a;padding:56px 24px;}
 <div class="sw-gray">
   <div class="section fade-in">
     <div class="section-label" data-en="WHY THIS EXISTS" data-zh="问题出在哪里">WHY THIS EXISTS</div>
-    <h2 class="section-title" data-en="Neither side has what they need." data-zh="商家和创作者，双方都在踩坑。">Neither side has what they need.</h2>
+    <h2 class="section-title" data-en="<span style='color:var(--accent)'>Neither side</span> has what they need." data-zh="商家和创作者，<span style='color:var(--accent)'>双方都在踩坑</span>。"><span style="color:var(--accent)">Neither side</span> has what they need.</h2>
 
     <div class="problem-grid">
 
@@ -518,7 +545,7 @@ footer{background:#0f0f1a;padding:56px 24px;}
             <div class="pain-item-body" data-en="Creators take free product and disappear. No-shows. Low-quality content. No recourse, no records, no accountability." data-zh="博主拿了免费产品后消失、放鸽子、或发了劣质内容。没有记录、没有追责机制、没有任何补救办法。">Creators take free product and disappear. No-shows. Low-quality content. No recourse, no records, no accountability.</div>
           </div>
         </div>
-        <div class="panel-verdict" data-en="$150 gone. Zero data, zero repeat." data-zh="每次 $150 花出去，连个数据都没留下。">$150 gone. Zero data, zero repeat.</div>
+        <div class="panel-verdict" data-en="<span style='font-weight:600;color:var(--text)'>$150</span> gone. Zero data, zero repeat." data-zh="每次 <span style='font-weight:600;color:var(--text)'>$150</span> 花出去，连个数据都没留下。"><span style="font-weight:600;color:var(--text)">$150</span> gone. Zero data, zero repeat.</div>
       </div>
 
       <!-- Creator Pain -->
@@ -554,8 +581,8 @@ footer{background:#0f0f1a;padding:56px 24px;}
 <div class="sw-white" id="workflow">
   <div class="section fade-in">
     <div class="section-label" data-en="HOW IT WORKS" data-zh="运作方式">HOW IT WORKS</div>
-    <h2 class="section-title" data-en="Goal → Structure → Route → Verify → Settle → Repeat." data-zh="从下单到结案，每一步都有记录。">Goal → Structure → Route → Verify → Settle → Repeat.</h2>
-    <p class="section-sub" data-en="20x improvement over the basic marketplace flow." data-zh="一套比微信对接靠谱得多的工作流。">20x improvement over the basic marketplace flow.</p>
+    <h2 class="section-title" data-en="Goal → Structure → Route → Verify → Settle → <strong>Repeat</strong>." data-zh="从下单到结案，<strong>每一步都有记录</strong>。">Goal → Structure → Route → Verify → Settle → <strong>Repeat</strong>.</h2>
+    <p class="section-sub" data-en="<strong>20x improvement</strong> over the basic marketplace flow." data-zh="一套比微信对接<strong>靠谱得多</strong>的工作流。"><strong>20x improvement</strong> over the basic marketplace flow.</p>
 
     <div style="margin-top:36px;">
       <div class="compare-strip strip-before fade-in">
@@ -623,7 +650,7 @@ footer{background:#0f0f1a;padding:56px 24px;}
 <div class="sw-gray">
   <div class="section fade-in">
     <div class="section-label" data-en="WHAT PUSH IS" data-zh="战略定位">WHAT PUSH IS</div>
-    <h2 class="section-title" data-en="Not everything. Just the right thing." data-zh="不是什么都做，只做最该做的事。">Not everything. Just the right thing.</h2>
+    <h2 class="section-title" data-en="Not everything. Just the <span style='color:var(--accent)'>right thing</span>." data-zh="不是什么都做，只做<span style='color:var(--accent)'>最该做的事</span>。">Not everything. Just the <span style="color:var(--accent)">right thing</span>.</h2>
 
     <div class="is-grid fade-in">
       <div class="is-col not">
@@ -680,7 +707,7 @@ footer{background:#0f0f1a;padding:56px 24px;}
 <div class="sw-white">
   <div class="section fade-in">
     <div class="section-label" data-en="CORE ADVANTAGES" data-zh="核心优势">CORE ADVANTAGES</div>
-    <h2 class="section-title" data-en="Three things no competitor has built." data-zh="三件竞品没有做、也不愿做的事。">Three things no competitor has built.</h2>
+    <h2 class="section-title" data-en="Three things <strong>no competitor</strong> has built." data-zh="三件竞品<strong>没有做</strong>、也不愿做的事。">Three things <strong>no competitor</strong> has built.</h2>
 
     <div class="diff-grid fade-in">
       <div class="diff-card">
@@ -709,7 +736,7 @@ footer{background:#0f0f1a;padding:56px 24px;}
 <div class="sw-gray">
   <div class="section fade-in">
     <div class="section-label" data-en="EXPLORE THE PROJECT" data-zh="看看项目">EXPLORE THE PROJECT</div>
-    <h2 class="section-title" data-en="Nine pages. Every layer explained." data-zh="九个页面，覆盖业务每个层面。">Nine pages. Every layer explained.</h2>
+    <h2 class="section-title" data-en="Nine pages. <strong>Every layer</strong> explained." data-zh="九个页面，覆盖业务<strong>每个层面</strong>。">Nine pages. <strong>Every layer</strong> explained.</h2>
 
     <div class="reading-order" style="margin-bottom:32px; padding:24px; background:var(--bg2); border:1px solid var(--border); border-radius:8px;">
       <h3 style="font-size:18px; font-weight:700; margin-bottom:12px;" data-en="📖 Suggested Reading Order" data-zh="📖 建议阅读顺序" class="bilingual-text">📖 Suggested Reading Order</h3>
@@ -785,8 +812,8 @@ footer{background:#0f0f1a;padding:56px 24px;}
 <div class="sw-dark" id="dochub">
   <div class="dochub-inner fade-in">
     <div class="section-label section-label-dark" data-en="DOCUMENT HUB" data-zh="文档中心">DOCUMENT HUB</div>
-    <h2 class="section-title section-title-white" style="margin-bottom:8px;" data-en="13 Internal Documents" data-zh="13 份内部文档">13 Internal Documents</h2>
-    <p class="section-sub section-sub-dark" style="margin-bottom:0;" data-en="The complete strategic and operational foundation." data-zh="完整战略与运营框架。">The complete strategic and operational foundation.</p>
+    <h2 class="section-title section-title-white" style="margin-bottom:8px;" data-en="<strong>13</strong> Internal Documents" data-zh="<strong>13</strong> 份内部文档"><strong>13</strong> Internal Documents</h2>
+    <p class="section-sub section-sub-dark" style="margin-bottom:0;" data-en="The <strong>complete</strong> strategic and operational foundation." data-zh="<strong>完整</strong>战略与运营框架。">The <strong>complete</strong> strategic and operational foundation.</p>
 
     <!-- Reading paths by role -->
     <div style="margin-bottom:20px; margin-top:40px; padding:12px 16px; background:rgba(255,255,255,0.05); border-radius:8px; font-size:13px; color:rgba(255,255,255,0.5);">
@@ -1452,6 +1479,22 @@ document.querySelectorAll('.section,.sw-white,.sw-gray,.sw-dark,.fade-in:not(.se
     });
   }, { passive: true });
   btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+})();
+
+/* — Scroll progress bar — */
+(function() {
+  const bar = document.getElementById('scroll-progress');
+  let rafPending = false;
+  window.addEventListener('scroll', () => {
+    if (rafPending) return;
+    rafPending = true;
+    requestAnimationFrame(() => {
+      const docH = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docH > 0 ? (window.scrollY / docH) * 100 : 0;
+      bar.style.width = pct + '%';
+      rafPending = false;
+    });
+  }, { passive: true });
 })();
 </script>
 </body>

@@ -41,14 +41,18 @@ html{scroll-behavior:smooth}
 body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:var(--text);font-size:15px;line-height:1.75;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;word-break:break-word;}
 a{text-decoration:none;color:inherit}
 
+/* SCROLL PROGRESS BAR */
+#scroll-progress{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:300;width:0;transition:none;pointer-events:none;}
+
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;background:#ffffff;border-bottom:1px solid var(--border);transition:box-shadow 0.2s;}
+nav{position:fixed;top:2px;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;background:#ffffff;border-bottom:1px solid var(--border);transition:box-shadow 0.2s;}
 nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.1);}
 .nav-logo{font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;margin-right:8px;flex-shrink:0;text-decoration:none;}
 .nav-links{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
-.nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:color 0.15s,background 0.15s;white-space:nowrap;text-decoration:none;}
+.nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:color 0.15s,background 0.15s;white-space:nowrap;text-decoration:none;position:relative;}
 .nav-links a:hover{color:var(--accent);background:var(--accent-bg);}
 .nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);}
+.nav-links a.active::after{content:'';position:absolute;bottom:0;left:12px;right:12px;height:2px;background:var(--accent);border-radius:2px;}
 .nav-right{margin-left:16px;flex-shrink:0}
 .lang-btn{
   background:var(--accent);color:#fff;
@@ -154,10 +158,11 @@ section{padding:120px 64px;background:#fff;border-top:1px solid var(--border);co
 .bypass-card{
   background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);
   padding:28px 22px;
-  transition:box-shadow 0.25s ease;cursor:default;
+  transition:box-shadow 0.25s ease,border-color 0.25s ease;cursor:default;
 }
 .bypass-card:hover{
-  box-shadow:0 2px 12px rgba(0,0,0,0.08);
+  box-shadow:0 4px 16px rgba(0,0,0,0.08);
+  border-color:rgba(79,70,229,0.2);
 }
 .bypass-icon{font-size:32px;margin-bottom:14px;display:block}
 .bypass-title-en{font-size:16px;font-weight:800;color:var(--text);margin-bottom:4px}
@@ -188,14 +193,18 @@ section{padding:120px 64px;background:#fff;border-top:1px solid var(--border);co
 .value-card{
   background:#fff;border-radius:var(--radius);
   padding:36px;
-  transition:box-shadow 0.25s ease;cursor:default;
+  border:1.5px solid var(--border);
+  border-top:3px solid transparent;
+  transition:box-shadow 0.25s ease,border-color 0.25s ease,border-top-color 0.25s ease;cursor:default;
   position:relative;overflow:hidden;
   contain:layout style paint;
 }
 .value-card:hover{
-  box-shadow:0 2px 12px rgba(0,0,0,0.08);
+  box-shadow:0 4px 20px rgba(79,70,229,0.12);
+  border-color:rgba(79,70,229,0.2);
+  border-top-color:var(--accent);
 }
-.value-title{font-size:22px;font-weight:800;color:var(--text);margin-bottom:4px;letter-spacing:-0.02em}
+.value-title{font-size:17px;font-weight:700;color:var(--text);margin-bottom:4px;letter-spacing:-0.02em}
 .value-sub{font-size:13px;font-weight:600;color:var(--accent);margin-bottom:16px}
 .value-bullets{list-style:none;margin-bottom:20px}
 .value-bullets li{
@@ -208,6 +217,8 @@ section{padding:120px 64px;background:#fff;border-top:1px solid var(--border);co
   content:'→';position:absolute;left:0;
   color:var(--accent);font-weight:700;font-size:11px;top:7px;
 }
+.value-bullets li strong{color:var(--text);font-weight:600}
+.lose-items li strong{color:var(--text);font-weight:600}
 .value-key{
   background:var(--accent-bg);
   border-radius:8px;
@@ -226,11 +237,12 @@ section{padding:120px 64px;background:#fff;border-top:1px solid var(--border);co
   display:flex;align-items:flex-start;gap:24px;
   background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);
   padding:28px 32px;
-  transition:box-shadow 0.25s ease;cursor:default;
+  transition:box-shadow 0.25s ease,border-color 0.25s ease;cursor:default;
   contain:layout style paint;
 }
 .mech-strip:hover{
-  box-shadow:0 2px 12px rgba(0,0,0,0.08);
+  box-shadow:0 4px 16px rgba(5,150,105,0.1);
+  border-color:rgba(5,150,105,0.3);
 }
 .mech-num{
   width:52px;height:52px;border-radius:50%;
@@ -240,7 +252,7 @@ section{padding:120px 64px;background:#fff;border-top:1px solid var(--border);co
   flex-shrink:0;letter-spacing:-1px;
 }
 .mech-content{flex:1}
-.mech-title{font-size:19px;font-weight:800;color:var(--text);margin-bottom:6px;letter-spacing:-0.3px}
+.mech-title{font-size:17px;font-weight:700;color:var(--text);margin-bottom:6px;letter-spacing:-0.3px}
 .mech-body{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:0}
 .mech-highlight{
   margin-top:12px;
@@ -347,12 +359,13 @@ section{padding:120px 64px;background:#fff;border-top:1px solid var(--border);co
 @media(max-width:640px){.lose-grid{grid-template-columns:1fr}}
 .lose-card{
   background:#fff;border-radius:var(--radius);
-  padding:36px;
-  transition:box-shadow 0.25s ease;
+  padding:36px;border:1.5px solid var(--border);
+  transition:box-shadow 0.25s ease,border-color 0.25s ease;
   contain:layout style paint;
 }
 .lose-card:hover{
-  box-shadow:0 2px 12px rgba(0,0,0,0.08);
+  box-shadow:0 4px 16px rgba(0,0,0,0.1);
+  border-color:rgba(79,70,229,0.2);
 }
 .lose-card-header{
   display:flex;align-items:center;gap:12px;margin-bottom:24px;
@@ -395,30 +408,33 @@ section{padding:120px 64px;background:#fff;border-top:1px solid var(--border);co
 }
 .lose-bottom-quote strong{color:var(--accent-light);font-style:normal}
 
-/* FOOTER */
+/* SECTION DIVIDER */
+section + section{border-top:1px solid var(--border);}
+
+/* FOOTER (minimal) */
 .footer{
-  background:#07071a;padding:60px 24px 40px;
+  background:#07071a;padding:36px 24px 28px;
   border-top:1px solid rgba(255,255,255,0.06);
 }
 .footer-inner{max-width:1000px;margin:0 auto}
-.footer-top{display:flex;align-items:flex-start;gap:40px;margin-bottom:40px;flex-wrap:wrap}
+.footer-top{display:flex;align-items:center;gap:24px;margin-bottom:0;flex-wrap:wrap}
 .footer-brand{flex:1;min-width:200px}
-.footer-logo{font-size:24px;font-weight:900;color:var(--accent);margin-bottom:8px}
-.footer-tagline{font-size:13px;color:rgba(255,255,255,0.35);line-height:1.6}
-.footer-links{display:flex;flex-wrap:wrap;gap:8px}
+.footer-logo{font-size:20px;font-weight:900;color:var(--accent);margin-bottom:4px}
+.footer-tagline{font-size:12px;color:rgba(255,255,255,0.3);line-height:1.5}
+.footer-links{display:flex;flex-wrap:wrap;gap:6px}
 .footer-link{
-  padding:7px 14px;border-radius:8px;
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(255,255,255,0.08);
-  font-size:12px;font-weight:600;color:rgba(255,255,255,0.55);
+  padding:5px 12px;border-radius:6px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.06);
+  font-size:11px;font-weight:600;color:rgba(255,255,255,0.4);
   transition:background 0.18s,border-color 0.18s,color 0.18s;
 }
 .footer-link:hover{background:var(--accent-bg);border-color:var(--accent);color:var(--accent)}
 .footer-link.current{background:var(--accent-bg);border-color:var(--accent);color:var(--accent)}
 .footer-bottom{
   border-top:1px solid rgba(255,255,255,0.06);
-  padding-top:24px;
-  font-size:12px;color:rgba(255,255,255,0.2);
+  margin-top:20px;padding-top:16px;
+  font-size:11px;color:rgba(255,255,255,0.18);
 }
 
 /* SCROLL ANIMATION */
@@ -469,6 +485,9 @@ section{padding:120px 64px;background:#fff;border-top:1px solid var(--border);co
 </style>
 </head>
 <body>
+
+<!-- SCROLL PROGRESS BAR -->
+<div id="scroll-progress"></div>
 
 <!-- NAV -->
 <nav>
@@ -616,10 +635,10 @@ section{padding:120px 64px;background:#fff;border-top:1px solid var(--border);co
         <div class="value-title" data-en="Screening & Matching Efficiency" data-zh="筛选与匹配效率">Screening &amp; Matching Efficiency</div>
         <div class="value-sub" data-en="Find the right creator, faster" data-zh="更快找到合适的 Creator">Find the right creator, faster</div>
         <ul class="value-bullets">
-          <li data-en="Smart recommendations by category, location, performance history" data-zh="按品类、地点、历史表现筛选推荐">Smart recommendations by category, location, performance history</li>
-          <li data-en="Auto-fill + standby when creators cancel" data-zh="Creator 临时取消，平台自动补人">Auto-fill + standby when creators cancel</li>
-          <li data-en="Target-based filtering by tier and niche" data-zh="按等级和垂类精准筛人">Target-based filtering by tier and niche</li>
-          <li data-en="Multi-campaign management from one dashboard" data-zh="一个后台管多个活动，不用来回切">Multi-campaign management from one dashboard</li>
+          <li data-en="<strong>Smart recommendations</strong> by category, location, performance history" data-zh="<strong>按品类、地点、历史表现</strong>筛选推荐"><strong>Smart recommendations</strong> by category, location, performance history</li>
+          <li data-en="<strong>Auto-fill + standby</strong> when creators cancel" data-zh="<strong>Creator 临时取消，</strong>平台自动补人"><strong>Auto-fill + standby</strong> when creators cancel</li>
+          <li data-en="<strong>Target-based filtering</strong> by tier and niche" data-zh="<strong>按等级和垂类</strong>精准筛人"><strong>Target-based filtering</strong> by tier and niche</li>
+          <li data-en="<strong>Multi-campaign management</strong> from one dashboard" data-zh="<strong>一个后台管多个活动，</strong>不用来回切"><strong>Multi-campaign management</strong> from one dashboard</li>
         </ul>
         <div class="value-key">
           <div class="value-key-label" data-en="Key Takeaway" data-zh="核心要点">Key Takeaway</div>
@@ -631,10 +650,10 @@ section{padding:120px 64px;background:#fff;border-top:1px solid var(--border);co
         <div class="value-title" data-en="Attribution & Data Intelligence" data-zh="效果可追、数据可用">Attribution &amp; Data Intelligence</div>
         <div class="value-sub" data-en="Know what works, and why" data-zh="看清楚什么有用、什么在烧钱">Know what works, and why</div>
         <ul class="value-bullets">
-          <li data-en="Creator performance comparison across campaigns" data-zh="多个活动之间 Creator 效果横向对比">Creator performance comparison across campaigns</li>
-          <li data-en="Category analytics and ROI trends" data-zh="按品类看 ROI 走势">Category analytics and ROI trends</li>
-          <li data-en="Cost per redemption tracking" data-zh="每次核销成本追踪">Cost per redemption tracking</li>
-          <li data-en="Fill rate, completion rate, no-show analytics" data-zh="到场率、完成率、爽约分析">Fill rate, completion rate, no-show analytics</li>
+          <li data-en="<strong>Creator performance comparison</strong> across campaigns" data-zh="<strong>多个活动之间</strong> Creator 效果横向对比"><strong>Creator performance comparison</strong> across campaigns</li>
+          <li data-en="<strong>Category analytics</strong> and ROI trends" data-zh="<strong>按品类看</strong> ROI 走势"><strong>Category analytics</strong> and ROI trends</li>
+          <li data-en="<strong>Cost per redemption</strong> tracking" data-zh="<strong>每次核销成本</strong>追踪"><strong>Cost per redemption</strong> tracking</li>
+          <li data-en="<strong>Fill rate, completion rate,</strong> no-show analytics" data-zh="<strong>到场率、完成率、</strong>爽约分析"><strong>Fill rate, completion rate,</strong> no-show analytics</li>
         </ul>
         <div class="value-key">
           <div class="value-key-label" data-en="Key Takeaway" data-zh="核心要点">Key Takeaway</div>
@@ -646,10 +665,10 @@ section{padding:120px 64px;background:#fff;border-top:1px solid var(--border);co
         <div class="value-title" data-en="Payment, Dispute & Fulfillment Protection" data-zh="付款、纠纷和履约都有保障">Payment, Dispute &amp; Fulfillment Protection</div>
         <div class="value-sub" data-en="Safe for both sides, every time" data-zh="双方都有保障，不用靠信任扛风险">Safe for both sides, every time</div>
         <ul class="value-bullets">
-          <li data-en="Payout protection with escrow-style settlement" data-zh="资金托管，做完了再结">Payout protection with escrow-style settlement</li>
-          <li data-en="Proof flow: upload → review → confirm → settle" data-zh="上传证明→审核→确认→打款，流程清晰">Proof flow: upload → review → confirm → settle</li>
-          <li data-en="Dispute resolution with platform mediation" data-zh="有纠纷平台出面协调，不用自己扯皮">Dispute resolution with platform mediation</li>
-          <li data-en="Cancellation rules, no-show penalties" data-zh="有取消规则、爽约有记录">Cancellation rules, no-show penalties</li>
+          <li data-en="<strong>Payout protection</strong> with escrow-style settlement" data-zh="<strong>资金托管，</strong>做完了再结"><strong>Payout protection</strong> with escrow-style settlement</li>
+          <li data-en="<strong>Proof flow:</strong> upload → review → confirm → settle" data-zh="<strong>上传证明→审核→确认→打款，</strong>流程清晰"><strong>Proof flow:</strong> upload → review → confirm → settle</li>
+          <li data-en="<strong>Dispute resolution</strong> with platform mediation" data-zh="<strong>有纠纷平台出面协调，</strong>不用自己扯皮"><strong>Dispute resolution</strong> with platform mediation</li>
+          <li data-en="<strong>Cancellation rules,</strong> no-show penalties" data-zh="<strong>有取消规则、</strong>爽约有记录"><strong>Cancellation rules,</strong> no-show penalties</li>
         </ul>
         <div class="value-key">
           <div class="value-key-label" data-en="Key Takeaway" data-zh="核心要点">Key Takeaway</div>
@@ -661,10 +680,10 @@ section{padding:120px 64px;background:#fff;border-top:1px solid var(--border);co
         <div class="value-title" data-en="Continuous Supply & Rotation" data-zh="持续有人可用，不怕断供">Continuous Supply &amp; Rotation</div>
         <div class="value-sub" data-en="Never run out of creators" data-zh="用完一个有下一个，不断档">Never run out of creators</div>
         <ul class="value-bullets">
-          <li data-en="Private deals bind you to 1–2 creators (what if they stop?)" data-zh="私下谈好的就那一两个人，他们不来了你没有备选">Private deals bind you to 1–2 creators (what if they stop?)</li>
-          <li data-en="Platform provides ongoing discovery and rotation" data-zh="平台持续帮你找新人、换新人">Platform provides ongoing discovery and rotation</li>
-          <li data-en="Fresh faces keep content authentic" data-zh="换新面孔，内容看起来更真">Fresh faces keep content authentic</li>
-          <li data-en="Seasonal and category-specific matching" data-zh="节假日和特定品类都能按需匹配">Seasonal and category-specific matching</li>
+          <li data-en="<strong>Private deals bind you</strong> to 1–2 creators (what if they stop?)" data-zh="<strong>私下谈好的</strong>就那一两个人，他们不来了你没有备选"><strong>Private deals bind you</strong> to 1–2 creators (what if they stop?)</li>
+          <li data-en="<strong>Ongoing discovery</strong> and rotation via platform" data-zh="<strong>平台持续</strong>帮你找新人、换新人"><strong>Ongoing discovery</strong> and rotation via platform</li>
+          <li data-en="<strong>Fresh faces</strong> keep content authentic" data-zh="<strong>换新面孔，</strong>内容看起来更真"><strong>Fresh faces</strong> keep content authentic</li>
+          <li data-en="<strong>Seasonal matching</strong> by category and timing" data-zh="<strong>节假日和特定品类</strong>都能按需匹配"><strong>Seasonal matching</strong> by category and timing</li>
         </ul>
         <div class="value-key">
           <div class="value-key-label" data-en="Key Takeaway" data-zh="核心要点">Key Takeaway</div>
@@ -676,10 +695,10 @@ section{padding:120px 64px;background:#fff;border-top:1px solid var(--border);co
         <div class="value-title" data-en="Merchant Reputation System" data-zh="商家也有口碑积累">Merchant Reputation System</div>
         <div class="value-sub" data-en="Your track record works for you" data-zh="做得好的商家，Creator 自己会想来">Your track record works for you</div>
         <ul class="value-bullets">
-          <li data-en="Payment speed and reliability scoring" data-zh="打款快不快、靠不靠谱，有评分">Payment speed and reliability scoring</li>
-          <li data-en="Communication quality and responsiveness" data-zh="回消息快不快、说话算不算数">Communication quality and responsiveness</li>
-          <li data-en="Promise fulfillment and creator satisfaction" data-zh="答应的事有没有做到，Creator 满不满意">Promise fulfillment and creator satisfaction</li>
-          <li data-en="Repeat booking rate signals quality" data-zh="回头找同一个 Creator 的比例，说明这家值不值得合作">Repeat booking rate signals quality</li>
+          <li data-en="<strong>Payment speed</strong> and reliability scoring" data-zh="<strong>打款快不快、</strong>靠不靠谱，有评分"><strong>Payment speed</strong> and reliability scoring</li>
+          <li data-en="<strong>Communication quality</strong> and responsiveness" data-zh="<strong>回消息快不快、</strong>说话算不算数"><strong>Communication quality</strong> and responsiveness</li>
+          <li data-en="<strong>Promise fulfillment</strong> and creator satisfaction" data-zh="<strong>答应的事有没有做到，</strong>Creator 满不满意"><strong>Promise fulfillment</strong> and creator satisfaction</li>
+          <li data-en="<strong>Repeat booking rate</strong> signals quality" data-zh="<strong>回头找同一个 Creator 的比例，</strong>说明这家值不值得合作"><strong>Repeat booking rate</strong> signals quality</li>
         </ul>
         <div class="value-key">
           <div class="value-key-label" data-en="Key Takeaway" data-zh="核心要点">Key Takeaway</div>
@@ -849,12 +868,12 @@ section{padding:120px 64px;background:#fff;border-top:1px solid var(--border);co
           </div>
         </div>
         <ul class="lose-items">
-          <li data-en="Accumulated Passport score" data-zh="攒下来的 Passport 分">Accumulated Passport score</li>
-          <li data-en="Tier status and tier perks" data-zh="等级状态和等级福利">Tier status and tier perks</li>
-          <li data-en="Priority matching with top merchants" data-zh="和好商家优先匹配的资格">Priority matching with top merchants</li>
-          <li data-en="Complete performance history" data-zh="完整的接单历史">Complete performance history</li>
-          <li data-en="Earnings multipliers and bonus access" data-zh="收益加成和奖金资格">Earnings multipliers and bonus access</li>
-          <li data-en="Premium and exclusive campaign access" data-zh="高价活动和独家活动的接单资格">Premium and exclusive campaign access</li>
+          <li data-en="<strong>Accumulated Passport score</strong>" data-zh="<strong>攒下来的 Passport 分</strong>"><strong>Accumulated Passport score</strong></li>
+          <li data-en="<strong>Tier status</strong> and tier perks" data-zh="<strong>等级状态</strong>和等级福利"><strong>Tier status</strong> and tier perks</li>
+          <li data-en="<strong>Priority matching</strong> with top merchants" data-zh="<strong>和好商家</strong>优先匹配的资格"><strong>Priority matching</strong> with top merchants</li>
+          <li data-en="<strong>Complete performance history</strong>" data-zh="<strong>完整的接单历史</strong>"><strong>Complete performance history</strong></li>
+          <li data-en="<strong>Earnings multipliers</strong> and bonus access" data-zh="<strong>收益加成</strong>和奖金资格"><strong>Earnings multipliers</strong> and bonus access</li>
+          <li data-en="<strong>Premium and exclusive</strong> campaign access" data-zh="<strong>高价活动和独家活动</strong>的接单资格"><strong>Premium and exclusive</strong> campaign access</li>
         </ul>
         <div class="lose-badge" data-en="ALL NON-TRANSFERABLE" data-zh="全部带不走">ALL NON-TRANSFERABLE</div>
       </div>
@@ -868,12 +887,12 @@ section{padding:120px 64px;background:#fff;border-top:1px solid var(--border);co
           </div>
         </div>
         <ul class="lose-items">
-          <li data-en="Campaign analytics history and ROI data" data-zh="历次活动的效果数据和 ROI">Campaign analytics history and ROI data</li>
-          <li data-en="Creator performance benchmarks" data-zh="各 Creator 效果对比的参考数据">Creator performance benchmarks</li>
-          <li data-en="One-click re-booking workflows" data-zh="一键再合作的操作流程">One-click re-booking workflows</li>
-          <li data-en="Dispute protection and escrow settlement" data-zh="有纠纷有人管、付款有托管">Dispute protection and escrow settlement</li>
-          <li data-en="Ongoing creator supply pipeline" data-zh="持续有新 Creator 可以选">Ongoing creator supply pipeline</li>
-          <li data-en="Merchant reputation score" data-zh="在平台上攒下来的口碑评分">Merchant reputation score</li>
+          <li data-en="<strong>Campaign analytics</strong> history and ROI data" data-zh="<strong>历次活动的效果数据</strong>和 ROI"><strong>Campaign analytics</strong> history and ROI data</li>
+          <li data-en="<strong>Creator performance</strong> benchmarks" data-zh="<strong>各 Creator 效果对比</strong>的参考数据"><strong>Creator performance</strong> benchmarks</li>
+          <li data-en="<strong>One-click re-booking</strong> workflows" data-zh="<strong>一键再合作</strong>的操作流程"><strong>One-click re-booking</strong> workflows</li>
+          <li data-en="<strong>Dispute protection</strong> and escrow settlement" data-zh="<strong>有纠纷有人管、</strong>付款有托管"><strong>Dispute protection</strong> and escrow settlement</li>
+          <li data-en="<strong>Ongoing creator supply</strong> pipeline" data-zh="<strong>持续有新 Creator</strong> 可以选"><strong>Ongoing creator supply</strong> pipeline</li>
+          <li data-en="<strong>Merchant reputation score</strong>" data-zh="<strong>在平台上攒下来的口碑评分</strong>"><strong>Merchant reputation score</strong></li>
         </ul>
         <div class="lose-badge" data-en="ALL PLATFORM-LOCKED" data-zh="全部只在平台上有">ALL PLATFORM-LOCKED</div>
       </div>
@@ -923,12 +942,6 @@ section{padding:120px 64px;background:#fff;border-top:1px solid var(--border);co
     </div>
     <div class="footer-bottom">
       <span data-en="© 2026 Push" data-zh="© 2026 Push">© 2026 Push</span>
-      <div style="margin-top:16px; font-size:13px;">
-        <span data-en="You might also want: " data-zh="你可能还想看：" class="bilingual-text">You might also want: </span>
-        <a href="retention-defense.html" data-en="🔒 Creator Retention (supply-side)" data-zh="🔒 留存机制（供给侧）" class="bilingual-text">🔒 Creator Retention (supply-side)</a> ·
-        <a href="push-strategy-core.html" data-en="💎 Strategy Core" data-zh="💎 战略核心" class="bilingual-text">💎 Strategy Core</a> ·
-        <a href="index.html" data-en="🏠 Dashboard" data-zh="🏠 首页" class="bilingual-text">🏠 Dashboard</a>
-      </div>
     </div>
   </div>
 </footer>
@@ -1037,6 +1050,16 @@ document.querySelectorAll('section').forEach(el => observer.observe(el));
     const mainLangBtn = document.getElementById('langBtn');
     if (mainLangBtn) mobileLangBtn.textContent = mainLangBtn.textContent;
   }
+})();
+
+// Scroll progress bar
+(function() {
+  const bar = document.getElementById('scroll-progress');
+  if (!bar) return;
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = h > 0 ? (window.scrollY / h * 100) + '%' : '0';
+  }, { passive: true });
 })();
 </script>
 <button id="back-top" aria-label="Back to top">↑</button>

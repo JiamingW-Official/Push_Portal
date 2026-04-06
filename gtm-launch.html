@@ -43,13 +43,17 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 .visible .fade-in,.fade-in.visible{opacity:1;transform:none;animation:none;}
 @keyframes fadeInFallback{to{opacity:1;transform:translateY(0);}}
 
+/*SCROLL PROGRESS */
+.scroll-progress{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:300;width:0;transition:width 0.1s linear;pointer-events:none;}
+
 /*NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;background:#ffffff;border-bottom:1px solid var(--border);transition:box-shadow 0.2s;}
+nav{position:fixed;top:2px;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;background:#ffffff;border-bottom:1px solid var(--border);transition:box-shadow 0.2s;}
 .nav-logo{font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;margin-right:8px;flex-shrink:0;text-decoration:none;}
 .nav-links{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
-.nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:color 0.15s,background 0.15s;white-space:nowrap;text-decoration:none;}
+.nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:color 0.15s,background 0.15s;white-space:nowrap;text-decoration:none;position:relative;}
 .nav-links a:hover{color:var(--accent);background:var(--accent-bg);}
 .nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);}
+.nav-links a.active::after{content:'';position:absolute;bottom:0;left:12px;right:12px;height:2px;background:var(--accent);border-radius:2px;}
 .lang-btn{
   background:var(--accent);color:#fff;border:none;cursor:pointer;
   font-size:12px;font-weight:700;padding:7px 14px;border-radius:8px;
@@ -65,7 +69,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;ali
 .nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
 .nav-burger.open span:nth-child(2){opacity:0;}
 .nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-.nav-mobile-panel{display:none;position:fixed;top:60px;left:0;right:0;background:#ffffff;border-bottom:1px solid var(--border,#e5e7eb);padding:12px 16px 20px;flex-direction:column;gap:2px;z-index:999;box-shadow:0 8px 32px rgba(0,0,0,0.12);}
+.nav-mobile-panel{display:none;position:fixed;top:62px;left:0;right:0;background:#ffffff;border-bottom:1px solid var(--border,#e5e7eb);padding:12px 16px 20px;flex-direction:column;gap:2px;z-index:999;box-shadow:0 8px 32px rgba(0,0,0,0.12);}
 .nav-mobile-panel.open{display:flex;}
 .nav-mobile-panel a{padding:12px 16px;border-radius:8px;font-size:15px;font-weight:500;color:var(--text,#111827);text-decoration:none;transition:background 0.15s,color 0.15s;}
 .nav-mobile-panel a:hover{background:var(--bg2,#f8f9fa);}
@@ -145,8 +149,11 @@ blockquote.principle-white{
 .check-list{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border);}
 .check-item{
   display:flex;align-items:flex-start;gap:16px;
-  padding:16px 0;border-bottom:1px solid var(--border);
+  padding:16px 12px;border-bottom:1px solid var(--border);
+  margin:0 -12px;border-radius:6px;
+  transition:background 0.2s;
 }
+.check-item:hover{background:var(--bg2);}
 .check-icon{
   width:20px;height:20px;border-radius:5px;
   background:var(--green-bg);border:1.5px solid var(--green);
@@ -157,18 +164,26 @@ blockquote.principle-white{
 .check-label{font-size:14px;color:var(--text);font-weight:600;margin-bottom:2px;}
 .check-desc{font-size:13px;color:var(--text2);line-height:1.6;}
 
-/*NUMBERED EDITORIAL ROWS */
-.item-list{border-top:1px solid var(--border);}
+/*NUMBERED EDITORIAL ROWS — timeline feel */
+.item-list{border-top:1px solid var(--border);position:relative;}
+.item-list::before{content:'';position:absolute;left:23px;top:0;bottom:0;width:2px;background:var(--border);z-index:0;}
 .item-row{
   display:grid;
   grid-template-columns:48px 1fr;
   gap:0 28px;
-  padding:28px 0;
+  padding:28px 16px 28px 0;
   border-bottom:1px solid var(--border);
+  border-left:3px solid transparent;
+  transition:border-color 0.2s,background 0.2s,box-shadow 0.2s;
+  position:relative;z-index:1;
 }
+.item-row:hover{border-left-color:var(--accent);background:var(--bg2);box-shadow:0 2px 12px rgba(79,70,229,0.06);}
 .item-num{
   font-size:13px;font-weight:800;font-family:'JetBrains Mono',monospace;
   color:var(--accent);letter-spacing:1px;padding-top:4px;
+  width:28px;height:28px;display:flex;align-items:center;justify-content:center;
+  background:#fff;border:2px solid var(--accent);border-radius:50%;
+  position:relative;z-index:2;
 }
 .item-title{font-size:18px;font-weight:700;color:var(--text);margin-bottom:4px;}
 .item-sub{font-size:13px;font-weight:600;text-transform:none;letter-spacing:0.5px;color:var(--accent);margin-bottom:8px;}
@@ -190,7 +205,9 @@ blockquote.principle-white{
   font-size:13px;font-weight:600;padding:8px 16px;
   border-radius:100px;border:1px solid var(--border);
   color:var(--text);background:#fff;
+  transition:border-color 0.2s,box-shadow 0.2s,background 0.2s;
 }
+.wedge-pill:hover{border-color:var(--accent);box-shadow:0 2px 8px rgba(79,70,229,0.1);background:var(--accent-bg);}
 
 /*HYPER-LOCAL STAT STRIP */
 .stat-strip{
@@ -198,11 +215,14 @@ blockquote.principle-white{
   border:1px solid var(--border);border-radius:var(--radius);
   overflow:hidden;
   background:#fff;
+  transition:border-color 0.2s,box-shadow 0.2s;
 }
 .stat-strip-item{
   flex:1;padding:28px 24px;text-align:center;
   border-right:1px solid var(--border);
+  transition:background 0.2s,box-shadow 0.2s;
 }
+.stat-strip-item:hover{background:var(--bg2);box-shadow:inset 0 -3px 0 var(--accent);}
 .stat-strip-item:last-child{border-right:none;}
 .stat-num{
   font-size:24px;font-weight:800;color:var(--text);
@@ -230,7 +250,9 @@ blockquote.principle-white{
   font-size:13px;font-weight:600;padding:7px 14px;
   border-radius:6px;background:var(--accent-bg);color:var(--accent);
   white-space:nowrap;border:1px solid rgba(79,70,229,0.15);
+  transition:background 0.2s,border-color 0.2s,transform 0.2s;
 }
+.loop-step:hover{background:rgba(79,70,229,0.15);border-color:rgba(79,70,229,0.3);transform:translateY(-1px);}
 .loop-arrow{
   font-size:16px;color:var(--text3);flex-shrink:0;
 }
@@ -245,13 +267,16 @@ blockquote.principle-white{
 .warn-list{display:flex;flex-direction:column;gap:8px;}
 .warn-strip{
   display:flex;gap:16px;align-items:flex-start;
-  padding:18px 20px;border-left:none;
-  background:white;border-radius:8px;
-  border:1px solid var(--border);
+  padding:18px 20px;border-left:3px solid var(--red);
+  background:var(--red-bg);border-radius:8px;
+  border:1px solid rgba(220,38,38,0.15);
+  transition:box-shadow 0.2s,border-color 0.2s;
 }
+.warn-strip:hover{box-shadow:0 2px 12px rgba(220,38,38,0.08);border-color:rgba(220,38,38,0.3);}
 .warn-label{
-  font-size:13px;font-weight:600;
+  font-size:13px;font-weight:700;
   color:var(--red);letter-spacing:0.5px;white-space:nowrap;padding-top:2px;
+  min-width:20px;
 }
 .warn-title{font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px;}
 .warn-desc{font-size:13px;color:var(--text2);line-height:1.6;}
@@ -267,36 +292,47 @@ blockquote.principle-white{
   padding:18px 20px;border-bottom:1px solid var(--border);
   border-right:1px solid var(--border);
   background:#fff;
+  transition:background 0.2s,box-shadow 0.2s;
 }
+.metric-item:hover{background:var(--bg2);box-shadow:inset 3px 0 0 var(--accent);}
 .metric-item:nth-child(even){border-right:none;}
 .metric-item:last-child{border-bottom:none;}
 .metric-item:nth-last-child(2){border-bottom:none;}
 .metric-icon{
   font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:800;
-  color:var(--accent);min-width:24px;padding-top:1px;
+  color:#fff;min-width:24px;height:24px;
+  background:var(--accent);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
 }
 .metric-label{font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;}
 .metric-why{font-size:12px;color:var(--text3);}
 
-/*EXPANSION CHECKLIST */
+/*EXPANSION CHECKLIST — pass/fail gates */
 .expand-list{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border);}
 .expand-item{
   display:flex;align-items:flex-start;gap:16px;
-  padding:14px 0;border-bottom:1px solid var(--border);
+  padding:14px 12px;border-bottom:1px solid var(--border);
+  margin:0 -12px;border-radius:6px;border-left:3px solid transparent;
+  transition:background 0.2s,border-color 0.2s;
 }
-.expand-dot{
-  width:8px;height:8px;border-radius:50%;
-  background:var(--accent);flex-shrink:0;margin-top:6px;
+.expand-item:hover{background:var(--bg2);border-left-color:var(--green);}
+.expand-gate{
+  width:22px;height:22px;border-radius:6px;
+  background:var(--green-bg);border:1.5px solid var(--green);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:0;font-size:12px;color:var(--green);font-weight:700;
 }
 .expand-text{font-size:14px;color:var(--text2);line-height:1.5;}
+.expand-text strong{color:var(--text);font-weight:700;}
 
 .callout-warning{
   margin-top:28px;
   padding:20px 24px;
-  border:1px solid var(--border);
-  border-left:1px solid var(--border);
+  border:1px solid rgba(220,38,38,0.2);
+  border-left:3px solid var(--red);
   border-radius:var(--radius);
-  background:#fff;
+  background:var(--red-bg);
 }
 .callout-warning-label{
   font-size:13px;font-weight:600;
@@ -321,6 +357,9 @@ blockquote.principle-white{
 </style>
 </head>
 <body>
+
+<!-- SCROLL PROGRESS -->
+<div class="scroll-progress" id="scroll-progress"></div>
 
 <!-- NAV -->
 <nav>
@@ -489,7 +528,7 @@ blockquote.principle-white{
         <div>
           <div class="item-sub" data-en="MERCHANT SIDE" data-zh="商户侧">MERCHANT SIDE</div>
           <div class="item-title" data-en="Merchant Pain Discovery" data-zh="商户痛点发现">Merchant Pain Discovery</div>
-          <div class="item-desc" data-en="Interview and onboard 10 merchants across the launch zone. Present multiple campaign objective types. Track which objectives produce the strongest enthusiasm response. Measure whether merchants care more about traffic, launch awareness, fill rate, or social proof — and whether this varies by category." data-zh="访谈并入驻启动区域的10家商户。展示不同类型的活动目标。看哪种目标让商户最来劲。搞清楚商户更在意引流、打知名度、填充率还是口碑——以及不同品类之间有没有差异。">Interview and onboard 10 merchants across the launch zone. Present multiple campaign objective types. Track which objectives produce the strongest enthusiasm response. Measure whether merchants care more about traffic, launch awareness, fill rate, or social proof — and whether this varies by category.</div>
+          <div class="item-desc" data-en="Interview and onboard <strong>10 merchants</strong> across the launch zone. Present multiple campaign objective types. Track which objectives produce the strongest enthusiasm response. Measure whether merchants care more about traffic, launch awareness, fill rate, or social proof — and whether this varies by category." data-zh="访谈并入驻启动区域的<strong>10家</strong>商户。展示不同类型的活动目标。看哪种目标让商户最来劲。搞清楚商户更在意引流、打知名度、填充率还是口碑——以及不同品类之间有没有差异。">Interview and onboard <strong>10 merchants</strong> across the launch zone. Present multiple campaign objective types. Track which objectives produce the strongest enthusiasm response. Measure whether merchants care more about traffic, launch awareness, fill rate, or social proof — and whether this varies by category.</div>
           <div class="item-meta">
             <span class="item-meta-tag tag-goal" data-en="GOAL: Which objective resonates" data-zh="要弄清楚：哪种活动目标最对商户胃口">GOAL: Which objective resonates</span>
             <span class="item-meta-tag tag-track" data-en="TRACK: Enthusiasm by type" data-zh="追踪：不同目标类型的商户反应">TRACK: Enthusiasm by type</span>
@@ -501,7 +540,7 @@ blockquote.principle-white{
         <div>
           <div class="item-sub" data-en="CREATOR SIDE" data-zh="创作者侧">CREATOR SIDE</div>
           <div class="item-title" data-en="Creator Supply Quality Test" data-zh="创作者供应质量测试">Creator Supply Quality Test</div>
-          <div class="item-desc" data-en="Compare three creator segments: students, niche local creators, and vertical-focused creators (beauty/food/events). Track response speed to campaign offers, completion rate, and merchant-rated quality. Determine which segment delivers most value in the wedge categories chosen." data-zh="对比三类创作者：学生、本地小众创作者、垂直专注型（美妆/美食/活动）。追踪接单响应速度、完成率和商户给的评分。搞清楚哪类创作者在选定品类里最有价值。">Compare three creator segments: students, niche local creators, and vertical-focused creators (beauty/food/events). Track response speed to campaign offers, completion rate, and merchant-rated quality. Determine which segment delivers most value in the wedge categories chosen.</div>
+          <div class="item-desc" data-en="Compare <strong>three creator segments</strong>: students, niche local creators, and vertical-focused creators (beauty/food/events). Track <strong>response speed</strong> to campaign offers, <strong>completion rate</strong>, and merchant-rated quality. Determine which segment delivers most value in the wedge categories chosen." data-zh="对比<strong>三类创作者</strong>：学生、本地小众创作者、垂直专注型（美妆/美食/活动）。追踪<strong>接单响应速度</strong>、<strong>完成率</strong>和商户给的评分。搞清楚哪类创作者在选定品类里最有价值。">Compare <strong>three creator segments</strong>: students, niche local creators, and vertical-focused creators (beauty/food/events). Track <strong>response speed</strong> to campaign offers, <strong>completion rate</strong>, and merchant-rated quality. Determine which segment delivers most value in the wedge categories chosen.</div>
           <div class="item-meta">
             <span class="item-meta-tag tag-goal" data-en="GOAL: Best creator profile" data-zh="要弄清楚：哪类创作者最合用">GOAL: Best creator profile</span>
             <span class="item-meta-tag tag-track" data-en="TRACK: Speed, completion, quality" data-zh="追踪：接单速度、完成率、质量">TRACK: Speed, completion, quality</span>
@@ -525,7 +564,7 @@ blockquote.principle-white{
         <div>
           <div class="item-sub" data-en="MERCHANT REPEAT" data-zh="商户重复">MERCHANT REPEAT</div>
           <div class="item-title" data-en="Merchant Repeat Trigger Test" data-zh="商户重复触发测试">Merchant Repeat Trigger Test</div>
-          <div class="item-desc" data-en="After first campaign completion, split merchants into two groups: Group A receives post-campaign performance recommendations and a next-campaign suggestion. Group B receives a standard summary only. Compare 30-day repeat campaign rate between groups. Secondary test: compare reporting depth — detailed vs. summary reporting effects on repeat intent." data-zh="第一次活动完成后，把商户分成两组：A组收到活动效果分析和下一步建议；B组只收到一份标准总结。比较两组30天内的复投率。同时测报告详细程度的影响——详细报告和简略报告哪个更能促使商户再投。">After first campaign completion, split merchants into two groups: Group A receives post-campaign performance recommendations and a next-campaign suggestion. Group B receives a standard summary only. Compare 30-day repeat campaign rate between groups. Secondary test: compare reporting depth — detailed vs. summary reporting effects on repeat intent.</div>
+          <div class="item-desc" data-en="After first campaign completion, split merchants into <strong>two groups</strong>: Group A receives post-campaign performance recommendations and a next-campaign suggestion. Group B receives a standard summary only. Compare <strong>30-day repeat campaign rate</strong> between groups. Secondary test: compare reporting depth — detailed vs. summary reporting effects on repeat intent." data-zh="第一次活动完成后，把商户分成<strong>两组</strong>：A组收到活动效果分析和下一步建议；B组只收到一份标准总结。比较两组<strong>30天内的复投率</strong>。同时测报告详细程度的影响——详细报告和简略报告哪个更能促使商户再投。">After first campaign completion, split merchants into <strong>two groups</strong>: Group A receives post-campaign performance recommendations and a next-campaign suggestion. Group B receives a standard summary only. Compare <strong>30-day repeat campaign rate</strong> between groups. Secondary test: compare reporting depth — detailed vs. summary reporting effects on repeat intent.</div>
           <div class="item-meta">
             <span class="item-meta-tag tag-goal" data-en="GOAL: Repeat drivers" data-zh="要弄清楚：什么让商户愿意再投">GOAL: Repeat drivers</span>
             <span class="item-meta-tag tag-track" data-en="TRACK: 30-day repeat rate" data-zh="追踪：30天内复投率">TRACK: 30-day repeat rate</span>
@@ -673,7 +712,7 @@ blockquote.principle-white{
         <div class="metric-icon">05</div>
         <div>
           <div class="metric-label" data-en="Creator Second-Campaign Rate" data-zh="创作者第二次活动率">Creator Second-Campaign Rate</div>
-          <div class="metric-why" data-en="Creators who apply for a second campaign within 30 days" data-zh="30天内又来接第二个活动的创作者比例">Creators who apply for a second campaign within 30 days</div>
+          <div class="metric-why" data-en="Creators who apply for a second campaign within <strong>30 days</strong>" data-zh="<strong>30天</strong>内又来接第二个活动的创作者比例">Creators who apply for a second campaign within <strong>30 days</strong></div>
         </div>
       </div>
       <div class="metric-item">
@@ -709,24 +748,24 @@ blockquote.principle-white{
     <p class="section-sub" data-en="Geographic or category expansion is only justified when the existing launch zone is demonstrably healthy. Expansion is not a goal — it's a consequence of working loops." data-zh="只有现有区域明确健康了，才有理由扩张地区或品类。扩张不是目的——它是增长循环跑通之后自然发生的事。">Geographic or category expansion is only justified when the existing launch zone is demonstrably healthy. Expansion is not a goal — it's a consequence of working loops.</p>
     <div class="expand-list">
       <div class="expand-item">
-        <div class="expand-dot"></div>
-        <div class="expand-text" data-en="Merchant repeat exists — at least one repeat cohort from the first batch is running new campaigns without active solicitation." data-zh="有商家不催自己回来下单。">Merchant repeat exists — at least one repeat cohort from the first batch is running new campaigns without active solicitation.</div>
+        <div class="expand-gate">✓</div>
+        <div class="expand-text" data-en="<strong>Merchant repeat exists</strong> — at least one repeat cohort from the first batch is running new campaigns without active solicitation." data-zh="<strong>有商家不催自己回来下单</strong>。">Merchant repeat exists — at least <strong>one repeat cohort</strong> from the first batch is running new campaigns without active solicitation.</div>
       </div>
       <div class="expand-item">
-        <div class="expand-dot"></div>
-        <div class="expand-text" data-en="Creator quality remains strong — completion rates have not declined as the cohort size grew. New creators onboarded meet baseline quality standards." data-zh="创作者干活水平稳住了——随着人数增加，完成率没有跌。新入驻的创作者达到基本质量要求。">Creator quality remains strong — completion rates have not declined as the cohort size grew. New creators onboarded meet baseline quality standards.</div>
+        <div class="expand-gate">✓</div>
+        <div class="expand-text" data-en="<strong>Creator quality remains strong</strong> — completion rates have not declined as the cohort size grew. New creators onboarded meet baseline quality standards." data-zh="<strong>创作者干活水平稳住了</strong>——随着人数增加，完成率没有跌。新入驻的创作者达到基本质量要求。"><strong>Creator quality remains strong</strong> — completion rates have not declined as the cohort size grew. New creators onboarded meet baseline quality standards.</div>
       </div>
       <div class="expand-item">
-        <div class="expand-dot"></div>
-        <div class="expand-text" data-en="Standby remains meaningful — slots are being filled by standby creators, not just sitting open. Standby response rate within acceptable range." data-zh="备选机制还在起作用——空出来的名额真的被备选创作者接走了，不是干晾着。响应率在正常范围内。">Standby remains meaningful — slots are being filled by standby creators, not just sitting open. Standby response rate within acceptable range.</div>
+        <div class="expand-gate">✓</div>
+        <div class="expand-text" data-en="<strong>Standby remains meaningful</strong> — slots are being filled by standby creators, not just sitting open. Standby response rate within acceptable range." data-zh="<strong>备选机制还在起作用</strong>——空出来的名额真的被备选创作者接走了，不是干晾着。响应率在正常范围内。"><strong>Standby remains meaningful</strong> — slots are being filled by standby creators, not just sitting open. Standby response rate within acceptable range.</div>
       </div>
       <div class="expand-item">
-        <div class="expand-dot"></div>
-        <div class="expand-text" data-en="Operations stay controlled — the current zone is manageable without fires. Disputes are below acceptable threshold. Integrity flags are rare." data-zh="运营没有乱套——当前区域能正常管住，没有频繁出问题。争议数量在可接受线以下。作弊情况可控。">Operations stay controlled — the current zone is manageable without fires. Disputes are below acceptable threshold. Integrity flags are rare.</div>
+        <div class="expand-gate">✓</div>
+        <div class="expand-text" data-en="<strong>Operations stay controlled</strong> — the current zone is manageable without fires. Disputes are below acceptable threshold. Integrity flags are rare." data-zh="<strong>运营没有乱套</strong>——当前区域能正常管住，没有频繁出问题。争议数量在可接受线以下。作弊情况可控。"><strong>Operations stay controlled</strong> — the current zone is manageable without fires. Disputes are below acceptable threshold. Integrity flags are rare.</div>
       </div>
       <div class="expand-item">
-        <div class="expand-dot"></div>
-        <div class="expand-text" data-en="Campaign outcome quality is stable — merchant-reported satisfaction scores have not declined. Post-campaign recommendation uptake is positive." data-zh="活动结果质量稳定——商户的满意度没有下滑。活动后给出的建议有人在采纳、有用。">Campaign outcome quality is stable — merchant-reported satisfaction scores have not declined. Post-campaign recommendation uptake is positive.</div>
+        <div class="expand-gate">✓</div>
+        <div class="expand-text" data-en="<strong>Campaign outcome quality is stable</strong> — merchant-reported satisfaction scores have not declined. Post-campaign recommendation uptake is positive." data-zh="<strong>活动结果质量稳定</strong>——商户的满意度没有下滑。活动后给出的建议有人在采纳、有用。"><strong>Campaign outcome quality is stable</strong> — merchant-reported satisfaction scores have not declined. Post-campaign recommendation uptake is positive.</div>
       </div>
     </div>
     <div class="callout-warning">
@@ -758,33 +797,17 @@ blockquote.principle-white{
 </div>
 
 <!-- FOOTER -->
-<footer style="background:var(--primary);padding:56px 40px 40px;border-top:1px solid rgba(255,255,255,0.06);">
-  <div style="max-width:1100px;margin:0 auto;">
-    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:40px;flex-wrap:wrap;margin-bottom:40px;">
-      <div>
-        <div style="font-size:24px;font-weight:900;color:var(--accent);letter-spacing:-0.5px;margin-bottom:8px;">PUSH</div>
-        <div style="font-size:13px;color:rgba(255,255,255,0.35);max-width:280px;line-height:1.6;" data-en="Creator-to-merchant performance platform. Local density drives platform value." data-zh="创作者与商户绩效平台。本地密度驱动平台价值。">Creator-to-merchant performance platform. Local density drives platform value.</div>
-      </div>
-      <div style="display:flex;flex-wrap:wrap;gap:8px 16px;max-width:620px;">
-        <a href="index.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Overview" data-zh="首页">Overview</a>
-        <a href="project-intro.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
-        <a href="pitch-deck.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
-        <a href="prospects.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Prospects" data-zh="未来愿景">Prospects</a>
-        <a href="challenges.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Challenges" data-zh="挑战分析">Challenges</a>
-        <a href="risk-defense.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Risk &amp; Defense" data-zh="风险防御">Risk &amp; Defense</a>
-        <a href="retention-defense.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Retention" data-zh="留存机制">Retention</a>
-        <a href="platform-value.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
-        <a href="push-strategy-core.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
-        <a href="fraud-integrity.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Fraud &amp; Integrity" data-zh="反欺诈">Fraud &amp; Integrity</a>
-        <a href="gtm-launch.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="GTM &amp; Launch" data-zh="上线计划">GTM &amp; Launch</a>
-      </div>
+<footer style="background:var(--primary);padding:32px 40px;border-top:1px solid rgba(255,255,255,0.06);">
+  <div style="max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+    <div style="display:flex;align-items:center;gap:16px;">
+      <span style="font-size:18px;font-weight:900;color:var(--accent);letter-spacing:1px;">PUSH</span>
+      <span style="font-size:11px;color:rgba(255,255,255,0.2);" data-en="Internal Strategy Documentation" data-zh="内部战略文档">Internal Strategy Documentation</span>
     </div>
-    <div style="border-top:1px solid rgba(255,255,255,0.06);padding-top:20px;font-size:11px;color:rgba(255,255,255,0.2);" data-en="PUSH Platform — Internal Strategy Documentation" data-zh="PUSH 平台 — 内部战略文档">PUSH Platform — Internal Strategy Documentation</div>
-    <div style="margin-top:16px; font-size:13px;">
-      <span data-en="You might also want: " data-zh="你可能还想看：" class="bilingual-text" style="color:rgba(255,255,255,0.4);">You might also want: </span>
-      <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演材料" class="bilingual-text" style="color:rgba(255,255,255,0.5);text-decoration:none;">Pitch Deck</a> <span style="color:rgba(255,255,255,0.3);">·</span>
-      <a href="prospects.html" data-en="Prospects" data-zh="未来愿景" class="bilingual-text" style="color:rgba(255,255,255,0.5);text-decoration:none;">Prospects</a> <span style="color:rgba(255,255,255,0.3);">·</span>
-      <a href="index.html" data-en="🏠 Dashboard" data-zh="🏠 首页" class="bilingual-text" style="color:rgba(255,255,255,0.5);text-decoration:none;">🏠 Dashboard</a>
+    <div style="display:flex;flex-wrap:wrap;gap:6px 16px;">
+      <a href="index.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Overview" data-zh="首页">Overview</a>
+      <a href="pitch-deck.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
+      <a href="prospects.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Prospects" data-zh="未来愿景">Prospects</a>
+      <a href="push-strategy-core.html" style="font-size:12px;color:rgba(255,255,255,0.4);text-decoration:none;" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
     </div>
   </div>
 </footer>
@@ -815,7 +838,12 @@ blockquote.principle-white{
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.01, rootMargin: '0px 0px 60px 0px' });
   document.querySelectorAll('section').forEach(el => observer.observe(el));
-  window.addEventListener('scroll', () => {}, { passive: true });
+  // Scroll progress bar
+  const progressBar = document.getElementById('scroll-progress');
+  window.addEventListener('scroll', () => {
+    const docH = document.documentElement.scrollHeight - window.innerHeight;
+    if (docH > 0) progressBar.style.width = (window.scrollY / docH * 100) + '%';
+  }, { passive: true });
 })();
 
 // Mobile navigation

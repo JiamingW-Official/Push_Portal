@@ -44,9 +44,12 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 a { color: var(--accent); text-decoration: none; }
 a:hover { color: var(--accent-light); text-decoration: none; }
 
+/* SCROLL PROGRESS BAR */
+#scroll-progress{position:fixed;top:0;left:0;width:0%;height:2px;background:var(--accent);z-index:300;transition:width 0.1s linear;pointer-events:none;}
+
 /* NAV */
 nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;
+  position:fixed;top:2px;left:0;right:0;z-index:200;
   height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;
   background:#ffffff;
   border-bottom:1px solid var(--border);transition:box-shadow 0.2s;
@@ -55,7 +58,8 @@ nav{
 .nav-links{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
 .nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:color 0.15s,background 0.15s;white-space:nowrap;text-decoration:none;}
 .nav-links a:hover{color:var(--accent);background:var(--accent-bg);}
-.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);}
+.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);position:relative;}
+.nav-links a.active::after{content:'';position:absolute;bottom:2px;left:12px;right:12px;height:2px;background:var(--accent);border-radius:1px;}
 #lang-btn {
   background: var(--accent); color: #fff; border: none;
   padding: 7px 16px; border-radius: 8px; font-size: 12px; font-weight: 700;
@@ -88,11 +92,15 @@ nav{
   display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text2);
 }
 .legend-dot {
-  width: 12px; height: 12px; border-radius: 50%;
+  width: 12px; height: 12px; border-radius: 50%; transition: box-shadow 0.2s;
 }
+.legend-item:hover .legend-dot { cursor: default; }
 .legend-dot.critical { background: var(--red); }
+.legend-item:hover .legend-dot.critical { box-shadow: 0 0 0 2px var(--red); }
 .legend-dot.high { background: var(--orange); }
+.legend-item:hover .legend-dot.high { box-shadow: 0 0 0 2px var(--orange); }
 .legend-dot.medium { background: var(--accent); }
+.legend-item:hover .legend-dot.medium { box-shadow: 0 0 0 2px var(--accent); }
 
 /* SECTION */
 .section {
@@ -113,7 +121,7 @@ nav{
 /* CARD GRID */
 .card-grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
-  gap: 24px;
+  gap: 20px;
 }
 
 /* CHALLENGE CARD */
@@ -123,10 +131,11 @@ nav{
   border-radius: 8px;
   padding: 0;
   overflow: hidden;
-  transition: box-shadow 0.25s;
+  transition: box-shadow 0.25s, border-color 0.2s;
 }
 .challenge-card:hover {
   box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  border-color: var(--accent-light);
 }
 
 /* Card header with number badge */
@@ -144,7 +153,7 @@ nav{
 .card-num.medium { background: var(--accent); }
 
 .card-title {
-  font-size: 20px; font-weight: 700; color: var(--text);
+  font-size: 17px; font-weight: 700; color: var(--text);
 }
 .card-title.critical { color: var(--red); }
 .card-title.high { color: var(--orange); }
@@ -155,8 +164,11 @@ nav{
   padding: 12px 24px 0;
 }
 .severity-label {
-  display: flex; justify-content: space-between;
+  display: flex; justify-content: space-between; align-items: center;
   font-size: 11px; color: var(--text3); margin-bottom: 4px;
+}
+.severity-label .sev-pill {
+  font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; line-height: 1.4;
 }
 .severity-track {
   width: 100%; height: 6px; background: var(--bg4); border-radius: 3px; overflow: hidden;
@@ -203,6 +215,8 @@ nav{
   padding: 8px 10px;
   background: var(--green-bg);
   border-radius: 8px;
+  font-weight: 400;
+  border-left: 2px solid var(--green);
 }
 
 /* SUMMARY STATS */
@@ -224,7 +238,7 @@ nav{
 
 /* FOOTER */
 .footer {
-  text-align: center; padding: 40px 24px; color: var(--text3); font-size: 13px;
+  text-align: center; padding: 24px 24px; color: var(--text3); font-size: 12px;
   border-top: 1px solid var(--border); margin-top: 40px; background: #fff;
 }
 
@@ -271,6 +285,7 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
 </style>
 </head>
 <body>
+<div id="scroll-progress"></div>
 
 <!-- NAV -->
 <nav>
@@ -353,7 +368,7 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
         <div class="card-title critical" data-en="Cold Start Problem" data-zh="冷启动问题">Cold Start Problem</div>
       </div>
       <div class="severity-bar-wrap">
-        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>95%</span></div>
+        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span class="sev-pill" style="background:var(--red-bg);color:var(--red);">95%</span></div>
         <div class="severity-track"><div class="severity-fill critical" style="width:95%"></div></div>
       </div>
       <div class="bilingual">
@@ -379,7 +394,7 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
         <div class="card-title critical" data-en="Disintermediation Risk" data-zh="脱媒风险">Disintermediation Risk</div>
       </div>
       <div class="severity-bar-wrap">
-        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>90%</span></div>
+        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span class="sev-pill" style="background:var(--red-bg);color:var(--red);">90%</span></div>
         <div class="severity-track"><div class="severity-fill critical" style="width:90%"></div></div>
       </div>
       <div class="bilingual">
@@ -405,7 +420,7 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
         <div class="card-title critical" data-en="Merchant Retention" data-zh="商家留存">Merchant Retention</div>
       </div>
       <div class="severity-bar-wrap">
-        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>85%</span></div>
+        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span class="sev-pill" style="background:var(--red-bg);color:var(--red);">85%</span></div>
         <div class="severity-track"><div class="severity-fill critical" style="width:85%"></div></div>
       </div>
       <div class="bilingual">
@@ -431,7 +446,7 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
         <div class="card-title critical" data-en="Creator Quality Retention" data-zh="创作者质量留存">Creator Quality Retention</div>
       </div>
       <div class="severity-bar-wrap">
-        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>80%</span></div>
+        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span class="sev-pill" style="background:var(--red-bg);color:var(--red);">80%</span></div>
         <div class="severity-track"><div class="severity-fill critical" style="width:80%"></div></div>
       </div>
       <div class="bilingual">
@@ -457,7 +472,7 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
         <div class="card-title critical" data-en="Weak Attribution" data-zh="说不清谁带来的客人">Weak Attribution</div>
       </div>
       <div class="severity-bar-wrap">
-        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>82%</span></div>
+        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span class="sev-pill" style="background:var(--red-bg);color:var(--red);">82%</span></div>
         <div class="severity-track"><div class="severity-fill critical" style="width:82%"></div></div>
       </div>
       <div class="bilingual">
@@ -492,7 +507,7 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
         <div class="card-title high" data-en="Fraud" data-zh="欺诈风险">Fraud</div>
       </div>
       <div class="severity-bar-wrap">
-        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>75%</span></div>
+        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span class="sev-pill" style="background:var(--orange-bg);color:var(--orange);">75%</span></div>
         <div class="severity-track"><div class="severity-fill high" style="width:75%"></div></div>
       </div>
       <div class="bilingual">
@@ -518,7 +533,7 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
         <div class="card-title high" data-en="Commoditization" data-zh="同质化竞争">Commoditization</div>
       </div>
       <div class="severity-bar-wrap">
-        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>65%</span></div>
+        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span class="sev-pill" style="background:var(--orange-bg);color:var(--orange);">65%</span></div>
         <div class="severity-track"><div class="severity-fill high" style="width:65%"></div></div>
       </div>
       <div class="bilingual">
@@ -544,7 +559,7 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
         <div class="card-title high" data-en="Weak Wedge Selection" data-zh="切入点选择不当">Weak Wedge Selection</div>
       </div>
       <div class="severity-bar-wrap">
-        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>70%</span></div>
+        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span class="sev-pill" style="background:var(--orange-bg);color:var(--orange);">70%</span></div>
         <div class="severity-track"><div class="severity-fill high" style="width:70%"></div></div>
       </div>
       <div class="bilingual">
@@ -570,7 +585,7 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
         <div class="card-title high" data-en="Supply Opportunism" data-zh="供给端投机">Supply Opportunism</div>
       </div>
       <div class="severity-bar-wrap">
-        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>60%</span></div>
+        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span class="sev-pill" style="background:var(--orange-bg);color:var(--orange);">60%</span></div>
         <div class="severity-track"><div class="severity-fill high" style="width:60%"></div></div>
       </div>
       <div class="bilingual">
@@ -605,7 +620,7 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
         <div class="card-title medium" data-en="Approval Bottlenecks" data-zh="审批与结算瓶颈">Approval Bottlenecks</div>
       </div>
       <div class="severity-bar-wrap">
-        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>55%</span></div>
+        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span class="sev-pill" style="background:var(--accent-bg);color:var(--accent);">55%</span></div>
         <div class="severity-track"><div class="severity-fill medium" style="width:55%"></div></div>
       </div>
       <div class="bilingual">
@@ -631,7 +646,7 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
         <div class="card-title medium" data-en="Scaling Manual Operations" data-zh="手动运营扩展">Scaling Manual Operations</div>
       </div>
       <div class="severity-bar-wrap">
-        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>50%</span></div>
+        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span class="sev-pill" style="background:var(--accent-bg);color:var(--accent);">50%</span></div>
         <div class="severity-track"><div class="severity-fill medium" style="width:50%"></div></div>
       </div>
       <div class="bilingual">
@@ -657,7 +672,7 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
         <div class="card-title medium" data-en="Quality vs Growth" data-zh="质量与增长的平衡">Quality vs Growth</div>
       </div>
       <div class="severity-bar-wrap">
-        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span>50%</span></div>
+        <div class="severity-label"><span data-en="Risk Severity" data-zh="风险等级">Risk Severity</span><span class="sev-pill" style="background:var(--accent-bg);color:var(--accent);">50%</span></div>
         <div class="severity-track"><div class="severity-fill medium" style="width:50%"></div></div>
       </div>
       <div class="bilingual">
@@ -703,6 +718,12 @@ body.lang-zh .col-zh { padding-right: 0; border-right: none; }
 <script>
 window.addEventListener('scroll', () => {
   document.querySelector('nav').style.boxShadow = window.scrollY > 4 ? '0 2px 16px rgba(0,0,0,0.08)' : '';
+  // Scroll progress bar
+  var prog = document.getElementById('scroll-progress');
+  if (prog) {
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    prog.style.width = h > 0 ? (window.scrollY / h * 100) + '%' : '0%';
+  }
 }, {passive: true});
 const fadeObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
@@ -710,6 +731,10 @@ const fadeObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('.section').forEach(el => {
   el.classList.add('fade-in');
   fadeObserver.observe(el);
+});
+// Bold numbers/percentages in desc-text
+document.querySelectorAll('.desc-text').forEach(function(el) {
+  el.innerHTML = el.innerHTML.replace(/(\d+[\d,.]*%?)/g, '<strong>$1</strong>');
 });
 </script>
 
