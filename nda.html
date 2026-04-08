@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Push â Non-Disclosure Agreement</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #f8f9fb;
+    color: #1f2937;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Top accent bar */
+  .top-bar {
+    height: 3px;
+    background: linear-gradient(90deg, #1a73e8, #4f9cf7);
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Header */
+  .header {
+    padding: 48px 0 32px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  .brand {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #1a73e8;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .header h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #111827;
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+  }
+  .header .sub {
+    font-size: 13px;
+    color: #6b7280;
+    font-weight: 400;
+  }
+
+  /* NDA Body */
+  .nda-body {
+    padding: 32px 0;
+  }
+  .nda-body .preamble {
+    font-size: 13px;
+    color: #374151;
+    margin-bottom: 20px;
+    line-height: 1.7;
+  }
+  .nda-body .party-def {
+    font-size: 13px;
+    color: #374151;
+    padding-left: 20px;
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+  .nda-body .note {
+    font-size: 12.5px;
+    color: #6b7280;
+    margin: 12px 0 20px;
+    line-height: 1.65;
+    font-style: italic;
+  }
+
+  .section {
+    margin-bottom: 20px;
+  }
+  .section h2 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 6px;
+    letter-spacing: 0.01em;
+  }
+  .section p {
+    font-size: 12.5px;
+    color: #374151;
+    line-height: 1.72;
+    margin-bottom: 6px;
+  }
+  .section .sub-items {
+    padding-left: 20px;
+    margin: 6px 0 8px;
+  }
+  .section .sub-items li {
+    font-size: 12.5px;
+    color: #374151;
+    line-height: 1.7;
+    margin-bottom: 3px;
+    list-style: none;
+  }
+
+  /* Divider before form */
+  .divider {
+    border: none;
+    border-top: 1px solid #e5e7eb;
+    margin: 36px 0;
+  }
+
+  /* Signature Form */
+  .form-section {
+    padding-bottom: 60px;
+  }
+  .form-section h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 4px;
+  }
+  .form-section .form-sub {
+    font-size: 13px;
+    color: #6b7280;
+    margin-bottom: 28px;
+  }
+
+  .form-group {
+    margin-bottom: 22px;
+  }
+  .form-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 6px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .form-group input[type="text"],
+  .form-group input[type="email"],
+  .form-group input[type="date"] {
+    width: 100%;
+    padding: 11px 14px;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: #fff;
+    color: #1f2937;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .form-group input:focus {
+    outline: none;
+    border-color: #1a73e8;
+    box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+  }
+  .form-group input::placeholder {
+    color: #9ca3af;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  /* Signature pad area */
+  .sig-group {
+    margin-bottom: 22px;
+  }
+  .sig-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 6px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .sig-input {
+    width: 100%;
+    padding: 18px 14px;
+    font-size: 22px;
+    font-family: 'Dancing Script', 'Brush Script MT', cursive, 'Inter', sans-serif;
+    border: 1px dashed #d1d5db;
+    border-radius: 8px;
+    background: #fafbfc;
+    color: #1f2937;
+    text-align: center;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .sig-input:focus {
+    outline: none;
+    border-color: #1a73e8;
+    border-style: solid;
+    box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+    background: #fff;
+  }
+  .sig-input::placeholder {
+    color: #c0c4cc;
+    font-size: 15px;
+    font-family: 'Inter', sans-serif;
+  }
+  .sig-hint {
+    font-size: 11px;
+    color: #9ca3af;
+    margin-top: 4px;
+  }
+
+  /* Checkbox */
+  .agree-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 28px 0;
+    padding: 16px;
+    background: #f0f5ff;
+    border-radius: 8px;
+    border: 1px solid #dbeafe;
+  }
+  .agree-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    accent-color: #1a73e8;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+  .agree-group label {
+    font-size: 13px;
+    color: #1f2937;
+    line-height: 1.6;
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  /* Submit */
+  .submit-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    color: #fff;
+    background: #1a73e8;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    letter-spacing: 0.01em;
+  }
+  .submit-btn:hover { background: #1557b0; }
+  .submit-btn:active { transform: scale(0.995); }
+  .submit-btn:disabled {
+    background: #93c5fd;
+    cursor: not-allowed;
+  }
+
+  .submit-note {
+    text-align: center;
+    font-size: 11px;
+    color: #9ca3af;
+    margin-top: 12px;
+  }
+
+  /* Success */
+  .success-msg {
+    display: none;
+    text-align: center;
+    padding: 48px 24px;
+  }
+  .success-msg .check {
+    width: 56px;
+    height: 56px;
+    background: #dcfce7;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 28px;
+  }
+  .success-msg h3 {
+    font-size: 18px;
+    color: #111827;
+    margin-bottom: 6px;
+  }
+  .success-msg p {
+    font-size: 13px;
+    color: #6b7280;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 24px 0;
+    border-top: 1px solid #e5e7eb;
+    text-align: center;
+    font-size: 11px;
+    color: #9ca3af;
+  }
+
+  @media (max-width: 640px) {
+    .container { padding: 0 16px; }
+    .header { padding: 32px 0 24px; }
+    .header h1 { font-size: 22px; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="top-bar"></div>
+
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="brand">Push</div>
+    <h1>Non-Disclosure Agreement</h1>
+    <div class="sub">Influencer Research Interview &mdash; Confidential</div>
+  </div>
+
+  <!-- NDA Body -->
+  <div class="nda-body">
+
+    <p class="preamble">
+      This Non-Disclosure Agreement (this &ldquo;<strong>Agreement</strong>&rdquo;) is entered into as of the date of submission below (the &ldquo;<strong>Effective Date</strong>&rdquo;) by and between:
+    </p>
+
+    <p class="party-def">
+      <strong>(1) Push</strong>, a project team operating under the direction of its founding members with the intent to incorporate as a legal business entity (the &ldquo;<strong>Disclosing Party</strong>&rdquo;); and
+    </p>
+    <p class="party-def">
+      <strong>(2)</strong> The individual identified below (the &ldquo;<strong>Receiving Party</strong>&rdquo;, and together with the Disclosing Party, the &ldquo;<strong>Parties</strong>&rdquo;).
+    </p>
+
+    <p class="note">
+      This Agreement shall remain valid and enforceable regardless of whether Push has formally incorporated at the time of execution and shall automatically transfer to and bind any successor entity formed by the Push founding team.
+    </p>
+
+    <div class="section">
+      <h2>1. &nbsp;Purpose</h2>
+      <p>The Disclosing Party intends to share certain confidential information with the Receiving Party in connection with a research interview (the &ldquo;<strong>Interview</strong>&rdquo;) conducted for the purpose of gathering user insights, market feedback, and product validation related to the Push platform. The Interview is similar in nature to a focus-group session.</p>
+    </div>
+
+    <div class="section">
+      <h2>2. &nbsp;Confidential Information</h2>
+      <p>&ldquo;<strong>Confidential Information</strong>&rdquo; means any and all non-public information disclosed by the Disclosing Party to the Receiving Party during or in connection with the Interview, whether disclosed orally, visually, in writing, or by demonstration, including but not limited to:</p>
+      <ul class="sub-items">
+        <li>(a)&nbsp;&nbsp;business concepts, strategies, plans, and product ideas;</li>
+        <li>(b)&nbsp;&nbsp;product designs, prototypes, wireframes, and user-interface mockups;</li>
+        <li>(c)&nbsp;&nbsp;technical architecture, algorithms, and software features;</li>
+        <li>(d)&nbsp;&nbsp;business models, pricing strategies, and financial projections;</li>
+        <li>(e)&nbsp;&nbsp;marketing strategies, go-to-market plans, and partnership arrangements;</li>
+        <li>(f)&nbsp;&nbsp;any other information identified as confidential at the time of disclosure.</li>
+      </ul>
+      <p>Confidential Information does <strong>not</strong> include information that: (i)&nbsp;is or becomes publicly available through no fault of the Receiving Party; (ii)&nbsp;was already known to the Receiving Party prior to disclosure; (iii)&nbsp;is independently developed by the Receiving Party without use of or reference to the Confidential Information; or (iv)&nbsp;is lawfully obtained from a third party without restriction on disclosure.</p>
+    </div>
+
+    <div class="section">
+      <h2>3. &nbsp;Obligations of the Receiving Party</h2>
+      <p>The Receiving Party shall:</p>
+      <ul class="sub-items">
+        <li>(a)&nbsp;&nbsp;hold all Confidential Information in strict confidence;</li>
+        <li>(b)&nbsp;&nbsp;not disclose, publish, or otherwise disseminate any Confidential Information to any third party without the prior written consent of the Disclosing Party;</li>
+        <li>(c)&nbsp;&nbsp;not use any Confidential Information for any purpose other than participating in the Interview;</li>
+        <li>(d)&nbsp;&nbsp;not reproduce, copy, or record any Confidential Information except as expressly authorized by the Disclosing Party;</li>
+        <li>(e)&nbsp;&nbsp;exercise reasonable care to protect the secrecy and prevent unauthorized disclosure or use of the Confidential Information.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>4. &nbsp;Recording &amp; Data Usage</h2>
+      <p>The Receiving Party acknowledges that the Interview may be recorded (audio and/or video) for the Disclosing Party&rsquo;s internal research purposes only. Recordings will not be published, shared externally, or used for marketing without the Receiving Party&rsquo;s separate written consent. The Disclosing Party may use anonymized, aggregated insights derived from the Interview for product development, internal reporting, and strategic planning.</p>
+    </div>
+
+    <div class="section">
+      <h2>5. &nbsp;No Obligation or Relationship</h2>
+      <p>Nothing in this Agreement obligates either Party to enter into any further agreement, partnership, or business relationship. Participation in the Interview does not create an employment, agency, joint-venture, or partnership relationship between the Parties.</p>
+    </div>
+
+    <div class="section">
+      <h2>6. &nbsp;Term</h2>
+      <p>The confidentiality obligations under this Agreement shall survive for a period of <strong>two (2) years</strong> from the Effective Date, unless extended or shortened by mutual written agreement of the Parties.</p>
+    </div>
+
+    <div class="section">
+      <h2>7. &nbsp;Remedies</h2>
+      <p>The Receiving Party acknowledges that any breach of this Agreement may cause irreparable harm to the Disclosing Party for which monetary damages alone would be an inadequate remedy. Accordingly, the Disclosing Party shall be entitled to seek equitable relief, including injunction and specific performance, in addition to all other remedies available at law or in equity.</p>
+    </div>
+
+    <div class="section">
+      <h2>8. &nbsp;Governing Law</h2>
+      <p>This Agreement shall be governed by and construed in accordance with the laws of the State of California, United States, without regard to its conflict-of-laws principles.</p>
+    </div>
+
+    <div class="section">
+      <h2>9. &nbsp;General Provisions</h2>
+      <p>This Agreement constitutes the entire agreement between the Parties with respect to its subject matter and supersedes all prior or contemporaneous understandings, whether oral or written. No amendment or waiver of any provision shall be effective unless in writing and signed by both Parties. If any provision is held invalid or unenforceable, the remaining provisions shall continue in full force and effect.</p>
+    </div>
+
+  </div>
+
+  <!-- Signature Form -->
+  <hr class="divider">
+
+  <div class="form-section" id="formArea">
+    <h2>Sign this Agreement</h2>
+    <p class="form-sub">Please complete all fields below to acknowledge and agree to the terms above.</p>
+
+    <form id="ndaForm" action="https://formsubmit.co/wangjiamingaas@gmail.com" method="POST">
+      <!-- FormSubmit config -->
+      <input type="hidden" name="_subject" value="NDA Signed â Push Influencer Interview">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="">
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fullName">Full Legal Name</label>
+          <input type="text" id="fullName" name="Full Name" placeholder="e.g. Jane Smith" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="Email" placeholder="e.g. jane@example.com" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="handle">Social Media Handle</label>
+          <input type="text" id="handle" name="Social Media Handle" placeholder="e.g. @janeeats">
+        </div>
+        <div class="form-group">
+          <label for="signDate">Date</label>
+          <input type="date" id="signDate" name="Date Signed" required>
+        </div>
+      </div>
+
+      <div class="sig-group">
+        <label for="signature">Electronic Signature</label>
+        <input type="text" id="signature" name="Signature" class="sig-input" placeholder="Type your full name as signature" required>
+        <div class="sig-hint">By typing your name above, you are providing your electronic signature.</div>
+      </div>
+
+      <div class="agree-group">
+        <input type="checkbox" id="agreeCheck" required>
+        <label for="agreeCheck">
+          I have read and understand this Non-Disclosure Agreement in its entirety. I agree to be bound by its terms and acknowledge that my typed name above constitutes a legally binding electronic signature.
+        </label>
+      </div>
+
+      <button type="submit" class="submit-btn" id="submitBtn" disabled>Submit Signed Agreement</button>
+      <p class="submit-note">A confirmation will be sent to your email address. Push will receive a copy of your signed agreement.</p>
+    </form>
+
+    <div class="success-msg" id="successMsg">
+      <div class="check">&#10003;</div>
+      <h3>Agreement Signed Successfully</h3>
+      <p>Thank you. A copy has been sent to your email and to the Push team.<br>We look forward to speaking with you.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    Push &copy; 2026 &nbsp;&middot;&nbsp; This document is for research purposes only.
+  </div>
+
+</div>
+
+<script>
+  // Auto-fill today's date
+  document.getElementById('signDate').valueAsDate = new Date();
+
+  // Enable submit only when checkbox is checked
+  const cb = document.getElementById('agreeCheck');
+  const btn = document.getElementById('submitBtn');
+  cb.addEventListener('change', () => { btn.disabled = !cb.checked; });
+
+  // Set _next to current page with success param
+  const nextInput = document.querySelector('input[name="_next"]');
+  nextInput.value = window.location.href.split('?')[0] + '?signed=true';
+
+  // Show success if redirected back
+  if (new URLSearchParams(window.location.search).get('signed') === 'true') {
+    document.getElementById('ndaForm').style.display = 'none';
+    document.getEnementById('successMsg').style.display = 'block';
+    // Scroll to success
+    setTimeout(() => {
+      document.getElementById('successMsg').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 200);
+  }
+</script>
+
+</body>
+</html>
