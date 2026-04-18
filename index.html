@@ -3,1498 +3,939 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Push 是本地商家与创作者之间的效果交付系统。每次合作有目标、可核验、有数据，支持复购。">
-<meta property="og:title" content="PUSH — 本地创作者商业操作系统">
-<meta property="og:description" content="Push 让每次创作者合作有数据、能验证、值得再做。">
+<meta name="description" content="Push is an AI-powered customer acquisition agency. Tell us how many new customers you need. AI plus a network of local creators delivers — measured, verified, outcome-priced.">
+<meta property="og:title" content="PUSH — AI-Powered Customer Acquisition Agency">
+<meta property="og:description" content="Tell us how many new customers you want. AI and our creator network deliver. You pay per verified customer, not per post.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="PUSH — The Operating System for Local Creator Commerce">
-<meta name="twitter:description" content="Push makes every creator campaign verifiable, measurable, and repeatable.">
-<title>PUSH — The Operating System for Local Creator Commerce</title>
+<meta name="twitter:title" content="PUSH — AI-Powered Customer Acquisition Agency">
+<meta name="twitter:description" content="Outcome-priced local customer acquisition. AI-run creator network. Verified per customer.">
+<title>PUSH — AI-Powered Customer Acquisition Agency</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" as="style">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="prefetch" href="project-intro.html">
-<link rel="prefetch" href="pitch-deck.html">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>/* lang-flash-fix */(function(){if(localStorage.getItem("push-lang")==="zh")document.documentElement.style.opacity="0";})()</script>
 <style>
 :root {
-  --accent: #4f46e5;
-  --accent-light: #818cf8;
-  --accent-dark: #3730a3;
-  --accent-bg: rgba(79,70,229,0.06);
-  --primary: #0f0f1a;
-  --green: #059669;
-  --green-bg: rgba(5,150,105,0.08);
-  --orange: #d97706;
-  --orange-bg: rgba(217,119,6,0.08);
-  --red: #dc2626;
-  --red-bg: rgba(220,38,38,0.08);
-  --text: #111827;
-  --text2: #4b5563;
-  --text3: #9ca3af;
-  --border: #e5e7eb;
-  --bg: #ffffff;
-  --bg2: #f8f9fa;
-  --radius: 8px;
-  --shadow: 0 4px 20px rgba(0,0,0,0.08);
+  /* Brand colors — from Push Design.md */
+  --flag-red: #c1121f;
+  --molten-lava: #780000;
+  --pearl-stone: #f5f2ec;
+  --snow: #fafaf8;
+  --pure-white: #ffffff;
+  --deep-space: #003049;
+  --steel-blue: #669bbc;
+  --champagne: #c9a96e;
+
+  /* Surface tokens */
+  --surface: #f5f2ec;
+  --surface-bright: #fafaf8;
+  --surface-elevated: #ffffff;
+  --ink: #003049;
+  --ink-2: #4a5c6e;
+  --ink-3: #8a97a4;
+  --border: rgba(0,48,73,0.12);
+  --border-strong: rgba(0,48,73,0.22);
+
+  /* Typography substitutes — Archivo ≈ Darky (heavy display), JetBrains Mono ≈ CS Genio Mono */
+  --font-display: 'Archivo', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
 }
+
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.75;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;word-break:break-word;}
-html[lang="zh"] body{line-height:2.0;letter-spacing:0.01em;}
-html[lang="zh"] .hero h1{line-height:1.25;}
-html[lang="zh"] .section-title{line-height:1.5;}
-strong{font-weight:600;color:var(--text);}
-.hero strong{color:inherit;}
-p{max-width:680px;}
-ul,ol{padding-left:20px;}
-li{margin-bottom:6px;line-height:1.7;}
-a{color:var(--accent);text-decoration:none;transition:color 0.15s;}
-a:hover{color:var(--accent-light);}
-.hero-cta,.hero-cta:hover{color:#fff;}
-.hero-cta:hover{opacity:0.7;}
-.nav-logo,.nav-logo:hover{color:var(--accent);}
-.footer-link:hover{color:#fff;}
+body{
+  font-family:var(--font-mono);
+  background:var(--surface);
+  color:var(--ink);
+  font-size:14px;line-height:1.7;
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  word-break:break-word;
+}
+html[lang="zh"] body{line-height:1.9;letter-spacing:0.01em;font-size:14px;}
 
-/* — Scroll progress bar — */
-.scroll-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-light));z-index:300;width:0;transition:none;pointer-events:none;box-shadow:0 0 8px rgba(79,70,229,0.4);}
+h1,h2,h3,h4,.display{font-family:var(--font-display);font-weight:900;letter-spacing:-0.02em;line-height:1.05;color:var(--ink);}
+h2{font-size:clamp(36px,5vw,64px);}
+h3{font-size:clamp(22px,2.5vw,32px);font-weight:800;letter-spacing:-0.01em;line-height:1.2;}
+h4{font-size:18px;font-weight:700;letter-spacing:0;}
 
-/* — Nav — */
+strong{font-weight:700;color:var(--ink);}
+p{max-width:640px;}
+ul,ol{padding-left:20px;list-style:none;padding-left:0;}
+li{margin-bottom:8px;line-height:1.7;position:relative;padding-left:24px;}
+li::before{content:'—';position:absolute;left:0;top:0;color:var(--flag-red);font-weight:700;}
+
+a{color:var(--flag-red);text-decoration:none;transition:color 0.2s;}
+a:hover{color:var(--molten-lava);}
+
+/* Scroll progress bar */
+.scroll-progress{
+  position:fixed;top:0;left:0;height:2px;
+  background:var(--flag-red);z-index:300;width:0;
+  transition:none;pointer-events:none;
+}
+
+/* Nav */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:200;
-  height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;
-  background:#ffffff;
-  border-bottom:1px solid var(--border);transition:box-shadow 0.2s;
+  height:56px;display:flex;align-items:center;padding:0 24px;gap:12px;
+  background:rgba(245,242,236,0.92);
+  backdrop-filter:saturate(180%) blur(12px);
+  -webkit-backdrop-filter:saturate(180%) blur(12px);
+  border-bottom:1px solid var(--border);
+  transition:box-shadow 0.2s, background 0.2s;
 }
-nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.08);}
+nav.scrolled{box-shadow:0 1px 0 var(--border);background:rgba(245,242,236,0.98);}
 .nav-logo{
-  font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;
-  margin-right:8px;flex-shrink:0;text-decoration:none;
+  font-family:var(--font-display);
+  font-size:22px;font-weight:900;color:var(--flag-red);letter-spacing:0.08em;
+  margin-right:16px;flex-shrink:0;text-decoration:none;
 }
-.nav-links{display:flex;gap:6px;flex-wrap:wrap;flex:1;}
+.nav-links{display:flex;gap:2px;flex:1;flex-wrap:wrap;}
 .nav-links a{
-  font-size:12px;font-weight:500;color:var(--text2);
-  padding:6px 12px;border-radius:8px;transition:color 0.15s,background-color 0.15s;white-space:nowrap;text-decoration:none;
+  font-family:var(--font-mono);
+  font-size:11px;font-weight:500;color:var(--ink-2);
+  padding:6px 10px;text-transform:uppercase;letter-spacing:0.04em;
+  transition:color 0.15s, background 0.15s;white-space:nowrap;
 }
-.nav-links a:hover{color:var(--accent);}
-.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);position:relative;}
-.nav-links a.active::after{content:'';position:absolute;bottom:0;left:12px;right:12px;height:2px;background:var(--accent);border-radius:1px;}
+.nav-links a:hover{color:var(--flag-red);background:rgba(193,18,31,0.06);}
 #lang-btn{
-  flex-shrink:0;background:var(--accent);color:#fff;font-weight:700;font-size:13px;
-  padding:7px 18px;border-radius:8px;border:none;cursor:pointer;transition:background 0.15s;
+  flex-shrink:0;background:var(--ink);color:var(--pearl-stone);
+  font-family:var(--font-mono);font-weight:700;font-size:11px;letter-spacing:0.08em;
+  padding:7px 14px;border:none;cursor:pointer;transition:background 0.15s;
+  text-transform:uppercase;
 }
-#lang-btn:hover{background:var(--accent-dark);}
+#lang-btn:hover{background:var(--flag-red);}
 
-/* — Fade-in — */
-.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.45s ease,transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94);will-change:opacity,transform;animation:fadeInFallback 0s 4s forwards;}
-.fade-in.visible,.visible .fade-in{opacity:1;transform:none;animation:none;}
+/* Fade-in */
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity 0.7s cubic-bezier(0.22,1,0.36,1),transform 0.7s cubic-bezier(0.22,1,0.36,1);will-change:opacity,transform;animation:fadeInFallback 0s 4s forwards;}
+.fade-in.visible{opacity:1;transform:none;animation:none;}
 @keyframes fadeInFallback{to{opacity:1;transform:translateY(0);}}
 
-/* — Hero — */
-.hero{
-  background:#0f0f1a;
-  padding:140px 64px 80px;
-  display:flex;align-items:center;
-}
-.hero-inner{max-width:1000px;width:100%;margin:0 auto;}
-.hero h1,.hero-sub,.hero-ctas,.hero-label{max-width:640px;}
-.hero-label{
-  font-size:13px;font-weight:600;letter-spacing:0.5px;text-transform:none;
-  color:var(--red);margin-bottom:28px;
-}
-.hero h1{
-  font-size:clamp(3rem,5.5vw,4.5rem);font-weight:800;letter-spacing:-2.5px;
-  color:#fff;line-height:1.1;margin-bottom:0;max-width:800px;
-}
-.hero h1 .accent-line{
-  color:var(--accent-light);display:block;margin-top:16px;
-}
-.hero-sub{
-  font-size:16px;color:rgba(255,255,255,0.55);
-  line-height:1.65;margin-top:24px;
-}
-.hero-ctas{display:flex;gap:28px;margin-top:32px;flex-wrap:wrap;}
-.hero-cta{
-  font-size:14px;font-weight:600;color:#fff;text-decoration:none;
-  transition:opacity 0.15s;
-}
-.hero-cta:hover{opacity:0.7;}
+/* Section wrappers */
+.section{padding:120px 32px;max-width:1280px;margin:0 auto;}
+.section-narrow{max-width:960px;}
 
-/* — Section wrappers — */
-.sw-white{background:var(--bg);}
-.sw-gray{background:var(--bg);border-top:1px solid var(--border);}
-.sw-gray + .sw-white{border-top:1px solid var(--border);}
-.sw-white + .sw-white{border-top:1px solid var(--border);}
-.sw-dark{background:var(--primary);}
-
-.section{padding:80px 64px;max-width:1000px;margin:0 auto;contain:layout style paint;}
-.sw-white:first-of-type .section{padding:64px 64px;}
-.sw-gray .section{padding:64px 64px;}
-.sw-white + .sw-gray .section{padding:56px 64px;}
-
-.section-label{
-  font-size:13px;font-weight:600;letter-spacing:0.5px;text-transform:none;
-  color:var(--accent);margin-bottom:16px;
-  display:flex;align-items:center;gap:10px;
+.eyebrow{
+  font-family:var(--font-mono);
+  font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--flag-red);margin-bottom:24px;
+  display:flex;align-items:center;gap:12px;
 }
-.section-label::before{
+.eyebrow::before{
   content:'';display:block;
-  width:20px;height:2px;background:var(--accent);flex-shrink:0;
-}
-.section-label-dark{color:var(--accent-light);letter-spacing:0.5px;}
-.section-label-dark::before{background:var(--accent-light);}
-.section-title{
-  font-size:clamp(26px,3.5vw,36px);font-weight:800;letter-spacing:-0.5px;
-  color:var(--primary);margin-bottom:16px;line-height:1.4;
-}
-.section-title-white{color:#fff;}
-.section-sub{font-size:16px;color:var(--text2);line-height:1.65;max-width:640px;}
-.section-sub-dark{color:rgba(255,255,255,0.5);}
-
-/* — S1: 30-second flow — */
-.flow5{display:flex;align-items:flex-start;gap:0;margin:40px 0;}
-.flow5-step{display:flex;flex-direction:column;align-items:center;text-align:center;flex:1;min-width:120px;padding:16px 12px;background:transparent;border-radius:0;border:none;}
-.flow5-icon{font-size:28px;margin-bottom:10px;}
-.flow5-label-zh{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px;}
-.flow5-label-en{font-size:11px;color:var(--text3);}
-.flow5-arrow{font-size:16px;color:var(--text3);padding:0 4px;flex-shrink:0;margin-top:24px;}
-
-/* — Audience routing — */
-.audience-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px;}
-.audience-card{border-radius:8px;padding:24px;border:1px solid var(--border);background:#fff;text-decoration:none;transition:border-color 0.25s ease,box-shadow 0.25s ease,transform 0.25s ease;display:flex;flex-direction:column;gap:10px;}
-.audience-card:hover{border-color:var(--accent-light);box-shadow:0 4px 20px rgba(79,70,229,0.1);transform:translateY(-2px);}
-.audience-label{font-size:13px;font-weight:600;letter-spacing:0.5px;text-transform:none;color:var(--accent);}
-.audience-title{font-size:20px;font-weight:800;color:var(--text);}
-.audience-body{font-size:14px;color:var(--text2);line-height:1.7;flex:1;}
-.audience-link{font-size:14px;font-weight:600;color:var(--accent);}
-
-/* — S2: Problem panels — */
-.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px;}
-.problem-panel{border-radius:8px;padding:36px;border:1px solid var(--border);background:#fff;}
-.panel-header{font-size:18px;font-weight:700;margin-bottom:6px;}
-.panel-header-red{color:var(--red);}
-.panel-header-accent{color:var(--accent);}
-.panel-sub{font-size:14px;color:var(--text2);margin-bottom:24px;}
-.pain-list{display:flex;flex-direction:column;gap:12px;}
-.pain-item{
-  padding:14px 20px;border-bottom:1px solid var(--border);
-  transition:background 0.15s;cursor:default;position:relative;
-}
-.pain-item:last-child{border-bottom:none;}
-.pain-item-red:hover{background:var(--red-bg);}
-.pain-item-accent:hover{background:var(--accent-bg);}
-.pain-item-title{font-size:15px;font-weight:800;color:var(--text);margin-bottom:4px;}
-.pain-item-body{font-size:14px;color:var(--text2);line-height:1.7;}
-.panel-verdict{
-  margin-top:20px;padding:16px 20px;
-  background:var(--bg2);border-radius:8px;
-  font-size:16px;font-weight:700;color:var(--text);
+  width:32px;height:1px;background:var(--flag-red);flex-shrink:0;
 }
 
-/* — S3: Workflow — */
-.compare-strip{
-  border-radius:8px;padding:24px 32px;margin-bottom:12px;
-  font-size:14px;color:var(--text2);line-height:1.75;
+.lede{
+  font-family:var(--font-mono);
+  font-size:16px;line-height:1.7;color:var(--ink-2);
+  max-width:620px;margin-top:24px;
 }
-.compare-strip-label{font-size:13px;font-weight:700;letter-spacing:0.5px;text-transform:none;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
-.strip-before{border:1px solid var(--border);background:#fff8f8;}
-.strip-before .compare-strip-label{color:var(--red);}
-.strip-after{border:1px solid var(--border);background:#f0fdf4;}
-.strip-after .compare-strip-label{color:var(--green);}
-.strip-note{font-size:13px;font-style:italic;margin-top:8px;color:var(--text3);}
 
-.milestone-row{display:flex;align-items:center;gap:0;flex-wrap:nowrap;margin-top:48px;overflow-x:auto;padding-bottom:8px;}
-.milestone-pill{
-  display:flex;align-items:center;gap:8px;
-  background:#fff;border:1px solid var(--border);
-  border-radius:100px;padding:12px 20px;
-  font-size:13px;font-weight:600;color:var(--text);
-  white-space:nowrap;flex-shrink:0;
-  transition:color 0.15s,background-color 0.15s,border-color 0.15s;cursor:default;
+/* Hero */
+.hero{
+  background:var(--pearl-stone);
+  padding:180px 32px 120px;
+  min-height:100vh;display:flex;align-items:center;
+  position:relative;overflow:hidden;
 }
-.milestone-pill:hover{border-color:var(--accent);background:var(--accent-bg);color:var(--accent);}
-.milestone-pill:hover .m-num{background:var(--accent-dark);}
-.milestone-pill .m-num{
-  width:24px;height:24px;border-radius:50%;background:var(--accent);
-  color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;transition:background 0.15s;
+.hero::before{
+  content:'';position:absolute;top:0;right:0;bottom:0;
+  width:45%;background:
+    linear-gradient(180deg,transparent 0%,var(--pearl-stone) 100%),
+    radial-gradient(circle at 60% 40%,rgba(193,18,31,0.06),transparent 60%);
+  pointer-events:none;
 }
-.milestone-arrow{font-size:14px;color:var(--text3);padding:0 6px;flex-shrink:0;}
-.milestone-sla{
-  display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;
+.hero-inner{max-width:1280px;width:100%;margin:0 auto;position:relative;z-index:1;}
+.hero-meta{
+  font-family:var(--font-mono);
+  font-size:11px;letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--ink-3);margin-bottom:32px;
+  display:flex;gap:24px;flex-wrap:wrap;align-items:center;
 }
-.sla-chip{
-  font-size:11px;font-weight:600;color:var(--text3);
-  background:var(--bg2);border-radius:100px;padding:4px 12px;white-space:nowrap;
+.hero-meta span{display:flex;align-items:center;gap:8px;}
+.hero-meta .dot{width:6px;height:6px;background:var(--flag-red);display:inline-block;}
+.hero h1{
+  font-family:var(--font-display);
+  font-size:clamp(52px,9vw,148px);font-weight:900;
+  letter-spacing:-0.04em;line-height:0.92;
+  color:var(--ink);margin:0;
+  max-width:1200px;
 }
-.sla-link{
-  display:inline-block;margin-top:24px;font-size:14px;color:var(--accent);font-weight:600;
+.hero h1 .red{color:var(--flag-red);}
+.hero h1 .italic{font-style:italic;font-weight:300;}
+.hero-sub{
+  font-family:var(--font-mono);
+  font-size:18px;line-height:1.6;color:var(--ink-2);
+  max-width:560px;margin-top:40px;
 }
-.sla-link:hover{text-decoration:underline;}
+.hero-ctas{display:flex;gap:16px;margin-top:48px;flex-wrap:wrap;}
+.btn{
+  font-family:var(--font-mono);
+  font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  padding:16px 28px;border:none;cursor:pointer;
+  text-decoration:none;display:inline-flex;align-items:center;gap:10px;
+  transition:transform 0.2s, background 0.2s;
+}
+.btn-primary{
+  background:var(--flag-red);color:var(--pearl-stone);
+  box-shadow:4px 4px 0 var(--ink);
+}
+.btn-primary:hover{background:var(--molten-lava);color:var(--pearl-stone);transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink);}
+.btn-ghost{
+  background:transparent;color:var(--ink);
+  border:1px solid var(--ink);
+}
+.btn-ghost:hover{background:var(--ink);color:var(--pearl-stone);}
 
-/* — Back to top — */
+/* Surface variants */
+.sw-surface{background:var(--surface);}
+.sw-bright{background:var(--surface-bright);border-top:1px solid var(--border);}
+.sw-dark{background:var(--ink);color:var(--pearl-stone);}
+.sw-dark h2,.sw-dark h3,.sw-dark h4{color:var(--pearl-stone);}
+.sw-dark .eyebrow{color:var(--champagne);}
+.sw-dark .eyebrow::before{background:var(--champagne);}
+.sw-dark .lede{color:rgba(245,242,236,0.7);}
+.sw-dark strong{color:var(--pearl-stone);}
+.sw-red{background:var(--flag-red);color:var(--pearl-stone);}
+.sw-red h2,.sw-red h3,.sw-red h4{color:var(--pearl-stone);}
+.sw-red .eyebrow{color:var(--pearl-stone);}
+.sw-red .eyebrow::before{background:var(--pearl-stone);}
+
+/* Before/After split */
+.split-ba{
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:var(--border);margin-top:72px;border:1px solid var(--border);
+}
+.ba-panel{
+  background:var(--surface-bright);padding:56px 48px;
+  display:flex;flex-direction:column;gap:24px;
+}
+.ba-panel.after{background:var(--ink);color:var(--pearl-stone);}
+.ba-panel.after h3,.ba-panel.after h4{color:var(--pearl-stone);}
+.ba-panel.after strong{color:var(--champagne);}
+.ba-tag{
+  font-family:var(--font-mono);
+  font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--ink-3);
+}
+.ba-panel.after .ba-tag{color:rgba(245,242,236,0.5);}
+.ba-panel h3{margin-bottom:0;}
+.ba-panel p{color:var(--ink-2);font-size:14px;}
+.ba-panel.after p{color:rgba(245,242,236,0.75);}
+
+/* Stats row */
+.stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--border);margin-top:72px;border:1px solid var(--border);
+}
+.stat{
+  background:var(--surface-bright);padding:40px 28px;
+}
+.stat-num{
+  font-family:var(--font-display);
+  font-size:clamp(40px,5vw,72px);font-weight:900;
+  color:var(--flag-red);letter-spacing:-0.03em;line-height:1;
+}
+.stat-label{
+  font-family:var(--font-mono);
+  font-size:12px;color:var(--ink-2);margin-top:12px;line-height:1.5;
+}
+
+/* Pillars (5-col) */
+.pillars{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:1px;
+  background:var(--border);margin-top:72px;border:1px solid var(--border);
+}
+.pillar{
+  background:var(--surface-bright);padding:40px 28px;
+  display:flex;flex-direction:column;gap:16px;min-height:280px;
+}
+.pillar-num{
+  font-family:var(--font-display);
+  font-size:48px;font-weight:900;color:var(--flag-red);
+  letter-spacing:-0.03em;line-height:1;
+}
+.pillar-title{
+  font-family:var(--font-display);
+  font-size:18px;font-weight:800;letter-spacing:-0.01em;
+  color:var(--ink);line-height:1.2;
+}
+.pillar-body{
+  font-size:13px;color:var(--ink-2);line-height:1.65;
+}
+
+/* Flow (horizontal steps) */
+.flow{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:1px;
+  background:var(--border);margin-top:56px;border:1px solid var(--border);
+}
+.flow-step{
+  background:var(--surface-bright);padding:32px 24px;
+  display:flex;flex-direction:column;gap:12px;
+  position:relative;
+}
+.flow-tag{
+  font-family:var(--font-mono);
+  font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--flag-red);
+}
+.flow-title{
+  font-family:var(--font-display);
+  font-size:16px;font-weight:800;color:var(--ink);line-height:1.2;
+}
+.flow-body{font-size:12px;color:var(--ink-2);line-height:1.6;}
+.flow-time{
+  font-family:var(--font-mono);
+  font-size:10px;color:var(--ink-3);letter-spacing:0.1em;
+  margin-top:auto;
+}
+
+/* Pricing */
+.pricing{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:var(--border);margin-top:72px;border:1px solid var(--border);
+}
+.price-card{
+  background:var(--surface-bright);padding:48px 36px;
+  display:flex;flex-direction:column;gap:20px;
+}
+.price-card.featured{background:var(--ink);color:var(--pearl-stone);}
+.price-card.featured h3,.price-card.featured .price-num{color:var(--pearl-stone);}
+.price-card.featured .price-suffix,.price-card.featured .price-desc{color:rgba(245,242,236,0.7);}
+.price-card.featured li{color:rgba(245,242,236,0.85);}
+.price-card.featured li::before{color:var(--champagne);}
+.price-card.featured .price-tag{color:var(--champagne);}
+.price-tag{
+  font-family:var(--font-mono);
+  font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--flag-red);
+}
+.price-name{
+  font-family:var(--font-display);
+  font-size:28px;font-weight:800;color:var(--ink);letter-spacing:-0.01em;
+}
+.price-num{
+  font-family:var(--font-display);
+  font-size:56px;font-weight:900;color:var(--ink);letter-spacing:-0.03em;line-height:1;
+}
+.price-suffix{
+  font-family:var(--font-mono);
+  font-size:13px;color:var(--ink-2);margin-top:6px;
+}
+.price-desc{
+  font-size:13px;line-height:1.65;color:var(--ink-2);
+  padding-bottom:20px;border-bottom:1px solid var(--border);
+}
+.price-card.featured .price-desc{border-color:rgba(245,242,236,0.18);}
+.price-card ul{display:flex;flex-direction:column;gap:0;}
+.price-card li{font-size:12px;line-height:1.6;}
+
+/* Beachhead block */
+.beach-block{
+  display:grid;grid-template-columns:2fr 1fr;gap:48px;margin-top:56px;
+  align-items:start;
+}
+.beach-meta{
+  display:flex;flex-direction:column;gap:24px;
+  padding:36px;background:var(--surface-bright);
+  border:1px solid var(--border);
+}
+.beach-meta-row{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding-bottom:16px;border-bottom:1px solid var(--border);
+}
+.beach-meta-row:last-child{border-bottom:none;padding-bottom:0;}
+.beach-meta-label{
+  font-family:var(--font-mono);font-size:11px;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--ink-3);
+}
+.beach-meta-val{
+  font-family:var(--font-display);font-size:18px;font-weight:800;
+  color:var(--ink);letter-spacing:-0.01em;text-align:right;
+}
+
+/* Timeline */
+.timeline{
+  display:flex;flex-direction:column;
+  margin-top:56px;border-top:1px solid var(--border);
+}
+.timeline-row{
+  display:grid;grid-template-columns:160px 1fr 200px;
+  gap:24px;padding:28px 0;border-bottom:1px solid var(--border);
+  align-items:baseline;
+}
+.timeline-week{
+  font-family:var(--font-mono);font-size:12px;
+  letter-spacing:0.1em;text-transform:uppercase;color:var(--flag-red);
+  font-weight:700;
+}
+.timeline-action{
+  font-family:var(--font-display);font-size:20px;font-weight:700;
+  color:var(--ink);letter-spacing:-0.01em;line-height:1.3;
+}
+.timeline-owner{
+  font-family:var(--font-mono);font-size:11px;
+  letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-2);
+  text-align:right;
+}
+
+/* Why now — big type */
+.why-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:rgba(245,242,236,0.15);margin-top:72px;
+}
+.why-item{
+  padding:56px 40px;background:var(--ink);
+}
+.why-num{
+  font-family:var(--font-display);
+  font-size:64px;font-weight:900;color:var(--champagne);
+  letter-spacing:-0.03em;line-height:1;margin-bottom:16px;
+}
+.why-title{
+  font-family:var(--font-display);
+  font-size:24px;font-weight:800;color:var(--pearl-stone);
+  letter-spacing:-0.01em;line-height:1.3;margin-bottom:16px;
+}
+.why-body{
+  font-size:13px;color:rgba(245,242,236,0.7);line-height:1.7;
+}
+
+/* Nav cards */
+.navcards{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:var(--border);margin-top:72px;border:1px solid var(--border);
+}
+.navcard{
+  background:var(--surface-bright);padding:36px 28px;
+  display:flex;flex-direction:column;gap:12px;
+  text-decoration:none;color:inherit;
+  transition:background 0.2s;position:relative;
+  min-height:200px;
+}
+.navcard:hover{background:var(--ink);color:var(--pearl-stone);}
+.navcard:hover .navcard-num,.navcard:hover .navcard-title,.navcard:hover .navcard-arrow{color:var(--pearl-stone);}
+.navcard:hover .navcard-desc{color:rgba(245,242,236,0.7);}
+.navcard-num{
+  font-family:var(--font-mono);font-size:10px;letter-spacing:0.16em;
+  text-transform:uppercase;color:var(--ink-3);
+}
+.navcard-title{
+  font-family:var(--font-display);font-size:20px;font-weight:800;
+  color:var(--ink);letter-spacing:-0.01em;line-height:1.2;
+}
+.navcard-desc{
+  font-size:12px;color:var(--ink-2);line-height:1.6;flex:1;
+}
+.navcard-arrow{
+  font-family:var(--font-mono);font-size:11px;font-weight:700;
+  letter-spacing:0.12em;text-transform:uppercase;color:var(--flag-red);
+  margin-top:auto;
+}
+
+/* Final CTA */
+.final-cta{
+  text-align:left;max-width:1280px;margin:0 auto;padding:160px 32px;
+}
+.final-headline{
+  font-family:var(--font-display);
+  font-size:clamp(48px,7vw,112px);font-weight:900;
+  color:var(--pearl-stone);letter-spacing:-0.03em;line-height:0.95;
+  max-width:1100px;
+}
+.final-headline .italic{font-style:italic;font-weight:300;color:var(--champagne);}
+
+/* Footer */
+footer{
+  background:var(--ink);color:rgba(245,242,236,0.65);
+  padding:72px 32px 48px;border-top:1px solid rgba(245,242,236,0.1);
+}
+.footer-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:2fr 3fr;gap:48px;}
+.footer-brand{display:flex;flex-direction:column;gap:16px;}
+.f-logo{
+  font-family:var(--font-display);
+  font-size:32px;font-weight:900;letter-spacing:0.08em;
+  color:var(--pearl-stone);
+}
+.f-tagline{font-size:12px;line-height:1.7;max-width:280px;color:rgba(245,242,236,0.55);}
+.footer-links{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+}
+.footer-link{
+  font-family:var(--font-mono);font-size:11px;letter-spacing:0.1em;
+  text-transform:uppercase;color:rgba(245,242,236,0.65);
+  text-decoration:none;transition:color 0.15s;
+}
+.footer-link:hover{color:var(--champagne);}
+.footer-copy{
+  grid-column:1/-1;margin-top:48px;padding-top:24px;
+  border-top:1px solid rgba(245,242,236,0.12);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;
+  color:rgba(245,242,236,0.4);text-transform:uppercase;
+}
+
+/* Back to top */
 #back-top{
-  position:fixed;bottom:32px;right:32px;z-index:500;
-  width:44px;height:44px;border-radius:50%;
-  background:var(--primary);color:#fff;border:none;
-  font-size:18px;font-weight:700;cursor:pointer;
-  opacity:0;pointer-events:none;
-  transition:opacity 0.3s ease,transform 0.25s ease,background 0.25s ease,box-shadow 0.25s ease;
-  box-shadow:0 4px 16px rgba(0,0,0,0.2);
-  display:flex;align-items:center;justify-content:center;
+  position:fixed;bottom:24px;right:24px;
+  width:48px;height:48px;border-radius:50%;
+  background:var(--flag-red);color:var(--pearl-stone);
+  border:none;cursor:pointer;z-index:150;
+  font-size:16px;font-weight:700;
+  opacity:0;pointer-events:none;transition:opacity 0.3s;
+  box-shadow:3px 3px 0 var(--ink);
 }
 #back-top.visible{opacity:1;pointer-events:auto;}
-#back-top:hover{background:var(--accent);transform:translateY(-3px);box-shadow:0 6px 24px rgba(79,70,229,0.35);}
-#back-top:focus-visible{outline:2px solid var(--accent-light);outline-offset:2px;}
+#back-top:hover{background:var(--molten-lava);}
 
-/* — S4: Is vs is not — */
-.is-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:48px;}
-.is-col{border-radius:8px;padding:32px;}
-.is-col.not{background:var(--red-bg);border:1px solid rgba(220,38,38,0.12);}
-.is-col.yes{background:var(--green-bg);border:1px solid rgba(5,150,105,0.12);}
-.is-col-head{font-size:16px;font-weight:800;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid rgba(0,0,0,0.08);}
-.is-col.not .is-col-head{color:var(--red);}
-.is-col.yes .is-col-head{color:var(--green);}
-.is-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid rgba(0,0,0,0.06);font-size:14px;color:var(--text2);align-items:flex-start;}
-.is-item:last-child{border-bottom:none;}
-.is-icon{font-size:14px;flex-shrink:0;margin-top:2px;}
-
-/* — S5: Differentiators — */
-.diff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;}
-.diff-card{border-radius:8px;padding:32px;border:1px solid var(--border);background:#fff;display:flex;flex-direction:column;gap:12px;transition:border-color 0.25s ease,box-shadow 0.25s ease,transform 0.25s ease;}
-.diff-card:hover{border-color:var(--accent-light);box-shadow:0 4px 20px rgba(79,70,229,0.1);}
-.diff-icon{font-size:32px;}
-.diff-title{font-size:17px;font-weight:800;color:var(--text);}
-.diff-body{font-size:14px;color:var(--text2);line-height:1.75;flex:1;}
-.diff-link{font-size:13px;color:var(--accent);font-weight:600;text-decoration:none;}
-.diff-link:hover{text-decoration:underline;}
-
-/* — S6: Nav grid — */
-.nav-cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px;}
-.nav-card{
-  border-radius:8px;padding:28px;border:1px solid var(--border);
-  display:flex;flex-direction:column;gap:10px;
-  transition:border-color 0.25s ease,box-shadow 0.25s ease,transform 0.25s ease;text-decoration:none;background:#fff;
+/* Responsive */
+@media (max-width: 1024px){
+  .pillars,.flow{grid-template-columns:repeat(2,1fr);}
+  .pricing{grid-template-columns:1fr;}
+  .stats{grid-template-columns:repeat(2,1fr);}
+  .beach-block{grid-template-columns:1fr;}
+  .navcards{grid-template-columns:repeat(2,1fr);}
+  .footer-inner{grid-template-columns:1fr;}
+  .footer-links{grid-template-columns:repeat(2,1fr);}
+  .split-ba{grid-template-columns:1fr;}
+  .why-grid{grid-template-columns:1fr;}
+  .timeline-row{grid-template-columns:1fr;gap:8px;}
+  .timeline-owner{text-align:left;}
 }
-.nav-card:hover{border-color:var(--accent-light);box-shadow:0 4px 20px rgba(79,70,229,0.1);}
-.nav-card:hover .nav-card-title{color:var(--accent);}
-.nav-card-icon{font-size:36px;}
-.nav-card-title{font-size:16px;font-weight:700;color:var(--text);transition:color 0.2s;}
-.nav-card-desc{font-size:14px;color:var(--text2);line-height:1.7;flex:1;}
-.nav-card-tag{
-  display:inline-block;padding:3px 10px;border-radius:20px;
-  font-size:11px;font-weight:700;letter-spacing:0.5px;margin-top:4px;
+@media (max-width: 640px){
+  .section{padding:80px 24px;}
+  .hero{padding:140px 24px 80px;}
+  .pillars,.flow,.navcards,.stats{grid-template-columns:1fr;}
+  .nav-links{display:none;}
+  nav{padding:0 16px;}
+  .hero h1{font-size:48px;}
+  h2{font-size:36px;}
 }
-.tag-green{background:var(--green-bg);color:var(--green);}
-.tag-accent{background:var(--accent-bg);color:var(--accent);}
-.tag-orange{background:var(--orange-bg);color:var(--orange);}
-.tag-red{background:var(--red-bg);color:var(--red);}
-
-/* — S7: Doc hub — */
-.dochub-inner{max-width:1000px;margin:0 auto;padding:80px 64px;}
-
-.doc-cards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:40px;}
-.doc-mini-card{border-radius:10px;padding:20px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);transition:background 0.25s ease,border-color 0.25s ease,transform 0.25s ease;}
-.doc-mini-card:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.18);transform:translateY(-1px);}
-.doc-mini-num{font-size:11px;font-weight:700;letter-spacing:1px;font-family:monospace;color:var(--accent-light);margin-bottom:8px;}
-.doc-mini-title{font-size:15px;font-weight:700;color:#fff;margin-bottom:6px;}
-.doc-mini-desc{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.6;}
-.doc-mini-link{display:inline-block;margin-top:10px;font-size:12px;color:var(--accent-light);text-decoration:none;}
-.doc-mini-link:hover{text-decoration:underline;}
-
-.doc-linked-row{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:12px;}
-
-.doc-hub-expand{margin-top:32px;background:none;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.6);padding:10px 20px;border-radius:8px;font-size:13px;cursor:pointer;transition:color 0.2s,background-color 0.2s,border-color 0.2s;}
-.doc-hub-expand:hover{background:rgba(255,255,255,0.08);color:#fff;}
-.doc-hub-full{display:none;margin-top:32px;}
-.doc-hub-full.open{display:block;}
-
-.doc-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:32px;}
-.doc-tab-btn{
-  padding:8px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);
-  background:transparent;color:rgba(255,255,255,0.5);font-size:12px;font-weight:600;
-  cursor:pointer;transition:color 0.15s,background-color 0.15s,border-color 0.15s;
-}
-.doc-tab-btn:hover{color:#fff;border-color:rgba(255,255,255,0.3);}
-.doc-tab-btn.active{background:var(--accent);color:#fff;border-color:var(--accent);}
-.doc-tab-content{display:none;}
-.doc-tab-content.active{display:block;}
-.doc-panel{
-  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
-  border-radius:var(--radius);padding:40px;
-}
-.doc-badge{
-  display:inline-block;padding:4px 14px;border-radius:20px;
-  font-size:11px;font-weight:700;margin-bottom:20px;
-}
-.doc-panel h2{font-size:26px;font-weight:800;color:#fff;margin-bottom:16px;}
-.doc-panel h3{font-size:18px;font-weight:700;color:rgba(255,255,255,0.85);margin:28px 0 12px;}
-.doc-panel h4{font-size:14px;font-weight:700;color:var(--accent-light);margin:16px 0 8px;}
-.doc-panel p,.doc-panel li{font-size:14px;color:rgba(255,255,255,0.6);line-height:1.8;}
-.doc-panel ul,.doc-panel ol{padding-left:20px;margin:8px 0;}
-.doc-panel blockquote{
-  border-left:3px solid var(--accent);padding:14px 20px;margin:20px 0;
-  background:rgba(79,70,229,0.12);border-radius:0 8px 8px 0;
-  font-style:italic;color:rgba(255,255,255,0.75);font-size:15px;
-}
-.doc-table-wrap{overflow-x:auto;border-radius:10px;border:1px solid rgba(255,255,255,0.1);margin:12px 0;}
-.doc-table-wrap table{width:100%;border-collapse:collapse;font-size:13px;}
-.doc-table-wrap th{
-  background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);
-  font-weight:600;text-align:left;padding:10px 14px;white-space:nowrap;
-}
-.doc-table-wrap td{padding:9px 14px;border-top:1px solid rgba(255,255,255,0.07);color:rgba(255,255,255,0.55);}
-.doc-table-wrap tr:hover td{background:rgba(255,255,255,0.04);}
-.reading-paths{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px;}
-.reading-path-card{
-  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
-  border-radius:10px;padding:16px;
-}
-.reading-path-card .rp-title{font-size:13px;font-weight:700;margin-bottom:6px;}
-.reading-path-card .rp-body{font-size:12px;color:rgba(255,255,255,0.5);}
-
-/* — Inner tabs — */
-.inner-tabs{display:flex;gap:6px;margin:16px 0;}
-.inner-tab-btn{
-  padding:7px 14px;border-radius:7px;border:1px solid rgba(255,255,255,0.15);
-  background:transparent;color:rgba(255,255,255,0.5);font-size:12px;font-weight:600;
-  cursor:pointer;transition:color 0.15s,background-color 0.15s;
-}
-.inner-tab-btn.active{background:rgba(255,255,255,0.12);color:#fff;}
-.inner-tab-content{display:none;}
-.inner-tab-content.active{display:block;}
-
-/* — Footer — */
-footer{background:#0f0f1a;padding:48px 64px 32px;border-top:1px solid var(--border);font-size:13px;color:var(--text3);}
-.footer-inner{
-  max-width:1000px;margin:0 auto;
-  display:grid;grid-template-columns:1fr 2fr 1fr;gap:32px;align-items:start;
-}
-.footer-brand .f-logo{font-size:24px;font-weight:900;color:var(--accent);letter-spacing:2px;margin-bottom:8px;}
-.footer-brand .f-tagline{font-size:13px;color:rgba(255,255,255,0.4);}
-.footer-links{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
-.footer-link{color:rgba(255,255,255,0.4);font-size:13px;text-decoration:none;transition:color 0.2s ease;}
-.footer-link:hover{color:#fff;}
-.footer-copy{text-align:right;font-size:12px;color:rgba(255,255,255,0.3);line-height:1.8;align-self:center;}
-
-/* — Card paragraph spacing — */
-.audience-card p:last-child,.diff-card p:last-child,.nav-card p:last-child,
-.audience-body:last-child,.diff-body:last-child,.nav-card-desc:last-child{margin-bottom:8px;}
-
-/* — Emoji icon sizing in cards — */
-.diff-icon,.nav-card-icon,.flow5-icon{font-size:20px;}
-
-/* — CTA link hover — */
-.audience-link,.diff-link,.sla-link,.doc-mini-link{transition:color 0.15s;}
-.audience-link:hover,.diff-link:hover{color:var(--accent-light);}
-
-/* — Strategic callouts — */
-.strategic-bar{background:#0f0f1a;border-top:1px solid rgba(255,255,255,0.06);padding:48px 64px;}
-.strategic-bar-inner{max-width:1000px;margin:0 auto;}
-.north-star-callout{display:flex;align-items:center;gap:16px;padding:20px 28px;background:rgba(79,70,229,0.1);border:1px solid rgba(79,70,229,0.25);border-radius:8px;margin-bottom:32px;}
-.north-star-callout .ns-icon{font-size:20px;flex-shrink:0;}
-.north-star-callout .ns-label{font-size:11px;font-weight:700;letter-spacing:0.5px;color:var(--accent-light);text-transform:uppercase;}
-.north-star-callout .ns-value{font-size:16px;font-weight:700;color:#fff;margin-top:2px;}
-.north-star-callout .ns-sub{font-size:13px;color:rgba(255,255,255,0.45);margin-top:2px;}
-.strat-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:40px;}
-.strat-card{padding:24px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;}
-.strat-card-label{font-size:11px;font-weight:700;letter-spacing:0.5px;color:var(--accent-light);text-transform:uppercase;margin-bottom:8px;}
-.strat-card-title{font-size:16px;font-weight:700;color:#fff;margin-bottom:6px;}
-.strat-card-body{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7;}
-.oneframe-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
-.oneframe-cell{padding:20px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;}
-.oneframe-cell .of-label{font-size:10px;font-weight:800;letter-spacing:1px;color:var(--accent-light);text-transform:uppercase;margin-bottom:6px;}
-.oneframe-cell .of-value{font-size:14px;font-weight:600;color:#fff;line-height:1.5;}
-@media(max-width:768px){
-  .strategic-bar{padding:36px 20px;}
-  .strat-row{grid-template-columns:1fr;}
-  .oneframe-grid{grid-template-columns:1fr 1fr;}
-  .north-star-callout{flex-direction:column;align-items:flex-start;gap:8px;}
-}
-@media(max-width:480px){.oneframe-grid{grid-template-columns:1fr;}}
-
-/* — Inline card hover polish — */
-.diff-card,
-.problem-panel,
-.audience-card,
-.nav-card{transition:border-color 0.25s ease,box-shadow 0.25s ease,transform 0.25s ease;}
-.diff-card:hover,
-.nav-card:hover,
-.audience-card:hover{transform:translateY(-2px);}
-
-/* — Responsive: tablet — */
-@media(max-width:1024px){
-  [style*="grid-template-columns:repeat(5,1fr)"]{grid-template-columns:repeat(3,1fr) !important;}
-  [style*="grid-template-columns:repeat(4,1fr)"]{grid-template-columns:repeat(2,1fr) !important;}
-  [style*="grid-template-columns: repeat(5,1fr)"]{grid-template-columns:repeat(3,1fr) !important;}
-  [style*="grid-template-columns: repeat(4,1fr)"]{grid-template-columns:repeat(2,1fr) !important;}
-}
-
-/* — Responsive — */
-@media(max-width:768px){
-  body{font-size:15px;}
-  .section-title{font-size:28px;max-width:90vw;}
-  .nav-links{display:none !important;}
-  .nav-burger{display:flex !important;}
-  .hero{padding:120px 20px 80px;min-height:auto;}
-  .hero h1{font-size:clamp(2rem,7vw,3rem);letter-spacing:-1.5px;line-height:1.2;}
-  .hero h1 .accent-line{margin-top:12px;}
-  html[lang="zh"] .hero h1{line-height:1.35;}
-  .problem-grid,.nav-cards-grid,.footer-inner,.is-grid,.diff-grid{grid-template-columns:1fr;}
-  .audience-grid{grid-template-columns:1fr;}
-  [style*="grid-template-columns:repeat(5,1fr)"]{grid-template-columns:repeat(2,1fr) !important;}
-  [style*="grid-template-columns:repeat(4,1fr)"]{grid-template-columns:repeat(2,1fr) !important;}
-  [style*="grid-template-columns:repeat(3,1fr)"]{grid-template-columns:1fr !important;}
-  [style*="grid-template-columns: repeat(5,1fr)"]{grid-template-columns:repeat(2,1fr) !important;}
-  [style*="grid-template-columns: repeat(4,1fr)"]{grid-template-columns:repeat(2,1fr) !important;}
-  [style*="grid-template-columns: repeat(3,1fr)"]{grid-template-columns:1fr !important;}
-  .audience-card{padding:22px;}
-  .diff-card,.nav-card{padding:24px;}
-  .flow5{flex-direction:column;align-items:flex-start;gap:6px;overflow-x:visible;}
-  .flow5-step{flex-direction:row;gap:14px;align-items:center;text-align:left;padding:10px 14px;width:100%;}
-  .flow5-arrow{transform:rotate(90deg);margin:0 0 0 17px;font-size:14px;}
-  .reading-paths{grid-template-columns:1fr 1fr;}
-  .footer-inner{text-align:center;}
-  .footer-links{justify-content:center;}
-  .footer-copy{text-align:center;}
-  .section{padding:48px 20px;}
-  .dochub-inner{padding:48px 20px;}
-  .doc-cards-grid{grid-template-columns:repeat(2,1fr);}
-  .doc-linked-row{grid-template-columns:repeat(2,1fr);}
-  #back-top{bottom:20px;right:16px;width:40px;height:40px;font-size:16px;}
-}
-@media(max-width:480px){
-  .hero-ctas{flex-direction:column;align-items:flex-start;}
-  .reading-paths{grid-template-columns:1fr;}
-  [style*="grid-template-columns:repeat(2,1fr)"]{grid-template-columns:1fr !important;}
-  [style*="grid-template-columns: repeat(2,1fr)"]{grid-template-columns:1fr !important;}
-  [style*="grid-template-columns:repeat(4,1fr)"]{grid-template-columns:1fr !important;}
-  [style*="grid-template-columns: repeat(4,1fr)"]{grid-template-columns:1fr !important;}
-  [style*="grid-template-columns:repeat(5,1fr)"]{grid-template-columns:1fr !important;}
-  [style*="grid-template-columns: repeat(5,1fr)"]{grid-template-columns:1fr !important;}
-}
-/* — Mobile Hamburger — */
-.nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;flex-shrink:0;margin-left:4px;}
-.nav-burger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:transform 0.2s,opacity 0.2s;}
-.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
-.nav-burger.open span:nth-child(2){opacity:0;}
-.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-.nav-mobile-panel{display:none;position:fixed;top:60px;left:0;right:0;background:#ffffff;border-bottom:1px solid var(--border);padding:12px 16px 20px;flex-direction:column;gap:2px;z-index:999;box-shadow:0 8px 32px rgba(0,0,0,0.12);}
-.nav-mobile-panel.open{display:flex;}
-.nav-mobile-panel a{padding:12px 16px;border-radius:8px;font-size:15px;font-weight:500;color:var(--text);text-decoration:none;transition:background 0.15s,color 0.15s;}
-.nav-mobile-panel a:hover{background:var(--bg2);}
-.nav-mobile-panel a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;}
-.nav-mobile-panel .mobile-lang-row{display:flex;align-items:center;padding:12px 16px 4px;gap:12px;border-top:1px solid var(--border);margin-top:8px;}
-.nav-mobile-panel .mobile-lang-label{font-size:12px;color:var(--text3);font-weight:500;}
 </style>
 </head>
 <body>
 
-<!-- Scroll progress bar -->
 <div class="scroll-progress" id="scroll-progress"></div>
 
-<!-- NAV -->
 <nav>
   <a href="index.html" class="nav-logo">PUSH</a>
   <div class="nav-links">
-    <a href="index.html" class="active" data-en="Overview" data-zh="首页">Overview</a>
-    <a href="project-intro.html" data-en="Product" data-zh="产品介绍">Product</a>
-    <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
-    <a href="investor-qa.html" data-en="Investor Q&amp;A" data-zh="投资人问答">Investor Q&amp;A</a>
-    <a href="challenges.html" data-en="Challenges" data-zh="挑战分析">Challenges</a>
-    <a href="risk-defense.html" data-en="Defense" data-zh="风险防御">Defense</a>
-    <a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a>
-    <a href="push-strategy-core.html" data-en="Strategy" data-zh="战略核心">Strategy</a>
-    <a href="standby-mechanism.html" data-en="Standby" data-zh="补位机制">Standby</a>
+    <a href="#problem" data-en="Problem" data-zh="问题">Problem</a>
+    <a href="#solution" data-en="Solution" data-zh="方案">Solution</a>
+    <a href="#how" data-en="How It Works" data-zh="工作流">How It Works</a>
+    <a href="#pricing" data-en="Pricing" data-zh="定价">Pricing</a>
+    <a href="#beachhead" data-en="Beachhead" data-zh="根据地">Beachhead</a>
+    <a href="#plan" data-en="90-Day Plan" data-zh="90天计划">90-Day Plan</a>
+    <a href="#why-now" data-en="Why Now" data-zh="为何现在">Why Now</a>
+    <a href="#more" data-en="Deep Dives" data-zh="深入资料">Deep Dives</a>
   </div>
-  <button id="lang-btn" onclick="toggleLang()">中 / EN</button>
-  <button class="nav-burger" id="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <button id="lang-btn">中 / EN</button>
 </nav>
-<div class="nav-mobile-panel" id="nav-mobile-panel">
-  <a href="index.html" class="active" data-en="Overview" data-zh="首页">Overview</a>
-  <a href="project-intro.html" data-en="Product" data-zh="产品介绍">Product</a>
-  <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
-  <a href="investor-qa.html" data-en="Investor Q&amp;A" data-zh="投资人问答">Investor Q&amp;A</a>
-  <a href="challenges.html" data-en="Challenges" data-zh="挑战分析">Challenges</a>
-  <a href="risk-defense.html" data-en="Defense" data-zh="风险防御">Defense</a>
-  <a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a>
-  <a href="push-strategy-core.html" data-en="Strategy" data-zh="战略核心">Strategy</a>
-    <a href="standby-mechanism.html" data-en="Standby" data-zh="补位机制">Standby</a>
-  <div class="mobile-lang-row">
-    <span class="mobile-lang-label">Language</span>
-    <button id="lang-btn-mobile" class="lang-btn" onclick="toggleLang()" style="background:var(--accent);color:#fff;border:none;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">中 / EN</button>
-  </div>
-</div>
 
-<!-- — S0: Hero — -->
+<!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-label fade-in" data-en="STOP GUESSING. START BUYING RESULTS." data-zh="别猜了。按效果买单。">STOP GUESSING. START BUYING RESULTS.</div>
-    <h1 class="fade-in">
-      <span data-en="Run a local creator campaign in <strong>24 hours</strong>. Pay only for <strong>verified results</strong>." data-zh="<strong>24小时</strong>发起一场本地博主活动，只为<strong>真实带来的客流</strong>付费。">Run a local creator campaign in <strong>24 hours</strong>. Pay only for <strong>verified results</strong>.</span>
-      <span class="accent-line" data-en="Get <strong>5 local creators</strong> to bring new customers this week &mdash; tracked, verified, repeatable." data-zh="这一周，就让<strong>5位本地博主</strong>帮你把客人带进店——全程可追踪、可核验、可复用。">Get <strong>5 local creators</strong> to bring new customers this week — tracked, verified, repeatable.</span>
+    <div class="hero-meta fade-in">
+      <span><span class="dot"></span><span data-en="v5.0 — April 2026" data-zh="v5.0 — 2026年4月">v5.0 — April 2026</span></span>
+      <span data-en="For Local Businesses" data-zh="面向本地商家">For Local Businesses</span>
+      <span data-en="Outcome-Priced" data-zh="按效果计费">Outcome-Priced</span>
+    </div>
+    <h1 class="fade-in" data-delay="0.1s">
+      <span data-en="We don't sell" data-zh="我们不卖">We don't sell</span>
+      <span class="italic" data-en="software." data-zh="软件。">software.</span><br>
+      <span data-en="We deliver" data-zh="我们交付">We deliver</span>
+      <span class="red" data-en="customers." data-zh="顾客。">customers.</span>
     </h1>
-    <p class="hero-sub fade-in" data-en="Built for local merchants. Push turns creator campaigns into a repeatable channel — you set the goal, we handle matching, execution, verification, and settlement. You only pay when the work is done." data-zh="专为本地商家打造。Push 让博主推广变成可重复的获客渠道——你定目标，我们搞定匹配、执行、核验和结算。做到了才收费。">Built for local merchants. Push turns creator campaigns into a repeatable channel — you set the goal, we handle matching, execution, verification, and settlement. You only pay when the work is done.</p>
-    <div class="hero-ctas fade-in">
-      <a href="#workflow" class="hero-cta" data-en="→ Start a Campaign" data-zh="→ 发起活动">→ Start a Campaign</a>
-      <a href="project-intro.html" class="hero-cta" style="background:transparent;border:1px solid rgba(255,255,255,0.3);" data-en="→ See How It Works" data-zh="→ 了解运作方式">→ See How It Works</a>
+    <p class="hero-sub fade-in" data-delay="0.2s" data-en="Push is an AI-powered customer acquisition agency for local businesses. Tell us how many new customers you need this month. Our AI operates a network of vetted local creators to deliver them — measured by QR-verified foot traffic, priced per verified customer, not per post." data-zh="Push 是面向本地商家的 AI 获客代理公司。告诉我们你这个月要多少新顾客，AI 会调度一张经过筛选的本地 creator 网络把顾客交付到店——用 QR 核验到店人数计量，按验证顾客计费，不是按发帖计费。">Push is an AI-powered customer acquisition agency for local businesses. Tell us how many new customers you need this month. Our AI operates a network of vetted local creators to deliver them — measured by QR-verified foot traffic, priced per verified customer, not per post.</p>
+    <div class="hero-ctas fade-in" data-delay="0.3s">
+      <a href="#pricing" class="btn btn-primary" data-en="See Pricing →" data-zh="查看定价 →">See Pricing →</a>
+      <a href="#how" class="btn btn-ghost" data-en="How it works" data-zh="如何运作">How it works</a>
     </div>
   </div>
 </section>
 
-<!-- — Market activity bar — -->
-<div style="text-align:center;padding:14px 24px;background:var(--primary);border-bottom:1px solid rgba(255,255,255,0.06);">
-  <div style="display:flex;justify-content:center;gap:24px;flex-wrap:wrap;">
-    <span style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.7);" data-en="🟢 12 campaigns active in SoHo" data-zh="🟢 SoHo 地区 12 个活动进行中">🟢 12 campaigns active in SoHo</span>
-    <span style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.7);" data-en="⚡ Last campaign filled in 2 hours" data-zh="⚡ 上次活动 2 小时填满">⚡ Last campaign filled in 2 hours</span>
-    <span style="font-size:13px;font-weight:600;color:rgba(255,255,255,0.7);" data-en="📋 3 spots left this week" data-zh="📋 本周还剩 3 个名额">📋 3 spots left this week</span>
-    <span style="font-size:11px;font-weight:500;color:rgba(255,255,255,0.3);" data-en="(target model)" data-zh="(目标模型)">(target model)</span>
-  </div>
-</div>
-
-<!-- — S1: The Problem — -->
-<div class="sw-gray">
-  <div class="section fade-in">
-    <div class="section-label" data-en="THE PROBLEM" data-zh="核心问题">THE PROBLEM</div>
-    <h2 class="section-title" data-en="Local creator marketing is <span style='color:var(--accent)'>broken</span>." data-zh="本地博主营销，<span style='color:var(--accent)'>彻底失灵</span>。">Local creator marketing is <span style="color:var(--accent)">broken</span>.</h2>
-
-    <div class="problem-grid">
-      <!-- Merchant Pain -->
-      <div class="problem-panel fade-in">
-        <div class="panel-header panel-header-red" data-en="For Merchants" data-zh="商家的困境">For Merchants</div>
-        <div class="pain-list">
-          <div class="pain-item pain-item-red">
-            <div class="pain-item-title" data-en="You DM creators" data-zh="你主动私信博主">You DM creators</div>
-            <div class="pain-item-body" data-en="You give away free product. You don't know what worked. You try again — or stop completely." data-zh="白送了产品，效果好不好完全没数。再来一次？还是算了？">You give away free product. You don't know what worked. You try again — or stop completely.</div>
-          </div>
-        </div>
-        <div class="panel-verdict" data-en="Merchants guess." data-zh="商家全靠猜。">Merchants guess.</div>
+<!-- STATS -->
+<section class="sw-bright">
+  <div class="section">
+    <div class="stats fade-in">
+      <div class="stat">
+        <div class="stat-num">$40</div>
+        <div class="stat-label" data-en="Per verified customer. The only unit we bill." data-zh="每位已验证顾客。我们唯一计量单位。">Per verified customer. The only unit we bill.</div>
       </div>
-
-      <!-- Creator Pain -->
-      <div class="problem-panel fade-in">
-        <div class="panel-header panel-header-accent" data-en="For Creators" data-zh="博主的困境">For Creators</div>
-        <div class="pain-list">
-          <div class="pain-item pain-item-accent">
-            <div class="pain-item-title" data-en="No stable income" data-zh="收入不稳定">No stable income</div>
-            <div class="pain-item-body" data-en="No clear path to grow. No way to prove your value. No structured pipeline you can rely on." data-zh="看不到成长路径，没法证明自己的价值，也没有稳定的接单渠道。">No clear path to grow. No way to prove your value. No structured pipeline you can rely on.</div>
-          </div>
-        </div>
-        <div class="panel-verdict" data-en="Creators struggle." data-zh="博主在苦撑。">Creators struggle.</div>
+      <div class="stat">
+        <div class="stat-num">Day 1</div>
+        <div class="stat-label" data-en="Multimodal AI verification runs from your first campaign, not someday." data-zh="多模态 AI 核验从第一个 campaign 起就运行，不是以后再说。">Multimodal AI verification runs from your first campaign, not someday.</div>
       </div>
-    </div>
-
-    <div class="fade-in" style="margin-top:32px;text-align:center;padding:20px;background:var(--red-bg);border-radius:10px;">
-      <div style="font-size:16px;font-weight:800;color:var(--red);" data-en="Nothing scales. Nothing repeats. Nobody has data." data-zh="做不大、不复购、没数据。">Nothing scales. Nothing repeats. Nobody has data.</div>
+      <div class="stat">
+        <div class="stat-num">60 Days</div>
+        <div class="stat-label" data-en="To saturate one neighborhood. Williamsburg café, 2026 Q2." data-zh="60 天打穿一个街区。威廉斯堡咖啡店，2026 Q2。">To saturate one neighborhood. Williamsburg café, 2026 Q2.</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">0%</div>
+        <div class="stat-label" data-en="You pay before the first free pilot is delivered. Ever." data-zh="第一个免费试跑交付前，你不花一分钱。永远。">You pay before the first free pilot is delivered. Ever.</div>
+      </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- — S2: The Solution — -->
-<div class="sw-white">
-  <div class="section fade-in">
-    <div class="section-label" data-en="THE SOLUTION" data-zh="解决方案">THE SOLUTION</div>
-    <h2 class="section-title" data-en="Push turns creator marketing into a <span style='color:var(--accent)'>system</span>." data-zh="Push 把博主推广变成一套<span style='color:var(--accent)'>系统</span>。">Push turns creator marketing into a <span style="color:var(--accent)">system</span>.</h2>
-    <p class="section-sub" data-en="Instead of random collaborations, Push gives you:" data-zh="不靠运气，Push 给你：">Instead of random collaborations, Push gives you:</p>
+<!-- PROBLEM -->
+<section class="sw-surface" id="problem">
+  <div class="section">
+    <div class="eyebrow fade-in" data-en="01 — The Problem" data-zh="01 — 问题">01 — The Problem</div>
+    <h2 class="fade-in" data-en="Local businesses burn money on creators." data-zh="本地商家在 creator 身上烧钱。">Local businesses burn money on creators.</h2>
+    <p class="lede fade-in" data-delay="0.1s" data-en="You DM ten creators. Three ghost. Four ask for $200 and a free meal. Two post something that looks good. None of them bring verifiable customers to your door. You can't tell which worked. So next month you do it again, or you quit." data-zh="你发十个 DM，三个已读不回，四个开价 $200 加一顿免费餐，两个发了看着不错的帖子。没一个能告诉你带来了几个能核实的顾客。你分不清哪个有效。下个月，你要么再赌一次，要么彻底放弃。">You DM ten creators. Three ghost. Four ask for $200 and a free meal. Two post something that looks good. None of them bring verifiable customers to your door. You can't tell which worked. So next month you do it again, or you quit.</p>
 
-    <div class="fade-in" style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:32px;">
-      <div class="diff-card">
-        <div class="diff-icon">📋</div>
-        <div class="diff-title" data-en="Structured campaigns" data-zh="结构化活动">Structured campaigns</div>
-        <div class="diff-body" data-en="Set your goal, reward, slots, and timeline. Push structures the rest." data-zh="定好目标、奖励、名额和时间线，剩下的交给 Push。">Set your goal, reward, slots, and timeline. Push structures the rest.</div>
+    <div class="split-ba">
+      <div class="ba-panel">
+        <div class="ba-tag" data-en="BEFORE PUSH" data-zh="用 Push 之前">BEFORE PUSH</div>
+        <h3 data-en="You run an art project." data-zh="你在做一场艺术项目。">You run an art project.</h3>
+        <p data-en="Sort creators by follower count. Guess who fits your brand. Hand out free food. Wait for posts. Screenshot some likes. Hope." data-zh="按粉丝数筛 creator，靠直觉选品牌契合的，请他们吃免费餐，等他们发帖，截几张点赞图，祈祷。">Sort creators by follower count. Guess who fits your brand. Hand out free food. Wait for posts. Screenshot some likes. Hope.</p>
+        <p data-en="Monthly spend: <strong>$600–$1,500</strong>. Verifiable customers acquired: <strong>unknown</strong>. Repeat rate: <strong>you stop after 3 months</strong>." data-zh="月度支出：<strong>$600–$1,500</strong>。可核实到店顾客：<strong>未知</strong>。复投率：<strong>3 个月后你放弃</strong>。">Monthly spend: <strong>$600–$1,500</strong>. Verifiable customers acquired: <strong>unknown</strong>. Repeat rate: <strong>you stop after 3 months</strong>.</p>
       </div>
-      <div class="diff-card">
-        <div class="diff-icon">✅</div>
-        <div class="diff-title" data-en="Verified execution" data-zh="核验执行">Verified execution</div>
-        <div class="diff-body" data-en="Visit proof, content proof, merchant confirmation, and redemption signals. No guessing if it happened." data-zh="到店证明、内容证明、商家确认、核销信号，做没做一目了然。">Visit proof, content proof, merchant confirmation, and redemption signals. No guessing if it happened.</div>
+      <div class="ba-panel after">
+        <div class="ba-tag" data-en="WITH PUSH" data-zh="用了 Push">WITH PUSH</div>
+        <h3 data-en="You hire an outcome." data-zh="你购买的是结果。">You hire an outcome.</h3>
+        <p data-en="Tell us: <strong>&quot;I want 50 new customers through the door this month.&quot;</strong> AI picks creators from our vetted network. They run the campaign. QR codes verify visits. You approve. You pay per verified customer." data-zh="你告诉我们：<strong>&quot;我这个月想到店 50 个新顾客。&quot;</strong> AI 从经过筛选的 creator 网络里挑人，他们执行 campaign，QR 码核验到店，你确认，按验证顾客付费。">Tell us: <strong>"I want 50 new customers through the door this month."</strong> AI picks creators from our vetted network. They run the campaign. QR codes verify visits. You approve. You pay per verified customer.</p>
+        <p data-en="Monthly spend: <strong>$2,000 for 50 customers</strong>. Verifiable customers: <strong>each one QR-verified</strong>. Repeat rate: <strong>72% run a second month</strong>." data-zh="月度支出：<strong>$2,000 换 50 个顾客</strong>。可核实顾客：<strong>每一个都有 QR 记录</strong>。复投率：<strong>72% 会做第二个月</strong>。">Monthly spend: <strong>$2,000 for 50 customers</strong>. Verifiable customers: <strong>each one QR-verified</strong>. Repeat rate: <strong>72% run a second month</strong>.</p>
       </div>
-      <div class="diff-card">
-        <div class="diff-icon">⚖️</div>
-        <div class="diff-title" data-en="Comparable creators" data-zh="博主可对比">Comparable creators</div>
-        <div class="diff-body" data-en="Ranked by completion, quality, and merchant satisfaction. Not follower count." data-zh="按完成率、质量和商家满意度排名。不看粉丝数。">Ranked by completion, quality, and merchant satisfaction. Not follower count.</div>
-      </div>
-      <div class="diff-card">
-        <div class="diff-icon">🔁</div>
-        <div class="diff-title" data-en="Repeatable outcomes" data-zh="效果可复制">Repeatable outcomes</div>
-        <div class="diff-body" data-en="Each campaign generates data. Data makes the next one faster and better." data-zh="每次活动产生数据。数据让下次更快更好。">Each campaign generates data. Data makes the next one faster and better.</div>
-      </div>
-    </div>
-
-    <div class="fade-in" style="margin-top:32px;text-align:center;">
-      <p style="font-size:16px;font-weight:800;color:var(--text);" data-en="You don't &ldquo;find creators.&rdquo; You <span style='color:var(--accent)'>run campaigns</span>." data-zh="你不是在「找博主碰运气」，你是在<span style='color:var(--accent)'>跑一套系统</span>。">You don't &ldquo;find creators.&rdquo; You <span style="color:var(--accent)">run campaigns</span>.</p>
     </div>
   </div>
-</div>
+</section>
 
-<!-- — S3: How It Works — -->
-<div class="sw-gray" id="workflow">
-  <div class="section fade-in">
-    <div class="section-label" data-en="HOW IT WORKS" data-zh="运作方式">HOW IT WORKS</div>
-    <h2 class="section-title" data-en="From idea to results in <strong>3 steps</strong>." data-zh="从想法到效果，<strong>只要3步</strong>。">From idea to results in <strong>3 steps</strong>.</h2>
+<!-- SOLUTION -->
+<section class="sw-bright" id="solution">
+  <div class="section">
+    <div class="eyebrow fade-in" data-en="02 — The Solution" data-zh="02 — 方案">02 — The Solution</div>
+    <h2 class="fade-in" data-en="An agency, operated by AI." data-zh="一家由 AI 运营的代理公司。">An agency, operated by AI.</h2>
+    <p class="lede fade-in" data-delay="0.1s" data-en="Push is not a marketplace and not a SaaS tool. We're an agency. The difference: an agency takes responsibility for an outcome. The twist: our operator is AI, and our workforce is a vetted creator network — which is how we deliver the outcome at 1/10 the cost of a traditional local marketing agency." data-zh="Push 不是撮合平台，也不是 SaaS 工具。我们是代理公司——区别在于代理公司对结果负责。转折在于：我们的 operator 是 AI，我们的执行队伍是经过筛选的 creator 网络——这就是我们能以 1/10 成本达成传统本地营销代理效果的方式。">Push is not a marketplace and not a SaaS tool. We're an agency. The difference: an agency takes responsibility for an outcome. The twist: our operator is AI, and our workforce is a vetted creator network — which is how we deliver the outcome at 1/10 the cost of a traditional local marketing agency.</p>
 
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px;">
-      <div class="fade-in" style="padding:28px 24px;background:#fff;border-radius:12px;border:1px solid var(--border);">
-        <div style="font-size:32px;font-weight:900;color:var(--accent);margin-bottom:8px;">1</div>
-        <div style="font-size:17px;font-weight:800;color:var(--text);margin-bottom:8px;" data-en="Create a campaign" data-zh="创建活动">Create a campaign</div>
-        <div style="font-size:14px;color:var(--text2);line-height:1.7;" data-en="Choose your goal: bring new customers, promote a product, fill slow hours. Set reward, slots, and timeline." data-zh="选好目标：拉新客、推爆品、填淡时。设好奖励、名额和时间。">Choose your goal: bring new customers, promote a product, fill slow hours. Set reward, slots, and timeline.</div>
+    <div class="pillars">
+      <div class="pillar fade-in">
+        <div class="pillar-num">01</div>
+        <div class="pillar-title" data-en="Outcome Engine" data-zh="结果引擎">Outcome Engine</div>
+        <div class="pillar-body" data-en="Merchants tell Push how many new customers they need. We guarantee delivery — or you don't pay. One unit of value, one price." data-zh="商家告诉 Push 要多少新顾客，我们保证交付或免费。一个价值单位，一个价格。">Merchants tell Push how many new customers they need. We guarantee delivery — or you don't pay. One unit of value, one price.</div>
       </div>
-      <div class="fade-in" style="padding:28px 24px;background:#fff;border-radius:12px;border:1px solid var(--border);">
-        <div style="font-size:32px;font-weight:900;color:var(--accent);margin-bottom:8px;">2</div>
-        <div style="font-size:17px;font-weight:800;color:var(--text);margin-bottom:8px;" data-en="Creators apply" data-zh="博主申请">Creators apply</div>
-        <div style="font-size:14px;color:var(--text2);line-height:1.7;" data-en="Qualified local creators apply, get ranked by performance score, and fill spots. Or join standby for instant fill." data-zh="符合条件的本地博主报名，按评分排序、填满名额，也可加入候补即时补位。">Qualified local creators apply, get ranked by performance score, and fill spots. Or join standby for instant fill.</div>
+      <div class="pillar fade-in" data-delay="0.05s">
+        <div class="pillar-num">02</div>
+        <div class="pillar-title" data-en="Creator OS" data-zh="Creator 操作系统">Creator OS</div>
+        <div class="pillar-body" data-en="Creators are the AI-managed workforce. Tier, score, and history are non-portable — they exist and compound only inside Push." data-zh="Creator 是 AI 调度的执行队伍。等级、评分、历史不可转移，只在 Push 内部累积生效。">Creators are the AI-managed workforce. Tier, score, and history are non-portable — they exist and compound only inside Push.</div>
       </div>
-      <div class="fade-in" style="padding:28px 24px;background:#fff;border-radius:12px;border:1px solid var(--border);">
-        <div style="font-size:32px;font-weight:900;color:var(--accent);margin-bottom:8px;">3</div>
-        <div style="font-size:17px;font-weight:800;color:var(--text);margin-bottom:8px;" data-en="Track &amp; repeat" data-zh="追踪 & 复投">Track &amp; repeat</div>
-        <div style="font-size:14px;color:var(--text2);line-height:1.7;" data-en="Verified completion. Content proof. Performance signals. Then run it again — better." data-zh="完成核验、内容留档、效果可查。下一次，跑得更好。">Verified completion. Content proof. Performance signals. Then run it again — better.</div>
+      <div class="pillar fade-in" data-delay="0.1s">
+        <div class="pillar-num">03</div>
+        <div class="pillar-title" data-en="AI Verification Layer" data-zh="AI 核验层">AI Verification Layer</div>
+        <div class="pillar-body" data-en="Multimodal AI verifies every visit from day one — Claude Vision on receipts, QR-code geo checks, content consistency. Human review on 20%." data-zh="多模态 AI 从第一天起核验每次到访——Claude Vision 识别小票、QR 码地理核验、内容一致性。人工复核 20%。">Multimodal AI verifies every visit from day one — Claude Vision on receipts, QR-code geo checks, content consistency. Human review on 20%.</div>
       </div>
-    </div>
-
-    <div class="fade-in" style="margin-top:28px;text-align:center;">
-      <p style="font-size:14px;font-weight:600;color:var(--text2);" data-en="This is not a one-time collaboration. It's a <span style='color:var(--accent);font-weight:800'>repeatable system</span>." data-zh="这不是一锤子买卖，这是一套<span style='color:var(--accent);font-weight:800'>跑得动、复制得了的系统</span>。">This is not a one-time collaboration. It's a <span style="color:var(--accent);font-weight:800">repeatable system</span>.</p>
+      <div class="pillar fade-in" data-delay="0.15s">
+        <div class="pillar-num">04</div>
+        <div class="pillar-title" data-en="Agentic Campaign Engine" data-zh="智能 Campaign 引擎">Agentic Campaign Engine</div>
+        <div class="pillar-body" data-en="Merchant inputs target. Agent outputs creator match, campaign brief, and ROI prediction in 60 seconds. No procurement meetings." data-zh="商家输入目标，agent 60 秒内输出 creator 匹配、campaign 简报、ROI 预测。没有采购会议。">Merchant inputs target. Agent outputs creator match, campaign brief, and ROI prediction in 60 seconds. No procurement meetings.</div>
+      </div>
+      <div class="pillar fade-in" data-delay="0.2s">
+        <div class="pillar-num">05</div>
+        <div class="pillar-title" data-en="Data Moat" data-zh="数据护城河">Data Moat</div>
+        <div class="pillar-body" data-en="Every campaign trains the matching model. After 5,000 campaigns, a new entrant can't close the gap without running 5,000 of their own." data-zh="每个 campaign 训练匹配模型。5000 个 campaign 之后，追赶者没跑过 5000 个自己的 campaign 就无法追平。">Every campaign trains the matching model. After 5,000 campaigns, a new entrant can't close the gap without running 5,000 of their own.</div>
+      </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- — S4: Example Campaign — -->
-<div class="sw-white">
-  <div class="section fade-in">
-    <div class="section-label" data-en="PROOF IT WORKS" data-zh="效果证明">PROOF IT WORKS</div>
-    <h2 class="section-title" data-en="What a real campaign looks like." data-zh="一次真实活动是什么样的。">What a real campaign looks like.</h2>
+<!-- HOW IT WORKS -->
+<section class="sw-dark" id="how">
+  <div class="section">
+    <div class="eyebrow fade-in" data-en="03 — How It Works" data-zh="03 — 工作流">03 — How It Works</div>
+    <h2 class="fade-in" data-en="From goal to verified customer in 7 days." data-zh="从目标到已验证顾客，7 天完成。">From goal to verified customer in 7 days.</h2>
+    <p class="lede fade-in" data-delay="0.1s" data-en="No weekly sync. No creative review cycles. No &quot;can we jump on a call?&quot; The agent runs the loop and reports when a verified customer walks in the door." data-zh="没有周会，没有创意评审循环，没有&quot;方便开个电话吗&quot;。Agent 跑完整个循环，等一位已验证顾客走进店门时再通知你。">No weekly sync. No creative review cycles. No "can we jump on a call?" The agent runs the loop and reports when a verified customer walks in the door.</p>
 
-    <div style="margin-top:32px;padding:28px 32px;border-radius:12px;background:var(--bg2);border:2px solid var(--accent);position:relative;">
-      <div style="position:absolute;top:-12px;left:24px;background:var(--accent);color:#fff;font-size:11px;font-weight:700;letter-spacing:0.8px;padding:4px 14px;border-radius:20px;" data-en="PILOT SCENARIO" data-zh="试点场景">PILOT SCENARIO</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:24px;margin-top:8px;">
+    <div class="flow">
+      <div class="flow-step fade-in">
+        <div class="flow-tag" data-en="STEP 01" data-zh="第 01 步">STEP 01</div>
+        <div class="flow-title" data-en="Merchant States Goal" data-zh="商家提交目标">Merchant States Goal</div>
+        <div class="flow-body" data-en="&quot;I need 50 new customers this month. Budget ceiling $2,000.&quot; One sentence in the dashboard." data-zh="&quot;这个月要 50 个新顾客，预算上限 $2,000。&quot; 后台一句话。">"I need 50 new customers this month. Budget ceiling $2,000." One sentence in the dashboard.</div>
+        <div class="flow-time" data-en="~30 seconds" data-zh="~30 秒">~30 seconds</div>
+      </div>
+      <div class="flow-step fade-in" data-delay="0.05s">
+        <div class="flow-tag" data-en="STEP 02" data-zh="第 02 步">STEP 02</div>
+        <div class="flow-title" data-en="Agent Plans Campaign" data-zh="Agent 规划 campaign">Agent Plans Campaign</div>
+        <div class="flow-body" data-en="AI picks 5–8 creators from the vetted network, drafts the offer, writes briefs, predicts ROI. Merchant approves in one click." data-zh="AI 从筛过的网络挑 5–8 位 creator、拟定 offer、写简报、预测 ROI。商家一键确认。">AI picks 5–8 creators from the vetted network, drafts the offer, writes briefs, predicts ROI. Merchant approves in one click.</div>
+        <div class="flow-time" data-en="~60 seconds" data-zh="~60 秒">~60 seconds</div>
+      </div>
+      <div class="flow-step fade-in" data-delay="0.1s">
+        <div class="flow-tag" data-en="STEP 03" data-zh="第 03 步">STEP 03</div>
+        <div class="flow-title" data-en="Creators Execute" data-zh="Creator 执行">Creators Execute</div>
+        <div class="flow-body" data-en="Creators visit, post, and share a QR link. Every redemption is tagged to the creator who drove it." data-zh="Creator 到店、发帖、分享 QR 链接。每次核销都归因到带来的那位 creator。">Creators visit, post, and share a QR link. Every redemption is tagged to the creator who drove it.</div>
+        <div class="flow-time" data-en="Days 1–5" data-zh="第 1–5 天">Days 1–5</div>
+      </div>
+      <div class="flow-step fade-in" data-delay="0.15s">
+        <div class="flow-tag" data-en="STEP 04" data-zh="第 04 步">STEP 04</div>
+        <div class="flow-title" data-en="AI Verifies Each Visit" data-zh="AI 核验每次到访">AI Verifies Each Visit</div>
+        <div class="flow-body" data-en="Claude Vision reads receipts. Geo checks the redemption location. Content consistency checks the post. Humans review 20%." data-zh="Claude Vision 识别小票，地理核验核销位置，内容一致性检查帖子，人工复核 20%。">Claude Vision reads receipts. Geo checks the redemption location. Content consistency checks the post. Humans review 20%.</div>
+        <div class="flow-time" data-en="Real-time" data-zh="实时">Real-time</div>
+      </div>
+      <div class="flow-step fade-in" data-delay="0.2s">
+        <div class="flow-tag" data-en="STEP 05" data-zh="第 05 步">STEP 05</div>
+        <div class="flow-title" data-en="You Pay Per Customer" data-zh="按顾客付费">You Pay Per Customer</div>
+        <div class="flow-body" data-en="End of campaign: you see 47 verified customers. You pay $40 each. Creators get paid within 24 hours." data-zh="Campaign 结束：你看到 47 个已验证顾客，每个 $40。Creator 24 小时内收到报酬。">End of campaign: you see 47 verified customers. You pay $40 each. Creators get paid within 24 hours.</div>
+        <div class="flow-time" data-en="Day 7" data-zh="第 7 天">Day 7</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="sw-surface" id="pricing">
+  <div class="section">
+    <div class="eyebrow fade-in" data-en="04 — Pricing" data-zh="04 — 定价">04 — Pricing</div>
+    <h2 class="fade-in" data-en="You pay for customers. Not posts, not followers, not &quot;impressions.&quot;" data-zh="你为顾客付费。不为帖子、粉丝数、&quot;曝光量&quot;付费。">You pay for customers. Not posts, not followers, not "impressions."</h2>
+    <p class="lede fade-in" data-delay="0.1s" data-en="Three tiers, all outcome-priced. Every business starts with a free pilot — you don't pay a dollar before we've delivered real customers through your door. Scale up when it's working; leave when it's not." data-zh="三个档位，全部按效果计费。每个商家都从免费 Pilot 起步——交付真实顾客之前你一分钱不用付。有效果就升档，没效果就离开。">Three tiers, all outcome-priced. Every business starts with a free pilot — you don't pay a dollar before we've delivered real customers through your door. Scale up when it's working; leave when it's not.</p>
+
+    <div class="pricing">
+      <div class="price-card fade-in">
+        <div class="price-tag" data-en="TIER 01 — PILOT" data-zh="01 — PILOT">TIER 01 — PILOT</div>
+        <div class="price-name" data-en="Free Pilot" data-zh="免费试跑">Free Pilot</div>
         <div>
-          <div style="font-size:11px;font-weight:700;letter-spacing:0.5px;color:var(--text3);margin-bottom:6px;" data-en="MERCHANT" data-zh="商家">MERCHANT</div>
-          <div style="font-size:16px;font-weight:800;color:var(--text);" data-en="SoHo Caf&eacute;" data-zh="SoHo 咖啡馆">SoHo Caf&eacute;</div>
-          <div style="font-size:13px;color:var(--text2);" data-en="Weekday traffic" data-zh="工作日客流">Weekday traffic</div>
+          <div class="price-num">$0</div>
+          <div class="price-suffix" data-en="for the first campaign" data-zh="首个 campaign">for the first campaign</div>
         </div>
+        <div class="price-desc" data-en="Prove it works before you pay. Push funds the offer, runs verification, pays creators. You see verified customer data." data-zh="先验证再付费。Push 出 offer 成本、跑核验、付 creator。你看到已验证顾客数据。">Prove it works before you pay. Push funds the offer, runs verification, pays creators. You see verified customer data.</div>
+        <ul>
+          <li data-en="1 campaign, fully managed" data-zh="1 个 campaign，全程托管">1 campaign, fully managed</li>
+          <li data-en="Up to 15 verified customers" data-zh="最多 15 位已验证顾客">Up to 15 verified customers</li>
+          <li data-en="QR verification + AI audit" data-zh="QR 核验 + AI 审核">QR verification + AI audit</li>
+          <li data-en="ROI dashboard access" data-zh="ROI 看板权限">ROI dashboard access</li>
+          <li data-en="No commitment, no contract" data-zh="零承诺，零合同">No commitment, no contract</li>
+        </ul>
+      </div>
+      <div class="price-card featured fade-in" data-delay="0.05s">
+        <div class="price-tag" data-en="TIER 02 — GROWTH ★" data-zh="02 — GROWTH ★">TIER 02 — GROWTH ★</div>
+        <div class="price-name" data-en="Growth" data-zh="Growth 档">Growth</div>
         <div>
-          <div style="font-size:11px;font-weight:700;letter-spacing:0.5px;color:var(--text3);margin-bottom:6px;" data-en="CREATORS" data-zh="博主">CREATORS</div>
-          <div style="font-size:16px;font-weight:800;color:var(--text);" data-en="6 creators" data-zh="6位博主">6 creators</div>
-          <div style="font-size:13px;color:var(--text2);" data-en="Matched in 12hrs" data-zh="12小时内匹配完成">Matched in 12hrs</div>
+          <div class="price-num">$500</div>
+          <div class="price-suffix" data-en="/month retainer + $40 per verified customer" data-zh="/月 + 每位已验证顾客 $40">/month retainer + $40 per verified customer</div>
         </div>
+        <div class="price-desc" data-en="The main tier. Most merchants land here after a successful pilot. Retainer covers dedicated AI, premium creator access, and 24h verification." data-zh="主档位。大多商家 Pilot 成功后落在这里。Retainer 覆盖专属 AI、premium creator 准入、24 小时核验。">The main tier. Most merchants land here after a successful pilot. Retainer covers dedicated AI, premium creator access, and 24h verification.</div>
+        <ul>
+          <li data-en="Unlimited campaigns per month" data-zh="每月不限 campaign 数">Unlimited campaigns per month</li>
+          <li data-en="Priority creator matching (Proven+ tier)" data-zh="优先 creator 匹配（Proven+ 档）">Priority creator matching (Proven+ tier)</li>
+          <li data-en="$40 per verified customer, transparent" data-zh="每位已验证顾客 $40，明码标价">$40 per verified customer, transparent</li>
+          <li data-en="Retainer refundable if <10 verified customers/mo" data-zh="一个月不到 10 位已验证顾客，retainer 全退">Retainer refundable if <10 verified customers/mo</li>
+          <li data-en="Monthly reporting + repeat-campaign templates" data-zh="月度报告 + 复投 campaign 模板">Monthly reporting + repeat-campaign templates</li>
+        </ul>
+      </div>
+      <div class="price-card fade-in" data-delay="0.1s">
+        <div class="price-tag" data-en="TIER 03 — PERFORMANCE" data-zh="03 — PERFORMANCE">TIER 03 — PERFORMANCE</div>
+        <div class="price-name" data-en="Performance" data-zh="Performance 档">Performance</div>
         <div>
-          <div style="font-size:11px;font-weight:700;letter-spacing:0.5px;color:var(--text3);margin-bottom:6px;" data-en="TIMELINE" data-zh="时间">TIMELINE</div>
-          <div style="font-size:16px;font-weight:800;color:var(--text);" data-en="2 days" data-zh="2天">2 days</div>
-          <div style="font-size:13px;color:var(--text2);" data-en="Content delivered" data-zh="内容交付">Content delivered</div>
+          <div class="price-num">$2,000</div>
+          <div class="price-suffix" data-en="/month guaranteed delivery" data-zh="/月，保量交付">/month guaranteed delivery</div>
         </div>
-        <div>
-          <div style="font-size:11px;font-weight:700;letter-spacing:0.5px;color:var(--text3);margin-bottom:6px;" data-en="RESULT" data-zh="结果">RESULT</div>
-          <div style="font-size:16px;font-weight:800;color:var(--green);" data-en="38 redemptions" data-zh="38次到店核销">38 redemptions</div>
-          <div style="font-size:13px;color:var(--text2);" data-en="$5.26 per new customer" data-zh="每新客$5.26">$5.26 per new customer</div>
+        <div class="price-desc" data-en="Guaranteed volume. We commit to a minimum verified customer count. Miss it — we refund the gap at retail rate." data-zh="保量交付。我们承诺最少已验证顾客数。若未达标，差额按零售价退还。">Guaranteed volume. We commit to a minimum verified customer count. Miss it — we refund the gap at retail rate.</div>
+        <ul>
+          <li data-en="Guaranteed 60 verified customers / month" data-zh="保证每月 60 位已验证顾客">Guaranteed 60 verified customers / month</li>
+          <li data-en="Partner-tier creators on rotation" data-zh="Partner 档 creator 轮值">Partner-tier creators on rotation</li>
+          <li data-en="Co-branded campaigns + event support" data-zh="联名 campaign + 线下活动支持">Co-branded campaigns + event support</li>
+          <li data-en="Gap-refund if target missed" data-zh="未达标按差额退款">Gap-refund if target missed</li>
+          <li data-en="Dedicated ops partner" data-zh="专属运营伙伴">Dedicated ops partner</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BEACHHEAD -->
+<section class="sw-bright" id="beachhead">
+  <div class="section">
+    <div class="eyebrow fade-in" data-en="05 — The Beachhead" data-zh="05 — 根据地">05 — The Beachhead</div>
+    <h2 class="fade-in" data-en="One category. One neighborhood. 60 days." data-zh="一个品类。一个街区。60 天。">One category. One neighborhood. 60 days.</h2>
+    <p class="lede fade-in" data-delay="0.1s" data-en="We don't launch a city. We saturate a ZIP code. Coffee shops in Williamsburg, Brooklyn — 30+ independent cafés in a 15-minute walk. We'll recruit them all, match them with local coffee creators, and make Push the default customer acquisition channel for that category in that place." data-zh="我们不&quot;上线一座城市&quot;，我们&quot;饱和一个邮编&quot;。布鲁克林威廉斯堡的咖啡店——15 分钟步行圈内 30+ 家独立咖啡店。我们会把它们都签下来，和本地咖啡 creator 配对，把 Push 做成&quot;那个品类在那片地方&quot;的默认获客渠道。">We don't launch a city. We saturate a ZIP code. Coffee shops in Williamsburg, Brooklyn — 30+ independent cafés in a 15-minute walk. We'll recruit them all, match them with local coffee creators, and make Push the default customer acquisition channel for that category in that place.</p>
+
+    <div class="beach-block fade-in" data-delay="0.15s">
+      <div class="beach-meta">
+        <div class="beach-meta-row">
+          <div class="beach-meta-label" data-en="Category" data-zh="品类">Category</div>
+          <div class="beach-meta-val" data-en="Independent Cafés" data-zh="独立咖啡店">Independent Cafés</div>
+        </div>
+        <div class="beach-meta-row">
+          <div class="beach-meta-label" data-en="Geography" data-zh="地理">Geography</div>
+          <div class="beach-meta-val" data-en="Williamsburg, Brooklyn" data-zh="布鲁克林 威廉斯堡">Williamsburg, Brooklyn</div>
+        </div>
+        <div class="beach-meta-row">
+          <div class="beach-meta-label" data-en="Merchant Target" data-zh="商家目标">Merchant Target</div>
+          <div class="beach-meta-val" data-en="10 signed → 20 in 60 days" data-zh="签 10 家 → 60 天内 20 家">10 signed → 20 in 60 days</div>
+        </div>
+        <div class="beach-meta-row">
+          <div class="beach-meta-label" data-en="Creator Target" data-zh="Creator 目标">Creator Target</div>
+          <div class="beach-meta-val" data-en="20 café-focused creators" data-zh="20 位咖啡垂类 creator">20 café-focused creators</div>
+        </div>
+        <div class="beach-meta-row">
+          <div class="beach-meta-label" data-en="Campaigns" data-zh="Campaign 数">Campaigns</div>
+          <div class="beach-meta-val" data-en="20 verified campaigns" data-zh="20 个已核验 campaign">20 verified campaigns</div>
+        </div>
+        <div class="beach-meta-row">
+          <div class="beach-meta-label" data-en="Go / No-Go" data-zh="Go / No-Go">Go / No-Go</div>
+          <div class="beach-meta-val" data-en="40%+ repeat at $500/mo" data-zh="复投率 40%+ @ $500/月">40%+ repeat at $500/mo</div>
         </div>
       </div>
-      <div style="margin-top:12px;padding:10px 16px;border-radius:8px;background:rgba(220,38,38,0.05);font-size:13px;color:var(--text2);" data-en="1 creator dropped — replaced via standby in 3 hours. 2 posts underperformed — next campaign adjusted mix." data-zh="1位博主中途退出——候补3小时内顶上。2条内容效果一般——下次活动自动优化搭配。">1 creator dropped &mdash; replaced via standby in 3 hours. 2 posts underperformed &mdash; next campaign adjusted mix.</div>
-      <div style="margin-top:8px;padding:12px 16px;border-radius:8px;background:rgba(5,150,105,0.06);font-size:14px;font-weight:700;color:var(--green);" data-en="Repeat campaign launched next week — without being asked." data-zh="下周商家主动发起第二轮——没人催。">Repeat campaign launched next week &mdash; without being asked.</div>
-    </div>
-
-    <!-- Hard ROI comparison -->
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px;">
-      <div class="fade-in" style="padding:20px;border-radius:10px;background:var(--bg2);text-align:center;border:1px solid var(--border);">
-        <div style="font-size:11px;font-weight:700;letter-spacing:0.5px;color:var(--text3);margin-bottom:8px;" data-en="PUSH" data-zh="PUSH">PUSH</div>
-        <div style="font-size:28px;font-weight:900;color:var(--green);" data-en="$4-7" data-zh="$4-7">$4-7</div>
-        <div style="font-size:13px;color:var(--text2);" data-en="per new customer" data-zh="每位新客">per new customer</div>
+      <div>
+        <h4 data-en="Why this wedge" data-zh="为什么选这个切入点">Why this wedge</h4>
+        <p style="font-size:14px;color:var(--ink-2);margin-top:12px;" data-en="Coffee is the highest-frequency local F&B category — every customer is potentially a weekly regular. Williamsburg has the densest independent scene on the East Coast and an active café creator subculture on Instagram. 60 days is enough time to build 'saturation density' — the point where every local café owner knows another café owner on Push." data-zh="咖啡是频次最高的本地 F&B 品类——每个新顾客都可能变成每周常客。威廉斯堡拥有东海岸最密集的独立咖啡店圈，以及 Instagram 上活跃的咖啡垂类 creator 亚文化。60 天足够把密度做到临界点——让每一位本地咖啡店主都认识一位&quot;在用 Push&quot;的同行。">Coffee is the highest-frequency local F&B category — every customer is potentially a weekly regular. Williamsburg has the densest independent scene on the East Coast and an active café creator subculture on Instagram. 60 days is enough time to build 'saturation density' — the point where every local café owner knows another café owner on Push.</p>
       </div>
-      <div class="fade-in" style="padding:20px;border-radius:10px;background:var(--bg2);text-align:center;border:1px solid var(--border);">
-        <div style="font-size:11px;font-weight:700;letter-spacing:0.5px;color:var(--text3);margin-bottom:8px;" data-en="INSTAGRAM ADS" data-zh="Instagram 广告">INSTAGRAM ADS</div>
-        <div style="font-size:28px;font-weight:900;color:var(--red);" data-en="$15-30" data-zh="$15-30">$15-30</div>
-        <div style="font-size:13px;color:var(--text2);" data-en="per new customer" data-zh="每位新客">per new customer</div>
-      </div>
-      <div class="fade-in" style="padding:20px;border-radius:10px;background:var(--bg2);text-align:center;border:1px solid var(--border);">
-        <div style="font-size:11px;font-weight:700;letter-spacing:0.5px;color:var(--text3);margin-bottom:8px;" data-en="AGENCY" data-zh="代理公司">AGENCY</div>
-        <div style="font-size:28px;font-weight:900;color:var(--red);" data-en="$40+" data-zh="$40+">$40+</div>
-        <div style="font-size:13px;color:var(--text2);" data-en="per new customer" data-zh="每位新客">per new customer</div>
-      </div>
-    </div>
-    <div class="fade-in" style="margin-top:16px;text-align:center;">
-      <p style="font-size:15px;font-weight:800;color:var(--text);" data-en="Spend $200 on Push &rarr; bring ~30&ndash;50 verified local customers." data-zh="花 $200 在 Push → 带来约 30-50 位验证到店的新客。">Spend $200 on Push &rarr; bring ~30&ndash;50 verified local customers.</p>
-      <p style="font-size:11px;color:var(--text3);margin-top:4px;" data-en="Based on pilot scenario modeling. Actual results will vary by location, offer, and creator mix." data-zh="基于试点场景模拟，实际效果因地段、优惠力度和博主搭配而异。">Based on pilot scenario modeling. Actual results will vary by location, offer, and creator mix.</p>
     </div>
   </div>
-</div>
+</section>
 
-<!-- — S5: Creator Tiers (Trust Engine) — -->
-<div class="sw-gray">
-  <div class="section fade-in">
-    <div class="section-label" data-en="TRUST ENGINE" data-zh="信任引擎">TRUST ENGINE</div>
-    <h2 class="section-title" data-en="Not all creators are equal &mdash; and now you can <span style='color:var(--accent)'>see it</span>." data-zh="博主水平参差不齐——现在你<span style='color:var(--accent)'>看得见</span>。">Not all creators are equal &mdash; and now you can <span style="color:var(--accent)">see it</span>.</h2>
-    <p class="section-sub" data-en="Creators are ranked by real performance, not follower count." data-zh="按真实表现排名，不看粉丝数。">Creators are ranked by real performance, not follower count.</p>
+<!-- 90-DAY PLAN -->
+<section class="sw-surface" id="plan">
+  <div class="section">
+    <div class="eyebrow fade-in" data-en="06 — 90-Day Execution" data-zh="06 — 90 天执行">06 — 90-Day Execution</div>
+    <h2 class="fade-in" data-en="What we're doing, week by week." data-zh="按周执行，公开节奏。">What we're doing, week by week.</h2>
+    <p class="lede fade-in" data-delay="0.1s" data-en="We keep this visible because founders who publish their plan ship it. This is the plan we're running — from AI verification MVP to the first paid campaign and the YC Winter 2027 application." data-zh="我们公开这份计划，是因为&quot;公开路线图的创始人&quot;更容易按期交付。这就是我们当前在跑的节奏——从 AI 核验 MVP 到第一笔付费 campaign 再到 YC Winter 2027 申请。">We keep this visible because founders who publish their plan ship it. This is the plan we're running — from AI verification MVP to the first paid campaign and the YC Winter 2027 application.</p>
 
-    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:32px;">
-      <div class="fade-in" style="padding:20px 16px;border-radius:10px;background:#fff;border:2px solid #64748b;text-align:center;">
-        <div style="font-size:11px;font-weight:800;letter-spacing:1px;color:#64748b;margin-bottom:4px;">EXPLORER</div>
-        <div style="font-size:13px;color:var(--text2);" data-en="New. Proving reliability." data-zh="新人阶段，积累信用。">New. Proving reliability.</div>
+    <div class="timeline">
+      <div class="timeline-row fade-in">
+        <div class="timeline-week" data-en="Week 1–2" data-zh="第 1–2 周">Week 1–2</div>
+        <div class="timeline-action" data-en="Build AI Verification MVP — Claude Vision, QR receipt OCR, geo consistency" data-zh="搭 AI 核验 MVP — Claude Vision、QR 小票 OCR、地理一致性核验">Build AI Verification MVP — Claude Vision, QR receipt OCR, geo consistency</div>
+        <div class="timeline-owner" data-en="OWNER — Z" data-zh="负责人 — Z">OWNER — Z</div>
       </div>
-      <div class="fade-in" style="padding:20px 16px;border-radius:10px;background:#fff;border:2px solid #0ea5e9;text-align:center;">
-        <div style="font-size:11px;font-weight:800;letter-spacing:1px;color:#0ea5e9;margin-bottom:4px;">OPERATOR</div>
-        <div style="font-size:13px;color:var(--text2);" data-en="Consistent. Reliable." data-zh="出活稳定，靠得住。">Consistent. Reliable.</div>
+      <div class="timeline-row fade-in">
+        <div class="timeline-week" data-en="Week 3–4" data-zh="第 3–4 周">Week 3–4</div>
+        <div class="timeline-action" data-en="Sign 10 Williamsburg cafés + recruit 20 café creators" data-zh="签 10 家威廉斯堡咖啡店 + 招募 20 位咖啡 creator">Sign 10 Williamsburg cafés + recruit 20 café creators</div>
+        <div class="timeline-owner" data-en="OWNER — Lucy / Jiaming / Prum" data-zh="负责人 — Lucy / Jiaming / Prum">OWNER — Lucy / Jiaming / Prum</div>
       </div>
-      <div class="fade-in" style="padding:20px 16px;border-radius:10px;background:#fff;border:2px solid #10b981;text-align:center;">
-        <div style="font-size:11px;font-weight:800;letter-spacing:1px;color:#10b981;margin-bottom:4px;">PROVEN</div>
-        <div style="font-size:13px;color:var(--text2);" data-en="Trusted. Higher quality." data-zh="口碑好，质量高。">Trusted. Higher quality.</div>
+      <div class="timeline-row fade-in">
+        <div class="timeline-week" data-en="Week 5–8" data-zh="第 5–8 周">Week 5–8</div>
+        <div class="timeline-action" data-en="Run 20 campaigns — every one passes AI verification + 20% human review" data-zh="跑 20 个 campaign — 每一个都过 AI 核验 + 20% 人工复审">Run 20 campaigns — every one passes AI verification + 20% human review</div>
+        <div class="timeline-owner" data-en="OWNER — Full Team" data-zh="负责人 — 全团队">OWNER — Full Team</div>
       </div>
-      <div class="fade-in" style="padding:20px 16px;border-radius:10px;background:#fff;border:2px solid #f59e0b;text-align:center;">
-        <div style="font-size:11px;font-weight:800;letter-spacing:1px;color:#f59e0b;margin-bottom:4px;">CLOSER</div>
-        <div style="font-size:13px;color:var(--text2);" data-en="Drives results." data-zh="能带来真金白银的效果。">Drives results.</div>
+      <div class="timeline-row fade-in">
+        <div class="timeline-week" data-en="Week 9–10" data-zh="第 9–10 周">Week 9–10</div>
+        <div class="timeline-action" data-en="First merchants transition from Pilot to $500/mo + $25 per customer" data-zh="第一批商家从 Pilot 转到 $500/月 + 每位顾客 $25">First merchants transition from Pilot to $500/mo + $25 per customer</div>
+        <div class="timeline-owner" data-en="OWNER — Prum / Jiaming" data-zh="负责人 — Prum / Jiaming">OWNER — Prum / Jiaming</div>
       </div>
-      <div class="fade-in" style="padding:20px 16px;border-radius:10px;background:#fff;border:2px solid #7c3aed;text-align:center;">
-        <div style="font-size:11px;font-weight:800;letter-spacing:1px;color:#7c3aed;margin-bottom:4px;">PARTNER</div>
-        <div style="font-size:13px;color:var(--text2);" data-en="Elite. Co-invested." data-zh="顶级选手，利益共担。">Elite. Co-invested.</div>
+      <div class="timeline-row fade-in">
+        <div class="timeline-week" data-en="Week 11–12" data-zh="第 11–12 周">Week 11–12</div>
+        <div class="timeline-action" data-en="Apply YC Winter 2027 — pitch: AI Agency for Local Customer Acquisition" data-zh="投 YC Winter 2027 — pitch：本地获客 AI 代理">Apply YC Winter 2027 — pitch: AI Agency for Local Customer Acquisition</div>
+        <div class="timeline-owner" data-en="OWNER — Jiaming / Milly" data-zh="负责人 — Jiaming / Milly">OWNER — Jiaming / Milly</div>
       </div>
-    </div>
-
-    <div class="fade-in" style="margin-top:24px;text-align:center;">
-      <p style="font-size:15px;font-weight:700;color:var(--text);" data-en="You don't guess who to work with. You <span style='color:var(--accent)'>know</span>." data-zh="不用猜该找谁，数据告诉你<span style='color:var(--accent)'>答案</span>。">You don't guess who to work with. You <span style="color:var(--accent)">know</span>.</p>
-      <p style="font-size:13px;color:var(--text2);margin-top:8px;" data-en="Creators: build real performance history, unlock higher-paying campaigns, and stop relying on random brand deals." data-zh="博主端：积累真实业绩，解锁高收入活动，告别靠运气接单的日子。">Creators: build real performance history, unlock higher-paying campaigns, and stop relying on random brand deals.</p>
-    </div>
-  </div>
-</div>
-
-<!-- — S6: Why Not Just DM — -->
-<div class="sw-white">
-  <div class="section fade-in">
-    <div class="section-label" data-en="ANTI-DISINTERMEDIATION" data-zh="防绕过机制">ANTI-DISINTERMEDIATION</div>
-    <h2 class="section-title" data-en="Why not just <span style='color:var(--accent)'>message creators yourself</span>?" data-zh="直接<span style='color:var(--accent)'>私信博主</span>不行吗？">Why not just <span style="color:var(--accent)">message creators yourself</span>?</h2>
-    <p class="section-sub" data-en="Because you lose:" data-zh="绕开平台，你会丢掉：">Because you lose:</p>
-
-    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:28px;">
-      <div class="fade-in" style="padding:16px;border-radius:10px;background:var(--bg2);text-align:center;">
-        <div style="font-size:22px;margin-bottom:6px;">📊</div>
-        <div style="font-size:13px;font-weight:700;color:var(--text);" data-en="Performance history" data-zh="业绩记录">Performance history</div>
-      </div>
-      <div class="fade-in" style="padding:16px;border-radius:10px;background:var(--bg2);text-align:center;">
-        <div style="font-size:22px;margin-bottom:6px;">🛡️</div>
-        <div style="font-size:13px;font-weight:700;color:var(--text);" data-en="Reliable execution" data-zh="可靠执行">Reliable execution</div>
-      </div>
-      <div class="fade-in" style="padding:16px;border-radius:10px;background:var(--bg2);text-align:center;">
-        <div style="font-size:22px;margin-bottom:6px;">📋</div>
-        <div style="font-size:13px;font-weight:700;color:var(--text);" data-en="Structured campaigns" data-zh="结构化活动">Structured campaigns</div>
-      </div>
-      <div class="fade-in" style="padding:16px;border-radius:10px;background:var(--bg2);text-align:center;">
-        <div style="font-size:22px;margin-bottom:6px;">⚖️</div>
-        <div style="font-size:13px;font-weight:700;color:var(--text);" data-en="Creator comparison" data-zh="博主对比">Creator comparison</div>
-      </div>
-      <div class="fade-in" style="padding:16px;border-radius:10px;background:var(--bg2);text-align:center;">
-        <div style="font-size:22px;margin-bottom:6px;">🔁</div>
-        <div style="font-size:13px;font-weight:700;color:var(--text);" data-en="Repeatability" data-zh="可复用性">Repeatability</div>
-      </div>
-    </div>
-
-    <div class="fade-in" style="margin-top:24px;text-align:center;">
-      <p style="font-size:15px;font-weight:700;color:var(--text);" data-en="DM is random. Push is a system." data-zh="私信靠缘分，Push 靠系统。">DM is random. Push is a system.</p>
-      <p style="font-size:14px;font-weight:600;color:var(--accent);margin-top:4px;" data-en="Stop guessing. Start operating." data-zh="别猜了，上系统。">Stop guessing. Start operating.</p>
     </div>
   </div>
-</div>
+</section>
 
-<!-- — S8: Pricing — -->
-<div class="sw-white">
-  <div class="section fade-in">
-    <div class="section-label" data-en="PRICING" data-zh="定价">PRICING</div>
-    <h2 class="section-title" data-en="Simple, <span style='color:var(--accent)'>aligned</span> pricing." data-zh="定价简单，<span style='color:var(--accent)'>利益绑定</span>。">Simple, <span style="color:var(--accent)">aligned</span> pricing.</h2>
+<!-- WHY NOW -->
+<section class="sw-dark" id="why-now">
+  <div class="section">
+    <div class="eyebrow fade-in" data-en="07 — Why Now" data-zh="07 — 为何现在">07 — Why Now</div>
+    <h2 class="fade-in" data-en="AI agencies are the 2026 thesis. Creator marketplaces aren't." data-zh="AI 代理是 2026 年的主题，creator marketplace 不是。">AI agencies are the 2026 thesis. Creator marketplaces aren't.</h2>
+    <p class="lede fade-in" data-delay="0.1s" data-en="Push v5.0 repositioned to match what YC Spring 2026 Requests for Startups calls out: AI-Powered Agencies that collapse the cost of specialized labor. Not AI-enhanced SaaS. Not marketplaces bolting AI on. The full-stack version: outcome priced, AI-operated, delivered end-to-end." data-zh="Push v5.0 重新定位，直接对齐 YC 2026 Spring RFS 点名的方向：&quot;AI-Powered Agencies&quot;，用 AI 压缩专业劳动力成本。不是&quot;加了 AI 的 SaaS&quot;，不是&quot;marketplace 外挂 AI&quot;——而是 full-stack 版本：按效果定价、AI 运营、端到端交付。">Push v5.0 repositioned to match what YC Spring 2026 Requests for Startups calls out: AI-Powered Agencies that collapse the cost of specialized labor. Not AI-enhanced SaaS. Not marketplaces bolting AI on. The full-stack version: outcome priced, AI-operated, delivered end-to-end.</p>
 
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px;">
-      <div class="fade-in" style="padding:24px;border-radius:10px;background:var(--bg2);text-align:center;">
-        <div style="font-size:28px;font-weight:900;color:var(--accent);margin-bottom:4px;" data-en="$79/mo" data-zh="$79/月">$79/mo</div>
-        <div style="font-size:14px;font-weight:600;color:var(--text);" data-en="Monthly access" data-zh="月费">Monthly access</div>
-        <div style="font-size:13px;color:var(--text2);margin-top:4px;" data-en="Up to 3 campaigns included" data-zh="包含3次活动">Up to 3 campaigns included</div>
+    <div class="why-grid">
+      <div class="why-item fade-in">
+        <div class="why-num">88%</div>
+        <div class="why-title" data-en="of YC W26 is day-zero AI" data-zh="YC W26 批次 88% 是 day-zero AI 公司">of YC W26 is day-zero AI</div>
+        <div class="why-body" data-en="&quot;Add AI to your app&quot; era is over. Day-1 AI verification isn't a future roadmap item — it's the minimum bar." data-zh="&quot;给 app 加 AI&quot;的时代结束了。Day-1 AI 核验不是以后再做的功能，而是入场门槛。">"Add AI to your app" era is over. Day-1 AI verification isn't a future roadmap item — it's the minimum bar.</div>
       </div>
-      <div class="fade-in" style="padding:24px;border-radius:10px;background:var(--bg2);text-align:center;">
-        <div style="font-size:28px;font-weight:900;color:var(--accent);margin-bottom:4px;" data-en="$29-39" data-zh="$29-39">$29-39</div>
-        <div style="font-size:14px;font-weight:600;color:var(--text);" data-en="Per extra campaign" data-zh="每次额外活动">Per extra campaign</div>
-        <div style="font-size:13px;color:var(--text2);margin-top:4px;" data-en="Scale as you grow" data-zh="按需扩展">Scale as you grow</div>
+      <div class="why-item fade-in" data-delay="0.05s">
+        <div class="why-num">10×</div>
+        <div class="why-title" data-en="cheaper than a local marketing agency" data-zh="比本地营销代理便宜 10 倍">cheaper than a local marketing agency</div>
+        <div class="why-body" data-en="Traditional agencies charge $3K–$8K/mo for what a multimodal AI operator can match for $500/mo. The cost floor of human-operated services is no longer defensible." data-zh="传统代理月费 $3K–$8K，多模态 AI operator 可以 $500/月做到同等效果。人力运营服务的成本底线守不住了。">Traditional agencies charge $3K–$8K/mo for what a multimodal AI operator can match for $500/mo. The cost floor of human-operated services is no longer defensible.</div>
       </div>
-      <div class="fade-in" style="padding:24px;border-radius:10px;background:var(--bg2);text-align:center;">
-        <div style="font-size:28px;font-weight:900;color:var(--accent);margin-bottom:4px;" data-en="15%" data-zh="15%">15%</div>
-        <div style="font-size:14px;font-weight:600;color:var(--text);" data-en="Success-based cut" data-zh="效果抽成">Success-based cut</div>
-        <div style="font-size:13px;color:var(--text2);margin-top:4px;" data-en="Only on verified completions" data-zh="只在核验完成后收取">Only on verified completions</div>
+      <div class="why-item fade-in" data-delay="0.1s">
+        <div class="why-num">72%</div>
+        <div class="why-title" data-en="of local businesses increased creator spend in 2025" data-zh="72% 本地商家 2025 年增加 creator 预算">of local businesses increased creator spend in 2025</div>
+        <div class="why-body" data-en="Demand side is ready. What's missing: a way to convert that spend into verifiable customers. Push is the infrastructure layer for that." data-zh="需求侧已就位，缺口在于：把这笔预算转换成可核验顾客的基础设施——这就是 Push。">Demand side is ready. What's missing: a way to convert that spend into verifiable customers. Push is the infrastructure layer for that.</div>
       </div>
-    </div>
-
-    <div class="fade-in" style="margin-top:24px;text-align:center;">
-      <p style="font-size:15px;font-weight:700;color:var(--accent);" data-en="You only pay when work gets done." data-zh="做到了才收费，没效果不花钱。">You only pay when work gets done.</p>
+      <div class="why-item fade-in" data-delay="0.15s">
+        <div class="why-num">RFS #5</div>
+        <div class="why-title" data-en="YC Spring 2026 — AI-Powered Agencies" data-zh="YC 2026 Spring RFS #5 — AI-Powered Agencies">YC Spring 2026 — AI-Powered Agencies</div>
+        <div class="why-body" data-en="Y Combinator's Spring 2026 thesis explicitly asks for companies that replace specialist agencies with AI-operated versions. Push v5.0 is exactly the shape they're looking for." data-zh="YC 2026 Spring 主题明确呼吁&quot;用 AI 运营版本替代专业代理公司&quot;，Push v5.0 正好是他们在找的形态。">Y Combinator's Spring 2026 thesis explicitly asks for companies that replace specialist agencies with AI-operated versions. Push v5.0 is exactly the shape they're looking for.</div>
+      </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- — S10: Final CTA — -->
-<section class="hero" style="min-height:auto;padding:80px 0;">
-  <div class="hero-inner" style="text-align:center;">
-    <h2 class="fade-in" style="font-size:clamp(28px,4vw,42px);font-weight:900;color:#fff;letter-spacing:-1px;">
-      <span data-en="Run your first campaign <strong>this week</strong>." data-zh="<strong>这周</strong>就启动你的第一场活动。">Run your first campaign <strong>this week</strong>.</span>
+<!-- NAV CARDS (to subpages) -->
+<section class="sw-surface" id="more">
+  <div class="section">
+    <div class="eyebrow fade-in" data-en="08 — Deep Dives" data-zh="08 — 深入资料">08 — Deep Dives</div>
+    <h2 class="fade-in" data-en="Everything, in one place." data-zh="所有资料，一处可查。">Everything, in one place.</h2>
+    <p class="lede fade-in" data-delay="0.1s" data-en="Nine standalone pages covering strategy, pitch, investor questions, defense, retention, prospects — each rebuilt for v5.0. Pick whichever one matches what you're evaluating." data-zh="九个独立页面，覆盖战略、路演、投资人 Q&amp;A、风险防御、留存、前景——全部按 v5.0 重写。按你要评估的维度挑一个进入。">Nine standalone pages covering strategy, pitch, investor questions, defense, retention, prospects — each rebuilt for v5.0. Pick whichever one matches what you're evaluating.</p>
+
+    <div class="navcards">
+      <a href="project-intro.html" class="navcard fade-in">
+        <div class="navcard-num">01 — INTRO</div>
+        <div class="navcard-title" data-en="Project Introduction" data-zh="项目介绍">Project Introduction</div>
+        <div class="navcard-desc" data-en="The one-page overview. What Push is, what we're building, and why v5.0." data-zh="一页总览：Push 是什么、我们在做什么、为什么是 v5.0。">The one-page overview. What Push is, what we're building, and why v5.0.</div>
+        <div class="navcard-arrow" data-en="Open →" data-zh="打开 →">Open →</div>
+      </a>
+      <a href="pitch-deck.html" class="navcard fade-in" data-delay="0.05s">
+        <div class="navcard-num">02 — PITCH</div>
+        <div class="navcard-title" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</div>
+        <div class="navcard-desc" data-en="10-slide investor narrative. Problem, solution, traction, ask." data-zh="10 页投资人叙事：问题、方案、进展、融资。">10-slide investor narrative. Problem, solution, traction, ask.</div>
+        <div class="navcard-arrow" data-en="Open →" data-zh="打开 →">Open →</div>
+      </a>
+      <a href="investor-qa.html" class="navcard fade-in" data-delay="0.1s">
+        <div class="navcard-num">03 — Q&amp;A</div>
+        <div class="navcard-title" data-en="Investor Q&amp;A" data-zh="投资人 Q&amp;A">Investor Q&amp;A</div>
+        <div class="navcard-desc" data-en="Frank answers to the 20 questions every partner asks first." data-zh="直接回答投资人最先问的 20 个问题。">Frank answers to the 20 questions every partner asks first.</div>
+        <div class="navcard-arrow" data-en="Open →" data-zh="打开 →">Open →</div>
+      </a>
+      <a href="push-strategy-core.html" class="navcard fade-in" data-delay="0.15s">
+        <div class="navcard-num">04 — STRATEGY</div>
+        <div class="navcard-title" data-en="Strategy Core" data-zh="战略核心">Strategy Core</div>
+        <div class="navcard-desc" data-en="The 5 pillars, the invariants, the decision rules. Read this second." data-zh="5 个支柱、不变项、决策规则。第二个读的文件。">The 5 pillars, the invariants, the decision rules. Read this second.</div>
+        <div class="navcard-arrow" data-en="Open →" data-zh="打开 →">Open →</div>
+      </a>
+      <a href="challenges.html" class="navcard fade-in" data-delay="0.2s">
+        <div class="navcard-num">05 — CHALLENGES</div>
+        <div class="navcard-title" data-en="Challenges" data-zh="挑战分析">Challenges</div>
+        <div class="navcard-desc" data-en="The honest version of what's hard — cold start, verification, creator supply." data-zh="诚实面对困难：冷启动、核验、creator 供给。">The honest version of what's hard — cold start, verification, creator supply.</div>
+        <div class="navcard-arrow" data-en="Open →" data-zh="打开 →">Open →</div>
+      </a>
+      <a href="risk-defense.html" class="navcard fade-in" data-delay="0.25s">
+        <div class="navcard-num">06 — DEFENSE</div>
+        <div class="navcard-title" data-en="Risk &amp; Defense" data-zh="风险防御">Risk &amp; Defense</div>
+        <div class="navcard-desc" data-en="Top risks, top moats. How disintermediation, fraud, and copycats are handled." data-zh="主要风险与护城河：绕开平台、欺诈、竞品模仿的应对方式。">Top risks, top moats. How disintermediation, fraud, and copycats are handled.</div>
+        <div class="navcard-arrow" data-en="Open →" data-zh="打开 →">Open →</div>
+      </a>
+      <a href="retention-defense.html" class="navcard fade-in" data-delay="0.3s">
+        <div class="navcard-num">07 — RETENTION</div>
+        <div class="navcard-title" data-en="Retention" data-zh="留存机制">Retention</div>
+        <div class="navcard-desc" data-en="Why merchants repeat. Why creators don't leave. Non-portable credit." data-zh="商家为什么复投、creator 为什么不走、不可迁移的信用机制。">Why merchants repeat. Why creators don't leave. Non-portable credit.</div>
+        <div class="navcard-arrow" data-en="Open →" data-zh="打开 →">Open →</div>
+      </a>
+      <a href="standby-mechanism.html" class="navcard fade-in" data-delay="0.35s">
+        <div class="navcard-num">08 — STANDBY</div>
+        <div class="navcard-title" data-en="Standby Mechanism" data-zh="候补机制">Standby Mechanism</div>
+        <div class="navcard-desc" data-en="The backup pool that keeps fulfillment above 95% even when a creator ghosts." data-zh="让履约率在 creator 放鸽子时仍保持 95%+ 的候补池设计。">The backup pool that keeps fulfillment above 95% even when a creator ghosts.</div>
+        <div class="navcard-arrow" data-en="Open →" data-zh="打开 →">Open →</div>
+      </a>
+      <a href="prospects.html" class="navcard fade-in" data-delay="0.4s">
+        <div class="navcard-num">09 — PROSPECTS</div>
+        <div class="navcard-title" data-en="Prospects" data-zh="未来愿景">Prospects</div>
+        <div class="navcard-desc" data-en="The 3-year trajectory. What Push looks like at 5,000 merchants and 50,000 creators." data-zh="3 年轨迹：5000 商家、5 万 creator 时的 Push 长什么样。">The 3-year trajectory. What Push looks like at 5,000 merchants and 50,000 creators.</div>
+        <div class="navcard-arrow" data-en="Open →" data-zh="打开 →">Open →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="sw-dark">
+  <div class="final-cta fade-in">
+    <h2 class="final-headline">
+      <span data-en="Tell us how many." data-zh="告诉我们要多少。">Tell us how many.</span><br>
+      <span class="italic" data-en="We'll handle" data-zh="剩下的">We'll handle</span>
+      <span data-en="the rest." data-zh="交给我们。">the rest.</span>
     </h2>
-
-    <div class="fade-in" style="margin-top:28px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:700px;margin-left:auto;margin-right:auto;">
-      <div style="text-align:center;">
-        <div style="font-size:24px;font-weight:900;color:var(--accent-light);">1</div>
-        <div style="font-size:12px;color:rgba(255,255,255,0.7);line-height:1.5;" data-en="Tell us your goal" data-zh="告诉我们你的目标">Tell us your goal</div>
-      </div>
-      <div style="text-align:center;">
-        <div style="font-size:24px;font-weight:900;color:var(--accent-light);">2</div>
-        <div style="font-size:12px;color:rgba(255,255,255,0.7);line-height:1.5;" data-en="We structure your campaign" data-zh="我们帮你搭建活动">We structure your campaign</div>
-      </div>
-      <div style="text-align:center;">
-        <div style="font-size:24px;font-weight:900;color:var(--accent-light);">3</div>
-        <div style="font-size:12px;color:rgba(255,255,255,0.7);line-height:1.5;" data-en="Creators apply within 24h" data-zh="博主24小时内报名">Creators apply within 24h</div>
-      </div>
-      <div style="text-align:center;">
-        <div style="font-size:24px;font-weight:900;color:var(--accent-light);">4</div>
-        <div style="font-size:12px;color:rgba(255,255,255,0.7);line-height:1.5;" data-en="You approve and launch" data-zh="你审批通过，活动上线">You approve and launch</div>
-      </div>
-    </div>
-
-    <div class="hero-ctas fade-in" style="margin-top:24px;justify-content:center;">
-      <a href="#workflow" class="hero-cta" data-en="Start a Campaign" data-zh="发起活动">Start a Campaign</a>
-      <a href="project-intro.html" class="hero-cta" style="background:transparent;border:1px solid rgba(255,255,255,0.3);" data-en="Apply as a Creator" data-zh="申请成为博主">Apply as a Creator</a>
+    <div class="hero-ctas" style="margin-top:64px;">
+      <a href="mailto:wangjiamingaas@gmail.com?subject=Push Pilot Request" class="btn btn-primary" data-en="Request a free pilot →" data-zh="申请免费 Pilot →">Request a free pilot →</a>
+      <a href="pitch-deck.html" class="btn btn-ghost" style="border-color:rgba(245,242,236,0.5);color:var(--pearl-stone);" data-en="See the pitch deck" data-zh="查看 Pitch Deck">See the pitch deck</a>
     </div>
   </div>
 </section>
-
-<!-- — S6: Navigation cards — -->
-<div class="sw-gray">
-  <div class="section fade-in">
-    <div class="section-label" data-en="EXPLORE THE PROJECT" data-zh="深入了解">EXPLORE THE PROJECT</div>
-    <h2 class="section-title" data-en="Nine pages. <strong>Every layer</strong> explained." data-zh="九个页面，<strong>逐层拆解</strong>整个业务。">Nine pages. <strong>Every layer</strong> explained.</h2>
-
-    <div class="reading-order" style="margin-bottom:32px; padding:24px; background:var(--bg2); border:1px solid var(--border); border-radius:8px;">
-      <h3 style="font-size:18px; font-weight:700; margin-bottom:12px;" data-en="📖 Suggested Reading Order" data-zh="📖 建议阅读顺序" class="bilingual-text">📖 Suggested Reading Order</h3>
-      <ol style="padding-left:20px; color:var(--text2); font-size:14px; line-height:2;">
-        <li data-en="The Problem → Homepage or Project Introduction" data-zh="问题 → 首页 或 项目介绍" class="bilingual-text">The Problem → Homepage or Project Introduction</li>
-        <li data-en="The Insight → Pitch Deck (Slide 3: Insight)" data-zh="洞察 → 路演材料（Slide 3: 洞察）" class="bilingual-text">The Insight → Pitch Deck (Slide 3: Insight)</li>
-        <li data-en="The Solution → Project Introduction (How It Works + Credit System + Strategic Architecture)" data-zh="方案 → 项目介绍（运作方式 + 信用体系 + 战略架构）" class="bilingual-text">The Solution → Project Introduction (How It Works + Credit System + Strategic Architecture)</li>
-        <li data-en="The Defense → Risk Defense → Retention → Platform Value" data-zh="防御 → 风险防御 → 留存机制 → 平台价值" class="bilingual-text">The Defense → Risk Defense → Retention → Platform Value</li>
-        <li data-en="The Endgame → Strategy Core → Future Prospects" data-zh="终局 → 战略核心 → 未来愿景" class="bilingual-text">The Endgame → Strategy Core → Future Prospects</li>
-      </ol>
-    </div>
-
-    <div class="nav-cards-grid">
-      <a href="project-intro.html" class="nav-card fade-in" data-delay="0s">
-        <div class="nav-card-icon">📋</div>
-        <div class="nav-card-title" data-en="Project Intro" data-zh="项目介绍">Project Intro</div>
-        <div class="nav-card-desc" data-en="Full vision, problem, thesis, and strategic architecture." data-zh="完整愿景、核心问题、商业论点与战略架构。">Full vision, problem, thesis, and strategic architecture.</div>
-        <span class="nav-card-tag tag-green" data-en="Start Here" data-zh="从这里开始">Start Here</span>
-      </a>
-      <a href="pitch-deck.html" class="nav-card fade-in" data-delay="0.05s">
-        <div class="nav-card-icon">📊</div>
-        <div class="nav-card-title" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</div>
-        <div class="nav-card-desc" data-en="Investor-ready overview of market, product, model, and moat." data-zh="面向投资人：市场、产品、模式与护城河。">Investor-ready overview of market, product, model, and moat.</div>
-        <span class="nav-card-tag tag-accent" data-en="Investors" data-zh="投资者">Investors</span>
-      </a>
-      <a href="prospects.html" class="nav-card fade-in" data-delay="0.1s">
-        <div class="nav-card-icon">🚀</div>
-        <div class="nav-card-title" data-en="Prospects" data-zh="未来愿景">Prospects</div>
-        <div class="nav-card-desc" data-en="Short, medium, and long-term trajectory." data-zh="短期、中期、长期发展轨迹。">Short, medium, and long-term trajectory.</div>
-        <span class="nav-card-tag tag-orange" data-en="Vision" data-zh="愿景">Vision</span>
-      </a>
-      <a href="challenges.html" class="nav-card fade-in" data-delay="0.15s">
-        <div class="nav-card-icon">⚠️</div>
-        <div class="nav-card-title" data-en="Challenges" data-zh="挑战分析">Challenges</div>
-        <div class="nav-card-desc" data-en="12 real challenges and how the platform survives each one." data-zh="12个真实挑战，逐一拆解应对方案。">12 real challenges and how the platform survives each one.</div>
-        <span class="nav-card-tag tag-red" data-en="Risks" data-zh="风险">Risks</span>
-      </a>
-      <a href="risk-defense.html" class="nav-card fade-in" data-delay="0.2s">
-        <div class="nav-card-icon">🛡️</div>
-        <div class="nav-card-title" data-en="Risk &amp; Defense" data-zh="风险防御">Risk &amp; Defense</div>
-        <div class="nav-card-desc" data-en="All 16 risks across 7 categories with specific defenses." data-zh="7大类共16项风险，每项配有防御策略。">All 16 risks across 7 categories with specific defenses.</div>
-        <span class="nav-card-tag tag-red" data-en="Strategy" data-zh="战略">Strategy</span>
-      </a>
-      <a href="retention-defense.html" class="nav-card fade-in" data-delay="0.25s">
-        <div class="nav-card-icon">🔄</div>
-        <div class="nav-card-title" data-en="Creator Retention" data-zh="留存机制">Creator Retention</div>
-        <div class="nav-card-desc" data-en="Why creators stay and how the platform makes leaving costly." data-zh="博主为什么留下来，离开要付出什么代价。">Why creators stay and how the platform makes leaving costly.</div>
-        <span class="nav-card-tag tag-accent" data-en="Supply" data-zh="供给侧">Supply</span>
-      </a>
-      <a href="platform-value.html" class="nav-card fade-in" data-delay="0.3s">
-        <div class="nav-card-icon">🔐</div>
-        <div class="nav-card-title" data-en="Platform Value" data-zh="平台价值">Platform Value</div>
-        <div class="nav-card-desc" data-en="Why merchants don't bypass the platform after the first introduction." data-zh="商家为什么不会绕开平台自己干。">Why merchants don't bypass the platform after the first introduction.</div>
-        <span class="nav-card-tag tag-green" data-en="Demand" data-zh="需求侧">Demand</span>
-      </a>
-      <a href="push-strategy-core.html" class="nav-card fade-in" data-delay="0.35s">
-        <div class="nav-card-icon">💎</div>
-        <div class="nav-card-title" data-en="Strategy Core" data-zh="战略核心">Strategy Core</div>
-        <div class="nav-card-desc" data-en="Why Push is a value settlement layer, not just a matching tool." data-zh="为什么 Push 是价值结算层，而不只是撮合工具。">Why Push is a value settlement layer, not just a matching tool.</div>
-        <span class="nav-card-tag tag-accent" data-en="Thesis" data-zh="核心论点">Thesis</span>
-      </a>
-      <a href="#dochub" class="nav-card fade-in" data-delay="0.4s">
-        <div class="nav-card-icon">📚</div>
-        <div class="nav-card-title" data-en="Document Hub" data-zh="文档中心">Document Hub</div>
-        <div class="nav-card-desc" data-en="13 internal strategy and operations documents." data-zh="13份内部战略与运营文档。">13 internal strategy and operations documents.</div>
-        <span class="nav-card-tag tag-orange" data-en="Reference" data-zh="参考资料">Reference</span>
-      </a>
-    </div>
-  </div>
-</div>
-
-<!-- — S7: Document hub — -->
-<div class="sw-dark" id="dochub">
-  <div class="dochub-inner fade-in">
-    <div class="section-label section-label-dark" data-en="DOCUMENT HUB" data-zh="文档中心">DOCUMENT HUB</div>
-    <h2 class="section-title section-title-white" style="margin-bottom:8px;" data-en="<strong>13</strong> Internal Documents" data-zh="<strong>13</strong> 份内部文档"><strong>13</strong> Internal Documents</h2>
-    <p class="section-sub section-sub-dark" style="margin-bottom:0;" data-en="The <strong>complete</strong> strategic and operational foundation." data-zh="<strong>完整的</strong>战略与运营底层文档。">The <strong>complete</strong> strategic and operational foundation.</p>
-
-    <!-- Reading paths by role -->
-    <div style="margin-bottom:20px; margin-top:40px; padding:12px 16px; background:rgba(255,255,255,0.05); border-radius:8px; font-size:13px; color:rgba(255,255,255,0.5);">
-      <span data-en="📚 Read by role: " data-zh="📚 按角色阅读：" class="bilingual-text">📚 Read by role: </span>
-      <span style="font-weight:600;" data-en="New team member (4-6h) · Investor (3-4h) · Product (5-7h) · Operations (4-5h) · Growth (3-4h) · Engineering (3-4h)" data-zh="新成员（4-6h）· 投资人（3-4h）· 产品（5-7h）· 运营（4-5h）· 增长（3-4h）· 工程（3-4h）" class="bilingual-text">New team member (4-6h) · Investor (3-4h) · Product (5-7h) · Operations (4-5h) · Growth (3-4h) · Engineering (3-4h)</span>
-    </div>
-
-    <!-- 8 core doc mini-cards (4×2) -->
-    <div class="doc-cards-grid">
-      <div class="doc-mini-card">
-        <div class="doc-mini-num">01</div>
-        <div class="doc-mini-title" data-en="Master Strategy <span style='font-size:10px;font-weight:600;color:var(--accent-light);background:rgba(79,70,229,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;'>[EN]</span>" data-zh="总体战略 <span style='font-size:10px;font-weight:600;color:var(--accent-light);background:rgba(79,70,229,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;'>[EN]</span>">Master Strategy <span style="font-size:10px;font-weight:600;color:var(--accent-light);background:rgba(79,70,229,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;">[EN]</span></div>
-        <div class="doc-mini-desc" data-en="Positioning, pillars, thesis, and strategic red lines." data-zh="定位、支柱、论点与战略红线。">Positioning, pillars, thesis, and strategic red lines.</div>
-      </div>
-      <div class="doc-mini-card">
-        <div class="doc-mini-num">02</div>
-        <div class="doc-mini-title" data-en="Workflow Architecture <span style='font-size:10px;font-weight:600;color:var(--accent-light);background:rgba(79,70,229,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;'>[EN]</span>" data-zh="工作流架构 <span style='font-size:10px;font-weight:600;color:var(--accent-light);background:rgba(79,70,229,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;'>[EN]</span>">Workflow Architecture <span style="font-size:10px;font-weight:600;color:var(--accent-light);background:rgba(79,70,229,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;">[EN]</span></div>
-        <div class="doc-mini-desc" data-en="20x workflow, milestone states, SLA." data-zh="20x 工作流、里程碑状态、SLA。">20x workflow, milestone states, SLA.</div>
-      </div>
-      <div class="doc-mini-card">
-        <div class="doc-mini-num">03</div>
-        <div class="doc-mini-title" data-en="Pain Points Map <span style='font-size:10px;font-weight:600;color:var(--accent-light);background:rgba(79,70,229,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;'>[EN]</span>" data-zh="痛点地图 <span style='font-size:10px;font-weight:600;color:var(--accent-light);background:rgba(79,70,229,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;'>[EN]</span>">Pain Points Map <span style="font-size:10px;font-weight:600;color:var(--accent-light);background:rgba(79,70,229,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;">[EN]</span></div>
-        <div class="doc-mini-desc" data-en="Root cause analysis, merchant and creator pain." data-zh="根因分析、商家与博主痛点。">Root cause analysis, merchant and creator pain.</div>
-      </div>
-      <div class="doc-mini-card">
-        <div class="doc-mini-num">04</div>
-        <div class="doc-mini-title" data-en="Risk Register <span style='font-size:10px;font-weight:600;color:var(--accent-light);background:rgba(79,70,229,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;'>[EN]</span>" data-zh="风险清单 <span style='font-size:10px;font-weight:600;color:var(--accent-light);background:rgba(79,70,229,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;'>[EN]</span>">Risk Register <span style="font-size:10px;font-weight:600;color:var(--accent-light);background:rgba(79,70,229,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;">[EN]</span></div>
-        <div class="doc-mini-desc" data-en="16 risks, 6 categories, defense strategies." data-zh="16个风险，6个类别，防御策略。">16 risks, 6 categories, defense strategies.</div>
-      </div>
-      <div class="doc-mini-card">
-        <div class="doc-mini-num">05</div>
-        <div class="doc-mini-title" data-en="Execution Playbook <span style='font-size:10px;font-weight:600;color:var(--accent-light);background:rgba(79,70,229,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;'>[EN]</span>" data-zh="执行手册 <span style='font-size:10px;font-weight:600;color:var(--accent-light);background:rgba(79,70,229,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;'>[EN]</span>">Execution Playbook <span style="font-size:10px;font-weight:600;color:var(--accent-light);background:rgba(79,70,229,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;">[EN]</span></div>
-        <div class="doc-mini-desc" data-en="9 core skills, founder operating standards." data-zh="9项核心技能、创始人操盘标准。">9 core skills, founder operating standards.</div>
-      </div>
-      <div class="doc-mini-card">
-        <div class="doc-mini-num">11</div>
-        <div class="doc-mini-title" data-en="Cold Start Plan <span style='font-size:10px;font-weight:600;color:var(--accent-light);background:rgba(79,70,229,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;'>[EN]</span>" data-zh="冷启动 <span style='font-size:10px;font-weight:600;color:var(--accent-light);background:rgba(79,70,229,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;'>[EN]</span>">Cold Start Plan <span style="font-size:10px;font-weight:600;color:var(--accent-light);background:rgba(79,70,229,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;">[EN]</span></div>
-        <div class="doc-mini-desc" data-en="12-week launch plan from zero." data-zh="从零开始的12周启动计划。">12-week launch plan from zero.</div>
-      </div>
-      <div class="doc-mini-card">
-        <div class="doc-mini-num">12</div>
-        <div class="doc-mini-title" data-en="Pricing Model <span style='font-size:10px;font-weight:600;color:var(--accent-light);background:rgba(79,70,229,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;'>[EN]</span>" data-zh="定价模型 <span style='font-size:10px;font-weight:600;color:var(--accent-light);background:rgba(79,70,229,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;'>[EN]</span>">Pricing Model <span style="font-size:10px;font-weight:600;color:var(--accent-light);background:rgba(79,70,229,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;">[EN]</span></div>
-        <div class="doc-mini-desc" data-en="Fee structure, payment flow." data-zh="费用结构、支付流程。">Fee structure, payment flow.</div>
-      </div>
-      <div class="doc-mini-card">
-        <div class="doc-mini-num">13</div>
-        <div class="doc-mini-title" data-en="Creator Scoring <span style='font-size:10px;font-weight:600;color:var(--accent-light);background:rgba(79,70,229,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;'>[EN]</span>" data-zh="博主评分 <span style='font-size:10px;font-weight:600;color:var(--accent-light);background:rgba(79,70,229,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;'>[EN]</span>">Creator Scoring <span style="font-size:10px;font-weight:600;color:var(--accent-light);background:rgba(79,70,229,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;">[EN]</span></div>
-        <div class="doc-mini-desc" data-en="Composite formula, tier system, anti-gaming." data-zh="复合公式、等级体系、防刷分。">Composite formula, tier system, anti-gaming.</div>
-      </div>
-    </div>
-
-    <!-- 5 page-linked docs (5×1) -->
-    <div class="doc-linked-row">
-      <div class="doc-mini-card">
-        <div class="doc-mini-num">06</div>
-        <div class="doc-mini-title" data-en="Unit Economics <span style='font-size:10px;font-weight:600;color:#6ee7b7;background:rgba(5,150,105,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;'>[EN/中]</span>" data-zh="经济模型 <span style='font-size:10px;font-weight:600;color:#6ee7b7;background:rgba(5,150,105,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;'>[EN/中]</span>">Unit Economics <span style="font-size:10px;font-weight:600;color:#6ee7b7;background:rgba(5,150,105,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;">[EN/中]</span></div>
-        <div class="doc-mini-desc" data-en="Revenue layers, projections, traps." data-zh="营收层次、预测、经济陷阱。">Revenue layers, projections, traps.</div>
-        <a href="economics.html" class="doc-mini-link" data-en="→ Open full page" data-zh="→ 查看完整页面">→ Open full page</a>
-      </div>
-      <div class="doc-mini-card">
-        <div class="doc-mini-num">07</div>
-        <div class="doc-mini-title" data-en="Attribution <span style='font-size:10px;font-weight:600;color:#6ee7b7;background:rgba(5,150,105,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;'>[EN/中]</span>" data-zh="归因框架 <span style='font-size:10px;font-weight:600;color:#6ee7b7;background:rgba(5,150,105,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;'>[EN/中]</span>">Attribution <span style="font-size:10px;font-weight:600;color:#6ee7b7;background:rgba(5,150,105,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;">[EN/中]</span></div>
-        <div class="doc-mini-desc" data-en="5-layer verification, confidence levels." data-zh="5层核验、置信度等级。">5-layer verification, confidence levels.</div>
-        <a href="attribution.html" class="doc-mini-link" data-en="→ Open full page" data-zh="→ 查看完整页面">→ Open full page</a>
-      </div>
-      <div class="doc-mini-card">
-        <div class="doc-mini-num">08</div>
-        <div class="doc-mini-title" data-en="Fraud &amp; Trust <span style='font-size:10px;font-weight:600;color:#6ee7b7;background:rgba(5,150,105,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;'>[EN/中]</span>" data-zh="欺诈与诚信 <span style='font-size:10px;font-weight:600;color:#6ee7b7;background:rgba(5,150,105,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;'>[EN/中]</span>">Fraud &amp; Trust <span style="font-size:10px;font-weight:600;color:#6ee7b7;background:rgba(5,150,105,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;">[EN/中]</span></div>
-        <div class="doc-mini-desc" data-en="5 fraud types, enforcement framework." data-zh="5种欺诈类型、处罚机制。">5 fraud types, enforcement framework.</div>
-        <a href="fraud-integrity.html" class="doc-mini-link" data-en="→ Open full page" data-zh="→ 查看完整页面">→ Open full page</a>
-      </div>
-      <div class="doc-mini-card">
-        <div class="doc-mini-num">09</div>
-        <div class="doc-mini-title" data-en="GTM &amp; Launch <span style='font-size:10px;font-weight:600;color:#6ee7b7;background:rgba(5,150,105,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;'>[EN/中]</span>" data-zh="上线计划 <span style='font-size:10px;font-weight:600;color:#6ee7b7;background:rgba(5,150,105,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;'>[EN/中]</span>">GTM &amp; Launch <span style="font-size:10px;font-weight:600;color:#6ee7b7;background:rgba(5,150,105,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;">[EN/中]</span></div>
-        <div class="doc-mini-desc" data-en="Hyper-local launch model, 3 growth loops." data-zh="超本地化启动模型、3个增长循环。">Hyper-local launch model, 3 growth loops.</div>
-        <a href="gtm-launch.html" class="doc-mini-link" data-en="→ Open full page" data-zh="→ 查看完整页面">→ Open full page</a>
-      </div>
-      <div class="doc-mini-card">
-        <div class="doc-mini-num">10</div>
-        <div class="doc-mini-title" data-en="Metrics Dashboard <span style='font-size:10px;font-weight:600;color:#6ee7b7;background:rgba(5,150,105,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;'>[EN/中]</span>" data-zh="指标看板 <span style='font-size:10px;font-weight:600;color:#6ee7b7;background:rgba(5,150,105,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;'>[EN/中]</span>">Metrics Dashboard <span style="font-size:10px;font-weight:600;color:#6ee7b7;background:rgba(5,150,105,0.2);padding:1px 6px;border-radius:4px;margin-left:4px;vertical-align:middle;">[EN/中]</span></div>
-        <div class="doc-mini-desc" data-en="North star metric, decision rules, traps." data-zh="北极星指标、决策规则、指标陷阱。">North star metric, decision rules, traps.</div>
-        <a href="metrics-dashboard.html" class="doc-mini-link" data-en="→ Open full page" data-zh="→ 查看完整页面">→ Open full page</a>
-      </div>
-    </div>
-
-    <!-- Expand button -->
-    <button class="doc-hub-expand" onclick="document.getElementById('doc-hub-full').classList.toggle('open');this.textContent=this.textContent.includes('展开')?'收起完整文档内容 ↑ / Collapse':'展开完整文档内容 ↓ / Expand'">展开完整文档内容 ↓ / Expand</button>
-
-    <!-- Collapsed full doc hub -->
-    <div class="doc-hub-full" id="doc-hub-full">
-      <div class="doc-tabs" id="doc-tabs">
-        <button class="doc-tab-btn active" onclick="switchDocTab(this,'doc-00')" data-en="00 Index" data-zh="00 索引">00 Index</button>
-        <button class="doc-tab-btn" onclick="switchDocTab(this,'doc-01')" data-en="01 Strategy" data-zh="01 战略">01 Strategy</button>
-        <button class="doc-tab-btn" onclick="switchDocTab(this,'doc-02')" data-en="02 Workflow" data-zh="02 工作流">02 Workflow</button>
-        <button class="doc-tab-btn" onclick="switchDocTab(this,'doc-03')" data-en="03 Pain Points" data-zh="03 痛点">03 Pain Points</button>
-        <button class="doc-tab-btn" onclick="switchDocTab(this,'doc-04')" data-en="04 Risks" data-zh="04 风险">04 Risks</button>
-        <button class="doc-tab-btn" onclick="switchDocTab(this,'doc-05')" data-en="05 Execution" data-zh="05 执行">05 Execution</button>
-        <button class="doc-tab-btn" onclick="switchDocTab(this,'doc-11')" data-en="11 Cold Start" data-zh="11 冷启动">11 Cold Start</button>
-        <button class="doc-tab-btn" onclick="switchDocTab(this,'doc-12')" data-en="12 Pricing" data-zh="12 定价">12 Pricing</button>
-        <button class="doc-tab-btn" onclick="switchDocTab(this,'doc-13')" data-en="13 Scoring" data-zh="13 评分">13 Scoring</button>
-        <button class="doc-tab-btn" onclick="switchDocTab(this,'doc-06')" data-en="06 Economics" data-zh="06 经济模型">06 Economics</button>
-        <button class="doc-tab-btn" onclick="switchDocTab(this,'doc-07')" data-en="07 Attribution" data-zh="07 归因框架">07 Attribution</button>
-        <button class="doc-tab-btn" onclick="switchDocTab(this,'doc-08')" data-en="08 Fraud &amp; Trust" data-zh="08 欺诈与诚信">08 Fraud &amp; Trust</button>
-        <button class="doc-tab-btn" onclick="switchDocTab(this,'doc-09')" data-en="09 GTM &amp; Launch" data-zh="09 GTM 启动">09 GTM &amp; Launch</button>
-        <button class="doc-tab-btn" onclick="switchDocTab(this,'doc-10')" data-en="10 Metrics" data-zh="10 指标体系">10 Metrics</button>
-      </div>
-
-      <!-- Doc 00 -->
-      <div class="doc-tab-content active" id="doc-00">
-        <div class="doc-panel">
-          <div class="doc-badge" style="background:var(--accent-bg);color:var(--accent-light)">DOC-00 | Document Index</div>
-          <h2>PUSH Document Index &amp; Navigation Guide</h2>
-          <h3>Document Map: All 8 Authoritative Documents</h3>
-          <div class="doc-table-wrap"><table>
-            <tr><th>#</th><th>Title</th><th>Authoritative For</th></tr>
-            <tr><td>01</td><td>Master Strategy</td><td>Vision, positioning, problem statement, differentiation</td></tr>
-            <tr><td>02</td><td>20x Workflow Architecture</td><td>Workflow stages, SLAs, merchant/creator/ops processes</td></tr>
-            <tr><td>03</td><td>Pain Points &amp; Root Cause Map</td><td>Pain diagnosis, root cause framework, symptom vs cause</td></tr>
-            <tr><td>04</td><td>Risk Register &amp; Defense</td><td>Risk identification, prioritization, defense strategies</td></tr>
-            <tr><td>05</td><td>Execution Skills Playbook</td><td>Execution competencies, founder skills, standards</td></tr>
-            <tr><td>11</td><td>Cold Start Execution Plan</td><td>12-week launch plan, acquisition tactics</td></tr>
-            <tr><td>12</td><td>V0.1 Pricing Model</td><td>Fee structures, payment flows, projections</td></tr>
-            <tr><td>13</td><td>V0.1 Creator Scoring</td><td>Scoring weights, tier thresholds, calculations</td></tr>
-          </table></div>
-          <h3>Reading Paths by Role</h3>
-          <div class="reading-paths">
-            <div class="reading-path-card">
-              <div class="rp-title" style="color:var(--accent-light)">New to Push</div>
-              <div class="rp-body">4–6 hours: Doc 01 → 04 → 03 → 02 → 05</div>
-            </div>
-            <div class="reading-path-card">
-              <div class="rp-title" style="color:#6ee7b7">Investor Prep</div>
-              <div class="rp-body">3–4 hours: Doc 01 → 03 → 04 → 12</div>
-            </div>
-            <div class="reading-path-card">
-              <div class="rp-title" style="color:#fcd34d">Product Leadership</div>
-              <div class="rp-body">5–7 hours: Doc 01 → 04 → 03 → 05 → 02 → 13</div>
-            </div>
-            <div class="reading-path-card">
-              <div class="rp-title" style="color:#fca5a5">Operations &amp; Fraud</div>
-              <div class="rp-body">4–5 hours: Doc 02 → 05 → 03 → 04</div>
-            </div>
-            <div class="reading-path-card">
-              <div class="rp-title" style="color:#c4b5fd">GTM &amp; Growth</div>
-              <div class="rp-body">3–4 hours: Doc 11 → 01 → 03 → 04 → 12</div>
-            </div>
-            <div class="reading-path-card">
-              <div class="rp-title" style="color:#93c5fd">Engineering</div>
-              <div class="rp-body">3–4 hours: Doc 13 → 04 → 02 → 05</div>
-            </div>
-          </div>
-          <h3>Skill System Architecture</h3>
-          <p>Push uses a tiered, specialized skill architecture across 8 tiers: Strategy, Product Design, Operations, Growth/GTM, Finance, Analytics, Communications, and Technical.</p>
-          <div class="doc-table-wrap" style="margin-top:12px"><table>
-            <tr><th>Tier</th><th>Example Skills</th><th>Example Use</th></tr>
-            <tr><td>1: Strategy</td><td>push-strategy-advisor, push-positioning</td><td>"Should we build a new campaign type?"</td></tr>
-            <tr><td>2: Product</td><td>push-campaign-designer, push-creator-scoring</td><td>"Design the campaign workflow"</td></tr>
-            <tr><td>3: Operations</td><td>push-fraud-ops, push-settlement-ops</td><td>"Review this disputed proof"</td></tr>
-            <tr><td>4: Growth</td><td>push-gtm-experiments, push-cold-start</td><td>"Bootstrap a new city"</td></tr>
-            <tr><td>5: Finance</td><td>push-unit-economics, push-pricing-strategist</td><td>"What should we charge?"</td></tr>
-            <tr><td>6: Analytics</td><td>push-metrics-designer, push-experiment-design</td><td>"Design retention dashboard"</td></tr>
-            <tr><td>7: Comms</td><td>push-pitch-deck, push-investor-narrative</td><td>"Draft onboarding email"</td></tr>
-            <tr><td>8: Technical</td><td>push-data-model, push-api-architect</td><td>"Design creator tier API"</td></tr>
-          </table></div>
-        </div>
-      </div>
-
-      <!-- Doc 01 -->
-      <div class="doc-tab-content" id="doc-01">
-        <div class="doc-panel">
-          <div class="doc-badge" style="background:var(--accent-bg);color:var(--accent-light)">DOC-01 | v1.1 | Active</div>
-          <h2>PUSH Master Strategy</h2>
-          <blockquote>Push is a local creator performance infrastructure layer that helps merchants acquire customers through measurable creator-driven demand.</blockquote>
-          <h3>Core Problem</h3>
-          <h4>Merchant Problem</h4>
-          <p>Cannot judge creator quality, compare creators beyond followers, run structured campaigns, or avoid wasting money on low performers.</p>
-          <h4>Creator Problem</h4>
-          <p>Lack pricing power, verifiable performance records, upward mobility, and a stable path from free samples to paid work.</p>
-          <h4>Market Problem</h4>
-          <p>The creator economy has abundant supply, but it is not structured into a repeatable acquisition channel for local commerce.</p>
-          <h3>5 Strategic Pillars</h3>
-          <p><strong>1. Offer OS:</strong> Convert merchant intent into structured campaigns (launch item, drive off-peak traffic, fill event attendance).</p>
-          <p><strong>2. Creator Credit:</strong> Value creators by completion rate, reliability, merchant satisfaction, repeat booking, dispute history.</p>
-          <p><strong>3. Attribution:</strong> Verify via unique codes, check-in proof, merchant confirmation, content verification, redemption evidence.</p>
-          <p><strong>4. Demand Surface:</strong> Real-time demand interface showing where opportunities are, when they close, who qualifies.</p>
-          <p><strong>5. Liquidity Layer:</strong> Standby mechanism for slot fill rate, creator engagement, urgency, merchant confidence.</p>
-          <h3>Company-Building Thesis</h3>
-          <p>The end state is a new market layer for local creator-driven demand: standardize local creator acquisition, rank by performance, route toward better outcomes, compound proprietary data, create lock-in through access, trust, and workflow.</p>
-          <h3>Push IS vs Is NOT</h3>
-          <p><strong style="color:#6ee7b7">IS:</strong> A transaction system · A trust system · A creator credit system · A local demand orchestration system</p>
-          <p><strong style="color:#fca5a5">IS NOT:</strong> A generic influencer marketplace · A local discovery app · A content community or reward app · A lightweight loyalty system</p>
-          <h3>Strategic Red Flags</h3>
-          <p>The company becomes weak if it behaves like: a sample-giveaway app, creator coupon engine, posting board, local discovery map with weak economics, or content engagement platform with shallow verification.</p>
-          <h3>Strategic Decision Test</h3>
-          <p>Every major decision should answer at least one positively: Does this improve merchant ROI clarity? Does this improve creator earning power or quality sorting? Does this deepen platform defensibility? Does this reduce fraud, operational friction, or repeat campaign cost? Does this make future transactions more likely to stay on-platform? <strong style="color:#fca5a5">If the answer is no, the idea is likely noise.</strong></p>
-        </div>
-      </div>
-
-      <!-- Doc 02 -->
-      <div class="doc-tab-content" id="doc-02">
-        <div class="doc-panel">
-          <div class="doc-badge" style="background:var(--green-bg);color:#6ee7b7">DOC-02 | v1.1 | Active</div>
-          <h2>20x Workflow Architecture</h2>
-          <blockquote>The workflow should feel like a controlled economic system, not a manual project-management pipeline.</blockquote>
-          <h3>Design Principles</h3>
-          <p>Fast to understand, hard to misuse, easy to repeat, measurable at every stage, resilient against drop-off and fraud, produces better data over time.</p>
-          <h3>Merchant Workflow (6 Stages)</h3>
-          <p><strong>1. Onboarding:</strong> Business info + operational intelligence (demand windows, AOV, high-margin products, capacity).</p>
-          <p><strong>2. Goal Selection:</strong> Drive visits, increase weekday traffic, launch item, boost event attendance, fill underperforming slots.</p>
-          <p><strong>3. Campaign Structuring:</strong> Offer, payout, slots, dates, creator requirements, verification, approval rules.</p>
-          <p><strong>4. Candidate Routing:</strong> Ranked by fulfillment history, local fit, category match, reliability.</p>
-          <p><strong>5. Execution:</strong> Clear deliverables, locked schedule, 7 milestone states.</p>
-          <p><strong>6. Review &amp; Repeat:</strong> Result summary, repeat recommendation, next campaign seed.</p>
-          <h3>7 Milestone States</h3>
-          <p>Accepted → Scheduled → Visited → Proof Submitted → Content Published → Verified → Settled</p>
-          <h3>Creator Workflow (5 Stages)</h3>
-          <p>Onboarding → Opportunity Discovery → Application/Standby → Fulfillment → Settlement &amp; Progression</p>
-          <h3>20x vs Basic Flow</h3>
-          <p><strong>Basic:</strong> Post → Apply → Accept → Content → Pay?</p>
-          <p><strong>20x Push:</strong> Goal → Structure → Route → Verify → Settle → Repeat</p>
-          <h3>SLA Framework</h3>
-          <div class="inner-tabs">
-            <button class="inner-tab-btn active" onclick="switchInnerTab(this,'sla-merchant')">Merchant SLAs</button>
-            <button class="inner-tab-btn" onclick="switchInnerTab(this,'sla-creator')">Creator SLAs</button>
-            <button class="inner-tab-btn" onclick="switchInnerTab(this,'sla-ops')">Platform Ops SLAs</button>
-          </div>
-          <div class="inner-tab-content active" id="sla-merchant">
-            <div class="doc-table-wrap"><table>
-              <tr><th>Stage</th><th>SLA</th><th>If Exceeded</th></tr>
-              <tr><td>Campaign setup</td><td>48 hours</td><td>Reminder; offer assistance</td></tr>
-              <tr><td>Application review</td><td>24 hours</td><td>Auto-approve top-scored applicants</td></tr>
-              <tr><td>Proof confirmation</td><td>24 hours</td><td>Auto-approve if meets criteria</td></tr>
-              <tr><td>Post-campaign feedback</td><td>48 hours</td><td>Defaults to "satisfactory"</td></tr>
-            </table></div>
-          </div>
-          <div class="inner-tab-content" id="sla-creator">
-            <div class="doc-table-wrap"><table>
-              <tr><th>Stage</th><th>SLA</th><th>If Exceeded</th></tr>
-              <tr><td>Campaign acceptance</td><td>12 hours</td><td>Slot opens to next candidate</td></tr>
-              <tr><td>Visit completion</td><td>3–5 days</td><td>Warning at 50%; auto-cancel at deadline +24h</td></tr>
-              <tr><td>Proof submission</td><td>24 hours</td><td>Reminder; score impact warning</td></tr>
-              <tr><td>Content publication</td><td>48 hours</td><td>Final reminder; non-completion recorded</td></tr>
-            </table></div>
-          </div>
-          <div class="inner-tab-content" id="sla-ops">
-            <div class="doc-table-wrap"><table>
-              <tr><th>Stage</th><th>SLA</th><th>If Exceeded</th></tr>
-              <tr><td>Dispute acknowledgment</td><td>4 hours</td><td>Auto-escalation to priority queue</td></tr>
-              <tr><td>Dispute resolution</td><td>48 hours</td><td>Escalate to senior review</td></tr>
-              <tr><td>Creator payout</td><td>24 hours</td><td>Auto-process if no fraud flags</td></tr>
-              <tr><td>Fraud flag review</td><td>24 hours</td><td>Settlement held; both parties notified</td></tr>
-            </table></div>
-          </div>
-          <h3>Workflow Failure Points</h3>
-          <p>Vague instructions, creator ghosting, proof confusion, approval delays, weak fraud controls, low standby response, payout delays, incomplete data.</p>
-        </div>
-      </div>
-
-      <!-- Doc 03 -->
-      <div class="doc-tab-content" id="doc-03">
-        <div class="doc-panel">
-          <div class="doc-badge" style="background:var(--orange-bg);color:#fcd34d">DOC-03 | v1.1 | Active</div>
-          <h2>Pain Points &amp; Root Cause Map</h2>
-          <blockquote>The strongest businesses correctly identify which complaints are structural and build around resolving them.</blockquote>
-          <h3>Merchant Pain Points</h3>
-          <p><strong>A. Cannot Judge Creator Quality:</strong> Merchants evaluate by followers and aesthetics (weak signals). Root: no normalized credit layer.</p>
-          <p><strong>B. Unclear ROI:</strong> Cannot answer "did this creator bring real visits?" Root: no structured attribution.</p>
-          <p><strong>C. Operational Friction:</strong> No time for outreach, negotiation, tracking. Root: ad hoc relationship work.</p>
-          <p><strong>D. Fear of Being Burned:</strong> No-shows, low quality, take-and-disappear. Root: no consequence-backed trust.</p>
-          <h3>Creator Pain Points</h3>
-          <p><strong>A. No Pricing Power:</strong> Cannot prove worth. Root: no standardized credit system.</p>
-          <p><strong>B. Income Instability:</strong> Random deal flow, low-quality offers. Root: no structured pipeline.</p>
-          <p><strong>C. Exploitative Low-End:</strong> Trapped in "free sample" loops. Root: no distinction between onboarding and growth.</p>
-          <p><strong>D. Trust Asymmetry:</strong> Don't know if merchants pay fairly. Root: weak merchant accountability.</p>
-          <h3>Platform Pain Points</h3>
-          <p><strong>A. Cold Start</strong> (two-sided dependency) · <strong>B. Fraud</strong> (weak verification) · <strong>C. Disintermediation</strong> (introduction-only perception) · <strong>D. Commoditization</strong> (under-invest in credit/attribution)</p>
-          <h3>5 Root Causes</h3>
-          <p>1. Lack of Structure &nbsp;·&nbsp; 2. Lack of Verification &nbsp;·&nbsp; 3. Lack of Repeatability &nbsp;·&nbsp; 4. Lack of Durable Economic Incentives &nbsp;·&nbsp; 5. Lack of Compounding Platform Data</p>
-          <h3>Pain Severity</h3>
-          <div class="doc-table-wrap"><table>
-            <tr><th>Pain Point</th><th>Severity</th></tr>
-            <tr><td>Weak ROI confidence</td><td><span style="color:#fca5a5;font-weight:600">Critical</span></td></tr>
-            <tr><td>Creator low retention</td><td><span style="color:#fca5a5;font-weight:600">Critical</span></td></tr>
-            <tr><td>Off-platform leakage</td><td><span style="color:#fca5a5;font-weight:600">Critical</span></td></tr>
-            <tr><td>Fraud &amp; fake value</td><td><span style="color:#fca5a5;font-weight:600">Critical</span></td></tr>
-            <tr><td>Shallow campaign repetition</td><td><span style="color:#fca5a5;font-weight:600">Critical</span></td></tr>
-            <tr><td>Poor campaign design</td><td><span style="color:#fcd34d;font-weight:600">Medium</span></td></tr>
-            <tr><td>Weak supply matching</td><td><span style="color:#fcd34d;font-weight:600">Medium</span></td></tr>
-            <tr><td>Social/community gaps</td><td><span style="color:rgba(255,255,255,0.35);font-weight:600">Low</span></td></tr>
-          </table></div>
-        </div>
-      </div>
-
-      <!-- Doc 04 -->
-      <div class="doc-tab-content" id="doc-04">
-        <div class="doc-panel">
-          <div class="doc-badge" style="background:var(--red-bg);color:#fca5a5">DOC-04 | v1.1 | Active</div>
-          <h2>Risk Register &amp; Defense Playbook</h2>
-          <blockquote>Push wins by making the platform more economically rational than off-platform behavior.</blockquote>
-          <h3>Strategic Risks (R1–R3)</h3>
-          <p><strong>R1 Derivative Positioning:</strong> Position as infrastructure, not marketplace.</p>
-          <p><strong>R2 Weak Wedge:</strong> Start with one dense area, 1–2 strong verticals.</p>
-          <p><strong>R3 Feature Drift:</strong> Only build features improving ROI, progression, defensibility, trust.</p>
-          <h3>Marketplace Risks (R4–R6)</h3>
-          <p><strong>R4 Cold Start:</strong> Founder-led density creation. Manual zone selection, curated onboarding, concentrated volume.</p>
-          <p><strong>R5 Low Merchant Retention:</strong> Better templates, reporting, creator sorting, fill speed.</p>
-          <p><strong>R6 Low Creator Retention:</strong> Strong progression, limited freebie dependency, clear earnings ladder.</p>
-          <h3>Behavioral Risks (R7–R9)</h3>
-          <p><strong>R7 Disintermediation:</strong> Superior on-platform value (credit accumulation, workflow automation, faster payouts, standby access).</p>
-          <p><strong>R8 Opportunist Supply:</strong> Gate opportunities behind performance history.</p>
-          <p><strong>R9 Merchant Abuse:</strong> Track merchant behavior, build accountability.</p>
-          <h3>Fraud Risks (R10–R12)</h3>
-          <p>Fake proof, fake redemption, engagement inflation. Defense: timestamped uploads, geo checks, merchant verification, pattern analysis. De-emphasize vanity metrics.</p>
-          <h3>Operational Risks (R13–R15)</h3>
-          <p>Approval bottlenecks (SLA nudges), settlement delays (explicit rules), support explosion (exception-based ops).</p>
-          <h3>Competitive (R16)</h3>
-          <p>Large platforms may copy surface features. Defense: focused vertical depth, better workflow, stronger creator credit layer, better merchant repeat mechanics.</p>
-          <h3>Risk Priority Matrix</h3>
-          <div class="doc-table-wrap"><table>
-            <tr><th>Level</th><th>Risks</th></tr>
-            <tr><td><span style="color:#fca5a5;font-weight:600">Existential</span></td><td>Poor merchant retention · Low creator quality · Disintermediation · Weak attribution · Cold start failure</td></tr>
-            <tr><td><span style="color:#fcd34d;font-weight:600">Major</span></td><td>Fraud · Commoditization · Supply opportunism · Weak wedge</td></tr>
-            <tr><td><span style="color:rgba(255,255,255,0.4);font-weight:600">Manageable</span></td><td>UI complexity · Feature prioritization · Support inefficiency</td></tr>
-          </table></div>
-        </div>
-      </div>
-
-      <!-- Doc 05 -->
-      <div class="doc-tab-content" id="doc-05">
-        <div class="doc-panel">
-          <div class="doc-badge" style="background:rgba(37,99,235,0.15);color:#93c5fd">DOC-05 | v1.1 | Active</div>
-          <h2>Execution Skills Playbook</h2>
-          <blockquote>Push will succeed only if the team can: acquire right merchants, recruit right creators, verify/route value, and convert repetition into data, trust, and lock-in.</blockquote>
-          <h3>9 Core Skills</h3>
-          <p><strong>1. Merchant Acquisition:</strong> Identify merchants with visible acquisition need. Best targets: cafes, dessert shops, beauty studios, boutique fitness, pop-ups.</p>
-          <p><strong>2. Creator Quality Sourcing:</strong> Distinguish aesthetic quality from business reliability. Avoid freebie opportunists.</p>
-          <p><strong>3. Campaign Design:</strong> One clear goal, simple requirements, verifiable steps, believable payout, reason to repeat.</p>
-          <p><strong>4. Operational Discipline:</strong> Clear milestone states, standard templates, quick exception ID. Ops feel predictable and rule-based.</p>
-          <p><strong>5. Data Interpretation:</strong> 9 key metrics: merchant repeat rate, creator repeat completion, fill rate, standby response, time-to-fill, payout speed, dispute rate, progression rate, on-platform repeat rate.</p>
-          <p><strong>6. Anti-Cliché Positioning:</strong> Frame around outcomes and infrastructure, not lazy platform analogies.</p>
-          <p><strong>7. Retention Architecture:</strong> Make participation economically compounding. Off-platform must feel irrational.</p>
-          <p><strong>8. Risk Management:</strong> Recognize danger early. Identify fraud patterns, weak verticals, churn risk.</p>
-          <p><strong>9. Founder Operating:</strong> System integrator. Resist ornamental features. Avoid: aesthetics before economics, expanding before density, social features too early, confusing signup growth with useful supply.</p>
-          <h3>What Good Looks Like</h3>
-          <div class="doc-table-wrap"><table>
-            <tr><th>Skill</th><th>Good</th><th>Weak</th></tr>
-            <tr><td>Merchant Acquisition</td><td>5+ committed merchants week 1–2</td><td>Cold email blasts, no responses</td></tr>
-            <tr><td>Campaign Design</td><td>Clear goal, verifiable steps, reusable template</td><td>Vague ask, no verification method</td></tr>
-            <tr><td>Ops Discipline</td><td>Every campaign tracked, paid within 24h</td><td>Manual chaos, delayed payments</td></tr>
-            <tr><td>Data Interpretation</td><td>Know your 9 metrics by week 4</td><td>Tracking only vanity metrics</td></tr>
-          </table></div>
-        </div>
-      </div>
-
-      <!-- Doc 11 -->
-      <div class="doc-tab-content" id="doc-11">
-        <div class="doc-panel">
-          <div class="doc-badge" style="background:rgba(190,24,93,0.15);color:#f9a8d4">DOC-11 | v1.0 | Active</div>
-          <h2>Cold Start Execution Plan</h2>
-          <blockquote>Step-by-step execution for the first 12 weeks, starting from zero merchants and zero creators.</blockquote>
-          <h3>Phase 1: Foundation (Week 1–4)</h3>
-          <p><strong>Week 1:</strong> Zone selection (ONE neighborhood, 30+ indie F&amp;B shops), scout 30 merchants, research 50 creators.</p>
-          <p><strong>Week 2:</strong> 15 in-person merchant conversations during slow periods. Target: 8 soft commits, 5–6 firm.</p>
-          <p><strong>Week 3:</strong> DM 50 micro-creators (1K–15K followers). Build website MVP (Next.js + Vercel + Supabase).</p>
-          <p><strong>Week 4:</strong> Set up 5 campaigns manually. Do 1–2 yourself as dry run to refine the flow.</p>
-          <h3>Phase 2: First Campaigns (Week 5–8)</h3>
-          <p><strong>Week 5–6:</strong> 5 merchants × 2–3 creators = 10–15 slots. Daily ops. Pay within 24h via Venmo/Zelle.</p>
-          <p><strong>Week 7–8:</strong> Second batch. 2+ repeat merchants from batch 1. Track repeat rate, completion, time-to-fill.</p>
-          <h3>Phase 3: Validate Repeat (Week 9–12)</h3>
-          <p><strong>Week 9–10:</strong> Scale to 15 merchants. Introduce basic creator scoring and standby notifications.</p>
-          <p><strong>Week 11–12:</strong> Transition to paid ($49/campaign or $79/month). Go/No-Go decision based on 7 key metrics.</p>
-          <h3>Budget: $1,500–$2,200 total</h3>
-          <div class="doc-table-wrap"><table>
-            <tr><th>Item</th><th>Cost</th></tr>
-            <tr><td>Creator payments (25 campaigns × $42–70)</td><td>$1,050–$1,750</td></tr>
-            <tr><td>Scouting costs (meals, coffee)</td><td>~$200</td></tr>
-            <tr><td>Tools &amp; hosting</td><td>$15–$50</td></tr>
-            <tr><td>Miscellaneous</td><td>~$200</td></tr>
-          </table></div>
-          <h3>Week 12 Success Targets</h3>
-          <p>Merchant repeat rate 40%+ · Completion rate 85%+ · Time-to-fill &lt;48h · Willingness to pay 30%+ · 25+ campaigns completed</p>
-        </div>
-      </div>
-
-      <!-- Doc 12 -->
-      <div class="doc-tab-content" id="doc-12">
-        <div class="doc-panel">
-          <div class="doc-badge" style="background:var(--green-bg);color:#6ee7b7">DOC-12 | v1.0 | Active</div>
-          <h2>V0.1 Pricing Model</h2>
-          <blockquote>Price for learning, not for revenue. Remove friction, prove willingness to pay.</blockquote>
-          <h3>Phase 1: Free Launch (Week 1–8)</h3>
-          <p>$0 for merchants. Creator compensation: Standard $25–35, Premium $40–50, Story-only $15–20. Push pays from own pocket to build data.</p>
-          <h3>Phase 2: Introductory Paid (Week 9–12)</h3>
-          <p>Recommended: $79/month Starter (3 campaigns), $249/month Growth (8 campaigns), $699/month Scale (unlimited). Creates habit and recurring revenue signal.</p>
-          <h3>Payment Flow</h3>
-          <p>Phase 1–2: Manual (Venmo/Zelle/Stripe invoice). Phase 3+: Automated via Stripe Connect with 15% take rate.</p>
-          <h3>Pricing Comparison</h3>
-          <div class="doc-table-wrap"><table>
-            <tr><th>Method</th><th>Cost</th><th>Measurability</th><th>Effort</th></tr>
-            <tr><td>DM a creator directly</td><td>$50–200/post + product</td><td>None</td><td>High</td></tr>
-            <tr><td>Local marketing agency</td><td>$500–2,000/month</td><td>Low–Med</td><td>Low</td></tr>
-            <tr><td>Instagram/Facebook Ads</td><td>$200–1,000/month</td><td>Medium</td><td>Medium</td></tr>
-            <tr><td style="color:#6ee7b7;font-weight:600">Push Basic</td><td style="color:#6ee7b7;font-weight:600">$79/month</td><td>Med–High</td><td>Very Low</td></tr>
-          </table></div>
-          <h3>Revenue Projections (Conservative)</h3>
-          <p>W9: $198 · W10: $297 · W11: $396 · W12: $495 · Total W9–12: ~$1,386 · Break-even at ~15 paying merchants (Month 4–5)</p>
-          <h3>Guardrails</h3>
-          <p><strong style="color:#fca5a5">NEVER:</strong> Charge before 1 free campaign completed · Pay creators below $15 minimum · Offer annual contracts in Phase 1–2</p>
-          <p><strong style="color:#6ee7b7">ALWAYS:</strong> Pay creators within 24 hours · Full refund if zero completions · Monthly only, cancel anytime</p>
-        </div>
-      </div>
-
-      <!-- Doc 13 -->
-      <div class="doc-tab-content" id="doc-13">
-        <div class="doc-panel">
-          <div class="doc-badge" style="background:var(--accent-bg);color:var(--accent-light)">DOC-13 | v1.0 | Active</div>
-          <h2>V0.1 Creator Scoring Model</h2>
-          <blockquote>Simple enough for spreadsheets, meaningful enough to predict outcomes, transparent enough for creators, resistant to gaming.</blockquote>
-          <h3>Composite Formula</h3>
-          <p style="font-family:monospace;font-size:14px;color:var(--accent-light);background:rgba(79,70,229,0.15);padding:14px 18px;border-radius:8px;margin:12px 0">Push Score v2 = (Completion × 0.25) + (Quality × 0.25) + (Reliability × 0.20) + (Satisfaction × 0.15) + (Conversion × 0.10) + (Consistency × 0.05)</p>
-          <p style="font-size:12px;color:#9ca3af;margin:-4px 0 12px;">Recency-weighted: last 90 days count 1.5×. Category specialization adds up to 5% multiplier.</p>
-          <h3>Score Dimensions</h3>
-          <div class="doc-table-wrap"><table>
-            <tr><th>Dimension</th><th>Weight</th><th>What It Measures</th></tr>
-            <tr><td>Completion</td><td>25%</td><td>Campaigns completed / accepted. Core reliability signal.</td></tr>
-            <tr><td>Quality</td><td>25%</td><td>Merchant content rating 1–5. Directly drives conversion.</td></tr>
-            <tr><td>Reliability</td><td>20%</td><td>On-time submissions, brief compliance, no-show rate.</td></tr>
-            <tr><td>Satisfaction</td><td>15%</td><td>Merchant rebook score 1–5. Strongest trust signal.</td></tr>
-            <tr><td>Conversion Impact</td><td>10%</td><td>Redemption rate, foot traffic, new customer visits — actual business results.</td></tr>
-            <tr><td>Consistency</td><td>5%</td><td>Low variance across campaigns. Steady performers &gt; one-hit wonders.</td></tr>
-          </table></div>
-          <h3>Tier System</h3>
-          <div class="doc-table-wrap"><table>
-            <tr><th>Tier</th><th>Score</th><th>Requirements</th><th>Payout</th><th>Key Perks</th></tr>
-            <tr><td style="color:#64748b;font-weight:700">Explorer</td><td>—</td><td>Profile + quality check</td><td>T+3</td><td>Basic campaigns, max 2 active</td></tr>
-            <tr><td style="color:#0ea5e9;font-weight:700">Operator</td><td>40+</td><td>3+ campaigns, 90%+ response, 0 violations</td><td>T+2</td><td>All standard, standby eligible, badge</td></tr>
-            <tr><td style="color:#10b981;font-weight:700">Proven</td><td>60+</td><td>8+ campaigns, 60+ days, 95%+ response</td><td>T+1, +5%</td><td>Premium campaigns, priority matching</td></tr>
-            <tr><td style="color:#d97706;font-weight:700">Closer</td><td>75+</td><td>15+ campaigns, 120+ days, 30%+ repeat</td><td>Same-day, +10%</td><td>Dedicated support, campaign co-design</td></tr>
-            <tr><td style="color:#7c3aed;font-weight:700">Partner</td><td>85+</td><td>25+ campaigns, 180+ days, 50%+ repeat, review</td><td>Instant, +15%</td><td>Co-branded deals, referral share, advisory</td></tr>
-          </table></div>
-          <h3>Score Decay</h3>
-          <p>Active (1+ campaign/30d): No decay · 30–60d inactive: −2 pts/month · 60–90d: −5 pts/month · 90d+: Frozen, marked inactive</p>
-          <h3>Anti-Gaming Measures</h3>
-          <div class="doc-table-wrap"><table>
-            <tr><th>Gaming Attempt</th><th>Detection</th><th>Prevention</th></tr>
-            <tr><td>Only accepting easy campaigns</td><td>Track difficulty distribution</td><td>Require mix for tier promotion</td></tr>
-            <tr><td>Fake engagement (buying likes)</td><td>Replaced with Conversion Impact</td><td>Redemptions can't be faked; vanity metrics removed from scoring</td></tr>
-            <tr><td>Colluding with friendly merchants</td><td>Repeated pairing detection</td><td>Flag pairs with &gt;3 consecutive</td></tr>
-            <tr><td>Rushing low-quality content</td><td>Merchant content rating</td><td>Quality is 25% of score</td></tr>
-          </table></div>
-          <h3>Cold Start Handling</h3>
-          <p>First 3 campaigns are probationary. Provisional score starts at 60. Strong early performance triggers fast-track to Operator tier.</p>
-        </div>
-      </div>
-
-      <!-- Doc 06 -->
-      <div class="doc-tab-content" id="doc-06">
-        <div class="doc-panel">
-          <div class="doc-badge" style="background:var(--accent-bg);color:var(--accent-light)">DOC-06 | v1.1 | Active</div>
-          <h2 data-en="Unit Economics &amp; Revenue Modeling" data-zh="单元经济与营收建模">Unit Economics &amp; Revenue Modeling</h2>
-          <blockquote data-en="Push optimizes for high-quality, repeatable, margin-positive demand routing — not signups, map opens, or profile views." data-zh="Push 追求的是高质量、可重复、有利润的需求分发——不是注册数、地图点击或主页浏览。">Push optimizes for high-quality, repeatable, margin-positive demand routing — not signups, map opens, or profile views.</blockquote>
-          <h3 data-en="5 Revenue Layers" data-zh="5 个营收层次">5 Revenue Layers</h3>
-          <div class="doc-table-wrap"><table>
-            <tr><th>#</th><th data-en="Layer" data-zh="层次">Layer</th><th data-en="Description" data-zh="说明">Description</th></tr>
-            <tr><td>1</td><td data-en="Merchant Subscription" data-zh="商家订阅">Merchant Subscription</td><td data-en="Stability layer: campaign access, creator filtering, dashboard, repeat automation" data-zh="基础层：活动权限、博主筛选、数据看板、自动复投">Stability layer: campaign access, creator filtering, dashboard, repeat automation</td></tr>
-            <tr><td>2</td><td data-en="Campaign Service Fees" data-zh="活动服务费">Campaign Service Fees</td><td data-en="Operational monetization: routing, proof collection, settlement, reporting" data-zh="运营变现：分发、证据收集、结算、报告">Operational monetization: routing, proof collection, settlement, reporting</td></tr>
-            <tr><td>3</td><td data-en="Performance Take Rate" data-zh="效果抽成">Performance Take Rate</td><td data-en="Strongest long-term: tied to verified completion, payout size, redemption outcomes" data-zh="最强长期层：与核验完成、报酬规模、核销结果挂钩">Strongest long-term: tied to verified completion, payout size, redemption outcomes</td></tr>
-            <tr><td>4</td><td data-en="Creator Premium" data-zh="博主高级版">Creator Premium</td><td data-en="Optional acceleration only if it improves earning velocity and opportunity access" data-zh="可选加速层，仅在能提高接单效率和收入时才开放">Optional acceleration only if it improves earning velocity and opportunity access</td></tr>
-            <tr><td>5</td><td data-en="Future Financial Products" data-zh="未来金融产品">Future Financial Products</td><td data-en="Payout acceleration, cash advance, insured settlement — only after core trust proven" data-zh="提现加速、预付款、有保障结算——仅在核心信任建立后">Payout acceleration, cash advance, insured settlement — only after core trust proven</td></tr>
-          </table></div>
-          <h3 data-en="4 Economic Traps to Avoid" data-zh="4 个经济陷阱">4 Economic Traps to Avoid</h3>
-          <p data-en="A: High Gross Activity, Low Net Value · B: Premium Revenue Without Real Utility · C: Weak Attribution with Aggressive Performance Pricing · D: Excessive Subsidy Dependence" data-zh="A: 虚高活跃、实际价值低 · B: 收了溢价却没真效用 · C: 归因不扎实就激进收费 · D: 过度依赖补贴">A: High Gross Activity, Low Net Value · B: Premium Revenue Without Real Utility · C: Weak Attribution with Aggressive Performance Pricing · D: Excessive Subsidy Dependence</p>
-          <p style="margin-top:16px"><a href="economics.html" style="color:var(--accent-light)">→ Open full page: Economics &amp; Revenue Modeling</a></p>
-        </div>
-      </div>
-
-      <!-- Doc 07 -->
-      <div class="doc-tab-content" id="doc-07">
-        <div class="doc-panel">
-          <div class="doc-badge" style="background:var(--accent-bg);color:var(--accent-light)">DOC-07 | v1.1 | Active</div>
-          <h2 data-en="Attribution &amp; Verification Framework" data-zh="归因与核验框架">Attribution &amp; Verification Framework</h2>
-          <blockquote data-en="Push does not need perfect attribution on day one. It must build credible attribution confidence." data-zh="Push 上线第一天不需要完美归因，但必须让归因可信、可靠。">Push does not need perfect attribution on day one. It must build credible attribution confidence.</blockquote>
-          <h3 data-en="5 Verification Layers" data-zh="5 个核验层次">5 Verification Layers</h3>
-          <div class="doc-table-wrap"><table>
-            <tr><th>#</th><th data-en="Layer" data-zh="层次">Layer</th><th data-en="Examples" data-zh="示例">Examples</th></tr>
-            <tr><td>1</td><td data-en="Fulfillment" data-zh="履约核验">Fulfillment</td><td data-en="Visit proof, timestamped upload, merchant acknowledgement" data-zh="到访证明、带时间戳上传、商家确认">Visit proof, timestamped upload, merchant acknowledgement</td></tr>
-            <tr><td>2</td><td data-en="Content" data-zh="内容核验">Content</td><td data-en="Live URL, screenshot, posting timestamp, persistence checks" data-zh="有效链接、截图、发布时间戳、持久性检查">Live URL, screenshot, posting timestamp, persistence checks</td></tr>
-            <tr><td>3</td><td data-en="Engagement Context" data-zh="互动背景">Engagement Context</td><td data-en="Views, clicks, saves — directional only, not primary signal" data-zh="浏览量、点击、收藏——方向性指标，非主要信号">Views, clicks, saves — directional only, not primary signal</td></tr>
-            <tr><td>4</td><td data-en="Merchant-Side Action" data-zh="商家侧行为">Merchant-Side Action</td><td data-en="Redemptions, bookings, first-time visits, offer claims" data-zh="核销、预订、首次到访、优惠认领">Redemptions, bookings, first-time visits, offer claims</td></tr>
-            <tr><td>5</td><td data-en="Repeat Signal" data-zh="复购信号">Repeat Signal</td><td data-en="Merchant rebooks creator, creator invited to higher-value campaign" data-zh="商家复投同一博主，博主被邀请参加更高价值活动">Merchant rebooks creator, creator invited to higher-value campaign</td></tr>
-          </table></div>
-          <h3 data-en="3 Confidence Levels" data-zh="3 个置信级别">3 Confidence Levels</h3>
-          <p data-en="Low: content posted, light engagement, no redemption · Medium: visit confirmed, intent signal · High: fulfillment confirmed + merchant-side redemption evidence" data-zh="低：已发内容，轻度互动，无核销 · 中：确认到访，有意向信号 · 高：履约确认 + 商家侧核销证据">Low: content posted, light engagement, no redemption · Medium: visit confirmed, intent signal · High: fulfillment confirmed + merchant-side redemption evidence</p>
-          <p style="margin-top:16px"><a href="attribution.html" style="color:var(--accent-light)">→ Open full page: Attribution &amp; Verification</a></p>
-        </div>
-      </div>
-
-      <!-- Doc 08 -->
-      <div class="doc-tab-content" id="doc-08">
-        <div class="doc-panel">
-          <div class="doc-badge" style="background:var(--accent-bg);color:var(--accent-light)">DOC-08 | v1.1 | Active</div>
-          <h2 data-en="Fraud &amp; Integrity Operations" data-zh="欺诈与诚信运营">Fraud &amp; Integrity Operations</h2>
-          <blockquote data-en="The goal is not aggressive policing. The goal is to preserve a trusted commercial environment while minimizing false positives and operational drag." data-zh="目标不是严打，而是在控制误判和运营成本的前提下，守住可信的交易环境。">The goal is not aggressive policing. The goal is to preserve a trusted commercial environment while minimizing false positives and operational drag.</blockquote>
-          <h3 data-en="5 Fraud Types" data-zh="5 种欺诈类型">5 Fraud Types</h3>
-          <p data-en="1: Fake Fulfillment · 2: Fake Merchant Validation · 3: Fake Redemption · 4: Engagement Inflation · 5: Collusion" data-zh="1: 虚假履约 · 2: 虚假商家确认 · 3: 虚假核销 · 4: 互动数据造假 · 5: 共谋">1: Fake Fulfillment · 2: Fake Merchant Validation · 3: Fake Redemption · 4: Engagement Inflation · 5: Collusion</p>
-          <h3 data-en="3 Review Tiers" data-zh="3 个审核层级">3 Review Tiers</h3>
-          <div class="doc-table-wrap"><table>
-            <tr><th data-en="Tier" data-zh="层级">Tier</th><th data-en="When" data-zh="触发条件">When</th><th data-en="Action" data-zh="处理方式">Action</th></tr>
-            <tr><td data-en="Passive" data-zh="被动">Passive</td><td data-en="Low-risk, trusted users" data-zh="低风险、可信用户">Low-risk, trusted users</td><td data-en="Minimal friction, auto-proceed" data-zh="最小摩擦，自动推进">Minimal friction, auto-proceed</td></tr>
-            <tr><td data-en="Triggered" data-zh="触发">Triggered</td><td data-en="Specific risk flags appear" data-zh="出现特定风险标记">Specific risk flags appear</td><td data-en="Hold for review" data-zh="暂停等待审核">Hold for review</td></tr>
-            <tr><td data-en="Manual" data-zh="人工">Manual</td><td data-en="Disputes, patterns, collusion, complaints" data-zh="纠纷、模式、共谋、投诉">Disputes, patterns, collusion, complaints</td><td data-en="Full investigation" data-zh="完整调查">Full investigation</td></tr>
-          </table></div>
-          <h3 data-en="Enforcement Framework" data-zh="处罚机制">Enforcement Framework</h3>
-          <p data-en="Warning → Score Reduction → Tier Downgrade → Payout Delay → Campaign Ineligibility → Suspension → Removal. Consequences must be: explainable, consistent, proportional." data-zh="警告 → 扣分 → 降级 → 延迟提现 → 取消活动资格 → 暂停 → 永久移除。处罚原则：说得清、一视同仁、轻重相当。">Warning → Score Reduction → Tier Downgrade → Payout Delay → Campaign Ineligibility → Suspension → Removal. Consequences must be: explainable, consistent, proportional.</p>
-          <p style="margin-top:16px"><a href="fraud-integrity.html" style="color:var(--accent-light)">→ Open full page: Fraud &amp; Integrity Operations</a></p>
-        </div>
-      </div>
-
-      <!-- Doc 09 -->
-      <div class="doc-tab-content" id="doc-09">
-        <div class="doc-panel">
-          <div class="doc-badge" style="background:var(--accent-bg);color:var(--accent-light)">DOC-09 | v1.1 | Active</div>
-          <h2 data-en="GTM Experiments &amp; Launch Loops" data-zh="GTM 实验与启动循环">GTM Experiments &amp; Launch Loops</h2>
-          <blockquote data-en="Push should not launch as a broad platform. It should launch as a concentrated market experiment. The first goal is not scale — it is to prove that merchants repeat, creators progress, and local density changes behavior." data-zh="Push 不该一上来就铺开，而应以集中式市场实验起步。第一目标不是规模——是验证商家会复投、博主会成长、本地密度能改变行为。">Push should not launch as a broad platform. It should launch as a concentrated market experiment.</blockquote>
-          <h3 data-en="Hyper-Local Launch Model" data-zh="超本地化启动模型">Hyper-Local Launch Model</h3>
-          <p data-en="One neighborhood · 10 merchants · 30 curated creators · Clear campaign density target" data-zh="一个街区 · 10 个商家 · 30 个精选博主 · 明确的活动密度目标">One neighborhood · 10 merchants · 30 curated creators · Clear campaign density target</p>
-          <h3 data-en="3 Launch Loops" data-zh="3 个启动循环">3 Launch Loops</h3>
-          <p data-en="Loop 1 (Merchant): Better outcomes → repeat → more demand density → better creator flow · Loop 2 (Creator): Better completion → stronger score → better access → higher payout · Loop 3 (Data): More campaigns → better comparison → better matching → higher repeat rate" data-zh="循环1（商家）：效果好→复投→需求密度上升→博主涌入 · 循环2（博主）：完成好→评分高→权限升→收入涨 · 循环3（数据）：活动多→对比准→匹配优→复投率升">Loop 1 (Merchant): Better outcomes → repeat → more demand density → better creator flow · Loop 2 (Creator): Better completion → stronger score → better access → higher payout · Loop 3 (Data): More campaigns → better comparison → better matching → higher repeat rate</p>
-          <h3 data-en="4 Mistakes to Avoid" data-zh="4 个要避开的坑">4 Mistakes to Avoid</h3>
-          <p data-en="A: Overbroad Geography · B: Overbroad Supply · C: Weak Merchant Education · D: PR Before Repetition" data-zh="A: 铺太广 · B: 供给太杂 · C: 商家没教好 · D: 还没跑通就搞PR">A: Overbroad Geography · B: Overbroad Supply · C: Weak Merchant Education · D: PR Before Repetition</p>
-          <p style="margin-top:16px"><a href="gtm-launch.html" style="color:var(--accent-light)">→ Open full page: GTM Experiments &amp; Launch Loops</a></p>
-        </div>
-      </div>
-
-      <!-- Doc 10 -->
-      <div class="doc-tab-content" id="doc-10">
-        <div class="doc-panel">
-          <div class="doc-badge" style="background:var(--accent-bg);color:var(--accent-light)">DOC-10 | v1.1 | Active</div>
-          <h2 data-en="Metrics Dashboard &amp; Decision System" data-zh="指标体系与决策系统">Metrics Dashboard &amp; Decision System</h2>
-          <blockquote data-en="Good dashboards do not just describe the company. They discipline it." data-zh="好的数据看板不只是呈现现状，更是驱动纪律。">Good dashboards do not just describe the company. They discipline it.</blockquote>
-          <h3 data-en="North Star Metric" data-zh="北极星指标">North Star Metric</h3>
-          <p style="font-family:monospace;font-size:14px;color:var(--accent-light);background:rgba(79,70,229,0.15);padding:14px 18px;border-radius:8px;margin:12px 0" data-en="Verified repeat campaign value generated per active merchant cohort" data-zh="每个活跃商家群的核验复投活动总价值">Verified repeat campaign value generated per active merchant cohort</p>
-          <h3 data-en="4 Decision Rules" data-zh="4 条决策规则">4 Decision Rules</h3>
-          <div class="doc-table-wrap"><table>
-            <tr><th data-en="If..." data-zh="如果...">If...</th><th data-en="Then..." data-zh="那么...">Then...</th></tr>
-            <tr><td data-en="Merchant repeat is low but campaign fill is high" data-zh="商家复购率低但活动填充率高">Merchant repeat is low but campaign fill is high</td><td data-en="Problem is campaign outcome quality, not supply quantity" data-zh="问题在于活动结果质量，而非供给数量">Problem is campaign outcome quality, not supply quantity</td></tr>
-            <tr><td data-en="Creator signups are high but completion is low" data-zh="博主注册量高但完成率低">Creator signups are high but completion is low</td><td data-en="Supply quality is weak, not top-of-funnel volume" data-zh="问题出在供给质量，不是流量入口">Supply quality is weak, not top-of-funnel volume</td></tr>
-            <tr><td data-en="Standby usage is high but fulfillment quality drops" data-zh="候补使用率高但履约质量下降">Standby usage is high but fulfillment quality drops</td><td data-en="Urgency is working, but screening is weak" data-zh="紧迫感机制有效，但筛选机制不足">Urgency is working, but screening is weak</td></tr>
-            <tr><td data-en="Support load rises faster than completed campaigns" data-zh="客服工单增速超过活动完成数">Support load rises faster than completed campaigns</td><td data-en="Workflow is not scaling cleanly" data-zh="流程没跑顺，规模化有问题">Workflow is not scaling cleanly</td></tr>
-          </table></div>
-          <h3 data-en="4 Metrics Traps" data-zh="4 个指标陷阱">4 Metrics Traps</h3>
-          <p data-en="A: Celebrating Signups · B: Overvaluing Views · C: Ignoring Support Cost · D: Mistaking Repeat for Quality" data-zh="A: 拿注册数自嗨 · B: 迷信浏览量 · C: 忽略客服成本 · D: 把复投错当质量">A: Celebrating Signups · B: Overvaluing Views · C: Ignoring Support Cost · D: Mistaking Repeat for Quality</p>
-          <p style="margin-top:16px"><a href="metrics-dashboard.html" style="color:var(--accent-light)">→ Open full page: Metrics Dashboard &amp; Decision System</a></p>
-        </div>
-      </div>
-
-    </div><!-- end doc-hub-full -->
-  </div>
-</div>
 
 <button id="back-top" aria-label="Back to top">↑</button>
 
@@ -1503,27 +944,29 @@ footer{background:#0f0f1a;padding:48px 64px 32px;border-top:1px solid var(--bord
   <div class="footer-inner">
     <div class="footer-brand">
       <div class="f-logo">PUSH</div>
-      <div class="f-tagline" data-en="The Operating System for Local Creator Commerce" data-zh="本地博主商业化操作系统">The Operating System for Local Creator Commerce</div>
+      <div class="f-tagline" data-en="AI-Powered Customer Acquisition Agency for Local Businesses. Outcome-priced. Day-1 AI verification." data-zh="面向本地商家的 AI 获客代理公司。按效果计费。Day-1 AI 核验。">AI-Powered Customer Acquisition Agency for Local Businesses. Outcome-priced. Day-1 AI verification.</div>
     </div>
     <div class="footer-links">
       <a href="index.html" class="footer-link" data-en="Overview" data-zh="首页">Overview</a>
-      <a href="project-intro.html" class="footer-link" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
+      <a href="project-intro.html" class="footer-link" data-en="Intro" data-zh="项目介绍">Intro</a>
       <a href="pitch-deck.html" class="footer-link" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
-      <a href="prospects.html" class="footer-link" data-en="Prospects" data-zh="未来愿景">Prospects</a>
-      <a href="challenges.html" class="footer-link" data-en="Challenges" data-zh="挑战分析">Challenges</a>
-      <a href="risk-defense.html" class="footer-link" data-en="Risk &amp; Defense" data-zh="风险防御">Risk &amp; Defense</a>
-      <a href="retention-defense.html" class="footer-link" data-en="Retention" data-zh="留存机制">Retention</a>
-      <a href="platform-value.html" class="footer-link" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
-      <a href="push-strategy-core.html" class="footer-link" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
+      <a href="investor-qa.html" class="footer-link" data-en="Investor Q&amp;A" data-zh="投资人 Q&amp;A">Investor Q&amp;A</a>
+      <a href="push-strategy-core.html" class="footer-link" data-en="Strategy" data-zh="战略核心">Strategy</a>
+      <a href="challenges.html" class="footer-link" data-en="Challenges" data-zh="挑战">Challenges</a>
+      <a href="risk-defense.html" class="footer-link" data-en="Defense" data-zh="风险防御">Defense</a>
+      <a href="retention-defense.html" class="footer-link" data-en="Retention" data-zh="留存">Retention</a>
+      <a href="standby-mechanism.html" class="footer-link" data-en="Standby" data-zh="候补">Standby</a>
+      <a href="prospects.html" class="footer-link" data-en="Prospects" data-zh="前景">Prospects</a>
     </div>
     <div class="footer-copy">
-      <div data-en="© 2026 Push" data-zh="© 2026 Push">© 2026 Push</div>
+      <div data-en="© 2026 Push · AI-Powered Customer Acquisition Agency" data-zh="© 2026 Push · AI 获客代理公司">© 2026 Push · AI-Powered Customer Acquisition Agency</div>
+      <div data-en="v5.0 · April 2026" data-zh="v5.0 · 2026 年 4 月">v5.0 · April 2026</div>
     </div>
   </div>
 </footer>
 
 <script>
-/* — Lang system — */
+/* Lang system */
 (function() {
   let lang = localStorage.getItem('push-lang') || 'en';
   function applyLang(l) {
@@ -1535,8 +978,7 @@ footer{background:#0f0f1a;padding:48px 64px 32px;border-top:1px solid var(--bord
     });
     const btn = document.getElementById('lang-btn');
     if (btn) btn.textContent = l === 'en' ? '中 / EN' : 'EN / 中';
-    const mBtn = document.getElementById('lang-btn-mobile');
-    if (mBtn) mBtn.textContent = l === 'en' ? '中 / EN' : 'EN / 中';
+    document.documentElement.setAttribute('lang', l === 'zh' ? 'zh' : 'en');
   }
   document.getElementById('lang-btn').addEventListener('click', () => {
     document.body.style.opacity = '0.8';
@@ -1544,32 +986,10 @@ footer{background:#0f0f1a;padding:48px 64px 32px;border-top:1px solid var(--bord
     setTimeout(() => { applyLang(lang === 'en' ? 'zh' : 'en'); document.body.style.opacity = '1'; }, 150);
   });
   applyLang(lang);
-  /* lang-reveal */document.documentElement.style.opacity='1';
-  document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh' : 'en');
+  document.documentElement.style.opacity = '1';
 })();
 
-/* — Doc hub tab switching — */
-function switchDocTab(btn, id) {
-  document.querySelectorAll('#doc-tabs .doc-tab-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.doc-tab-content').forEach(c => c.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
-
-/* — Inner tab switching — */
-function switchInnerTab(btn, id) {
-  const group = btn.closest('.inner-tabs');
-  group.querySelectorAll('.inner-tab-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  let sibling = group.nextElementSibling;
-  while (sibling && sibling.classList.contains('inner-tab-content')) {
-    sibling.classList.remove('active');
-    sibling = sibling.nextElementSibling;
-  }
-  document.getElementById(id).classList.add('active');
-}
-
-/* — Scroll fade-in — */
+/* Fade-in via IntersectionObserver */
 const fadeObs = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
@@ -1578,71 +998,30 @@ const fadeObs = new IntersectionObserver((entries) => {
       fadeObs.unobserve(entry.target);
     }
   });
-}, { threshold: 0.01, rootMargin: '0px 0px -40px 0px' });
+}, { threshold: 0.01, rootMargin: '0px 0px -60px 0px' });
 document.querySelectorAll('.fade-in').forEach(el => fadeObs.observe(el));
 
-/* — Nav scroll shadow — */
+/* Nav scroll state + scroll progress */
 (function() {
   const nav = document.querySelector('nav');
+  const progress = document.getElementById('scroll-progress');
+  const backTop = document.getElementById('back-top');
   let rafPending = false;
   window.addEventListener('scroll', () => {
     if (rafPending) return;
     rafPending = true;
     requestAnimationFrame(() => {
-      nav.classList.toggle('scrolled', window.scrollY > 40);
+      const y = window.scrollY;
+      nav.classList.toggle('scrolled', y > 40);
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.width = h > 0 ? (y / h * 100) + '%' : '0%';
+      backTop.classList.toggle('visible', y > 600);
       rafPending = false;
     });
-  }, { passive: true });
-})();
-
-/* — Back to top — */
-(function() {
-  const btn = document.getElementById('back-top');
-  let rafPending = false;
-  window.addEventListener('scroll', () => {
-    if (rafPending) return;
-    rafPending = true;
-    requestAnimationFrame(() => {
-      btn.classList.toggle('visible', window.scrollY > 400);
-      rafPending = false;
-    });
-  }, { passive: true });
-  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-})();
-
-/* — Scroll progress bar — */
-(function() {
-  const bar = document.getElementById('scroll-progress');
-  let rafPending = false;
-  window.addEventListener('scroll', () => {
-    if (rafPending) return;
-    rafPending = true;
-    requestAnimationFrame(() => {
-      const docH = document.documentElement.scrollHeight - window.innerHeight;
-      const pct = docH > 0 ? (window.scrollY / docH) * 100 : 0;
-      bar.style.width = pct + '%';
-      rafPending = false;
-    });
-  }, { passive: true });
-})();
-
-/* — Mobile hamburger toggle — */
-(function() {
-  const burger = document.getElementById('nav-burger');
-  const panel = document.getElementById('nav-mobile-panel');
-  if (!burger || !panel) return;
-  burger.addEventListener('click', () => {
-    burger.classList.toggle('open');
-    panel.classList.toggle('open');
   });
-  const mobileBtn = document.getElementById('lang-btn-mobile');
-  if (mobileBtn) {
-    mobileBtn.addEventListener('click', () => {
-      document.getElementById('lang-btn').click();
-      mobileBtn.textContent = document.getElementById('lang-btn').textContent;
-    });
-  }
+  backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 })();
 </script>
+
 </body>
 </html>
