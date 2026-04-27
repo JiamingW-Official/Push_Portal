@@ -9,13 +9,14 @@
 <link rel="stylesheet" href="assets/nav.css">
 <script src="assets/nav.js" defer></script>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="preload" href="assets/fonts/jetbrains-mono-latin-1cd702cd.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/archivo-latin-2a392e77.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/Magvix-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="assets/fonts/Darky-ExtraBold.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="assets/fonts/CSGenioMono-Regular.ttf" as="font" type="font/ttf" crossorigin>
+
   <script defer src="/_vercel/insights/script.js"></script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 <body>
-
 
 <nav class="site-nav">
   <a href="index.html" class="nav-logo">PUSH</a>
@@ -54,8 +55,8 @@
 
 <header class="page-hero">
   <div class="container">
-    <span class="eyebrow" data-en="Attribution · How we verify" data-zh="归因 · 我们怎么验">Attribution · How we verify</span>
-    <h1 data-en="How Push Attribution Works" data-zh="Push 归因机制解析">How Push Attribution Works</h1>
+    <span class="eyebrow with-line" data-en="(Attribution · How we verify)" data-zh="(归因 · 我们怎么验)">(Attribution · How we verify)</span>
+    <h1 class="hero-darky" data-en="How Push Attribution Works" data-zh="Push 归因机制解析">How Push Attribution Works</h1>
     <p class="lede" data-en="Three independent signals per conversion. QR scan + receipt timestamp + merchant confirmation. Stripe Connect underneath. Push never holds money." data-zh="每次转化三个独立信号。QR 扫码 + 收据时间戳 + 商家确认。底层 Stripe Connect。Push 永不持有资金。">Three independent signals per conversion. QR scan + receipt timestamp + merchant confirmation. Stripe Connect underneath. Push never holds money.</p>
   </div>
 </header>
@@ -64,7 +65,7 @@
 
 <section class="deep-section">
   <div class="container">
-    <span class="eyebrow" data-en="Six-step mechanism" data-zh="六步机制">Six-step mechanism</span>
+    <span class="eyebrow with-line" data-en="(Six-step mechanism)" data-zh="(六步机制)">(Six-step mechanism)</span>
     <h2 data-en="From merchant signup to creator payout." data-zh="从商家注册到创作者支付。">From merchant signup to creator payout.</h2>
     <div class="card-grid">
       <article class="card">
@@ -103,7 +104,7 @@
 
 <section class="deep-section alt">
   <div class="container">
-    <span class="eyebrow" data-en="Three independent signals" data-zh="三个独立信号">Three independent signals</span>
+    <span class="eyebrow with-line" data-en="(Three independent signals)" data-zh="(三个独立信号)">(Three independent signals)</span>
     <h2 data-en="How we verify each conversion." data-zh="我们怎么验证每次转化。">How we verify each conversion.</h2>
     <div class="card-grid">
       <article class="card">
@@ -127,7 +128,7 @@
 
 <section class="deep-section">
   <div class="container">
-    <span class="eyebrow" data-en="Creator earnings" data-zh="创作者收入">Creator earnings</span>
+    <span class="eyebrow with-line" data-en="(Creator earnings)" data-zh="(创作者收入)">(Creator earnings)</span>
     <h2 data-en="How creators get paid." data-zh="创作者怎么获得报酬。">How creators get paid.</h2>
     <p data-en="Creator earns $8–25 per verified conversion depending on tier. Push takes 15–20% rev share on payout. All settled via Stripe Connect. Push is never an MSB/FinCEN entity." data-zh="创作者每次验证转化获得 $8–25 报酬，取决于等级。Push 在支付时抽取 15–20% 收入分成。全部通过 Stripe Connect 结算。Push 永远不是 MSB/FinCEN 实体。">Creator earns $8–25 per verified conversion depending on tier. Push takes 15–20% rev share on payout. All settled via Stripe Connect. Push is never an MSB/FinCEN entity.</p>
   </div>
@@ -135,7 +136,7 @@
 
 <section class="deep-section alt">
   <div class="container">
-    <span class="eyebrow" data-en="FTC compliance" data-zh="FTC 合规">FTC compliance</span>
+    <span class="eyebrow with-line" data-en="(FTC compliance)" data-zh="(FTC 合规)">(FTC compliance)</span>
     <h2 data-en="Attribution that respects the law." data-zh="尊重法律的归因。">Attribution that respects the law.</h2>
     <p data-en="Every attribution event is verified, disclosed, and decaying. FTC 16 CFR Part 255 requires that paid creator relationships be disclosed. Push generates compliant records by design — with attribution decay built in (100%/50%/30%/10%/0% per recency window). Legacy ad platforms do not provide this. We do." data-zh="每个归因事件均经过验证、披露并设有时效衰减。FTC 16 CFR Part 255 要求披露有偿创作者关系。Push 在设计上生成合规记录——内置归因衰减（按时效窗口 100%/50%/30%/10%/0%）。传统广告平台不提供这一功能。我们提供。">Every attribution event is verified, disclosed, and decaying. FTC 16 CFR Part 255 requires that paid creator relationships be disclosed. Push generates compliant records by design — with attribution decay built in (100%/50%/30%/10%/0% per recency window). Legacy ad platforms do not provide this. We do.</p>
   </div>
@@ -143,7 +144,7 @@
 
 <section class="deep-section">
   <div class="container">
-    <span class="eyebrow" data-en="What we're not claiming" data-zh="我们不吹什么">What we're not claiming</span>
+    <span class="eyebrow with-line" data-en="(What we're not claiming)" data-zh="(我们不吹什么)">(What we're not claiming)</span>
     <h2 data-en="100% attribution doesn't exist. 95% decision confidence does." data-zh="100% 归因不存在。95% 决策置信度存在。">100% attribution doesn't exist. 95% decision confidence does.</h2>
     <p data-en="Every ad platform fakes the precision of their attribution. We don't. When a customer walks into a café, they may have seen 12 posts, 3 ads, and a friend's text. We claim only the one signal we can prove — and we tell merchants the confidence level so they make informed decisions. This honesty is the product." data-zh="每个广告平台都在夸大归因精度。我们不。一位顾客走进咖啡店前可能看过 12 个帖子、3 个广告、1 条朋友短信。我们只声明能证的那一条——并告诉商家置信度，让他们做知情决策。这份诚实就是产品。">Every ad platform fakes the precision of their attribution. We don't. When a customer walks into a café, they may have seen 12 posts, 3 ads, and a friend's text. We claim only the one signal we can prove — and we tell merchants the confidence level so they make informed decisions. This honesty is the product.</p>
   </div>
@@ -151,24 +152,23 @@
 
 </main>
 
-
 <footer class="site-footer">
   <div class="footer-grid footer-grid-3">
     <div class="footer-col">
-      <div class="footer-heading" data-en="Main" data-zh="主导航">Main</div>
+      <div class="footer-heading" data-en="(Main)" data-zh="(主导航)">(Main)</div>
       <a href="index.html" data-en="Overview" data-zh="首页">Overview</a>
       <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演">Pitch Deck</a>
       <a href="investor-qa.html" data-en="Investor Q&amp;A" data-zh="投资人问答">Investor Q&amp;A</a>
     </div>
     <div class="footer-col">
-      <div class="footer-heading" data-en="Core" data-zh="核心">Core</div>
+      <div class="footer-heading" data-en="(Core)" data-zh="(核心)">(Core)</div>
       <a href="project-intro.html" data-en="Product" data-zh="产品">Product</a>
       <a href="push-strategy-core.html" data-en="Strategy" data-zh="战略">Strategy</a>
       <a href="economics.html" data-en="Economics" data-zh="经济模型">Economics</a>
       <a href="attribution.html" data-en="Attribution" data-zh="归因机制">Attribution</a>
     </div>
     <div class="footer-col">
-      <div class="footer-heading" data-en="Reference" data-zh="参考资料">Reference</div>
+      <div class="footer-heading" data-en="(Reference)" data-zh="(参考资料)">(Reference)</div>
       <a href="deep-dive.html" data-en="Deep Dive" data-zh="深度解读">Deep Dive</a>
       <a href="metrics-dashboard.html" data-en="Metrics" data-zh="指标">Metrics</a>
       <a href="push-team-dashboard.html" data-en="Team" data-zh="团队">Team</a>
