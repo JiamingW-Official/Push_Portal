@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /nda
+Disallow: /nda.html
+
+Sitemap: https://push-portal-two.vercel.app/sitemap.xml

@@ -3,1025 +3,287 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Push is an AI-powered customer acquisition agency. Tell us how many new customers you need. AI plus a network of local creators delivers — measured, verified, outcome-priced.">
-<meta property="og:title" content="PUSH — AI-Powered Customer Acquisition Agency">
-<meta property="og:description" content="Tell us how many new customers you want. AI and our creator network deliver. You pay per verified customer, not per post.">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="PUSH — AI-Powered Customer Acquisition Agency">
-<meta name="twitter:description" content="Outcome-priced local customer acquisition. AI-run creator network. Verified per customer.">
-<title>PUSH — AI-Powered Customer Acquisition Agency</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script>/* lang-flash-fix */(function(){if(localStorage.getItem("push-lang")==="zh")document.documentElement.style.opacity="0";})()</script>
-<style>
-:root {
-  /* Brand colors — from Push Design.md */
-  --flag-red: #c1121f;
-  --molten-lava: #780000;
-  --pearl-stone: #f5f2ec;
-  --snow: #fafaf8;
-  --pure-white: #ffffff;
-  --deep-space: #003049;
-  --steel-blue: #669bbc;
-  --champagne: #c9a96e;
-
-  /* Surface tokens */
-  --surface: #f5f2ec;
-  --surface-bright: #fafaf8;
-  --surface-elevated: #ffffff;
-  --ink: #003049;
-  --ink-2: #4a5c6e;
-  --ink-3: #8a97a4;
-  --border: rgba(0,48,73,0.12);
-  --border-strong: rgba(0,48,73,0.22);
-
-  /* Typography substitutes — Archivo ≈ Darky (heavy display), JetBrains Mono ≈ CS Genio Mono */
-  --font-display: 'Archivo', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
-}
-
-*{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{
-  font-family:var(--font-mono);
-  background:var(--surface);
-  color:var(--ink);
-  font-size:14px;line-height:1.7;
-  text-rendering:optimizeLegibility;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  word-break:break-word;
-}
-html[lang="zh"] body{line-height:1.9;letter-spacing:0.01em;font-size:14px;}
-
-h1,h2,h3,h4,.display{font-family:var(--font-display);font-weight:900;letter-spacing:-0.02em;line-height:1.05;color:var(--ink);}
-h2{font-size:clamp(36px,5vw,64px);}
-h3{font-size:clamp(22px,2.5vw,32px);font-weight:800;letter-spacing:-0.01em;line-height:1.2;}
-h4{font-size:18px;font-weight:700;letter-spacing:0;}
-
-strong{font-weight:700;color:var(--ink);}
-p{max-width:640px;}
-ul,ol{padding-left:20px;list-style:none;padding-left:0;}
-li{margin-bottom:8px;line-height:1.7;position:relative;padding-left:24px;}
-li::before{content:'—';position:absolute;left:0;top:0;color:var(--flag-red);font-weight:700;}
-
-a{color:var(--flag-red);text-decoration:none;transition:color 0.2s;}
-a:hover{color:var(--molten-lava);}
-
-/* Scroll progress bar */
-.scroll-progress{
-  position:fixed;top:0;left:0;height:2px;
-  background:var(--flag-red);z-index:300;width:0;
-  transition:none;pointer-events:none;
-}
-
-/* Nav */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  height:56px;display:flex;align-items:center;padding:0 24px;gap:12px;
-  background:rgba(245,242,236,0.92);
-  backdrop-filter:saturate(180%) blur(12px);
-  -webkit-backdrop-filter:saturate(180%) blur(12px);
-  border-bottom:1px solid var(--border);
-  transition:box-shadow 0.2s, background 0.2s;
-}
-nav.scrolled{box-shadow:0 1px 0 var(--border);background:rgba(245,242,236,0.98);}
-.nav-logo{
-  font-family:var(--font-display);
-  font-size:22px;font-weight:900;color:var(--flag-red);letter-spacing:0.08em;
-  margin-right:16px;flex-shrink:0;text-decoration:none;
-}
-.nav-links{display:flex;gap:2px;flex:1;flex-wrap:wrap;}
-.nav-links a{
-  font-family:var(--font-mono);
-  font-size:11px;font-weight:500;color:var(--ink-2);
-  padding:6px 10px;text-transform:uppercase;letter-spacing:0.04em;
-  transition:color 0.15s, background 0.15s;white-space:nowrap;
-}
-.nav-links a:hover{color:var(--flag-red);background:rgba(193,18,31,0.06);}
-#lang-btn{
-  flex-shrink:0;background:var(--ink);color:var(--pearl-stone);
-  font-family:var(--font-mono);font-weight:700;font-size:11px;letter-spacing:0.08em;
-  padding:7px 14px;border:none;cursor:pointer;transition:background 0.15s;
-  text-transform:uppercase;
-}
-#lang-btn:hover{background:var(--flag-red);}
-
-/* Fade-in */
-.fade-in{opacity:0;transform:translateY(20px);transition:opacity 0.7s cubic-bezier(0.22,1,0.36,1),transform 0.7s cubic-bezier(0.22,1,0.36,1);will-change:opacity,transform;animation:fadeInFallback 0s 4s forwards;}
-.fade-in.visible{opacity:1;transform:none;animation:none;}
-@keyframes fadeInFallback{to{opacity:1;transform:translateY(0);}}
-
-/* Section wrappers */
-.section{padding:120px 32px;max-width:1280px;margin:0 auto;}
-.section-narrow{max-width:960px;}
-
-.eyebrow{
-  font-family:var(--font-mono);
-  font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;
-  color:var(--flag-red);margin-bottom:24px;
-  display:flex;align-items:center;gap:12px;
-}
-.eyebrow::before{
-  content:'';display:block;
-  width:32px;height:1px;background:var(--flag-red);flex-shrink:0;
-}
-
-.lede{
-  font-family:var(--font-mono);
-  font-size:16px;line-height:1.7;color:var(--ink-2);
-  max-width:620px;margin-top:24px;
-}
-
-/* Hero */
-.hero{
-  background:var(--pearl-stone);
-  padding:180px 32px 120px;
-  min-height:100vh;display:flex;align-items:center;
-  position:relative;overflow:hidden;
-}
-.hero::before{
-  content:'';position:absolute;top:0;right:0;bottom:0;
-  width:45%;background:
-    linear-gradient(180deg,transparent 0%,var(--pearl-stone) 100%),
-    radial-gradient(circle at 60% 40%,rgba(193,18,31,0.06),transparent 60%);
-  pointer-events:none;
-}
-.hero-inner{max-width:1280px;width:100%;margin:0 auto;position:relative;z-index:1;}
-.hero-meta{
-  font-family:var(--font-mono);
-  font-size:11px;letter-spacing:0.16em;text-transform:uppercase;
-  color:var(--ink-3);margin-bottom:32px;
-  display:flex;gap:24px;flex-wrap:wrap;align-items:center;
-}
-.hero-meta span{display:flex;align-items:center;gap:8px;}
-.hero-meta .dot{width:6px;height:6px;background:var(--flag-red);display:inline-block;}
-.hero h1{
-  font-family:var(--font-display);
-  font-size:clamp(52px,9vw,148px);font-weight:900;
-  letter-spacing:-0.04em;line-height:0.92;
-  color:var(--ink);margin:0;
-  max-width:1200px;
-}
-.hero h1 .red{color:var(--flag-red);}
-.hero h1 .italic{font-style:italic;font-weight:300;}
-.hero-sub{
-  font-family:var(--font-mono);
-  font-size:18px;line-height:1.6;color:var(--ink-2);
-  max-width:560px;margin-top:40px;
-}
-.hero-ctas{display:flex;gap:16px;margin-top:48px;flex-wrap:wrap;}
-.btn{
-  font-family:var(--font-mono);
-  font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
-  padding:16px 28px;border:none;cursor:pointer;
-  text-decoration:none;display:inline-flex;align-items:center;gap:10px;
-  transition:transform 0.2s, background 0.2s;
-}
-.btn-primary{
-  background:var(--flag-red);color:var(--pearl-stone);
-  box-shadow:4px 4px 0 var(--ink);
-}
-.btn-primary:hover{background:var(--molten-lava);color:var(--pearl-stone);transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink);}
-.btn-ghost{
-  background:transparent;color:var(--ink);
-  border:1px solid var(--ink);
-}
-.btn-ghost:hover{background:var(--ink);color:var(--pearl-stone);}
-
-/* Surface variants */
-.sw-surface{background:var(--surface);}
-.sw-bright{background:var(--surface-bright);border-top:1px solid var(--border);}
-.sw-dark{background:var(--ink);color:var(--pearl-stone);}
-.sw-dark h2,.sw-dark h3,.sw-dark h4{color:var(--pearl-stone);}
-.sw-dark .eyebrow{color:var(--champagne);}
-.sw-dark .eyebrow::before{background:var(--champagne);}
-.sw-dark .lede{color:rgba(245,242,236,0.7);}
-.sw-dark strong{color:var(--pearl-stone);}
-.sw-red{background:var(--flag-red);color:var(--pearl-stone);}
-.sw-red h2,.sw-red h3,.sw-red h4{color:var(--pearl-stone);}
-.sw-red .eyebrow{color:var(--pearl-stone);}
-.sw-red .eyebrow::before{background:var(--pearl-stone);}
-
-/* Before/After split */
-.split-ba{
-  display:grid;grid-template-columns:1fr 1fr;gap:1px;
-  background:var(--border);margin-top:72px;border:1px solid var(--border);
-}
-.ba-panel{
-  background:var(--surface-bright);padding:56px 48px;
-  display:flex;flex-direction:column;gap:24px;
-}
-.ba-panel.after{background:var(--ink);color:var(--pearl-stone);}
-.ba-panel.after h3,.ba-panel.after h4{color:var(--pearl-stone);}
-.ba-panel.after strong{color:var(--champagne);}
-.ba-tag{
-  font-family:var(--font-mono);
-  font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;
-  color:var(--ink-3);
-}
-.ba-panel.after .ba-tag{color:rgba(245,242,236,0.5);}
-.ba-panel h3{margin-bottom:0;}
-.ba-panel p{color:var(--ink-2);font-size:14px;}
-.ba-panel.after p{color:rgba(245,242,236,0.75);}
-
-/* Stats row */
-.stats{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
-  background:var(--border);margin-top:72px;border:1px solid var(--border);
-}
-.stat{
-  background:var(--surface-bright);padding:40px 28px;
-}
-.stat-num{
-  font-family:var(--font-display);
-  font-size:clamp(40px,5vw,72px);font-weight:900;
-  color:var(--flag-red);letter-spacing:-0.03em;line-height:1;
-}
-.stat-label{
-  font-family:var(--font-mono);
-  font-size:12px;color:var(--ink-2);margin-top:12px;line-height:1.5;
-}
-
-/* Pillars (5-col) */
-.pillars{
-  display:grid;grid-template-columns:repeat(5,1fr);gap:1px;
-  background:var(--border);margin-top:72px;border:1px solid var(--border);
-}
-.pillar{
-  background:var(--surface-bright);padding:40px 28px;
-  display:flex;flex-direction:column;gap:16px;min-height:280px;
-}
-.pillar-num{
-  font-family:var(--font-display);
-  font-size:48px;font-weight:900;color:var(--flag-red);
-  letter-spacing:-0.03em;line-height:1;
-}
-.pillar-title{
-  font-family:var(--font-display);
-  font-size:18px;font-weight:800;letter-spacing:-0.01em;
-  color:var(--ink);line-height:1.2;
-}
-.pillar-body{
-  font-size:13px;color:var(--ink-2);line-height:1.65;
-}
-
-/* Flow (horizontal steps) */
-.flow{
-  display:grid;grid-template-columns:repeat(5,1fr);gap:1px;
-  background:var(--border);margin-top:56px;border:1px solid var(--border);
-}
-.flow-step{
-  background:var(--surface-bright);padding:32px 24px;
-  display:flex;flex-direction:column;gap:12px;
-  position:relative;
-}
-.flow-tag{
-  font-family:var(--font-mono);
-  font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;
-  color:var(--flag-red);
-}
-.flow-title{
-  font-family:var(--font-display);
-  font-size:16px;font-weight:800;color:var(--ink);line-height:1.2;
-}
-.flow-body{font-size:12px;color:var(--ink-2);line-height:1.6;}
-.flow-time{
-  font-family:var(--font-mono);
-  font-size:10px;color:var(--ink-3);letter-spacing:0.1em;
-  margin-top:auto;
-}
-
-/* Pricing */
-.pricing{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
-  background:var(--border);margin-top:72px;border:1px solid var(--border);
-}
-.price-card{
-  background:var(--surface-bright);padding:48px 36px;
-  display:flex;flex-direction:column;gap:20px;
-}
-.price-card.featured{background:var(--ink);color:var(--pearl-stone);}
-.price-card.featured h3,.price-card.featured .price-num{color:var(--pearl-stone);}
-.price-card.featured .price-suffix,.price-card.featured .price-desc{color:rgba(245,242,236,0.7);}
-.price-card.featured li{color:rgba(245,242,236,0.85);}
-.price-card.featured li::before{color:var(--champagne);}
-.price-card.featured .price-tag{color:var(--champagne);}
-.price-tag{
-  font-family:var(--font-mono);
-  font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;
-  color:var(--flag-red);
-}
-.price-name{
-  font-family:var(--font-display);
-  font-size:28px;font-weight:800;color:var(--ink);letter-spacing:-0.01em;
-}
-.price-num{
-  font-family:var(--font-display);
-  font-size:56px;font-weight:900;color:var(--ink);letter-spacing:-0.03em;line-height:1;
-}
-.price-suffix{
-  font-family:var(--font-mono);
-  font-size:13px;color:var(--ink-2);margin-top:6px;
-}
-.price-desc{
-  font-size:13px;line-height:1.65;color:var(--ink-2);
-  padding-bottom:20px;border-bottom:1px solid var(--border);
-}
-.price-card.featured .price-desc{border-color:rgba(245,242,236,0.18);}
-.price-card ul{display:flex;flex-direction:column;gap:0;}
-.price-card li{font-size:12px;line-height:1.6;}
-
-/* Beachhead block */
-.beach-block{
-  display:grid;grid-template-columns:2fr 1fr;gap:48px;margin-top:56px;
-  align-items:start;
-}
-.beach-meta{
-  display:flex;flex-direction:column;gap:24px;
-  padding:36px;background:var(--surface-bright);
-  border:1px solid var(--border);
-}
-.beach-meta-row{
-  display:flex;justify-content:space-between;align-items:baseline;
-  padding-bottom:16px;border-bottom:1px solid var(--border);
-}
-.beach-meta-row:last-child{border-bottom:none;padding-bottom:0;}
-.beach-meta-label{
-  font-family:var(--font-mono);font-size:11px;letter-spacing:0.1em;
-  text-transform:uppercase;color:var(--ink-3);
-}
-.beach-meta-val{
-  font-family:var(--font-display);font-size:18px;font-weight:800;
-  color:var(--ink);letter-spacing:-0.01em;text-align:right;
-}
-
-/* Timeline */
-.timeline{
-  display:flex;flex-direction:column;
-  margin-top:56px;border-top:1px solid var(--border);
-}
-.timeline-row{
-  display:grid;grid-template-columns:160px 1fr 200px;
-  gap:24px;padding:28px 0;border-bottom:1px solid var(--border);
-  align-items:baseline;
-}
-.timeline-week{
-  font-family:var(--font-mono);font-size:12px;
-  letter-spacing:0.1em;text-transform:uppercase;color:var(--flag-red);
-  font-weight:700;
-}
-.timeline-action{
-  font-family:var(--font-display);font-size:20px;font-weight:700;
-  color:var(--ink);letter-spacing:-0.01em;line-height:1.3;
-}
-.timeline-owner{
-  font-family:var(--font-mono);font-size:11px;
-  letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-2);
-  text-align:right;
-}
-
-/* Why now — big type */
-.why-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:1px;
-  background:rgba(245,242,236,0.15);margin-top:72px;
-}
-.why-item{
-  padding:56px 40px;background:var(--ink);
-}
-.why-num{
-  font-family:var(--font-display);
-  font-size:64px;font-weight:900;color:var(--champagne);
-  letter-spacing:-0.03em;line-height:1;margin-bottom:16px;
-}
-.why-title{
-  font-family:var(--font-display);
-  font-size:24px;font-weight:800;color:var(--pearl-stone);
-  letter-spacing:-0.01em;line-height:1.3;margin-bottom:16px;
-}
-.why-body{
-  font-size:13px;color:rgba(245,242,236,0.7);line-height:1.7;
-}
-
-/* Nav cards */
-.navcards{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
-  background:var(--border);margin-top:72px;border:1px solid var(--border);
-}
-.navcard{
-  background:var(--surface-bright);padding:36px 28px;
-  display:flex;flex-direction:column;gap:12px;
-  text-decoration:none;color:inherit;
-  transition:background 0.2s;position:relative;
-  min-height:200px;
-}
-.navcard:hover{background:var(--ink);color:var(--pearl-stone);}
-.navcard:hover .navcard-num,.navcard:hover .navcard-title,.navcard:hover .navcard-arrow{color:var(--pearl-stone);}
-.navcard:hover .navcard-desc{color:rgba(245,242,236,0.7);}
-.navcard-num{
-  font-family:var(--font-mono);font-size:10px;letter-spacing:0.16em;
-  text-transform:uppercase;color:var(--ink-3);
-}
-.navcard-title{
-  font-family:var(--font-display);font-size:20px;font-weight:800;
-  color:var(--ink);letter-spacing:-0.01em;line-height:1.2;
-}
-.navcard-desc{
-  font-size:12px;color:var(--ink-2);line-height:1.6;flex:1;
-}
-.navcard-arrow{
-  font-family:var(--font-mono);font-size:11px;font-weight:700;
-  letter-spacing:0.12em;text-transform:uppercase;color:var(--flag-red);
-  margin-top:auto;
-}
-
-/* Final CTA */
-.final-cta{
-  text-align:left;max-width:1280px;margin:0 auto;padding:160px 32px;
-}
-.final-headline{
-  font-family:var(--font-display);
-  font-size:clamp(48px,7vw,112px);font-weight:900;
-  color:var(--pearl-stone);letter-spacing:-0.03em;line-height:0.95;
-  max-width:1100px;
-}
-.final-headline .italic{font-style:italic;font-weight:300;color:var(--champagne);}
-
-/* Footer */
-footer{
-  background:var(--ink);color:rgba(245,242,236,0.65);
-  padding:72px 32px 48px;border-top:1px solid rgba(245,242,236,0.1);
-}
-.footer-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:2fr 3fr;gap:48px;}
-.footer-brand{display:flex;flex-direction:column;gap:16px;}
-.f-logo{
-  font-family:var(--font-display);
-  font-size:32px;font-weight:900;letter-spacing:0.08em;
-  color:var(--pearl-stone);
-}
-.f-tagline{font-size:12px;line-height:1.7;max-width:280px;color:rgba(245,242,236,0.55);}
-.footer-links{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
-}
-.footer-link{
-  font-family:var(--font-mono);font-size:11px;letter-spacing:0.1em;
-  text-transform:uppercase;color:rgba(245,242,236,0.65);
-  text-decoration:none;transition:color 0.15s;
-}
-.footer-link:hover{color:var(--champagne);}
-.footer-copy{
-  grid-column:1/-1;margin-top:48px;padding-top:24px;
-  border-top:1px solid rgba(245,242,236,0.12);
-  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
-  font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;
-  color:rgba(245,242,236,0.4);text-transform:uppercase;
-}
-
-/* Back to top */
-#back-top{
-  position:fixed;bottom:24px;right:24px;
-  width:48px;height:48px;border-radius:50%;
-  background:var(--flag-red);color:var(--pearl-stone);
-  border:none;cursor:pointer;z-index:150;
-  font-size:16px;font-weight:700;
-  opacity:0;pointer-events:none;transition:opacity 0.3s;
-  box-shadow:3px 3px 0 var(--ink);
-}
-#back-top.visible{opacity:1;pointer-events:auto;}
-#back-top:hover{background:var(--molten-lava);}
-
-/* Responsive */
-@media (max-width: 1024px){
-  .pillars,.flow{grid-template-columns:repeat(2,1fr);}
-  .pricing{grid-template-columns:1fr;}
-  .stats{grid-template-columns:repeat(2,1fr);}
-  .beach-block{grid-template-columns:1fr;}
-  .navcards{grid-template-columns:repeat(2,1fr);}
-  .footer-inner{grid-template-columns:1fr;}
-  .footer-links{grid-template-columns:repeat(2,1fr);}
-  .split-ba{grid-template-columns:1fr;}
-  .why-grid{grid-template-columns:1fr;}
-  .timeline-row{grid-template-columns:1fr;gap:8px;}
-  .timeline-owner{text-align:left;}
-}
-@media (max-width: 640px){
-  .section{padding:80px 24px;}
-  .hero{padding:140px 24px 80px;}
-  .pillars,.flow,.navcards,.stats{grid-template-columns:1fr;}
-  .nav-links{display:none;}
-  nav{padding:0 16px;}
-  .hero h1{font-size:48px;}
-  h2{font-size:36px;}
-}
-</style>
+<title>PUSH — Local commerce, finally measurable.</title>
+<meta name="description" content="Push is the attribution layer for local commerce. Creator posts, customers scan a QR at the register, merchants pay per verified walk-in. Stripe Connect underneath. Push never holds money.">
+<link rel="stylesheet" href="assets/shared.css">
+<link rel="stylesheet" href="assets/nav.css">
+<script src="assets/nav.js" defer></script>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preload" href="assets/fonts/Magvix-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="assets/fonts/Darky-ExtraBold.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="assets/fonts/CSGenioMono-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 <body>
 
-<div class="scroll-progress" id="scroll-progress"></div>
 
-<nav>
+<nav class="site-nav">
   <a href="index.html" class="nav-logo">PUSH</a>
   <div class="nav-links">
-    <a href="#problem" data-en="Problem" data-zh="问题">Problem</a>
-    <a href="#solution" data-en="Solution" data-zh="方案">Solution</a>
-    <a href="#how" data-en="How It Works" data-zh="工作流">How It Works</a>
-    <a href="#pricing" data-en="Pricing" data-zh="定价">Pricing</a>
-    <a href="#beachhead" data-en="Beachhead" data-zh="根据地">Beachhead</a>
-    <a href="#plan" data-en="90-Day Plan" data-zh="90天计划">90-Day Plan</a>
-    <a href="#why-now" data-en="Why Now" data-zh="为何现在">Why Now</a>
-    <a href="#more" data-en="Deep Dives" data-zh="深入资料">Deep Dives</a>
+    <a href="index.html" class="active" data-en="Overview" data-zh="首页">Overview</a>
+    <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演">Pitch Deck</a>
+    <a href="investor-qa.html" data-en="Investor Q&amp;A" data-zh="投资人问答">Investor Q&amp;A</a>
+    <div class="nav-more">
+      <button class="nav-more-btn" aria-haspopup="true" aria-expanded="false">
+        <span data-en="More" data-zh="更多">More</span> <span class="nav-more-caret">▾</span>
+      </button>
+      <div class="nav-more-panel nav-more-panel-compact" role="menu">
+        <div class="nav-more-group">
+          <div class="nav-more-heading" data-en="Core" data-zh="核心">Core</div>
+          <a href="project-intro.html" data-en="Product" data-zh="产品">Product</a>
+          <a href="push-strategy-core.html" data-en="Strategy" data-zh="战略">Strategy</a>
+          <a href="economics.html" data-en="Economics" data-zh="经济模型">Economics</a>
+          <a href="attribution.html" data-en="Attribution" data-zh="归因机制">Attribution</a>
+        </div>
+        <div class="nav-more-group">
+          <div class="nav-more-heading" data-en="Reference" data-zh="参考资料">Reference</div>
+          <a href="deep-dive.html" data-en="Deep Dive" data-zh="深度解读">Deep Dive</a>
+          <a href="metrics-dashboard.html" data-en="Metrics" data-zh="指标">Metrics</a>
+          <a href="push-team-dashboard.html" data-en="Team" data-zh="团队">Team</a>
+        </div>
+      </div>
+    </div>
   </div>
-  <button id="lang-btn">中 / EN</button>
+  <div class="nav-actions">
+    <button class="nav-lang">中 / EN</button>
+    <button class="nav-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-inner">
-    <div class="hero-meta fade-in">
-      <span><span class="dot"></span><span data-en="v5.0 — April 2026" data-zh="v5.0 — 2026年4月">v5.0 — April 2026</span></span>
-      <span data-en="For Local Businesses" data-zh="面向本地商家">For Local Businesses</span>
-      <span data-en="Outcome-Priced" data-zh="按效果计费">Outcome-Priced</span>
-    </div>
-    <h1 class="fade-in" data-delay="0.1s">
-      <span data-en="We don't sell" data-zh="我们不卖">We don't sell</span>
-      <span class="italic" data-en="software." data-zh="软件。">software.</span><br>
-      <span data-en="We deliver" data-zh="我们交付">We deliver</span>
-      <span class="red" data-en="customers." data-zh="顾客。">customers.</span>
-    </h1>
-    <p class="hero-sub fade-in" data-delay="0.2s" data-en="Push is an AI-powered customer acquisition agency for local businesses. Tell us how many new customers you need this month. Our AI operates a network of vetted local creators to deliver them — measured by QR-verified foot traffic, priced per verified customer, not per post." data-zh="Push 是面向本地商家的 AI 获客代理公司。告诉我们你这个月要多少新顾客，AI 会调度一张经过筛选的本地 creator 网络把顾客交付到店——用 QR 核验到店人数计量，按验证顾客计费，不是按发帖计费。">Push is an AI-powered customer acquisition agency for local businesses. Tell us how many new customers you need this month. Our AI operates a network of vetted local creators to deliver them — measured by QR-verified foot traffic, priced per verified customer, not per post.</p>
-    <div class="hero-ctas fade-in" data-delay="0.3s">
-      <a href="#pricing" class="btn btn-primary" data-en="See Pricing →" data-zh="查看定价 →">See Pricing →</a>
-      <a href="#how" class="btn btn-ghost" data-en="How it works" data-zh="如何运作">How it works</a>
+<div class="sub-nav">
+  <a href="#bet" data-en="The bet" data-zh="赌注">The bet</a>
+  <a href="#problem" data-en="The problem" data-zh="问题">The problem</a>
+  <a href="#how" data-en="How it works" data-zh="怎么跑通">How it works</a>
+  <a href="#who" data-en="Who it&#39;s for" data-zh="谁在用">Who it&#39;s for</a>
+  <a href="#now" data-en="Why now" data-zh="为什么是现在">Why now</a>
+  <a href="#plan" data-en="Next 90 days" data-zh="未来90天">Next 90 days</a>
+</div>
+
+<header class="page-hero">
+  <div class="container">
+    <span class="eyebrow with-line" data-en="(WHY PUSH EXISTS · v6.1.1 · APRIL 2026)" data-zh="(为什么有 PUSH · v6.1.1 · 2026 年 4 月)">(WHY PUSH EXISTS · v6.1.1 · APRIL 2026)</span>
+    <h1 class="hero-magvix" data-en="Local commerce, finally measurable." data-zh="本地商业，终于能算回一笔账。" style="margin-top: 32px;">Local commerce, finally measurable.</h1>
+    <p class="lede" style="margin-top: 32px;" data-en="Sarah owns a coffee shop in Williamsburg. She spends $800 a month on Instagram and TikTok ads. Every month she sees the same dashboard: 47,000 impressions, 1,200 link clicks, zero way to know whether any of those people actually walked in. Multiply Sarah by 1.4 million independent F&amp;B businesses in the U.S. — that&#39;s the broken layer of the internet we&#39;re fixing." data-zh="Sarah 在 Williamsburg 开咖啡店。每月在 Instagram + TikTok 投 $800，后台只给她一份数据：4.7 万曝光、1,200 次点击、0 个能溯源到柜台前的客人。她不知道哪条广告值得续投、哪个 creator 真带客、哪条 reel 就是噪声。把 Sarah ×美国 1.4M 个独立 F&amp;B 商家——这就是 iOS 14 之后被切断的归因，Push 在补的就是这一段。">Sarah owns a coffee shop in Williamsburg. She spends $800 a month on Instagram and TikTok ads. Every month she sees the same dashboard: 47,000 impressions, 1,200 link clicks, zero way to know whether any of those people actually walked in. Multiply Sarah by 1.4 million independent F&amp;B businesses in the U.S. — that&#39;s the broken layer of the internet we&#39;re fixing.</p>
+    <p class="mono" style="margin-top: 48px; display: flex; gap: 16px; flex-wrap: wrap;">
+      <a class="btn btn-primary" href="pitch-deck.html" data-en="Read the pitch deck →" data-zh="看 Pitch Deck →">Read the pitch deck →</a>
+      <a class="btn" href="investor-qa.html" data-en="Investor Q&amp;A →" data-zh="投资人问答 →">Investor Q&amp;A →</a>
+    </p>
+  </div>
+</header>
+
+<main>
+
+<section class="deep-section" id="bet">
+  <div class="container">
+    <span class="eyebrow with-line" data-en="(01 · THE BET)" data-zh="(01 · 我们在赌什么)">(01 · THE BET)</span>
+    <h2 style="margin-top: 16px;" data-en="Every dollar a local business spends online disappears at the door." data-zh="本地商家在线上烧的每一块钱，跨过店门就丢了线索。">Every dollar a local business spends online disappears at the door.</h2>
+    <p style="margin-top: 24px;" data-en="Push is the attribution layer that local businesses always needed. We give every creator a unique QR. We verify every walk-in with computer vision. We tell the merchant, for the first time, exactly which post produced which customer — and we pay the creator for the outcome rather than the impression." data-zh="Push 是本地商家一直缺的那一层归因。给每个 creator 一个独立 QR、用 CV+OCR+geo 三轴交叉验证每一笔到店——第一次让商家精确知道是哪条帖子、哪个 creator，把哪个客人带到了柜台。然后按真实结果付钱给 creator，不再按曝光、不再按「估摸着」、不再按虚荣指标。">Push is the attribution layer that local businesses always needed. We give every creator a unique QR. We verify every walk-in with computer vision. We tell the merchant, for the first time, exactly which post produced which customer — and we pay the creator for the outcome rather than the impression.</p>
+    <div class="card-grid" style="margin-top: 48px;">
+      <article class="card">
+        <div class="card-num" data-en="WHAT WE BUILD" data-zh="我们在做什么">WHAT WE BUILD</div>
+        <h3 data-en="A 32-field ground-truth row" data-zh="一行 32 字段的 ground-truth">A 32-field ground-truth row</h3>
+        <p data-en="Each verified walk-in writes one row that links a single piece of creative content to a verified human at a verified counter. As of April 2026: 37,000 rows live." data-zh="每笔验证到店，写入一行 32 字段记录：哪条 reel × 哪个 creator × 哪家店 × 哪样商品 × 多少钱 × 信号分数。截至 2026 年 4 月已落地 3.7 万笔。">Each verified walk-in writes one row that links a single piece of creative content to a verified human at a verified counter. As of April 2026: 37,000 rows live.</p>
+      </article>
+      <article class="card">
+        <div class="card-num" data-en="WHO PAYS US" data-zh="谁付我们钱">WHO PAYS US</div>
+        <h3 data-en="Merchants, agencies, eventually data" data-zh="商家、agency、最后是数据层">Merchants, agencies, eventually data</h3>
+        <p data-en="Independent local businesses ($15–85/mo + take-rate). Agencies running them ($500/mo dashboard). And, by year four, the local ad layer built on top of our dataset — the Instacart Ads template applied off-platform." data-zh="本地独立商家（$15-85/月 + 5% take rate）。给他们做营销的 agency（$500/月 dashboard）。第四年起：建在我们数据之上的本地 ad layer——按 Instacart Ads 模板。">Independent local businesses ($15–85/mo + take-rate). Agencies running them ($500/mo dashboard). And, by year four, the local ad layer built on top of our dataset — the Instacart Ads template applied off-platform.</p>
+      </article>
+      <article class="card">
+        <div class="card-num" data-en="WHY WE WIN" data-zh="凭什么赢">WHY WE WIN</div>
+        <h3 data-en="The dataset is the moat" data-zh="数据集就是护城河">The dataset is the moat</h3>
+        <p data-en="Once we ship the loop, no one else in the world has the dataset. After 10K rows the model predicts conversion. After 100K it&#39;s structural — others can&#39;t back-fill, because the rows only exist if you&#39;ve operated the loop." data-zh="闭环跑通的那一刻，归因数据全网只有我们手上有。1 万笔之后模型开始预测下一笔的转化率；10 万笔之后这个数据集是结构性壁垒——别人没办法补训，因为这些数据只在跑过闭环的那家公司手上。">Once we ship the loop, no one else in the world has the dataset. After 10K rows the model predicts conversion. After 100K it&#39;s structural — others can&#39;t back-fill, because the rows only exist if you&#39;ve operated the loop.</p>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- STATS -->
-<section class="sw-bright">
-  <div class="section">
-    <div class="stats fade-in">
-      <div class="stat">
-        <div class="stat-num">$40</div>
-        <div class="stat-label" data-en="Per verified customer. The only unit we bill." data-zh="每位已验证顾客。我们唯一计量单位。">Per verified customer. The only unit we bill.</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">Day 1</div>
-        <div class="stat-label" data-en="Multimodal AI verification runs from your first campaign, not someday." data-zh="多模态 AI 核验从第一个 campaign 起就运行，不是以后再说。">Multimodal AI verification runs from your first campaign, not someday.</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">60 Days</div>
-        <div class="stat-label" data-en="To saturate one neighborhood. Williamsburg café, 2026 Q2." data-zh="60 天打穿一个街区。威廉斯堡咖啡店，2026 Q2。">To saturate one neighborhood. Williamsburg café, 2026 Q2.</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">0%</div>
-        <div class="stat-label" data-en="You pay before the first free pilot is delivered. Ever." data-zh="第一个免费试跑交付前，你不花一分钱。永远。">You pay before the first free pilot is delivered. Ever.</div>
-      </div>
+<div class="signature-divider" data-en="End of the bet · Begin the diagnosis ·" data-zh="赌注说完了 · 接下来是诊断 ·">End of the bet · Begin the diagnosis ·</div>
+
+<section class="deep-section alt" id="problem">
+  <div class="container">
+    <span class="eyebrow with-line" data-en="(02 · THE PROBLEM)" data-zh="(02 · 问题在哪)">(02 · THE PROBLEM)</span>
+    <h2 style="margin-top: 16px;" data-en="Marketing for local businesses is mostly guessing." data-zh="本地商家做线上营销，本质上是在赌。">Marketing for local businesses is mostly guessing.</h2>
+    <p style="margin-top: 24px;" data-en="Push exists because three things broke at once, and nobody fixed the seam where they meet." data-zh="Push 之所以存在，是这三件事同时塌——而且没人在修接缝处。">Push exists because three things broke at once, and nobody fixed the seam where they meet.</p>
+    <div class="card-grid" style="margin-top: 48px;">
+      <article class="card">
+        <div class="card-num">01</div>
+        <h3 data-en="iOS 14 broke the link." data-zh="iOS 14 把归因链切断了。">iOS 14 broke the link.</h3>
+        <p data-en="When Apple turned on App Tracking Transparency in 2021, pixel-based attribution lost roughly 40% of its accuracy overnight. For local merchants, whose conversion happens at a counter not a checkout page, the link was never clean to begin with. Today they buy Reach and Impressions and hope." data-zh="2021 年 Apple 打开 ATT，pixel 归因精度一夜掉 40%。本地商家被打得最重——转化发生在柜台前，不是结账页面，链路从一开始就脏。今天他们花钱买的就是 Reach 和 Impressions，剩下的全靠猜。">When Apple turned on App Tracking Transparency in 2021, pixel-based attribution lost roughly 40% of its accuracy overnight. For local merchants, whose conversion happens at a counter not a checkout page, the link was never clean to begin with. Today they buy Reach and Impressions and hope.</p>
+      </article>
+      <article class="card">
+        <div class="card-num">02</div>
+        <h3 data-en="Last-touch attribution lies." data-zh="“我在 IG 看到你”是最贵的玩笑。">Last-touch attribution lies.</h3>
+        <p data-en="When a customer walks in saying &quot;I saw you on Instagram,&quot; Instagram gets 100% of the credit. The food creator who actually started the journey three weeks earlier with a single reel gets nothing. There is no system that tells the truth about what brought a real person through a real door." data-zh="客人走进店里说出这句话，Instagram 拿走 100% 功劳。三周前真正种草的那个美食 creator 一分钱回款都没有。Meta 不知道、商家不知道、creator 自己也不知道——三方一起把这条信号丢了。">When a customer walks in saying "I saw you on Instagram," Instagram gets 100% of the credit. The food creator who actually started the journey three weeks earlier with a single reel gets nothing. There is no system that tells the truth about what brought a real person through a real door.</p>
+      </article>
+      <article class="card">
+        <div class="card-num">03</div>
+        <h3 data-en="Creators get paid for the wrong thing." data-zh="creator 侧的钱算反了。">Creators get paid for the wrong thing.</h3>
+        <p data-en="A 50,000-follower influencer with a 2% conversion rate makes ten times more from brand deals than a 5,000-follower neighborhood foodie who actually drives walk-ins. The market pays for vanity, not value. The creators who actually drive customers slowly stop posting." data-zh="5 万粉、转化率 2% 的本地美食微网红，给一家咖啡店带的真实订单价值是 5 千粉同城博主的 10 倍。但行业按曝光定价，两边拿基本一样的 base fee。市场在给虚荣指标付钱，不是给带客能力——能真带客的人慢慢就不发了，供给端被错误的激励逐年熬干。">A 50,000-follower influencer with a 2% conversion rate makes ten times more from brand deals than a 5,000-follower neighborhood foodie who actually drives walk-ins. The market pays for vanity, not value. The creators who actually drive customers slowly stop posting.</p>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- PROBLEM -->
-<section class="sw-surface" id="problem">
-  <div class="section">
-    <div class="eyebrow fade-in" data-en="01 — The Problem" data-zh="01 — 问题">01 — The Problem</div>
-    <h2 class="fade-in" data-en="Local businesses burn money on creators." data-zh="本地商家在 creator 身上烧钱。">Local businesses burn money on creators.</h2>
-    <p class="lede fade-in" data-delay="0.1s" data-en="You DM ten creators. Three ghost. Four ask for $200 and a free meal. Two post something that looks good. None of them bring verifiable customers to your door. You can't tell which worked. So next month you do it again, or you quit." data-zh="你发十个 DM，三个已读不回，四个开价 $200 加一顿免费餐，两个发了看着不错的帖子。没一个能告诉你带来了几个能核实的顾客。你分不清哪个有效。下个月，你要么再赌一次，要么彻底放弃。">You DM ten creators. Three ghost. Four ask for $200 and a free meal. Two post something that looks good. None of them bring verifiable customers to your door. You can't tell which worked. So next month you do it again, or you quit.</p>
-
-    <div class="split-ba">
-      <div class="ba-panel">
-        <div class="ba-tag" data-en="BEFORE PUSH" data-zh="用 Push 之前">BEFORE PUSH</div>
-        <h3 data-en="You run an art project." data-zh="你在做一场艺术项目。">You run an art project.</h3>
-        <p data-en="Sort creators by follower count. Guess who fits your brand. Hand out free food. Wait for posts. Screenshot some likes. Hope." data-zh="按粉丝数筛 creator，靠直觉选品牌契合的，请他们吃免费餐，等他们发帖，截几张点赞图，祈祷。">Sort creators by follower count. Guess who fits your brand. Hand out free food. Wait for posts. Screenshot some likes. Hope.</p>
-        <p data-en="Monthly spend: <strong>$600–$1,500</strong>. Verifiable customers acquired: <strong>unknown</strong>. Repeat rate: <strong>you stop after 3 months</strong>." data-zh="月度支出：<strong>$600–$1,500</strong>。可核实到店顾客：<strong>未知</strong>。复投率：<strong>3 个月后你放弃</strong>。">Monthly spend: <strong>$600–$1,500</strong>. Verifiable customers acquired: <strong>unknown</strong>. Repeat rate: <strong>you stop after 3 months</strong>.</p>
-      </div>
-      <div class="ba-panel after">
-        <div class="ba-tag" data-en="WITH PUSH" data-zh="用了 Push">WITH PUSH</div>
-        <h3 data-en="You hire an outcome." data-zh="你购买的是结果。">You hire an outcome.</h3>
-        <p data-en="Tell us: <strong>&quot;I want 50 new customers through the door this month.&quot;</strong> AI picks creators from our vetted network. They run the campaign. QR codes verify visits. You approve. You pay per verified customer." data-zh="你告诉我们：<strong>&quot;我这个月想到店 50 个新顾客。&quot;</strong> AI 从经过筛选的 creator 网络里挑人，他们执行 campaign，QR 码核验到店，你确认，按验证顾客付费。">Tell us: <strong>"I want 50 new customers through the door this month."</strong> AI picks creators from our vetted network. They run the campaign. QR codes verify visits. You approve. You pay per verified customer.</p>
-        <p data-en="Monthly spend: <strong>$2,000 for 50 customers</strong>. Verifiable customers: <strong>each one QR-verified</strong>. Repeat rate: <strong>72% run a second month</strong>." data-zh="月度支出：<strong>$2,000 换 50 个顾客</strong>。可核实顾客：<strong>每一个都有 QR 记录</strong>。复投率：<strong>72% 会做第二个月</strong>。">Monthly spend: <strong>$2,000 for 50 customers</strong>. Verifiable customers: <strong>each one QR-verified</strong>. Repeat rate: <strong>72% run a second month</strong>.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SOLUTION -->
-<section class="sw-bright" id="solution">
-  <div class="section">
-    <div class="eyebrow fade-in" data-en="02 — The Solution" data-zh="02 — 方案">02 — The Solution</div>
-    <h2 class="fade-in" data-en="An agency, operated by AI." data-zh="一家由 AI 运营的代理公司。">An agency, operated by AI.</h2>
-    <p class="lede fade-in" data-delay="0.1s" data-en="Push is not a marketplace and not a SaaS tool. We're an agency. The difference: an agency takes responsibility for an outcome. The twist: our operator is AI, and our workforce is a vetted creator network — which is how we deliver the outcome at 1/10 the cost of a traditional local marketing agency." data-zh="Push 不是撮合平台，也不是 SaaS 工具。我们是代理公司——区别在于代理公司对结果负责。转折在于：我们的 operator 是 AI，我们的执行队伍是经过筛选的 creator 网络——这就是我们能以 1/10 成本达成传统本地营销代理效果的方式。">Push is not a marketplace and not a SaaS tool. We're an agency. The difference: an agency takes responsibility for an outcome. The twist: our operator is AI, and our workforce is a vetted creator network — which is how we deliver the outcome at 1/10 the cost of a traditional local marketing agency.</p>
-
-    <div class="pillars">
-      <div class="pillar fade-in">
-        <div class="pillar-num">01</div>
-        <div class="pillar-title" data-en="Outcome Engine" data-zh="结果引擎">Outcome Engine</div>
-        <div class="pillar-body" data-en="Merchants tell Push how many new customers they need. We guarantee delivery — or you don't pay. One unit of value, one price." data-zh="商家告诉 Push 要多少新顾客，我们保证交付或免费。一个价值单位，一个价格。">Merchants tell Push how many new customers they need. We guarantee delivery — or you don't pay. One unit of value, one price.</div>
-      </div>
-      <div class="pillar fade-in" data-delay="0.05s">
-        <div class="pillar-num">02</div>
-        <div class="pillar-title" data-en="Creator OS" data-zh="Creator 操作系统">Creator OS</div>
-        <div class="pillar-body" data-en="Creators are the AI-managed workforce. Tier, score, and history are non-portable — they exist and compound only inside Push." data-zh="Creator 是 AI 调度的执行队伍。等级、评分、历史不可转移，只在 Push 内部累积生效。">Creators are the AI-managed workforce. Tier, score, and history are non-portable — they exist and compound only inside Push.</div>
-      </div>
-      <div class="pillar fade-in" data-delay="0.1s">
-        <div class="pillar-num">03</div>
-        <div class="pillar-title" data-en="AI Verification Layer" data-zh="AI 核验层">AI Verification Layer</div>
-        <div class="pillar-body" data-en="Multimodal AI verifies every visit from day one — Claude Vision on receipts, QR-code geo checks, content consistency. Human review on 20%." data-zh="多模态 AI 从第一天起核验每次到访——Claude Vision 识别小票、QR 码地理核验、内容一致性。人工复核 20%。">Multimodal AI verifies every visit from day one — Claude Vision on receipts, QR-code geo checks, content consistency. Human review on 20%.</div>
-      </div>
-      <div class="pillar fade-in" data-delay="0.15s">
-        <div class="pillar-num">04</div>
-        <div class="pillar-title" data-en="Agentic Campaign Engine" data-zh="智能 Campaign 引擎">Agentic Campaign Engine</div>
-        <div class="pillar-body" data-en="Merchant inputs target. Agent outputs creator match, campaign brief, and ROI prediction in 60 seconds. No procurement meetings." data-zh="商家输入目标，agent 60 秒内输出 creator 匹配、campaign 简报、ROI 预测。没有采购会议。">Merchant inputs target. Agent outputs creator match, campaign brief, and ROI prediction in 60 seconds. No procurement meetings.</div>
-      </div>
-      <div class="pillar fade-in" data-delay="0.2s">
-        <div class="pillar-num">05</div>
-        <div class="pillar-title" data-en="Data Moat" data-zh="数据护城河">Data Moat</div>
-        <div class="pillar-body" data-en="Every campaign trains the matching model. After 5,000 campaigns, a new entrant can't close the gap without running 5,000 of their own." data-zh="每个 campaign 训练匹配模型。5000 个 campaign 之后，追赶者没跑过 5000 个自己的 campaign 就无法追平。">Every campaign trains the matching model. After 5,000 campaigns, a new entrant can't close the gap without running 5,000 of their own.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="sw-dark" id="how">
-  <div class="section">
-    <div class="eyebrow fade-in" data-en="03 — How It Works" data-zh="03 — 工作流">03 — How It Works</div>
-    <h2 class="fade-in" data-en="From goal to verified customer in 7 days." data-zh="从目标到已验证顾客，7 天完成。">From goal to verified customer in 7 days.</h2>
-    <p class="lede fade-in" data-delay="0.1s" data-en="No weekly sync. No creative review cycles. No &quot;can we jump on a call?&quot; The agent runs the loop and reports when a verified customer walks in the door." data-zh="没有周会，没有创意评审循环，没有&quot;方便开个电话吗&quot;。Agent 跑完整个循环，等一位已验证顾客走进店门时再通知你。">No weekly sync. No creative review cycles. No "can we jump on a call?" The agent runs the loop and reports when a verified customer walks in the door.</p>
-
-    <div class="flow">
-      <div class="flow-step fade-in">
-        <div class="flow-tag" data-en="STEP 01" data-zh="第 01 步">STEP 01</div>
-        <div class="flow-title" data-en="Merchant States Goal" data-zh="商家提交目标">Merchant States Goal</div>
-        <div class="flow-body" data-en="&quot;I need 50 new customers this month. Budget ceiling $2,000.&quot; One sentence in the dashboard." data-zh="&quot;这个月要 50 个新顾客，预算上限 $2,000。&quot; 后台一句话。">"I need 50 new customers this month. Budget ceiling $2,000." One sentence in the dashboard.</div>
-        <div class="flow-time" data-en="~30 seconds" data-zh="~30 秒">~30 seconds</div>
-      </div>
-      <div class="flow-step fade-in" data-delay="0.05s">
-        <div class="flow-tag" data-en="STEP 02" data-zh="第 02 步">STEP 02</div>
-        <div class="flow-title" data-en="Agent Plans Campaign" data-zh="Agent 规划 campaign">Agent Plans Campaign</div>
-        <div class="flow-body" data-en="AI picks 5–8 creators from the vetted network, drafts the offer, writes briefs, predicts ROI. Merchant approves in one click." data-zh="AI 从筛过的网络挑 5–8 位 creator、拟定 offer、写简报、预测 ROI。商家一键确认。">AI picks 5–8 creators from the vetted network, drafts the offer, writes briefs, predicts ROI. Merchant approves in one click.</div>
-        <div class="flow-time" data-en="~60 seconds" data-zh="~60 秒">~60 seconds</div>
-      </div>
-      <div class="flow-step fade-in" data-delay="0.1s">
-        <div class="flow-tag" data-en="STEP 03" data-zh="第 03 步">STEP 03</div>
-        <div class="flow-title" data-en="Creators Execute" data-zh="Creator 执行">Creators Execute</div>
-        <div class="flow-body" data-en="Creators visit, post, and share a QR link. Every redemption is tagged to the creator who drove it." data-zh="Creator 到店、发帖、分享 QR 链接。每次核销都归因到带来的那位 creator。">Creators visit, post, and share a QR link. Every redemption is tagged to the creator who drove it.</div>
-        <div class="flow-time" data-en="Days 1–5" data-zh="第 1–5 天">Days 1–5</div>
-      </div>
-      <div class="flow-step fade-in" data-delay="0.15s">
-        <div class="flow-tag" data-en="STEP 04" data-zh="第 04 步">STEP 04</div>
-        <div class="flow-title" data-en="AI Verifies Each Visit" data-zh="AI 核验每次到访">AI Verifies Each Visit</div>
-        <div class="flow-body" data-en="Claude Vision reads receipts. Geo checks the redemption location. Content consistency checks the post. Humans review 20%." data-zh="Claude Vision 识别小票，地理核验核销位置，内容一致性检查帖子，人工复核 20%。">Claude Vision reads receipts. Geo checks the redemption location. Content consistency checks the post. Humans review 20%.</div>
-        <div class="flow-time" data-en="Real-time" data-zh="实时">Real-time</div>
-      </div>
-      <div class="flow-step fade-in" data-delay="0.2s">
-        <div class="flow-tag" data-en="STEP 05" data-zh="第 05 步">STEP 05</div>
-        <div class="flow-title" data-en="You Pay Per Customer" data-zh="按顾客付费">You Pay Per Customer</div>
-        <div class="flow-body" data-en="End of campaign: you see 47 verified customers. You pay $40 each. Creators get paid within 24 hours." data-zh="Campaign 结束：你看到 47 个已验证顾客，每个 $40。Creator 24 小时内收到报酬。">End of campaign: you see 47 verified customers. You pay $40 each. Creators get paid within 24 hours.</div>
-        <div class="flow-time" data-en="Day 7" data-zh="第 7 天">Day 7</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PRICING -->
-<section class="sw-surface" id="pricing">
-  <div class="section">
-    <div class="eyebrow fade-in" data-en="04 — Pricing" data-zh="04 — 定价">04 — Pricing</div>
-    <h2 class="fade-in" data-en="You pay for customers. Not posts, not followers, not &quot;impressions.&quot;" data-zh="你为顾客付费。不为帖子、粉丝数、&quot;曝光量&quot;付费。">You pay for customers. Not posts, not followers, not "impressions."</h2>
-    <p class="lede fade-in" data-delay="0.1s" data-en="Three tiers, all outcome-priced. Every business starts with a free pilot — you don't pay a dollar before we've delivered real customers through your door. Scale up when it's working; leave when it's not." data-zh="三个档位，全部按效果计费。每个商家都从免费 Pilot 起步——交付真实顾客之前你一分钱不用付。有效果就升档，没效果就离开。">Three tiers, all outcome-priced. Every business starts with a free pilot — you don't pay a dollar before we've delivered real customers through your door. Scale up when it's working; leave when it's not.</p>
-
-    <div class="pricing">
-      <div class="price-card fade-in">
-        <div class="price-tag" data-en="TIER 01 — PILOT" data-zh="01 — PILOT">TIER 01 — PILOT</div>
-        <div class="price-name" data-en="Free Pilot" data-zh="免费试跑">Free Pilot</div>
+<section class="deep-section" id="how">
+  <div class="container">
+    <span class="eyebrow with-line" data-en="(03 · HOW IT WORKS)" data-zh="(03 · 怎么跑通)">(03 · HOW IT WORKS)</span>
+    <h2 style="margin-top: 16px;" data-en="One QR code closes the loop." data-zh="一个 QR 码，跑通一笔归因。">One QR code closes the loop.</h2>
+    <p style="margin-top: 24px;" data-en="From a creator&#39;s post to a verified row in our database. Five steps. Thirty seconds. No app downloads, no behavioral tracking, no cookies." data-zh="从 creator 发帖，到 push_transactions 表里写下一行结构化记录。五步、30 秒、不下 App、不要用户行为数据、不留 cookie 也能继续归因。">From a creator&#39;s post to a verified row in our database. Five steps. Thirty seconds. No app downloads, no behavioral tracking, no cookies.</p>
+    <ol class="steps" style="margin-top: 48px;">
+      <li>
+        <div class="step-label" data-en="Step 01" data-zh="01">Step 01</div>
         <div>
-          <div class="price-num">$0</div>
-          <div class="price-suffix" data-en="for the first campaign" data-zh="首个 campaign">for the first campaign</div>
+          <strong data-en="Mia posts." data-zh="Mia 发帖。">Mia posts.</strong>
+          <span data-en="Push generates a unique QR per creator × merchant × campaign — no duplicates anywhere on the network. Mia drops it in a reel, story, TikTok, or in-person meetup." data-zh="Push 给每一组 creator × 商家 × campaign 生成独立 QR，全网无重复。Mia 把它丢进 reel / story / TikTok / 线下见面会，一个 QR 走通所有渠道。">Push generates a unique QR per creator × merchant × campaign — no duplicates anywhere on the network. Mia drops it in a reel, story, TikTok, or in-person meetup.</span>
         </div>
-        <div class="price-desc" data-en="Prove it works before you pay. Push funds the offer, runs verification, pays creators. You see verified customer data." data-zh="先验证再付费。Push 出 offer 成本、跑核验、付 creator。你看到已验证顾客数据。">Prove it works before you pay. Push funds the offer, runs verification, pays creators. You see verified customer data.</div>
-        <ul>
-          <li data-en="1 campaign, fully managed" data-zh="1 个 campaign，全程托管">1 campaign, fully managed</li>
-          <li data-en="Up to 15 verified customers" data-zh="最多 15 位已验证顾客">Up to 15 verified customers</li>
-          <li data-en="QR verification + AI audit" data-zh="QR 核验 + AI 审核">QR verification + AI audit</li>
-          <li data-en="ROI dashboard access" data-zh="ROI 看板权限">ROI dashboard access</li>
-          <li data-en="No commitment, no contract" data-zh="零承诺，零合同">No commitment, no contract</li>
-        </ul>
-      </div>
-      <div class="price-card featured fade-in" data-delay="0.05s">
-        <div class="price-tag" data-en="TIER 02 — GROWTH ★" data-zh="02 — GROWTH ★">TIER 02 — GROWTH ★</div>
-        <div class="price-name" data-en="Growth" data-zh="Growth 档">Growth</div>
+      </li>
+      <li>
+        <div class="step-label" data-en="Step 02" data-zh="02">Step 02</div>
         <div>
-          <div class="price-num">$500</div>
-          <div class="price-suffix" data-en="/month retainer + $40 per verified customer" data-zh="/月 + 每位已验证顾客 $40">/month retainer + $40 per verified customer</div>
+          <strong data-en="A fan scans." data-zh="粉丝扫码。">A fan scans.</strong>
+          <span data-en="The QR opens a clean landing page: &quot;Mia recommended this. Here&#39;s 15% off your first matcha.&quot; One tap, no account, no cookie. Consent + delete-link visible on the same page." data-zh="扫开是张干净的 landing：「Mia 推荐了这家——首杯抹茶 15% off」。一个动作、不用注册、不沉淀账号、不留 cookie 也能继续归因；同意页和删除链接都在同一页可见。">The QR opens a clean landing page: "Mia recommended this. Here&#39;s 15% off your first matcha." One tap, no account, no cookie. Consent + delete-link visible on the same page.</span>
         </div>
-        <div class="price-desc" data-en="The main tier. Most merchants land here after a successful pilot. Retainer covers dedicated AI, premium creator access, and 24h verification." data-zh="主档位。大多商家 Pilot 成功后落在这里。Retainer 覆盖专属 AI、premium creator 准入、24 小时核验。">The main tier. Most merchants land here after a successful pilot. Retainer covers dedicated AI, premium creator access, and 24h verification.</div>
-        <ul>
-          <li data-en="Unlimited campaigns per month" data-zh="每月不限 campaign 数">Unlimited campaigns per month</li>
-          <li data-en="Priority creator matching (Proven+ tier)" data-zh="优先 creator 匹配（Proven+ 档）">Priority creator matching (Proven+ tier)</li>
-          <li data-en="$40 per verified customer, transparent" data-zh="每位已验证顾客 $40，明码标价">$40 per verified customer, transparent</li>
-          <li data-en="Retainer refundable if <10 verified customers/mo" data-zh="一个月不到 10 位已验证顾客，retainer 全退">Retainer refundable if <10 verified customers/mo</li>
-          <li data-en="Monthly reporting + repeat-campaign templates" data-zh="月度报告 + 复投 campaign 模板">Monthly reporting + repeat-campaign templates</li>
-        </ul>
-      </div>
-      <div class="price-card fade-in" data-delay="0.1s">
-        <div class="price-tag" data-en="TIER 03 — PERFORMANCE" data-zh="03 — PERFORMANCE">TIER 03 — PERFORMANCE</div>
-        <div class="price-name" data-en="Performance" data-zh="Performance 档">Performance</div>
+      </li>
+      <li>
+        <div class="step-label" data-en="Step 03" data-zh="03">Step 03</div>
         <div>
-          <div class="price-num">$2,000</div>
-          <div class="price-suffix" data-en="/month guaranteed delivery" data-zh="/月，保量交付">/month guaranteed delivery</div>
+          <strong data-en="They walk in." data-zh="他们走进店里。">They walk in.</strong>
+          <span data-en="The geofence pings as the device crosses into the store. Attribution to Mia is now provisional — held server-side for 24 hours, no client-side tracking required." data-zh="设备跨进店面 geofence 就 ping 一次，归因暂时挂在 Mia 名下，creator_id 留在 server-side session 里 24 小时；不需要任何客户端追踪。">The geofence pings as the device crosses into the store. Attribution to Mia is now provisional — held server-side for 24 hours, no client-side tracking required.</span>
         </div>
-        <div class="price-desc" data-en="Guaranteed volume. We commit to a minimum verified customer count. Miss it — we refund the gap at retail rate." data-zh="保量交付。我们承诺最少已验证顾客数。若未达标，差额按零售价退还。">Guaranteed volume. We commit to a minimum verified customer count. Miss it — we refund the gap at retail rate.</div>
-        <ul>
-          <li data-en="Guaranteed 60 verified customers / month" data-zh="保证每月 60 位已验证顾客">Guaranteed 60 verified customers / month</li>
-          <li data-en="Partner-tier creators on rotation" data-zh="Partner 档 creator 轮值">Partner-tier creators on rotation</li>
-          <li data-en="Co-branded campaigns + event support" data-zh="联名 campaign + 线下活动支持">Co-branded campaigns + event support</li>
-          <li data-en="Gap-refund if target missed" data-zh="未达标按差额退款">Gap-refund if target missed</li>
-          <li data-en="Dedicated ops partner" data-zh="专属运营伙伴">Dedicated ops partner</li>
-        </ul>
+      </li>
+      <li>
+        <div class="step-label" data-en="Step 04" data-zh="04">Step 04</div>
+        <div>
+          <strong data-en="Checkout scan." data-zh="结账时再扫一次。">Checkout scan.</strong>
+          <span data-en="The cashier scans the same QR at the register. ConversionOracle™ runs computer vision on the receipt, OCR on the order, geofence on the device. Three signals must agree. 3-of-3 counts; 2-of-3 goes to manual review." data-zh="店员在收银台扫同一个 QR。ConversionOracle 同步跑 CV（看收据图）+ OCR（看订单结构）+ geo（看设备位置）。三个独立信号 3/3 对上才算一笔，2/3 进人工复审。">The cashier scans the same QR at the register. ConversionOracle™ runs computer vision on the receipt, OCR on the order, geofence on the device. Three signals must agree. 3-of-3 counts; 2-of-3 goes to manual review.</span>
+        </div>
+      </li>
+      <li>
+        <div class="step-label" data-en="Step 05" data-zh="05">Step 05</div>
+        <div>
+          <strong data-en="Truth is recorded." data-zh="真相落地。">Truth is recorded.</strong>
+          <span data-en="A 32-field row lands in push_transactions: who, what, when, where, how much, signal score. Mia gets paid that night. Sarah sees the ROI in the morning. Push trains the next version of Oracle." data-zh="32 字段写入 push_transactions：creator / merchant / campaign / item / amount / verified_at / signal_score。Mia 当晚拿钱，Sarah 早上看 ROI，Push 用这条数据训下一版 Oracle。">A 32-field row lands in push_transactions: who, what, when, where, how much, signal score. Mia gets paid that night. Sarah sees the ROI in the morning. Push trains the next version of Oracle.</span>
+        </div>
+      </li>
+    </ol>
+    <p style="margin-top: 48px; padding: 24px; background: var(--surface-2); border-left: 2px solid var(--brand-red);" data-en="ConversionOracle™ verification stack: 88% auto-pass, &lt;20% manual review, &lt;1.5% false positive — built across two years on a 37,000-transaction fraud dataset. Replicating it isn&#39;t a weekend project." data-zh="ConversionOracle 验证栈：自动通过率 88%，人工复审率 &lt;20%，假阳率 &lt;1.5%——在 3.7 万笔真实交易上训了两年。复制它不是周末搞定的事。">ConversionOracle™ verification stack: 88% auto-pass, &lt;20% manual review, &lt;1.5% false positive — built across two years on a 37,000-transaction fraud dataset. Replicating it isn&#39;t a weekend project.</p>
+  </div>
+</section>
+
+<div class="signature-divider" data-en="Loop closed · Now meet the four humans on each side ·" data-zh="闭环跑通了 · 现在认识一下每一笔交易背后的四个人 ·">Loop closed · Now meet the four humans on each side ·</div>
+
+<section class="deep-section alt" id="who">
+  <div class="container">
+    <span class="eyebrow with-line" data-en="(04 · WHO PUSH IS FOR)" data-zh="(04 · Push 给谁用)">(04 · WHO PUSH IS FOR)</span>
+    <h2 style="margin-top: 16px;" data-en="Four humans, one closed loop." data-zh="四个角色，一个闭环。">Four humans, one closed loop.</h2>
+    <p style="margin-top: 24px;" data-en="Personas are a shortcut. Here are the actual humans on each side of every push_transaction." data-zh="一笔 push_transaction 背后，永远是这四个人在动。">Personas are a shortcut. Here are the actual humans on each side of every push_transaction.</p>
+    <div class="card-grid" style="margin-top: 48px;">
+      <article class="card">
+        <div class="card-num" data-en="THE MERCHANT · Sarah" data-zh="商家 · Sarah">THE MERCHANT · Sarah</div>
+        <h3 data-en="Coffee shop, Williamsburg" data-zh="Williamsburg 咖啡店老板">Coffee shop, Williamsburg</h3>
+        <p data-en="AOV $14. Was spending $600/mo on Instagram and Yelp ads, attributable returns: 0%. On Push she pays $69/mo + $25 per verified walk-in. First 35 days: 25 verified scans, 78% of them on weekends. First time she knows: which reel brought who, ROAS is 3.4x not 1.2x." data-zh="客单 $14。每月在 IG + Yelp 烧 $600，可归因 0%。上 Push：$69/月 + $25/到店；35 天内拿到 25 个真扫码客户、78% 来自周末。第一次精确知道：哪条 reel 带来谁、ROAS 实际是 3.4 不是 1.2。">AOV $14. Was spending $600/mo on Instagram and Yelp ads, attributable returns: 0%. On Push she pays $69/mo + $25 per verified walk-in. First 35 days: 25 verified scans, 78% of them on weekends. First time she knows: which reel brought who, ROAS is 3.4x not 1.2x.</p>
+      </article>
+      <article class="card">
+        <div class="card-num" data-en="THE CREATOR · Mia" data-zh="创作者 · Mia">THE CREATOR · Mia</div>
+        <h3 data-en="Brooklyn food creator, 8K followers" data-zh="布鲁克林美食 creator · 8K 粉丝">Brooklyn food creator, 8K followers</h3>
+        <p data-en="Brand deals paid her $200/post regardless of outcome. Her best month last year was $400. On Push she earns $32 base/merchant + 5% rev share + milestone bonuses. Best month on Push: $1,800. The supply side is locked once a creator is making real money on outcome-pay." data-zh="品牌合作不管结果，每条 $200，去年最好月份 $400。在 Push 上：$32 base/单 + 每店 5% rev share + milestone 奖金。Push 上最好月份 $1,800——供给端真正锁住了。">Brand deals paid her $200/post regardless of outcome. Her best month last year was $400. On Push she earns $32 base/merchant + 5% rev share + milestone bonuses. Best month on Push: $1,800. The supply side is locked once a creator is making real money on outcome-pay.</p>
+      </article>
+      <article class="card">
+        <div class="card-num" data-en="THE CUSTOMER · Jamie" data-zh="顾客 · Jamie">THE CUSTOMER · Jamie</div>
+        <h3 data-en="23, found Sarah&#39;s shop via Mia&#39;s reel" data-zh="23 岁 · 因 Mia 一条 reel 找到 Sarah">23, found Sarah&#39;s shop via Mia&#39;s reel</h3>
+        <p data-en="First scan = 15% off and a clear consent screen explaining what Push does with the data. No app, no password, no spam. If Jamie wants the data deleted, the link is on the same page. CCPA / GDPR satisfied by default." data-zh="扫第一次 QR 拿首单 15% off，扫第二次自动归因 Mia。零账号、零密码、零垃圾短信、零 App。DSAR 同意页 + 删除链接同页可见，CCPA / GDPR 默认满足。">First scan = 15% off and a clear consent screen explaining what Push does with the data. No app, no password, no spam. If Jamie wants the data deleted, the link is on the same page. CCPA / GDPR satisfied by default.</p>
+      </article>
+      <article class="card">
+        <div class="card-num" data-en="THE AGENCY · Local Brand Co." data-zh="代理商 · Local Brand Co.">THE AGENCY · Local Brand Co.</div>
+        <h3 data-en="3 people, 30 NYC restaurants" data-zh="3 人 agency · 服务 30 家 NYC 餐饮">3 people, 30 NYC restaurants</h3>
+        <p data-en="They subscribe to Push at $500/mo for a dashboard that shows which creators convert for which clients. They become the channel; Push becomes their measurement layer. Both win the same client. Year three: this channel ships $2M+ ARR." data-zh="$500/月订阅 Push dashboard，按 ROI 实时配给 creator 投放。同一笔交易：agency 收商家服务费 + Push 收 agency licensing。三方都在赚——第三年这条 channel 跑出 $2M+ ARR。">They subscribe to Push at $500/mo for a dashboard that shows which creators convert for which clients. They become the channel; Push becomes their measurement layer. Both win the same client. Year three: this channel ships $2M+ ARR.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="deep-section" id="now">
+  <div class="container">
+    <span class="eyebrow with-line" data-en="(05 · WHY NOW)" data-zh="(05 · 为什么是现在)">(05 · WHY NOW)</span>
+    <h2 style="margin-top: 16px;" data-en="The right window opens once." data-zh="对的窗口只开一次。">The right window opens once.</h2>
+    <p style="margin-top: 24px;" data-en="Three things just lined up. Two years ago none of them was true. Two years from now everyone will be doing this." data-zh="三件事刚好对齐——两年前一件都不成立，两年后大家都会这么干。">Three things just lined up. Two years ago none of them was true. Two years from now everyone will be doing this.</p>
+    <ul class="list" style="margin-top: 48px;">
+      <li data-en="01 · iOS 14 has compounded. Five years since Apple turned off the cookie. The pain isn&#39;t fresh — it&#39;s structural. Local merchants are now the most under-served segment in adtech. When we cold-call a coffee shop today, the third question is always: &quot;Can you actually tell me which ad worked last month?&quot; This isn&#39;t educating the market — it&#39;s answering a question the market is already asking." data-zh="01 · iOS 14 已经走完发酵期。ATT 上线五年，痛已经从「适应期」变成结构性损伤。本地商家是 adtech 里最弱势的甲方，今天我们去 cold call 一家咖啡店，平均第三个问题就是「你们能不能告诉我哪条广告真的有用」。这不是教育市场——是承接已经成熟的需求。">01 · iOS 14 has compounded. Five years since Apple turned off the cookie. The pain isn&#39;t fresh — it&#39;s structural. Local merchants are now the most under-served segment in adtech. When we cold-call a coffee shop today, the third question is always: "Can you actually tell me which ad worked last month?" This isn&#39;t educating the market — it&#39;s answering a question the market is already asking.</li>
+      <li data-en="02 · The creator economy crossed the supply threshold. Three million U.S. micro-creators would happily trade flat brand-deal fees for real outcome share. Five years ago this audience didn&#39;t exist at scale. We signed 47 NYC creators in one week in April — 31% reply rate, zero asked for a flat fee. They came already wanting rev share." data-zh="02 · 创作者经济跨过供给阈值。全美 300 万微网红愿意把固定品牌合作费换成真实结果分成。五年前这个供给端规模和心态都不到位；今天他们主动来谈 rev share。我们 4 月一周签下 47 个 NYC creator，平均回复率 31%，没有一个人问「你们能不能加固定 fee」。">02 · The creator economy crossed the supply threshold. Three million U.S. micro-creators would happily trade flat brand-deal fees for real outcome share. Five years ago this audience didn&#39;t exist at scale. We signed 47 NYC creators in one week in April — 31% reply rate, zero asked for a flat fee. They came already wanting rev share.</li>
+      <li data-en="03 · Vision crossed the cost line. Verifying a receipt photo plus an order screen used to be a $0.30/transaction problem. As of 2026 it&#39;s $0.003 — 100× cheaper. Two years ago Oracle&#39;s unit cost would have eaten the entire take rate. This year, verification costs 0.02% of the transaction. The thing that gates ConversionOracle is finally on our side." data-zh="03 · 视觉 AI 跨过成本门槛。验证一张收据照 + 一个订单截屏，2021 年是 $0.30/单，2026 年是 $0.003/单——便宜了 100 倍。卡住整个验证栈最关键的环节，今年才在我们这边对账。两年前 Oracle 跑出来单位成本会吃掉所有 take rate；今年开始，每笔验证只占交易额 0.02%。">03 · Vision crossed the cost line. Verifying a receipt photo plus an order screen used to be a $0.30/transaction problem. As of 2026 it&#39;s $0.003 — 100× cheaper. Two years ago Oracle&#39;s unit cost would have eaten the entire take rate. This year, verification costs 0.02% of the transaction. The thing that gates ConversionOracle is finally on our side.</li>
+    </ul>
+  </div>
+</section>
+
+<div class="signature-divider" data-en="Window&#39;s open · Five shops on May 15 ·" data-zh="窗口开着 · 5 月 15 日，五家店 ·">Window&#39;s open · Five shops on May 15 ·</div>
+
+<section class="deep-section alt" id="plan">
+  <div class="container">
+    <span class="eyebrow with-line" data-en="(06 · NEXT 90 DAYS)" data-zh="(06 · 接下来 90 天)">(06 · NEXT 90 DAYS)</span>
+    <h2 style="margin-top: 16px;" data-en="May 15. Williamsburg. Five shops. Day one." data-zh="5 月 15 日。Williamsburg。五家店。第一天。">May 15. Williamsburg. Five shops. Day one.</h2>
+    <p style="margin-top: 24px;" data-en="We&#39;ve stopped writing strategy. We&#39;re building product, signing merchants, and shipping the loop. Each line below is an externally verifiable fact, not an aspiration." data-zh="战略不用再写了。要做的是产品、签商家、跑闭环。下面每一行都对应一个外部可验证的事实，不是「我们希望」、不是「我们计划」。">We&#39;ve stopped writing strategy. We&#39;re building product, signing merchants, and shipping the loop. Each line below is an externally verifiable fact, not an aspiration.</p>
+    <div class="kv-grid" style="margin-top: 48px;">
+      <div class="kv">
+        <dt data-en="Day 0 · May 15" data-zh="DAY 0 · 5 月 15">Day 0 · May 15</dt>
+        <dd data-en="Pilot launches. 5 Williamsburg coffee shops, 20 contracted creators on board. Real money starts moving." data-zh="Pilot 启动。5 家 Williamsburg Coffee+ 商家、20 个签约 creator 上线。真钱开始流动。">Pilot launches. 5 Williamsburg coffee shops, 20 contracted creators on board. Real money starts moving.</dd>
+      </div>
+      <div class="kv">
+        <dt data-en="Day 30 · Jun 14" data-zh="DAY 30 · 6 月 14">Day 30 · Jun 14</dt>
+        <dd data-en="50+ verified customers in push_transactions. ConversionOracle running at ≥ 88% auto-pass, &lt; 1.5% false-positive." data-zh="push_transactions 写入 50+ 验证客户。Oracle 自动通过率 ≥ 88%、假阳率 &lt; 1.5%。">50+ verified customers in push_transactions. ConversionOracle running at ≥ 88% auto-pass, &lt; 1.5% false-positive.</dd>
+      </div>
+      <div class="kv">
+        <dt data-en="Day 60 · Jul 14" data-zh="DAY 60 · 7 月 14">Day 60 · Jul 14</dt>
+        <dd data-en="First 5 merchants convert from pilot to paid. $69/mo + $25/walk-in pricing live. First invoice clears." data-zh="头 5 家商家从 pilot 转付费。$69/月 + $25/到店 定价生效，第一笔 invoice 到账。">First 5 merchants convert from pilot to paid. $69/mo + $25/walk-in pricing live. First invoice clears.</dd>
+      </div>
+      <div class="kv">
+        <dt data-en="Day 90 · Aug 14" data-zh="DAY 90 · 8 月 14">Day 90 · Aug 14</dt>
+        <dd data-en="12 paying merchants. 150 verified walk-ins. $8K MRR. F&amp;F SAFE $200K @ $8M cap closes; YC W26 application submitted." data-zh="12 家付费商家、150 验证到店、$8K MRR。F&amp;F SAFE $200K @ $8M cap 关账，YC W26 申请提交。">12 paying merchants. 150 verified walk-ins. $8K MRR. F&amp;F SAFE $200K @ $8M cap closes; YC W26 application submitted.</dd>
       </div>
     </div>
   </div>
 </section>
 
-<!-- BEACHHEAD -->
-<section class="sw-bright" id="beachhead">
-  <div class="section">
-    <div class="eyebrow fade-in" data-en="05 — The Beachhead" data-zh="05 — 根据地">05 — The Beachhead</div>
-    <h2 class="fade-in" data-en="One category. One neighborhood. 60 days." data-zh="一个品类。一个街区。60 天。">One category. One neighborhood. 60 days.</h2>
-    <p class="lede fade-in" data-delay="0.1s" data-en="We don't launch a city. We saturate a ZIP code. Coffee shops in Williamsburg, Brooklyn — 30+ independent cafés in a 15-minute walk. We'll recruit them all, match them with local coffee creators, and make Push the default customer acquisition channel for that category in that place." data-zh="我们不&quot;上线一座城市&quot;，我们&quot;饱和一个邮编&quot;。布鲁克林威廉斯堡的咖啡店——15 分钟步行圈内 30+ 家独立咖啡店。我们会把它们都签下来，和本地咖啡 creator 配对，把 Push 做成&quot;那个品类在那片地方&quot;的默认获客渠道。">We don't launch a city. We saturate a ZIP code. Coffee shops in Williamsburg, Brooklyn — 30+ independent cafés in a 15-minute walk. We'll recruit them all, match them with local coffee creators, and make Push the default customer acquisition channel for that category in that place.</p>
+<div class="ticket-panel">
+  <div class="ticket-eyebrow" data-en="(THE WEDGE · ADMIT ONE)" data-zh="(楔子 · 凭票一张)">(THE WEDGE · ADMIT ONE)</div>
+  <h2 data-en="Local commerce, finally measurable." data-zh="本地商业，终于能算回一笔账。">Local commerce, finally measurable.</h2>
+  <p data-en="The team is in place. The product is in build. The pilot is funded. The window is open. If you&#39;ve read this far, you already know what to do — sign your name, or pass this deck to someone who will." data-zh="团队就位、产品在跑、Pilot 有钱、窗口开着。读到这里你已经知道该做什么了——要么把名字签上来，要么把这份 deck 转给真正会动手的人。两年后这个品类会有一家公司，我们想成为那家公司。">The team is in place. The product is in build. The pilot is funded. The window is open. If you&#39;ve read this far, you already know what to do — sign your name, or pass this deck to someone who will.</p>
+  <a class="btn btn-ink" href="pitch-deck.html" data-en="Read the full pitch deck →" data-zh="看完整路演 →">Read the full pitch deck →</a>
+</div>
 
-    <div class="beach-block fade-in" data-delay="0.15s">
-      <div class="beach-meta">
-        <div class="beach-meta-row">
-          <div class="beach-meta-label" data-en="Category" data-zh="品类">Category</div>
-          <div class="beach-meta-val" data-en="Independent Cafés" data-zh="独立咖啡店">Independent Cafés</div>
-        </div>
-        <div class="beach-meta-row">
-          <div class="beach-meta-label" data-en="Geography" data-zh="地理">Geography</div>
-          <div class="beach-meta-val" data-en="Williamsburg, Brooklyn" data-zh="布鲁克林 威廉斯堡">Williamsburg, Brooklyn</div>
-        </div>
-        <div class="beach-meta-row">
-          <div class="beach-meta-label" data-en="Merchant Target" data-zh="商家目标">Merchant Target</div>
-          <div class="beach-meta-val" data-en="10 signed → 20 in 60 days" data-zh="签 10 家 → 60 天内 20 家">10 signed → 20 in 60 days</div>
-        </div>
-        <div class="beach-meta-row">
-          <div class="beach-meta-label" data-en="Creator Target" data-zh="Creator 目标">Creator Target</div>
-          <div class="beach-meta-val" data-en="20 café-focused creators" data-zh="20 位咖啡垂类 creator">20 café-focused creators</div>
-        </div>
-        <div class="beach-meta-row">
-          <div class="beach-meta-label" data-en="Campaigns" data-zh="Campaign 数">Campaigns</div>
-          <div class="beach-meta-val" data-en="20 verified campaigns" data-zh="20 个已核验 campaign">20 verified campaigns</div>
-        </div>
-        <div class="beach-meta-row">
-          <div class="beach-meta-label" data-en="Go / No-Go" data-zh="Go / No-Go">Go / No-Go</div>
-          <div class="beach-meta-val" data-en="40%+ repeat at $500/mo" data-zh="复投率 40%+ @ $500/月">40%+ repeat at $500/mo</div>
-        </div>
-      </div>
-      <div>
-        <h4 data-en="Why this wedge" data-zh="为什么选这个切入点">Why this wedge</h4>
-        <p style="font-size:14px;color:var(--ink-2);margin-top:12px;" data-en="Coffee is the highest-frequency local F&B category — every customer is potentially a weekly regular. Williamsburg has the densest independent scene on the East Coast and an active café creator subculture on Instagram. 60 days is enough time to build 'saturation density' — the point where every local café owner knows another café owner on Push." data-zh="咖啡是频次最高的本地 F&B 品类——每个新顾客都可能变成每周常客。威廉斯堡拥有东海岸最密集的独立咖啡店圈，以及 Instagram 上活跃的咖啡垂类 creator 亚文化。60 天足够把密度做到临界点——让每一位本地咖啡店主都认识一位&quot;在用 Push&quot;的同行。">Coffee is the highest-frequency local F&B category — every customer is potentially a weekly regular. Williamsburg has the densest independent scene on the East Coast and an active café creator subculture on Instagram. 60 days is enough time to build 'saturation density' — the point where every local café owner knows another café owner on Push.</p>
-      </div>
+</main>
+
+
+<footer class="site-footer">
+  <div class="footer-grid footer-grid-3">
+    <div class="footer-col">
+      <div class="footer-heading" data-en="(MAIN)" data-zh="(主导航)">(MAIN)</div>
+      <a href="index.html" data-en="Overview" data-zh="首页">Overview</a>
+      <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演">Pitch Deck</a>
+      <a href="investor-qa.html" data-en="Investor Q&amp;A" data-zh="投资人问答">Investor Q&amp;A</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-heading" data-en="(CORE)" data-zh="(核心)">(CORE)</div>
+      <a href="project-intro.html" data-en="Product" data-zh="产品">Product</a>
+      <a href="push-strategy-core.html" data-en="Strategy" data-zh="战略">Strategy</a>
+      <a href="economics.html" data-en="Economics" data-zh="经济模型">Economics</a>
+      <a href="attribution.html" data-en="Attribution" data-zh="归因机制">Attribution</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-heading" data-en="(REFERENCE)" data-zh="(参考)">(REFERENCE)</div>
+      <a href="deep-dive.html" data-en="Deep Dive" data-zh="深度解读">Deep Dive</a>
+      <a href="metrics-dashboard.html" data-en="Metrics" data-zh="指标">Metrics</a>
+      <a href="push-team-dashboard.html" data-en="Team" data-zh="团队">Team</a>
+      <a href="nda.html" data-en="NDA" data-zh="保密协议">NDA</a>
     </div>
   </div>
-</section>
-
-<!-- 90-DAY PLAN -->
-<section class="sw-surface" id="plan">
-  <div class="section">
-    <div class="eyebrow fade-in" data-en="06 — 90-Day Execution" data-zh="06 — 90 天执行">06 — 90-Day Execution</div>
-    <h2 class="fade-in" data-en="What we're doing, week by week." data-zh="按周执行，公开节奏。">What we're doing, week by week.</h2>
-    <p class="lede fade-in" data-delay="0.1s" data-en="We keep this visible because founders who publish their plan ship it. This is the plan we're running — from AI verification MVP to the first paid campaign and the YC Winter 2027 application." data-zh="我们公开这份计划，是因为&quot;公开路线图的创始人&quot;更容易按期交付。这就是我们当前在跑的节奏——从 AI 核验 MVP 到第一笔付费 campaign 再到 YC Winter 2027 申请。">We keep this visible because founders who publish their plan ship it. This is the plan we're running — from AI verification MVP to the first paid campaign and the YC Winter 2027 application.</p>
-
-    <div class="timeline">
-      <div class="timeline-row fade-in">
-        <div class="timeline-week" data-en="Week 1–2" data-zh="第 1–2 周">Week 1–2</div>
-        <div class="timeline-action" data-en="Build AI Verification MVP — Claude Vision, QR receipt OCR, geo consistency" data-zh="搭 AI 核验 MVP — Claude Vision、QR 小票 OCR、地理一致性核验">Build AI Verification MVP — Claude Vision, QR receipt OCR, geo consistency</div>
-        <div class="timeline-owner" data-en="OWNER — Z" data-zh="负责人 — Z">OWNER — Z</div>
-      </div>
-      <div class="timeline-row fade-in">
-        <div class="timeline-week" data-en="Week 3–4" data-zh="第 3–4 周">Week 3–4</div>
-        <div class="timeline-action" data-en="Sign 10 Williamsburg cafés + recruit 20 café creators" data-zh="签 10 家威廉斯堡咖啡店 + 招募 20 位咖啡 creator">Sign 10 Williamsburg cafés + recruit 20 café creators</div>
-        <div class="timeline-owner" data-en="OWNER — Lucy / Jiaming / Prum" data-zh="负责人 — Lucy / Jiaming / Prum">OWNER — Lucy / Jiaming / Prum</div>
-      </div>
-      <div class="timeline-row fade-in">
-        <div class="timeline-week" data-en="Week 5–8" data-zh="第 5–8 周">Week 5–8</div>
-        <div class="timeline-action" data-en="Run 20 campaigns — every one passes AI verification + 20% human review" data-zh="跑 20 个 campaign — 每一个都过 AI 核验 + 20% 人工复审">Run 20 campaigns — every one passes AI verification + 20% human review</div>
-        <div class="timeline-owner" data-en="OWNER — Full Team" data-zh="负责人 — 全团队">OWNER — Full Team</div>
-      </div>
-      <div class="timeline-row fade-in">
-        <div class="timeline-week" data-en="Week 9–10" data-zh="第 9–10 周">Week 9–10</div>
-        <div class="timeline-action" data-en="First merchants transition from Pilot to $500/mo + $25 per customer" data-zh="第一批商家从 Pilot 转到 $500/月 + 每位顾客 $25">First merchants transition from Pilot to $500/mo + $25 per customer</div>
-        <div class="timeline-owner" data-en="OWNER — Prum / Jiaming" data-zh="负责人 — Prum / Jiaming">OWNER — Prum / Jiaming</div>
-      </div>
-      <div class="timeline-row fade-in">
-        <div class="timeline-week" data-en="Week 11–12" data-zh="第 11–12 周">Week 11–12</div>
-        <div class="timeline-action" data-en="Apply YC Winter 2027 — pitch: AI Agency for Local Customer Acquisition" data-zh="投 YC Winter 2027 — pitch：本地获客 AI 代理">Apply YC Winter 2027 — pitch: AI Agency for Local Customer Acquisition</div>
-        <div class="timeline-owner" data-en="OWNER — Jiaming / Milly" data-zh="负责人 — Jiaming / Milly">OWNER — Jiaming / Milly</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHY NOW -->
-<section class="sw-dark" id="why-now">
-  <div class="section">
-    <div class="eyebrow fade-in" data-en="07 — Why Now" data-zh="07 — 为何现在">07 — Why Now</div>
-    <h2 class="fade-in" data-en="AI agencies are the 2026 thesis. Creator marketplaces aren't." data-zh="AI 代理是 2026 年的主题，creator marketplace 不是。">AI agencies are the 2026 thesis. Creator marketplaces aren't.</h2>
-    <p class="lede fade-in" data-delay="0.1s" data-en="Push v5.0 repositioned to match what YC Spring 2026 Requests for Startups calls out: AI-Powered Agencies that collapse the cost of specialized labor. Not AI-enhanced SaaS. Not marketplaces bolting AI on. The full-stack version: outcome priced, AI-operated, delivered end-to-end." data-zh="Push v5.0 重新定位，直接对齐 YC 2026 Spring RFS 点名的方向：&quot;AI-Powered Agencies&quot;，用 AI 压缩专业劳动力成本。不是&quot;加了 AI 的 SaaS&quot;，不是&quot;marketplace 外挂 AI&quot;——而是 full-stack 版本：按效果定价、AI 运营、端到端交付。">Push v5.0 repositioned to match what YC Spring 2026 Requests for Startups calls out: AI-Powered Agencies that collapse the cost of specialized labor. Not AI-enhanced SaaS. Not marketplaces bolting AI on. The full-stack version: outcome priced, AI-operated, delivered end-to-end.</p>
-
-    <div class="why-grid">
-      <div class="why-item fade-in">
-        <div class="why-num">88%</div>
-        <div class="why-title" data-en="of YC W26 is day-zero AI" data-zh="YC W26 批次 88% 是 day-zero AI 公司">of YC W26 is day-zero AI</div>
-        <div class="why-body" data-en="&quot;Add AI to your app&quot; era is over. Day-1 AI verification isn't a future roadmap item — it's the minimum bar." data-zh="&quot;给 app 加 AI&quot;的时代结束了。Day-1 AI 核验不是以后再做的功能，而是入场门槛。">"Add AI to your app" era is over. Day-1 AI verification isn't a future roadmap item — it's the minimum bar.</div>
-      </div>
-      <div class="why-item fade-in" data-delay="0.05s">
-        <div class="why-num">10×</div>
-        <div class="why-title" data-en="cheaper than a local marketing agency" data-zh="比本地营销代理便宜 10 倍">cheaper than a local marketing agency</div>
-        <div class="why-body" data-en="Traditional agencies charge $3K–$8K/mo for what a multimodal AI operator can match for $500/mo. The cost floor of human-operated services is no longer defensible." data-zh="传统代理月费 $3K–$8K，多模态 AI operator 可以 $500/月做到同等效果。人力运营服务的成本底线守不住了。">Traditional agencies charge $3K–$8K/mo for what a multimodal AI operator can match for $500/mo. The cost floor of human-operated services is no longer defensible.</div>
-      </div>
-      <div class="why-item fade-in" data-delay="0.1s">
-        <div class="why-num">72%</div>
-        <div class="why-title" data-en="of local businesses increased creator spend in 2025" data-zh="72% 本地商家 2025 年增加 creator 预算">of local businesses increased creator spend in 2025</div>
-        <div class="why-body" data-en="Demand side is ready. What's missing: a way to convert that spend into verifiable customers. Push is the infrastructure layer for that." data-zh="需求侧已就位，缺口在于：把这笔预算转换成可核验顾客的基础设施——这就是 Push。">Demand side is ready. What's missing: a way to convert that spend into verifiable customers. Push is the infrastructure layer for that.</div>
-      </div>
-      <div class="why-item fade-in" data-delay="0.15s">
-        <div class="why-num">RFS #5</div>
-        <div class="why-title" data-en="YC Spring 2026 — AI-Powered Agencies" data-zh="YC 2026 Spring RFS #5 — AI-Powered Agencies">YC Spring 2026 — AI-Powered Agencies</div>
-        <div class="why-body" data-en="Y Combinator's Spring 2026 thesis explicitly asks for companies that replace specialist agencies with AI-operated versions. Push v5.0 is exactly the shape they're looking for." data-zh="YC 2026 Spring 主题明确呼吁&quot;用 AI 运营版本替代专业代理公司&quot;，Push v5.0 正好是他们在找的形态。">Y Combinator's Spring 2026 thesis explicitly asks for companies that replace specialist agencies with AI-operated versions. Push v5.0 is exactly the shape they're looking for.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- NAV CARDS (to subpages) -->
-<section class="sw-surface" id="more">
-  <div class="section">
-    <div class="eyebrow fade-in" data-en="08 — Deep Dives" data-zh="08 — 深入资料">08 — Deep Dives</div>
-    <h2 class="fade-in" data-en="Everything, in one place." data-zh="所有资料，一处可查。">Everything, in one place.</h2>
-    <p class="lede fade-in" data-delay="0.1s" data-en="Nine standalone pages covering strategy, pitch, investor questions, defense, retention, prospects — each rebuilt for v5.0. Pick whichever one matches what you're evaluating." data-zh="九个独立页面，覆盖战略、路演、投资人 Q&amp;A、风险防御、留存、前景——全部按 v5.0 重写。按你要评估的维度挑一个进入。">Nine standalone pages covering strategy, pitch, investor questions, defense, retention, prospects — each rebuilt for v5.0. Pick whichever one matches what you're evaluating.</p>
-
-    <div class="navcards">
-      <a href="project-intro.html" class="navcard fade-in">
-        <div class="navcard-num">01 — INTRO</div>
-        <div class="navcard-title" data-en="Project Introduction" data-zh="项目介绍">Project Introduction</div>
-        <div class="navcard-desc" data-en="The one-page overview. What Push is, what we're building, and why v5.0." data-zh="一页总览：Push 是什么、我们在做什么、为什么是 v5.0。">The one-page overview. What Push is, what we're building, and why v5.0.</div>
-        <div class="navcard-arrow" data-en="Open →" data-zh="打开 →">Open →</div>
-      </a>
-      <a href="pitch-deck.html" class="navcard fade-in" data-delay="0.05s">
-        <div class="navcard-num">02 — PITCH</div>
-        <div class="navcard-title" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</div>
-        <div class="navcard-desc" data-en="10-slide investor narrative. Problem, solution, traction, ask." data-zh="10 页投资人叙事：问题、方案、进展、融资。">10-slide investor narrative. Problem, solution, traction, ask.</div>
-        <div class="navcard-arrow" data-en="Open →" data-zh="打开 →">Open →</div>
-      </a>
-      <a href="investor-qa.html" class="navcard fade-in" data-delay="0.1s">
-        <div class="navcard-num">03 — Q&amp;A</div>
-        <div class="navcard-title" data-en="Investor Q&amp;A" data-zh="投资人 Q&amp;A">Investor Q&amp;A</div>
-        <div class="navcard-desc" data-en="Frank answers to the 20 questions every partner asks first." data-zh="直接回答投资人最先问的 20 个问题。">Frank answers to the 20 questions every partner asks first.</div>
-        <div class="navcard-arrow" data-en="Open →" data-zh="打开 →">Open →</div>
-      </a>
-      <a href="push-strategy-core.html" class="navcard fade-in" data-delay="0.15s">
-        <div class="navcard-num">04 — STRATEGY</div>
-        <div class="navcard-title" data-en="Strategy Core" data-zh="战略核心">Strategy Core</div>
-        <div class="navcard-desc" data-en="The 5 pillars, the invariants, the decision rules. Read this second." data-zh="5 个支柱、不变项、决策规则。第二个读的文件。">The 5 pillars, the invariants, the decision rules. Read this second.</div>
-        <div class="navcard-arrow" data-en="Open →" data-zh="打开 →">Open →</div>
-      </a>
-      <a href="challenges.html" class="navcard fade-in" data-delay="0.2s">
-        <div class="navcard-num">05 — CHALLENGES</div>
-        <div class="navcard-title" data-en="Challenges" data-zh="挑战分析">Challenges</div>
-        <div class="navcard-desc" data-en="The honest version of what's hard — cold start, verification, creator supply." data-zh="诚实面对困难：冷启动、核验、creator 供给。">The honest version of what's hard — cold start, verification, creator supply.</div>
-        <div class="navcard-arrow" data-en="Open →" data-zh="打开 →">Open →</div>
-      </a>
-      <a href="risk-defense.html" class="navcard fade-in" data-delay="0.25s">
-        <div class="navcard-num">06 — DEFENSE</div>
-        <div class="navcard-title" data-en="Risk &amp; Defense" data-zh="风险防御">Risk &amp; Defense</div>
-        <div class="navcard-desc" data-en="Top risks, top moats. How disintermediation, fraud, and copycats are handled." data-zh="主要风险与护城河：绕开平台、欺诈、竞品模仿的应对方式。">Top risks, top moats. How disintermediation, fraud, and copycats are handled.</div>
-        <div class="navcard-arrow" data-en="Open →" data-zh="打开 →">Open →</div>
-      </a>
-      <a href="retention-defense.html" class="navcard fade-in" data-delay="0.3s">
-        <div class="navcard-num">07 — RETENTION</div>
-        <div class="navcard-title" data-en="Retention" data-zh="留存机制">Retention</div>
-        <div class="navcard-desc" data-en="Why merchants repeat. Why creators don't leave. Non-portable credit." data-zh="商家为什么复投、creator 为什么不走、不可迁移的信用机制。">Why merchants repeat. Why creators don't leave. Non-portable credit.</div>
-        <div class="navcard-arrow" data-en="Open →" data-zh="打开 →">Open →</div>
-      </a>
-      <a href="standby-mechanism.html" class="navcard fade-in" data-delay="0.35s">
-        <div class="navcard-num">08 — STANDBY</div>
-        <div class="navcard-title" data-en="Standby Mechanism" data-zh="候补机制">Standby Mechanism</div>
-        <div class="navcard-desc" data-en="The backup pool that keeps fulfillment above 95% even when a creator ghosts." data-zh="让履约率在 creator 放鸽子时仍保持 95%+ 的候补池设计。">The backup pool that keeps fulfillment above 95% even when a creator ghosts.</div>
-        <div class="navcard-arrow" data-en="Open →" data-zh="打开 →">Open →</div>
-      </a>
-      <a href="prospects.html" class="navcard fade-in" data-delay="0.4s">
-        <div class="navcard-num">09 — PROSPECTS</div>
-        <div class="navcard-title" data-en="Prospects" data-zh="未来愿景">Prospects</div>
-        <div class="navcard-desc" data-en="The 3-year trajectory. What Push looks like at 5,000 merchants and 50,000 creators." data-zh="3 年轨迹：5000 商家、5 万 creator 时的 Push 长什么样。">The 3-year trajectory. What Push looks like at 5,000 merchants and 50,000 creators.</div>
-        <div class="navcard-arrow" data-en="Open →" data-zh="打开 →">Open →</div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
-<section class="sw-dark">
-  <div class="final-cta fade-in">
-    <h2 class="final-headline">
-      <span data-en="Tell us how many." data-zh="告诉我们要多少。">Tell us how many.</span><br>
-      <span class="italic" data-en="We'll handle" data-zh="剩下的">We'll handle</span>
-      <span data-en="the rest." data-zh="交给我们。">the rest.</span>
-    </h2>
-    <div class="hero-ctas" style="margin-top:64px;">
-      <a href="mailto:wangjiamingaas@gmail.com?subject=Push Pilot Request" class="btn btn-primary" data-en="Request a free pilot →" data-zh="申请免费 Pilot →">Request a free pilot →</a>
-      <a href="pitch-deck.html" class="btn btn-ghost" style="border-color:rgba(245,242,236,0.5);color:var(--pearl-stone);" data-en="See the pitch deck" data-zh="查看 Pitch Deck">See the pitch deck</a>
-    </div>
-  </div>
-</section>
-
-<button id="back-top" aria-label="Back to top">↑</button>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <div class="f-logo">PUSH</div>
-      <div class="f-tagline" data-en="AI-Powered Customer Acquisition Agency for Local Businesses. Outcome-priced. Day-1 AI verification." data-zh="面向本地商家的 AI 获客代理公司。按效果计费。Day-1 AI 核验。">AI-Powered Customer Acquisition Agency for Local Businesses. Outcome-priced. Day-1 AI verification.</div>
-    </div>
-    <div class="footer-links">
-      <a href="index.html" class="footer-link" data-en="Overview" data-zh="首页">Overview</a>
-      <a href="project-intro.html" class="footer-link" data-en="Intro" data-zh="项目介绍">Intro</a>
-      <a href="pitch-deck.html" class="footer-link" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
-      <a href="investor-qa.html" class="footer-link" data-en="Investor Q&amp;A" data-zh="投资人 Q&amp;A">Investor Q&amp;A</a>
-      <a href="push-strategy-core.html" class="footer-link" data-en="Strategy" data-zh="战略核心">Strategy</a>
-      <a href="challenges.html" class="footer-link" data-en="Challenges" data-zh="挑战">Challenges</a>
-      <a href="risk-defense.html" class="footer-link" data-en="Defense" data-zh="风险防御">Defense</a>
-      <a href="retention-defense.html" class="footer-link" data-en="Retention" data-zh="留存">Retention</a>
-      <a href="standby-mechanism.html" class="footer-link" data-en="Standby" data-zh="候补">Standby</a>
-      <a href="prospects.html" class="footer-link" data-en="Prospects" data-zh="前景">Prospects</a>
-    </div>
-    <div class="footer-copy">
-      <div data-en="© 2026 Push · AI-Powered Customer Acquisition Agency" data-zh="© 2026 Push · AI 获客代理公司">© 2026 Push · AI-Powered Customer Acquisition Agency</div>
-      <div data-en="v5.0 · April 2026" data-zh="v5.0 · 2026 年 4 月">v5.0 · April 2026</div>
-    </div>
+  <div class="footer-bottom">
+    <span data-en="© 2026 Push. Local commerce, finally measurable." data-zh="© 2026 Push. 本地商业，终于能算回一笔账。">© 2026 Push. Local commerce, finally measurable.</span>
   </div>
 </footer>
-
-<script>
-/* Lang system */
-(function() {
-  let lang = localStorage.getItem('push-lang') || 'en';
-  function applyLang(l) {
-    lang = l;
-    localStorage.setItem('push-lang', l);
-    document.querySelectorAll('[data-en]').forEach(el => {
-      const val = el.getAttribute('data-' + l);
-      if (val !== null) el.innerHTML = val;
-    });
-    const btn = document.getElementById('lang-btn');
-    if (btn) btn.textContent = l === 'en' ? '中 / EN' : 'EN / 中';
-    document.documentElement.setAttribute('lang', l === 'zh' ? 'zh' : 'en');
-  }
-  document.getElementById('lang-btn').addEventListener('click', () => {
-    document.body.style.opacity = '0.8';
-    document.body.style.transition = 'opacity 0.15s';
-    setTimeout(() => { applyLang(lang === 'en' ? 'zh' : 'en'); document.body.style.opacity = '1'; }, 150);
-  });
-  applyLang(lang);
-  document.documentElement.style.opacity = '1';
-})();
-
-/* Fade-in via IntersectionObserver */
-const fadeObs = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.style.transitionDelay = entry.target.dataset.delay || '0s';
-      entry.target.classList.add('visible');
-      fadeObs.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.01, rootMargin: '0px 0px -60px 0px' });
-document.querySelectorAll('.fade-in').forEach(el => fadeObs.observe(el));
-
-/* Nav scroll state + scroll progress */
-(function() {
-  const nav = document.querySelector('nav');
-  const progress = document.getElementById('scroll-progress');
-  const backTop = document.getElementById('back-top');
-  let rafPending = false;
-  window.addEventListener('scroll', () => {
-    if (rafPending) return;
-    rafPending = true;
-    requestAnimationFrame(() => {
-      const y = window.scrollY;
-      nav.classList.toggle('scrolled', y > 40);
-      const h = document.documentElement.scrollHeight - window.innerHeight;
-      progress.style.width = h > 0 ? (y / h * 100) + '%' : '0%';
-      backTop.classList.toggle('visible', y > 600);
-      rafPending = false;
-    });
-  });
-  backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-})();
-</script>
 
 </body>
 </html>

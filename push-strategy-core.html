@@ -1,1329 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Push — 本地创作者效果基础设施">
-  <meta property="og:title" content="PUSH">
-  <meta property="og:description" content="Push 让每次创作者合作都可以量化、追踪、复购。">
-  <meta property="og:type" content="website">
-  <title>PUSH — Strategy Core: Value Settlement Layer</title>
-  <link rel="prefetch" href="prospects.html">
-  <link rel="prefetch" href="index.html">
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" /></noscript>
-<script>/* lang-flash-fix */(function(){if(localStorage.getItem("push-lang")==="zh")document.documentElement.style.opacity="0";})()</script>
-  <style>
-:root {
-  --accent: #4f46e5;
-  --accent-light: #818cf8;
-  --accent-dark: #3730a3;
-  --accent-bg: rgba(79,70,229,0.06);
-  --primary: #0f0f1a;
-  --green: #059669;
-  --green-bg: rgba(5,150,105,0.08);
-  --orange: #d97706;
-  --orange-bg: rgba(217,119,6,0.08);
-  --red: #dc2626;
-  --red-bg: rgba(220,38,38,0.08);
-  --text: #111827;
-  --text2: #4b5563;
-  --text3: #9ca3af;
-  --border: #e5e7eb;
-  --bg: #ffffff;
-  --bg2: #f8f9fa;
-  --radius: 8px;
-  --shadow: 0 4px 20px rgba(0,0,0,0.08);
-}
-*{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.75;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;word-break:break-word;}
-html[lang="zh"] body{line-height:2.0;letter-spacing:0.01em;}
-html[lang="zh"] .hero h1{line-height:1.25;}
-html[lang="zh"] .section-title{line-height:1.5;}
-strong{font-weight:600;color:var(--text);}
-.hero strong{color:inherit;}
-p{max-width:680px;}
-ul,ol{padding-left:20px;}
-li{margin-bottom:6px;line-height:1.7;}
-a{color:var(--accent);text-decoration:none;transition:color 0.15s;}
-a:hover{color:var(--accent-light);}
-.hero-cta,.hero-cta:hover{color:#fff;}
-.hero-cta:hover{opacity:0.7;}
-.nav-logo,.nav-logo:hover{color:var(--accent);}
-.footer-link:hover{color:#fff;}
-
-/* -- Scroll progress bar -- */
-.scroll-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-light));z-index:300;width:0;transition:none;pointer-events:none;box-shadow:0 0 8px rgba(79,70,229,0.4);}
-
-/* -- Nav -- */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;
-  background:#ffffff;
-  border-bottom:1px solid var(--border);transition:box-shadow 0.2s;
-}
-nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.08);}
-.nav-logo{
-  font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;
-  margin-right:8px;flex-shrink:0;text-decoration:none;
-}
-.nav-links{display:flex;gap:6px;flex-wrap:wrap;flex:1;}
-.nav-links a{
-  font-size:12px;font-weight:500;color:var(--text2);
-  padding:6px 12px;border-radius:8px;transition:color 0.15s,background-color 0.15s;white-space:nowrap;text-decoration:none;
-}
-.nav-links a:hover{color:var(--accent);}
-.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);position:relative;}
-.nav-links a.active::after{content:'';position:absolute;bottom:0;left:12px;right:12px;height:2px;background:var(--accent);border-radius:1px;}
-#lang-btn{
-  flex-shrink:0;background:var(--accent);color:#fff;font-weight:700;font-size:13px;
-  padding:7px 18px;border-radius:8px;border:none;cursor:pointer;transition:background 0.15s;
-}
-#lang-btn:hover{background:var(--accent-dark);}
-
-/* -- Fade-in -- */
-.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.45s ease,transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94);will-change:opacity,transform;animation:fadeInFallback 0s 4s forwards;}
-.fade-in.visible,.visible .fade-in{opacity:1;transform:none;animation:none;}
-@keyframes fadeInFallback{to{opacity:1;transform:translateY(0);}}
-.fd1{transition-delay:0.1s;}
-.fd2{transition-delay:0.2s;}
-.fd3{transition-delay:0.3s;}
-.fd4{transition-delay:0.4s;}
-.fd5{transition-delay:0.5s;}
-
-/* -- Hero -- */
-.hero{
-  background:#0f0f1a;
-  padding:140px 64px 80px;
-  display:flex;align-items:center;
-}
-.hero-inner{max-width:1000px;width:100%;margin:0 auto;}
-.hero h1,.hero-sub,.hero-ctas,.hero-label{max-width:640px;}
-.hero-label{
-  font-size:13px;font-weight:600;letter-spacing:0.5px;text-transform:none;
-  color:var(--accent-light);margin-bottom:28px;
-  display:flex;align-items:center;gap:10px;
-}
-.hero-label::before{
-  content:'';display:block;width:20px;height:2px;background:var(--accent-light);flex-shrink:0;
-}
-.hero h1{
-  font-size:clamp(3rem,5.5vw,4.5rem);font-weight:800;letter-spacing:-2.5px;
-  color:#fff;line-height:1.1;margin-bottom:0;max-width:800px;
-}
-.hero h1 .accent-line{
-  color:var(--accent-light);display:block;margin-top:16px;
-}
-.hero-sub{
-  font-size:16px;color:rgba(255,255,255,0.55);
-  line-height:1.65;margin-top:24px;
-}
-.hero-ctas{display:flex;gap:16px;margin-top:32px;flex-wrap:wrap;}
-.hero-cta{
-  display:inline-flex;align-items:center;gap:8px;
-  text-decoration:none;
-  font-size:14px;font-weight:600;color:#fff;
-  padding:12px 24px;border-radius:8px;
-  transition:background 0.25s,box-shadow 0.25s;
-}
-.hero-cta-primary{
-  background:var(--accent);color:#fff;
-  box-shadow:0 4px 24px rgba(79,70,229,0.38);
-}
-.hero-cta-primary:hover{
-  background:#5b52f0;
-  box-shadow:0 8px 32px rgba(79,70,229,0.5);
-}
-.hero-cta-secondary{
-  background:rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.2);
-  color:rgba(255,255,255,0.85);
-}
-.hero-cta-secondary:hover{
-  background:rgba(255,255,255,0.14);
-}
-
-/* -- Section wrappers -- */
-.sw-white{background:var(--bg);}
-.sw-gray{background:var(--bg);border-top:1px solid var(--border);}
-.sw-gray + .sw-white{border-top:1px solid var(--border);}
-.sw-white + .sw-white{border-top:1px solid var(--border);}
-.sw-white + .sw-gray{border-top:1px solid var(--border);}
-.sw-dark{background:var(--primary);}
-.sw-dark + .sw-white{border-top:none;}
-.sw-dark + .sw-gray{border-top:none;}
-
-.section{padding:80px 64px;max-width:1000px;margin:0 auto;contain:layout style paint;}
-
-/* -- Section labels -- */
-.section-label{
-  font-size:13px;font-weight:600;letter-spacing:0.5px;text-transform:none;
-  color:var(--accent);margin-bottom:16px;
-  display:flex;align-items:center;gap:10px;
-}
-.section-label::before{
-  content:'';display:block;
-  width:20px;height:2px;background:var(--accent);flex-shrink:0;
-}
-.section-label-dark{color:var(--accent-light);font-size:13px;font-weight:600;letter-spacing:0.5px;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
-.section-label-dark::before{content:'';display:block;width:20px;height:2px;background:var(--accent-light);flex-shrink:0;}
-.section-title{
-  font-size:clamp(26px,3.5vw,36px);font-weight:800;letter-spacing:-0.5px;
-  color:var(--primary);margin-bottom:16px;line-height:1.4;
-}
-.section-title-white{color:#fff;}
-.section-sub{font-size:16px;color:var(--text2);line-height:1.65;max-width:640px;}
-.section-sub-dark{color:rgba(255,255,255,0.5);font-size:16px;line-height:1.65;max-width:640px;}
-
-/* -- Cards base -- */
-.card{
-  border-radius:var(--radius);padding:28px 32px;
-  border:1px solid var(--border);background:#fff;
-  transition:border-color 0.25s ease,box-shadow 0.25s ease,transform 0.25s ease;
-}
-.card:hover{border-color:var(--accent-light);box-shadow:0 4px 20px rgba(79,70,229,0.1);transform:translateY(-2px);}
-
-/* -- SECTION 1: Fatal Questions -- */
-.fatal-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:36px;}
-.fatal-card{
-  background:#fff;border:1px solid var(--border);border-radius:var(--radius);
-  padding:36px 32px;position:relative;overflow:hidden;
-  transition:border-color 0.25s ease,box-shadow 0.25s ease,transform 0.25s ease;
-}
-.fatal-card:hover{border-color:var(--accent-light);box-shadow:0 4px 20px rgba(79,70,229,0.1);transform:translateY(-2px);}
-.fatal-q-badge{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:36px;height:36px;background:var(--accent);color:#fff;
-  border-radius:50%;font-size:13px;font-weight:800;margin-bottom:20px;
-}
-.fatal-q-text{font-size:18px;font-weight:600;font-style:italic;color:var(--text);line-height:1.45;}
-.fatal-verdict{
-  background:var(--bg2);border:1px solid rgba(220,38,38,0.2);border-radius:var(--radius);
-  padding:28px 32px;font-size:1.05rem;font-weight:600;color:#991b1b;line-height:1.65;
-}
-
-/* -- SECTION 2: Danger grid -- */
-.danger-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
-.danger-card{
-  background:#fff;border-radius:var(--radius);padding:28px 32px;
-  border:1px solid var(--border);
-  transition:border-color 0.25s ease,box-shadow 0.25s ease,transform 0.25s ease;
-}
-.danger-card:hover{border-color:rgba(220,38,38,0.4);box-shadow:0 4px 20px rgba(220,38,38,0.1);transform:translateY(-2px);}
-.danger-num-badge{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:36px;height:36px;background:var(--red-bg);
-  border:1px solid rgba(220,38,38,0.25);color:var(--red);border-radius:50%;
-  font-size:13px;font-weight:800;margin-bottom:16px;
-}
-.danger-icon{font-size:20px;margin-bottom:16px;display:block;}
-.danger-title{font-size:17px;font-weight:800;color:var(--red);margin-bottom:12px;}
-.danger-body{font-size:14px;color:var(--text2);line-height:1.7;max-width:680px;}
-
-/* -- SECTION 3: Pillar grid -- */
-.pillar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;counter-reset:pillar;}
-.pillar-card{
-  background:#fff;border-radius:var(--radius);padding:36px 30px 32px;
-  border:1px solid var(--border);
-  transition:border-color 0.25s ease,box-shadow 0.25s ease,transform 0.25s ease;
-  counter-increment:pillar;position:relative;overflow:hidden;
-}
-.pillar-card::before{
-  content:counter(pillar);position:absolute;top:16px;right:20px;
-  font-size:48px;font-weight:900;color:rgba(0,0,0,0.04);line-height:1;pointer-events:none;
-}
-.pillar-card:hover{border-color:var(--accent-light);box-shadow:0 4px 20px rgba(79,70,229,0.1);transform:translateY(-2px);}
-.pillar-icon{font-size:20px;display:block;margin-bottom:16px;}
-.pillar-title{font-size:17px;font-weight:800;color:var(--text);margin-bottom:6px;}
-.pillar-title-zh{font-size:13px;font-weight:600;margin-bottom:16px;}
-.pillar-card.pillar-indigo .pillar-title-zh{color:var(--accent);}
-.pillar-card.pillar-green .pillar-title-zh{color:var(--green);}
-.pillar-card.pillar-orange .pillar-title-zh{color:var(--orange);}
-.pillar-body{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:20px;}
-.pillar-body strong{color:var(--text);font-weight:700;}
-.pillar-tag{
-  display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.5px;
-  padding:5px 12px;border-radius:100px;
-}
-.pillar-card.pillar-indigo .pillar-tag{background:var(--accent-bg);color:var(--accent);}
-.pillar-card.pillar-green .pillar-tag{background:var(--green-bg);color:var(--green);}
-.pillar-card.pillar-orange .pillar-tag{background:rgba(217,119,6,0.08);color:var(--orange);}
-
-/* -- SECTION 4: Flywheel -- */
-.flywheel-layout{display:grid;grid-template-columns:1fr 200px 1fr;gap:28px;align-items:start;}
-.flywheel-col-header{
-  font-size:13px;font-weight:600;letter-spacing:0.5px;
-  margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid;
-}
-.col-creator .flywheel-col-header{color:#7c3aed;border-color:#7c3aed;}
-.col-merchant .flywheel-col-header{color:var(--green);border-color:var(--green);}
-.flywheel-loop{
-  background:#fff;border-radius:var(--radius);padding:28px 24px;
-  border:1px solid var(--border);
-}
-.flywheel-step{
-  display:flex;align-items:center;gap:10px;padding:9px 14px;border-radius:8px;
-  font-size:14px;font-weight:600;margin-bottom:4px;transition:background 0.15s;cursor:default;
-}
-.col-creator .flywheel-step{background:rgba(124,58,237,0.06);color:#5b21b6;}
-.col-creator .flywheel-step:hover{background:rgba(124,58,237,0.12);}
-.col-merchant .flywheel-step{background:var(--green-bg);color:#065f46;}
-.col-merchant .flywheel-step:hover{background:rgba(5,150,105,0.15);}
-.flywheel-arrow{text-align:center;font-size:14px;color:var(--text3);padding:2px 0;opacity:0.6;}
-.flywheel-return{text-align:center;font-size:18px;padding:6px 0;font-weight:700;margin-top:8px;}
-.col-creator .flywheel-return{color:#7c3aed;}
-.col-merchant .flywheel-return{color:var(--green);}
-.flywheel-hub-col{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding-top:32px;}
-.flywheel-hub{
-  width:140px;height:140px;border-radius:50%;
-  background:linear-gradient(135deg,var(--accent),var(--accent-light));
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;padding:16px;box-shadow:0 4px 24px rgba(79,70,229,0.2);
-}
-.hub-push{font-size:24px;font-weight:900;color:#fff;letter-spacing:2px;line-height:1;}
-.hub-sub{font-size:10px;font-weight:600;color:rgba(255,255,255,0.8);line-height:1.3;margin-top:6px;}
-
-.platform-loop-strip{
-  margin-top:32px;background:rgba(217,119,6,0.04);
-  border:1px solid rgba(217,119,6,0.15);border-radius:var(--radius);padding:24px 32px;
-}
-.platform-loop-label{font-size:13px;font-weight:600;letter-spacing:0.5px;color:var(--orange);margin-bottom:12px;}
-.platform-loop-steps{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-.platform-step{
-  background:rgba(217,119,6,0.1);color:#92400e;font-size:12px;font-weight:600;
-  padding:6px 14px;border-radius:100px;white-space:nowrap;
-}
-.platform-step-arrow{color:var(--orange);font-size:14px;font-weight:700;opacity:0.7;}
-
-/* -- SECTION 5: Moat timeline -- */
-.moat-timeline{display:grid;grid-template-columns:repeat(4,1fr);position:relative;gap:0;}
-.moat-connector{
-  position:absolute;top:30px;left:calc(12.5% + 8px);right:calc(12.5% + 8px);
-  height:3px;background:linear-gradient(90deg,#93c5fd,var(--accent),var(--accent-dark),#1e1b4b);z-index:0;
-}
-.moat-card{position:relative;z-index:1;padding:0 12px;text-align:center;cursor:default;}
-.moat-card:hover .moat-inner{border-color:var(--accent-light);box-shadow:0 4px 20px rgba(79,70,229,0.1);transform:translateY(-2px);}
-.moat-dot{
-  width:20px;height:20px;border-radius:50%;margin:0 auto 20px;
-  border:3px solid;background:#fff;position:relative;z-index:2;
-}
-.moat-card:nth-child(2) .moat-dot{border-color:#93c5fd;background:#eff6ff;}
-.moat-card:nth-child(3) .moat-dot{border-color:var(--accent-light);}
-.moat-card:nth-child(4) .moat-dot{border-color:var(--accent);}
-.moat-card:nth-child(5) .moat-dot{border-color:var(--accent-dark);background:var(--accent-dark);}
-.moat-inner{
-  background:#fff;border:1px solid var(--border);border-radius:var(--radius);
-  padding:28px 20px;transition:border-color 0.25s ease,box-shadow 0.25s ease,transform 0.25s ease;
-}
-.moat-period{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;}
-.moat-card:nth-child(2) .moat-period{color:#60a5fa;}
-.moat-card:nth-child(3) .moat-period{color:var(--accent-light);}
-.moat-card:nth-child(4) .moat-period{color:var(--accent);}
-.moat-card:nth-child(5) .moat-period{color:var(--accent-dark);}
-.moat-phase-icon{font-size:20px;margin-bottom:8px;}
-.moat-title{font-size:16px;font-weight:800;color:var(--primary);margin-bottom:4px;}
-.moat-title-zh{font-size:13px;font-weight:600;color:var(--accent);margin-bottom:12px;}
-.moat-body{font-size:14px;color:var(--text2);line-height:1.65;}
-
-/* -- SECTION 6: Business Plan -- */
-.bp-questions{display:flex;flex-direction:column;gap:20px;margin-bottom:36px;}
-.bp-q{
-  background:#fff;border-radius:var(--radius);padding:32px 36px;
-  display:flex;align-items:flex-start;gap:24px;
-  transition:border-color 0.25s ease,box-shadow 0.25s ease,transform 0.25s ease;cursor:default;
-  border:1px solid var(--border);
-}
-.bp-q:hover{border-color:var(--accent-light);box-shadow:0 4px 20px rgba(79,70,229,0.1);transform:translateY(-2px);}
-.bp-q-num-circle{
-  width:44px;height:44px;border-radius:50%;
-  background:rgba(217,119,6,0.1);border:2px solid rgba(217,119,6,0.25);
-  color:var(--orange);display:flex;align-items:center;justify-content:center;
-  font-size:15px;font-weight:800;flex-shrink:0;
-}
-.bp-q-content{flex:1;}
-.bp-q-label{font-size:13px;font-weight:600;letter-spacing:0.5px;color:var(--accent-light);margin-bottom:8px;}
-.bp-q-text{font-size:18px;font-weight:600;font-style:italic;color:var(--text);line-height:1.4;margin-bottom:12px;}
-.bp-q-answer{font-size:15px;font-weight:400;color:var(--text2);line-height:1.65;margin-bottom:14px;max-width:680px;}
-.bp-q-answer strong{color:var(--text);font-weight:700;}
-.bp-q-link{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;transition:gap 0.2s;
-}
-.bp-q-link:hover{gap:10px;}
-.bp-verdict{
-  background:rgba(248,249,250,0.08);border:1px solid rgba(129,140,248,0.3);
-  border-radius:var(--radius);padding:32px 40px;
-  font-size:1.08rem;font-weight:600;color:rgba(255,255,255,0.9);line-height:1.65;text-align:center;
-}
-.bp-verdict em{font-style:normal;color:var(--accent-light);font-weight:700;}
-
-/* -- Dark section text -- */
-.sw-dark p,.sw-dark li{color:rgba(255,255,255,0.9);}
-.sw-dark strong{color:rgba(255,255,255,0.95);}
-
-/* -- Callout cards -- */
-.callout-card{
-  border-radius:12px;padding:36px 40px;position:relative;overflow:hidden;
-}
-.callout-card .watermark{
-  position:absolute;top:12px;right:20px;font-size:48px;opacity:0.06;font-weight:900;pointer-events:none;
-}
-.callout-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;}
-.callout-title{font-size:22px;font-weight:800;line-height:1.35;margin-bottom:16px;}
-.callout-body{font-size:15px;line-height:1.8;max-width:640px;}
-
-/* -- Flow pills -- */
-.flow-pills{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-.flow-pill{font-size:13px;font-weight:700;padding:8px 16px;border-radius:100px;white-space:nowrap;}
-.flow-arrow{font-size:16px;font-weight:700;}
-
-/* -- Behavior grid -- */
-.behavior-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px;}
-.behavior-panel{background:var(--bg2);border-radius:12px;padding:28px 24px;}
-.behavior-panel-label{font-size:13px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;}
-.behavior-list{display:flex;flex-direction:column;gap:12px;font-size:14px;line-height:1.7;color:var(--text2);}
-.behavior-list strong{color:var(--text);font-weight:600;}
-
-/* -- Reading path -- */
-.reading-path{font-size:13px;color:var(--text3);line-height:1.6;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
-.reading-path a{text-decoration:none;color:var(--text3);opacity:0.5;transition:opacity 0.2s;}
-.reading-path a:hover{opacity:1;color:var(--accent);}
-.reading-path .sep{color:var(--text3);opacity:0.3;}
-.reading-path .current{font-weight:700;color:var(--accent);background:var(--accent-bg);padding:2px 10px;border-radius:100px;font-size:12px;opacity:1;}
-
-/* -- Data moat grid -- */
-.data-moat-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:20px;align-items:stretch;}
-.data-moat-col{border-radius:12px;padding:28px 24px;}
-.data-moat-col-label{font-size:12px;font-weight:700;letter-spacing:0.5px;margin-bottom:16px;}
-.data-moat-items{display:flex;flex-direction:column;gap:10px;font-size:14px;color:var(--text2);line-height:1.65;}
-.data-moat-plus{display:flex;align-items:center;justify-content:center;}
-.data-moat-plus-circle{
-  width:48px;height:48px;border-radius:50%;background:var(--accent);color:#fff;
-  font-size:24px;font-weight:800;display:flex;align-items:center;justify-content:center;
-  box-shadow:0 4px 16px rgba(79,70,229,0.25);
-}
-
-/* -- Stats row -- */
-.stats-row{display:flex;gap:16px;flex-wrap:wrap;}
-.stat-box{border-radius:10px;padding:14px 18px;text-align:center;min-width:100px;}
-.stat-label{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;}
-.stat-value{font-size:26px;font-weight:900;}
-
-/* -- Econ row -- */
-.econ-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
-.econ-box{background:rgba(255,255,255,0.08);border-radius:10px;padding:16px 20px;text-align:center;min-width:120px;}
-.econ-label{font-size:11px;font-weight:600;color:rgba(255,255,255,0.5);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;}
-.econ-value{font-size:28px;font-weight:900;color:#fff;}
-.econ-arrow{color:rgba(255,255,255,0.3);font-size:20px;font-weight:700;}
-
-/* -- Where to go -- */
-.next-cards{display:flex;gap:16px;flex-wrap:wrap;}
-.next-card{
-  flex:1;min-width:200px;padding:16px;background:#fff;
-  border:1px solid var(--border);border-radius:var(--radius);
-  text-decoration:none;transition:border-color 0.25s ease,box-shadow 0.25s ease,transform 0.25s ease;
-}
-.next-card:hover{border-color:var(--accent-light);box-shadow:0 4px 20px rgba(79,70,229,0.1);transform:translateY(-2px);}
-.next-card-label{font-size:13px;color:var(--text3);}
-.next-card-title{font-size:15px;font-weight:600;color:var(--text);}
-.next-card-link{font-size:13px;color:var(--accent);margin-top:4px;}
-
-/* -- Back to top -- */
-#back-top{
-  position:fixed;bottom:32px;right:32px;z-index:500;
-  width:44px;height:44px;border-radius:50%;
-  background:var(--primary);color:#fff;border:none;
-  font-size:18px;font-weight:700;cursor:pointer;
-  opacity:0;pointer-events:none;
-  transition:opacity 0.3s ease,transform 0.25s ease,background 0.25s ease,box-shadow 0.25s ease;
-  box-shadow:0 4px 16px rgba(0,0,0,0.2);
-  display:flex;align-items:center;justify-content:center;
-}
-#back-top.visible{opacity:1;pointer-events:auto;}
-#back-top:hover{background:var(--accent);transform:translateY(-3px);box-shadow:0 6px 24px rgba(79,70,229,0.35);}
-#back-top:focus-visible{outline:2px solid var(--accent-light);outline-offset:2px;}
-
-/* -- Footer -- */
-footer{background:#0f0f1a;padding:48px 64px 32px;border-top:1px solid var(--border);font-size:13px;color:var(--text3);}
-.footer-inner{
-  max-width:1000px;margin:0 auto;
-  display:grid;grid-template-columns:1fr 2fr 1fr;gap:32px;align-items:start;
-}
-.footer-brand .f-logo{font-size:24px;font-weight:900;color:var(--accent);letter-spacing:2px;margin-bottom:8px;}
-.footer-brand .f-tagline{font-size:13px;color:rgba(255,255,255,0.4);}
-.footer-links{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
-.footer-link{color:rgba(255,255,255,0.4);font-size:13px;text-decoration:none;transition:color 0.2s ease;}
-.footer-link:hover{color:#fff;}
-.footer-copy{text-align:right;font-size:12px;color:rgba(255,255,255,0.3);line-height:1.8;align-self:center;}
-
-/* -- MOBILE HAMBURGER -- */
-.nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;flex-shrink:0;margin-left:4px;}
-.nav-burger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:transform 0.2s,opacity 0.2s;}
-.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
-.nav-burger.open span:nth-child(2){opacity:0;}
-.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-.nav-mobile-panel{display:none;position:fixed;top:60px;left:0;right:0;background:#ffffff;border-bottom:1px solid var(--border);padding:12px 16px 20px;flex-direction:column;gap:2px;z-index:999;box-shadow:0 8px 32px rgba(0,0,0,0.12);}
-.nav-mobile-panel.open{display:flex;}
-.nav-mobile-panel a{padding:12px 16px;border-radius:8px;font-size:15px;font-weight:500;color:var(--text);text-decoration:none;transition:background 0.15s,color 0.15s;}
-.nav-mobile-panel a:hover{background:var(--bg2);}
-.nav-mobile-panel a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;}
-.nav-mobile-panel .mobile-lang-row{display:flex;align-items:center;padding:12px 16px 4px;gap:12px;border-top:1px solid var(--border);margin-top:8px;}
-.nav-mobile-panel .mobile-lang-label{font-size:12px;color:var(--text3);font-weight:500;}
-
-/* -- RESPONSIVE -- */
-@media(max-width:1024px){
-  .pillar-grid{grid-template-columns:1fr 1fr;}
-  .moat-timeline{grid-template-columns:1fr 1fr;gap:20px;}
-  .moat-connector{display:none;}
-  .moat-dot{margin-bottom:16px;}
-  .flywheel-layout{grid-template-columns:1fr;}
-  .flywheel-hub-col{padding-top:0;flex-direction:row;order:-1;justify-content:center;}
-  .flywheel-hub{width:120px;height:120px;}
-  .data-moat-grid{grid-template-columns:1fr;}
-  .data-moat-plus{padding:8px 0;}
-}
-@media(max-width:768px){
-  .nav-links{display:none !important;}
-  .nav-burger{display:flex !important;}
-  .hero{padding:100px 20px 48px;}
-  .hero h1{font-size:clamp(1.8rem,6vw,2.5rem);letter-spacing:-0.5px;line-height:1.25;}
-  .hero-sub{font-size:14px;}
-  .hero-ctas{flex-direction:column;gap:12px;}
-  .section{padding:48px 20px;}
-  .fatal-grid,.danger-grid,.pillar-grid,.behavior-grid{grid-template-columns:1fr;}
-  .moat-timeline{grid-template-columns:1fr;}
-  .bp-q{padding:24px 20px;flex-direction:column;gap:12px;}
-  .platform-loop-steps{flex-direction:column;align-items:flex-start;}
-  .data-moat-grid{grid-template-columns:1fr;}
-  .next-cards{flex-direction:column;}
-  .econ-row{flex-direction:column;align-items:stretch;}
-  .econ-row .econ-arrow{text-align:center;}
-  .stats-row{flex-direction:column;}
-  .flow-pills{flex-direction:column;align-items:flex-start;}
-  .footer-inner{grid-template-columns:1fr;text-align:center;}
-  .footer-links{justify-content:center;}
-  .footer-copy{text-align:center;}
-  footer{padding:32px 20px 24px;}
-  body{font-size:15px;}
-}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PUSH — Strategy Core</title>
+<meta name="description" content="Push strategy core: positioning, agentic roadmap, competitive stance, and decision principles.">
+<link rel="stylesheet" href="assets/shared.css">
+<link rel="stylesheet" href="assets/nav.css">
+<script src="assets/nav.js" defer></script>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preload" href="assets/fonts/jetbrains-mono-latin-1cd702cd.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/archivo-latin-2a392e77.woff2" as="font" type="font/woff2" crossorigin>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 <body>
-<div class="scroll-progress" id="scroll-progress"></div>
 
-<!-- NAV -->
-<nav>
+
+<nav class="site-nav">
   <a href="index.html" class="nav-logo">PUSH</a>
   <div class="nav-links">
     <a href="index.html" data-en="Overview" data-zh="首页">Overview</a>
-    <a href="project-intro.html" data-en="Product" data-zh="产品介绍">Product</a>
-    <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
+    <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演">Pitch Deck</a>
     <a href="investor-qa.html" data-en="Investor Q&amp;A" data-zh="投资人问答">Investor Q&amp;A</a>
-    <a href="challenges.html" data-en="Challenges" data-zh="挑战分析">Challenges</a>
-    <a href="risk-defense.html" data-en="Defense" data-zh="风险防御">Defense</a>
-    <a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a>
-    <a href="push-strategy-core.html" class="active" data-en="Strategy" data-zh="战略核心">Strategy</a>
-    <a href="standby-mechanism.html" data-en="Standby" data-zh="补位机制">Standby</a>
+    <div class="nav-more">
+      <button class="nav-more-btn" aria-haspopup="true" aria-expanded="false">
+        <span data-en="More" data-zh="更多">More</span> <span class="nav-more-caret">▾</span>
+      </button>
+      <div class="nav-more-panel nav-more-panel-compact" role="menu">
+        <div class="nav-more-group">
+          <div class="nav-more-heading" data-en="Core" data-zh="核心">Core</div>
+          <a href="project-intro.html" data-en="Product" data-zh="产品">Product</a>
+          <a href="push-strategy-core.html" class="active" data-en="Strategy" data-zh="战略">Strategy</a>
+          <a href="economics.html" data-en="Economics" data-zh="经济模型">Economics</a>
+          <a href="attribution.html" data-en="Attribution" data-zh="归因机制">Attribution</a>
+        </div>
+        <div class="nav-more-group">
+          <div class="nav-more-heading" data-en="Reference" data-zh="参考资料">Reference</div>
+          <a href="deep-dive.html" data-en="Deep Dive" data-zh="深度解读">Deep Dive</a>
+          <a href="metrics-dashboard.html" data-en="Metrics" data-zh="指标">Metrics</a>
+          <a href="push-team-dashboard.html" data-en="Team" data-zh="团队">Team</a>
+        </div>
+      </div>
+    </div>
   </div>
-  <button id="lang-btn" onclick="toggleLang()">中 / EN</button>
-  <button class="nav-burger" id="nav-burger" aria-label="打开菜单" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
+  <div class="nav-actions">
+    <button class="nav-lang">中 / EN</button>
+    <button class="nav-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
-<div class="nav-mobile-panel" id="nav-mobile-panel">
-  <a href="index.html" data-en="Overview" data-zh="首页">Overview</a>
-  <a href="project-intro.html" data-en="Product" data-zh="产品介绍">Product</a>
-  <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
-  <a href="investor-qa.html" data-en="Investor Q&amp;A" data-zh="投资人问答">Investor Q&amp;A</a>
-  <a href="challenges.html" data-en="Challenges" data-zh="挑战分析">Challenges</a>
-  <a href="risk-defense.html" data-en="Defense" data-zh="风险防御">Defense</a>
-  <a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a>
-  <a href="push-strategy-core.html" class="active" data-en="Strategy" data-zh="战略核心">Strategy</a>
-    <a href="standby-mechanism.html" data-en="Standby" data-zh="补位机制">Standby</a>
-  <div class="mobile-lang-row">
-    <span class="mobile-lang-label" data-en="Language" data-zh="语言">Language</span>
-    <button id="lang-btn-mobile" onclick="toggleLang()" style="background:var(--accent);color:#fff;border:none;padding:6px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">中 / EN</button>
+
+<header class="page-hero">
+  <div class="container">
+    <span class="eyebrow" data-en="Strategy Core" data-zh="战略核心">Strategy Core</span>
+    <h1 data-en="Positioning is a decision, not a description." data-zh="定位是做出来的决定，不是描述出来的。">Positioning is a decision, not a description.</h1>
+    <p class="lede" data-en="Push is the attribution rail for local commerce. We prove which creator post drove which in-store purchase, so merchants pay for verified foot traffic instead of vanity metrics. Everything we build — and everything we refuse to build — comes from that one choice." data-zh="Push 是本地商业的归因基础设施。我们证明哪篇创作者帖子带来了哪笔到店消费，商家为验证的真实到访付费，而非虚荣指标。我们做什么和拒绝做什么——都从这一个选择长出来。">Push is the attribution rail for local commerce. We prove which creator post drove which in-store purchase, so merchants pay for verified foot traffic instead of vanity metrics. Everything we build — and everything we refuse to build — comes from that one choice.</p>
   </div>
-</div>
+</header>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-inner">
+<main>
 
-    <div class="hero-label">
-      <span data-en="Core Thesis" data-zh="核心命题">Core Thesis</span>
+<section class="deep-section">
+  <div class="container">
+    <span class="eyebrow" data-en="The choice" data-zh="这个选择">The choice</span>
+    <h2 data-en="Why Attribution Rail, not Agency / Platform / Marketplace" data-zh="为什么是归因基础设施，不是代理 / 平台 / Marketplace">Why Attribution Rail, not Agency / Platform / Marketplace</h2>
+    <div class="kv-grid">
+      <div class="kv"><dt data-en="Attribution Rail (Push)" data-zh="归因基础设施（Push）">Attribution Rail (Push)</dt><dd data-en="We are the proof layer — QR scan + receipt timestamp + merchant confirmation = one attribution event. Three independent signals, one ledger, Stripe Connect underneath." data-zh="我们是证明层——QR 扫码 + 收据时间戳 + 商家确认 = 一个归因事件。三个独立信号，一个账本，底层是 Stripe Connect。">We are the proof layer — QR scan + receipt timestamp + merchant confirmation = one attribution event. Three independent signals, one ledger, Stripe Connect underneath.</dd></div>
+      <div class="kv"><dt data-en="NOT Agency" data-zh="不是代理公司">NOT Agency</dt><dd data-en="Agencies hold creator relationships. We hold attribution data — non-portable, compounding, moated." data-zh="代理公司掌握 creator 关系。我们掌握归因数据——不可转移、复合增长、有护城河。">Agencies hold creator relationships. We hold attribution data — non-portable, compounding, moated.</dd></div>
+      <div class="kv"><dt data-en="NOT Platform" data-zh="不是平台">NOT Platform</dt><dd data-en="Platforms rank by algorithm. We settle by verified conversion. Different fundamental unit." data-zh="平台按算法排名。我们按验证的转化结算。基本单位完全不同。">Platforms rank by algorithm. We settle by verified conversion. Different fundamental unit.</dd></div>
+      <div class="kv"><dt data-en="NOT Marketplace" data-zh="不是 Marketplace">NOT Marketplace</dt><dd data-en="Marketplaces match supply and demand. We prove that the match resulted in a physical visit." data-zh="Marketplace 撮合供需。我们证明撮合导致了真实到访。">Marketplaces match supply and demand. We prove that the match resulted in a physical visit.</dd></div>
     </div>
-
-    <h1>
-      <span data-en="Built for local merchants." data-zh="为本地商家而建。">Built for local merchants.</span>
-      <span class="accent-line" data-en="Structured campaigns. Verified results." data-zh="标准化流程，效果看得见。">Structured campaigns. Verified results.</span>
-    </h1>
-
-    <p class="hero-sub" data-en="Push gives local merchants what matching tools can't: repeatable outcomes — structured campaigns, verified redemptions, creator comparison, and re-bookable performance history. No guesswork, no wasted spend." data-zh="Push 让本地商家拿到撮合工具给不了的东西：可复制的效果——标准化流程、核销验证、博主横向对比、可复购的业绩档案。不靠猜，不烧冤枉钱。">Push gives local merchants what matching tools can't: repeatable outcomes — structured campaigns, verified redemptions, creator comparison, and re-bookable performance history. No guesswork, no wasted spend.</p>
-
-    <div class="hero-ctas">
-      <a href="retention-defense.html" class="hero-cta hero-cta-primary" data-en="Creator Retention Architecture" data-zh="博主留存架构">Creator Retention Architecture</a>
-      <a href="platform-value.html" class="hero-cta hero-cta-secondary" data-en="Anti-Disintermediation Defense" data-zh="防绕开机制">Anti-Disintermediation Defense</a>
-    </div>
-
   </div>
 </section>
 
-<!-- READING PATH -->
-<div class="sw-white">
-  <div class="section" style="padding-top:16px;padding-bottom:16px;">
-    <div class="reading-path">
-      <span data-en="Reading path:" data-zh="阅读路径：" style="opacity:0.6;">Reading path:</span>
-      <a href="index.html" data-en="The Problem" data-zh="问题">The Problem</a>
-      <span class="sep"> &gt; </span>
-      <a href="project-intro.html" data-en="The Solution" data-zh="方案">The Solution</a>
-      <span class="sep"> &gt; </span>
-      <a href="risk-defense.html" data-en="The Defense" data-zh="防御">The Defense</a>
-      <span class="sep"> &gt; </span>
-      <span class="current" data-en="The Endgame" data-zh="终局">The Endgame</span>
+<section class="deep-section alt">
+  <div class="container">
+    <span class="eyebrow" data-en="Agentic roadmap" data-zh="Agentic 路线图">Agentic roadmap</span>
+    <h2 data-en="AI automation — Phase 0 first, then optionality." data-zh="AI 自动化——先做 Phase 0，再考虑可选性。">AI automation — Phase 0 first, then optionality.</h2>
+    <ol class="steps">
+      <li>
+        <div class="step-label">Phase 0</div>
+        <div><strong data-en="Manual founder ops" data-zh="创始人手动运营">Manual founder ops</strong><br><span data-en="The founder manually acts as merchant advisor — reviewing ROI cards, suggesting creator mix, optimizing campaign timing. Phase 0 (2026) is all about landing verification, not automation." data-zh="创始人手动担任商家顾问——审查 ROI 卡、建议创作者组合、优化活动时机。Phase 0（2026）完全关乎落地验证，不是自动化。">The founder manually acts as merchant advisor — reviewing ROI cards, suggesting creator mix, optimizing campaign timing. Phase 0 (2026) is all about landing verification, not automation.</span></div>
+      </li>
+      <li>
+        <div class="step-label">Year 2+</div>
+        <div><strong data-en="AI Copilot (conditional on Phase 0 data)" data-zh="AI Copilot（取决于 Phase 0 数据）">AI Copilot (conditional on Phase 0 data)</strong><br><span data-en="Once we have 90 days of verified, real-world transaction data from Phase 0 merchants, we can train prediction models for creator ROI, campaign timing, and merchant upsell. Automating this layer is a Year 2 product decision, not a Seed-stage priority." data-zh="一旦我们有 Phase 0 商家 90 天的验证、真实交易数据，就能训练 creator ROI、活动时机、商家加单的预测模型。自动化这一层是第 2 年的产品决策，不是 Seed 阶段优先级。">Once we have 90 days of verified, real-world transaction data from Phase 0 merchants, we can train prediction models for creator ROI, campaign timing, and merchant upsell. Automating this layer is a Year 2 product decision, not a Seed-stage priority.</span></div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="deep-section">
+  <div class="container">
+    <span class="eyebrow" data-en="Strategic rules" data-zh="战略规则">Strategic rules</span>
+    <h2 data-en="The non-negotiables." data-zh="不议价的东西。">The non-negotiables.</h2>
+    <ul class="list">
+      <li data-en="Phase 0 data before any expansion decision. No silent drift from Williamsburg to Manhattan." data-zh="任何扩张决策前，都要 Phase 0 数据。不能无声地从 Williamsburg 漂到 Manhattan。">Phase 0 data before any expansion decision. No silent drift from Williamsburg to Manhattan.</li>
+      <li data-en="FTC 16 CFR Part 255 compliance is a moat, not a cost. Every attribution event is verified, disclosed, and decaying by design." data-zh="FTC 16 CFR Part 255 合规是护城河，不是成本。每个归因事件都经过验证、披露、按设计衰减。">FTC 16 CFR Part 255 compliance is a moat, not a cost. Every attribution event is verified, disclosed, and decaying by design.</li>
+      <li data-en="Push never holds money. Stripe Connect is the financial rail. This is a compliance moat against Square, Toast, Chime." data-zh="Push 永不持资金。Stripe Connect 是金融基础设施。这是对抗 Square、Toast、Chime 的合规护城河。">Push never holds money. Stripe Connect is the financial rail. This is a compliance moat against Square, Toast, Chime.</li>
+      <li data-en="Three independent signals per conversion: QR scan + receipt timestamp + merchant confirmation. Honest about 95% decision confidence, not claiming 100% precision." data-zh="每次转化三个独立信号：QR 扫码 + 收据时间戳 + 商家确认。对 95% 决策置信度坦诚，不声称 100% 精度。">Three independent signals per conversion: QR scan + receipt timestamp + merchant confirmation. Honest about 95% decision confidence, not claiming 100% precision.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="deep-section alt">
+  <div class="container">
+    <span class="eyebrow" data-en="Defensibility" data-zh="防御力">Defensibility</span>
+    <h2 data-en="Three moats that compound." data-zh="三条复合增长的护城河。">Three moats that compound.</h2>
+    <ul class="list">
+      <li><strong data-en="M1: Neighborhood Attribution Graph" data-zh="M1：街区归因图">M1: Neighborhood Attribution Graph</strong> — <span data-en="Each verified transaction trains a local preference model non-exportable to competitors. The data moat compounds with every scan." data-zh="每次验证交易都训练一个非竞争对手可导出的本地偏好模型。数据护城河随每次扫码复合增长。">Each verified transaction trains a local preference model non-exportable to competitors. The data moat compounds with every scan.</span></li>
+      <li><strong data-en="M2: Creator Reputation Lock" data-zh="M2：创作者声誉锁定">M2: Creator Reputation Lock</strong> — <span data-en="Creator earnings and tier are tied to their Push attribution history. Reputation is non-portable. Churn destroys career capital." data-zh="Creator 收入和等级与其 Push 归因历史绑定。声誉不可转移。流失摧毁职业资本。">Creator earnings and tier are tied to their Push attribution history. Reputation is non-portable. Churn destroys career capital.</span></li>
+      <li><strong data-en="M3: FTC-Compliant Attribution Records" data-zh="M3：FTC 合规的归因记录">M3: FTC-Compliant Attribution Records</strong> — <span data-en="We generate the verified/disclosed/decaying records that FTC 16 CFR Part 255 now requires. Legacy platforms don't. We do, by design." data-zh="我们生成 FTC 16 CFR Part 255 现在要求的验证 / 披露 / 衰减的记录。遗留平台不能。我们能，因为我们按设计。">We generate the verified/disclosed/decaying records that FTC 16 CFR Part 255 now requires. Legacy platforms don't. We do, by design.</span></li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+
+<footer class="site-footer">
+  <div class="footer-grid footer-grid-3">
+    <div class="footer-col">
+      <div class="footer-heading" data-en="Main" data-zh="主导航">Main</div>
+      <a href="index.html" data-en="Overview" data-zh="首页">Overview</a>
+      <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演">Pitch Deck</a>
+      <a href="investor-qa.html" data-en="Investor Q&amp;A" data-zh="投资人问答">Investor Q&amp;A</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-heading" data-en="Core" data-zh="核心">Core</div>
+      <a href="project-intro.html" data-en="Product" data-zh="产品">Product</a>
+      <a href="push-strategy-core.html" data-en="Strategy" data-zh="战略">Strategy</a>
+      <a href="economics.html" data-en="Economics" data-zh="经济模型">Economics</a>
+      <a href="attribution.html" data-en="Attribution" data-zh="归因机制">Attribution</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-heading" data-en="Reference" data-zh="参考资料">Reference</div>
+      <a href="deep-dive.html" data-en="Deep Dive" data-zh="深度解读">Deep Dive</a>
+      <a href="metrics-dashboard.html" data-en="Metrics" data-zh="指标">Metrics</a>
+      <a href="push-team-dashboard.html" data-en="Team" data-zh="团队">Team</a>
+      <a href="nda.html" data-en="NDA" data-zh="保密协议">NDA</a>
     </div>
   </div>
-</div>
-
-<!-- NORTH STAR METRIC -->
-<div class="sw-white">
-  <div class="section" style="padding-top:40px;padding-bottom:40px;">
-    <div class="fade-in">
-      <div class="callout-card" style="background:linear-gradient(135deg, rgba(79,70,229,0.06) 0%, rgba(129,140,248,0.06) 100%); border:2px solid rgba(79,70,229,0.18); text-align:center;">
-        <div class="watermark">&#x2605;</div>
-        <div class="callout-label" style="color:var(--accent);" data-en="North Star Metric" data-zh="北极星指标">North Star Metric</div>
-        <div style="font-size:clamp(22px,3vw,26px); font-weight:900; color:var(--primary); line-height:1.3; letter-spacing:-0.5px; margin-bottom:10px;" data-en="Verified Repeat Campaign Value Per Merchant" data-zh="单商家已验证复购价值">Verified Repeat Campaign Value Per Merchant</div>
-        <div style="font-size:14px; color:var(--text2); max-width:560px; margin:0 auto; line-height:1.7;" data-en="This single metric captures retention, trust, and monetization in one number. If this grows, everything else follows. If it stalls, nothing else matters." data-zh="一个数字就能看出留存、信任和变现。涨了，说明方向对。停了，别的都白搭。">This single metric captures retention, trust, and monetization in one number. If this grows, everything else follows. If it stalls, nothing else matters.</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- SECTION 1: FATAL QUESTIONS -->
-<div class="sw-gray">
-  <div class="section">
-
-    <div class="fade-in">
-      <div class="section-label" data-en="The Core Thesis" data-zh="核心命题">The Core Thesis</div>
-      <h2 class="section-title" data-en="Two Questions That Determine Everything" data-zh="决定生死的两个问题">Two Questions That Determine Everything</h2>
-      <p class="section-sub" data-en="Before anything else, any investor, advisor, or serious operator will ask these two questions. If you can't answer them with conviction, the rest doesn't matter." data-zh="任何认真的投资人、顾问或操盘手都会先问这两个问题。答不好，后面说什么都白搭。">Before anything else, any investor, advisor, or serious operator will ask these two questions. If you can't answer them with conviction, the rest doesn't matter.</p>
-    </div>
-
-    <div class="fatal-grid" style="margin-top:40px;">
-      <div class="fatal-card fade-in fd1">
-        <div class="fatal-q-badge">Q1</div>
-        <div class="fatal-q-text" data-en="Why do creators stay long-term, instead of grabbing free samples and leaving?" data-zh="博主为什么会长期留下，而不是薅完白嫖就跑？">Why do creators stay long-term, instead of grabbing free samples and leaving?</div>
-      </div>
-      <div class="fatal-card fade-in fd2">
-        <div class="fatal-q-badge">Q2</div>
-        <div class="fatal-q-text" data-en="Why don't merchants bypass the platform and deal directly with creators?" data-zh="商家为什么不绕开平台，直接跟博主私下谈？">Why don't merchants bypass the platform and deal directly with creators?</div>
-      </div>
-    </div>
-
-    <div class="fatal-verdict fade-in fd3">
-      <span data-en="If you cannot answer both questions convincingly, Push is just a tool. Tools get replaced. Tools get commoditized. Tools die." data-zh="这两个问题答不上来，Push 就只是个工具。工具会被替代，会被卷死。">If you cannot answer both questions convincingly, Push is just a tool. Tools get replaced. Tools get commoditized. Tools die.</span>
-    </div>
-
-    <!-- WHY NOT JUST DM? -->
-    <div class="fade-in" style="margin-top:36px;">
-      <div class="callout-card" style="background:var(--red-bg); border:1px solid rgba(220,38,38,0.2);">
-        <div class="callout-label" style="color:var(--red);" data-en="Why Not Just DM?" data-zh="为什么不直接私信？">Why Not Just DM?</div>
-        <div style="font-size:15px; font-weight:600; color:var(--text); line-height:1.75;" data-en="DM is random. Push is a system. You lose performance history, reliable execution, structured campaigns, creator comparison, and repeatability." data-zh="私信靠碰运气，Push 是一套系统。走私信，你丢掉的是：业绩记录、靠谱执行、标准流程、博主对比、还有复购能力。">DM is random. Push is a system. You lose performance history, reliable execution, structured campaigns, creator comparison, and repeatability.</div>
-      </div>
-    </div>
-
-    <!-- BEHAVIOR DESIGN -->
-    <div class="fade-in" style="margin-top:48px;">
-      <div class="section-label" data-en="BEHAVIOR DESIGN" data-zh="行为设计">BEHAVIOR DESIGN</div>
-      <h2 class="section-title" data-en="Push is not just a system — it is a behavior engine." data-zh="Push 不只是系统——它是行为引擎。">Push is not just a system — it is a behavior engine.</h2>
-    </div>
-
-    <div class="behavior-grid fade-in">
-      <div class="behavior-panel">
-        <div class="behavior-panel-label" data-en="Creator Drivers" data-zh="博主为什么来">Creator Drivers</div>
-        <div class="behavior-list">
-          <div data-en="<strong>Limited seats</strong> &rarr; FOMO: act now or miss out" data-zh="<strong>限量名额</strong> &rarr; 制造紧迫感：不抢就没了"><strong>Limited seats</strong> &rarr; FOMO: act now or miss out</div>
-          <div data-en="<strong>Standby queue</strong> &rarr; Gamification: always one slot away" data-zh="<strong>候补队列</strong> &rarr; 游戏化心理：就差一个名额"><strong>Standby queue</strong> &rarr; Gamification: always one slot away</div>
-          <div data-en="<strong>Tier progression</strong> &rarr; Growth narrative: I'm building something" data-zh="<strong>等级晋升</strong> &rarr; 成长感：我在一步步往上走"><strong>Tier progression</strong> &rarr; Growth narrative: I'm building something</div>
-          <div data-en="<strong>Fast payouts</strong> &rarr; Instant reward: effort &rarr; money today" data-zh="<strong>快速结款</strong> &rarr; 即时反馈：干完活，当天到账"><strong>Fast payouts</strong> &rarr; Instant reward: effort &rarr; money today</div>
-        </div>
-      </div>
-      <div class="behavior-panel">
-        <div class="behavior-panel-label" data-en="Merchant Drivers" data-zh="商家为什么用">Merchant Drivers</div>
-        <div class="behavior-list">
-          <div data-en="<strong>Templates</strong> &rarr; Low cognitive cost: don't think, just launch" data-zh="<strong>模板</strong> &rarr; 零门槛：不用想，直接发"><strong>Templates</strong> &rarr; Low cognitive cost: don't think, just launch</div>
-          <div data-en="<strong>Repeat button</strong> &rarr; Habit loop: worked once, do it again" data-zh="<strong>一键复购</strong> &rarr; 习惯回路：上次有效，再来一次"><strong>Repeat button</strong> &rarr; Habit loop: worked once, do it again</div>
-          <div data-en="<strong>Dashboard</strong> &rarr; Control: I can see what's happening" data-zh="<strong>数据面板</strong> &rarr; 掌控感：钱花在哪，一目了然"><strong>Dashboard</strong> &rarr; Control: I can see what's happening</div>
-          <div data-en="<strong>Creator ranking</strong> &rarr; Safety: picking a vetted creator, not guessing" data-zh="<strong>博主排名</strong> &rarr; 安全感：选的是验证过的人，不用赌"><strong>Creator ranking</strong> &rarr; Safety: picking a vetted creator, not guessing</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- BRUTAL SIMPLIFICATION (Minimum Viable Push) -->
-    <div class="fade-in" style="margin-top:48px;">
-      <div class="callout-card" style="background:#fff; border:2px solid var(--green);">
-        <div class="watermark">MVP</div>
-        <div class="callout-label" style="color:var(--green);" data-en="Execution" data-zh="执行">Execution</div>
-        <div class="callout-title" style="color:var(--primary); margin-bottom:20px;" data-en="Brutal Simplification: Minimum Viable Push" data-zh="砍到最简：最小可行版 Push">Brutal Simplification: Minimum Viable Push</div>
-        <div class="flow-pills" style="margin-bottom:20px;">
-          <span class="flow-pill" style="background:rgba(5,150,105,0.08); color:var(--green);" data-en="1. Merchant posts" data-zh="1. 商家发布">1. Merchant posts</span>
-          <span class="flow-arrow" style="color:var(--green);">&#x2192;</span>
-          <span class="flow-pill" style="background:rgba(5,150,105,0.08); color:var(--green);" data-en="2. Creator accepts" data-zh="2. 博主接单">2. Creator accepts</span>
-          <span class="flow-arrow" style="color:var(--green);">&#x2192;</span>
-          <span class="flow-pill" style="background:rgba(5,150,105,0.08); color:var(--green);" data-en="3. Proof submitted" data-zh="3. 提交证明">3. Proof submitted</span>
-          <span class="flow-arrow" style="color:var(--green);">&#x2192;</span>
-          <span class="flow-pill" style="background:rgba(5,150,105,0.08); color:var(--green);" data-en="4. Merchant confirms" data-zh="4. 商家确认">4. Merchant confirms</span>
-          <span class="flow-arrow" style="color:var(--green);">&#x2192;</span>
-          <span class="flow-pill" style="background:rgba(5,150,105,0.08); color:var(--green);" data-en="5. Result recorded" data-zh="5. 结果记录">5. Result recorded</span>
-        </div>
-        <div class="callout-body" style="color:var(--text2);" data-en="No map. No fancy UI. Runs on a spreadsheet and DMs before the product even exists. If the loop does not work manually, no amount of engineering will save it." data-zh="不要地图，不要花哨界面。产品没做之前，Excel 加私信就能跑。手动跑不通的话，写多少代码都没用。">No map. No fancy UI. Runs on a spreadsheet and DMs before the product even exists. If the loop does not work manually, no amount of engineering will save it.</div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- SECTION 2: MATCHING TOOL TRAP -->
-<div class="sw-white">
-  <div class="section">
-
-    <div class="fade-in">
-      <div class="section-label" data-en="The Danger" data-zh="警告">The Danger</div>
-      <h2 class="section-title" data-en="If Push is Just a Matching Tool" data-zh="如果 Push 只是个撮合工具">If Push is Just a Matching Tool</h2>
-      <p class="section-sub" data-en="Three reasons why matching tools always fail." data-zh="纯撮合工具必死的三个原因。">Three reasons why matching tools always fail.</p>
-    </div>
-
-    <div class="danger-grid" style="margin-top:40px;">
-      <div class="danger-card fade-in fd1">
-        <div class="danger-num-badge">01</div>
-        <div class="danger-icon">&#x1F513;</div>
-        <div class="danger-title" data-en="Zero Switching Cost" data-zh="零切换成本">Zero Switching Cost</div>
-        <div class="danger-body" data-en="If everything a creator does on the platform can be replicated elsewhere — or abandoned without loss — they will leave the moment a better offer comes. No lock-in means no loyalty. No loyalty means no business." data-zh="如果博主在平台上攒的东西别处也能有，走的时候又不损失什么，那有更好的单子一来，人立刻就跑了。没锁定就没忠诚，没忠诚就没生意。">If everything a creator does on the platform can be replicated elsewhere — or abandoned without loss — they will leave the moment a better offer comes. No lock-in means no loyalty. No loyalty means no business.</div>
-      </div>
-      <div class="danger-card fade-in fd2">
-        <div class="danger-num-badge">02</div>
-        <div class="danger-icon">&#x1F4CA;</div>
-        <div class="danger-title" data-en="No Network Effect" data-zh="用的人越多也没变好用">No Network Effect</div>
-        <div class="danger-body" data-en="A simple matching tool gets better for no one as it grows. More users = more noise, not more value. Without compounding data and reputation layers, scale delivers diminishing returns — not defensibility." data-zh="纯撮合工具越做越大，但谁也没觉得更好用。用户多了只是噪音多了，不是价值多了。没有数据和信用层的积累，规模越大边际收益越低。">A simple matching tool gets better for no one as it grows. More users = more noise, not more value. Without compounding data and reputation layers, scale delivers diminishing returns — not defensibility.</div>
-      </div>
-      <div class="danger-card fade-in fd3">
-        <div class="danger-num-badge">03</div>
-        <div class="danger-icon">&#x1F4B8;</div>
-        <div class="danger-title" data-en="Commoditization Death" data-zh="沦为同质化炮灰">Commoditization Death</div>
-        <div class="danger-body" data-en="Any well-funded competitor can clone a matching interface in 3 months. Without structural lock-in, you get undercut on price and replaced. This is the graveyard of every gig platform that never built a moat." data-zh="有钱的对手 3 个月就能抄出一个一模一样的界面。用户的数据和信用没攒在你这，人家一打价格战你就输了。这就是所有没建起壁垒的撮合平台的坟场。">Any well-funded competitor can clone a matching interface in 3 months. Without structural lock-in, you get undercut on price and replaced. This is the graveyard of every gig platform that never built a moat.</div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- SECTION 3: VALUE SETTLEMENT LAYER -->
-<div class="sw-dark">
-  <div class="section">
-
-    <div class="fade-in">
-      <div class="section-label-dark" data-en="The Core Thesis" data-zh="核心命题">The Core Thesis</div>
-      <h2 class="section-title section-title-white" data-en="What Makes PUSH a Value Settlement Layer" data-zh="PUSH 凭什么不只是撮合工具">What Makes PUSH a Value Settlement Layer</h2>
-      <p class="section-sub-dark" data-en="A value settlement layer is where both sides book their earned value — and where leaving means losing that value." data-zh="价值结算层的意思是：双方的真实资产都沉淀在这里——走了，这些东西全没了。">A value settlement layer is where both sides book their earned value — and where leaving means losing that value.</p>
-    </div>
-
-    <div class="pillar-grid" style="margin-top:40px;">
-
-      <!-- Pillar 1 -->
-      <div class="pillar-card pillar-indigo fade-in fd1">
-        <span class="pillar-icon">&#x1F4DC;</span>
-        <div class="pillar-title" data-en="Creator Credit Capital" data-zh="博主信用资本">Creator Credit Capital</div>
-        <div class="pillar-title-zh" data-en="Creator 信用资本" data-zh="带不走的资产">Creator 信用资本</div>
-        <div class="pillar-body" data-en="Fulfillment history, merchant ratings, geo-credit, category expertise, reliability score, dispute-free record — all <strong>non-portable</strong>. A creator's PUSH profile is their professional track record. Leaving PUSH means starting from zero." data-zh="履约记录、商家评分、地域信用、品类专长、靠谱指数、零纠纷记录——全部<strong>带不走</strong>。PUSH 档案就是博主的职业简历。离开 PUSH，一切从零开始。">Fulfillment history, merchant ratings, geo-credit, category expertise, reliability score, dispute-free record — all <strong>non-portable</strong>. A creator's PUSH profile is their professional track record. Leaving PUSH means starting from zero.</div>
-        <span class="pillar-tag" data-en="Non-portable assets" data-zh="带不走的资产">Non-portable assets</span>
-      </div>
-
-      <!-- Pillar 2 -->
-      <div class="pillar-card pillar-green fade-in fd2">
-        <span class="pillar-icon">&#x1F4CA;</span>
-        <div class="pillar-title" data-en="Merchant Operations Intelligence" data-zh="商家运营智能">Merchant Operations Intelligence</div>
-        <div class="pillar-title-zh" data-en="商家运营智能" data-zh="锁在平台里的数据">商家运营智能</div>
-        <div class="pillar-body" data-en="Campaign analytics, creator performance comparison, ROI benchmarks, automated re-booking, dispute protection, continuous supply — all <strong>locked to the platform</strong>. PUSH is their creator marketing operations center. Leaving means losing all of it." data-zh="活动分析、博主对比、ROI 基准线、自动复购、纠纷保护、持续供给——全部<strong>锁在平台里</strong>。PUSH 就是商家的博主营销操作台。走了，这些全没了。">Campaign analytics, creator performance comparison, ROI benchmarks, automated re-booking, dispute protection, continuous supply — all <strong>locked to the platform</strong>. PUSH is their creator marketing operations center. Leaving means losing all of it.</div>
-        <span class="pillar-tag" data-en="Platform-locked data" data-zh="锁在平台里的数据">Platform-locked data</span>
-      </div>
-
-      <!-- Pillar 3 -->
-      <div class="pillar-card pillar-orange fade-in fd3">
-        <span class="pillar-icon">&#x1F512;</span>
-        <div class="pillar-title" data-en="Network-Locked Liquidity" data-zh="只在平台内流通的资源">Network-Locked Liquidity</div>
-        <div class="pillar-title-zh" data-en="网络锁定的流动性" data-zh="只存在于 PUSH 内">网络锁定的流动性</div>
-        <div class="pillar-body" data-en="The pool of verified, scored, tier-ranked local creators <strong>only exists inside PUSH</strong>. The pool of verified, performing local merchants only exists inside PUSH. Neither side can recreate this off-platform." data-zh="经过验证、有评分、有等级的本地博主池，<strong>只在 PUSH 里有</strong>。经过验证、有业绩的本地商家池，也只在 PUSH 里。双方都没法在外面重建这个网络。">The pool of verified, scored, tier-ranked local creators <strong>only exists inside PUSH</strong>. The pool of verified, performing local merchants only exists inside PUSH. Neither side can recreate this off-platform.</div>
-        <span class="pillar-tag" data-en="Only inside PUSH" data-zh="PUSH 独有">Only inside PUSH</span>
-      </div>
-
-    </div>
-
-    <!-- OPERATING SYSTEM CALLOUT -->
-    <div class="fade-in" style="margin-top:48px;">
-      <div class="callout-card" style="background:rgba(255,255,255,0.04); border:1px solid rgba(129,140,248,0.25);">
-        <div style="position:absolute; top:16px; right:24px; font-size:56px; opacity:0.05; font-weight:900; color:#fff; pointer-events:none;">OS</div>
-        <div class="callout-label" style="color:var(--accent-light);" data-en="Positioning" data-zh="定位">Positioning</div>
-        <div class="callout-title" style="color:#fff;" data-en="Operating System, Not Platform" data-zh="操作系统，不是平台">Operating System, Not Platform</div>
-        <div class="callout-body" style="color:rgba(255,255,255,0.75);" data-en="A platform connects two sides. An operating system makes them perform. Platforms are replaceable. Systems are not &mdash; because the switching cost is the accumulated intelligence inside." data-zh="平台只是把两边连起来。操作系统让两边高效运转。平台随时能换，系统换不了——因为切换成本就是里面攒下的全部智能。">A platform connects two sides. An operating system makes them perform. Platforms are replaceable. Systems are not &mdash; because the switching cost is the accumulated intelligence inside.</div>
-      </div>
-    </div>
-
-    <!-- QUALITY DEFENSE -->
-    <div class="fade-in" style="margin-top:36px;">
-      <div class="callout-card" style="background:rgba(255,255,255,0.04); border:1px solid rgba(220,38,38,0.3);">
-        <div style="position:absolute; top:16px; right:24px; font-size:56px; opacity:0.05; font-weight:900; color:#fff; pointer-events:none;">QC</div>
-        <div class="callout-label" style="color:#f87171;" data-en="Quality Defense" data-zh="质量防线">Quality Defense</div>
-        <div class="callout-title" style="color:#fff; margin-bottom:20px;" data-en="Why Push Won't Race to the Bottom" data-zh="为什么 Push 不会被卷成低价">Why Push Won't Race to the Bottom</div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px;">
-          <div style="background:rgba(255,255,255,0.06); border-radius:8px; padding:18px 20px;">
-            <div style="font-size:13px; font-weight:700; color:#fff; margin-bottom:6px;" data-en="Tier (Gates)" data-zh="等级（门槛）">Tier (Gates)</div>
-            <div style="font-size:13px; color:rgba(255,255,255,0.6); line-height:1.65;" data-en="Entry requirements filter out low-effort participants before they enter" data-zh="准入门槛直接挡住混日子的人">Entry requirements filter out low-effort participants before they enter</div>
-          </div>
-          <div style="background:rgba(255,255,255,0.06); border-radius:8px; padding:18px 20px;">
-            <div style="font-size:13px; font-weight:700; color:#fff; margin-bottom:6px;" data-en="Credit (History)" data-zh="信用（历史）">Credit (History)</div>
-            <div style="font-size:13px; color:rgba(255,255,255,0.6); line-height:1.65;" data-en="Every action is recorded — reputation is earned, not claimed" data-zh="所有行为都有记录——口碑靠攒，不靠吹">Every action is recorded — reputation is earned, not claimed</div>
-          </div>
-          <div style="background:rgba(255,255,255,0.06); border-radius:8px; padding:18px 20px;">
-            <div style="font-size:13px; font-weight:700; color:#fff; margin-bottom:6px;" data-en="Verification (Checked)" data-zh="核验（审核）">Verification (Checked)</div>
-            <div style="font-size:13px; color:rgba(255,255,255,0.6); line-height:1.65;" data-en="Proof of work is verified before any payout or credit is issued" data-zh="结款和加分之前，必须先验证干了没">Proof of work is verified before any payout or credit is issued</div>
-          </div>
-          <div style="background:rgba(255,255,255,0.06); border-radius:8px; padding:18px 20px;">
-            <div style="font-size:13px; font-weight:700; color:#fff; margin-bottom:6px;" data-en="Access Control (Earned)" data-zh="准入控制（靠实力解锁）">Access Control (Earned)</div>
-            <div style="font-size:13px; color:rgba(255,255,255,0.6); line-height:1.65;" data-en="Premium campaigns are only visible to creators who have earned the right" data-zh="高价值活动只有够格的博主才能看到">Premium campaigns are only visible to creators who have earned the right</div>
-          </div>
-        </div>
-        <div style="font-size:15px; font-weight:600; color:rgba(255,255,255,0.9); line-height:1.7; font-style:italic; border-top:1px solid rgba(255,255,255,0.1); padding-top:20px;" data-en="Push is not an open marketplace — it is a curated, performance-gated system." data-zh="Push 不是开放市场——而是一个有筛选、凭实力说话的系统。">Push is not an open marketplace — it is a curated, performance-gated system.</div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- SECTION 4: FLYWHEEL -->
-<div class="sw-gray">
-  <div class="section">
-
-    <div class="fade-in">
-      <div class="section-label" data-en="The Flywheel" data-zh="飞轮">The Flywheel</div>
-      <h2 class="section-title" data-en="The Complete Retention &amp; Anti-Bypass Flywheel" data-zh="留存 + 防绕开的完整飞轮">The Complete Retention &amp; Anti-Bypass Flywheel</h2>
-      <p class="section-sub" data-en="When this flywheel works, every revolution makes it harder for both sides to leave." data-zh="飞轮一旦转起来，每转一圈，双方都更难走。">When this flywheel works, every revolution makes it harder for both sides to leave.</p>
-    </div>
-
-    <div class="flywheel-layout fade-in fd1" style="margin-top:40px;">
-
-      <!-- Creator Column -->
-      <div class="col-creator">
-        <div class="flywheel-col-header" data-en="Creator Side" data-zh="博主端">Creator Side</div>
-        <div class="flywheel-loop">
-          <div class="flywheel-step" data-en="Complete Campaigns" data-zh="完成活动">Complete Campaigns</div>
-          <div class="flywheel-arrow">&darr;</div>
-          <div class="flywheel-step" data-en="Passport Updated" data-zh="Passport 更新">Passport Updated</div>
-          <div class="flywheel-arrow">&darr;</div>
-          <div class="flywheel-step" data-en="Tier Up" data-zh="等级提升">Tier Up</div>
-          <div class="flywheel-arrow">&darr;</div>
-          <div class="flywheel-step" data-en="Better Campaigns" data-zh="更好的活动">Better Campaigns</div>
-          <div class="flywheel-arrow">&darr;</div>
-          <div class="flywheel-step" data-en="Earn More" data-zh="赚得更多">Earn More</div>
-          <div class="flywheel-arrow">&darr;</div>
-          <div class="flywheel-step" data-en="Stay on Platform" data-zh="留在平台">Stay on Platform</div>
-          <div class="flywheel-return">&curarr;</div>
-        </div>
-      </div>
-
-      <!-- Center Hub -->
-      <div class="flywheel-hub-col">
-        <div class="flywheel-hub">
-          <div class="hub-push">PUSH</div>
-          <div class="hub-sub" data-en="becomes irreplaceable" data-zh="越来越换不掉">becomes irreplaceable</div>
-        </div>
-      </div>
-
-      <!-- Merchant Column -->
-      <div class="col-merchant">
-        <div class="flywheel-col-header" data-en="Merchant Side" data-zh="商家端">Merchant Side</div>
-        <div class="flywheel-loop">
-          <div class="flywheel-step" data-en="Post Campaign" data-zh="发布活动">Post Campaign</div>
-          <div class="flywheel-arrow">&darr;</div>
-          <div class="flywheel-step" data-en="Find Reliable Creators" data-zh="找到靠谱博主">Find Reliable Creators</div>
-          <div class="flywheel-arrow">&darr;</div>
-          <div class="flywheel-step" data-en="Data Review" data-zh="复盘数据">Data Review</div>
-          <div class="flywheel-arrow">&darr;</div>
-          <div class="flywheel-step" data-en="One-Click Re-book" data-zh="一键复购">One-Click Re-book</div>
-          <div class="flywheel-arrow">&darr;</div>
-          <div class="flywheel-step" data-en="Stable ROI" data-zh="稳定 ROI">Stable ROI</div>
-          <div class="flywheel-arrow">&darr;</div>
-          <div class="flywheel-step" data-en="Stay on Platform" data-zh="留在平台">Stay on Platform</div>
-          <div class="flywheel-return">&curarr;</div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- GROWTH FLYWHEEL ENGINE -->
-    <div class="fade-in" style="margin-top:40px;">
-      <div class="callout-card" style="background:#fff; border:2px solid var(--accent);">
-        <div class="watermark">&#x267B;</div>
-        <div class="callout-label" style="color:var(--accent);" data-en="Growth Engine" data-zh="增长引擎">Growth Engine</div>
-        <div style="font-size:20px; font-weight:800; color:var(--primary); margin-bottom:20px; line-height:1.3;" data-en="The 6-Step Growth Flywheel" data-zh="增长飞轮 6 步">The 6-Step Growth Flywheel</div>
-        <div class="flow-pills">
-          <span class="flow-pill" style="background:var(--accent-bg); color:var(--accent);" data-en="More merchants" data-zh="更多商家">More merchants</span>
-          <span class="flow-arrow" style="color:var(--accent);">&#x2192;</span>
-          <span class="flow-pill" style="background:var(--accent-bg); color:var(--accent);" data-en="More campaigns" data-zh="更多活动">More campaigns</span>
-          <span class="flow-arrow" style="color:var(--accent);">&#x2192;</span>
-          <span class="flow-pill" style="background:var(--accent-bg); color:var(--accent);" data-en="More creator opportunities" data-zh="博主机会更多">More creator opportunities</span>
-          <span class="flow-arrow" style="color:var(--accent);">&#x2192;</span>
-          <span class="flow-pill" style="background:var(--accent-bg); color:var(--accent);" data-en="Better creators stay" data-zh="好博主留下来">Better creators stay</span>
-          <span class="flow-arrow" style="color:var(--accent);">&#x2192;</span>
-          <span class="flow-pill" style="background:var(--accent-bg); color:var(--accent);" data-en="Better results" data-zh="效果更好">Better results</span>
-          <span class="flow-arrow" style="color:var(--accent);">&#x2192;</span>
-          <span class="flow-pill" style="background:var(--accent-bg); color:var(--accent);" data-en="Merchant repeat" data-zh="商家复购">Merchant repeat</span>
-          <span class="flow-arrow" style="color:var(--accent);">&#x21BA;</span>
-        </div>
-        <div style="font-size:13px; color:var(--text2); margin-top:16px; line-height:1.7; max-width:600px;" data-en="Each revolution of this loop strengthens the next. The flywheel is self-reinforcing: more supply attracts demand, better demand retains supply, and data from both sides sharpens the matching engine." data-zh="每转一圈，下一圈就更强。供给多了吸引需求，需求好了留住供给，两边的数据让匹配越来越准。">Each revolution of this loop strengthens the next. The flywheel is self-reinforcing: more supply attracts demand, better demand retains supply, and data from both sides sharpens the matching engine.</div>
-      </div>
-    </div>
-
-    <!-- PMF SIGNAL -->
-    <div class="fade-in" style="margin-top:40px;">
-      <div class="callout-card" style="background:#fff; border:2px solid var(--orange);">
-        <div class="watermark">PMF</div>
-        <div class="callout-label" style="color:var(--orange);" data-en="Validation Signal" data-zh="验证信号">Validation Signal</div>
-        <div style="font-size:20px; font-weight:800; color:var(--primary); margin-bottom:16px; line-height:1.3;" data-en="The Only PMF Signal That Matters" data-zh="唯一重要的 PMF 信号">The Only PMF Signal That Matters</div>
-        <div style="font-size:15px; color:var(--text2); line-height:1.8; max-width:640px; margin-bottom:16px;" data-en="When merchants start running campaigns repeatedly without being pushed, we know we have PMF. Not user growth. Not downloads. The only signal: unprompted merchant repeat." data-zh="商家不用催就主动反复发活动，这就是 PMF。不看用户增长，不看下载量。唯一的信号：商家自发复购。">When merchants start running campaigns repeatedly without being pushed, we know we have PMF. Not user growth. Not downloads. The only signal: unprompted merchant repeat.</div>
-        <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(217,119,6,0.08); padding:10px 18px; border-radius:8px;">
-          <span style="font-size:18px;">&#x1F3AF;</span>
-          <span style="font-size:13px; font-weight:700; color:var(--orange);" data-en="Metric: Unprompted merchant repeat rate" data-zh="指标：商家自发复购率">Metric: Unprompted merchant repeat rate</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Platform Loop Strip -->
-    <div class="platform-loop-strip fade-in fd2" style="margin-top:32px;">
-      <div class="platform-loop-label" data-en="Platform Loop" data-zh="平台循环">Platform Loop</div>
-      <div class="platform-loop-steps">
-        <span class="platform-step" data-en="More Transactions" data-zh="更多交易">More Transactions</span>
-        <span class="platform-step-arrow">&rarr;</span>
-        <span class="platform-step" data-en="Better Dataset" data-zh="更强数据集">Better Dataset</span>
-        <span class="platform-step-arrow">&rarr;</span>
-        <span class="platform-step" data-en="Smarter Matching" data-zh="匹配更准">Smarter Matching</span>
-        <span class="platform-step-arrow">&rarr;</span>
-        <span class="platform-step" data-en="Stronger Passport" data-zh="更强 Passport">Stronger Passport</span>
-        <span class="platform-step-arrow">&rarr;</span>
-        <span class="platform-step" data-en="Higher Retention" data-zh="更高留存">Higher Retention</span>
-        <span class="platform-step-arrow">&rarr;</span>
-        <span class="platform-step" data-en="Network Effects" data-zh="用的人越多越好用">Network Effects</span>
-        <span class="platform-step-arrow">&curarr;</span>
-      </div>
-    </div>
-
-    <!-- CONTROL POINT -->
-    <div class="fade-in" style="margin-top:40px;">
-      <div class="callout-card" style="background:#fff; border:2px solid var(--accent);">
-        <div class="watermark">&#x2693;</div>
-        <div class="callout-label" style="color:var(--accent);" data-en="Defensibility" data-zh="防御壁垒">Defensibility</div>
-        <div style="font-size:20px; font-weight:800; color:var(--primary); margin-bottom:16px; line-height:1.3;" data-en="The Control Point" data-zh="控制点">The Control Point</div>
-        <div style="font-size:15px; color:var(--text2); line-height:1.8; max-width:640px; margin-bottom:16px;" data-en="Push controls access to high-quality demand — which campaigns appear, who sees them, who accepts, who gets priority. This is not a feature. This is the structural advantage." data-zh="Push 把控着优质需求的入口——哪些活动上线、谁看得到、谁能接、谁优先。这不是功能，这是结构性优势。">Push controls access to high-quality demand — which campaigns appear, who sees them, who accepts, who gets priority. This is not a feature. This is the structural advantage.</div>
-        <div style="font-size:16px; font-weight:700; color:var(--accent); font-style:italic;" data-en="That is the power." data-zh="这就是真正的话语权。">That is the power.</div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- SECTION 5: COMPOUNDING MOAT -->
-<div class="sw-white">
-  <div class="section">
-
-    <div class="fade-in">
-      <div class="section-label" data-en="The Moat" data-zh="壁垒">The Moat</div>
-      <h2 class="section-title" data-en="How PUSH's Moat Compounds Over Time" data-zh="PUSH 的壁垒如何随时间加深">How PUSH's Moat Compounds Over Time</h2>
-      <p class="section-sub" data-en="The platform is not a moat from day one. The moat builds as data, credit, and trust compound." data-zh="第一天没有壁垒，谁都能抄。壁垒是随着数据、信用、信任一层一层攒出来的。">The platform is not a moat from day one. The moat builds as data, credit, and trust compound.</p>
-    </div>
-
-    <div class="moat-timeline fade-in fd1" style="margin-top:40px;">
-      <div class="moat-connector"></div>
-
-      <div class="moat-card">
-        <div class="moat-dot"></div>
-        <div class="moat-inner">
-          <div class="moat-period" data-en="MONTH 1–3" data-zh="第 1–3 月">MONTH 1–3</div>
-          <div class="moat-phase-icon">&#x2744;&#xFE0F;</div>
-          <div class="moat-title" data-en="Cold Start" data-zh="冷启动">Cold Start</div>
-          <div class="moat-title-zh" data-en="冷启动" data-zh="Cold Start">冷启动</div>
-          <div class="moat-body" data-en="Matching tool phase. No real moat yet. Critical to establish quality habits now — the foundation for everything after." data-zh="还是撮合工具阶段，没有壁垒。但必须从现在开始建立质量标准——后面所有东西都建在这上面。">Matching tool phase. No real moat yet. Critical to establish quality habits now — the foundation for everything after.</div>
-          <div class="moat-body" style="margin-top:10px; font-size:13px; color:var(--accent); font-weight:600;" data-en="Entry wedge: 10 caf&eacute;s in SoHo, 50 local creators, 12-week validation, $1,500 budget." data-zh="切入点：SoHo 10 家咖啡馆 + 50 个本地博主，12 周验证，预算 $1,500。">Entry wedge: 10 caf&eacute;s in SoHo, 50 local creators, 12-week validation, $1,500 budget.</div>
-        </div>
-      </div>
-
-      <div class="moat-card">
-        <div class="moat-dot"></div>
-        <div class="moat-inner">
-          <div class="moat-period" data-en="MONTH 4–9" data-zh="第 4–9 月">MONTH 4–9</div>
-          <div class="moat-phase-icon">&#x1F4C8;</div>
-          <div class="moat-title" data-en="Credit Building" data-zh="信用积累">Credit Building</div>
-          <div class="moat-title-zh" data-en="信用积累" data-zh="Credit Building">信用积累</div>
-          <div class="moat-body" data-en="Creators start accumulating meaningful <strong>Passport</strong> data. Merchants begin seeing ROI patterns. First signs of switching cost emerge." data-zh="博主在 <strong>Passport</strong> 里攒出了真实履历。商家开始看到 ROI 规律。切换成本开始出现。">Creators start accumulating meaningful <strong>Passport</strong> data. Merchants begin seeing ROI patterns. First signs of switching cost emerge.</div>
-        </div>
-      </div>
-
-      <div class="moat-card">
-        <div class="moat-dot"></div>
-        <div class="moat-inner">
-          <div class="moat-period" data-en="MONTH 10–18" data-zh="第 10–18 月">MONTH 10–18</div>
-          <div class="moat-phase-icon">&#x1F3F0;</div>
-          <div class="moat-title" data-en="Moat Emerging" data-zh="壁垒初成">Moat Emerging</div>
-          <div class="moat-title-zh" data-en="壁垒初成" data-zh="Moat Emerging">壁垒初成</div>
-          <div class="moat-body" data-en="High-tier creators cannot easily replicate their PUSH standing elsewhere. Merchants dependent on campaign analytics and re-booking flows. Real retention achieved." data-zh="高等级博主没法在别的平台复制自己的地位。商家离不开活动分析和复购流程。真正的留存形成了。">High-tier creators cannot easily replicate their PUSH standing elsewhere. Merchants dependent on campaign analytics and re-booking flows. Real retention achieved.</div>
-        </div>
-      </div>
-
-      <div class="moat-card">
-        <div class="moat-dot"></div>
-        <div class="moat-inner">
-          <div class="moat-period" data-en="MONTH 19+" data-zh="第 19 月+">MONTH 19+</div>
-          <div class="moat-phase-icon">&#x2728;</div>
-          <div class="moat-title" data-en="Network Effect" data-zh="用的人越多越好用">Network Effect</div>
-          <div class="moat-title-zh" data-en="用的人越多越好用" data-zh="Network Effect">用的人越多越好用</div>
-          <div class="moat-body" data-en="The best creators only take PUSH campaigns. The best merchants only use PUSH. New entrants face an established quality gap they cannot easily bridge." data-zh="最好的博主只接 PUSH 的单。最活跃的商家也不想换地方。新玩家进来，面对的是一个已经拉开的质量差距，追不上了。">The best creators only take PUSH campaigns. The best merchants only use PUSH. New entrants face an established quality gap they cannot easily bridge.</div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- DATA MOAT -->
-    <div class="fade-in" style="margin-top:56px;">
-      <div class="section-label" data-en="Data Moat" data-zh="数据护城河">Data Moat</div>
-      <h3 style="font-size:clamp(22px,3vw,28px); font-weight:800; color:var(--primary); margin-bottom:24px; line-height:1.35;" data-en="Two Data Streams, One Irreplicable Engine" data-zh="两条数据流，一个抄不走的引擎">Two Data Streams, One Irreplicable Engine</h3>
-      <div class="data-moat-grid">
-        <!-- Creator-side data -->
-        <div class="data-moat-col" style="background:rgba(124,58,237,0.04); border:1px solid rgba(124,58,237,0.15);">
-          <div class="data-moat-col-label" style="color:#7c3aed;" data-en="Creator-Side Data" data-zh="博主端数据">Creator-Side Data</div>
-          <div class="data-moat-items">
-            <div data-en="Completion rates" data-zh="完成率">Completion rates</div>
-            <div data-en="Reliability scores" data-zh="靠谱指数">Reliability scores</div>
-            <div data-en="Quality ratings" data-zh="内容质量评分">Quality ratings</div>
-            <div data-en="Conversion lift per creator" data-zh="单个博主带来的转化增量">Conversion lift per creator</div>
-          </div>
-        </div>
-        <!-- Plus sign -->
-        <div class="data-moat-plus">
-          <div class="data-moat-plus-circle">+</div>
-        </div>
-        <!-- Merchant-side data -->
-        <div class="data-moat-col" style="background:rgba(5,150,105,0.04); border:1px solid rgba(5,150,105,0.15);">
-          <div class="data-moat-col-label" style="color:var(--green);" data-en="Merchant-Side Data" data-zh="商家端数据">Merchant-Side Data</div>
-          <div class="data-moat-items">
-            <div data-en="Which campaigns work" data-zh="哪些活动有效">Which campaigns work</div>
-            <div data-en="Which creators convert" data-zh="哪些博主能带转化">Which creators convert</div>
-            <div data-en="Optimal timing patterns" data-zh="什么时候投最有效">Optimal timing patterns</div>
-            <div data-en="Repeat strategies" data-zh="复购策略">Repeat strategies</div>
-          </div>
-        </div>
-      </div>
-      <!-- Result -->
-      <div style="margin-top:20px; background:linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%); border-radius:12px; padding:28px 32px; text-align:center;">
-        <div style="font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:rgba(255,255,255,0.6); margin-bottom:8px;" data-en="Result" data-zh="结果">Result</div>
-        <div style="font-size:20px; font-weight:800; color:#fff; line-height:1.4;" data-en="An irreplicable matching engine that gets smarter with every transaction" data-zh="一个抄不走的匹配引擎，每笔交易都让它更聪明">An irreplicable matching engine that gets smarter with every transaction</div>
-        <div style="font-size:13px; color:rgba(255,255,255,0.65); margin-top:10px; max-width:500px; margin-left:auto; margin-right:auto; line-height:1.7;" data-en="Competitors can copy the interface. They cannot copy the data. And without the data, matching is guesswork." data-zh="对手可以抄界面，但抄不走数据。没有数据，匹配就是盲猜。">Competitors can copy the interface. They cannot copy the data. And without the data, matching is guesswork.</div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- SECTION 6: BUSINESS PLAN -->
-<div class="sw-dark">
-  <div class="section">
-
-    <div class="fade-in">
-      <div class="section-label-dark" data-en="Investor Readiness" data-zh="投资人必考题">Investor Readiness</div>
-      <h2 class="section-title section-title-white" data-en="Retention &amp; Disintermediation Defense" data-zh="留存与防绕开——投资人必问的三道题">Retention &amp; Disintermediation Defense</h2>
-      <p class="section-sub-dark" data-en="The chapter every serious investor will ask about. Answer these three questions strongly, and the project becomes fundable." data-zh="真正看项目的投资人一定会追问这三个。答得硬，项目才拿得到钱。">The chapter every serious investor will ask about. Answer these three questions strongly, and the project becomes fundable.</p>
-    </div>
-
-    <div class="bp-questions" style="margin-top:40px;">
-
-      <div class="bp-q fade-in fd1">
-        <div class="bp-q-num-circle">1</div>
-        <div class="bp-q-content">
-          <div class="bp-q-label" data-en="Question 01" data-zh="问题 01">Question 01</div>
-          <div class="bp-q-text" data-en="What non-transferable assets do creators accumulate?" data-zh="博主在 PUSH 上积累了什么带不走的东西？">What non-transferable assets do creators accumulate?</div>
-          <div class="bp-q-answer" data-en="<strong>Answer:</strong> <strong>Passport</strong> scores, <strong>Tier</strong> benefits, earnings history, geo-credit, merchant ratings — none portable. A creator who leaves PUSH loses their entire professional identity on the platform." data-zh="<strong>回答：</strong><strong>Passport</strong> 分数、<strong>等级</strong>权益、收益记录、地域信用、商家评分——全带不走。博主一旦离开 PUSH，整个职业身份清零。"><strong>Answer:</strong> <strong>Passport</strong> scores, <strong>Tier</strong> benefits, earnings history, geo-credit, merchant ratings — none portable. A creator who leaves PUSH loses their entire professional identity on the platform.</div>
-          <a href="retention-defense.html" class="bp-q-link" data-en="See Creator Retention Architecture →" data-zh="查看博主留存架构 →">See Creator Retention Architecture →</a>
-        </div>
-      </div>
-
-      <div class="bp-q fade-in fd2">
-        <div class="bp-q-num-circle">2</div>
-        <div class="bp-q-content">
-          <div class="bp-q-label" data-en="Question 02" data-zh="问题 02">Question 02</div>
-          <div class="bp-q-text" data-en="What continuous value do merchants get that private deals can never provide?" data-zh="PUSH 能给商家什么，是私下合作永远给不了的？">What continuous value do merchants get that private deals can never provide?</div>
-          <div class="bp-q-answer" data-en="<strong>Answer:</strong> Ongoing supply, data intelligence, automated workflows, dispute protection, quality-rated creator pool. A private deal provides none of this infrastructure — only a one-time transaction." data-zh="<strong>回答：</strong>持续供给、数据分析、自动化流程、纠纷保护、有质量评级的博主池。私下合作没有这些基础设施——只是一锤子买卖。"><strong>Answer:</strong> Ongoing supply, data intelligence, automated workflows, dispute protection, quality-rated creator pool. A private deal provides none of this infrastructure — only a one-time transaction.</div>
-          <a href="platform-value.html" class="bp-q-link" data-en="See Anti-Disintermediation Defense →" data-zh="查看防绕开机制 →">See Anti-Disintermediation Defense →</a>
-        </div>
-      </div>
-
-      <div class="bp-q fade-in fd3">
-        <div class="bp-q-num-circle">3</div>
-        <div class="bp-q-content">
-          <div class="bp-q-label" data-en="Question 03" data-zh="问题 03">Question 03</div>
-          <div class="bp-q-text" data-en="Why is on-platform re-booking better in every dimension?" data-zh="为什么在平台上复购，方方面面都比私下合作强？">Why is on-platform re-booking better in every dimension?</div>
-          <div class="bp-q-answer" data-en="<strong>Answer:</strong> Faster, cheaper, safer, auto-settled, proof-verified, credit-building — vs. DMs, cash transfers, disputes, no records. The platform is not just easier; it is structurally superior in every measurable way." data-zh="<strong>回答：</strong>更快、更省、更安全、自动结算、核销验证、信用积累——对比私信沟通、现金转账、扯皮纠纷、没有记录。走平台不只是省事，是每个维度都碾压私下合作。"><strong>Answer:</strong> Faster, cheaper, safer, auto-settled, proof-verified, credit-building — vs. DMs, cash transfers, disputes, no records. The platform is not just easier; it is structurally superior in every measurable way.</div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="bp-verdict fade-in fd4" data-en="If answered <em>weakly</em>, the project appears fragile. If answered <em>strongly</em>, the project becomes fundable." data-zh="答得<em>虚</em>，项目看着脆弱。答得<em>硬</em>，项目才值得投。">If answered <em>weakly</em>, the project appears fragile. If answered <em>strongly</em>, the project becomes fundable.</div>
-
-    <!-- UNIT ECONOMICS PER CAMPAIGN -->
-    <div class="fade-in" style="margin-top:48px;">
-      <div class="callout-card" style="background:rgba(255,255,255,0.04); border:1px solid rgba(129,140,248,0.25);">
-        <div style="position:absolute; top:16px; right:24px; font-size:56px; opacity:0.05; font-weight:900; color:#fff; pointer-events:none;">$</div>
-        <div class="callout-label" style="color:var(--accent-light);" data-en="Unit Economics" data-zh="单位经济模型">Unit Economics</div>
-        <div class="callout-title" style="color:#fff; margin-bottom:24px;" data-en="Economics Per Campaign" data-zh="单次活动经济账">Economics Per Campaign</div>
-        <div class="econ-row" style="margin-bottom:24px;">
-          <div class="econ-box">
-            <div class="econ-label" data-en="Merchant Pays" data-zh="商家支付">Merchant Pays</div>
-            <div class="econ-value">$200</div>
-          </div>
-          <span class="econ-arrow">&#x2192;</span>
-          <div class="econ-box" style="background:rgba(129,140,248,0.12);">
-            <div class="econ-label" data-en="Creator Earns" data-zh="博主到手">Creator Earns</div>
-            <div class="econ-value" style="color:var(--accent-light);">$120</div>
-          </div>
-          <span class="econ-arrow">+</span>
-          <div class="econ-box">
-            <div class="econ-label" data-en="Ops Cost" data-zh="运营成本">Ops Cost</div>
-            <div class="econ-value" style="color:rgba(255,255,255,0.7);">$10</div>
-          </div>
-          <span class="econ-arrow">=</span>
-          <div class="econ-box" style="background:rgba(5,150,105,0.15); border:1px solid rgba(5,150,105,0.3); min-width:140px;">
-            <div class="econ-label" data-en="Platform Net" data-zh="平台净收入">Platform Net</div>
-            <div class="econ-value" style="color:#34d399;">$70</div>
-            <div style="font-size:12px; font-weight:700; color:rgba(52,211,153,0.8); margin-top:2px;" data-en="35% margin" data-zh="35% 利润率">35% margin</div>
-          </div>
-        </div>
-        <div style="font-size:15px; font-weight:600; color:rgba(255,255,255,0.85); line-height:1.7; font-style:italic; border-top:1px solid rgba(255,255,255,0.1); padding-top:20px;" data-en="Push gets more profitable with every campaign — not busier but poorer." data-zh="活动越多，Push 越赚钱——不是越忙越亏。">Push gets more profitable with every campaign — not busier but poorer.</div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- EXAMPLE CAMPAIGN -->
-<div class="sw-white">
-  <div class="section" style="padding-top:48px;padding-bottom:48px;">
-    <div class="fade-in">
-      <div class="callout-card" style="background:linear-gradient(135deg, rgba(5,150,105,0.06) 0%, rgba(5,150,105,0.03) 100%); border:2px solid rgba(5,150,105,0.18);">
-        <div class="watermark">&#x2615;</div>
-        <div class="callout-label" style="color:var(--green);" data-en="Example Campaign" data-zh="活动案例">Example Campaign</div>
-        <div class="callout-title" style="color:var(--primary); margin-bottom:16px;" data-en="SoHo Caf&eacute; — Real Numbers" data-zh="SoHo 咖啡馆——实际数据">SoHo Caf&eacute; — Real Numbers</div>
-        <div class="stats-row" style="margin-bottom:20px;">
-          <div class="stat-box" style="background:rgba(5,150,105,0.08);">
-            <div class="stat-label" data-en="Creators" data-zh="博主">Creators</div>
-            <div class="stat-value" style="color:var(--green);">6</div>
-          </div>
-          <div class="stat-box" style="background:rgba(5,150,105,0.08);">
-            <div class="stat-label" data-en="Duration" data-zh="时长">Duration</div>
-            <div class="stat-value" style="color:var(--green);" data-en="2 days" data-zh="2 天">2 days</div>
-          </div>
-          <div class="stat-box" style="background:rgba(5,150,105,0.08);">
-            <div class="stat-label" data-en="Redemptions" data-zh="核销">Redemptions</div>
-            <div class="stat-value" style="color:var(--green);">38</div>
-          </div>
-          <div class="stat-box" style="background:rgba(5,150,105,0.08);">
-            <div class="stat-label" data-en="Cost/Customer" data-zh="获客成本">Cost/Customer</div>
-            <div class="stat-value" style="color:var(--green);">$5.26</div>
-          </div>
-        </div>
-        <div style="font-size:15px; font-weight:600; color:var(--text); line-height:1.7; font-style:italic; border-top:1px solid rgba(5,150,105,0.15); padding-top:16px;" data-en="Repeat campaign launched next week — without being asked." data-zh="第二周商家主动复购——没人催。">Repeat campaign launched next week — without being asked.</div>
-        <div style="margin-top:16px; background:rgba(5,150,105,0.06); border-radius:8px; padding:14px 18px; font-size:14px; color:var(--text2); line-height:1.7;" data-en="<strong style='color:var(--green);'>Hard ROI:</strong> Push $4–7 per customer vs Instagram ads $15–30 vs Agency $40+. Local merchants get measurable results at a fraction of the cost." data-zh="<strong style='color:var(--green);'>算硬账：</strong>Push 获客 $4–7/人，Instagram 广告 $15–30，代理 $40+。本地商家花零头的钱，拿到量化的结果。"><strong style="color:var(--green);">Hard ROI:</strong> Push $4–7 per customer vs Instagram ads $15–30 vs Agency $40+. Local merchants get measurable results at a fraction of the cost.</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- FOUNDER-MARKET FIT -->
-<div class="sw-gray">
-  <div class="section" style="padding-top:48px;padding-bottom:48px;">
-    <div class="fade-in">
-      <div style="background:var(--primary); border-radius:12px; padding:44px 48px; position:relative; overflow:hidden;">
-        <div style="position:absolute; top:0; right:0; width:200px; height:200px; background:radial-gradient(circle, rgba(79,70,229,0.15) 0%, transparent 70%); pointer-events:none;"></div>
-        <div class="callout-label" style="color:var(--accent-light);" data-en="Founder-Market Fit" data-zh="创始人与市场的契合">Founder-Market Fit</div>
-        <div style="font-size:clamp(20px,3vw,24px); font-weight:800; color:#fff; margin-bottom:16px; line-height:1.35; max-width:600px;" data-en="At the Intersection of Three Worlds" data-zh="站在三个圈的交叉点">At the Intersection of Three Worlds</div>
-        <div class="flow-pills" style="margin-bottom:20px;">
-          <span class="flow-pill" style="background:rgba(129,140,248,0.15); color:var(--accent-light); border:1px solid rgba(129,140,248,0.25);" data-en="Creator Culture" data-zh="博主文化">Creator Culture</span>
-          <span style="font-size:18px; color:rgba(255,255,255,0.3); display:flex; align-items:center;">&#x00D7;</span>
-          <span class="flow-pill" style="background:rgba(129,140,248,0.15); color:var(--accent-light); border:1px solid rgba(129,140,248,0.25);" data-en="Design Systems" data-zh="产品设计">Design Systems</span>
-          <span style="font-size:18px; color:rgba(255,255,255,0.3); display:flex; align-items:center;">&#x00D7;</span>
-          <span class="flow-pill" style="background:rgba(129,140,248,0.15); color:var(--accent-light); border:1px solid rgba(129,140,248,0.25);" data-en="Local Commerce" data-zh="本地商业">Local Commerce</span>
-        </div>
-        <div style="font-size:15px; color:rgba(255,255,255,0.65); line-height:1.8; max-width:560px;" data-en="Positioned at the intersection of creator culture, design systems, and local commerce. This is not a generalist building a marketplace. This is someone who lives in all three worlds building the system that connects them." data-zh="博主文化、产品设计、本地商业——三个领域的交叉点。这不是一个什么都懂一点的人在做平台，而是一个同时泡在这三个世界里的人，在造连接它们的系统。">Positioned at the intersection of creator culture, design systems, and local commerce. This is not a generalist building a marketplace. This is someone who lives in all three worlds building the system that connects them.</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- WHERE TO GO -->
-<div class="sw-white">
-  <div class="section" style="padding-top:40px;padding-bottom:48px;">
-    <h3 style="font-size:16px; font-weight:700; margin-bottom:12px;" data-en="Where to go from here" data-zh="下一步">Where to go from here</h3>
-    <div class="next-cards">
-      <a href="prospects.html" class="next-card">
-        <div class="next-card-label" data-en="Forward" data-zh="往前看">Forward</div>
-        <div class="next-card-title" data-en="See the long-term vision and where Push is headed" data-zh="Push 长期要做成什么样">See the long-term vision and where Push is headed</div>
-        <div class="next-card-link" data-en="Future Prospects →" data-zh="未来愿景 →">Future Prospects →</div>
-      </a>
-      <a href="index.html" class="next-card">
-        <div class="next-card-label" data-en="Back to start" data-zh="回到起点">Back to start</div>
-        <div class="next-card-title" data-en="Return to the full overview dashboard" data-zh="回到首页看全貌">Return to the full overview dashboard</div>
-        <div class="next-card-link" data-en="Dashboard →" data-zh="首页 →">Dashboard →</div>
-      </a>
-    </div>
-  </div>
-</div>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <div class="f-logo">PUSH</div>
-      <div class="f-tagline" data-en="The Operating System for Local Creator Commerce" data-zh="本地博主商业化操作系统">The Operating System for Local Creator Commerce</div>
-    </div>
-    <div class="footer-links">
-      <a href="index.html" class="footer-link" data-en="Overview" data-zh="首页">Overview</a>
-      <a href="project-intro.html" class="footer-link" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
-      <a href="pitch-deck.html" class="footer-link" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
-      <a href="prospects.html" class="footer-link" data-en="Prospects" data-zh="未来愿景">Prospects</a>
-      <a href="challenges.html" class="footer-link" data-en="Challenges" data-zh="挑战分析">Challenges</a>
-      <a href="risk-defense.html" class="footer-link" data-en="Risk &amp; Defense" data-zh="风险防御">Risk &amp; Defense</a>
-      <a href="retention-defense.html" class="footer-link" data-en="Retention" data-zh="留存机制">Retention</a>
-      <a href="platform-value.html" class="footer-link" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
-      <a href="push-strategy-core.html" class="footer-link" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
-    </div>
-    <div class="footer-copy">
-      <div data-en="© 2026 Push" data-zh="© 2026 Push">© 2026 Push</div>
-    </div>
+  <div class="footer-bottom">
+    <span data-en="© 2026 Push. Attribution rail for local commerce." data-zh="© 2026 Push. 本地商业归因基础设施。">© 2026 Push. Attribution rail for local commerce.</span>
   </div>
 </footer>
 
-<button id="back-top" aria-label="Back to top">&uarr;</button>
-
-<script>
-/* LANGUAGE SYSTEM */
-const LANG_KEY = 'push-lang';
-
-function getLang() {
-  return localStorage.getItem(LANG_KEY) || 'en';
-}
-
-function applyLang(lang) {
-  document.querySelectorAll('[data-en]').forEach(el => {
-    const val = lang === 'zh' ? el.getAttribute('data-zh') : el.getAttribute('data-en');
-    if (val !== null) el.innerHTML = val;
-  });
-  const btn = document.getElementById('lang-btn');
-  if (btn) btn.textContent = lang === 'en' ? '中 / EN' : 'EN / 中';
-  const mobileBtn = document.getElementById('lang-btn-mobile');
-  if (mobileBtn) mobileBtn.textContent = lang === 'en' ? '中 / EN' : 'EN / 中';
-  document.documentElement.lang = lang === 'zh' ? 'zh' : 'en';
-}
-
-function toggleLang() {
-  const next = getLang() === 'en' ? 'zh' : 'en';
-  localStorage.setItem(LANG_KEY, next);
-  document.body.style.opacity = '0.85';
-  setTimeout(() => {
-    applyLang(next);
-    document.body.style.opacity = '1';
-  }, 120);
-}
-
-document.getElementById('lang-btn').addEventListener('click', toggleLang);
-applyLang(getLang());
-/* lang-reveal */document.documentElement.style.opacity='1';
-
-/* SCROLL FADE-IN */
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.01, rootMargin: '0px 0px 60px 0px' });
-
-document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-/* smooth opacity transition */
-document.body.style.transition = 'opacity 0.12s ease';
-
-// Nav scroll shadow
-(function() {
-  const nav = document.querySelector('nav');
-  if (nav) window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
-})();
-
-// Scroll progress bar
-(function() {
-  const bar = document.getElementById('scroll-progress');
-  if (bar) {
-    window.addEventListener('scroll', () => {
-      const h = document.documentElement.scrollHeight - window.innerHeight;
-      bar.style.width = h > 0 ? (window.scrollY / h * 100) + '%' : '0%';
-    }, { passive: true });
-  }
-})();
-
-// Back to top
-(function() {
-  const btn = document.getElementById('back-top');
-  if (btn) {
-    window.addEventListener('scroll', () => btn.classList.toggle('visible', window.scrollY > 400), { passive: true });
-    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-  }
-})();
-
-// Mobile navigation
-(function() {
-  const burger = document.getElementById('nav-burger');
-  const panel = document.getElementById('nav-mobile-panel');
-  if (!burger || !panel) return;
-  burger.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const open = panel.classList.toggle('open');
-    burger.classList.toggle('open', open);
-    burger.setAttribute('aria-expanded', open);
-  });
-  panel.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      panel.classList.remove('open');
-      burger.classList.remove('open');
-      burger.setAttribute('aria-expanded', 'false');
-    });
-  });
-  document.addEventListener('click', (e) => {
-    if (!burger.contains(e.target) && !panel.contains(e.target)) {
-      panel.classList.remove('open');
-      burger.classList.remove('open');
-      burger.setAttribute('aria-expanded', 'false');
-    }
-  });
-  const mobileLangBtn = document.getElementById('lang-btn-mobile');
-  if (mobileLangBtn) {
-    mobileLangBtn.addEventListener('click', () => {
-      const mainLangBtn = document.getElementById('lang-btn');
-      if (mainLangBtn) mainLangBtn.click();
-      setTimeout(() => { if (mainLangBtn) mobileLangBtn.textContent = mainLangBtn.textContent; }, 200);
-    });
-    const mainLangBtn = document.getElementById('lang-btn');
-    if (mainLangBtn) mobileLangBtn.textContent = mainLangBtn.textContent;
-  }
-})();
-</script>
 </body>
 </html>

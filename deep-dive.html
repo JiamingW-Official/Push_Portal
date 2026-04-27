@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PUSH — Deep Dive</title>
+<meta name="description" content="Push v6-streamlined canonical: the attribution rail for local commerce. Complete thesis, mechanisms, moats, and Phase 0 strategy.">
+<link rel="stylesheet" href="assets/shared.css">
+<link rel="stylesheet" href="assets/nav.css">
+<script src="assets/nav.js" defer></script>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preload" href="assets/fonts/jetbrains-mono-latin-1cd702cd.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/archivo-latin-2a392e77.woff2" as="font" type="font/woff2" crossorigin>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="index.html" class="nav-logo">PUSH</a>
+  <div class="nav-links">
+    <a href="index.html" data-en="Overview" data-zh="首页">Overview</a>
+    <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演">Pitch Deck</a>
+    <a href="investor-qa.html" data-en="Investor Q&amp;A" data-zh="投资人问答">Investor Q&amp;A</a>
+    <div class="nav-more">
+      <button class="nav-more-btn" aria-haspopup="true" aria-expanded="false">
+        <span data-en="More" data-zh="更多">More</span> <span class="nav-more-caret">▾</span>
+      </button>
+      <div class="nav-more-panel nav-more-panel-compact" role="menu">
+        <div class="nav-more-group">
+          <div class="nav-more-heading" data-en="Core" data-zh="核心">Core</div>
+          <a href="project-intro.html" data-en="Product" data-zh="产品">Product</a>
+          <a href="push-strategy-core.html" data-en="Strategy" data-zh="战略">Strategy</a>
+          <a href="economics.html" data-en="Economics" data-zh="经济模型">Economics</a>
+          <a href="attribution.html" data-en="Attribution" data-zh="归因机制">Attribution</a>
+        </div>
+        <div class="nav-more-group">
+          <div class="nav-more-heading" data-en="Reference" data-zh="参考资料">Reference</div>
+          <a href="deep-dive.html" class="active" data-en="Deep Dive" data-zh="深度解读">Deep Dive</a>
+          <a href="metrics-dashboard.html" data-en="Metrics" data-zh="指标">Metrics</a>
+          <a href="push-team-dashboard.html" data-en="Team" data-zh="团队">Team</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="nav-actions">
+    <button class="nav-lang">中 / EN</button>
+    <button class="nav-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="container">
+    <span class="eyebrow" data-en="Reference · Phase 0 is the thesis" data-zh="参考资料 · Phase 0 就是核心论点">Reference · Phase 0 is the thesis</span>
+    <h1 data-en="Push Deep Dive: The Attribution Rail for Local Commerce" data-zh="Push 深度解析：本地商业归因基础设施">Push Deep Dive: The Attribution Rail for Local Commerce</h1>
+    <p class="lede" data-en="Everything we know, everything we've tested, and exactly what we commit to. Phase 0 is the thesis." data-zh="我们所知道的一切，我们已测试的一切，以及我们所承诺的一切。Phase 0 是核心论点。">Everything we know, everything we've tested, and exactly what we commit to. Phase 0 is the thesis.</p>
+
+    <ol class="page-toc" aria-label="Table of contents">
+      <li><a href="#problem" data-en="01 · The problem" data-zh="01 · 问题">01 · The problem</a></li>
+      <li><a href="#why-now" data-en="02 · Why now: 4 forces" data-zh="02 · 为什么是现在：4 股力量">02 · Why now: 4 forces</a></li>
+      <li><a href="#mechanism" data-en="03 · The mechanism" data-zh="03 · 运作机制">03 · The mechanism</a></li>
+      <li><a href="#moats" data-en="04 · Three moats" data-zh="04 · 三道护城河">04 · Three moats</a></li>
+      <li><a href="#gtm" data-en="05 · Phase 0 and Phase 1" data-zh="05 · Phase 0 和 Phase 1">05 · Phase 0 and Phase 1</a></li>
+      <li><a href="#year-1" data-en="06 · Year 1 base case" data-zh="06 · 第 1 年基础情景">06 · Year 1 base case</a></li>
+      <li><a href="#year-5" data-en="07 · Year 5 exit story" data-zh="07 · 第 5 年退出故事">07 · Year 5 exit story</a></li>
+      <li><a href="#risks" data-en="08 · Risks stated honestly" data-zh="08 · 坦白列示风险">08 · Risks stated honestly</a></li>
+    </ol>
+  </div>
+</header>
+
+<main>
+
+<section class="deep-section" id="problem">
+  <div class="container">
+    <span class="eyebrow" data-en="01 · Three truths" data-zh="01 · 三个真相">01 · Three truths</span>
+    <h2 data-en="The problem" data-zh="问题">The problem</h2>
+    <p data-en="Three sentences. If any is wrong, the premise breaks." data-zh="三句话。任何一句错，前提就倒了。">Three sentences. If any is wrong, the premise breaks.</p>
+    <div class="card-grid">
+      <article class="card">
+        <div class="card-num">1</div>
+        <h3 data-en="Local merchants spend billions on ad networks with no proof of store visits" data-zh="本地商家在广告网络上花数十亿，却不知道谁到过店">Local merchants spend billions on ad networks with no proof of store visits</h3>
+        <p data-en="Instagram, Yelp, Google, and Mailchimp take tens of billions per year from local SMBs. Not one dollar is tied to a verified store visit. They cannot measure it." data-zh="Instagram、Yelp、Google、Mailchimp 每年从本地 SMB 拿走数十亿。没有一块钱能对上实际到访。他们测不了。">Instagram, Yelp, Google, and Mailchimp take tens of billions per year from local SMBs. Not one dollar is tied to a verified store visit. They cannot measure it.</p>
+      </article>
+      <article class="card">
+        <div class="card-num">2</div>
+        <h3 data-en="Creators post about local merchants daily but are never paid because attribution cannot be proven" data-zh="Creator 每天发关于本地商家的内容，却不拿报酬因为无法证明">Creators post about local merchants daily but are never paid because attribution cannot be proven</h3>
+        <p data-en="The $250B creator economy is global. But local creators—3K to 100K followers—have zero infrastructure to monetize local impact. They post, merchants don't pay, everyone loses." data-zh="2500 亿美元 creator 经济是全球的。但本地 creator（3k-100k 粉丝）没有基础设施把本地影响力变现。发了，商家不付，各输。">The $250B creator economy is global. But local creators—3K to 100K followers—have zero infrastructure to monetize local impact. They post, merchants don't pay, everyone loses.</p>
+      </article>
+      <article class="card">
+        <div class="card-num">3</div>
+        <h3 data-en="Consumers are force-fed algorithm-ranked ads instead of trusted tastemakers" data-zh="消费者被迫接收算法广告，而非信任的意见领袖">Consumers are force-fed algorithm-ranked ads instead of trusted tastemakers</h3>
+        <p data-en="Meta and Google optimize for engagement, not relevance. Consumers see ads from brands they don't trust. The tastemakers they actually follow get no revenue from their influence." data-zh="Meta 和 Google 优化参与度，不是相关性。消费者看到不信任的品牌广告。他们真正关注的意见领袖从影响力拿不到报酬。">Meta and Google optimize for engagement, not relevance. Consumers see ads from brands they don't trust. The tastemakers they actually follow get no revenue from their influence.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="deep-section alt" id="why-now">
+  <div class="container">
+    <span class="eyebrow" data-en="02 · Four structural windows" data-zh="02 · 四个结构性窗口">02 · Four structural windows</span>
+    <h2 data-en="Why now: 4 forces" data-zh="为什么是现在：4 股力量">Why now: 4 forces</h2>
+    <p data-en="Each opened in the past five years. Together they unlock a $15-40B market." data-zh="每个都在过去五年打开。合在一起打开了一个 $15-40B 的市场。">Each opened in the past five years. Together they unlock a $15-40B market.</p>
+    <div class="card-grid">
+      <article class="card">
+        <h3 data-en="Force 1 · Cookie attribution is dead" data-zh="第一股力量 · Cookie 归因已死">Force 1 · Cookie attribution is dead</h3>
+        <p data-en="iOS 14.5 (2021) + Chrome 3P cookie deprecation (2024). Digital marketers can no longer prove attribution at the ad-network level. This is not a weakness of digital—it is a permanent structural shift. Only offline (physical verification) now works." data-zh="iOS 14.5 (2021) + Chrome 第三方 cookie 弃用 (2024)。数字营销人员再也不能在广告网络层面证明归因。这不是数字的缺点——这是永久性结构转变。只有线下（物理验证）现在有效。">iOS 14.5 (2021) + Chrome 3P cookie deprecation (2024). Digital marketers can no longer prove attribution at the ad-network level. This is not a weakness of digital—it is a permanent structural shift. Only offline (physical verification) now works.</p>
+      </article>
+      <article class="card">
+        <h3 data-en="Force 2 · No creator infrastructure for local impact" data-zh="第二股力量 · 本地 Creator 无基础设施">Force 2 · No creator infrastructure for local impact</h3>
+        <p data-en="The creator economy is platform-dependent (TikTok, Instagram, YouTube). All revenue flows through their algorithms. No independent creator can monetize local impact. This is a vacuum waiting to fill." data-zh="Creator 经济依赖平台（TikTok、Instagram、YouTube）。所有收入都过他们算法。独立 creator 无法变现本地影响力。这是个等待填补的真空。">The creator economy is platform-dependent (TikTok, Instagram, YouTube). All revenue flows through their algorithms. No independent creator can monetize local impact. This is a vacuum waiting to fill.</p>
+      </article>
+      <article class="card">
+        <h3 data-en="Force 3 · FTC 16 CFR Part 255 actively enforced" data-zh="第三股力量 · FTC 16 CFR Part 255 主动执法">Force 3 · FTC 16 CFR Part 255 actively enforced</h3>
+        <p data-en="Merchants who pay creators for merchant-related content must provide verified, disclosed, decaying attribution records. Legacy platforms do not. We do. Compliance is now a competitive advantage." data-zh="商家如果为商家相关内容付费给 creator，必须提供已验证、已披露、衰减的归因记录。传统平台没有。我们有。合规现在是竞争优势。">Merchants who pay creators for merchant-related content must provide verified, disclosed, decaying attribution records. Legacy platforms do not. We do. Compliance is now a competitive advantage.</p>
+      </article>
+      <article class="card">
+        <h3 data-en="Force 4 · QR is post-COVID native" data-zh="第四股力量 · QR 是后疫情原住民">Force 4 · QR is post-COVID native</h3>
+        <p data-en="In 2019, QR codes were fringe. In 2026, they are normal—receipts, storefronts, packaging. No education required. A customer scanning is frictionless." data-zh="2019 年 QR 码很边缘。2026 年它很正常——收据、店前、包装上都有。不用教育。顾客扫描零摩擦。">In 2019, QR codes were fringe. In 2026, they are normal—receipts, storefronts, packaging. No education required. A customer scanning is frictionless.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="deep-section" id="mechanism">
+  <div class="container">
+    <span class="eyebrow" data-en="03 · Six steps: how it works" data-zh="03 · 六个步骤：工作原理">03 · Six steps: how it works</span>
+    <h2 data-en="The mechanism" data-zh="运作机制">The mechanism</h2>
+    <p data-en="A creator posts. A customer scans. A merchant pays. Everything verified." data-zh="Creator 发帖。顾客扫码。商家付费。一切已验证。">A creator posts. A customer scans. A merchant pays. Everything verified.</p>
+    <ol class="steps">
+      <li>
+        <div class="step-label">Step 1</div>
+        <div><strong data-en="Creator applies" data-zh="Creator 申请">Creator applies</strong><br><span data-en="Verified on 12 dimensions: follower count, audience locality, past merchant engagement, content quality, disclosure hygiene." data-zh="12 维验证：粉丝数、受众本地性、历史商家互动、内容质量、披露卫生度。">Verified on 12 dimensions: follower count, audience locality, past merchant engagement, content quality, disclosure hygiene.</span></div>
+      </li>
+      <li>
+        <div class="step-label">Step 2</div>
+        <div><strong data-en="Merchant posts campaign" data-zh="商家发起 Campaign">Merchant posts campaign</strong><br><span data-en="Create: target neighborhood, budget ($200-2k typical), success metric (10-50 verified customers). Zero upfront cost in pilot phase." data-zh="新建：目标街区、预算（$200-2k 典型）、成功指标（10-50 验证顾客）。Pilot 阶段零上付。">Create: target neighborhood, budget ($200-2k typical), success metric (10-50 verified customers). Zero upfront cost in pilot phase.</span></div>
+      </li>
+      <li>
+        <div class="step-label">Step 3</div>
+        <div><strong data-en="Push assigns creator" data-zh="Push 分配 Creator">Push assigns creator</strong><br><span data-en="Algorithm matches: creator locality overlap + audience relevance + past ROAS + creator availability. Primary + standby creator (see moat §2)." data-zh="算法匹配：creator 位置重叠 + 受众相关性 + 历史 ROAS + creator 可用性。主 + 备选 creator。">Algorithm matches: creator locality overlap + audience relevance + past ROAS + creator availability. Primary + standby creator (see moat §2).</span></div>
+      </li>
+      <li>
+        <div class="step-label">Step 4</div>
+        <div><strong data-en="Creator posts with unique QR" data-zh="Creator 带唯一 QR 发帖">Creator posts with unique QR</strong><br><span data-en="Instagram, TikTok, Xiaohongshu: creator discloses 'Paid partnership with [Merchant] via Push.' Unique QR in post links to merchant landing. Attribution tracking starts." data-zh="Instagram、TikTok、小红书：creator 披露『通过 Push 与 [Merchant] 合作，已付费』。帖子中唯一 QR 指向商家落地页。归因追踪启动。">Instagram, TikTok, Xiaohongshu: creator discloses 'Paid partnership with [Merchant] via Push.' Unique QR in post links to merchant landing. Attribution tracking starts.</span></div>
+      </li>
+      <li>
+        <div class="step-label">Step 5</div>
+        <div><strong data-en="Customer scans → visits" data-zh="顾客扫码 → 到访">Customer scans → visits</strong><br><span data-en="QR scan creates event record: device fingerprint + IP + timestamp + creator ID + merchant ID. Customer visits store within 24-72h window. Merchant confirms via POS or staff." data-zh="QR 扫码生成事件记录：设备指纹 + IP + 时间戳 + creator ID + 商家 ID。顾客 24-72 小时内到店。商家通过 POS 或店员确认。">QR scan creates event record: device fingerprint + IP + timestamp + creator ID + merchant ID. Customer visits store within 24-72h window. Merchant confirms via POS or staff.</span></div>
+      </li>
+      <li>
+        <div class="step-label">Step 6</div>
+        <div><strong data-en="Push pays both parties" data-zh="Push 同时付两方">Push pays both parties</strong><br><span data-en="Merchant: charged $40 per verified customer (deferred from upfront cost). Creator: $24 per verified customer (60% margin; tied to tier and reputation). Both parties get disclosed, immutable audit trail (FTC 16 CFR Part 255 compliant)." data-zh="商家：$40/验证顾客收费（从上付零成本开始）。Creator：$24/验证顾客（60% 分成；与分级和声誉挂钩）。双方获得已披露、不可篡改的审计记录（符合 FTC 16 CFR Part 255）。">Merchant: charged $40 per verified customer (deferred from upfront cost). Creator: $24 per verified customer (60% margin; tied to tier and reputation). Both parties get disclosed, immutable audit trail (FTC 16 CFR Part 255 compliant).</span></div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="deep-section alt" id="moats">
+  <div class="container">
+    <span class="eyebrow" data-en="04 · Why we can't be copied" data-zh="04 · 为什么抄不走">04 · Why we can't be copied</span>
+    <h2 data-en="Three moats" data-zh="三道护城河">Three moats</h2>
+    <p data-en="Not a technology moat. Not a brand moat. Structural + network + regulatory." data-zh="不是技术护城河。不是品牌护城河。是结构 + 网络 + 监管。">Not a technology moat. Not a brand moat. Structural + network + regulatory.</p>
+    <div class="card-grid">
+      <article class="card">
+        <h3 data-en="M1 · Neighborhood Attribution Graph" data-zh="M1 · 街区归因图谱">M1 · Neighborhood Attribution Graph</h3>
+        <p data-en="We own verified-customer data at the creator–merchant–neighborhood level. 40K records by Year 1 end (beachhead). Competitors entering a new neighborhood start at zero. Our graph compounds: higher creator scores, better merchant pricing, faster cold-start matching. Non-exportable." data-zh="我们拥有 creator-商家-街区 层级的验证顾客数据。第 1 年末 4 万条记录（根据地）。竞争对手进入新街区从零开始。我们的图谱复利：creator 评分更高、商家定价更精准、冷启动匹配更快。不可出口。">We own verified-customer data at the creator–merchant–neighborhood level. 40K records by Year 1 end (beachhead). Competitors entering a new neighborhood start at zero. Our graph compounds: higher creator scores, better merchant pricing, faster cold-start matching. Non-exportable.</p>
+      </article>
+      <article class="card">
+        <h3 data-en="M2 · Creator Reputation Lock" data-zh="M2 · Creator 声誉锁定">M2 · Creator Reputation Lock</h3>
+        <p data-en="Earnings and tier are non-portable. A creator leaving takes zero reputation with them. Career capital is locked to Push. Portability is our killer friction." data-zh="收入和分级不可转移。Creator 离开带不走任何声誉。职业生涯资本锁定在 Push。可转移性是我们的杀手摩擦。">Earnings and tier are non-portable. A creator leaving takes zero reputation with them. Career capital is locked to Push. Portability is our killer friction.</p>
+      </article>
+      <article class="card">
+        <h3 data-en="M3 · FTC-Compliant Attribution Records" data-zh="M3 · 符合 FTC 规范的归因记录">M3 · FTC-Compliant Attribution Records</h3>
+        <p data-en="We generate what FTC 16 CFR Part 255 requires: verified disclosure, decaying attribution window, immutable audit trail. Merchants who work with us have legal cover. Legacy agencies + platforms do not. Compliance is table stakes—and an unfair advantage against peers." data-zh="我们生成 FTC 16 CFR Part 255 要求的：已验证披露、衰减归因窗口、不可篡改审计记录。与我们合作的商家有法律保护。传统代理 + 平台没有。合规是基础——也是对同行的不公平优势。">We generate what FTC 16 CFR Part 255 requires: verified disclosure, decaying attribution window, immutable audit trail. Merchants who work with us have legal cover. Legacy agencies + platforms do not. Compliance is table stakes—and an unfair advantage against peers.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="deep-section" id="gtm">
+  <div class="container">
+    <span class="eyebrow" data-en="05 · Phase 0 and Phase 1" data-zh="05 · Phase 0 和 Phase 1">05 · Phase 0 and Phase 1</span>
+    <h2 data-en="Phase 0 and Phase 1" data-zh="Phase 0 和 Phase 1">Phase 0 and Phase 1</h2>
+    <p data-en="Phase 0 proves the unit. Phase 1 proves the motion." data-zh="Phase 0 证明单位经济。Phase 1 证明增长节奏。">Phase 0 proves the unit. Phase 1 proves the motion.</p>
+    
+    <h3 data-en="Phase 0 (May–July 2026, Williamsburg, NYC)" data-zh="Phase 0 (2026 年 5-7 月，纽约威廉斯堡)">Phase 0 (May–July 2026, Williamsburg, NYC)</h3>
+    <div class="kv-grid">
+      <div class="kv"><dt data-en="Scope" data-zh="范围">Scope</dt><dd data-en="5–7 paying merchants in 2 neighborhoods (Williamsburg + East Williamsburg). 8 Instagram micro-creators + 5 Xiaohongshu creators." data-zh="2 个街区（Williamsburg + East Williamsburg）5-7 家付费商家。8 位 Instagram 微创作者 + 5 位小红书 Creator。">5–7 paying merchants in 2 neighborhoods (Williamsburg + East Williamsburg). 8 Instagram micro-creators + 5 Xiaohongshu creators.</dd></div>
+      <div class="kv"><dt data-en="Success gate" data-zh="成功门槛">Success gate</dt><dd data-en="10+ verified transactions total. >80% merchant retention into Phase 1. Blended verified-customer cost ≤$18." data-zh="累计 10+ 笔验证交易。>80% 商家留存进入 Phase 1。综合验证顾客成本 ≤$18。">10+ verified transactions total. >80% merchant retention into Phase 1. Blended verified-customer cost ≤$18.</dd></div>
+      <div class="kv"><dt data-en="Kill criteria (if hit, pause)" data-zh="关停条件（如果触发，暂停）">Kill criteria (if hit, pause)</dt><dd data-en="W1 end: <5 merchant conversations. W2 end: 0 LOIs. W3 end: 3+ staging failures. W4 end: <3 verified transactions." data-zh="第 1 周末：<5 商家对话。第 2 周末：0 LOI。第 3 周末：3+ 失败。第 4 周末：<3 验证交易。">W1 end: <5 merchant conversations. W2 end: 0 LOIs. W3 end: 3+ staging failures. W4 end: <3 verified transactions.</dd></div>
+    </div>
+
+    <h3 data-en="Phase 1 (Q3–Q4 2026, Greater Williamsburg + Chinatown)" data-zh="Phase 1 (2026 年 Q3-Q4，大 Williamsburg + 唐人街)">Phase 1 (Q3–Q4 2026, Greater Williamsburg + Chinatown)</h3>
+    <div class="kv-grid">
+      <div class="kv"><dt data-en="Scope" data-zh="范围">Scope</dt><dd data-en="SoHo: 15–20 anchor merchants (high-ticket restaurants, galleries, boutiques). Chinatown: 5–8 anchor merchants (dim sum houses, herbal shops). Founder leads Chinatown personally." data-zh="SoHo：15-20 家锚点商家（高端餐厅、画廊、精品店）。唐人街：5-8 家锚点商家（早茶、中药店）。创始人亲自带 Chinatown。">SoHo: 15–20 anchor merchants (high-ticket restaurants, galleries, boutiques). Chinatown: 5–8 anchor merchants (dim sum houses, herbal shops). Founder leads Chinatown personally.</dd></div>
+      <div class="kv"><dt data-en="Success gate" data-zh="成功门槛">Success gate</dt><dd data-en="22 paying merchants total. 80%+ phase 0 retention. 150+ verified transactions. >25% ROAS lift on merchants." data-zh="累计 22 家付费商家。80%+ 第 0 阶段留存。150+ 验证交易。>25% 商家 ROAS 提升。">22 paying merchants total. 80%+ phase 0 retention. 150+ verified transactions. >25% ROAS lift on merchants.</dd></div>
+    </div>
+  </div>
+</section>
+
+<section class="deep-section alt" id="year-1">
+  <div class="container">
+    <span class="eyebrow" data-en="06 · No stretch" data-zh="06 · 不是 stretch">06 · No stretch</span>
+    <h2 data-en="Year 1 base case" data-zh="第 1 年基础情景">Year 1 base case</h2>
+    <p data-en="Hard numbers. No agentic multiples. No international expansion." data-zh="硬数字。没有 agentic 倍数。没有国际扩张。">Hard numbers. No agentic multiples. No international expansion.</p>
+    <div class="kv-grid">
+      <div class="kv"><dt data-en="Merchants" data-zh="商家数">Merchants</dt><dd data-en="22 signed, >80% paying retention" data-zh="22 家已签约，>80% 付费留存">22 signed, >80% paying retention</dd></div>
+      <div class="kv"><dt data-en="Creators" data-zh="Creator 数">Creators</dt><dd data-en="50+ Tier 2+ (Verified+)" data-zh="50+ Tier 2+ (Verified+)">50+ Tier 2+ (Verified+)</dd></div>
+      <div class="kv"><dt data-en="Verified transactions" data-zh="验证交易数">Verified transactions</dt><dd data-en="200K+" data-zh="20 万+">200K+</dd></div>
+      <div class="kv"><dt data-en="ARR" data-zh="年经常性收入">ARR</dt><dd data-en="$6.2M (22 merchants × 200K avg trans ÷ 12 months × $40)" data-zh="$6.2M (22 家商家 × 平均 20 万交易 ÷ 12 个月 × $40)">$6.2M (22 merchants × 200K avg trans ÷ 12 months × $40)</dd></div>
+      <div class="kv"><dt data-en="Gross margin" data-zh="毛利率">Gross margin</dt><dd data-en="28% (creator payout $24/verified customer, ops overhead)" data-zh="28% (creator 分成 $24/验证顾客、运营成本)">28% (creator payout $24/verified customer, ops overhead)</dd></div>
+      <div class="kv"><dt data-en="Headcount" data-zh="人员">Headcount</dt><dd data-en="8–10" data-zh="8-10">8–10</dd></div>
+      <div class="kv"><dt data-en="Funding at this stage" data-zh="融资规模">Funding at this stage</dt><dd data-en="Seed $5M @ $22–30M cap (post-Phase 0)" data-zh="Seed $5M @ $22-30M (Phase 0 后)">Seed $5M @ $22–30M cap (post-Phase 0)</dd></div>
+    </div>
+  </div>
+</section>
+
+<section class="deep-section" id="year-5">
+  <div class="container">
+    <span class="eyebrow" data-en="07 · Exit story" data-zh="07 · 退出故事">07 · Exit story</span>
+    <h2 data-en="Year 5 exit story" data-zh="第 5 年退出故事">Year 5 exit story</h2>
+    <p data-en="$80–120M ARR @ 8–12x = $800M–$1.2B. Does not require agentic multiples, international expansion, or cross-border." data-zh="$80-120M 年收入 @ 8-12 倍 = $8 亿-12 亿。不需要 agentic 倍数、国际扩张或跨境。">$80–120M ARR @ 8–12x = $800M–$1.2B. Does not require agentic multiples, international expansion, or cross-border.</p>
+    <div class="kv-grid">
+      <div class="kv"><dt data-en="Year 5 ARR" data-zh="第 5 年 ARR">Year 5 ARR</dt><dd data-en="$80–120M (base case, 5× CAGR from $6.2M Y1)" data-zh="$80-120M (基础情景，从第 1 年 $6.2M 起 5 倍 CAGR)">$80–120M (base case, 5× CAGR from $6.2M Y1)</dd></div>
+      <div class="kv"><dt data-en="Blended gross margin" data-zh="综合毛利">Blended gross margin</dt><dd data-en="48% (AI operators replace account managers)" data-zh="48% (AI operator 替代 account manager)">48% (AI operators replace account managers)</dd></div>
+      <div class="kv"><dt data-en="SaaS multiple applied" data-zh="应用 SaaS 倍数">SaaS multiple applied</dt><dd data-en="8–12x (not 18–22x 'agentic')" data-zh="8-12 倍（不是 18-22 倍『agentic』）">8–12x (not 18–22x 'agentic')</dd></div>
+      <div class="kv"><dt data-en="Exit valuation" data-zh="退出估值">Exit valuation</dt><dd data-en="$800M–$1.2B" data-zh="$8 亿-12 亿">$800M–$1.2B</dd></div>
+      <div class="kv"><dt data-en="Geography" data-zh="地理覆盖">Geography</dt><dd data-en="NYC (Williamsburg, SoHo, Chinatown) + LA (3–5 neighborhoods) + Austin (2–3) + Chicago (2–3). Total ~200 neighborhoods." data-zh="纽约 (Williamsburg、SoHo、唐人街) + LA (3-5 街区) + Austin (2-3) + Chicago (2-3)。共 ~200 个街区。">NYC (Williamsburg, SoHo, Chinatown) + LA (3–5 neighborhoods) + Austin (2–3) + Chicago (2–3). Total ~200 neighborhoods.</dd></div>
+    </div>
+  </div>
+</section>
+
+<section class="deep-section alt" id="risks">
+  <div class="container">
+    <span class="eyebrow" data-en="08 · What can go wrong" data-zh="08 · 什么会出错">08 · What can go wrong</span>
+    <h2 data-en="Risks stated honestly" data-zh="坦白列示风险">Risks stated honestly</h2>
+    <p data-en="We don't hide downside scenarios. We state them clearly." data-zh="我们不隐瞒下行情景。我们清楚说明。">We don't hide downside scenarios. We state them clearly.</p>
+    <div class="card-grid">
+      <article class="card">
+        <h3 data-en="Risk 1 · Phase 0 misses" data-zh="风险 1 · Phase 0 失手">Risk 1 · Phase 0 misses</h3>
+        <p data-en="If we hit the kill criteria (W1 <5 convos, W2 0 LOI, W3 3+ failures, W4 <3 verified transactions), we pause. We do not push forward into Phase 1. This is truth." data-zh="如果触发关停条件（第 1 周末 <5 对话、第 2 周末 0 LOI、第 3 周末 3+ 失败、第 4 周末 <3 验证交易），我们暂停。不强行进 Phase 1。这是真话。">If we hit the kill criteria (W1 <5 convos, W2 0 LOI, W3 3+ failures, W4 <3 verified transactions), we pause. We do not push forward into Phase 1. This is truth.</p>
+      </article>
+      <article class="card">
+        <h3 data-en="Risk 2 · Meta/Google free attribution tool (Medium, Y2–3)" data-zh="风险 2 · Meta/Google 免费归因工具(中等概率，Y2-3)">Risk 2 · Meta/Google free attribution tool (Medium, Y2–3)</h3>
+        <p data-en="Both have enough data to build verified-transaction tracking. If they launch it for free, they own the margin floor. Upside: we'd be acquired at scale before it lands. Downside: we have 18–24 months of runway before competitive pressure." data-zh="两家都有足够数据建构验证交易追踪。如果免费推，他们控制毛利下限。上行：我们规模化前被收购。下行：有 18-24 个月时间窗在压力到来前。">Both have enough data to build verified-transaction tracking. If they launch it for free, they own the margin floor. Upside: we'd be acquired at scale before it lands. Downside: we have 18–24 months of runway before competitive pressure.</p>
+      </article>
+      <article class="card">
+        <h3 data-en="Risk 3 · FTC guidance change (Low, any year)" data-zh="风险 3 · FTC 指导变化(低概率，任何时间)">Risk 3 · FTC guidance change (Low, any year)</h3>
+        <p data-en="If 16 CFR Part 255 is reinterpreted to narrow disclosure or attribution windows, we adapt or shift. Current enforcement is active, which is our tail wind now. Reversal is unlikely but not impossible." data-zh="如果 16 CFR Part 255 被重新解读缩减披露或归因窗口，我们适应或转移。目前执法活跃，这是我们现在的尾风。反向不太可能但不是不可能。">If 16 CFR Part 255 is reinterpreted to narrow disclosure or attribution windows, we adapt or shift. Current enforcement is active, which is our tail wind now. Reversal is unlikely but not impossible.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="deep-section" id="team">
+  <div class="container">
+    <span class="eyebrow" data-en="09 · Who's building this" data-zh="09 · 谁在做这件事">09 · Who's building this</span>
+    <h2 data-en="Five founders, four native-Mandarin speakers" data-zh="五位创始人，四位母语汉语使用者">Five founders, four native-Mandarin speakers</h2>
+    <p data-en="This is not a hack. It is a structural advantage in the US local merchant market, where Asian-American restaurateurs and retailers now represent ~35% of high-growth SMBs." data-zh="这不是技巧。这是美国本地商人市场的结构优势——亚裔美国餐饮和零售商现在占高增长 SMB 的 ~35%。">This is not a hack. It is a structural advantage in the US local merchant market, where Asian-American restaurateurs and retailers now represent ~35% of high-growth SMBs.</p>
+    <div class="kv-grid">
+      <div class="kv"><dt data-en="CAC implication" data-zh="CAC 含义">CAC implication</dt><dd data-en="Peer agencies spend $700–1000 per merchant acquisition in NYC. We spend $80–120 (5 founders each with 20–30 trusted merchant relationships in Williamsburg + SoHo + Chinatown at launch)." data-zh="同行代理在纽约的商家获取成本是 $700-1000。我们是 $80-120（5 位创始人各自在 Williamsburg + SoHo + 唐人街启动时有 20-30 位信任的商家关系）。">Peer agencies spend $700–1000 per merchant acquisition in NYC. We spend $80–120 (5 founders each with 20–30 trusted merchant relationships in Williamsburg + SoHo + Chinatown at launch).</dd></div>
+      <div class="kv"><dt data-en="Founder network" data-zh="创始人网络">Founder network</dt><dd data-en="100+ merchants across three neighborhoods, plus connections to creator networks in Xiaohongshu + Instagram that no US-based team has built independently." data-zh="三个街区 100+ 商家，加上对小红书 + Instagram 创意者网络的连接，这是没有美国本土团队独立建构过的。">100+ merchants across three neighborhoods, plus connections to creator networks in Xiaohongshu + Instagram that no US-based team has built independently.</dd></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-grid footer-grid-3">
+    <div class="footer-col">
+      <div class="footer-heading" data-en="Main" data-zh="主导航">Main</div>
+      <a href="index.html" data-en="Overview" data-zh="首页">Overview</a>
+      <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演">Pitch Deck</a>
+      <a href="investor-qa.html" data-en="Investor Q&amp;A" data-zh="投资人问答">Investor Q&amp;A</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-heading" data-en="Core" data-zh="核心">Core</div>
+      <a href="project-intro.html" data-en="Product" data-zh="产品">Product</a>
+      <a href="push-strategy-core.html" data-en="Strategy" data-zh="战略">Strategy</a>
+      <a href="economics.html" data-en="Economics" data-zh="经济模型">Economics</a>
+      <a href="attribution.html" data-en="Attribution" data-zh="归因机制">Attribution</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-heading" data-en="Reference" data-zh="参考资料">Reference</div>
+      <a href="deep-dive.html" data-en="Deep Dive" data-zh="深度解读">Deep Dive</a>
+      <a href="metrics-dashboard.html" data-en="Metrics" data-zh="指标">Metrics</a>
+      <a href="push-team-dashboard.html" data-en="Team" data-zh="团队">Team</a>
+      <a href="nda.html" data-en="NDA" data-zh="保密协议">NDA</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span data-en="© 2026 Push. Attribution rail for local commerce." data-zh="© 2026 Push. 本地商业归因基础设施。">© 2026 Push. Attribution rail for local commerce.</span>
+  </div>
+</footer>
+
+</body>
+</html>

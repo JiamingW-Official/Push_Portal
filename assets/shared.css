@@ -1,0 +1,755 @@
+/* ============================================================
+   Push Portal — shared.css · v11
+   Single source of truth for tokens, typography, layout primitives.
+   Spec: Design.md (v11 — 3-tier rule classification, closed allowed-color
+   list, 11-stop warm-gray ladder, 5 unified button variants,
+   bottom-right hover-shift signature, iOS 26 radii scale).
+   ============================================================ */
+
+/* =================================
+   Font faces (v11 — 3 fonts, role-locked)
+   Magvix : hero, wordmark, signature divider, inline accent
+   Darky  : display, headings, numerals, footer giant wordmark
+   CS Genio Mono : body, UI, labels, parenthetical eyebrow
+   ================================= */
+@font-face {
+  font-family: 'Magvix';
+  src: url('fonts/Magvix-Regular.ttf') format('truetype');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Magvix';
+  src: url('fonts/Magvix-Italic.ttf') format('truetype');
+  font-weight: 400; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: 'Darky';
+  src: url('fonts/Darky-Regular.ttf') format('truetype');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Darky';
+  src: url('fonts/Darky-Bold.ttf') format('truetype');
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Darky';
+  src: url('fonts/Darky-ExtraBold.ttf') format('truetype');
+  font-weight: 800; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Darky';
+  src: url('fonts/Darky-Black.ttf') format('truetype');
+  font-weight: 900; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'CS Genio Mono';
+  src: url('fonts/CSGenioMono-Regular.ttf') format('truetype');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'CS Genio Mono';
+  src: url('fonts/CSGenioMono-Italic.ttf') format('truetype');
+  font-weight: 400; font-style: italic; font-display: swap;
+}
+
+/* =================================
+   v11 Design Tokens
+   ================================= */
+:root {
+  /* === 2.1 Eleven-stop warm-gray ladder === */
+  --snow:        #ffffff;        /* text on dark surfaces */
+  --surface:     #f8f4e8;        /* page background — Ivory Cream */
+  --surface-2:   #f5f3ee;        /* nested cards, alternate sections */
+  --surface-3:   #ece9e0;        /* button hover, muted block */
+  --mist:        #d8d4c8;        /* card frame border, divider */
+  --ink-6:       #cfcfcf;        /* placeholder, disabled */
+  --ink-5:       #9a9a9a;        /* tertiary metadata */
+  --ink-4:       #6a6a6a;        /* secondary label */
+  --ink-3:       #61605c;        /* body copy (locked) */
+  --char:        #3a3835;        /* dark panel surface (warmer than ink) */
+  --graphite:    #2c2a26;        /* mid-strong heading, secondary CTA text */
+  --ink-2:       #1f1f1f;        /* secondary heading, dark surface */
+  --ink:         #0a0a0a;        /* primary text, all headings, default UI ink */
+  --obsidian:    #000000;        /* footer interior contrast only */
+
+  /* Hairlines */
+  --hairline:        rgba(10, 10, 10, 0.08);
+  --hairline-2:      rgba(10, 10, 10, 0.14);
+  --hairline-dotted: repeating-linear-gradient(to right, rgba(10,10,10,0.20) 0 4px, transparent 4px 8px);
+
+  /* === 2.2 Brand signatures (3 colors, role-locked) === */
+  --brand-red:        #c1121f;       /* primary CTA */
+  --brand-red-deep:   #9b0e19;
+  --brand-red-tint:   rgba(193,18,31,0.08);
+  --accent-blue:      #0085ff;       /* secondary CTA — N2W Blue */
+  --accent-blue-deep: #0077b5;
+  --accent-blue-tint: rgba(0,133,255,0.10);
+  --champagne:        #bfa170;       /* ceremonial */
+  --champagne-light:  #e8dcc3;
+
+  /* === 2.3 Editorial moments (≤1 saturated per viewport) === */
+  --editorial-blue:        #1e5fad;  /* footer panel only */
+  --editorial-blue-deep:   #144a8a;
+  --editorial-pink:        #e8447d;  /* single CTA stamp / share badge */
+  --editorial-pink-deep:   #c8336a;
+  --ga-orange:             #ff5e2b;  /* Ticket Panel + nav home pill */
+  --ga-orange-deep:        #d94215;
+
+  /* === 2.4 GA Tri-Color Nav (nav chrome only) === */
+  --ga-green:    #4ade80;
+  --ga-sky:      #93c5fd;
+
+  /* === 3 Typography === */
+  --font-hero:    'Magvix', Georgia, serif;
+  --font-display: 'Darky', 'Inter', sans-serif;
+  --font-mono:    'CS Genio Mono', 'JetBrains Mono', 'Courier New', monospace;
+
+  /* === 4 Radii (iOS 26 continuous corner) === */
+  --r-xs:    4px;
+  --r-sm:    8px;     /* buttons */
+  --r-md:   10px;     /* cards, inputs, ticket panel */
+  --r-lg:   12px;     /* dropdowns, icon tiles */
+  --r-xl:   16px;     /* liquid-glass tiles */
+  --r-2xl:  20px;     /* modals, photo containers */
+  --r-3xl:  28px;     /* candy panel */
+  --r-4xl:  40px;     /* footer rounded-top */
+  --r-pill: 50vh;     /* pill buttons, GA nav pills */
+  --r-full: 50%;
+
+  /* === 5 Spacing (8px atomic grid) === */
+  --space-1:    8px;
+  --space-2:   16px;
+  --space-3:   24px;
+  --space-4:   32px;
+  --space-5:   40px;
+  --space-6:   48px;
+  --space-7:   56px;
+  --space-8:   64px;
+  --space-9:   80px;
+  --space-10:  96px;
+  --space-11: 128px;
+  --space-12: 160px;
+
+  /* === Layout container (12-col desktop) === */
+  --wrap:       1140px;
+  --wrap-tight:  880px;
+  --wrap-pad-desktop: 64px;
+  --wrap-pad-tablet:  48px;
+  --wrap-pad-mobile:  24px;
+
+  /* === Shadows === */
+  --shadow-1: 0 1px 2px rgba(10,10,10,0.06), 0 2px 8px rgba(10,10,10,0.04);
+  --shadow-2: 0 4px 16px rgba(10,10,10,0.08), 0 2px 4px rgba(10,10,10,0.04);
+  --shadow-3: 0 12px 32px rgba(10,10,10,0.10), 0 4px 8px rgba(10,10,10,0.06);
+  --shadow-glass: 0 8px 24px rgba(10,10,10,0.08);
+
+  /* === Motion === */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out:    cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* =================================
+   Reset + base
+   ================================= */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--surface);
+  color: var(--ink-3);
+  font-family: var(--font-mono);
+  font-size: 18px;
+  line-height: 1.55;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* === 3.1 Type scale (locked) === */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  margin: 0;
+  color: var(--ink);
+}
+
+h1 {
+  font-size: clamp(40px, 5vw, 72px);
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -0.025em;
+}
+h2 {
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+h3 {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+h4 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+h5 {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+}
+
+@media (max-width: 720px) {
+  h2 { font-size: 32px; }
+  h3 { font-size: 24px; }
+}
+
+p {
+  margin: 0;
+  max-width: 68ch;
+}
+
+a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.18s var(--ease-out), border-color 0.18s var(--ease-out);
+}
+a:hover { color: var(--brand-red); border-bottom-color: var(--brand-red); }
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+img, svg { display: block; max-width: 100%; }
+
+/* =================================
+   3.5 Magvix Hero typography
+   ================================= */
+.hero-magvix {
+  font-family: var(--font-hero);
+  font-size: clamp(64px, 9vw, 160px);
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0;
+}
+.hero-magvix em {
+  font-family: var(--font-hero);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.05em;
+  letter-spacing: -0.025em;
+}
+
+.hero-darky {
+  font-family: var(--font-display);
+  font-size: clamp(56px, 8vw, 128px);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  margin: 0;
+}
+
+/* Section title — corner-anchored top-left of panel by default */
+.section-title {
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0;
+}
+@media (max-width: 720px) {
+  .section-title { font-size: 32px; }
+}
+
+/* =================================
+   3.x Eyebrow (parenthetical — Marketing register)
+   ================================= */
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0;
+}
+.eyebrow.with-line {
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--ink);
+}
+
+/* =================================
+   8.x Magvix Italic Signature Divider
+   Editorial breathing room between panels.
+   Phrasing library example: "End of campaign · Fin ·"
+   ================================= */
+.signature-divider {
+  font-family: var(--font-hero);
+  font-style: italic;
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.005em;
+  color: var(--ink-3);
+  text-align: center;
+  margin: var(--space-9) 0;
+  padding: 0 var(--space-3);
+}
+
+/* =================================
+   Layout primitives
+   ================================= */
+.container {
+  width: 100%;
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding-left: var(--wrap-pad-desktop);
+  padding-right: var(--wrap-pad-desktop);
+}
+.container-tight { max-width: var(--wrap-tight); }
+
+@media (max-width: 1024px) {
+  .container { padding-left: var(--wrap-pad-tablet); padding-right: var(--wrap-pad-tablet); }
+}
+@media (max-width: 720px) {
+  .container { padding-left: var(--wrap-pad-mobile); padding-right: var(--wrap-pad-mobile); }
+}
+
+/* === 12-column grid helper === */
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+}
+@media (max-width: 1024px) {
+  .grid-12 { grid-template-columns: repeat(8, 1fr); gap: 20px; }
+}
+@media (max-width: 720px) {
+  .grid-12 { grid-template-columns: repeat(4, 1fr); gap: 16px; }
+}
+
+/* =================================
+   Page hero (corner-anchored title bottom-left of panel)
+   ================================= */
+.page-hero {
+  padding: var(--space-9) 0 var(--space-8);
+  border-bottom: 1px solid var(--hairline);
+}
+.page-hero .eyebrow { margin-bottom: var(--space-2); }
+.page-hero h1, .page-hero .hero-magvix, .page-hero .hero-darky {
+  margin-bottom: var(--space-3);
+}
+.page-hero .lede {
+  font-size: 20px;
+  color: var(--ink-3);
+  max-width: 68ch;
+  line-height: 1.55;
+}
+
+@media (max-width: 720px) {
+  .page-hero { padding: var(--space-7) 0 var(--space-6); }
+  .page-hero .lede { font-size: 17px; }
+}
+
+/* =================================
+   Section primitives
+   ================================= */
+.section {
+  padding: var(--space-10) 0;
+  border-bottom: 1px solid var(--hairline);
+}
+.section.alt { background: var(--surface-2); }
+.section.dark {
+  background: var(--char);
+  color: var(--surface);
+  border-bottom-color: rgba(255,255,255,0.08);
+}
+.section.dark h1, .section.dark h2, .section.dark h3, .section.dark h4 { color: var(--snow); }
+.section.dark .eyebrow { color: var(--ink-6); }
+
+.section .eyebrow { margin-bottom: var(--space-2); }
+.section h2, .section .section-title { margin-bottom: var(--space-3); }
+.section > .container > p {
+  font-size: 18px;
+  max-width: 68ch;
+  margin-bottom: var(--space-6);
+  line-height: 1.6;
+}
+
+@media (max-width: 720px) {
+  .section { padding: var(--space-7) 0; }
+}
+
+/* deep-section is an alias from old code; keep working with new tokens */
+.deep-section {
+  padding: var(--space-10) 0;
+  border-bottom: 1px solid var(--hairline);
+}
+.deep-section.alt { background: var(--surface-2); }
+.deep-section h2 { margin: var(--space-2) 0 var(--space-3); }
+.deep-section > .container > p {
+  font-size: 18px;
+  max-width: 68ch;
+  margin-bottom: var(--space-6);
+  line-height: 1.6;
+}
+@media (max-width: 720px) {
+  .deep-section { padding: var(--space-7) 0; }
+}
+
+/* =================================
+   Card grid
+   ================================= */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+}
+.card {
+  background: var(--snow);
+  border: 1px solid var(--mist);
+  border-radius: var(--r-md);
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  transition: transform 0.18s var(--ease-out), border-color 0.18s var(--ease-out), box-shadow 0.18s var(--ease-out);
+}
+.section.alt .card,
+.deep-section.alt .card { background: var(--snow); }
+.section.dark .card { background: var(--graphite); border-color: rgba(255,255,255,0.08); color: var(--surface); }
+.section.dark .card h3 { color: var(--snow); }
+.section.dark .card p { color: var(--ink-6); }
+
+.card:hover {
+  transform: translate(1px, 1px);
+  border-color: var(--ink);
+  box-shadow: var(--shadow-1);
+}
+.card-num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--brand-red);
+}
+.card h3 { margin: 0; }
+.card p {
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink-3);
+}
+
+@media (max-width: 1024px) { .card-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px)  { .card-grid { grid-template-columns: 1fr; } }
+
+/* =================================
+   Editorial Table (kv-grid replacement)
+   v11 Cinema-Selects: mono parenthetical header + Darky 18-20 first cell
+   + mono 16 other cells + dotted row dividers + corner-anchored title
+   ================================= */
+.kv-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3) var(--space-6);
+}
+.kv {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  border-top: 1px solid var(--hairline);
+}
+.kv dt {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  padding-top: 2px;
+}
+.kv dd {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-3);
+}
+
+@media (max-width: 1024px) { .kv-grid { grid-template-columns: 1fr; } }
+@media (max-width: 640px) {
+  .kv { grid-template-columns: 1fr; gap: var(--space-1); }
+}
+
+/* =================================
+   Simple list (left-rail accent)
+   ================================= */
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.list li {
+  padding: var(--space-2) 0 var(--space-2) var(--space-3);
+  border-left: 2px solid var(--brand-red);
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink-3);
+}
+
+/* =================================
+   Numbered steps
+   ================================= */
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.steps li {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--hairline);
+}
+.steps .step-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--brand-red);
+}
+.steps strong {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--ink);
+  font-size: 18px;
+}
+.steps span {
+  font-size: 16px;
+  color: var(--ink-3);
+  line-height: 1.55;
+  display: block;
+  margin-top: var(--space-1);
+}
+@media (max-width: 640px) {
+  .steps li { grid-template-columns: 1fr; gap: var(--space-1); }
+}
+
+/* =================================
+   Page TOC
+   ================================= */
+.page-toc {
+  margin: var(--space-6) 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-1) var(--space-5);
+  max-width: var(--wrap-tight);
+}
+.page-toc a {
+  display: block;
+  padding: 8px 0;
+  color: var(--ink);
+  font-size: 14px;
+  font-family: var(--font-mono);
+  border-bottom: 1px solid transparent;
+}
+.page-toc a:hover {
+  color: var(--brand-red);
+  border-bottom-color: var(--brand-red);
+}
+@media (max-width: 640px) { .page-toc { grid-template-columns: 1fr; } }
+
+/* =================================
+   9. Unified button system (5 variants)
+   All buttons: 8px radius, mono uppercase, bottom-right hover-shift
+   ================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.18s var(--ease-out),
+              color 0.18s var(--ease-out),
+              border-color 0.18s var(--ease-out),
+              transform 0.18s var(--ease-out),
+              box-shadow 0.18s var(--ease-out);
+}
+.btn:hover {
+  transform: translate(1px, 1px);
+  box-shadow: var(--shadow-1);
+  border-bottom-color: var(--ink);
+}
+.btn:active {
+  transform: translate(2px, 2px) scale(0.98);
+}
+
+/* Variant: Filled Primary — Brand Red */
+.btn-primary {
+  background: var(--brand-red);
+  border-color: var(--brand-red);
+  color: var(--snow);
+}
+.btn-primary:hover {
+  background: var(--brand-red-deep);
+  border-color: var(--brand-red-deep);
+  color: var(--snow);
+}
+
+/* Variant: Filled Secondary — N2W Blue */
+.btn-secondary {
+  background: var(--accent-blue);
+  border-color: var(--accent-blue);
+  color: var(--snow);
+}
+.btn-secondary:hover {
+  background: var(--accent-blue-deep);
+  border-color: var(--accent-blue-deep);
+  color: var(--snow);
+}
+
+/* Variant: Filled Ink — for Ticket Panel / dark surface */
+.btn-ink {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--snow);
+}
+.btn-ink:hover {
+  background: var(--graphite);
+  border-color: var(--graphite);
+  color: var(--snow);
+}
+
+/* Variant: Ghost (default base) — already styled by .btn */
+
+/* Variant: Pill */
+.btn-pill {
+  border-radius: var(--r-pill);
+  background: var(--surface-3);
+  border-color: var(--surface-3);
+  color: var(--ink);
+  padding: 8px 18px;
+  font-size: 13px;
+}
+.btn-pill:hover {
+  background: var(--mist);
+  border-color: var(--mist);
+  color: var(--ink);
+}
+
+/* =================================
+   Ticket Panel — GA Orange perforated CTA container (≤1 per page)
+   ================================= */
+.ticket-panel {
+  position: relative;
+  background: var(--ga-orange);
+  color: var(--ink);
+  border-radius: var(--r-md);
+  padding: var(--space-8) var(--space-6);
+  margin: var(--space-9) auto;
+  max-width: 720px;
+  text-align: center;
+  /* Dashed top + bottom perforations */
+  border-top: 2px dashed var(--ink);
+  border-bottom: 2px dashed var(--ink);
+}
+.ticket-panel::before,
+.ticket-panel::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--surface);
+}
+.ticket-panel::before { top: -10px; left: -8px; box-shadow: 16px 0 0 var(--surface), calc(100vw - 32px) 0 0 var(--surface); }
+.ticket-panel::after  { bottom: -10px; left: -8px; box-shadow: 16px 0 0 var(--surface), calc(100vw - 32px) 0 0 var(--surface); }
+.ticket-panel .ticket-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: var(--space-2);
+}
+.ticket-panel h2 {
+  font-family: var(--font-hero);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(40px, 5vw, 56px);
+  line-height: 1.0;
+  margin-bottom: var(--space-3);
+  letter-spacing: -0.02em;
+}
+.ticket-panel p {
+  margin: 0 auto var(--space-5);
+  max-width: 56ch;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+.ticket-panel .btn-ink { /* ticket CTA uses Filled Ink */ }
+
+/* =================================
+   Utility
+   ================================= */
+.text-mute  { color: var(--ink-4); }
+.text-red   { color: var(--brand-red); }
+.text-blue  { color: var(--accent-blue); }
+.text-ink   { color: var(--ink); }
+.mono       { font-family: var(--font-mono); }
+.serif      { font-family: var(--font-hero); }
+.display    { font-family: var(--font-display); }
+.italic     { font-style: italic; }
+.hide       { display: none !important; }
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

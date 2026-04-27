@@ -1,0 +1,68 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/challenges", "destination": "/deep-dive#challenges", "permanent": true },
+    { "source": "/challenges.html", "destination": "/deep-dive#challenges", "permanent": true },
+    { "source": "/risk-defense", "destination": "/deep-dive#risk-defense", "permanent": true },
+    { "source": "/risk-defense.html", "destination": "/deep-dive#risk-defense", "permanent": true },
+    { "source": "/retention-defense", "destination": "/deep-dive#retention", "permanent": true },
+    { "source": "/retention-defense.html", "destination": "/deep-dive#retention", "permanent": true },
+    { "source": "/standby-mechanism", "destination": "/deep-dive#standby", "permanent": true },
+    { "source": "/standby-mechanism.html", "destination": "/deep-dive#standby", "permanent": true },
+    { "source": "/fraud-integrity", "destination": "/deep-dive#fraud", "permanent": true },
+    { "source": "/fraud-integrity.html", "destination": "/deep-dive#fraud", "permanent": true },
+    { "source": "/platform-value", "destination": "/deep-dive#platform-value", "permanent": true },
+    { "source": "/platform-value.html", "destination": "/deep-dive#platform-value", "permanent": true },
+    { "source": "/gtm-launch", "destination": "/deep-dive#gtm", "permanent": true },
+    { "source": "/gtm-launch.html", "destination": "/deep-dive#gtm", "permanent": true },
+    { "source": "/prospects", "destination": "/deep-dive#prospects", "permanent": true },
+    { "source": "/prospects.html", "destination": "/deep-dive#prospects", "permanent": true }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/:path*.woff2",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/:path*.woff",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/:path*.svg",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/:path*.png",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/:path*.ico",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    }
+  ]
+}

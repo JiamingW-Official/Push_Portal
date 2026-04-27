@@ -3,1070 +3,138 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Push 技术文档 — 本地创作者效果基础设施">
-<meta property="og:title" content="PUSH — Technical Documents">
-<meta property="og:type" content="website">
-<title>PUSH — Metrics Dashboard & Decision System</title>
-<link rel="prefetch" href="attribution.html">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=JetBrains+Mono:wght@500;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet"></noscript>
-<script>/* lang-flash-fix */(function(){if(localStorage.getItem("push-lang")==="zh")document.documentElement.style.opacity="0";})()</script>
-<style>
-:root {
-  --accent: #4f46e5;
-  --accent-light: #818cf8;
-  --accent-dark: #3730a3;
-  --accent-bg: rgba(79,70,229,0.06);
-  --primary: #0f0f1a;
-  --green: #059669;
-  --green-bg: rgba(5,150,105,0.08);
-  --orange: #d97706;
-  --orange-bg: rgba(217,119,6,0.08);
-  --red: #dc2626;
-  --red-bg: rgba(220,38,38,0.08);
-  --text: #111827;
-  --text2: #4b5563;
-  --text3: #9ca3af;
-  --border: #e5e7eb;
-  --bg: #ffffff;
-  --bg2: #f8f9fa;
-  --radius: 8px;
-  --shadow-hover: 0 2px 12px rgba(0,0,0,0.08);
-}
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:var(--text);font-size:15px;line-height:1.75;overflow-x:hidden;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;word-break:break-word;}
-a { text-decoration: none; color: inherit; }
-
-/* Scroll progress bar */
-.scroll-progress{position:fixed;top:0;left:0;height:2px;background:var(--accent);z-index:300;width:0;transition:width 0.1s linear;pointer-events:none;}
-
-/* Nav */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;display:flex;align-items:center;padding:0 24px;gap:12px;background:#ffffff;border-bottom:1px solid var(--border);transition:box-shadow 0.2s;}
-.nav-logo{font-size:22px;font-weight:900;color:var(--accent);letter-spacing:2px;margin-right:8px;flex-shrink:0;text-decoration:none;}
-.nav-links{display:flex;gap:4px;flex-wrap:wrap;flex:1;}
-.nav-links a{font-size:12px;font-weight:500;color:var(--text2);padding:6px 12px;border-radius:8px;transition:color 0.15s,background 0.15s;white-space:nowrap;text-decoration:none;position:relative;}
-.nav-links a:hover{color:var(--accent);background:var(--accent-bg);}
-.nav-links a.active{color:var(--accent);background:var(--accent-bg);font-weight:700;box-shadow:inset 0 0 0 1px rgba(79,70,229,0.2);}
-.nav-links a.active::after{content:'';position:absolute;bottom:0;left:12px;right:12px;height:2px;background:var(--accent);border-radius:1px;}
-#lang-btn{
-  flex-shrink:0;background:var(--accent);color:#fff;font-weight:700;font-size:13px;
-  padding:7px 18px;border-radius:8px;border:none;cursor:pointer;transition:background 0.15s;
-}
-#lang-btn:hover{background:var(--accent-dark);}
-
-/* Doc strip */
-.doc-strip {
-  position: fixed; top: 60px; left: 0; right: 0; z-index: 999;
-  height: 36px; background: #f8f9fa;
-  border-bottom: 1px solid var(--border);
-  display: flex; align-items: center;
-  padding: 0 24px; gap: 16px;
-  font-size: 12px; color: var(--text3);
-}
-.doc-strip a {
-  color: var(--accent); font-weight: 500;
-  transition: opacity 0.18s, background 0.2s, color 0.2s; white-space: nowrap;
-  padding: 4px 10px; border-radius: 6px;
-}
-.doc-strip a:hover { opacity: 0.75; background: var(--accent-bg); }
-.doc-strip a.active { font-weight: 700; background: var(--accent-bg); }
-
-/* Hero */
-.hero {
-  background: var(--primary);
-  padding: 120px 32px 56px;
-  position: relative; overflow: hidden;
-}
-.hero-inner { max-width: 900px; position: relative; z-index: 1; }
-.hero-doc-badge {
-  display: inline-flex; align-items: center; gap: 10px;
-  color: var(--accent-light);
-  font-size: 13px; font-weight: 600; letter-spacing: 0.5px; text-transform: none;
-  margin-bottom: 20px;
-}
-.hero-title {
-  font-size: 36px;
-  font-weight: 800; color: #fff;
-  letter-spacing: -0.5px; line-height: 1.12;
-  margin-bottom: 8px;
-}
-.hero-title-zh {
-  font-size: 16px;
-  font-weight: 500; color: var(--accent-light);
-  letter-spacing: 0; line-height: 1.65;
-  margin-bottom: 20px;
-}
-.hero-sub {
-  font-size: 16px; font-weight: 400;
-  color: rgba(255,255,255,0.55); line-height: 1.65;
-  max-width: 560px; margin-bottom: 6px;
-}
-.hero-sub-zh {
-  font-size: 14px; color: rgba(255,255,255,0.45);
-  line-height: 1.65; max-width: 560px;
-}
-
-/* Shared section */
-.section { padding: 64px 40px; background: #fff; border-top: 1px solid var(--border); }
-.section-gray { background: #fff; }
-.section-white { background: #fff; }
-.section-dark { background: var(--primary); border-top: none; }
-.container { max-width: 1000px; margin: 0 auto; }
-
-.section-label {
-  font-size: 13px; font-weight: 600;
-  letter-spacing: 0.5px;
-  color: var(--accent); margin-bottom: 10px;
-}
-.section-label-light { color: var(--accent-light); }
-.section-label-green { color: var(--green); }
-.section-label-orange { color: var(--orange); }
-.section-label-red { color: var(--red); }
-
-.section-title {
-  font-size: 36px;
-  font-weight: 800; color: var(--primary);
-  letter-spacing: -0.5px; line-height: 1.2;
-  margin-bottom: 8px;
-}
-.section-title-white { color: #fff; }
-.section-sub {
-  font-size: 16px; color: var(--text2);
-  line-height: 1.65; max-width: 640px; margin-bottom: 48px;
-}
-.section-sub-white { color: rgba(255,255,255,0.55); }
-
-/* Fade in */
-.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.55s ease,transform 0.55s ease;animation:fadeInFallback 0s 4s forwards;will-change:opacity,transform;}
-.visible .fade-in,.fade-in.visible{opacity:1;transform:none;animation:none;will-change:auto;}
-@keyframes fadeInFallback { to { opacity: 1; transform: translateY(0); } }
-
-/* Section 1 - Philosophy + North Star */
-.philosophy-body {
-  font-size: 16px; color: var(--text2); line-height: 1.75;
-  max-width: 860px; margin-bottom: 40px;
-}
-.north-star-blockquote {
-  background: var(--primary);
-  border-radius: var(--radius);
-  border-left: 4px solid var(--accent-light);
-  padding: 40px 44px;
-  max-width: 900px;
-}
-.north-star-label {
-  font-size: 13px; font-weight: 600; letter-spacing: 0.5px;
-  color: var(--accent-light);
-  margin-bottom: 12px;
-}
-.north-star-quote {
-  font-size: 22px; font-weight: 800; color: #fff;
-  line-height: 1.55;
-  margin-bottom: 16px;
-  font-variant-numeric: tabular-nums;
-}
-.north-star-quote-zh {
-  font-size: 15px; font-weight: 400;
-  color: rgba(255,255,255,0.45);
-  line-height: 1.65;
-}
-.metrics-5q {
-  display: flex; flex-direction: column; gap: 10px; margin-top: 28px; max-width: 900px;
-  counter-reset: question;
-}
-.metrics-5q-item {
-  background: #fff; border: 1px solid var(--border);
-  border-radius: 8px; padding: 12px 18px;
-  font-size: 16px; font-weight: 600; color: var(--text);
-  display: flex; align-items: center; gap: 14px;
-  counter-increment: question;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-.metrics-5q-item:hover {
-  border-color: rgba(79,70,229,0.3); box-shadow: 0 1px 8px rgba(0,0,0,0.05);
-}
-.metrics-5q-item::before {
-  content: counter(question);
-  display: flex; align-items: center; justify-content: center;
-  width: 28px; height: 28px; border-radius: 50%;
-  background: var(--accent); color: #fff;
-  font-size: 13px; font-weight: 800; flex-shrink: 0;
-  font-variant-numeric: tabular-nums;
-}
-
-/* Metrics tables */
-.metrics-table-wrap { overflow-x: auto; margin-bottom: 0; }
-.metrics-3col {
-  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0;
-  border: 1px solid var(--border); border-top: 3px solid transparent;
-  border-radius: var(--radius);
-  overflow: hidden; background: #fff;
-  transition: box-shadow 0.2s, border-color 0.2s;
-}
-.metrics-3col:hover {
-  box-shadow: var(--shadow-hover);
-  border-top-color: var(--accent);
-  border-color: rgba(79,70,229,0.25);
-}
-.metrics-col { display: flex; flex-direction: column; }
-.metrics-col-header {
-  padding: 16px 22px; font-size: 13px; font-weight: 600;
-  letter-spacing: 0.5px;
-  border-bottom: 1px solid var(--border);
-  border-right: 1px solid var(--border);
-  display: flex; align-items: center; gap: 8px;
-}
-.metrics-col:last-child .metrics-col-header,
-.metrics-col:last-child .metrics-col-item { border-right: none; }
-.header-activation { background: rgba(5,150,105,0.06); color: var(--green); }
-.header-quality { background: rgba(79,70,229,0.06); color: var(--accent); }
-.header-retention { background: rgba(217,119,6,0.06); color: var(--orange); }
-.metrics-col-item {
-  padding: 11px 22px;
-  font-size: 13.5px; color: var(--text2); line-height: 1.5;
-  border-bottom: 1px solid var(--border);
-  border-right: 1px solid var(--border);
-  transition: background 0.15s;
-  font-variant-numeric: tabular-nums;
-}
-.metrics-col-item:last-child { border-bottom: none; }
-.metrics-col-item:hover { background: var(--bg2); }
-
-/* 2-col layout */
-.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
-.metrics-box {
-  background: #fff; border: 1px solid var(--border);
-  border-top: 3px solid transparent;
-  border-radius: var(--radius); overflow: hidden;
-  contain: layout style paint;
-  transition: box-shadow 0.2s, border-color 0.2s;
-}
-.metrics-box:hover {
-  box-shadow: var(--shadow-hover);
-  border-top-color: var(--accent);
-  border-color: rgba(79,70,229,0.25);
-}
-.metrics-box-gray { background: var(--bg2); }
-.metrics-box-header {
-  padding: 16px 24px; border-bottom: 1px solid var(--border);
-  font-size: 13px; font-weight: 600; letter-spacing: 0.5px;
-  display: flex; align-items: center; gap: 8px;
-}
-.mh-campaign { color: var(--accent); background: var(--accent-bg); }
-.mh-liquidity { color: var(--green); background: var(--green-bg); }
-.mh-integrity { color: var(--red); background: var(--red-bg); }
-.mh-economic { color: var(--orange); background: var(--orange-bg); }
-.metrics-box-item {
-  padding: 9px 24px; font-size: 13.5px; color: var(--text2);
-  border-bottom: 1px solid var(--border); line-height: 1.5;
-  font-variant-numeric: tabular-nums;
-}
-.metrics-box-item:last-child { border-bottom: none; }
-
-/* Decision rules */
-.decision-rules { display: flex; flex-direction: column; gap: 20px; }
-.decision-rule {
-  display: flex; align-items: stretch; gap: 0;
-  border: 1px solid var(--border); border-radius: var(--radius);
-  overflow: hidden; background: #fff;
-  transition: box-shadow 0.2s, border-color 0.2s;
-}
-.decision-rule:hover {
-  box-shadow: var(--shadow-hover);
-  border-color: rgba(79,70,229,0.25);
-}
-.rule-if {
-  flex: 1; padding: 24px 28px;
-  background: var(--green-bg);
-  border-right: 1px solid rgba(5,150,105,0.18);
-  display: flex; flex-direction: column; gap: 8px;
-}
-.rule-arrow {
-  padding: 0 20px; display: flex; align-items: center; justify-content: center;
-  font-size: 24px; font-weight: 700; color: var(--text3);
-  background: #fff; flex-shrink: 0;
-  border-right: 1px solid var(--border);
-}
-.rule-then {
-  flex: 1; padding: 24px 28px;
-  background: var(--accent-bg);
-  display: flex; flex-direction: column; gap: 8px;
-}
-.rule-label {
-  font-family: 'JetBrains Mono', 'Courier New', monospace;
-  font-size: 10px; font-weight: 700; letter-spacing: 2px;
-  text-transform: uppercase; display: block;
-}
-.rule-if .rule-label { color: var(--green); }
-.rule-then .rule-label { color: var(--accent); }
-.rule-condition {
-  font-size: 15px; font-weight: 600; color: #065f46;
-  line-height: 1.45;
-}
-.rule-action {
-  font-size: 15px; font-weight: 600; color: var(--accent-dark);
-  line-height: 1.45;
-}
-.rule-num {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 28px; height: 28px; border-radius: 50%;
-  background: var(--green); color: #fff;
-  font-size: 12px; font-weight: 800; flex-shrink: 0;
-  margin-right: 10px;
-}
-
-/* Dashboard structure */
-.dashboard-2x2 {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
-}
-.dashboard-card {
-  background: #fff; border: 1px solid var(--border);
-  border-top: 3px solid transparent;
-  border-radius: var(--radius); padding: 28px;
-  transition: transform 0.15s, box-shadow 0.15s, border-color 0.2s;
-  cursor: default;
-  contain: layout style paint;
-}
-.dashboard-card:hover {
-  box-shadow: var(--shadow-hover);
-  border-top-color: var(--accent);
-  border-color: rgba(79,70,229,0.25);
-}
-.dc-badge {
-  font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
-  text-transform: uppercase; padding: 4px 10px;
-  border-radius: 6px; display: inline-block;
-  margin-bottom: 14px; font-variant-numeric: tabular-nums;
-}
-.dc-exec { background: rgba(79,70,229,0.08); color: var(--accent); }
-.dc-product { background: rgba(5,150,105,0.08); color: var(--green); }
-.dc-ops { background: rgba(220,38,38,0.08); color: var(--red); }
-.dc-gtm { background: rgba(217,119,6,0.08); color: var(--orange); }
-.dc-title { font-size: 28px; font-weight: 800; color: var(--text); margin-bottom: 6px; font-variant-numeric: tabular-nums; }
-.dc-subtitle { font-size: 13px; font-weight: 600; color: var(--text3); margin-bottom: 16px; letter-spacing: 0.5px; }
-.dc-items { list-style: none; display: flex; flex-direction: column; gap: 6px; }
-.dc-items li {
-  font-size: 14px; color: var(--text2);
-  padding-left: 18px; position: relative; line-height: 1.6;
-}
-.dc-items li::before {
-  content: '·'; position: absolute; left: 4px;
-  color: var(--text3); font-size: 16px; top: -2px;
-}
-
-/* Metrics traps */
-.traps-list { display: flex; flex-direction: column; gap: 18px; }
-.trap-strip {
-  display: flex; align-items: flex-start; gap: 20px;
-  background: rgba(220,38,38,0.02); border: 1px solid rgba(220,38,38,0.12);
-  border-top: 3px solid var(--red);
-  border-radius: var(--radius); padding: 24px 28px;
-  transition: box-shadow 0.2s, border-color 0.2s;
-  contain: layout style paint;
-}
-.trap-strip:hover { box-shadow: 0 2px 12px rgba(220,38,38,0.1); border-color: rgba(220,38,38,0.25); }
-.trap-icon {
-  width: 44px; height: 44px; border-radius: 50%;
-  background: var(--red-bg); border: 1px solid rgba(220,38,38,0.2);
-  color: var(--red); font-size: 18px; font-weight: 900;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; letter-spacing: -1px;
-}
-.trap-badge {
-  font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
-  text-transform: uppercase; color: var(--red);
-  background: var(--red-bg); padding: 3px 9px;
-  border-radius: 5px; display: inline-block; margin-bottom: 8px;
-}
-.trap-title { font-size: 18px; font-weight: 800; color: var(--text); margin-bottom: 6px; font-variant-numeric: tabular-nums; }
-.trap-body { font-size: 14px; color: var(--text2); line-height: 1.6; }
-
-/* Final standard */
-.final-blockquote {
-  max-width: 900px; margin: 0 auto;
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 8px; padding: 40px 48px;
-  position: relative;
-}
-.final-quote-text {
-  font-size: 18px; font-weight: 500; color: rgba(255,255,255,0.85);
-  line-height: 1.75; margin-bottom: 20px;
-}
-.final-quote-zh {
-  font-size: 15px; color: rgba(255,255,255,0.4);
-  line-height: 1.65;
-  border-top: 1px solid rgba(255,255,255,0.08);
-  padding-top: 18px; margin-top: 18px;
-}
-
-/* Footer */
-.footer {
-  background: #0f0f1a; padding: 48px 64px 32px;
-  border-top: 1px solid rgba(255,255,255,0.06);
-}
-.footer-inner { max-width: 1000px; margin: 0 auto; }
-.footer-top {
-  display: flex; align-items: flex-start;
-  justify-content: space-between; gap: 40px;
-  flex-wrap: wrap; padding-bottom: 36px;
-  border-bottom: 1px solid rgba(255,255,255,0.07);
-  margin-bottom: 28px;
-}
-.footer-logo { font-size: 24px; font-weight: 900; color: var(--accent-light); margin-bottom: 8px; }
-.footer-tagline { font-size: 13px; color: rgba(255,255,255,0.3); max-width: 240px; line-height: 1.5; }
-.footer-links { display: flex; flex-wrap: wrap; gap: 8px; }
-.footer-link {
-  font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.5);
-  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
-  padding: 6px 14px; border-radius: 100px; transition: color 0.18s,background 0.18s,border-color 0.18s;
-}
-.footer-link:hover { color: #fff; background: rgba(79,70,229,0.2); border-color: rgba(79,70,229,0.3); }
-
-.footer-link.active { color: var(--accent-light); border-color: rgba(79,70,229,0.3); background: rgba(79,70,229,0.1); }
-.footer-copy { font-size: 12px; color: rgba(255,255,255,0.18); text-align: center; }
-
-/* TEXT LAYOUT OPTIMIZATIONS */
-p,.item-desc,.check-desc,.signal-text,.philosophy-body{max-width:640px;}
-.section-sub,.hero-subtitle,.hero-sub{max-width:640px;}
-.section-title,h2{margin-bottom:16px;}
-li{margin-bottom:6px;line-height:1.7;}
-strong{font-weight:600;color:var(--text);}
-.hero strong,.section-dark strong{color:rgba(255,255,255,0.95);}
-.section-dark p,.section-dark li,.hero p{color:rgba(255,255,255,0.9);}
-.item-row,.check-item,.signal-item,.dash-item,.card,.metric-item,.metrics-card,.metrics-5q-item,.dashboard-2x2-item,.metrics-col-item{padding:20px 24px;}
-code,pre{font-size:13px;}
-
-/* -- Design polish: card hover -- */
-.dashboard-card:hover,.trap-strip:hover,.decision-rule:hover,.metrics-box:hover,.metrics-3col:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,0.08);}
-
-/* Chinese mode */
-html[lang="zh"] body{line-height:2.0;letter-spacing:0.01em;}
-html[lang="zh"] .section-title,html[lang="zh"] .hero-title{line-height:1.4;}
-
-/* Mobile */
-@media(max-width: 900px) {
-  .two-col { grid-template-columns: 1fr; }
-  .dashboard-2x2 { grid-template-columns: 1fr; }
-  .metrics-3col { grid-template-columns: 1fr; }
-  .metrics-col .metrics-col-header { border-right: none; }
-  .metrics-col .metrics-col-item { border-right: none; }
-}
-@media(max-width: 768px) {
-  .decision-rule { flex-direction: column; }
-  .rule-arrow { padding: 12px 0; justify-content: center; border-right: none; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-  .hero { padding: 108px 20px 48px; }
-  .final-blockquote { padding: 36px 28px; }
-}
-@media(max-width: 640px) {
-  body { font-size: 15px; }
-  .nav-links { display: none; }
-  .hero-title,.section-title,h2 { font-size: clamp(22px,6vw,28px); line-height: 1.3; }
-  .section { padding: 48px 20px; }
-  .hero { padding: 96px 20px 40px; }
-  .footer-top { flex-direction: column; }
-  .footer { padding: 32px 20px 24px; }
-}
-/* Mobile hamburger */
-.nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;flex-shrink:0;margin-left:4px;}
-.nav-burger span{display:block;width:22px;height:2px;background:var(--text,#111827);border-radius:2px;transition:transform 0.2s,opacity 0.2s;}
-.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
-.nav-burger.open span:nth-child(2){opacity:0;}
-.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-.nav-mobile-panel{display:none;position:fixed;top:60px;left:0;right:0;background:#fffffffa;border-bottom:1px solid var(--border,#e5e7eb);padding:12px 16px 20px;flex-direction:column;gap:2px;z-index:999;box-shadow:0 8px 32px rgba(0,0,0,0.12);}
-.nav-mobile-panel.open{display:flex;}
-.nav-mobile-panel a{padding:12px 16px;border-radius:8px;font-size:15px;font-weight:500;color:var(--text,#111827);text-decoration:none;transition:background 0.15s,color 0.15s;}
-.nav-mobile-panel a:hover{background:var(--bg2,#f8f9fa);}
-.nav-mobile-panel a.active{color:var(--accent,#4f46e5);background:var(--accent-bg,rgba(79,70,229,0.06));font-weight:700;}
-.nav-mobile-panel .mobile-lang-row{display:flex;align-items:center;padding:12px 16px 4px;gap:12px;border-top:1px solid var(--border,#e5e7eb);margin-top:8px;}
-.nav-mobile-panel .mobile-lang-label{font-size:12px;color:var(--text3,#9ca3af);font-weight:500;}
-@media(max-width:768px){
-  .nav-links,.navlinks{display:none !important;}
-  .nav-burger{display:flex !important;}
-}
-</style>
+<title>PUSH — Metrics</title>
+<meta name="description" content="Year 1 Base Case KPIs, Phase 0 gates, and decision rules for Push.">
+<link rel="stylesheet" href="assets/shared.css">
+<link rel="stylesheet" href="assets/nav.css">
+<script src="assets/nav.js" defer></script>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preload" href="assets/fonts/jetbrains-mono-latin-1cd702cd.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/archivo-latin-2a392e77.woff2" as="font" type="font/woff2" crossorigin>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 <body>
-<div class="scroll-progress" id="scroll-progress"></div>
 
-<!-- NAV -->
-<nav>
+
+<nav class="site-nav">
   <a href="index.html" class="nav-logo">PUSH</a>
   <div class="nav-links">
     <a href="index.html" data-en="Overview" data-zh="首页">Overview</a>
-    <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
-    <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
-    <a href="prospects.html" data-en="Prospects" data-zh="未来愿景">Prospects</a>
-    <a href="challenges.html" data-en="Challenges" data-zh="挑战分析">Challenges</a>
-    <a href="risk-defense.html" data-en="Risk &amp; Defense" data-zh="风险防御">Risk &amp; Defense</a>
-    <a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a>
-    <a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
-    <a href="push-strategy-core.html" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
+    <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演">Pitch Deck</a>
+    <a href="investor-qa.html" data-en="Investor Q&amp;A" data-zh="投资人问答">Investor Q&amp;A</a>
+    <div class="nav-more">
+      <button class="nav-more-btn" aria-haspopup="true" aria-expanded="false">
+        <span data-en="More" data-zh="更多">More</span> <span class="nav-more-caret">▾</span>
+      </button>
+      <div class="nav-more-panel nav-more-panel-compact" role="menu">
+        <div class="nav-more-group">
+          <div class="nav-more-heading" data-en="Core" data-zh="核心">Core</div>
+          <a href="project-intro.html" data-en="Product" data-zh="产品">Product</a>
+          <a href="push-strategy-core.html" data-en="Strategy" data-zh="战略">Strategy</a>
+          <a href="economics.html" data-en="Economics" data-zh="经济模型">Economics</a>
+          <a href="attribution.html" data-en="Attribution" data-zh="归因机制">Attribution</a>
+        </div>
+        <div class="nav-more-group">
+          <div class="nav-more-heading" data-en="Reference" data-zh="参考资料">Reference</div>
+          <a href="deep-dive.html" data-en="Deep Dive" data-zh="深度解读">Deep Dive</a>
+          <a href="metrics-dashboard.html" class="active" data-en="Metrics" data-zh="指标">Metrics</a>
+          <a href="push-team-dashboard.html" data-en="Team" data-zh="团队">Team</a>
+        </div>
+      </div>
+    </div>
   </div>
-  <button id="lang-btn">中 / EN</button>
-  <button class="nav-burger" id="nav-burger" aria-label="打开菜单" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
+  <div class="nav-actions">
+    <button class="nav-lang">中 / EN</button>
+    <button class="nav-burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
-<div class="nav-mobile-panel" id="nav-mobile-panel">
-  <a href="index.html" data-en="Overview" data-zh="首页">Overview</a>
-  <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
-  <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
-  <a href="prospects.html" data-en="Prospects" data-zh="未来愿景">Prospects</a>
-  <a href="challenges.html" data-en="Challenges" data-zh="挑战分析">Challenges</a>
-  <a href="risk-defense.html" data-en="Risk &amp; Defense" data-zh="风险防御">Risk &amp; Defense</a>
-  <a href="retention-defense.html" data-en="Retention" data-zh="留存机制">Retention</a>
-  <a href="platform-value.html" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
-  <a href="push-strategy-core.html" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
-  <a href="economics.html" data-en="Economics" data-zh="经济模型">Economics</a>
-  <a href="attribution.html" data-en="Attribution" data-zh="归因体系">Attribution</a>
-  <a href="fraud-integrity.html" data-en="Fraud &amp; Trust" data-zh="反欺诈">Fraud &amp; Trust</a>
-  <a href="gtm-launch.html" data-en="GTM &amp; Launch" data-zh="上线计划">GTM &amp; Launch</a>
-  <a href="metrics-dashboard.html" class="active" data-en="Metrics" data-zh="指标看板">Metrics</a>
-  <div class="mobile-lang-row">
-    <span class="mobile-lang-label" data-en="Language" data-zh="语言">Language</span>
-    <button id="lang-btn-mobile" style="background:var(--accent,#4f46e5);color:#fff;border:none;padding:6px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;">中 / EN</button>
-  </div>
-</div>
 
-<!-- DOC STRIP -->
-<div class="doc-strip">
-  <span data-en="Technical Docs:" data-zh="技术文档：">Technical Docs:</span>
-  <a href="economics.html" data-en="Economics" data-zh="经济模型">Economics</a>
-  <a href="attribution.html" data-en="Attribution" data-zh="归因体系">Attribution</a>
-  <a href="fraud-integrity.html" data-en="Fraud &amp; Trust" data-zh="反欺诈">Fraud &amp; Trust</a>
-  <a href="gtm-launch.html" data-en="GTM &amp; Launch" data-zh="上线计划">GTM &amp; Launch</a>
-  <a href="metrics-dashboard.html" class="active" data-en="Metrics" data-zh="指标看板">Metrics</a>
-</div>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-inner">
-    <div class="hero-doc-badge" data-en="DOC — 10" data-zh="文档 — 10">DOC — 10</div>
-    <h1 class="hero-title" data-en="Metrics Dashboard &amp; Decision System" data-zh="数据看板与决策规则">Metrics Dashboard &amp; Decision System</h1>
-    <div class="hero-title-zh" data-en="数据看板与决策规则" data-zh="Metrics Dashboard &amp; Decision System">数据看板与决策规则</div>
-    <p class="hero-sub" data-en="Which metrics matter, how to interpret them, and how to avoid making bad decisions from shallow data." data-zh="哪些数字真的重要、怎么读懂它们，以及怎么避免被表面数字带偏。">Which metrics matter, how to interpret them, and how to avoid making bad decisions from shallow data.</p>
-    <p class="hero-sub-zh" data-en="哪些指标重要、如何解读它们，以及如何避免从浅层数据做出错误决策。" data-zh="Which metrics matter, how to interpret them, and how to avoid making bad decisions from shallow data.">哪些指标重要、如何解读它们，以及如何避免从浅层数据做出错误决策。</p>
-  </div>
-</section>
-
-<!-- ── LAYER DESCRIPTION ── -->
-<div style="max-width:800px; margin:0 auto 24px; padding:10px 16px; background:var(--bg2, #f8f9fa); border-radius:8px; font-size:13px; color:var(--text3); text-align:center;">
-  <span data-en="Deep dive into Push's key metrics and KPIs. For attribution methodology, see <a href='attribution.html'>Attribution</a>." data-zh="看看 Push 盯哪些数字、怎么判断好坏。归因做法请参阅<a href='attribution.html'>归因方法</a>。" class="bilingual-text">Deep dive into Push's key metrics and KPIs. For attribution methodology, see <a href="attribution.html">Attribution</a>.</span>
-</div>
-
-<!-- SECTION 1 — PHILOSOPHY + NORTH STAR -->
-<section class="section section-gray">
+<header class="page-hero">
   <div class="container">
-    <div class="fade-in">
-      <div class="section-label" data-en="METRIC PHILOSOPHY" data-zh="数据观">METRIC PHILOSOPHY</div>
-      <h2 class="section-title" data-en="What We Optimize For" data-zh="我们在优化什么">What We Optimize For</h2>
-      <p class="philosophy-body" data-en="Optimize for trust, repeatability, creator quality, merchant quality, clean transactions, and defensible data accumulation. Metrics must answer: Is the agency delivering outcomes? Is the workflow working? Is retention real? Is the wedge correct? Is the Creator OS getting stronger?" data-zh="重点盯：复购率、创作者完成率、商家满意度、交易纠纷率。数字必须能回答这几个问题：Agency 有没有交付真实到店？流程跑不跑得通？留存是不是真的？切入品类选对了吗？Creator OS 有没有越跑越强？">Optimize for trust, repeatability, creator quality, merchant quality, clean transactions, and defensible data accumulation. Metrics must answer: Is the agency delivering outcomes? Is the workflow working? Is retention real? Is the wedge correct? Is the Creator OS getting stronger?</p>
-    </div>
-
-    <div class="metrics-5q fade-in" style="margin-bottom: 40px;">
-      <div class="metrics-5q-item" data-en="Is the agency delivering outcomes?" data-zh="Agency 有没有交付真实到店？">Is the agency delivering outcomes?</div>
-      <div class="metrics-5q-item" data-en="Is the workflow working?" data-zh="流程跑得顺吗？">Is the workflow working?</div>
-      <div class="metrics-5q-item" data-en="Is retention real?" data-zh="留存是真实的吗？">Is retention real?</div>
-      <div class="metrics-5q-item" data-en="Is the wedge correct?" data-zh="切入品类选对了吗？">Is the wedge correct?</div>
-      <div class="metrics-5q-item" data-en="Is the Creator OS getting stronger?" data-zh="Creator OS 有没有越跑越强？">Is the Creator OS getting stronger?</div>
-    </div>
-
-    <div class="north-star-blockquote fade-in">
-      <div class="north-star-label" data-en="NORTH STAR METRIC" data-zh="最重要的数字">NORTH STAR METRIC</div>
-      <div class="north-star-quote" data-en='"Verified repeat campaign value generated per active merchant cohort"' data-zh='"每批活跃商户产生的经核实复投活动价值"'>"Verified repeat campaign value generated per active merchant cohort"</div>
-      <div class="north-star-quote-zh" data-en="— Ties value to merchants, requires campaign completion quality, emphasizes repeat behavior, discourages vanity metrics." data-zh="— 商家从平台上赚没赚到，活动完成率高不高，商家愿不愿意再来，别被注册量和浏览量骗了。">— Ties value to merchants, requires campaign completion quality, emphasizes repeat behavior, discourages vanity metrics.</div>
-    </div>
+    <span class="eyebrow" data-en="Metrics · Year 1 Base Case" data-zh="指标 · 第一年基准预测">Metrics · Year 1 Base Case</span>
+    <h1 data-en="Push Metrics: Year 1 Base Case" data-zh="Push 指标：第一年基准预测">Push Metrics: Year 1 Base Case</h1>
+    <p class="lede" data-en="What we commit to. Phase 0 gates first." data-zh="我们承诺的数字。先通过 Phase 0 门槛。">What we commit to. Phase 0 gates first.</p>
   </div>
-</section>
+</header>
 
-<!-- SECTION 2 — MERCHANT METRICS -->
-<section class="section section-white">
+<main>
+
+<section class="deep-section">
   <div class="container">
-    <div class="fade-in" style="margin-bottom: 36px;">
-      <div class="section-label section-label-green" data-en="MERCHANT METRICS" data-zh="商户数据">MERCHANT METRICS</div>
-      <h2 class="section-title" data-en="Merchant Performance Tracking" data-zh="商户表现怎么看">Merchant Performance Tracking</h2>
-      <p class="section-sub" data-en="Three lenses: activation quality, operational quality, and long-term retention health." data-zh="商家表现看三个：新商家转化、活动完成情况、回头率。">Three lenses: activation quality, operational quality, and long-term retention health.</p>
-    </div>
-    <div class="metrics-table-wrap fade-in">
-      <div class="metrics-3col">
-        <div class="metrics-col">
-          <div class="metrics-col-header header-activation">
-            <span>⚡</span>
-            <span data-en="Activation" data-zh="激活">Activation</span>
-          </div>
-          <div class="metrics-col-item" data-en="Merchant onboarding completion rate" data-zh="商家入驻完成率">Merchant onboarding completion rate</div>
-          <div class="metrics-col-item" data-en="First campaign launch rate" data-zh="首次活动发布率">First campaign launch rate</div>
-          <div class="metrics-col-item" data-en="Time-to-first-campaign" data-zh="首次活动所需时间">Time-to-first-campaign</div>
-          <div class="metrics-col-item" data-en="Campaign setup abandonment rate" data-zh="活动设置放弃率">Campaign setup abandonment rate</div>
-        </div>
-        <div class="metrics-col">
-          <div class="metrics-col-header header-quality">
-            <span>🎯</span>
-            <span data-en="Quality" data-zh="质量">Quality</span>
-          </div>
-          <div class="metrics-col-item" data-en="Merchant approval turnaround time" data-zh="商家审批周转时间">Merchant approval turnaround time</div>
-          <div class="metrics-col-item" data-en="Merchant dispute rate" data-zh="商家纠纷率">Merchant dispute rate</div>
-          <div class="metrics-col-item" data-en="Merchant satisfaction score" data-zh="商家满意度评分">Merchant satisfaction score</div>
-          <div class="metrics-col-item" data-en="Campaign report open rate" data-zh="活动报告查看率">Campaign report open rate</div>
-        </div>
-        <div class="metrics-col">
-          <div class="metrics-col-header header-retention">
-            <span>🔁</span>
-            <span data-en="Retention" data-zh="留存">Retention</span>
-          </div>
-          <div class="metrics-col-item" data-en="Merchant second-campaign rate" data-zh="商家第二次活动率">Merchant second-campaign rate</div>
-          <div class="metrics-col-item" data-en="30-day repeat rate" data-zh="30天复购率">30-day repeat rate</div>
-          <div class="metrics-col-item" data-en="60-day repeat rate" data-zh="60天复购率">60-day repeat rate</div>
-          <div class="metrics-col-item" data-en="Average campaigns per active merchant" data-zh="每活跃商家平均活动数">Average campaigns per active merchant</div>
-        </div>
-      </div>
+    <span class="eyebrow" data-en="Year 1 KPI Targets" data-zh="第一年 KPI 目标">Year 1 KPI Targets</span>
+    <h2 data-en="Hard base case numbers. Never stretch." data-zh="硬底数字。永不拔高。">Hard base case numbers. Never stretch.</h2>
+    <div class="kv-grid">
+      <div class="kv"><dt data-en="Signed merchants" data-zh="签约商家">Signed merchants</dt><dd data-en="22 (failure floor: &lt;18 triggers strategy review)" data-zh="22（失败线：&lt;18 触发战略审视）">22 (failure floor: &lt;18 triggers strategy review)</dd></div>
+      <div class="kv"><dt data-en="90-day merchant retention" data-zh="90 天商家留存">90-day merchant retention</dt><dd data-en="&gt;80% (failure floor: &lt;70% triggers product redesign)" data-zh="&gt;80%（失败线：&lt;70% 触发产品重做）">&gt;80% (failure floor: &lt;70% triggers product redesign)</dd></div>
+      <div class="kv"><dt data-en="Merchant ROAS lift vs baseline" data-zh="商家 ROAS 提升 vs 基线">Merchant ROAS lift vs baseline</dt><dd data-en="&gt;25% (failure floor: &lt;15% triggers product redesign)" data-zh="&gt;25%（失败线：&lt;15% 触发产品重做）">&gt;25% (failure floor: &lt;15% triggers product redesign)</dd></div>
+      <div class="kv"><dt data-en="Brand partner contracts" data-zh="品牌合作商合约">Brand partner contracts</dt><dd data-en="2 Pilot + 1 Standard" data-zh="2 个 Pilot + 1 个 Standard">2 Pilot + 1 Standard</dd></div>
+      <div class="kv"><dt data-en="Insider Free MAU" data-zh="内部用户月活">Insider Free MAU</dt><dd data-en="3K (failure floor: &lt;1.5K triggers acquisition redesign)" data-zh="3K（失败线：&lt;1.5K 触发获客重做）">3K (failure floor: &lt;1.5K triggers acquisition redesign)</dd></div>
+      <div class="kv"><dt data-en="Creator signed (Community)" data-zh="创作者签约（社群）">Creator signed (Community)</dt><dd data-en="25 (failure floor: &lt;18 triggers creator model review)" data-zh="25（失败线：&lt;18 触发创作者模型审视）">25 (failure floor: &lt;18 triggers creator model review)</dd></div>
+      <div class="kv"><dt data-en="Creator signed (Studio)" data-zh="创作者签约（工作室）">Creator signed (Studio)</dt><dd data-en="3 (failure floor: &lt;2 triggers Studio product rework)" data-zh="3（失败线：&lt;2 触发 Studio 产品重做）">3 (failure floor: &lt;2 triggers Studio product rework)</dd></div>
+      <div class="kv"><dt data-en="Attribution events" data-zh="归因事件">Attribution events</dt><dd data-en="200K (failure floor: &lt;80K triggers funnel review)" data-zh="200K（失败线：&lt;80K 触发漏斗审视）">200K (failure floor: &lt;80K triggers funnel review)</dd></div>
+      <div class="kv"><dt data-en="Seed close" data-zh="种子轮融资">Seed close</dt><dd data-en="$5M @ $22–30M cap" data-zh="$5M @ $22–30M 估值">$5M @ $22–30M cap</dd></div>
+      <div class="kv"><dt data-en="Headcount" data-zh="团队规模">Headcount</dt><dd data-en="8–10 (&gt;16 means burn is out of control)" data-zh="8–10（&gt;16 意味着烧钱失控）">8–10 (&gt;16 means burn is out of control)</dd></div>
     </div>
   </div>
 </section>
 
-<!-- SECTION 3 — CREATOR METRICS -->
-<section class="section section-gray">
+<section class="deep-section alt">
   <div class="container">
-    <div class="fade-in" style="margin-bottom: 36px;">
-      <div class="section-label" data-en="CREATOR METRICS" data-zh="创作者数据">CREATOR METRICS</div>
-      <h2 class="section-title" data-en="Creator Performance Tracking" data-zh="创作者表现怎么看">Creator Performance Tracking</h2>
-      <p class="section-sub" data-en="Activation speed, completion quality, and compound retention behavior over time." data-zh="多快开始接活、完成率和商家评分怎么样、留不留得住。">Activation speed, completion quality, and compound retention behavior over time.</p>
-    </div>
-    <div class="metrics-table-wrap fade-in">
-      <div class="metrics-3col">
-        <div class="metrics-col">
-          <div class="metrics-col-header header-activation">
-            <span>⚡</span>
-            <span data-en="Activation" data-zh="激活">Activation</span>
-          </div>
-          <div class="metrics-col-item" data-en="Creator onboarding completion rate" data-zh="Creator 入驻完成率">Creator onboarding completion rate</div>
-          <div class="metrics-col-item" data-en="Time-to-first-application" data-zh="首次申请所需时间">Time-to-first-application</div>
-          <div class="metrics-col-item" data-en="Time-to-first-approved campaign" data-zh="首次获批活动时间">Time-to-first-approved campaign</div>
-          <div class="metrics-col-item" data-en="Time-to-first-completion" data-zh="首次完成所需时间">Time-to-first-completion</div>
-        </div>
-        <div class="metrics-col">
-          <div class="metrics-col-header header-quality">
-            <span>🎯</span>
-            <span data-en="Quality" data-zh="质量">Quality</span>
-          </div>
-          <div class="metrics-col-item" data-en="Completion rate" data-zh="完成率">Completion rate</div>
-          <div class="metrics-col-item" data-en="Proof rejection rate" data-zh="证明拒绝率">Proof rejection rate</div>
-          <div class="metrics-col-item" data-en="Merchant rating (avg)" data-zh="商家评分（均值）">Merchant rating (avg)</div>
-          <div class="metrics-col-item" data-en="Reliability trend (3-month)" data-zh="可靠性趋势（3个月）">Reliability trend (3-month)</div>
-          <div class="metrics-col-item" data-en="Dispute rate" data-zh="纠纷率">Dispute rate</div>
-        </div>
-        <div class="metrics-col">
-          <div class="metrics-col-header header-retention">
-            <span>🔁</span>
-            <span data-en="Retention" data-zh="留存">Retention</span>
-          </div>
-          <div class="metrics-col-item" data-en="Creator second-campaign rate" data-zh="Creator 第二次活动率">Creator second-campaign rate</div>
-          <div class="metrics-col-item" data-en="30-day active creator repeat rate" data-zh="30天活跃Creator复购率">30-day active creator repeat rate</div>
-          <div class="metrics-col-item" data-en="Tier progression rate" data-zh="Tier 晋级率">Tier progression rate</div>
-          <div class="metrics-col-item" data-en="Premium retention rate" data-zh="高级会员留存率">Premium retention rate</div>
-        </div>
-      </div>
-    </div>
+    <span class="eyebrow" data-en="Phase 0 Gate" data-zh="Phase 0 门槛">Phase 0 Gate</span>
+    <h2 data-en="Williamsburg pilot. May–Jul 2026. Three non-negotiables." data-zh="威廉斯堡试点。2026 年 5–7 月。三项必须达成。">Williamsburg pilot. May–Jul 2026. Three non-negotiables.</h2>
+    <p data-en="<strong>Phase 0 gate (Williamsburg, May–Jul 2026):</strong> 10 verified attribution transactions. $1K creator payout. 90-day merchant retention ≥80%. If missed → pause before Manhattan." data-zh="<strong>Phase 0 门槛（威廉斯堡，2026 年 5–7 月）：</strong>10 笔验证归因交易。$1K 创作者收入。90 天商家留存率 ≥80%。未达标则暂停，不进入曼哈顿。"><strong>Phase 0 gate (Williamsburg, May–Jul 2026):</strong> 10 verified attribution transactions. $1K creator payout. 90-day merchant retention ≥80%. If missed → pause before Manhattan.</p>
   </div>
 </section>
 
-<!-- SECTION 4 — CAMPAIGN + LIQUIDITY METRICS -->
-<section class="section section-white">
+<section class="deep-section">
   <div class="container">
-    <div class="fade-in" style="margin-bottom: 36px;">
-      <div class="section-label" data-en="OPERATIONAL METRICS" data-zh="运营数据">OPERATIONAL METRICS</div>
-      <h2 class="section-title" data-en="Campaign &amp; Agency Throughput" data-zh="活动跑得顺不顺">Campaign &amp; Agency Throughput</h2>
-      <p class="section-sub" data-en="Campaign health and supply-demand balance across the Creator OS." data-zh="活动跑得顺不顺、Creator OS 供需有没有失衡。">Campaign health and supply-demand balance across the Creator OS.</p>
-    </div>
-    <div class="two-col fade-in">
-      <div>
-        <div class="metrics-box">
-          <div class="metrics-box-header mh-campaign">
-            <span>📋</span>
-            <span data-en="Campaign Metrics" data-zh="活动指标">Campaign Metrics</span>
-          </div>
-          <div class="metrics-box-item" data-en="Time-to-fill" data-zh="填满所需时间">Time-to-fill</div>
-          <div class="metrics-box-item" data-en="Fill rate" data-zh="填充率">Fill rate</div>
-          <div class="metrics-box-item" data-en="Standby usage rate" data-zh="备用名额使用率">Standby usage rate</div>
-          <div class="metrics-box-item" data-en="Completion rate" data-zh="完成率">Completion rate</div>
-          <div class="metrics-box-item" data-en="Verification completion rate" data-zh="核验完成率">Verification completion rate</div>
-          <div class="metrics-box-item" data-en="Payout completion rate" data-zh="结算完成率">Payout completion rate</div>
-          <div class="metrics-box-item" data-en="Dispute density" data-zh="纠纷密度">Dispute density</div>
-          <div class="metrics-box-item" data-en="Average campaign manual-intervention load" data-zh="平均活动人工干预量">Average campaign manual-intervention load</div>
-        </div>
-      </div>
-      <div>
-        <div class="metrics-box metrics-box-gray">
-          <div class="metrics-box-header mh-liquidity">
-            <span>💧</span>
-            <span data-en="Agency Throughput" data-zh="Agency 供需">Agency Throughput</span>
-          </div>
-          <div class="metrics-box-item" data-en="Application-to-approval ratio" data-zh="申请通过比">Application-to-approval ratio</div>
-          <div class="metrics-box-item" data-en="Slot fill speed" data-zh="名额填充速度">Slot fill speed</div>
-          <div class="metrics-box-item" data-en="Qualified creator density per campaign" data-zh="每活动合格Creator密度">Qualified creator density per campaign</div>
-          <div class="metrics-box-item" data-en="Standby response speed" data-zh="备用响应速度">Standby response speed</div>
-          <div class="metrics-box-item" data-en="Creator opportunity coverage by zone" data-zh="按区域的Creator机会覆盖率">Creator opportunity coverage by zone</div>
-          <div class="metrics-box-item" data-en="Merchant fill reliability by neighborhood" data-zh="按社区的商家填充可靠性">Merchant fill reliability by neighborhood</div>
-        </div>
-      </div>
-    </div>
+    <span class="eyebrow" data-en="Year 5 Base Case" data-zh="第 5 年基准">Year 5 Base Case</span>
+    <h2 data-en="Where we want to be in 2031." data-zh="2031 年的目标。">Where we want to be in 2031.</h2>
+    <p data-en="<strong>Year 5 ARR: $80–120M base.</strong> 8–12x revenue multiple. Exit / next-round: $800M–$1.2B." data-zh="<strong>第 5 年 ARR：基准 $80–120M。</strong>8–12 倍收入倍数。退出/下轮估值：$8–12 亿。"><strong>Year 5 ARR: $80–120M base.</strong> 8–12x revenue multiple. Exit / next-round: $800M–$1.2B.</p>
   </div>
 </section>
 
-<!-- SECTION 5 — INTEGRITY + ECONOMIC METRICS -->
-<section class="section section-gray">
+<section class="deep-section alt">
   <div class="container">
-    <div class="fade-in" style="margin-bottom: 36px;">
-      <div class="section-label section-label-red" data-en="TRUST &amp; ECONOMICS" data-zh="风控和钱">TRUST &amp; ECONOMICS</div>
-      <h2 class="section-title" data-en="Integrity &amp; Economic Health" data-zh="平台干净不干净、钱赚没赚到">Integrity &amp; Economic Health</h2>
-      <p class="section-sub" data-en="Agency integrity signals and unit economics — the financial foundation of a scalable outcome-priced service." data-zh="Agency 诚信的风险信号，以及单位经济——按效果收费能不能规模化的财务基础。">Agency integrity signals and unit economics — the financial foundation of a scalable outcome-priced service.</p>
-    </div>
-    <div class="two-col fade-in">
-      <div>
-        <div class="metrics-box metrics-box-gray">
-          <div class="metrics-box-header mh-integrity">
-            <span>🛡️</span>
-            <span data-en="Integrity Metrics" data-zh="诚信指标">Integrity Metrics</span>
-          </div>
-          <div class="metrics-box-item" data-en="Fraud flag rate" data-zh="欺诈标记率">Fraud flag rate</div>
-          <div class="metrics-box-item" data-en="False-positive review rate" data-zh="误判率">False-positive review rate</div>
-          <div class="metrics-box-item" data-en="Suspicious redemption rate" data-zh="可疑核销率">Suspicious redemption rate</div>
-          <div class="metrics-box-item" data-en="Suspicious creator pairings" data-zh="可疑Creator配对">Suspicious creator pairings</div>
-          <div class="metrics-box-item" data-en="Suspicious merchant pairings" data-zh="可疑商家配对">Suspicious merchant pairings</div>
-          <div class="metrics-box-item" data-en="Settlement hold rate" data-zh="结算搁置率">Settlement hold rate</div>
-          <div class="metrics-box-item" data-en="Repeat dispute actor concentration" data-zh="重复纠纷主体集中度">Repeat dispute actor concentration</div>
-        </div>
-      </div>
-      <div>
-        <div class="metrics-box">
-          <div class="metrics-box-header mh-economic">
-            <span>💰</span>
-            <span data-en="Economic Metrics" data-zh="经济指标">Economic Metrics</span>
-          </div>
-          <div class="metrics-box-item" data-en="Retainer revenue by merchant cohort (Growth / Performance)" data-zh="按商家队列的retainer收入（Growth / Performance）">Retainer revenue by merchant cohort (Growth / Performance)</div>
-          <div class="metrics-box-item" data-en="Verified-customer outcome revenue ($40 / customer)" data-zh="验证顾客 outcome 收入（$40/位）">Verified-customer outcome revenue ($40 / customer)</div>
-          <div class="metrics-box-item" data-en="Blended take per verified customer (retainer + outcome)" data-zh="每验证顾客综合take（retainer + outcome）">Blended take per verified customer (retainer + outcome)</div>
-          <div class="metrics-box-item" data-en="Support cost per delivered customer" data-zh="每交付顾客的支持成本">Support cost per delivered customer</div>
-          <div class="metrics-box-item" data-en="Contribution margin per verified-customer cohort" data-zh="每验证顾客队列贡献利润率">Contribution margin per verified-customer cohort</div>
-          <div class="metrics-box-item" data-en="Average revenue per retained merchant" data-zh="每留存商家平均收入">Average revenue per retained merchant</div>
-          <div class="metrics-box-item" data-en="Pilot → Growth conversion rate" data-zh="Pilot → Growth 转化率">Pilot → Growth conversion rate</div>
-          <div class="metrics-box-item" data-en="Growth → Performance upgrade rate" data-zh="Growth → Performance 升级率">Growth → Performance upgrade rate</div>
-        </div>
-      </div>
-    </div>
+    <span class="eyebrow" data-en="North star" data-zh="北极星指标">North star</span>
+    <h2 data-en="One number we watch more than anything else." data-zh="盯得最紧的一个数字。">One number we watch more than anything else.</h2>
+    <p data-en="<strong>Merchants running campaigns repeatedly without being pushed.</strong> That's PMF for Push. Every other metric is a proxy or a leading indicator. When merchants come back on their own — monthly, without sales follow-up — we have product-market fit. Until then, we're building." data-zh="<strong>商家不用催自己反复跑活动。</strong>这就是 Push 的 PMF。其他所有指标都是代理或前瞻。商家自己每月回来、不用我们追——就是 PMF。在那之前我们还在建。"><strong>Merchants running campaigns repeatedly without being pushed.</strong> That's PMF for Push. Every other metric is a proxy or a leading indicator. When merchants come back on their own — monthly, without sales follow-up — we have product-market fit. Until then, we're building.</p>
   </div>
 </section>
 
-<!-- SECTION 6 — DECISION RULES -->
-<section class="section section-white">
-  <div class="container">
-    <div class="fade-in" style="margin-bottom: 40px;">
-      <div class="section-label" data-en="DECISION RULES" data-zh="读数字的方法">DECISION RULES</div>
-      <h2 class="section-title" data-en="Four Rules for Reading the Data" data-zh="读数字的四条规则">Four Rules for Reading the Data</h2>
-      <p class="section-sub" data-en="When signals conflict, these rules clarify where the real problem lives. Don't treat symptoms — treat root causes." data-zh="信号打架的时候，这几条规则帮你找到真正的问题在哪。不要打补丁，要找根因。">When signals conflict, these rules clarify where the real problem lives. Don't treat symptoms — treat root causes.</p>
+</main>
+
+
+<footer class="site-footer">
+  <div class="footer-grid footer-grid-3">
+    <div class="footer-col">
+      <div class="footer-heading" data-en="Main" data-zh="主导航">Main</div>
+      <a href="index.html" data-en="Overview" data-zh="首页">Overview</a>
+      <a href="pitch-deck.html" data-en="Pitch Deck" data-zh="路演">Pitch Deck</a>
+      <a href="investor-qa.html" data-en="Investor Q&amp;A" data-zh="投资人问答">Investor Q&amp;A</a>
     </div>
-
-    <div class="decision-rules">
-
-      <div class="decision-rule fade-in">
-        <div class="rule-if">
-          <span class="rule-label">IF</span>
-          <span class="rule-condition" data-en="merchant repeat is low but campaign fill is high" data-zh="商户复投率低但活动填充率高">merchant repeat is low but campaign fill is high</span>
-        </div>
-        <div class="rule-arrow">→</div>
-        <div class="rule-then">
-          <span class="rule-label">THEN</span>
-          <span class="rule-action" data-en="problem is likely campaign outcome quality, not supply quantity" data-zh="问题大概率是活动效果不够好，不是供给量的问题">problem is likely campaign outcome quality, not supply quantity</span>
-        </div>
-      </div>
-
-      <div class="decision-rule fade-in" style="transition-delay:0.08s;">
-        <div class="rule-if">
-          <span class="rule-label">IF</span>
-          <span class="rule-condition" data-en="creator signups are high but completion is low" data-zh="创作者注册量高但完成率低">creator signups are high but completion is low</span>
-        </div>
-        <div class="rule-arrow">→</div>
-        <div class="rule-then">
-          <span class="rule-label">THEN</span>
-          <span class="rule-action" data-en="supply quality is weak, not top-of-funnel volume" data-zh="是创作者完成率太低的问题，不是获客量的问题">supply quality is weak, not top-of-funnel volume</span>
-        </div>
-      </div>
-
-      <div class="decision-rule fade-in" style="transition-delay:0.16s;">
-        <div class="rule-if">
-          <span class="rule-label">IF</span>
-          <span class="rule-condition" data-en="standby usage is high but fulfillment quality drops" data-zh="备选使用率高但完成率和商家评分在跌">standby usage is high but fulfillment quality drops</span>
-        </div>
-        <div class="rule-arrow">→</div>
-        <div class="rule-then">
-          <span class="rule-label">THEN</span>
-          <span class="rule-action" data-en="urgency is working, but screening is weak" data-zh="备选响应没问题，但筛选太松了">urgency is working, but screening is weak</span>
-        </div>
-      </div>
-
-      <div class="decision-rule fade-in" style="transition-delay:0.24s;">
-        <div class="rule-if">
-          <span class="rule-label">IF</span>
-          <span class="rule-condition" data-en="support load rises faster than completed campaigns" data-zh="客服工单量增速比完成活动量增速还快">support load rises faster than completed campaigns</span>
-        </div>
-        <div class="rule-arrow">→</div>
-        <div class="rule-then">
-          <span class="rule-label">THEN</span>
-          <span class="rule-action" data-en="workflow is not scaling cleanly" data-zh="流程没有在干净地扩展，需要靠人撑着">workflow is not scaling cleanly</span>
-        </div>
-      </div>
-
+    <div class="footer-col">
+      <div class="footer-heading" data-en="Core" data-zh="核心">Core</div>
+      <a href="project-intro.html" data-en="Product" data-zh="产品">Product</a>
+      <a href="push-strategy-core.html" data-en="Strategy" data-zh="战略">Strategy</a>
+      <a href="economics.html" data-en="Economics" data-zh="经济模型">Economics</a>
+      <a href="attribution.html" data-en="Attribution" data-zh="归因机制">Attribution</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-heading" data-en="Reference" data-zh="参考资料">Reference</div>
+      <a href="deep-dive.html" data-en="Deep Dive" data-zh="深度解读">Deep Dive</a>
+      <a href="metrics-dashboard.html" data-en="Metrics" data-zh="指标">Metrics</a>
+      <a href="push-team-dashboard.html" data-en="Team" data-zh="团队">Team</a>
+      <a href="nda.html" data-en="NDA" data-zh="保密协议">NDA</a>
     </div>
   </div>
-</section>
-
-<!-- SECTION 7 — DASHBOARD STRUCTURE -->
-<section class="section section-gray">
-  <div class="container">
-    <div class="fade-in" style="margin-bottom: 40px;">
-      <div class="section-label section-label-orange" data-en="DASHBOARD STRUCTURE" data-zh="看板怎么分">DASHBOARD STRUCTURE</div>
-      <h2 class="section-title" data-en="Four Dashboard Layers" data-zh="四块看板，各看各的">Four Dashboard Layers</h2>
-      <p class="section-sub" data-en="Different audiences need different views. Each dashboard is optimized for a specific decision-making context." data-zh="不同角色需要看不同的东西。每个看板针对特定的决策场景。">Different audiences need different views. Each dashboard is optimized for a specific decision-making context.</p>
-    </div>
-
-    <div class="dashboard-2x2">
-
-      <div class="dashboard-card fade-in" style="transition-delay:0.05s;">
-        <div class="dc-badge dc-exec" data-en="EXECUTIVE" data-zh="高管">EXECUTIVE</div>
-        <div class="dc-title" data-en="Executive Dashboard" data-zh="高管看板">Executive Dashboard</div>
-        <div class="dc-subtitle" data-en="Retention · Revenue Quality · Integrity Health" data-zh="留存 · 净收入 · 风控状况">Retention · Revenue Quality · Integrity Health</div>
-        <ul class="dc-items">
-          <li data-en="Merchant &amp; creator repeat rates" data-zh="商户和创作者的复投率">Merchant &amp; creator repeat rates</li>
-          <li data-en="Campaign quality scores" data-zh="活动完成率和商家评分">Campaign quality scores</li>
-          <li data-en="Net revenue quality (by cohort)" data-zh="每批商家带来的净收入">Net revenue quality (by cohort)</li>
-          <li data-en="Integrity health summary" data-zh="风控异常汇总">Integrity health summary</li>
-        </ul>
-      </div>
-
-      <div class="dashboard-card fade-in" style="transition-delay:0.1s;">
-        <div class="dc-badge dc-product" data-en="PRODUCT" data-zh="产品">PRODUCT</div>
-        <div class="dc-title" data-en="Product Dashboard" data-zh="产品看板">Product Dashboard</div>
-        <div class="dc-subtitle" data-en="Workflow Friction · Activation · Completion States" data-zh="流程摩擦点 · 激活 · 完成状态">Workflow Friction · Activation · Completion States</div>
-        <ul class="dc-items">
-          <li data-en="Workflow friction points" data-zh="哪里有摩擦卡住了">Workflow friction points</li>
-          <li data-en="Activation milestone drop-off" data-zh="激活节点的流失在哪">Activation milestone drop-off</li>
-          <li data-en="Standby behavior patterns" data-zh="备选行为规律">Standby behavior patterns</li>
-          <li data-en="Campaign completion state funnel" data-zh="活动完成漏斗">Campaign completion state funnel</li>
-        </ul>
-      </div>
-
-      <div class="dashboard-card fade-in" style="transition-delay:0.15s;">
-        <div class="dc-badge dc-ops" data-en="OPS" data-zh="运营">OPS</div>
-        <div class="dc-title" data-en="Operations Dashboard" data-zh="运营看板">Operations Dashboard</div>
-        <div class="dc-subtitle" data-en="Exceptions · Disputes · Payout Delays" data-zh="异常问题 · 纠纷 · 结算延迟">Exceptions · Disputes · Payout Delays</div>
-        <ul class="dc-items">
-          <li data-en="Exception and escalation volume" data-zh="异常和升级问题的数量">Exception and escalation volume</li>
-          <li data-en="Active disputes and resolution time" data-zh="当前纠纷数量和解决时长">Active disputes and resolution time</li>
-          <li data-en="Payout delay rate" data-zh="结算延迟率">Payout delay rate</li>
-          <li data-en="Fraud trigger alerts" data-zh="欺诈触发警报">Fraud trigger alerts</li>
-          <li data-en="Merchant approval bottlenecks" data-zh="商户审批卡在哪里">Merchant approval bottlenecks</li>
-        </ul>
-      </div>
-
-      <div class="dashboard-card fade-in" style="transition-delay:0.2s;">
-        <div class="dc-badge dc-gtm" data-en="GTM" data-zh="市场拓展">GTM</div>
-        <div class="dc-title" data-en="GTM Dashboard" data-zh="GTM 看板">GTM Dashboard</div>
-        <div class="dc-subtitle" data-en="Pipeline · Supply Quality · Neighborhood Density" data-zh="获客漏斗 · 供给完成率 · 街区密度">Pipeline · Supply Quality · Neighborhood Density</div>
-        <ul class="dc-items">
-          <li data-en="Merchant acquisition pipeline" data-zh="商户获取漏斗">Merchant acquisition pipeline</li>
-          <li data-en="Creator supply quality by vertical" data-zh="各品类创作者完成率和商家评分">Creator supply quality by vertical</li>
-          <li data-en="Vertical comparisons" data-zh="品类横向对比">Vertical comparisons</li>
-          <li data-en="Neighborhood creator density quality" data-zh="各街区创作者够不够用">Neighborhood creator density quality</li>
-        </ul>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- SECTION 8 — METRICS TRAPS -->
-<section class="section section-white">
-  <div class="container">
-    <div class="fade-in" style="margin-bottom: 40px;">
-      <div class="section-label section-label-red" data-en="METRICS TRAPS" data-zh="数字陷阱">METRICS TRAPS</div>
-      <h2 class="section-title" data-en="Four Traps That Corrupt Decisions" data-zh="四个会带偏决策的陷阱">Four Traps That Corrupt Decisions</h2>
-      <p class="section-sub" data-en="Good metrics discipline means knowing what NOT to celebrate as much as what to celebrate." data-zh="好的数据纪律不只是知道该庆祝什么，还要知道哪些数字根本不该在意。">Good metrics discipline means knowing what NOT to celebrate as much as what to celebrate.</p>
-    </div>
-
-    <div class="traps-list">
-      <div class="trap-strip fade-in">
-        <div class="trap-icon" data-en="A" data-zh="A">A</div>
-        <div>
-          <div class="trap-badge" data-en="TRAP A" data-zh="陷阱 A">TRAP A</div>
-          <div class="trap-title" data-en="Celebrating Signups" data-zh="注册量多就高兴">Celebrating Signups</div>
-          <p class="trap-body" data-en="Signups without completion or repeat are weak. A surge in creator or merchant registrations that doesn't convert to completed campaigns and repeat usage is a vanity metric — it reveals nothing about platform health." data-zh="没有完成和复投的注册量是空的。创作者或商家注册量暴涨，但转化不成实际完成和复投，就是装门面的数字——完成率和复购率没涨，注册量再高也没用。">Signups without completion or repeat are weak. A surge in creator or merchant registrations that doesn't convert to completed campaigns and repeat usage is a vanity metric — it reveals nothing about platform health.</p>
-        </div>
-      </div>
-
-      <div class="trap-strip fade-in" style="transition-delay:0.07s;">
-        <div class="trap-icon" data-en="B" data-zh="B">B</div>
-        <div>
-          <div class="trap-badge" data-en="TRAP B" data-zh="陷阱 B">TRAP B</div>
-          <div class="trap-title" data-en="Overvaluing Views" data-zh="太在意浏览量">Overvaluing Views</div>
-          <p class="trap-body" data-en="Views are not the core business outcome. Content reach and impressions are secondary effects. The core business outcome is a verified redemption that a merchant found valuable enough to repeat. Views without attribution to transactions are decorative." data-zh="浏览量不是核心业务结果。内容触达和曝光量是副产品。核心业务结果是商户认为值得再来一次的经核实核销。跟交易挂不上钩的浏览量是装饰。">Views are not the core business outcome. Content reach and impressions are secondary effects. The core business outcome is a verified redemption that a merchant found valuable enough to repeat. Views without attribution to transactions are decorative.</p>
-        </div>
-      </div>
-
-      <div class="trap-strip fade-in" style="transition-delay:0.14s;">
-        <div class="trap-icon" data-en="C" data-zh="C">C</div>
-        <div>
-          <div class="trap-badge" data-en="TRAP C" data-zh="陷阱 C">TRAP C</div>
-          <div class="trap-title" data-en="Ignoring Support Cost" data-zh="不管客服成本">Ignoring Support Cost</div>
-          <p class="trap-body" data-en="A campaign that works only with heavy manual intervention is not healthy. If support cost per completed campaign is rising faster than volume, the workflow is not scaling — it's being manually propped up. High GMV with high support load is not healthy growth." data-zh="靠大量人工才能跑完的活动撑不住。如果单个活动的客服成本增速超过活动量增速，说明流程不是在扩展——是在靠人工撑着。GMV高但客服负担也高，迟早要出问题。">A campaign that works only with heavy manual intervention is not healthy. If support cost per completed campaign is rising faster than volume, the workflow is not scaling — it's being manually propped up. High GMV with high support load is not healthy growth.</p>
-        </div>
-      </div>
-
-      <div class="trap-strip fade-in" style="transition-delay:0.21s;">
-        <div class="trap-icon" data-en="D" data-zh="D">D</div>
-        <div>
-          <div class="trap-badge" data-en="TRAP D" data-zh="陷阱 D">TRAP D</div>
-          <div class="trap-title" data-en="Mistaking Repeat for Quality" data-zh="回来不代表满意">Mistaking Repeat for Quality</div>
-          <p class="trap-body" data-en="Repeat matters only if economics remain healthy and trust remains high. A merchant who repeats because they have no better option — not because the platform delivered real value — is not a retention win. Monitor repeat rate alongside contribution margin and dispute rate together." data-zh="复投有意义，前提是利润没有下滑、纠纷没有上升。商家因为没有更好选择而留下来——不是因为平台真的帮他赚到了——这不算留存。要把复投率和贡献利润率、纠纷率放在一起看。">Repeat matters only if economics remain healthy and trust remains high. A merchant who repeats because they have no better option — not because the platform delivered real value — is not a retention win. Monitor repeat rate alongside contribution margin and dispute rate together.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SECTION 9 — FINAL STANDARD -->
-<section class="section section-dark">
-  <div class="container">
-    <div class="fade-in" style="text-align:center; margin-bottom: 48px;">
-      <div class="section-label section-label-light" data-en="THE FINAL STANDARD" data-zh="最终标准">THE FINAL STANDARD</div>
-      <h2 class="section-title section-title-white" data-en="What Good Dashboards Do" data-zh="好看板：一眼看出哪里不对">What Good Dashboards Do</h2>
-      <p class="section-sub section-sub-white" style="margin: 0 auto;" data-en="The purpose of measurement is not to describe the company — it is to discipline it." data-zh="数字摆在这，好就是好，差就是差。">The purpose of measurement is not to describe the company — it is to discipline it.</p>
-    </div>
-    <div class="final-blockquote fade-in">
-      <p class="final-quote-text" data-en="Clarify where the system is getting stronger. Expose false progress quickly. Distinguish volume from quality. Help the team make sharper, not noisier, decisions. Good dashboards do not just describe the company — they discipline it." data-zh="看出真进展和假繁荣的区别。分清是单量涨了还是质量好了。哪个数字在涨、哪个在跌，打开就知道。">Clarify where the system is getting stronger. Expose false progress quickly. Distinguish volume from quality. Help the team make sharper, not noisier, decisions. Good dashboards do not just describe the company — they discipline it.</p>
-      <div class="final-quote-zh" data-en="看出真进展和假繁荣的区别。分清是单量涨了还是质量好了。哪个数字在涨、哪个在跌，打开就知道。" data-zh="Clarify where the system is getting stronger. Expose false progress quickly. Distinguish volume from quality. Help the team make sharper, not noisier, decisions. Good dashboards do not just describe the company — they discipline it.">看出真进展和假繁荣的区别。分清是单量涨了还是质量好了。哪个数字在涨、哪个在跌，打开就知道。</div>
-    </div>
-  </div>
-</section>
-
-<!-- ── NEXT READING ── -->
-<div style="max-width:800px; margin:40px auto; padding:24px; background:var(--bg2, #f8f9fa); border:1px solid var(--border, #e5e7eb); border-radius:12px;">
-  <h3 style="font-size:16px; font-weight:700; margin-bottom:12px;" data-en="Continue Reading" data-zh="继续阅读" class="bilingual-text">Continue Reading</h3>
-  <a href="attribution.html" style="display:block; padding:16px; background:#fff; border:1px solid var(--border, #e5e7eb); border-radius:8px; text-decoration:none; transition:all 0.2s; max-width:400px;">
-    <div style="font-size:13px; color:var(--text3, #9ca3af);" data-en="Next →" data-zh="下一步 →" class="bilingual-text">Next →</div>
-    <div style="font-size:15px; font-weight:600; color:var(--text, #111827);" data-en="See how we measure attribution" data-zh="看我们怎么做归因" class="bilingual-text">See how we measure attribution</div>
-    <div style="font-size:13px; color:var(--accent, #4f46e5); margin-top:4px;" data-en="Attribution Framework →" data-zh="归因做法 →" class="bilingual-text">Attribution Framework →</div>
-  </a>
-</div>
-
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div>
-        <div class="footer-logo">PUSH</div>
-        <div class="footer-tagline" data-en="Local Creator Performance Infrastructure" data-zh="本地创作者效果平台">Local Creator Performance Infrastructure</div>
-      </div>
-      <div class="footer-links">
-        <a href="index.html" class="footer-link" data-en="Overview" data-zh="首页">Dashboard</a>
-        <a href="project-intro.html" class="footer-link" data-en="Project Intro" data-zh="项目介绍">Project Intro</a>
-        <a href="pitch-deck.html" class="footer-link" data-en="Pitch Deck" data-zh="路演材料">Pitch Deck</a>
-        <a href="prospects.html" class="footer-link" data-en="Prospects" data-zh="未来愿景">Prospects</a>
-        <a href="challenges.html" class="footer-link" data-en="Challenges" data-zh="挑战分析">Challenges</a>
-        <a href="retention-defense.html" class="footer-link" data-en="Retention" data-zh="留存机制">Retention</a>
-        <a href="platform-value.html" class="footer-link" data-en="Platform Value" data-zh="平台价值">Platform Value</a>
-        <a href="push-strategy-core.html" class="footer-link" data-en="Strategy Core" data-zh="战略核心">Strategy Core</a>
-        <a href="economics.html" class="footer-link" data-en="Economics" data-zh="经济模型">Economics</a>
-        <a href="attribution.html" class="footer-link" data-en="Attribution" data-zh="归因体系">Attribution</a>
-        <a href="fraud-integrity.html" class="footer-link" data-en="Fraud &amp; Trust" data-zh="反欺诈">Fraud &amp; Trust</a>
-        <a href="gtm-launch.html" class="footer-link" data-en="GTM &amp; Launch" data-zh="上线计划">GTM &amp; Launch</a>
-        <a href="metrics-dashboard.html" class="footer-link active" data-en="Metrics" data-zh="指标看板">Metrics</a>
-      </div>
-    </div>
-    <div class="footer-copy">© 2026 Push</div>
-    <div style="margin-top:16px; font-size:13px;">
-      <span data-en="You might also want: " data-zh="你可能还想看：" class="bilingual-text">You might also want: </span>
-      <a href="attribution.html" data-en="Attribution" data-zh="归因体系" class="bilingual-text">Attribution</a> ·
-      <a href="project-intro.html" data-en="Project Intro" data-zh="项目介绍" class="bilingual-text">Project Intro</a> ·
-      <a href="index.html" data-en="🏠 Dashboard" data-zh="🏠 首页" class="bilingual-text">🏠 Dashboard</a>
-    </div>
+  <div class="footer-bottom">
+    <span data-en="© 2026 Push. Attribution rail for local commerce." data-zh="© 2026 Push. 本地商业归因基础设施。">© 2026 Push.</span>
   </div>
 </footer>
 
-<script>
-(function() {
-  let lang = localStorage.getItem('push-lang') || 'en';
-  function applyLang(l) {
-    lang = l;
-    localStorage.setItem('push-lang', l);
-    document.querySelectorAll('[data-en]').forEach(el => {
-      const val = el.getAttribute('data-' + l);
-      if (val !== null) el.innerHTML = val;
-    });
-    const btn = document.getElementById('lang-btn');
-    if (btn) btn.textContent = l === 'en' ? '中 / EN' : 'EN / 中';
-    const mobileBtn = document.getElementById('lang-btn-mobile');
-    if (mobileBtn) mobileBtn.textContent = l === 'en' ? '中 / EN' : 'EN / 中';
-  }
-  document.getElementById('lang-btn').addEventListener('click', () => {
-    document.body.style.opacity = '0.8';
-    document.body.style.transition = 'opacity 0.15s';
-    setTimeout(() => { applyLang(lang === 'en' ? 'zh' : 'en'); document.body.style.opacity = '1'; }, 150);
-  });
-  applyLang(lang);
-  /* lang-reveal */document.documentElement.style.opacity='1';
-  document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh' : 'en');
-})();
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-}, { threshold: 0.01, rootMargin: '0px 0px 60px 0px' });
-document.querySelectorAll('section,.hero').forEach(el => observer.observe(el));
-// Scroll progress bar
-const scrollBar = document.getElementById('scroll-progress');
-window.addEventListener('scroll', () => {
-  const h = document.documentElement.scrollHeight - window.innerHeight;
-  if (h > 0) scrollBar.style.width = (window.scrollY / h * 100) + '%';
-}, { passive: true });
-
-// Mobile navigation
-(function() {
-  const burger = document.getElementById('nav-burger');
-  const panel = document.getElementById('nav-mobile-panel');
-  if (!burger || !panel) return;
-  burger.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const open = panel.classList.toggle('open');
-    burger.classList.toggle('open', open);
-    burger.setAttribute('aria-expanded', open);
-  });
-  panel.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      panel.classList.remove('open');
-      burger.classList.remove('open');
-      burger.setAttribute('aria-expanded', 'false');
-    });
-  });
-  document.addEventListener('click', (e) => {
-    if (!burger.contains(e.target) && !panel.contains(e.target)) {
-      panel.classList.remove('open');
-      burger.classList.remove('open');
-      burger.setAttribute('aria-expanded', 'false');
-    }
-  });
-  const mobileLangBtn = document.getElementById('lang-btn-mobile');
-  if (mobileLangBtn) {
-    mobileLangBtn.addEventListener('click', () => {
-      const mainLangBtn = document.getElementById('lang-btn');
-      if (mainLangBtn) mainLangBtn.click();
-      setTimeout(() => { if (mainLangBtn) mobileLangBtn.textContent = mainLangBtn.textContent; }, 200);
-    });
-    const mainLangBtn = document.getElementById('lang-btn');
-    if (mainLangBtn) mobileLangBtn.textContent = mainLangBtn.textContent;
-  }
-})();
-</script>
 </body>
 </html>
