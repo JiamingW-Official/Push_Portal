@@ -100,10 +100,14 @@
   --ga-green:    #4ade80;
   --ga-sky:      #93c5fd;
 
-  /* === 3 Typography === */
-  --font-hero:    'Magvix', Georgia, serif;
-  --font-display: 'Darky', 'Inter', sans-serif;
-  --font-mono:    'CS Genio Mono', 'JetBrains Mono', 'Courier New', monospace;
+  /* === 3 Typography ===
+     Chinese fallback is locked to ONE heiti family (PingFang SC) across
+     hero / display / mono — no serif Songti rendering anywhere on CN. */
+  --font-cjk: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', 'Source Han Sans SC', sans-serif;
+
+  --font-hero:    'Magvix', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --font-display: 'Darky', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --font-mono:    'CS Genio Mono', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', monospace;
 
   /* === 4 Radii (iOS 26 continuous corner) === */
   --r-xs:    4px;
