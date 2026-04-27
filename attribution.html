@@ -55,8 +55,8 @@
 <header class="page-hero">
   <div class="container">
     <span class="eyebrow with-line" data-en="(Attribution · How we verify)" data-zh="(归因 · 我们怎么验)">(Attribution · How we verify)</span>
-    <h1 class="hero-darky" data-en="How Push Attribution Works" data-zh="Push 归因机制解析">How Push Attribution Works</h1>
-    <p class="lede" data-en="Three independent signals per conversion. QR scan + receipt timestamp + merchant confirmation. Stripe Connect underneath. Push never holds money." data-zh="每次转化三个独立信号。QR 扫码 + 收据时间戳 + 商家确认。底层 Stripe Connect。Push 永不持有资金。">Three independent signals per conversion. QR scan + receipt timestamp + merchant confirmation. Stripe Connect underneath. Push never holds money.</p>
+    <h1 class="hero-darky" data-en="How Push Attribution Works" data-zh="一笔归因是怎么算成的">How Push Attribution Works</h1>
+    <p class="lede" data-en="Three independent signals per conversion. QR scan + receipt timestamp + merchant confirmation. Stripe Connect underneath. Push never holds money." data-zh="一笔转化三个独立信号：QR 扫码 + 收据时间戳 + 商家确认。底层走 Stripe Connect，Push 自己不碰钱。">Three independent signals per conversion. QR scan + receipt timestamp + merchant confirmation. Stripe Connect underneath. Push never holds money.</p>
   </div>
 </header>
 
@@ -65,37 +65,37 @@
 <section class="deep-section">
   <div class="container">
     <span class="eyebrow with-line" data-en="(Six-step mechanism)" data-zh="(六步机制)">(Six-step mechanism)</span>
-    <h2 data-en="From merchant signup to creator payout." data-zh="从商家注册到创作者支付。">From merchant signup to creator payout.</h2>
+    <h2 data-en="From merchant signup to creator payout." data-zh="从商家注册到 creator 拿钱。">From merchant signup to creator payout.</h2>
     <div class="card-grid">
       <article class="card">
         <div class="card-num">01</div>
         <h3 data-en="Merchant signup" data-zh="商家注册">Merchant signup</h3>
-        <p data-en="Merchant signs up on Push. Choose Attribution Lite (free) / Essentials ($99/month) / Pro (Year 1 outcome-based)." data-zh="商家在 Push 上注册。选择 Attribution Lite（免费）/ Essentials（$99/月）/ Pro（第一年 outcome-based）。">Merchant signs up on Push. Choose Attribution Lite (free) / Essentials ($99/month) / Pro (Year 1 outcome-based).</p>
+        <p data-en="Merchant signs up on Push. Choose Attribution Lite (free) / Essentials ($99/month) / Pro (Year 1 outcome-based)." data-zh="商家在 Push 注册，挑一档：Attribution Lite（免费）/ Essentials（$99/月）/ Pro（Year 1 按结果付费）。">Merchant signs up on Push. Choose Attribution Lite (free) / Essentials ($99/month) / Pro (Year 1 outcome-based).</p>
       </article>
       <article class="card">
         <div class="card-num">02</div>
-        <h3 data-en="Creator posts" data-zh="创作者发布">Creator posts</h3>
-        <p data-en="Creator posts about merchant on Instagram / TikTok / Xiaohongshu with Push QR code." data-zh="创作者在 Instagram / TikTok / 小红书 上发布关于商家的内容并附带 Push 二维码。">Creator posts about merchant on Instagram / TikTok / Xiaohongshu with Push QR code.</p>
+        <h3 data-en="Creator posts" data-zh="creator 发帖">Creator posts</h3>
+        <p data-en="Creator posts about merchant on Instagram / TikTok / Xiaohongshu with Push QR code." data-zh="creator 在 Instagram / TikTok / 小红书发帖，把 Push QR 放进帖子里。">Creator posts about merchant on Instagram / TikTok / Xiaohongshu with Push QR code.</p>
       </article>
       <article class="card">
         <div class="card-num">03</div>
-        <h3 data-en="Campaign binding" data-zh="活动绑定">Campaign binding</h3>
-        <p data-en="Each post carries a Push QR code bound to creator × merchant × campaign. Unique identifier per content piece." data-zh="每个帖子的 Push 二维码绑定到创作者 × 商家 × 活动。每条内容有唯一标识符。">Each post carries a Push QR code bound to creator × merchant × campaign. Unique identifier per content piece.</p>
+        <h3 data-en="Campaign binding" data-zh="QR 绑定 campaign">Campaign binding</h3>
+        <p data-en="Each post carries a Push QR code bound to creator × merchant × campaign. Unique identifier per content piece." data-zh="每条帖子的 QR 都绑死 creator × 商家 × campaign，每条内容一个独立 ID。">Each post carries a Push QR code bound to creator × merchant × campaign. Unique identifier per content piece.</p>
       </article>
       <article class="card">
         <div class="card-num">04</div>
-        <h3 data-en="QR scan at checkout" data-zh="结账时扫码">QR scan at checkout</h3>
-        <p data-en="Customer scans QR at checkout (or staff scans receipt). Timestamp recorded instantly." data-zh="顾客在结账时扫描二维码（或店员扫收据）。时间戳立即记录。">Customer scans QR at checkout (or staff scans receipt). Timestamp recorded instantly.</p>
+        <h3 data-en="QR scan at checkout" data-zh="收银台扫一下">QR scan at checkout</h3>
+        <p data-en="Customer scans QR at checkout (or staff scans receipt). Timestamp recorded instantly." data-zh="顾客在收银台扫一下 QR（或店员扫小票），时间戳当场记下来。">Customer scans QR at checkout (or staff scans receipt). Timestamp recorded instantly.</p>
       </article>
       <article class="card">
         <div class="card-num">05</div>
-        <h3 data-en="Triple verification" data-zh="三重验证">Triple verification</h3>
-        <p data-en="Push records the conversion: QR scan + receipt timestamp + merchant confirmation. All three signals cross-checked." data-zh="Push 记录转化：QR 扫码 + 收据时间戳 + 商家确认。三个信号互相交叉验证。">Push records the conversion: QR scan + receipt timestamp + merchant confirmation. All three signals cross-checked.</p>
+        <h3 data-en="Triple verification" data-zh="三路信号交叉">Triple verification</h3>
+        <p data-en="Push records the conversion: QR scan + receipt timestamp + merchant confirmation. All three signals cross-checked." data-zh="Push 把这笔转化记下：QR 扫码 + 收据时间戳 + 商家确认。三路对上才算一笔。">Push records the conversion: QR scan + receipt timestamp + merchant confirmation. All three signals cross-checked.</p>
       </article>
       <article class="card">
         <div class="card-num">06</div>
-        <h3 data-en="Creator payout" data-zh="创作者支付">Creator payout</h3>
-        <p data-en="Creator is paid per verified conversion via Stripe Connect. Push takes rev share (15–20%). No MSB/FinCEN exposure." data-zh="创作者通过 Stripe Connect 按验证转化数获得报酬。Push 抽取收入分成（15–20%）。无 MSB/FinCEN 风险。">Creator is paid per verified conversion via Stripe Connect. Push takes rev share (15–20%). No MSB/FinCEN exposure.</p>
+        <h3 data-en="Creator payout" data-zh="creator 收款">Creator payout</h3>
+        <p data-en="Creator is paid per verified conversion via Stripe Connect. Push takes rev share (15–20%). No MSB/FinCEN exposure." data-zh="creator 按真实转化通过 Stripe Connect 收款，Push 抽 15-20%。我们不持牌、不碰钱，零 MSB/FinCEN 风险。">Creator is paid per verified conversion via Stripe Connect. Push takes rev share (15–20%). No MSB/FinCEN exposure.</p>
       </article>
     </div>
   </div>
@@ -104,22 +104,22 @@
 <section class="deep-section alt">
   <div class="container">
     <span class="eyebrow with-line" data-en="(Three independent signals)" data-zh="(三个独立信号)">(Three independent signals)</span>
-    <h2 data-en="How we verify each conversion." data-zh="我们怎么验证每次转化。">How we verify each conversion.</h2>
+    <h2 data-en="How we verify each conversion." data-zh="一笔转化是怎么验出来的。">How we verify each conversion.</h2>
     <div class="card-grid">
       <article class="card">
         <div class="card-num">01</div>
         <h3 data-en="QR scan" data-zh="QR 扫码">QR scan</h3>
-        <p data-en="Customer physically scans at point of sale. Requires physical presence. Cannot be gamed remotely. Device fingerprint + IP + timestamp locked." data-zh="顾客在销售点现场扫码。需要物理在场。无法远程欺骗。设备指纹 + IP + 时间戳锁定。">Customer physically scans at point of sale. Requires physical presence. Cannot be gamed remotely. Device fingerprint + IP + timestamp locked.</p>
+        <p data-en="Customer physically scans at point of sale. Requires physical presence. Cannot be gamed remotely. Device fingerprint + IP + timestamp locked." data-zh="顾客必须人在收银台前扫码——远程刷不了。设备指纹 + IP + 时间戳同时锁死。">Customer physically scans at point of sale. Requires physical presence. Cannot be gamed remotely. Device fingerprint + IP + timestamp locked.</p>
       </article>
       <article class="card">
         <div class="card-num">02</div>
         <h3 data-en="Receipt timestamp" data-zh="收据时间戳">Receipt timestamp</h3>
-        <p data-en="Merchant system logs the transaction timestamp. Cross-references with QR scan time within acceptable window. Prevents retroactive claims." data-zh="商家系统记录交易时间戳。与 QR 扫码时间在可接受范围内交叉参照。防止追溯性声明。">Merchant system logs the transaction timestamp. Cross-references with QR scan time within acceptable window. Prevents retroactive claims.</p>
+        <p data-en="Merchant system logs the transaction timestamp. Cross-references with QR scan time within acceptable window. Prevents retroactive claims." data-zh="商家系统记下交易时间戳，跟 QR 扫码时间对齐到允许的窗口内。事后补单这条路堵死。">Merchant system logs the transaction timestamp. Cross-references with QR scan time within acceptable window. Prevents retroactive claims.</p>
       </article>
       <article class="card">
         <div class="card-num">03</div>
-        <h3 data-en="Merchant confirmation" data-zh="商家确认">Merchant confirmation</h3>
-        <p data-en="Merchant confirms the visit. Third check against both QR and receipt record. Detects collusion and false claims. Logged to dispute record." data-zh="商家确认到访。针对 QR 和收据记录的第三重检查。检测串联和虚假声明。记录到争议档案。">Merchant confirms the visit. Third check against both QR and receipt record. Detects collusion and false claims. Logged to dispute record.</p>
+        <h3 data-en="Merchant confirmation" data-zh="商家这边确认">Merchant confirmation</h3>
+        <p data-en="Merchant confirms the visit. Third check against both QR and receipt record. Detects collusion and false claims. Logged to dispute record." data-zh="商家确认这次到访。这是第三层校验，对住前两条信号——串通和虚报都会在这一关被抓出来，全部进争议档案。">Merchant confirms the visit. Third check against both QR and receipt record. Detects collusion and false claims. Logged to dispute record.</p>
       </article>
     </div>
   </div>
@@ -128,24 +128,24 @@
 <section class="deep-section">
   <div class="container">
     <span class="eyebrow with-line" data-en="(Creator earnings)" data-zh="(创作者收入)">(Creator earnings)</span>
-    <h2 data-en="How creators get paid." data-zh="创作者怎么获得报酬。">How creators get paid.</h2>
-    <p data-en="Creator earns $8–25 per verified conversion depending on tier. Push takes 15–20% rev share on payout. All settled via Stripe Connect. Push is never an MSB/FinCEN entity." data-zh="创作者每次验证转化获得 $8–25 报酬，取决于等级。Push 在支付时抽取 15–20% 收入分成。全部通过 Stripe Connect 结算。Push 永远不是 MSB/FinCEN 实体。">Creator earns $8–25 per verified conversion depending on tier. Push takes 15–20% rev share on payout. All settled via Stripe Connect. Push is never an MSB/FinCEN entity.</p>
+    <h2 data-en="How creators get paid." data-zh="creator 怎么拿到钱。">How creators get paid.</h2>
+    <p data-en="Creator earns $8–25 per verified conversion depending on tier. Push takes 15–20% rev share on payout. All settled via Stripe Connect. Push is never an MSB/FinCEN entity." data-zh="creator 一笔真实转化拿 $8-25，按档位走。Push 在结算时抽 15-20%。资金全程走 Stripe Connect——我们不是 MSB / FinCEN 持牌主体，也不打算变成。">Creator earns $8–25 per verified conversion depending on tier. Push takes 15–20% rev share on payout. All settled via Stripe Connect. Push is never an MSB/FinCEN entity.</p>
   </div>
 </section>
 
 <section class="deep-section alt">
   <div class="container">
     <span class="eyebrow with-line" data-en="(FTC compliance)" data-zh="(FTC 合规)">(FTC compliance)</span>
-    <h2 data-en="Attribution that respects the law." data-zh="尊重法律的归因。">Attribution that respects the law.</h2>
-    <p data-en="Every attribution event is verified, disclosed, and decaying. FTC 16 CFR Part 255 requires that paid creator relationships be disclosed. Push generates compliant records by design — with attribution decay built in (100%/50%/30%/10%/0% per recency window). Legacy ad platforms do not provide this. We do." data-zh="每个归因事件均经过验证、披露并设有时效衰减。FTC 16 CFR Part 255 要求披露有偿创作者关系。Push 在设计上生成合规记录——内置归因衰减（按时效窗口 100%/50%/30%/10%/0%）。传统广告平台不提供这一功能。我们提供。">Every attribution event is verified, disclosed, and decaying. FTC 16 CFR Part 255 requires that paid creator relationships be disclosed. Push generates compliant records by design — with attribution decay built in (100%/50%/30%/10%/0% per recency window). Legacy ad platforms do not provide this. We do.</p>
+    <h2 data-en="Attribution that respects the law." data-zh="不绕监管的归因。">Attribution that respects the law.</h2>
+    <p data-en="Every attribution event is verified, disclosed, and decaying. FTC 16 CFR Part 255 requires that paid creator relationships be disclosed. Push generates compliant records by design — with attribution decay built in (100%/50%/30%/10%/0% per recency window). Legacy ad platforms do not provide this. We do." data-zh="每一笔归因事件都可验证、可披露、随时间衰减。FTC 16 CFR Part 255 要求有偿合作必须披露——Push 按设计就生成合规记录，归因按时效窗口 100% / 50% / 30% / 10% / 0% 逐档衰减。老广告平台没有这层，我们有。">Every attribution event is verified, disclosed, and decaying. FTC 16 CFR Part 255 requires that paid creator relationships be disclosed. Push generates compliant records by design — with attribution decay built in (100%/50%/30%/10%/0% per recency window). Legacy ad platforms do not provide this. We do.</p>
   </div>
 </section>
 
 <section class="deep-section">
   <div class="container">
     <span class="eyebrow with-line" data-en="(What we're not claiming)" data-zh="(我们不吹什么)">(What we're not claiming)</span>
-    <h2 data-en="100% attribution doesn't exist. 95% decision confidence does." data-zh="100% 归因不存在。95% 决策置信度存在。">100% attribution doesn't exist. 95% decision confidence does.</h2>
-    <p data-en="Every ad platform fakes the precision of their attribution. We don't. When a customer walks into a café, they may have seen 12 posts, 3 ads, and a friend's text. We claim only the one signal we can prove — and we tell merchants the confidence level so they make informed decisions. This honesty is the product." data-zh="每个广告平台都在夸大归因精度。我们不。一位顾客走进咖啡店前可能看过 12 个帖子、3 个广告、1 条朋友短信。我们只声明能证的那一条——并告诉商家置信度，让他们做知情决策。这份诚实就是产品。">Every ad platform fakes the precision of their attribution. We don't. When a customer walks into a café, they may have seen 12 posts, 3 ads, and a friend's text. We claim only the one signal we can prove — and we tell merchants the confidence level so they make informed decisions. This honesty is the product.</p>
+    <h2 data-en="100% attribution doesn't exist. 95% decision confidence does." data-zh="100% 精确归因不存在。95% 决策置信度存在。">100% attribution doesn't exist. 95% decision confidence does.</h2>
+    <p data-en="Every ad platform fakes the precision of their attribution. We don't. When a customer walks into a café, they may have seen 12 posts, 3 ads, and a friend's text. We claim only the one signal we can prove — and we tell merchants the confidence level so they make informed decisions. This honesty is the product." data-zh="每家广告平台都在装精确，我们不装。一个顾客走进店之前可能看过 12 条帖子、3 条广告、1 条朋友的短信——我们只认能证的那一条，同时把置信度告诉商家，让他们自己判断。这份诚实就是产品本身。">Every ad platform fakes the precision of their attribution. We don't. When a customer walks into a café, they may have seen 12 posts, 3 ads, and a friend's text. We claim only the one signal we can prove — and we tell merchants the confidence level so they make informed decisions. This honesty is the product.</p>
   </div>
 </section>
 

@@ -750,6 +750,51 @@ img, svg { display: block; max-width: 100%; }
 .italic     { font-style: italic; }
 .hide       { display: none !important; }
 
+/* =================================
+   Chinese typography overrides — :lang(zh)
+   CJK glyphs are denser than Latin: scale display sizes down ~30-40%
+   so headings read at the same visual weight as English. Kill synthetic
+   italic everywhere — PingFang has no italic face and browsers fake it
+   with an ugly oblique slant.
+   ================================= */
+:lang(zh) .hero-magvix { font-size: clamp(48px, 7vw, 100px); line-height: 1.05; letter-spacing: -0.01em; }
+:lang(zh) .hero-darky  { font-size: clamp(40px, 6vw,  88px); line-height: 1.05; letter-spacing: -0.01em; }
+
+:lang(zh) h1 { font-size: clamp(32px, 4.5vw, 56px); letter-spacing: -0.01em; }
+:lang(zh) h2 { font-size: 32px; letter-spacing: -0.01em; }
+:lang(zh) h3 { font-size: 22px; }
+:lang(zh) h4 { font-size: 19px; }
+
+@media (max-width: 720px) {
+  :lang(zh) h2 { font-size: 26px; }
+  :lang(zh) h3 { font-size: 20px; }
+}
+
+:lang(zh) .signature-divider {
+  font-size: clamp(18px, 2.2vw, 28px);
+  font-style: normal;        /* no synthetic-italic on PingFang */
+  letter-spacing: 0.02em;    /* small tracking for CJK breath */
+}
+
+:lang(zh) .hero-magvix em,
+:lang(zh) em {
+  font-style: normal;        /* kill synthetic italic on Chinese */
+}
+
+:lang(zh) .ticket-panel h2 {
+  font-style: normal;
+  font-weight: 700;
+  font-size: clamp(28px, 3.6vw, 44px);
+  letter-spacing: -0.005em;
+}
+
+/* Page hero lede: bump Chinese line-height for legibility on PingFang */
+:lang(zh) .page-hero .lede,
+:lang(zh) .section > .container > p,
+:lang(zh) .deep-section > .container > p {
+  line-height: 1.7;
+}
+
 /* Reduce motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
